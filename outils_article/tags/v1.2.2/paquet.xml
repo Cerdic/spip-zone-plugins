@@ -1,0 +1,28 @@
+<paquet
+	prefix="outils_article"
+	categorie="navigation"
+	version="1.2.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/outils_article-64.png"
+	schema="0.1.0"
+	documentation="https://contrib.spip.net/Boite-a-outils-pour-articles-version-plugin"
+>
+
+	<nom>Boite à outils</nom>
+	<!-- Collection d'outils pour articles -->
+
+	<auteur lien="https://contrib.spip.net/_vcris_">Christophe Vallois</auteur>
+
+	<copyright>2007-2015</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<menu nom="configurer_outils_article" titre="outils_article:titre" parent="menu_configuration" icone="images/outils_article-16.png" />
+
+	<utilise nom="article_pdf" compatibilite="[0.3.0;]" />
+	<utilise nom="imprimir_documento" compatibilite="[0.2.0;]" />
+	<utilise nom="boutonstexte" compatibilite="[2.0.0;]" />
+	<utilise nom="notation" compatibilite="[2.0.0;]" />
+	<utilise nom="recommander" compatibilite="[1.0.0;]" />
+</paquet>

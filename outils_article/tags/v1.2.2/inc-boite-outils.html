@@ -1,0 +1,58 @@
+#CACHE{0}
+[(#REM) squelette de la noisette boite à outils pour article]
+<BOUCLE_article_boite (ARTICLES) {id_article}>
+<h2><:outils_article:titre:></h2>
+<ul class='outils'>
+[(#PLUGIN{boutonstexte}|oui)
+	[(#CONFIG{outils_article/texte}|?{' ',''})
+	<li class="outil_texte"><img src="#CHEMIN{css/images/#CONFIG{outils_article/theme}/texteplus.png}" alt="fontsizeup" class="textsizeup" /><img src="#CHEMIN{css/images/#CONFIG{outils_article/theme}/textemoins.png}" alt="fontsizedown" class="textsizedown" /><:outils_article:taille:></li>
+	]
+][(#PLUGIN{article_pdf}|oui)
+	[(#CONFIG{outils_article/pdf}|?{' ',''})
+	<li class="outil_pdf">#ARTICLE_PDF{id_article}<:outils_article:pdf:></li>
+	]
+]
+	[(#CONFIG{outils_article/impression}|?{' ',''})
+	<li class="outil_impression">
+		<a href="#URL_PAGE{imprimer,id_article=#ID_ARTICLE}" title="afficher une version imprimable de cet article" onclick="window.open(this.href,'_blank');return false;">
+		<img src='plugins/outils_article/img_pack/printer.png' alt="<:outils_article:impression_title:>" title="<:outils_article:impression_title:>" />
+		<:outils_article:impression:></a>
+	</li>
+	]
+[(#PLUGIN{enviar_email}|oui)
+	[(#CONFIG{outils_article/mail}|?{' ',''})
+	<li class="outil_email">
+		#ENVIAR_EMAIL**{id_article}
+	</li>
+	]
+]
+	<BOUCLE_rub_rss (RUBRIQUES) {id_rubrique} {si #CONFIG{outils_article/rss}}>
+	<li class="outil_rss_rub">
+		<a rel="alternate" type="application/rss+xml" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" [ title="RSS (#TITRE|texte_backend)"]><img src="#CHEMIN{img_pack/rss_black.png}" alt="suivre la vie du site" title="suivre la vie du site"  /> <:outils_article:rss:></a>
+	</li>
+	</BOUCLE_rub_rss>
+	<BOUCLE_forum_rss (ARTICLES) {id_article} {si #CONFIG{outils_article/rssforum}}>
+	<li class="outil_rss_forum">
+		<a href="[(#PARAMETRES_FORUM|url_rss_forum)]" rel="nofollow"><img src="#CHEMIN{img_pack/feed.gif}" alt="syndiquer le forum" title="syndiquer le forum"/> <:outils_article:rssforum:></a>
+	</li>
+	</BOUCLE_forum_rss>
+	<BOUCLE_auteur_article(AUTEURS) {id_article} {si #CONFIG{outils_article/auteur}}>
+	<li class="outil_auteur">
+		<a href="#URL_AUTEUR"><img src="#CHEMIN{img_pack/auteur.png}" title="articles du même auteur"> <:outils_article:auteur:></a>
+	</li>
+	</BOUCLE_auteur_article>
+	[(#CONFIG{outils_article/reagir}|?{' ',''})
+	[<li class="outil_reagir"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><img src="#CHEMIN{img_pack/chat.png}"><:outils_article:reagir:></a>
+	</li>]]
+	<BOUCLE_compteur_forum (FORUMS){id_article}></BOUCLE_compteur_forum>
+	[(#CONFIG{outils_article/compteur}|?{' ',''})
+	[<li class="outil_compteur">(#TOTAL_BOUCLE|accord_pluriel{r&eacute;action})</li>]
+	]
+	<//B_compteur_forum>
+[(#PLUGIN{notation}|oui)
+	[(#CONFIG{outils_article/note}|?{' ',''})
+	<li class="outil_notation">#NOTATION</li>
+	]
+]
+</ul>
+</BOUCLE_article_boite>
