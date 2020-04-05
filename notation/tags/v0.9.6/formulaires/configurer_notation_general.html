@@ -1,0 +1,23 @@
+#CACHE{0}
+	
+<div class="formulaire_spip formulaire_configurer_notation_general">
+[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+
+<form method="post" action="#ENV{action}"><div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+<li class="editer_accepter_note">
+	<label for="accepter_note"><:notation:label_accepter_note:></label>
+	<p class="explication"><:notation:explication_accepter_note:></p>
+	<select name="accepter_note" id="accepter_note">
+		<option value="oui"[(#ENV*{accepter_note}|=={oui}|oui)selected="selected"]><:notation:bouton_radio_ouvert:></option>
+		<option value="non"[(#ENV*{accepter_note}|=={non}|oui)selected="selected"]><:notation:bouton_radio_fermee:></option>
+	</select>
+</li>
+</ul>
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+</p>
+</div></form>
+</div>

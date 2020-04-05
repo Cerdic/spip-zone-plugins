@@ -1,0 +1,25 @@
+[(#REM)
+Afficher le top ten
+exemple : 
+<notation|topten|titre=TOPTen|max=10|left>
+]
+
+<B_not>
+<span class="notation"[ style="float:(#ENV{align}|match{left|right});"]>
+<table class="topten"[ (#ENV{align}|=={center}|?{'style="margin: 0 auto;"'})]>
+	<thead><tr><td colspan="4">#ENV{titre,Le TopTen des Articles}</td>
+	</tr>
+	</thead>
+<BOUCLE_not(NOTATIONS_OBJETS){par note_ponderee}{objet=article}{inverse}{0,#ENV{max,10}}>
+  <tr class="ligne_[(#COMPTEUR_BOUCLE|alterner{impaire,paire})]">
+  <td>#COMPTEUR_BOUCLE</td>
+  <BOUCLE_aa(ARTICLES){id_article=#ID_OBJET}>
+	<td><a href="#URL_ARTICLE">Article : #TITRE</a></td>
+	<td>[(#NOTATION_ETOILE{#NOTE_PONDEREE,top_ten#TYPE_BOUCLE-#ID_ARTICLE})]</td>
+    <td><small>(#NOTE_PONDEREE - #NOMBRE_VOTES [(#NOMBRE_VOTES|>{1}|oui)<:notation:votes:>][(#NOMBRE_VOTES|>{1}|non)<:notation:vote:>])</small></td>
+  </BOUCLE_aa>
+  </tr>
+</BOUCLE_not>
+</table>
+</span>
+</B_not>

@@ -1,0 +1,24 @@
+[(#REM)
+Afficher le top ten pour l'auteur connecte (ou un autre si precise)
+exemple : 
+<notation|preferee|titre=TOPTen|max=10|id_auteur=1|left>
+]
+
+<B_not>
+<div class="notation"[ style="float:(#ENV{align}|match{left|right});"]>
+<table class="topten"[ (#ENV{align}|=={center}|?{'style="margin: 0 auto;"'})]>
+	<thead><tr><td colspan=4>#ENV{titre,Mon TopTen}</td>
+	</tr>
+	</thead>
+<BOUCLE_not(NOTATIONS){!par note}{!par maj}{id_auteur=#ENV{id_auteur,#SESSION{id_auteur}}}{0,#ENV{max,5}}>
+  <tr class=ligne_[(#COMPTEUR_BOUCLE|alterner{impaire,paire})]>
+  <td>#COMPTEUR_BOUCLE</td>
+  	[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+	<td>
+	[(#NOTATION_ETOILE{#NOTE})]
+	</td>
+  </tr>
+</BOUCLE_not>
+</table>
+</div>
+</B_not>
