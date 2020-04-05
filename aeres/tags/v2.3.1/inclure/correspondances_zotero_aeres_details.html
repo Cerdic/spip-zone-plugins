@@ -1,0 +1,158 @@
+<table class="spip">
+<thead>
+<tr>
+	<th>Saisie sous Zotero<br />(Choix du type de document)</th>
+	<th>Affichage demandé par le HCERES et Consignes de saisie</th>
+</tr>
+</thead>
+<tbody>
+<tr class="row_even">
+	<td  style="vertical-align: middle;" rowspan="2">Article de revue (scientifique)</td>
+	<td  style="vertical-align: middle;">
+		<strong>Article scientfique</strong><br />
+		Si l'article comporte un ou plusieurs auteurs, il figurera dans la rubrique <em>ACL - Articles dans des revues à comité de lecture</em>.<br />
+		Dans le cas d’un article d’un numéro thématique, l’article est considéré comme simple article de revue (ne pas mentionner le titre de la thématique).
+	</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">
+		<strong>Direction d'un numéro de revue</strong><br />
+		Les personnes ayant dirigé un numéro thématique de revue doivent renseignées comme éditeurs (rôle attribué à un contributeur). La référence sera classée dans la rubrique&nbsp; <em>DO - Directions d'ouvrage ou de revue</em>.<br />
+		Attention&nbsp; ne pas confondre un « éditeur scientifique » (rôle attribué à un des contributeurs) et « éditeur commercial », sans objet ici.<br />
+		Cas particulier d’un compte-rendu de lecture&nbsp; s’il a fait l'objet d'une publication dans une revue scientifique, le compte-rendu sera compté comme article scientifique.<br />
+		Pour une revue il peut y avoir un volume et un numéro ou seulement un numéro. Exemple : vol. 8 n°3 qui peut se présenter aussi sous la forme 8(3). Il faut remplir&nbsp; ‘Volume’ 8 et ‘Numéro’ 3. S’il n’y a qu’un numéro, il faut seulement remplir seulement le champ ‘Numéro’.
+	</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Article de magazine</td>
+	<td  style="vertical-align: middle;">
+		<strong>Autres articles</strong><br />
+		<em>ASCL - Articles dans des revues sans comité de lecture</em><br />
+		Est considérée comme une revue sans comité de lecture une revue dans laquelle les articles ne sont pas relus en aveugle par des scientifiques de la discipline. Cela est indépendant du travail de relecture du comité éditorial de la revue. Ainsi, une revue comme <em>Sciences Humaines</em> sera classée comme revue sans comité de lecture.
+	</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;" rowspan="3">Article de colloque</td>
+	<td  style="vertical-align: middle;">
+		<strong>Communication publiée dans des actes de colloque</strong><br />
+		Rentrer la référence comme un ‘Article de colloque’ et renseigner ‘Titre des actes’ et les autres champs comme pour un ouvrage. Le champ ‘Intitulé du colloque’ est à remplir s’il est différent de ce qui apparaît dans les actes.<br />
+		La référence sera classée automatiquement dans&nbsp; <em>[(#CONFIG{aeres/conference_actes}|=={ch}|?{CH - Chapitres d'ouvrage, C-ACT - Communications avec publication dans des actes})]</em>.<br />
+		Si une communication orale a fait l’objet d’une publication dans des actes, on ne renseignera que la publication et non la communication orale.
+	</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">
+		<strong>Communication orale</strong><br />
+		Doit être renseignée comme un ‘Article de colloque’ et non une ‘Présentation’.<br />
+		Dans le champ ‘Éditeur’ préciser&nbsp; “communication orale” (en minuscules). Au besoin, on pourra indiquer un numéro de communication à la suite (par exemple&nbsp; “communication orale n°THAB123”).<br />
+		Indiquer le nom du colloque dans le champ ‘Intitulé du colloque’ et laisser le champ ‘Titre des actes’ vide (car sinon la référence sera considérée comme une publication dans des actes).<br />
+		La référence sera classée dans <em>C-COM - Communications orales dans un congrès</em>.<br />
+		La date correspond à la date du colloque (2012-02) et le lieu au nom de la ville où la communication a été présentée. L'institution organisatrice de la conférence apparaitra quant à elle dans ‘Intitulé du colloque’ (par exemple&nbsp; “Conférence mondiale sur la population de l'UIESP”).
+	</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">
+		<strong>Poster/Affiche</strong><br />
+		En l'absence de ‘Titre des actes’, indiquez dans le champ ‘Éditeur’&nbsp; “poster” (en minuscules, le numéro de communication pouvant optionnellement être indiqué à la suite, par exemple&nbsp; “poster n°123456”).<br />
+		La référence sera classée en <em>C-AFF - Affiches ou posters dans un congrès</em>.<br />
+		<strong>NB&nbsp;</strong> un article de colloque sans ‘Titre des actes’ et dont le champ ‘Éditeur’ ne commence pas par “communication orale” ou par “poster” ne sera pas pris en compte dans la classification HCERES.
+	</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;" rowspan="2">Livre</td>
+	<td  style="vertical-align: middle;">
+		<strong>Ouvrage</strong><br />
+		La nomenclature HCERES <em>OS - Ouvrages Scientifiques</em> correspond aux ouvrages dont vous êtes auteur de l’ensemble de l’ouvrage (à ne pas confondre avec les ouvrages collectifs).<br />
+		Une traduction de votre ouvrage est également une publication. Vous pouvez préciser l'ISBN de la traduction et le nom du traducteur.
+	</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">
+		<strong>Direction d’ouvrage</strong><br />
+		Pour les personnes ayant dirigé un ouvrage ou une revue, indiquer ‘éditeur‘ comme rôle pour chaque contributeur. La référence figurera dans la nomenclature HCERES en tant que <em>DO - Directions d'ouvrage ou de revue</em>. Pour classer correctement la référence, il importe qu’aucun des contributeurs n’ait le rôle ‘Auteur’.<br />
+		<strong>Attention&nbsp;</strong> ne pas confondre les éditeurs scientifiques (rôle ‘Éditeur’ attribué à un contributeur, « editor » en anglais) avec l’éditeur commercial ou maison d’édition (« publisher » en anglais, comme Hachette) qui est à renseigner dans le champ intitulé ‘Éditeur’ ; ni avec le champ ‘Édition’ (rarement utilisé, il correspond à une nouvelle édition d’un ouvrage lors d’une mise à jour, par exemple&nbsp; “seconde édition revue et augmentée”).
+	</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Chapitre de livre</td>
+	<td  style="vertical-align: middle;">
+		<strong>Chapitre de livre</strong><br />
+		Figurera dans la nomenclature HCERES sous <em>CH - Chapitres d'ouvrage</em>.<br />
+		Il faut renseigner les champs ‘Titre’ (qui correspond au titre du chapitre) et ‘Titre du livre’.<br />
+		Il importe de distinguer les chapitres d’un ouvrage collectif des préfaces à un ouvrage d’un confrère/consœur.<br />
+		Pour les <strong>ouvrages collectifs</strong>, les auteurs du chapitre seront renseignés comme ‘Auteur’ tandis que les personnes ayant dirigés l’ouvrage (ou éditeurs scientifiques) seront renseignés comme ‘Éditeurs’ (rôle du contributeur).<br />
+		Pour les <strong>préfaces</strong>, l’auteur de la préface sera renseigné comme ‘Auteur’ et l’auteur de l’ouvrage comme ‘Auteur du livre’.
+	</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Film</td>
+	<td  style="vertical-align: middle;" rowspan="4">
+		<strong>Production artistique</strong><br />
+		Seront classés en <em>PAT - Productions artistiques théorisées</em>.
+	</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Illustration</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Enregistrement audio</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Enregistrement vidéo</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;" rowspan="2">Thèse</td>
+	<td  style="vertical-align: middle;">
+		<strong>HDR</strong><br />
+		On tiendra compte du champ ‘Type’. Si ce dernier commence par “habilitation à diriger des recherches” (en minuscles, attention aux accents et aux fautes de frappe), la référence sera classée en <em>HDR - Habilitations à diriger des recherches</em>.
+	</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">
+		<strong>Thèse</strong><br />
+		S’il s’agit d’une thèse de doctorat, écrire en minuscules “thèse” dans le champs ‘Type’ (attention aux accents). On peut optionnellement préciser la discipline de la thèse à la suite, par exemple : “thèse de doctorat en démographie”.<br />
+		La référence sera classée dans <em>TH – Thèses</em>.<br />
+		<strong>NB&nbsp;</strong> si le champs ‘Type’ n’est pas renseigné ou ne commence pas par “habilitation à diriger des recherches” ou par “thèse” (cas d’un mémoire de master par exemple), la référence ne sera pas prise en compte dans la classification HCERES.
+	</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Brevet</td>
+	<td  style="vertical-align: middle;"><em>BRE - Brevets</em></td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Article d'encyclopédie</td>
+	<td  style="vertical-align: middle;" rowspan="9">
+		<em>AP - Autres publications</em><br />
+		Les <strong>Working Papers</strong> sont classés comme des ‘Rapports’ dans Zotero. Il importe de renseigner le champ ‘Type de rapport’ (exemple&nbsp; ‘Working Papers du CEPED’), le numéro (si possible) et l'institution qui a publié le rapport.
+	</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Article de journal (presse)</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Carte</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Document</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Entrée de dictionnaire</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Manuscrit</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Programme informatique</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Page web</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Rapport</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Autres types de documents Zotero</td>
+	<td  style="vertical-align: middle;">Non intégrés dans la bibliographie au format HCERES.</td>
+</tr>
+</tbody>
+</table>

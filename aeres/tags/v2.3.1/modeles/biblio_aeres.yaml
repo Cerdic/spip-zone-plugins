@@ -1,0 +1,127 @@
+nom: 'Bibliographie selon la nomenclature HCERES'
+logo: 'images/aeres-24.png'
+icone_barre: 'aeres.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'biblio'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'variante'
+      defaut: 'aeres'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'selection_references'
+      label: '<:zotspip:label_selection_references:>'
+    saisies:
+      -
+        saisie: 'zotspip_creator'
+        options:
+          nom: 'auteur'
+          label: '<:zotspip:label_auteur:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'souligne'
+          label: '<:zotspip:label_souligne:>'
+          option_intro: '<:item_oui:>'
+          afficher_si: '@auteur@!=""'
+          datas:
+            non: '<:item_non:>'
+      -
+        saisie: 'zotspip_type'
+        options:
+          nom: 'type_ref'
+          label: '<:zotspip:label_type_ref:>'
+      -
+        saisie: 'zotspip_annee'
+        options:
+          nom: 'annee'
+          label: '<:zotspip:label_annee:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'depuis'
+          label: '<:zotspip:label_depuis:>'
+          explication: '<:zotspip:explication_depuis:>'
+      -
+        saisie: 'zotspip_tag'
+        options:
+          nom: 'tag'
+          label: '<:zotspip:label_tag:>'
+      -
+        saisie: 'zotspip_zcollection'
+        options:
+          nom: 'zcollection'
+          label: '<:zotspip:label_zcollection:>'
+      -
+        saisie: 'zotspip_publication'
+        options:
+          nom: 'publication'
+          label: '<:zotspip:label_publication:>'
+      -
+        saisie: 'zotspip_conference'
+        options:
+          nom: 'conference'
+          label: '<:zotspip:label_conference:>'
+      -
+        saisie: 'zotspip_editeur'
+        options:
+          nom: 'editeur'
+          label: '<:zotspip:label_editeur:>'
+      -
+        saisie: 'zotspip_collection'
+        options:
+          nom: 'collection'
+          label: '<:zotspip:label_collection:>'
+      -
+        saisie: 'zotspip_type_doc'
+        options:
+          nom: 'type_doc'
+          label: '<:zotspip:label_type_doc:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'recherche'
+          label: '<:zotspip:label_recherche_libre:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'options_affichage'
+      label: '<:zotspip:label_options_affichage:>'
+    saisies:
+      -
+        saisie: 'csl'
+        options:
+          nom: 'csl'
+          label: '<:zotspip:label_csl:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'liens'
+          label: '<:zotspip:label_liens:>'
+          option_intro: '<:item_oui:>'
+          datas:
+            non: '<:item_non:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'export'
+          label: '<:zotspip:label_export:>'
+          option_intro: '<:item_oui:>'
+          datas:
+            non: '<:item_non:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'details'
+          label: '<:zotspip:label_details:>'
+          cacher_option_intro: 'on'
+          datas:
+            non: '<:zotspip:item_aucun:>'
+            '': '<:zotspip:item_resume_tags:>'
+            complet: '<:zotspip:item_complet:>'

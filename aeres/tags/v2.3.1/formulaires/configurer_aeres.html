@@ -1,0 +1,208 @@
+<!-- presentation=non -->
+<!-- nom=aeres -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		<li class="editer_debut[(#ENV**{erreurs}|table_valeur{debut}|oui)erreur]">
+			<label>Année de début</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{debut})</span>]
+			<input type="text" name="debut" class="text" value="#ENV*{debut}" id="debut" [(#HTML5|oui)required='required']/>
+		</li>
+		<li class="editer_fin[(#ENV**{erreurs}|table_valeur{fin}|oui)erreur]">
+			<label>Année de fin</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fin})</span>]
+			<input type="text" name="fin" class="text" value="#ENV*{fin}" id="fin" [(#HTML5|oui)required='required']/>
+		</li>
+		<B_csl>
+		<li class="editer_csl[ (#ENV**{erreurs}|table_valeur{csl}|oui)erreur]">
+			<label for='csl'>Style CSL à utiliser</label>
+			<select name="csl" id="csl">
+				<BOUCLE_csl(POUR){tableau #LISTER_CSL}{par valeur}>
+				<option value="#CLE"[(#ENV{csl}|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
+				</BOUCLE_csl>
+			</select>
+		</li>
+		</B_csl>
+		<li class="editer_conference_actes[(#ENV**{erreurs}|table_valeur{conference_actes}|oui)erreur]">
+			<label>Articles de colloque avec publication dans des actes</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{conference_actes})</span>]
+			<div class="choix">
+				<input type="radio" name="conference_actes" class="radio" id="conference_actes_cact" value="cact" [(#ENV{conference_actes}|=={cact}|oui) checked="checked"] />
+				<label for='conference_actes_cact'>Catégorie HCERES autonome (C-ACT)</label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="conference_actes" class="radio" id="conference_actes_ch" value="ch" [(#ENV{conference_actes}|=={ch}|oui) checked="checked"] />
+				<label for='conference_actes_ch'>Présentés avec les chapitres d'ouvrage (CH)</label>
+			</div>
+		</li>
+		<li class="editer_titre_biblio_unite[(#ENV**{erreurs}|table_valeur{titre_biblio_unite}|oui)erreur]">
+			<label>Titre de la bibliographie de l'unité</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre_biblio_unite})</span>]
+			<input type="text" name="titre_biblio_unite" class="text" value="#ENV*{titre_biblio_unite}" id="titre_biblio_unite" />
+		</li>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend">Qui peut vérifier les références (via la page ‘biblioaeres’) ?</h3>
+				<ul>
+				[(#REM) <!-- Choix de la methode d'autorisation --> ]
+					[(#SAISIE{radio, autorisation_verif_type,
+						label=<:tickets:cfg_lbl_type_autorisation:>,
+						explication=<:tickets:cfg_inf_type_autorisation:>,
+						datas=#ARRAY{
+							webmestre,<:tickets:cfg_lbl_autorisation_webmestre:>,
+							par_statut,<:tickets:cfg_lbl_autorisation_statuts:>,
+							par_auteur,<:tickets:cfg_lbl_autorisation_auteurs:>},
+						defaut=webmestre})]
+				</ul>
+				[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_verif_bloc_par_statut" class="autorisation_verif_bloc">
+					[(#SAISIE{statuts_auteurs,autorisation_verif_statuts,
+						label=<:tickets:cfg_lbl_statuts_auteurs:>,
+						afficher_tous=oui,
+						multiple=oui})]
+				</ul>
+				[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_verif_bloc_par_auteur" class="autorisation_verif_bloc">
+					[(#SAISIE{auteurs,autorisation_verif_auteurs,
+						label=<:tickets:cfg_lbl_liste_auteurs:>,
+						multiple=oui,
+						option_statut=oui})]
+				</ul>
+			</fieldset>
+			<script type="text/javascript">
+			//<![CDATA[
+				jQuery(document).ready(function() {
+					// on cache tous les blocs du meme prefixe
+					jQuery(".autorisation_verif_bloc").not('.visible').hide();
+					//on recupere la valeur de celui qui est deja selectionne
+					var checked = jQuery("input[name='autorisation_verif_type']:checked").val();
+					// pour l'afficher
+					jQuery("#autorisation_verif_bloc_"+checked).show();
+					// si une checkbox change
+					jQuery("input[name='autorisation_verif_type']").change(function() {
+						var inputval = $(this).val();
+						// on cache tous les blocs du meme prefixe
+						jQuery(".autorisation_verif_bloc").fadeOut('slow',function(){
+							// pour afficher celui qui correspond a la checkbox selectionnee
+							jQuery("#autorisation_verif_bloc_"+inputval).fadeIn();
+						});
+						jQuery(this).blur();
+					});
+				});
+			//]]>
+			</script>
+		</li>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend">Qui peut voir la bibliographie générale de l’unité (page ‘biblioaeres_unite’) ?</h3>
+				<ul>
+				[(#REM) <!-- Choix de la methode d'autorisation --> ]
+					[(#SAISIE{radio, autorisation_biblio_unite_type,
+						label=<:tickets:cfg_lbl_type_autorisation:>,
+						explication=<:tickets:cfg_inf_type_autorisation:>,
+						datas=#ARRAY{
+							webmestre,<:tickets:cfg_lbl_autorisation_webmestre:>,
+							par_statut,<:tickets:cfg_lbl_autorisation_statuts:>,
+							par_auteur,<:tickets:cfg_lbl_autorisation_auteurs:>},
+						defaut=webmestre})]
+				</ul>
+				[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_biblio_unite_bloc_par_statut" class="autorisation_biblio_unite_bloc">
+					[(#SAISIE{statuts_auteurs,autorisation_biblio_unite_statuts,
+						label=<:tickets:cfg_lbl_statuts_auteurs:>,
+						afficher_tous=oui,
+						multiple=oui})]
+				</ul>
+				[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_biblio_unite_bloc_par_auteur" class="autorisation_biblio_unite_bloc">
+					[(#SAISIE{auteurs,autorisation_biblio_unite_auteurs,
+						label=<:tickets:cfg_lbl_liste_auteurs:>,
+						multiple=oui,
+						option_statut=oui})]
+				</ul>
+			</fieldset>
+			<script type="text/javascript">
+			//<![CDATA[
+				jQuery(document).ready(function() {
+					// on cache tous les blocs du meme prefixe
+					jQuery(".autorisation_biblio_unite_bloc").not('.visible').hide();
+					//on recupere la valeur de celui qui est deja selectionne
+					var checked = jQuery("input[name='autorisation_biblio_unite_type']:checked").val();
+					// pour l'afficher
+					jQuery("#autorisation_biblio_unite_bloc_"+checked).show();
+					// si une checkbox change
+					jQuery("input[name='autorisation_biblio_unite_type']").change(function() {
+						var inputval = $(this).val();
+						// on cache tous les blocs du meme prefixe
+						jQuery(".autorisation_biblio_unite_bloc").fadeOut('slow',function(){
+							// pour afficher celui qui correspond a la checkbox selectionnee
+							jQuery("#autorisation_biblio_unite_bloc_"+inputval).fadeIn();
+						});
+						jQuery(this).blur();
+					});
+				});
+			//]]>
+			</script>
+		</li>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend">Qui peut voir les statistiques par auteur ?</h3>
+				<ul>
+				[(#REM) <!-- Choix de la methode d'autorisation --> ]
+					[(#SAISIE{radio, autorisation_stats_type,
+						label=<:tickets:cfg_lbl_type_autorisation:>,
+						explication=<:tickets:cfg_inf_type_autorisation:>,
+						datas=#ARRAY{
+							webmestre,<:tickets:cfg_lbl_autorisation_webmestre:>,
+							par_statut,<:tickets:cfg_lbl_autorisation_statuts:>,
+							par_auteur,<:tickets:cfg_lbl_autorisation_auteurs:>},
+						defaut=webmestre})]
+				</ul>
+				[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_stats_bloc_par_statut" class="autorisation_stats_bloc">
+					[(#SAISIE{statuts_auteurs,autorisation_stats_statuts,
+						label=<:tickets:cfg_lbl_statuts_auteurs:>,
+						afficher_tous=oui,
+						multiple=oui})]
+				</ul>
+				[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_stats_bloc_par_auteur" class="autorisation_stats_bloc">
+					[(#SAISIE{auteurs,autorisation_stats_auteurs,
+						label=<:tickets:cfg_lbl_liste_auteurs:>,
+						multiple=oui,
+						option_statut=oui})]
+				</ul>
+			</fieldset>
+			<script type="text/javascript">
+			//<![CDATA[
+				jQuery(document).ready(function() {
+					// on cache tous les blocs du meme prefixe
+					jQuery(".autorisation_stats_bloc").not('.visible').hide();
+					//on recupere la valeur de celui qui est deja selectionne
+					var checked = jQuery("input[name='autorisation_stats_type']:checked").val();
+					// pour l'afficher
+					jQuery("#autorisation_stats_bloc_"+checked).show();
+					// si une checkbox change
+					jQuery("input[name='autorisation_stats_type']").change(function() {
+						var inputval = $(this).val();
+						// on cache tous les blocs du meme prefixe
+						jQuery(".autorisation_stats_bloc").fadeOut('slow',function(){
+							// pour afficher celui qui correspond a la checkbox selectionnee
+							jQuery("#autorisation_stats_bloc_"+inputval).fadeIn();
+						});
+						jQuery(this).blur();
+					});
+				});
+			//]]>
+			</script>
+		</li>
+		</ul>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' id="valider_cfg_aeres" />
+		</p>
+	</div></form>
+</div>

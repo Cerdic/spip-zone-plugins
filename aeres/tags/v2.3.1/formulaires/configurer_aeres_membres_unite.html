@@ -1,0 +1,25 @@
+<!-- presentation=non -->
+<!-- nom=aeres -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		<li class="editer_membres[(#ENV**{erreurs}|table_valeur{membres}|oui)erreur]">
+			<label>Membres de l'unité</label>
+			<p class="explication">Liste des auteurs à prendre en compte dans la bibliographie générale.</p>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{membres})</span>]
+			
+			<BOUCLE_zcreators(ZCREATORS){fusion auteur}{par auteur}><div class="choix">
+				<input type="checkbox" name="membres[]" class="checkbox" id="membre_#COMPTEUR_BOUCLE" value="#AUTEUR" [(#AUTEUR|in_array{#ENV{membres}}|oui)checked="checked"]>
+				<label for="membre_#COMPTEUR_BOUCLE">#AUTEUR</label>
+			</div></BOUCLE_zcreators>
+		</li>
+		</ul>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' id="valider_cfg_aeres" />
+		</p>
+	</div></form>
+</div>

@@ -1,0 +1,225 @@
+#CACHE{0}
+#SET{debut,#ENV{debut,#CONFIG{aeres/debut}}}
+#SET{fin,#ENV{fin,#CONFIG{aeres/fin}}}
+#SET{total,0}
+#SET{auteurs,#ENV{auteurs,#AERES_MEMBRES}}
+[(#REM) Fil d'Ariane ]
+[(#ENV{masquer_fil}|non)
+	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblio}">Publications</a> &gt; <strong class="on">[(#CONFIG{aeres/titre_biblio_unite,Bibliographie de l'unité}|couper{80})]</strong></p>
+]	
+
+<h1 class="h1">[(#CONFIG{aeres/titre_biblio_unite,Bibliographie de l'unité})] ([(#ENV{debut,#CONFIG{aeres/debut}})]-[(#ENV{fin,#CONFIG{aeres/fin}})])</h1>
+
+<BOUCLE_si_autorise(CONDITION){si #AUTORISER{voir,bibliounite}}>
+
+[<div class="explication">Membres sélectionnés : (#ENV{auteurs}|implode{' ; '}).</div>]
+
+<B_acl>
+<h2 class="h2">ACL - Articles dans des revues à comité de lecture</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_acl(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=journalArticle}{role=author}>
+[<h3 class="h3">(#ANNEE|unique{acl})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_acl>
+
+
+<B_acsl>
+<h2 class="h2">ACSL - Articles dans des revues sans comité de lecture</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_acsl(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=magazineArticle}{role=author}>
+[<h3 class="h3">(#ANNEE|unique{acsl})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_acsl>
+
+<BOUCLE_test_cact(CONDITION){si #CONFIG{aeres/conference_actes,cact}|=={cact}}>
+<B_cact>
+<h2 class="h2">C-ACT - Communications avec publication dans des actes</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_cact(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=conferencePaper}{role=author}{!publication=''}>
+[<h3 class="h3">(#ANNEE|unique{cact})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_cact>
+</BOUCLE_test_cact>
+
+<B_ccom>
+<h2 class="h2">C-COM - Communications orales dans une conférence nationale ou internationale</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_ccom(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=conferencePaper}{role=author}{editeur LIKE communication orale%}{publication=''}>
+[<h3 class="h3">(#ANNEE|unique{ccom})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_ccom>
+
+<B_caff>
+<h2 class="h2">C-AFF - Affiches / posters dans une conférence nationale ou internationale</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_caff(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=conferencePaper}{role=author}{editeur LIKE poster%}{publication=''}>
+[<h3 class="h3">(#ANNEE|unique{caff})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_caff>
+
+
+#SET{exclure_do, #ARRAY}
+<BOUCLE_exclure_do(ZITEMS){!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref IN book,journalArticle}{role=author}{doublons do}>
+#SET{exclure_do, #GET{exclure_do}|push{#ID_ZITEM}}
+</BOUCLE_exclure_do>
+<B_do>
+<h2 class="h2">DO - Direction d'ouvrage ou de revue</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_do(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref IN book,journalArticle}{role=editor}{!id_zitem IN #GET{exclure_do}}>
+[<h3 class="h3">(#ANNEE|unique{do})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_do>
+
+<B_os>
+<h2 class="h2">OS - Ouvrages scientifiques</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_os(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=book}{role=author}>
+[<h3 class="h3">(#ANNEE|unique{os})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_os>
+
+<BOUCLE_test_ch(CONDITION){si #CONFIG{aeres/conference_actes,cact}|=={cact}}>
+<B_ch>
+<h2 class="h2">CH - Chapitres d'ouvrage</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_ch(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=bookSection}{role=author}{!publication=''}>
+[<h3 class="h3">(#ANNEE|unique{ch})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_ch>
+</BOUCLE_test_ch>
+<B_ch2>
+<h2 class="h2">CH - Chapitres d'ouvrage</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_ch2(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref IN bookSection, conferencePaper}{role=author}{!publication=''}>
+[<h3 class="h3">(#ANNEE|unique{ch})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_ch2>
+<//B_test_ch>
+
+
+<B_pat>
+<h2 class="h2">PAT - Productions artistiques théorisées</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_pat(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref IN film,artwork,videoRecording,audioRecording}>
+[<h3 class="h3">(#ANNEE|unique{pat})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_pat>
+
+<B_hdr>
+<h2 class="h2">HDR - Habilitations à diriger des recherches</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_hdr(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=thesis}{role=author}{type_doc LIKE habilitation à diriger des recherches%}>
+[<h3 class="h3">(#ANNEE|unique{hdr})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_hdr>
+
+<B_th>
+<h2 class="h2">TH - Thèses</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_th(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=thesis}{role=author}{type_doc LIKE thèse%}>
+[<h3 class="h3">(#ANNEE|unique{th})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_th>
+
+<B_bre>
+<h2 class="h2">BRE - Brevets</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_bre(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=brevet}>
+[<h3 class="h3">(#ANNEE|unique{bre})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_bre>
+
+<B_ap>
+<h2 class="h2">AP - Autres publications</h2>
+[(#ENV{compteur}|oui)
+	[<div style="text-align:right;">(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]
+	[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]
+]
+<BOUCLE_ap(ZITEMS){auteur IN #GET{auteurs}}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref IN report,encyclopediaArticle,computerProgram,webpage,map,document,manuscript,dictionaryEntry,newspaperArticle}>
+[<h3 class="h3">(#ANNEE|unique{ap})</h3>]
+#INCLURE{fond=inclure/zitem,id_zitem,csl=#ENV{csl,#CONFIG{aeres/csl}},souligne=#GET{auteurs}}
+</BOUCLE_ap>
+
+[(#ENV{compteur}|oui)[<div style="text-align:right;">Total : (#GET{total}|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]]
+
+<BOUCLE_test_stats(CONDITION){si #ENV{stats}|et{#AUTORISER{voir,aeresstat}}}>
+<B_stats_auteurs>
+<h2 class="h2">Statistiques par auteur</h2>
+<table class="spip">
+<tr>
+	<th>Nom</th>
+	<th>ACL</th>
+	<th>DO</th>
+	<th>OS</th>
+	<th>CH</th>
+	<th>Total</th>
+</tr>
+<BOUCLE_stats_auteurs(POUR){tableau #GET{auteurs}}{par valeur}>
+#SET{total,0}
+<tr>
+	<td>#VALEUR</td>
+	<td><BOUCLE_stats_acl(ZITEMS){auteur=#VALEUR}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=journalArticle}{role=author} />#TOTAL_BOUCLE[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]<//B_stats_acl></td>
+	<td><BOUCLE_stats_do(ZITEMS){auteur=#VALEUR}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref IN book,journalArticle}{role=editor}{!id_zitem IN #GET{exclure_do}} />#TOTAL_BOUCLE[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]<//B_stats_do></td>
+	<td><BOUCLE_stats_os(ZITEMS){auteur=#VALEUR}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=book}{role=author} />#TOTAL_BOUCLE[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]<//B_stats_os></td>
+	<td>
+	<BOUCLE_test_ch_stats(CONDITION){si #CONFIG{aeres/conference_actes,cact}|=={cact}}>
+		<BOUCLE_stats_ch(ZITEMS){auteur=#VALEUR}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=bookSection}{role=author}{!publication=''} />#TOTAL_BOUCLE[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]<//B_stats_ch>
+	</BOUCLE_test_ch_stats>
+		<BOUCLE_stats_ch2(ZITEMS){auteur=#VALEUR}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref IN bookSection, conferencePaper}{role=author}{!publication=''} />#TOTAL_BOUCLE[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]<//B_stats_ch2>
+	<//B_test_ch_stats>
+	</td>
+	<td>#GET{total}</td>
+</tr>
+</BOUCLE_stats_auteurs>
+</table>
+</B_stats_auteurs>
+</BOUCLE_test_stats>
+
+</BOUCLE_si_autorise>
+
+[(#SESSION|non)
+<p><:bibliocheck:connexion_requise:></p>
+#LOGIN_PUBLIC
+]
+[(#SESSION|oui)<p><:bibliocheck:droits_insuffisants:></p>]
+
+<//B_si_autorise>

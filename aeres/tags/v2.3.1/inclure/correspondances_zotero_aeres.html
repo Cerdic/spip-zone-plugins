@@ -1,0 +1,98 @@
+<table class="spip">
+<thead>
+<tr>
+	<th>Zotero</th>
+	<th>HCERES</th>
+</tr>
+</thead>
+<tbody>
+<tr class="row_even">
+	<td  style="vertical-align: middle;" rowspan="2">Article de revue (scientifique)</td>
+	<td  style="vertical-align: middle;">Si un ou plusieurs auteurs,<br />ACL - Articles dans des revues à comité de lecture</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Sinon, si éditeur(s),<br />DO - Directions d'ouvrage ou de revue</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Article de magazine</td>
+	<td  style="vertical-align: middle;">ASCL - Articles dans des revues sans comité de lecture</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;" rowspan="3">Article de colloque</td>
+	<td  style="vertical-align: middle;">Si <code>Titre des actes</code> est renseigné,[(#CONFIG{aeres/conference_actes}|=={ch}|?{CH - Chapitres d'ouvrage, C-ACT - Communications avec publication dans des actes})]</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Sinon, si <code>Éditeur</code> commence par <q>communication orale</q>, C-COM - Communications orales dans un congrès
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Sinon, si <code>Éditeur</code> commence par <q>poster</q>, C-AFF - Affiches ou posters dans un congès</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;" rowspan="2">Livre</td>
+	<td  style="vertical-align: middle;">Si un ou plusieurs auteurs, OS - Ouvrages Scientifiques</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Sinon, si un ou plusieurs éditeurs, DO - Directions d'ouvrage ou de revue</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Chapitre de livre</td>
+	<td  style="vertical-align: middle;">CH - Chapitres d'ouvrage</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Film</td>
+	<td  style="vertical-align: middle;" rowspan="4">PAT - Productions artistiques théorisées</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Illustration</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Enregistrement audio</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Enregistrement vidéo</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;" rowspan="2">Thèse</td>
+	<td  style="vertical-align: middle;">Si <code>Type</code> commence par <q>habilitation à diriger des recherches</q>, HDR - Habilitations à diriger des recherches</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Si <code>Type</code> commence par <q>thèse</q>, TH - Thèses</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Brevet</td>
+	<td  style="vertical-align: middle;">BRE - Brevets</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Article d'encyclopédie</td>
+	<td  style="vertical-align: middle;" rowspan="9">AP - Autres publications</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Article de journal (presse)</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Carte</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Document</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Entrée de dictionnaire</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Manuscrit</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Programme informatique</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Page web</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Rapport</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Autres types de documents Zotero</td>
+	<td  style="vertical-align: middle;">Non intégrés dans la bibliographie au format HCERES</td>
+</tr>
+</tbody>
+</table>
