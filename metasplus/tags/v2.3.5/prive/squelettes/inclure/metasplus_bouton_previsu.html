@@ -1,0 +1,44 @@
+[(#REM)
+
+	Lien de prévisualisation des métas+
+
+]
+
+[(#URL_ECRIRE{metasplus_previsu}
+	|parametre_url{page,#ENV{type-page}}
+	|parametre_url{objet,#ENV{objet}}
+	|parametre_url{id_objet,#ENV{id_objet}}
+	|icone_horizontale{
+		<:metasplus:icone_previsu:>,
+		'metasplus_previsu-24',
+	}
+	|inserer_attribut{title,<:metasplus:icone_previsu_title:>})]
+
+<script>
+function metasplus_box_init(){
+	// Ouverture boîte modale
+	$('.icone[class*=metasplus_previsu] a').click(function(e){
+		e.preventDefault();
+		var href = $(this).attr('href');
+		href = parametre_url(href, 'var_zajax', 'contenu');
+		$.modalboxload(href);
+	});
+	// Fermeture boîte modale
+	$('.box_modalbox .retour.metasplus a').click(function(e){
+		e.preventDefault();
+		$.modalboxclose();
+	});
+}
+var metasplus_box_initialized;
+if (!metasplus_box_initialized){
+	if (window.jQuery){
+		metasplus_box_initialized = true;
+		(function($){
+			if (typeof onAjaxLoad == "function") {
+				onAjaxLoad(metasplus_box_init);
+			}
+			$(metasplus_box_init);
+		})(jQuery);
+	}
+}
+</script>

@@ -1,0 +1,25 @@
+<paquet
+	prefix="metasplus"
+	categorie="divers"
+	version="2.3.5"
+	schema="1.0.0"
+	etat="stable"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="opengraph.png"
+	documentation="https://contrib.spip.net/4969"
+>
+
+	<nom>Métas +</nom>
+	<!-- Métadonnées pour booster vos articles -->
+
+	<auteur lien="http://spip.tetue.net">tetue</auteur>
+	<auteur lien="https://www.erational.org">erational</auteur>
+	<auteur lien="https://www.bravecassine.com">tcharlss</auteur>
+
+	<pipeline nom="affichage_final" inclure="metasplus_pipelines.php" />
+	<pipeline nom="post_edition" inclure="metasplus_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="metasplus_pipelines.php" />
+	<pipeline nom="autoriser" inclure="metasplus_autorisations.php" />
+
+	<utilise nom="composition" compatibilite="[3.7.0;[" />
+</paquet>
