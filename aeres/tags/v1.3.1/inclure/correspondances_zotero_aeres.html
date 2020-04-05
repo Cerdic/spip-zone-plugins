@@ -1,0 +1,98 @@
+<table class="spip">
+<thead>
+<tr>
+	<th>Zotero</th>
+	<th>AERES</th>
+</tr>
+</thead>
+<tbody>
+<tr class="row_even">
+	<td  style="vertical-align: middle;" rowspan="2">Article de revue (scientifique)</td>
+	<td  style="vertical-align: middle;">Si l'article comporte un ou plusieurs auteurs,<br /><em>ACL - Articles dans des revues à comité de lecture</em></td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Sinon, les personnes ayant dirigé la revue étant renseignées comme éditeurs,<br /><em>DO - Directions d'ouvrage ou de revue</em></td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Article de magazine</td>
+	<td  style="vertical-align: middle;"><em>ASCL - Articles dans des revues sans comité de lecture</em></td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;" rowspan="3">Article de colloque</td>
+	<td  style="vertical-align: middle;">Si le champ 'Titre des actes' est renseigné, il s'agit alors de<br /><em>[(#CONFIG{aeres/conference_actes}|=={ch}|?{CH - Chapitres d'ouvrage, C-ACT - Communications avec publication dans des actes})]</em></td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Sinon, le champ 'Éditeur' précisera s'il s'agit d'une communication orale ou d'un poster. Si le champ commence par 'communication orale' (en minuscules), on classifiera en<br /><em>C-COM - Communications orales dans un congrès</em>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">En l'absence de 'Titre des actes' et si le champ 'éditeur' commence par 'poster' (en minuscules, le numéro de communication pouvant optionnellement être indiqué ensuite, exemple : 'poster n°123456'),<br /><em>C-AFF - Affiches ou posters dans un congès</em></td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;" rowspan="2">Livre</td>
+	<td  style="vertical-align: middle;">Si la référence comporte un ou plusieurs auteurs,<br /><em>OS - Ouvrages Scientifiques</em></td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Sinon, les personnes ayant dirigé l'ouvrage étant renseignées comme éditeurs,<br /><em>DO - Directions d'ouvrage ou de revue</em></td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Chapitre de livre</td>
+	<td  style="vertical-align: middle;"><em>CH - Chapitres d'ouvrage</em></td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Film</td>
+	<td  style="vertical-align: middle;" rowspan="4">PAT - Productions artistiques théorisées</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Illustration</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Enregistrement audio</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Enregistrement vidéo</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;" rowspan="2">Thèse</td>
+	<td  style="vertical-align: middle;">On tiendra compte du champ 'type'. Si ce dernier commence par 'habilitation à diriger des recherches' (en minuscles, attention aux accents et aux fautes de frappe),<br /><em>HDR - Habilitations à diriger des recherches</em></td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Si le champ 'type' commence par 'thèse' (en minuscules, attention aux accents, on peut optionnellement préciser la thèse ensuite, par exemple 'thèse de doctorat en démographie'),<br /><em>TH - Thèses</em></td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Brevet</td>
+	<td  style="vertical-align: middle;"><em>BRE - Brevets</em></td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Article d'encyclopédie</td>
+	<td  style="vertical-align: middle;" rowspan="9"><em>AP - Autres publications</em></td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Article de journal (presse)</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Carte</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Document</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Entrée de dictionnaire</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Manuscrit</td>
+</tr>
+<tr class="row_even">
+	<td  style="vertical-align: middle;">Programme informatique</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Page web</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Rapport</td>
+</tr>
+<tr class="row_odd">
+	<td  style="vertical-align: middle;">Autres types de documents Zotero</td>
+	<td  style="vertical-align: middle;">Non intégrés dans la bibliographie au format AERES</td>
+</tr>
+</tbody>
+</table>

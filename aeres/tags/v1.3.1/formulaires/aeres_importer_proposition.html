@@ -1,0 +1,28 @@
+<BOUCLE_ticket(TICKETS){id_ticket}>
+[(#ID_ZITEM|non|et{#ZITEM_JSON}|oui)
+<div class="formulaire_spip formulaire_editer formulaire_importer_proposition">
+	<div class="cadre_padding">
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		<div style="font-weight:bold;">Proposition :</div>
+		[(#ZITEM_JSON|zotspip_calculer_zitem_details)]
+	</div>
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='Importer dans Zotero' />
+		</p>
+	</div></form>
+</div>
+<p />]
+
+[(#ID_ZITEM||oui)
+[<div class="formulaire_spip formulaire_editer formulaire_importer_proposition">
+	<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
+</div>]
+<div class="cadre cadre-r"><div class="cadre_padding">
+	<div style="font-weight:bold;">Version en base :</div>
+	<ul>#INCLURE{fond=inclure/zitem,id_zitem=#ID_ZITEM,liste=oui,details=complet,icones=oui,liens=oui,csl=#CONFIG{aeres/csl}}</ul>
+	<div style="text-align:right; font-weight:bold;"><a href="[(#ID_ZITEM|modifier_sur_zotero)]" target="_blank">Modifier en ligne sur zotero.org</a></div>
+</div></div>]
+</BOUCLE_ticket>

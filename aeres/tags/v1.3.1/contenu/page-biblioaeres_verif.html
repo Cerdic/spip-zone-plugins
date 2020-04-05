@@ -1,0 +1,175 @@
+#CACHE{0}
+#SET{debut,#ENV{debut,#CONFIG{aeres/debut}}}
+#SET{fin,#ENV{fin,#CONFIG{aeres/fin}}}
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblioaeres}">Bibliographie AERES</a> &gt; <strong class="on">Vérifier la bibliographie</strong></p>
+
+<h1 class="h1">[(#ENV{auteur,Tous les auteurs})] ([(#GET{debut})]-[(#GET{fin})])</h1>
+
+#SET{refs, #ARRAY} [(#REM) Le critère doublons ne marche pas avec des id textuels. ]
+
+<B_acl>
+<h2 class="h2">ACL - Articles dans des revues à comité de lecture</h2>
+<BOUCLE_acl(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=journalArticle}{role=author}>
+[<h3 class="h3">(#ANNEE|unique{acl})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_acl>
+
+<B_acsl>
+<h2 class="h2">ACSL - Articles dans des revues sans comité de lecture</h2>
+<BOUCLE_acsl(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=magazineArticle}{role=author}>
+[<h3 class="h3">(#ANNEE|unique{acsl})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_acsl>
+
+<BOUCLE_test_cact(CONDITION){si #CONFIG{aeres/conference_actes,cact}|=={cact}}>
+<B_cact>
+<h2 class="h2">C-ACT - Communications avec publication dans des actes</h2>
+<BOUCLE_cact(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=conferencePaper}{role=author}{!publication=''}>
+[<h3 class="h3">(#ANNEE|unique{cact})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_cact>
+</BOUCLE_test_cact>
+
+<B_ccom>
+<h2 class="h2">C-COM - Communications orales dans une conférence nationale ou internationale</h2>
+<BOUCLE_ccom(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=conferencePaper}{role=author}{editeur LIKE communication orale%}{publication=''}>
+[<h3 class="h3">(#ANNEE|unique{ccom})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_ccom>
+
+<B_caff>
+<h2 class="h2">C-AFF - Affiches / posters dans une conférence nationale ou internationale</h2>
+<BOUCLE_caff(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=conferencePaper}{role=author}{editeur LIKE poster%}{publication=''}>
+[<h3 class="h3">(#ANNEE|unique{caff})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_caff>
+
+<B_cpb>
+<h2 class="h2">COMMUNICATIONS INDÉTERMINÉES</h2>
+<div class="aeres_info_notice">Les références ci-dessous ne précisent pas s'il s'agit d'une communication orale ou d'un poster. Cette information doit être renseignée dans le champs <em>Éditeur</em>, qui doit commencer par <code>communication orale</code> ou <code>poster</code> (en minuscules).<br />Il est possible de préciser un numéro de communication à la suite, par exemple <code>poster n°123456</code>.<br />Veuillez indiquer les corrections à effectuer sur ces référénces. En l'absence de précisions, elles ne seront pas intégrées à la bibliographie AERES.</div>
+<BOUCLE_cpb(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=conferencePaper}{role=author}{!editeur LIKE poster%}{!editeur LIKE communication orale%}{publication=''}>
+[<h3 class="h3">(#ANNEE|unique{cpb})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_cpb>
+
+#SET{exclure_do, #ARRAY}
+<BOUCLE_exclure_do(ZITEMS){!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type IN book,journalArticle}{role=author}{doublons do}>
+#SET{exclure_do, #GET{exclure_do}|push{#ID_ZITEM}}
+</BOUCLE_exclure_do>
+<B_do>
+<h2 class="h2">DO - Direction d'ouvrage ou de revue</h2>
+<BOUCLE_do(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type IN book,journalArticle}{role=editor}{!id_zitem IN #GET{exclure_do}}>
+[<h3 class="h3">(#ANNEE|unique{do})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_do>
+
+<B_os>
+<h2 class="h2">OS - Ouvrages scientifiques</h2>
+<BOUCLE_os(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=book}{role=author}>
+[<h3 class="h3">(#ANNEE|unique{os})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_os>
+
+<BOUCLE_test_ch(CONDITION){si #CONFIG{aeres/conference_actes,cact}|=={cact}}>
+<B_ch>
+<h2 class="h2">CH - Chapitres d'ouvrage</h2>
+<BOUCLE_ch(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=bookSection}{role=author}{!publication=''}>
+[<h3 class="h3">(#ANNEE|unique{ch})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_ch>
+</BOUCLE_test_ch>
+<B_ch2>
+<h2 class="h2">CH - Chapitres d'ouvrage</h2>
+<BOUCLE_ch2(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type IN bookSection, conferencePaper}{role=author}{!publication=''}>
+[<h3 class="h3">(#ANNEE|unique{ch})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_ch2>
+<//B_test_ch>
+
+<B_chpb>
+<h2 class="h2">CHAPITRES SANS TITRE DE LIVRE</h2>
+<BOUCLE_chpb(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=bookSection}{role=author}{publication=''}>
+[<h3 class="h3">(#ANNEE|unique{ch})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_chpb>
+
+<B_pat>
+<h2 class="h2">PAT - Productions artistiques théorisées</h2>
+<BOUCLE_pat(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type IN film,artwork,videoRecording,audioRecording}>
+[<h3 class="h3">(#ANNEE|unique{pat})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_pat>
+
+<B_hdr>
+<h2 class="h2">HDR - Habilitations à diriger des recherches</h2>
+<BOUCLE_hdr(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=thesis}{role=author}{type_doc LIKE habilitation à diriger des recherches%}>
+[<h3 class="h3">(#ANNEE|unique{hdr})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_hdr>
+
+<B_th>
+<h2 class="h2">TH - Thèses</h2>
+<BOUCLE_th(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=thesis}{role=author}{type_doc LIKE thèse%}>
+[<h3 class="h3">(#ANNEE|unique{th})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_th>
+
+<B_thpb>
+<h2 class="h2">THÈSES INDÉTERMINÉES et autres mémoires</h2>
+<div class="aeres_info_notice">Les références ci-dessous ne précisent pas s'il s'agit d'une HDR ou d'une thèse. Il peut éventuellement s'agir d'autres types de mémoire (master...), ces derniers n'étant pas pris en compte pour la bibliographie AERES. Le type de mémoire doit commencer par <code>habilitation à diriger des recherches</code> ou <code>thèse</code> (en minuscules, attention aux fautes de frappe et aux accents).<br />Il est possible de préciser la discipline à la suite, par exemple <code>thèse de démographie</code>.<br />Veuillez indiquer les corrections à effectuer sur ces référénces. En l'absence de précisions, elles ne seront pas intégrées à la bibliographie AERES.</div>
+<BOUCLE_thpb(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=thesis}{role=author}{!type_doc LIKE habilitation à diriger des recherches%}{!type_doc LIKE thèse%}>
+[<h3 class="h3">(#ANNEE|unique{thpb})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_thpb>
+
+<B_bre>
+<h2 class="h2">BRE - Brevets</h2>
+<BOUCLE_bre(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=brevet}>
+[<h3 class="h3">(#ANNEE|unique{bre})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_bre>
+
+<B_ap>
+<h2 class="h2">AP - Autres publications</h2>
+<BOUCLE_ap(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type IN report,encyclopediaArticle,computerProgram,webpage,map,document,manuscript,dictionaryEntry,newspaperArticle}>
+[<h3 class="h3">(#ANNEE|unique{ap})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_ap>
+
+<B_anneepb>
+<h2 class="h2">RÉFÉRENCES SANS ANNÉE DE PUBLICATION</h2>
+<div class="aeres_info_erreur">Veuillez préciser l'année de publication des références ci-dessous.</div>
+<BOUCLE_anneepb(ZITEMS){auteur?}{!par annee}{par auteurs}{annee=0}{!type IN attachment,note}>
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+#SET{refs, #GET{refs}|push{#ID_ZITEM}}
+</BOUCLE_anneepb>
+
+<B_autres>
+<h2 class="h2">Autres références (hors AERES)</h2>
+<div class="aeres_info_notice">Autres références présentes dans la base de données. Ces dernières ne seront pas intégrées à la bibliographie AERES.</div>
+<BOUCLE_autres(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{!id_zitem IN #GET{refs}}{!type IN attachment,note}>
+[<h3 class="h3">(#ANNEE|unique{autres})</h3>]
+<div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
+</BOUCLE_autres>
+
+<h2 class="h2">Références à ajouter</h2>
+
+<div class="ajax">#FORMULAIRE_AERES_AJOUTER_ZITEM{#ENV{auteur}}</div>

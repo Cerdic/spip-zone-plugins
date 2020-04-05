@@ -1,0 +1,43 @@
+<plugin>
+	<nom>Bibliographie AERES</nom>
+	<slogan>Générer une bibliographie au format AERES à partir de ZotSpip</slogan>
+	<auteur>[Joseph Larmarange->https://contrib.spip.net/Joseph]</auteur>
+	<licence>GPL v3</licence>
+	<version>1.3.1</version>
+	<version_base>0.1</version_base>
+	<etat>test</etat>
+	<description>Ce plugin fournit une interface pour faciliter la réalisation d'une bibliographie au format AERES. Les auteurs peuvent indiquer en ligne des corrections à effectuer ou bien indiquer des références à ajouter.</description>
+	<lien>https://contrib.spip.net/Bibliographie-AERES-1-0</lien>
+	<icon>images/aeres-48.png</icon>
+	<prefix>aeres</prefix>
+	<install>aeres_administrations.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/aeres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/aeres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>aeres_ieconfig.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>aeres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>aeres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>aeres_pipelines.php</inclure>
+	</pipeline>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="zotspip" />
+	<necessite id="ticketskiss" />
+	<necessite id="medias" />
+</plugin>

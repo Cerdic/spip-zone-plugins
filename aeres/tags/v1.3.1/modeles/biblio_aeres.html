@@ -1,0 +1,141 @@
+#SET{details,#ENV{details}|=={non}|?{'',#ENV{details,'on'}}}
+#SET{export,#ENV{export}|=={non}|?{'','on'}}
+#SET{liens,#ENV{liens}|=={non}|?{'','on'}}
+#SET{souligne,#ENV{auteur}|et{#ENV{souligne}|!={non}}|?{#ENV{auteur},''}}
+#SET{alea,#EVAL{rand()}} [(#REM) besoin d'un alea pour unique car le modele peut etre appele plusieurs fois (typiquement pour l'intro, puis pour le texte). ]
+
+<B_acl>
+<h4 class="h4">ACL - Articles dans des revues à comité de lecture</h4>
+<BOUCLE_acl(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type=journalArticle}{role=author}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_acl})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_acl>
+</ul>
+</B_acl>
+
+
+<B_acsl>
+<h4 class="h4">ACSL - Articles dans des revues sans comité de lecture</h4>
+<BOUCLE_acsl(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type=magazineArticle}{role=author}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_acsl})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_acsl>
+</ul>
+</B_acsl>
+
+<BOUCLE_test_cact(CONDITION){si #CONFIG{aeres/conference_actes,cact}|=={cact}}>
+<B_cact>
+<h4 class="h4">C-ACT - Communications avec publication dans des actes</h4>
+<BOUCLE_cact(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type=conferencePaper}{role=author}{!publication=''}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_cact})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_cact>
+</ul>
+</B_cact>
+</BOUCLE_test_cact>
+
+<B_ccom>
+<h4 class="h4">C-COM - Communications orales dans une conférence nationale ou internationale</h4>
+<BOUCLE_ccom(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type=conferencePaper}{role=author}{editeur LIKE communication orale%}{publication=''}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_ccom})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_ccom>
+</ul>
+</B_ccom>
+
+<B_caff>
+<h4 class="h4">C-AFF - Affiches / posters dans une conférence nationale ou internationale</h4>
+<BOUCLE_caff(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type=conferencePaper}{role=author}{editeur LIKE poster%}{publication=''}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_caff})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_caff>
+</ul>
+</B_caff>
+
+#SET{exclure_do, #ARRAY}
+<BOUCLE_exclure_do(ZITEMS){!par annee}{par auteurs}{type IN book,journalArticle}{role=author}{doublons do}>
+#SET{exclure_do, #GET{exclure_do}|push{#ID_ZITEM}}
+</BOUCLE_exclure_do>
+<B_do>
+<h4 class="h4">DO - Direction d'ouvrage ou de revue</h4>
+<BOUCLE_do(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type IN book,journalArticle}{role=editor}{!id_zitem IN #GET{exclure_do}}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_do})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_do>
+</ul>
+</B_do>
+
+<B_os>
+<h4 class="h4">OS - Ouvrages scientifiques</h4>
+<BOUCLE_os(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type=book}{role=author}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_os})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_os>
+</ul>
+</B_os>
+
+<BOUCLE_test_ch(CONDITION){si #CONFIG{aeres/conference_actes,cact}|=={cact}}>
+<B_ch>
+<h4 class="h4">CH - Chapitres d'ouvrage</h4>
+<BOUCLE_ch(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type=bookSection}{role=author}{!publication=''}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_ch})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_ch>
+</ul>
+</B_ch>
+</BOUCLE_test_ch>
+<B_ch2>
+<h4 class="h4">CH - Chapitres d'ouvrage</h4>
+<BOUCLE_ch2(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type IN bookSection, conferencePaper}{role=author}{!publication=''}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_ch})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_ch2>
+</ul>
+</B_ch2>
+<//B_test_ch>
+
+
+<B_pat>
+<h4 class="h4">PAT - Productions artistiques théorisées</h4>
+<BOUCLE_pat(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type IN film,artwork,videoRecording,audioRecording}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_pat})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_pat>
+</ul>
+</B_pat>
+
+<B_hdr>
+<h4 class="h4">HDR - Habilitations à diriger des recherches</h4>
+<BOUCLE_hdr(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type=thesis}{role=author}{type_doc LIKE habilitation à diriger des recherches%}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_hdr})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_hdr>
+</ul>
+</B_hdr>
+
+<B_th>
+<h4 class="h4">TH - Thèses</h4>
+<BOUCLE_th(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type=thesis}{role=author}{type_doc LIKE thèse%}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_th})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_th>
+</ul>
+</B_th>
+
+<B_bre>
+<h4 class="h4">BRE - Brevets</h4>
+<BOUCLE_bre(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type=brevet}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_bre})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_bre>
+</ul>
+</B_bre>
+
+<B_ap>
+<h4 class="h4">AP - Autres publications</h4>
+<BOUCLE_ap(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type IN report,encyclopediaArticle,computerProgram,webpage,map,document,manuscript,dictionaryEntry,newspaperArticle}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_ap})</h5><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+</BOUCLE_ap>
+</ul>
+</B_ap>

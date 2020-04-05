@@ -1,0 +1,99 @@
+<!-- presentation=non -->
+<!-- nom=aeres -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		<li class="editer_debut[(#ENV**{erreurs}|table_valeur{debut}|oui)erreur]">
+			<label>Année de début</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{debut})</span>]
+			<input type="text" name="debut" class="text" value="#ENV*{debut}" id="debut" [(#HTML5|oui)required='required']/>
+		</li>
+		<li class="editer_fin[(#ENV**{erreurs}|table_valeur{fin}|oui)erreur]">
+			<label>Année de fin</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fin})</span>]
+			<input type="text" name="fin" class="text" value="#ENV*{fin}" id="fin" [(#HTML5|oui)required='required']/>
+		</li>
+		<B_csl>
+		<li class="editer_csl[ (#ENV**{erreurs}|table_valeur{csl}|oui)erreur]">
+			<label for='csl'>Style CSL à utiliser</label>
+			<select name="csl" id="csl">
+				<BOUCLE_csl(POUR){tableau #LISTER_CSL}{par valeur}>
+				<option value="#CLE"[(#ENV{csl}|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
+				</BOUCLE_csl>
+			</select>
+		</li>
+		</B_csl>
+		<li class="editer_contact[(#ENV**{erreurs}|table_valeur{debut}|oui)erreur]">
+			<label>Email de contact</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{contact})</span>]
+			<input type="text" name="contact" class="text" value="#ENV*{contact}" id="contact" />
+		</li>
+		<li class="editer_conference_actes[(#ENV**{erreurs}|table_valeur{conference_actes}|oui)erreur]">
+			<label>Articles de colloque avec publication dans des actes</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{conference_actes})</span>]
+			<div class="choix">
+				<input type="radio" name="conference_actes" class="radio" id="conference_actes_cact" value="cact" [(#ENV{conference_actes}|=={cact}|oui) checked="checked"] />
+				<label for='conference_actes_cact'>Catégorie AERES autonome (C-ACT)</label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="conference_actes" class="radio" id="conference_actes_ch" value="ch" [(#ENV{conference_actes}|=={ch}|oui) checked="checked"] />
+				<label for='conference_actes_ch'>Présentés avec les chapitres d'ouvrage (CH)</label>
+			</div>
+		</li>
+		<li class="editer_format_docs[(#ENV**{erreurs}|table_valeur{format_docs}|oui)erreur]">
+			<label>Format des documents joints</label>
+			<p class="explication">Formats acceptés pour les documents joints à une demande de correction / d'ajout, séparés par une virgule et un espace. Laissez vide pour ne pas accepter l'ajout de document. Exemple : <em>txt, ris, bib, rdf, xml, doc, docx, odt, ppt, pptx, odp, pdf, html, jpg, png, gif</em></p>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{format_docs})</span>]
+			<input type="text" name="format_docs" class="text" value="#ENV*{format_docs}" id="format_docs"/>
+		</li>
+		<li class="editer_membres[(#ENV**{erreurs}|table_valeur{membres}|oui)erreur]"">
+			<label>Membres de l'unité</label>
+			<p class="explication">Liste des auteurs à prendre en compte dans la bibliographie générale.</p>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{format_docs})</span>]
+			<div style="float:left; width:49%; text-align:center; height:100%;">
+				<strong>Non-membres</strong>
+				<select multiple id="non_membres" name="non_membres[]" style="height:200px;" class="select">
+					<BOUCLE_non_membres(POUR){tableau #ENV{non_membres}}>
+					<option value="#VALEUR">#VALEUR</option>
+					</BOUCLE_non_membres>
+				</select>
+				<a href="#" id="ajouter_membre">Ajouter &gt;&gt;</a>
+			</div>
+			<div style="float:right; width:49%; text-align:center; height:100%;">
+				<strong>Membres</strong>
+				<select multiple id="membres" name="membres[]" style="height:200px;" class="select">
+					<BOUCLE_membres(POUR){tableau #ENV{membres}}>
+					<option value="#VALEUR">#VALEUR</option>
+					</BOUCLE_membres>
+				</select>
+				<a href="#" id="retirer_membre">&lt;&lt; Retirer</a>
+			 </div> 
+		</li>
+		</ul>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' id="valider_cfg_aeres" />
+		</p>
+	</div></form>
+</div>
+<script type="text/javascript">// <![CDATA[
+$(document).ready(function(){
+	$( ".editer_membres" ).resizable({
+		handles: "s, se",
+		alsoResize: "#membres, #non_membres",
+	});
+	$('#ajouter_membre').click(function() {
+		return !$('#non_membres option:selected').remove().appendTo('#membres');
+	});
+	$('#retirer_membre').click(function() {
+		return !$('#membres option:selected').remove().appendTo('#non_membres');
+	});
+	$('#valider_cfg_aeres').click(function() {
+		$('#membres *').attr('selected','selected');
+		$('#non_membres *').attr('selected','selected');
+	});
+});
+ //]]></script>
