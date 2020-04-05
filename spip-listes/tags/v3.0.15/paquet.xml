@@ -1,0 +1,32 @@
+<paquet 
+	prefix="spiplistes" 
+	categorie="communication" 
+	version="3.0.15"
+	etat="test" 
+	compatibilite="[3.0.0;3.0.*]" 
+	logo="prive/themes/spip/images/spip-listes.png" 
+	schema="1.9923" 
+	documentation="https://contrib.spip.net/SPIP-Listes">
+	<nom>Spip-Listes</nom>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/spiplistes.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/spiplistes.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/spiplistes.php" />
+	<pipeline nom="affiche_milieu" inclure="inc/spiplistes_pipeline_affiche_milieu.php" />
+	<pipeline nom="insert_head" inclure="inc/spiplistes_pipeline_insert_head.php" />
+	<pipeline nom="header_prive" inclure="inc/spiplistes_pipeline_header_prive.php" />
+	<pipeline nom="taches_generales_cron" inclure="genie/spiplistes_cron.php" />
+	<pipeline nom="ajouter_boutons" inclure="inc/spiplistes_pipeline_ajouter_boutons.php" />
+	<pipeline nom="ajouter_onglets" inclure="inc/spiplistes_pipeline_ajouter_onglets.php" />
+
+	<menu nom="spip-listes" titre="spiplistes:listes_de_diffusion_" parent="bando_edition" icone="images/spip-listes-16.png" action="spiplistes_courriers_casier" />
+	<menu nom="spip-listes_conf" titre="spiplistes:listes_de_diffusion_" parent="bando_configuration" icone="images/spip-listes-16.png" action="spiplistes_config" />
+	<menu nom="lettre_creer" titre="spiplistes:icone_creation_courrier" parent="outils_rapides" icone="images/courriers_redac-16.png"  action="spiplistes_courrier_edit" parametres='new=oui&amp;type=nl' />
+
+	<onglet nom="spiplistes_courriers_casier" titre="spiplistes:icone_courriers_casier" parent="spip-listes" icone="images/stock_hyperlink-mail-and-news-24.gif" action="spiplistes_courriers_casier" />
+	<onglet nom="spiplistes_listes_toutes" titre="spiplistes:icone_listes_toutes" parent="spip-listes" icone="images/reply-to-all-24.gif" action="spiplistes_listes_toutes" />
+	<onglet nom="spiplistes_abonnes_tous" titre="spiplistes:icone__abonnes_tous" parent="spip-listes" icone="images/addressbook-24.gif" action="spiplistes_abonnes_tous" />
+
+	<necessite nom="facteur" compatibilite="[3.6.2;[" />
+
+</paquet>

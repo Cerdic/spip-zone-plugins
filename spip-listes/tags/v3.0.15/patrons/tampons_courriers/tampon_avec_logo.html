@@ -1,0 +1,31 @@
+#CACHE{1}
+#HTTP_HEADER{Content-Type: text/html}
+[(#REM)
+
+	* Squelette pour spip-listes    
+	* tampon_avec_logo.html (CP-20071012 paladin@quesaco.org)
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	* Le tampon de courrier est appliqué à l'envoi de votre courrier.
+	
+	* Pour paramétrer l'envoi du tampon Editeur, voir la page de configuration
+	* dans le menu configuration (espace privé)
+	* ou http://<votre-site>/ecrire/?exec=spiplistes_config
+		
+	* - ne pas envoyer des gabarits de plus de 10Ko
+	* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+	* ils seront ajoutes automatiquement à l'envoi du mail 
+	* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+	* - les urls et liens images seront automatiquement converties en absolues
+	*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+
+]
+
+<div style='vertical-align:top;border-top:2px groove #ccf;padding:0.5ex;'>
+[<img style="float:left;margin:0 1ex 0 0;" src="(#EDITEUR_LOGO)" width="48" height="48">
+]<span align="left"><span style='font-size:120%;font-weight:bold;'>#EDITEUR_NOM</span><br />
+[(#EDITEUR_ADRESSE)<br />]
+[<span style='font-size:8pt;'>RCS: (#EDITEUR_RCS)[ - SIRET: (#EDITEUR_SIRET)]</span>]</span>
+</div>

@@ -1,0 +1,17 @@
+[<!--(#REM)
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+	Permet d'afficher la page mirroir du courrier.
+
+	Appel de la page par :
+		http://<foo.bar>/?page=courrier
+	Ou en intgrant les deux lignes ci-dessous dans
+	votre squelette.
+
+
+-->]
+[(#PLUGIN{Z}|oui) <INCLURE{fond=structure}{env}{type=page}{composition=courrier} />]
+[(#PLUGIN{Z}|non) <INCLURE{fond=courrier-defaut}{env}>]

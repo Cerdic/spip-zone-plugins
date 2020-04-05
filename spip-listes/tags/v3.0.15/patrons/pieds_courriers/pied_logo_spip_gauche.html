@@ -1,0 +1,36 @@
+#CACHE{1}
+#HTTP_HEADER{Content-Type: text/html}
+[<!--(#REM)
+
+	* Squelette pour spip-listes    
+	* pied_logo_spip.html
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	* Le pied de courrier est applique a l'envoi de votre courrier.
+	
+	* - ne pas envoyer des gabarits de plus de 10Ko
+	* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+	* ils seront ajoutes automatiquement a l'envoi du mail 
+	* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+	* - les urls et liens images seront automatiquement converties en absolues
+	*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+
+	Pour personnaliser votre pied de courrier, 2 solutions :
+	- soit creer un squelette et le placer dans le repertoire 'patrons/pieds_courriers/' puis le selectionner dans la page de configuration de SPIP-Listes
+	- soit le placer dans vos squelettes. Dans ce cas, creez un repertoire 'patrons/pieds_courriers/ et ajoutez-y votre squelette de pied en le nommant 'piedmail.html'
+	
+	Le pied de mail est calcule' a la creation de la liste.
+	Il est enregistre' dans le champ 'pied_page' de la table 'spip_listes'.
+	
+	Si vous voulez changer le pied de courrier d'une liste existante
+	, soit il faut remplacer la valeur de ce champ (c'est du code HTML)
+	, soit vous recreez une liste en reprenant les elements de la precedente. 
+
+-->][<div style='text-align:left; font-size:11px'>
+<a href="https://www.spip.net/">
+<img src="(#CHEMIN{spip.png})" alt="SPIP" width="48" height="16" class="format_png" /></a> - 
+<a href="https://contrib.spip.net/SPIP-Listes">
+<:spiplistes:courrier_realise_avec_spiplistes:></a>
+</div>]

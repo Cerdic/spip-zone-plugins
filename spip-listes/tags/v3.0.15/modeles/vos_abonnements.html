@@ -1,0 +1,35 @@
+#CACHE{1}
+[(#REM)
+
+<!-- 
+// vos_abonnements.html (modèle)
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+Donne la liste des abonnements pour l'auteur connecté
+
+CP-20081205
+- Validé sous SPIP 2
+- Validé sous SPIP 192e
+
+
+-->
+]
+	<div class='spiplistes-mes-abos'>
+	<B_meslistes>
+		<BOUCLE_compter(AUTEURS_LISTES spip_listes){id_auteur=#EVAL{$GLOBALS['auteur_session']['id_auteur']}}>
+		</BOUCLE_compter>
+		[(#TOTAL_BOUCLE|>{1}|?{<:spiplistes:vous_etes_abonne_aux_listes_:><ul> , 
+			<:spiplistes:vous_etes_abonne_a_la_liste_:> })]
+		<ul class='spiplistes-mesabos'>
+		</B_compter>
+	    <BOUCLE_meslistes(AUTEURS_LISTES spip_listes){id_auteur=#EVAL{$GLOBALS['auteur_session']['id_auteur']}}>
+             <li>#TITRE</li>
+    </BOUCLE_meslistes>
+	</ul>
+    </B_meslistes>
+		<a href="#URL_PAGE{abonnement}"><:spiplistes:abonne_aucune_liste:></a>
+    <//B_meslistes>
+	</div>

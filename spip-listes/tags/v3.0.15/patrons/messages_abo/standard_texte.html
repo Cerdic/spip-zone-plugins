@@ -1,0 +1,66 @@
+#CACHE{1}
+[<!--(#REM)
+
+	Squelette pour spip-listes    
+	patrons/messages/standard_texte.html
+	
+	$LastChangedRevision$
+	$LastChangedBy$
+	$LastChangedDate$
+	
+*
+* Precautions:                             
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html
+*
+-->
+]<:form_forum_message_auto:>
+
+[(#ENV*{titre})
+=======================================]
+
+<:bonjour:>[ (#ENV{nom})],
+
+[(#ENV{nouvel_inscription}|=={oui}|?{' ',''})<:spiplistes:bienvenue_sur_la_liste_:>][(#ENV{nouvel_inscription}|=={oui}|?{'',' '})<:spiplistes:vos_abos_sur_le_site_:>]#NOM_SITE_SPIP
+
+[(#ENV{format}|=={non}|?{' ',''})<:spiplistes:vous_abonne_aucune_liste:>][(#ENV{format}|=={non}|?{'',' '})<:spiplistes:votre_format_de_reception_:> : [(#ENV{format}|=={html}|?{' ',''})<:spiplistes:html_description:>][(#ENV{format}|=={texte}|?{' ',''})<:spiplistes:texte_brut:>]
+]
+<B_listes>
+[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:vous_etes_abonne_a_la_liste_:>,<:spiplistes:vous_etes_abonne_aux_listes_:>})]
+<BOUCLE_listes(LISTES){statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{id_liste IN #ENV**{ids_abos}}>
+	- #TITRE[ - (#TEXTE)]
+</BOUCLE_listes>
+[<:spiplistes:pour_modifier_votre_abo_:>, <:spiplistes:_cliquez_lien_formulaire:> :
+#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})]
+</B_listes>
+<:spiplistes:vous_abonne_aucune_liste:>.
+<B_dispos>
+[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:liste_dispo_site_:>,<:spiplistes:listes_dispos_site_:>})]
+<BOUCLE_dispos(LISTES){statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}>
+	- #TITRE[ - (#TEXTE)]
+</BOUCLE_dispos>
+[<:spiplistes:pour_vous_abonner:>, <:spiplistes:_cliquez_lien_formulaire:> :
+#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})]
+</B_dispos>
+<:spiplistes:desole_pas_de_liste:>
+<//B_dispos>
+<//B_listes>
+
+[(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
+[(#ENV{statut}|=={nouveau}|?{' ',''})
+<:spiplistes:vous_etes_redact:>
+]
+]
+[(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
+[(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
+<:spiplistes:vous_etes_membre:>
+]
+]
+[(#ENV{zepass}|?{' ',''})
+[<:login_login:> (#ENV{login})
+]
+<:login_pass2:> #ENV{zepass}
+]
+
+
+[(#ENV*{texte})]
