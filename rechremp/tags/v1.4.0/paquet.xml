@@ -1,0 +1,22 @@
+<paquet
+	prefix="rechremp"
+	categorie="outil"
+	version="1.4.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/rechremp-32.png"
+	documentation="https://contrib.spip.net/3941"
+>
+
+	<nom>Rechercher/Remplacer</nom>
+	<!-- Rechercher des chaines dans la BDD SPIP et eventuellement les remplacer par une autre chaine -->
+
+	<auteur>JLuc</auteur>
+	<auteur>Cerdic</auteur>
+
+	<licence>GNU/GLP</licence>
+
+	<pipeline nom="autoriser" inclure="rechremp_autorisations.php" />
+
+	<menu nom="rechremp" titre="rechremp:titre_rechremp" parent="menu_administration" icone="images/rechremp-16.png" />
+</paquet>
