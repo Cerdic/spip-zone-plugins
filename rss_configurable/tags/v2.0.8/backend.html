@@ -1,0 +1,124 @@
+[(#REM)
+	Ce fichier sert à créer les flux RSS
+	qui permettent aux visiteurs de suivre l'actualité
+	de votre site depuis un lecteur de news.
+
+	Cette page génère un code XML/RSS adapté
+
+][(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml
+version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+>
+[(#SET{flux_articles,#CONFIG{rssconfig/activer}|!={non}|oui})]
+[(#SET{flux_breves,#PLUGIN{breves}|et{#CONFIG{activer_breves}|=={oui}}|et{#CONFIG{rssconfig_breves/activer}|!={non}}|et{#CONFIG{rssconfig_breves/flux,breves}|!={breves}}|oui})]
+[(#SET{flux_sites,#PLUGIN{sites}|et{#CONFIG{activer_sites}|=={oui}}|et{#CONFIG{rssconfig_sites/activer}|!={non}}|et{#CONFIG{rssconfig_sites/flux,sites}|!={sites}}|oui})]
+[(#SET{flux_evenements,#PLUGIN{simplecal}|et{#CONFIG{rssconfig_evenements/activer}|!={non}}|et{#CONFIG{rssconfig_evenements/flux,evenements}|!={evenements}}|oui})]
+
+<channel[ xml:lang="(#LANG)"]>
+	<title>[(#NOM_SITE_SPIP|textebrut|texte_backend)]-#GET{flux_evenements}-#GET{flux_sites}-#GET{flux_breves}-#GET{flux_articles}</title>
+	<link>#URL_SITE_SPIP/</link>
+	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+	<atom:link href="[(#SELF|url_absolue)]" rel="self" type="application/rss+xml" />
+[	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<link>#URL_SITE_SPIP/</link>
+		[<height>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
+	</image>
+]
+[(#REM) tableau qui pour stocker les items ramenes par les boucles
+        cle = art ou bre ou sit + id (ex : art124 pour article avec id_article1234)
+		valeur = date
+]
+#SET{elements,#ARRAY}
+
+[(#REM) collecte des articles ]
+
+[(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
+			sinon, on explode la chaine saisie ]
+#SET{rubriques_a_inclure,#CONFIG{rssconfig/rubriques_a_inclure}|picker_selected{rubrique}}
+[(#GET{rubriques_a_inclure}|count|=={0}|et{#GET{rubriques_a_inclure}|is_array|non}|oui) #SET{rubriques_a_inclure,#CONFIG{rssconfig/rubriques_a_inclure}|explode{','}}]
+#SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure}}}
+
+<BOUCLE_recents(ARTICLES) {si #GET{flux_articles}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?}{id_auteur ?} {par date}{inverse}{0,#CONFIG{rssconfig/nb_art,10}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{art#ID_ARTICLE,#DATE}}})]
+</BOUCLE_recents>
+<BOUCLE_tres_recents(ARTICLES) {si #GET{flux_articles}|=={oui}} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?}{id_auteur ?} {par date}{inverse}{age<#CONFIG{rssconfig/age_art,3}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{art#ID_ARTICLE,#DATE}}})]
+</BOUCLE_tres_recents>
+<BOUCLE_recemment_modifies(ARTICLES) {si #GET{flux_articles}|=={oui}} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?}{id_auteur ?} {par date}{inverse}{age_modif < #CONFIG{rssconfig/age_modif,0}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{art#ID_ARTICLE,#DATE}}})]
+</BOUCLE_recemment_modifies>
+
+[(#REM) collecte des breves ]
+
+[(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
+			sinon, on explode la chaine saisie ]
+#SET{rubriques_a_inclure_breves,#CONFIG{rssconfig_breves/rubriques_a_inclure}|picker_selected{rubrique}}
+[(#GET{rubriques_a_inclure_breves}|count|=={0}|et{#GET{rubriques_a_inclure_breves}|is_array|non}|oui) #SET{rubriques_a_inclure_breves,#CONFIG{rssconfig_breves/rubriques_a_inclure}|explode{','}}]
+#SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure_breves}}}
+
+<BOUCLE_recentsb(BREVES)  {si #GET{flux_breves}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?} {par date}{inverse}{0,#CONFIG{rssconfig_breves/nb_art,20}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{bre#ID_BREVE,#DATE}}})]
+</BOUCLE_recentsb>
+<BOUCLE_tres_recentsb(BREVES) {si #GET{flux_breves}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?} {par date}{inverse}{age<#CONFIG{rssconfig_breves/age_art,0}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{bre#ID_BREVE,#DATE}}})]
+</BOUCLE_tres_recentsb>
+<BOUCLE_recemment_modifiesb(BREVES) {si #GET{flux_breves}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?} {par date}{inverse}{age_modif < #CONFIG{rssconfig_breves/age_modif,0}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{bre#ID_BREVE,#DATE}}})]
+</BOUCLE_recemment_modifiesb>
+
+
+[(#REM) collecte des sites ]
+
+[(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
+			sinon, on explode la chaine saisie ]
+#SET{rubriques_a_inclure_sites,#CONFIG{rssconfig_sites/rubriques_a_inclure}|picker_selected{rubrique}}
+[(#GET{rubriques_a_inclure_sites}|count|=={0}|et{#GET{rubriques_a_inclure_sites}|is_array|non}|oui) #SET{rubriques_a_inclure_sites,#CONFIG{rssconfig_sites/rubriques_a_inclure}|explode{','}}]
+#SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure_sites}}}
+
+<BOUCLE_recentss(SITES) {si #GET{flux_sites}|==oui} {branche #GET{id_rubrique,?}} {id_mot ?} {par date}{inverse} >
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{sit#ID_SYNDIC,#DATE}}})]
+</BOUCLE_recentss>
+
+<BOUCLE_tres_recentss(SITES) {si #GET{flux_sites}|==oui} {branche #GET{id_rubrique,?}} {id_mot ?} {par date}{inverse}{age<#CONFIG{rssconfig_sites/age_art,0}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{sit#ID_SYNDIC,#DATE}}})]
+</BOUCLE_tres_recentss>
+
+
+[(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
+			sinon, on explode la chaine saisie ]
+#SET{rubriques_a_inclure_evenements,#CONFIG{rssconfig_evenements/rubriques_a_inclure}|picker_selected{rubrique}}
+[(#GET{rubriques_a_inclure_evenements}|count|=={0}|et{#GET{rubriques_a_inclure_evenements}|is_array|non}|oui) #SET{rubriques_a_inclure_evenements,#CONFIG{rssconfig_evenements/rubriques_a_inclure}|explode{','}}]
+#SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure_evenements}}}
+
+[(#REM)
+Intégration dans le flux rss des evenements debutant dans 5 toujours
+TODO : à rendre configurable , avec rssconfig_evenements/age_art par exemple)
+rem : balise DATE_JOUR_PLUS fournie par simplecal
+]
+<BOUCLE_recentse(EVENEMENTS)  {si #GET{flux_evenements}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?} {where date_debut <= (#DATE_JOUR_PLUS{5}|affdate{'Ymd'})} {par date_debut}{inverse}{0,#CONFIG{rssconfig_evenements/nb_art,20}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{evt#ID_EVENEMENT,#DATE}}})]
+</BOUCLE_recentse>
+
+
+
+[(#REM) tri du tableau sur la date (champ valeur)
+        et pour chaque item ecriture rss selon le type ]
+<BOUCLE_lesflux(DATA) {source table, #GET{elements} } {par valeur} {inverse}>
+#SET{type,(#CLE|couper{3})}
+#SET{id,(#CLE|replace{#GET{type},''})}
+[(#GET{type}|=={art}|oui)<INCLURE{fond=inclure/rss-item}{id_article=#GET{id}}>]
+[(#GET{type}|=={bre}|oui)<INCLURE{fond=inclure/rss-item-breve}{id_breve=#GET{id}}>]
+[(#GET{type}|=={sit}|oui)<INCLURE{fond=inclure/rss-item-site}{id_syndic=#GET{id}}>]
+[(#GET{type}|=={evt}|oui)<INCLURE{fond=inclure/rss-item-evenement}{id_evenement=#GET{id}}>]
+</BOUCLE_lesflux>
+
+</channel>
+</rss>

@@ -1,0 +1,26 @@
+[(#AUTORISER{configurer,rssconfig}|sinon_interdire_acces)]
+<h1 class="grostitre"><:rssconfig:configurer_rssconfig:></h1>
+
+
+<h2><:articles:></h2>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_RSSCONFIG
+</div>
+<div class="nettoyeur"></div>
+[(#PLUGIN{breves}|et{#CONFIG{activer_breves}|=={oui}})<h2><:breves:breves:></h2>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_RSSCONFIG_BREVES
+</div>
+<div class="nettoyeur"></div>]
+[(#PLUGIN{sites}|et{#CONFIG{activer_sites}|=={oui}})<h2><:sites:titre_sites_tous:></h2>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_RSSCONFIG_SITES
+</div>
+<div class="nettoyeur"></div>]
+[(#PLUGIN{simplecal}|oui)
+<h2><:simplecal:html_title:></h2>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_RSSCONFIG_EVENEMENTS
+</div>
+<div class="nettoyeur"></div>
+]

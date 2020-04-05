@@ -1,0 +1,26 @@
+<paquet
+	prefix="rssconfig"
+	categorie="communication"
+	version="2.0.8"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/rssconfig-32.png"
+	documentation="https://contrib.spip.net/?article3793"
+	schema="0.1.0"
+>
+
+	<nom>Flux RSS configurable</nom>
+	<!-- Personnaliser le flux RSS des articles du site -->
+
+	<auteur lien="https://contrib.spip.net/Joseph">Joseph</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="ieconfig_metas" inclure="rssconfig_ieconfig_metas.php" />
+
+	<utilise nom="Z" compatibilite="[1.0.0;]" />
+	<utilise nom="Zdist" compatibilite="[1.0.0;]" />
+	<utilise nom="simplecal" compatibilite="[2.2.13;[" />
+
+	<menu nom="rssconfig" titre="rssconfig:rssconfig" parent="bando_squelette" icone="images/rssconfig-16.png" action="configurer_rssconfig" />
+</paquet>
