@@ -1,0 +1,32 @@
+<div class="formulaire_spip formulaire_configurer">
+	<form action="#SELF" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		#SET{ae,activite_editoriale}
+		<ul class="editer-groupe">
+			#SET{name,champ}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{ae}|concat{':label_cfg_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<select name="#GET{name}" id="#GET{name}">
+					<option value="maj_rubrique" [(#ENV{champ}|=={maj_rubrique}|oui) selected="selected"]><:activite_editoriale:cfg_maj_rubrique:></option>
+					<option value="date_modif_branche" [(#ENV{champ}|=={date_modif_branche}|oui) selected="selected"]><:activite_editoriale:cfg_date_modif_branche:></option>
+					<option value="date_modif_rubrique" [(#ENV{champ}|=={date_modif_rubrique}|oui) selected="selected"]><:activite_editoriale:cfg_date_modif_rubrique:></option>
+				</select>
+				[<p class="explication">(#GET{ae}|concat{':explications_',#GET{name}}|_T)</p>]
+			</li>
+			#SET{name,alerter_auteur}#SET{obli,''}#SET{defaut,non}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{ae}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<label for="#GET{name}">[(#GET{ae}|concat{':label_',#GET{name}}|_T)]</label>
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" value="oui" id="#GET{name}"[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] />
+					<label for="#GET{name}">[(#GET{ae}|concat{':label_oui_',#GET{name}}|_T)]</label>
+				</div>
+				[<p class="explication">(#GET{ae}|concat{':explications_',#GET{name}}|_T)</p>]
+			</li>
+		</ul>
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</form>
+</div>
