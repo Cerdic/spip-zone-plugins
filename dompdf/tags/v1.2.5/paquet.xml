@@ -1,0 +1,18 @@
+<paquet
+	prefix="dompdf"
+	categorie="outil"
+	version="1.2.5"
+	etat="dev"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/dompdf-64.png"
+	documentation="https://contrib.spip.net/DOMPDF-generer-des-PDF-a-partir-de-vos-squelettes"
+>
+	<nom>DOMPDF</nom>
+
+	<auteur lien='http://p.henix.be/'>Phenix</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="affiche_gauche" inclure="dompdf_pipelines.php" />
+	<utilise nom="formidable" compatibilite="[1.3.0;]" />
+</paquet>
