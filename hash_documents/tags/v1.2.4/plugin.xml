@@ -1,0 +1,29 @@
+<plugin>
+	<nom>Hash documents</nom>
+	<slogan>
+		<multi>
+		[fr]Enregistrer les documents dans <code>IMG/mp3/a/b/c/fichier.mp3</code>
+		[en]Save documents in <code>IMG/mp3/a/b/c/file.mp3</code>
+		</multi>
+	</slogan>
+	<auteur>Fil</auteur>
+	<licence>GNU/GPL</licence>
+	<version>1.2.4</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+		[fr]Le nombre de documents dans le r&#233;pertoire IMG/extension/ du site peut devenir beaucoup trop important et avoir un impact sur les performances du syst&#232;me de fichiers du serveur. La solution propos&#233;e par ce plugin est de &#171; hasher &#187; le r&#233;pertoire IMG/.
+		[en]The number of documents in the directory IMG/extension/ site can become too important and affect the performance of the server's file system. The solution proposed by this plugin is to "hash" directory IMG/.
+		</multi>
+	</description>
+	<lien>https://contrib.spip.net/Le-plugin-hash_documents</lien>
+	<prefix>hasher</prefix>
+	<icon>hash_documents.png</icon>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>hash_fonctions.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
+	<categorie>performance</categorie>
+</plugin>
