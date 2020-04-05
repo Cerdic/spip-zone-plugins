@@ -1,0 +1,21 @@
+#HTTP_HEADER{Content-Type: text/css;}
+
+
+[(#VAL{article}|objet_edition_directe|oui)
+	.articles #wysiwyg,.articles .bandeau_actions .icone36{display:none;}
+	.articles_versions #wysiwyg{display:block;}
+	]	
+	
+[(#VAL{rubrique}|objet_edition_directe|oui)
+	.rubriques .bandeau_actions .icone36 {display:none;}
+	.rubriques .bandeau_actions .danger {display:block;}
+	]
+	
+[(#VAL{breve}|objet_edition_directe|oui)
+	.breves .bandeau_actions .icone36 {display:none;}
+	]
+	
+[(#VAL{site}|objet_edition_directe|oui)
+	.sites .bandeau_actions .icone36 {display:none;}
+	]
+		
