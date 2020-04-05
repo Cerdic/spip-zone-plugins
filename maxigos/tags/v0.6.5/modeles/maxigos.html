@@ -1,0 +1,208 @@
+<!--
+	Plugin: maxigos integration for Spip. Uses embedded maxiGos v6.64 Copyright (C) 1998-2017 - François Mizessyn
+	Stand-alone players only + editor. http://jeudego.org/maxiGos/
+    Copyright (C) 2017  Robert Sebille - http://sebille.name
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+#SET{style,#ENV{style}}
+#SET{type,#ENV{type}}
+#SET{langue,#ENV{langue}}
+#SET{id,#ENV{id}}
+#SET{contenu,#ENV{contenu}}
+#SET{init,#ENV{init}}
+#SET{demo,#ENV{demo}}
+#SET{indices,#ENV{indices}}
+#SET{numeros,#ENV{numeros}}
+#SET{ombre,#ENV{ombre}}
+#SET{recommencer_tout,#ENV{recommencer_tout}}
+#SET{reprendre_coup,#ENV{reprendre_coup}}
+#SET{montrer_suite,#ENV{montrer_suite}}
+#SET{commentaire_arbre,#ENV{commentaire_arbre}}
+
+<?php
+/*****************************/
+/* Traitement des paramètres */
+/*****************************/
+/* Récup dans une variable php */
+$maxigos_style = trim(strtolower('#GET{style}'));
+$maxigos_type = trim(strtolower('#GET{type}'));
+$maxigos_langue = trim(strtolower('#GET{langue}'));
+$maxigos_id = trim('#GET{id}');
+$maxigos_contenu = trim('#GET{contenu}');
+$maxigos_init = trim(strtolower('#GET{init}'));
+$maxigos_demo = trim('#GET{demo}');
+$maxigos_indices = trim(strtolower('#GET{indices}'));
+$maxigos_numeros = trim(strtolower('#GET{numeros}'));
+$maxigos_ombre = trim('#GET{ombre}');
+$maxigos_recommencer_tout = trim('#GET{recommencer_tout}');
+$maxigos_reprendre_coup = trim('#GET{reprendre_coup}');
+$maxigos_montrer_suite = trim('#GET{montrer_suite}');
+$maxigos_commentaire_arbre = trim('#GET{commentaire_arbre}');
+
+
+/* Paramètres de styles, types et langues */
+// classic (=défaut), neo (=neo-classic), tatami, minimal (=minimalist), cameleon, [multitypes] ou fm, kifu, tiger [monotypes]
+switch ($maxigos_style) {
+	case 'neo':      $maxigos_style = 'maxigos-neo-classic'; break;
+	case 'tatami':   $maxigos_style = 'maxigos-tatami'; break;
+	case 'minimal':  $maxigos_style = 'maxigos-minimalist'; break;
+	case 'cameleon': $maxigos_style = 'maxigos-chameleon'; break;
+	case 'fm':       $maxigos_style = 'fm'; break; // monotype
+	case 'kifu':     $maxigos_style = 'kifu'; break; // monotype
+	case 'tiger':    $maxigos_style = 'tiger'; break; // monotype
+	default:         $maxigos_style = 'maxigos-classic';
+}
+
+// basic (=défaut), comment, diagram, game, problem [multistyles], tree, edit, lesson [monostyles]
+switch ($maxigos_type) {
+	case 'comment': $maxigos_type = '-comment'; break;
+	case 'diagram': $maxigos_type = '-diagram'; break;
+	case 'game':    $maxigos_type = '-game'; break;
+	case 'problem': $maxigos_type = '-problem'; break;
+	case 'tree':    $maxigos_type = '-tree'; break;
+	case 'edit':    $maxigos_type = '-edit'; $maxigos_style = 'maxigos'; break;
+	case 'lesson':  $maxigos_type = '-lesson'; $maxigos_style = 'maxigos-classic'; break;
+	default:        $maxigos_type = '-basic';
+}
+
+// pas de type pour les monotypes
+if ($maxigos_style == 'fm' || $maxigos_style == 'kifu' || $maxigos_style == 'tiger') {$maxigos_type = '';}
+
+// fr (français, défaut), en (anglais), ja (japonais), zh (chinois), zh-tw (chinois taiwan)
+switch ($maxigos_langue) {
+	case 'en':    $maxigos_langue = 'en'; break;
+	case 'ja':    $maxigos_langue = 'ja'; break;
+	case 'zh':    $maxigos_langue = 'zh'; break;
+	case 'zh-tw': $maxigos_langue = 'zh-tw'; break;
+	default:      $maxigos_langue = 'fr';
+}
+
+/* Activation / désactivation des autres paramètres */
+if ($maxigos_id == '') {$maxigos_id = 'null';}
+if ($maxigos_contenu == '') {$maxigos_contenu = 'null';}
+if ($maxigos_init == '') {$maxigos_init = 'null';}
+if ($maxigos_demo == '') {$maxigos_demo = 'null';}
+if ($maxigos_indices == '') {$maxigos_indices = 'null';}
+if ($maxigos_numeros == '') {$maxigos_numeros = 'null';}
+if ($maxigos_ombre == '') {$maxigos_ombre = 'null';}
+if ($maxigos_recommencer_tout == '') {$maxigos_recommencer_tout = 'null';}
+if ($maxigos_reprendre_coup == '') {$maxigos_reprendre_coup = 'null';}
+if ($maxigos_montrer_suite == '') {$maxigos_montrer_suite = 'null';}
+if ($maxigos_commentaire_arbre == '') {$maxigos_commentaire_arbre = 'null';}
+
+
+/**********************/
+/* Chemin des scripts */
+/**********************/
+$maxigos_scriptpath = find_in_path(maxigos);
+$maxigos_script = $maxigos_scriptpath.'/'.$maxigos_style.$maxigos_type.'.js';
+$maxigos_languescript = $maxigos_scriptpath.'/_i18n/mgos-i18n-'.$maxigos_langue.'.js';
+unset($maxigos_scriptpath);
+
+/******************************************************/
+/* si fichier SGF, on le récupère via une boucle spip */
+/******************************************************/
+// Priorité: 1 id, 2 contenu
+if ($maxigos_id != 'null') {
+?>
+
+	<B_maxigos_fic_doc>
+		<BOUCLE_maxigos_fic_doc(DOCUMENTS) {extension=sgf} {id_document=#GET{id}}>
+			<?php $maxigos_contenu='#FICHIER'; ?>
+		</BOUCLE_maxigos_fic_doc>
+	</B_maxigos_fic_doc>
+		<?php die('Erreur dans le modèle maxigos : pas trouvé de document .sgf avec un "id='.'#GET{id}'.'".'); ?>
+	<//B_maxigos_fic_doc>
+	
+<?php
+}
+
+/*************************************************************************************/
+/* On traite les divers paramètres maxigos supplémentaires implémenté dans ce modèle */
+/*************************************************************************************/
+$maxigos_divers_parametres = '';
+
+// init= ($maxigos_init): correspond au paramètre initMethod de maxiGos. first (défaut) ou last
+if ($maxigos_init != 'null') {if ($maxigos_init == 'last') {$maxigos_divers_parametres .= 'data-maxigos-init-method="last" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-init-method="first" ';}}
+
+// demo = ($maxigos_demo): correspond au (contraire du) paramètre canPlaceVariation de maxiGos. 0 (défaut) ou 1
+if ($maxigos_demo != 'null') {if ($maxigos_demo == '0') {$maxigos_divers_parametres .= 'data-maxigos-can-place-variation="1" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-can-place-variation="0" ';}}
+
+// indices = ($maxigos_indices): correspond au paramètre indicesOn de maxiGos. 0, 1 ou undefined (défaut)
+if ($maxigos_indices != 'null') {if ($maxigos_indices == '0') {$maxigos_divers_parametres .= 'data-maxigos-indices-on="0" ';}
+	elseif ($maxigos_indices == '1') {$maxigos_divers_parametres .= 'data-maxigos-indices-on="1" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-indices-on="undefined" ';}}
+
+// numeros = ($maxigos_numeros): correspond au paramètre numberingOn de maxiGos. 0, 1 ou undefined (défaut)
+if ($maxigos_numeros != 'null') {if ($maxigos_numeros == '0') {$maxigos_divers_parametres .= 'data-maxigos-numbering-on="0" ';}
+	elseif ($maxigos_numeros == '1') {$maxigos_divers_parametres .= 'data-maxigos-numbering-on="1" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-numbering-on="undefined" ';}}
+
+// ombre = ($maxigos_ombre): correspond au paramètre stoneShadowOn de maxiGos. 0 (défaut) ou 1
+if ($maxigos_ombre != 'null') {if ($maxigos_ombre == '0') {$maxigos_divers_parametres .= 'data-maxigos-stone-shadow-on="0" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-stone-shadow-on="1" ';}}
+
+// recommencer_tout = ($maxigos_recommencer_tout): correspond au paramètre canRetry de maxiGos. 0 (défaut) ou 1
+if ($maxigos_recommencer_tout != 'null') {if ($maxigos_recommencer_tout == '0') {$maxigos_divers_parametres .= 'data-maxigos-can-retry="0" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-can-retry="1" ';}}
+// reprendre_coup = ($maxigos_reprendre_coup): correspond au paramètre canUndo de maxiGos. 0 (défaut) ou 1
+if ($maxigos_reprendre_coup != 'null') {if ($maxigos_reprendre_coup == '0') {$maxigos_divers_parametres .= 'data-maxigos-can-undo="0" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-can-undo="1" ';}}
+// montrer_suite = ($maxigos_montrer_suite): correspond au paramètre canContinuation de maxiGos. 0 (défaut) ou 1
+if ($maxigos_montrer_suite != 'null') {if ($maxigos_montrer_suite == '0') {$maxigos_divers_parametres .= 'data-maxigos-can-continuation="0" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-can-continuation="1" ';}}
+
+// commentaire_arbre = ($maxigos_commentaire_arbre): correspond au paramètre markCommentOnTree de maxiGos. 0 (défaut) ou 1
+if ($maxigos_commentaire_arbre != 'null') {if ($maxigos_commentaire_arbre == '0') {$maxigos_divers_parametres .= 'data-maxigos-mark-comment-on-tree="0" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-mark-comment-on-tree="1" ';}}
+
+
+/*************************/
+/* Affichage des scripts */
+/*************************/
+// On assure l'internationalisation
+echo "\n".'<script src="'.$maxigos_languescript.'"></script>'."\n";
+// On appelle le lecteur maxiGos
+echo "\n".'<script  data-maxigos-l="'.$maxigos_langue.'" '.$maxigos_divers_parametres.' src="'.$maxigos_script.'" charset="UTF-8">'.$maxigos_contenu.'</script>'."\n";
+
+/*********/
+/* DEBUG */
+/*********/
+
+/*
+// Debug
+echo "Style: ".$maxigos_style."<hr />";
+echo "Type: ".$maxigos_type."<hr />";
+echo "fichier_verif: ".$maxigos_fichier_verif."<hr />";
+echo "fichier_chemin: ".$maxigos_fichier_chemin."<hr />";
+echo "maxigos_id: ".$maxigos_id."<hr />";
+echo "Contenu: ".$maxigos_contenu."<hr />";
+echo "maxigos_indices: ".$maxigos_indices."<hr />";
+echo "maxigos_numeros: ".$maxigos_numeros."<hr />";
+echo "mgoscript: ".$maxigos_script."<hr />";
+echo "langue: ".$maxigos_langue."<hr />";
+echo "mgolanguescript: ".$maxigos_languescript."<hr />";
+//*/
+
+// Database spip_types_documents
+// titre SGF
+// extension sgf
+// inclus non
+// upload oui
+// autres champs vides
+
+?>
