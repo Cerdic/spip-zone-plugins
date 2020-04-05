@@ -1,0 +1,15 @@
+<h1 class="grostitre"><:pensebete:titre_murs:></h1>
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li><a href="#URL_ECRIRE{murs,quoi=mien}"><:pensebete:titre_mur_mien:></a></li>
+		<li><a href="#URL_ECRIRE{murs,quoi=autres}"><:pensebete:titre_murs_autres:></a></li>
+		<li><strong><:pensebete:titre_mur_de{auteur=#INFO_NOM{auteur,#ENV{id_receveur}}}:></strong></li>
+	</ul>
+</div>
+<div>
+   <INCLURE{fond=prive/squelettes/inclure/pensebete_accueil,id_donneur=#SESSION{id_auteur},id_receveur=#ENV{id_receveur},ajax}>
+</div>
+
+[(#AUTORISER{poserpensebete}|oui)
+	[(#URL_ECRIRE{pensebete_edit,new=oui}|icone_verticale{<:pensebete:icone_creer_pensebete:>,pensebete-24.png,new,right})]
+]
