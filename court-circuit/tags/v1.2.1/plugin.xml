@@ -1,0 +1,21 @@
+<plugin>
+	<nom><multi>[fr]Court-circuit[en]Short circuit[es]Cortocircuito[de]Kurz</multi></nom>
+	<prefix>courtcircuit</prefix>
+	<icon>icon/courtcircuit.png</icon>
+
+	<version>1.2.1</version>
+	<etat>stable</etat>
+	<categorie>outil</categorie>
+
+	<slogan><multi>[fr]Acc&#233;s direct aux articles et reset des squelettes par d#233;faut[en]Direct access to articles[es]Acceso directo a los artículos[de]Direkter Zugang zu~den~Artikeln</multi></slogan>
+	<description>
+		Acc&#233;s direct aux articles et reset des squelettes par d&eacute;faut. Ce plugin court-circuite deux choses&nbsp;:
+		-* les squelettes par d&#233;faut de SPIP, qui renvoient en&nbsp;404, pour &eacute;viter les diffusions intempestives ;
+		-* les rubriques, qui affichent directement leur premier article, pour naviguer plus efficacement.
+	</description>
+	<lien>https://contrib.spip.net/?article3748</lien>
+	<auteur>[Tetue->http://spip.tetue.net] - 2011</auteur>
+
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
+	<utilise id="Z" />
+</plugin>
