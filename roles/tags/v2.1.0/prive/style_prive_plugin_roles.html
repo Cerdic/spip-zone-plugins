@@ -1,0 +1,25 @@
+/* alignement des listes lorsqu'elles sont sur 2 lignes */
+.liste-objets-associer td {vertical-align:middle;}
+.liste-objets-associer td {vertical-align:middle;}
+
+/* gérer le sélecteur dropdown, des titres dedans, les boutons.link */
+.dropdown-menu .dropdown-header {font-weight:bold; color:#666;}
+.formulaire_spip .spip .dropdown-menu li:not(.divider) {
+    text-align:left;
+    padding:.2em 1em;
+}
+.dropdown-menu button.link {border-radius:0; box-shadow:none;}
+
+
+/* adapter le dropdown "modifier" et le caler à droite */
+table .role .roles-btn-group:before,
+table .role .roles-btn-group:after {
+    display: inline-block;
+}
+table .role .roles-btn-group {float:right;}
+
+/* le dropdow doit passer au-dessus des DIV qui se trouvent en-dessous : en attendant de trouver mieux ! */
+.formulaire_editer_liens { z-index:800; }
+.formulaire_traduire { z-index:900; }
+.formulaire_editer_liens-auteurs { z-index:1000; }
+

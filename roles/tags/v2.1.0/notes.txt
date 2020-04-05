@@ -1,0 +1,5 @@
+Cf.
+- http://thread.gmane.org/gmane.comp.web.spip.devel/63059
+- https://core.spip.net/projects/spip/repository/revisions/22075
+
+
