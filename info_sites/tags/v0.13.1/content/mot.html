@@ -1,0 +1,85 @@
+<BOUCLE_content(MOTS) {id_mot} {doublons}>
+<section>
+
+  <header class="cartouche">
+      <h1 class="#EDIT{titre}">[(#LOGO_MOT|image_reduire)]#TITRE</h1>
+  </header>
+
+	<div class="main">
+		[<div class="#EDIT{texte} chapo">(#TEXTE|adaptive_images)</div>]
+	</div>
+
+	<aside>
+		[(#REM) Articles lies au mot-cle ]
+		<B_articles>
+		<div class="liste articles">
+			#ANCRE_PAGINATION
+			<h2 class="h2"><:articles:></h2>
+			<ul class="liste-items">
+				<BOUCLE_articles(ARTICLES) {id_mot} {par popularite}{inverse} {pagination 50}>
+				<li class="item">
+				<a href="#URL_ARTICLE">#TITRE</a>
+				<div class="small">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr>][, <:par_auteur:> (#LESAUTEURS)]</div></li>
+				</BOUCLE_articles>
+			</ul>
+			[<div class="pagination">(#PAGINATION)</div>]
+		</div>
+		</B_articles>
+
+		[(#REM) Rubriques liees au mot-cle ]
+		<B_rubriques>
+		<div class="liste rubriques">
+			<h2 class="h2"><:rubriques:></h2>
+			<ul class="liste-items">
+				<BOUCLE_rubriques(RUBRIQUES) {id_mot} {par titre} {pagination 50}>
+				<li class="item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
+				</BOUCLE_rubriques>
+			</ul>
+			[<div class="pagination">(#PAGINATION)</div>]
+		</div>
+		</B_rubriques>
+
+		[(#REM) Breves liees au mot-cle ]
+		<B_breves>
+		<div class="liste breves">
+			<h2 class="h2"><:breves:breves:></h2>
+			<ul class="liste-items">
+				<BOUCLE_breves(BREVES) {id_mot} {par titre} {pagination 50}>
+				<li class="item"><a href="#URL_BREVE">#TITRE</a></li>
+				</BOUCLE_breves>
+			</ul>
+			[<div class="pagination">(#PAGINATION)</div>]
+		</div>
+		</B_breves>
+
+		[(#REM) Liens des forums ]
+		<B_forums_liens>
+		<div class="liste forums">
+			<h2 class="h2"><:messages_forum:></h2>
+			<ul class="liste-items">
+				<BOUCLE_forums_liens(FORUMS) {id_mot} {plat} {par date}{inverse} {pagination 50}>
+				<li class="item">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_FORUM">[(#TEXTE|couper{80})]</a></li>
+				</BOUCLE_forums_liens>
+			</ul>
+			[<div class="pagination">(#PAGINATION)</div>]
+		</div>
+		</B_forums_liens>
+
+		[(#REM) Sites web lies au mot-cle ]
+		<B_sites>
+		<div class="liste sites">
+			<h2 class="h2"><:sites_web:></h2>
+			<ul class="liste-items">
+				<BOUCLE_sites(SITES) {id_mot} {par nom_site} {pagination 50}>
+				<li class="item"><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a></li>
+				</BOUCLE_sites>
+			</ul>
+			[<div class="pagination">(#PAGINATION)</div>]
+		</div>
+		</B_sites>
+	</aside>
+	[<footer>
+		<div class="notes"><hr />(#NOTES)</div>
+	</footer>]
+</section>
+</BOUCLE_content>

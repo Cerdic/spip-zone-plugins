@@ -1,0 +1,58 @@
+<BOUCLE_extra (PROJETS_SITES) {id_projets_site}>
+<div class="dropdown boutons">
+<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownAction" data-toggle="dropdown"><:info_sites:btn_label_actions:> <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownAction">
+    [(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE})
+        <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" title="<:info_sites:icone_modifier_projets_site|attribut_html:>"><i class="fa fa-pencil-square-o"></i> <:info_sites:icone_modifier_projets_site:></a></li>
+    ][(#LOGICIEL_PLUGINS*|strlen|oui)
+            <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{diagnostic}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="bouton diagnostic" title="<:info_sites:btn_diagnostic|attribut_html:>"><i class="fa fa-table"></i> <:info_sites:btn_diagnostic:></a></li>
+    ][(#WEBSERVICE*|strlen|oui)
+            <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{webservice}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="bouton website" title="<:info_sites:btn_webservice_consultation|attribut_html:>"><i class="fa fa-globe"></i> <:info_sites:btn_webservice_consultation:></a></li>
+    ]
+    </ul>
+</div>
+<div class="clearfix"></div>
+
+<div class="block">
+    <div class="clearfix clear"> </div>
+    [(#SET{projets_id,#ARRAY})]
+    [(#SET{projets_id_rss,#ARRAY})]
+    <BOUCLE_projets_lies (projets_sites_liens) {id_projets_site} {objet='projet'}>
+    [(#SET{projets_id,[(#GET{projets_id}|push{#ID_OBJET})]})]
+    </BOUCLE_projets_lies>
+    <BOUCLE_projets_rss (PROJETS) {id_projet IN #GET{projets_id}}>
+        [(#VERSIONING_RSS|oui)
+            [(#SET{projets_id_rss, [(#GET{projets_id_rss}|push{#ID_PROJET})]})]
+        ][(#VERSIONING_RSS|non)[(#ID_PROJET_PARENT|=={0}|non)[(#INFO_VERSIONING_RSS{projet,#ID_PROJET_PARENT}|oui)
+            [(#SET{projets_id_rss, [(#GET{projets_id_rss}|push{#ID_PROJET_PARENT})]})]
+        ]]]
+    </BOUCLE_projets_rss>
+
+    [(#REM)
+        Si on n'a pas d'identifiant pour les projets, pas la peine d'aller plus loin
+    ][(#GET{projets_id}|count|=={0}|non)
+        [(#SET{projets_id,[(#GET{projets_id}|array_unique|array_filter)]})]
+        [(#SET{projets_id,[(#GET{projets_id}|count|=={0}|?{0,[(#GET{projets_id}|join{","})]})]})]
+        [(#SET{where,projets.id_projet IN \(#GET{projets_id}\)})]
+        <INCLURE{fond=objets/liste/projets,where=#GET{where},ajax,env} />
+    ]
+    [(#REM)
+        Si on n'a pas d'identifiant pour les rss de projets, pas la peine d'aller plus loin
+    ][(#GET{projets_id_rss}|count|=={0}|non)
+        [(#PLUGIN{RSS_COMMITS}|oui)
+            [(#SET{projets_id_rss,[(#GET{projets_id_rss}|array_unique|array_filter)]})]
+            [(#SET{projets_id_rss,[(#GET{projets_id_rss}|count|=={0}|?{0,[(#GET{projets_id_rss}|join{","})]})]})]
+                [(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
+                [(#SET{where,commits.id_projet IN \(#GET{projets_id_rss}\)})]
+                <INCLURE{fond=objets/liste/commits,where=#GET{where},ajax,env} />]
+                [(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
+                [(#SET{where,IN \(#GET{projets_id_rss}\)})]
+                <INCLURE{fond=objets/liste/rss_commits, id_projet=#GET{projets_id_rss}, force=0, ajax, env} />]
+        ]
+    ]
+    [(#SET{where,''})]
+    </B_projets_lies>
+</div>
+<div class="clearfix"></div>
+
+</BOUCLE_extra>

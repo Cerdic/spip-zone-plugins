@@ -1,0 +1,11 @@
+[(#AUTORISER{configurer,_info_sites}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:info_sites:titre_page_configurer_info_sites:></h1>
+
+[(#REM) Il n'y a pas vraiment de configuration pour le moment
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_INFO_SITES
+</div>]
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/squelettes/inclure/controle_configuration,env} />

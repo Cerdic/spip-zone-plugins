@@ -1,0 +1,14 @@
+<div class="block">
+    <form action="#SELF" method="get" role="form" class="form">
+        <input type="hidden" name="page" value="#ENV{page}" />
+        <div class="form-group">
+            <label for="id_projets_site" class="control-label"><:info_sites:label_selectionner_site:></label>
+            <select name="id_projets_site" class="form-control">
+                <BOUCLE_sites (PROJETS_SITES)><option value="#ID_PROJETS_SITE"[(#ENV{id_projets_site}|=={#ID_PROJETS_SITE}|oui) selected="selected"]>#TITRE [(#TYPE_SITE|oui)[\((#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_abbr'}|_T)\)]]</option></BOUCLE_sites>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="submit btn btn-default"><:bouton_valider:></button>
+        </div>
+    </form>
+</div>

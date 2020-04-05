@@ -1,0 +1,35 @@
+<BOUCLE_extra (ORGANISATIONS) {id_organisation}>
+<div class="dropdown boutons">
+<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownAction" data-toggle="dropdown"><:info_sites:btn_label_actions:> <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownAction">
+    [(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
+        <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" title="<:info_sites:icone_modifier_organisation|attribut_html:>"><i class="fa fa-pencil-square-o"></i> <:info_sites:icone_modifier_organisation:></a></li>
+        <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_ECRIRE{organisation,id_organisation=#ID_ORGANISATION})]" class="bouton editer_liens" rel="nofollow" target="_blank" title="<:info_sites:editer_liens_organisation|attribut_html:>"><i class="fa fa-link"></i> <:info_sites:editer_liens_organisation:></a></li>
+    ]</ul>
+</div>
+<div class="clearfix"></div>
+
+<div class="block">
+    <INCLURE{fond=objets/liste/contacts,organisation,id_organisation,ajax,env} />
+</div>
+<div class="clearfix"></div>
+
+<div class="block">
+    <INCLURE{fond=objets/liste/projets,organisation,id_organisation,ajax,env} />
+</div>
+<div class="clearfix"></div>
+
+<B_autresobjets>
+<div class="block">
+    <BOUCLE_autresobjets (spip_organisations_liens) {id_organisation} {fusion objet}{par objet}>
+        #SET{table,#OBJET|table_objet}
+        [(#SET{titre,[#OBJET:info_(#GET{table})_liees_organisation]})]
+        [(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},organisations_lies}})]
+        <INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_organisation,ajax,env} />
+    </BOUCLE_autresobjets>
+</div>
+<div class="clearfix"></div>
+</B_autresobjets>
+
+</BOUCLE_extra>
+

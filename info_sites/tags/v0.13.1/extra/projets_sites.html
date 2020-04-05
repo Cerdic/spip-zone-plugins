@@ -1,0 +1,85 @@
+<div class="dropdown boutons">
+<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownAction" data-toggle="dropdown"><:info_sites:btn_label_actions:> <span class="caret"></span></button>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownAction">
+	[(#AUTORISER{creer,projets_site})
+	    <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_ECRIRE{projets_site_edit,new=oui}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton creer" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit}|parametre_url{new,'oui'}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" title="<:projets_site:icone_creer_projets_site|attribut_html:>"><i class="fa fa-plus-circle"></i> <:projets_site:icone_creer_projets_site:></a></li>
+		<li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{ajouter_fiche_site})]" class="bouton creer" rel="nofollow" title="<:info_sites:icone_creer_fiche_siste|attribut_html:>"><i class="fa fa-plus-circle"></i> <:info_sites:icone_creer_fiche_siste:></a></li>
+	]</ul>
+</div>
+<div class="clearfix"></div>
+
+[(#SET{id_projet,#ARRAY})][(#SET{titre,#ARRAY})][(#SET{type_site,#ARRAY})][(#SET{logiciel_nom,#ARRAY})][(#SET{logiciel_version,#ARRAY})][(#SET{fo_url,#ARRAY})][(#SET{id_projets_site,#ARRAY})]
+<BOUCLE_lister (PROJETS_SITES)> [(#SET{titre,[(#GET{titre}|push{#TITRE})]})][(#SET{type_site,[(#GET{type_site}|push{#TYPE_SITE})]})][(#SET{logiciel_nom,[(#GET{logiciel_nom}|push{#LOGICIEL_NOM})]})][(#SET{logiciel_version,[(#GET{logiciel_version}|push{#LOGICIEL_VERSION})]})][(#SET{fo_url,[(#GET{fo_url}|push{#FO_URL})]})][(#SET{id_projets_site,[(#GET{id_projets_site}|push{#ID_PROJETS_SITE})]})]</BOUCLE_lister>[(#SET{titre,[(#GET{titre}|array_unique|array_filter)]})][(#SET{type_site,[(#GET{type_site}|array_unique|array_filter)]})][(#SET{logiciel_nom,[(#GET{logiciel_nom}|array_unique|array_filter)]})][(#SET{logiciel_version,[(#GET{logiciel_version}|array_unique|array_filter)]})][(#SET{fo_url,[(#GET{fo_url}|array_unique|array_filter)]})][(#SET{id_projets_site,[(#GET{id_projets_site}|array_unique|array_filter)]})]</B_lister>
+<div class="block filtre liste">
+	<form action="#SELF" role="form">
+		[(#SELF
+		|parametre_url{titre,''}
+		|parametre_url{type_site,''}
+		|parametre_url{logiciel_nom,''}
+		|parametre_url{logiciel_version,''}
+		|parametre_url{fo_url,''}
+		|parametre_url{id_projets_site,''}
+		|form_hidden)]
+		<B_titre>
+		<div class="form-group">
+		<label for="champ_titre"><:projets_site:titre_label:></label>
+		<select name="titre" id="champ_titre" class="form-control">
+			<option value=""></option>
+			<BOUCLE_titre (DATA) {source table, #GET{titre}} {par valeur}>
+			<option value="#VALEUR"[ (#ENV{titre}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option></BOUCLE_titre>
+		</select>
+		</div>
+		</B_titre>
+		<B_type_site>
+		<div class="form-group">
+		<label for="champ_type_site"><:projets_site:type_site_label:></label>
+		<select name="type_site" id="champ_type_site" class="form-control">
+			<option value=""></option>
+			<BOUCLE_type_site (DATA) {source table, #GET{type_site}} {par valeur}>
+			<option value="#VALEUR"[ (#ENV{type_site}|=={#VALEUR}|oui)selected="selected"]>[(#VAL{projets_site:type_site_}|concat{#VALEUR,'_abbr'}|_T)]</option></BOUCLE_type_site>
+		</select>
+		</div>
+		</B_type_site>
+		<B_logiciel_nom>
+		<div class="form-group">
+		<label for="champ_logiciel_nom"><:projets_site:logiciel_nom_label:></label>
+		<select name="logiciel_nom" id="champ_logiciel_nom" class="form-control">
+			<option value=""></option>
+			<BOUCLE_logiciel_nom (DATA) {source table, #GET{logiciel_nom}} {par valeur}>
+			<option value="#VALEUR"[ (#ENV{logiciel_nom}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option></BOUCLE_logiciel_nom>
+		</select>
+		</div>
+		</B_logiciel_nom>
+		<B_logiciel_version>
+		<div class="form-group">
+		<label for="champ_logiciel_version"><:projets_site:logiciel_version_label:></label>
+		<select name="logiciel_version" id="champ_logiciel_version" class="form-control">
+			<option value=""></option>
+			<BOUCLE_logiciel_version (DATA) {source table, #GET{logiciel_version}} {par valeur}>
+			<option value="#VALEUR"[ (#ENV{logiciel_version}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option></BOUCLE_logiciel_version>
+		</select>
+		</div>
+		</B_logiciel_version>
+		<B_fo_url>
+		<div class="form-group">
+		<label for="champ_fo_url"><:projets_site:fo_url_label:></label>
+		<select name="fo_url" id="champ_fo_url" class="form-control">
+			<option value=""></option>
+			<BOUCLE_fo_url (DATA) {source table, #GET{fo_url}} {par valeur}>
+			<option value="#VALEUR"[ (#ENV{fo_url}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option></BOUCLE_fo_url>
+		</select>
+		</div>
+		</B_fo_url>
+		<B_id_projets_site>
+		<div class="form-group">
+		<label for="champ_id_projets_site"><:projets_site:id_projets_site_label:></label>
+		<input type="text" name="id_projets_site" list="list_id_projets_site" id="champ_id_projets_site" class="form-control"value="[(#ENV{id_projets_site,''})]" />
+		<datalist id="list_id_projets_site">
+			<BOUCLE_id_projets_site (DATA) {source table, #GET{id_projets_site}} {par valeur}>
+			<option value="#VALEUR">#VALEUR</option></BOUCLE_id_projets_site>
+		</datalist>
+		</div>
+		</B_id_projets_site>
+		<button type="submit" class="btn btn-default"><:bouton_valider:></button>
+	</form>
+</div>

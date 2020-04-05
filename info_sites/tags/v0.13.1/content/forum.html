@@ -1,0 +1,36 @@
+[(#REM) Fil d'Ariane ]
+<section>
+
+	<header class="cartouche">
+    	<h1><:poster_message:></h1>
+	</header>
+
+	<div class="main">
+	    <h2><:en_reponse:></h2>
+
+	    <BOUCLE_forum_parent(FORUMS) {id_forum}>
+			#INCLURE{fond=inclure/resume/comment,id_forum}
+	    </BOUCLE_forum_parent>
+
+	    <BOUCLE_article(ARTICLES) {id_article}>
+			#INCLURE{fond=inclure/resume/article,id_article}
+	    </BOUCLE_article>
+
+	    <BOUCLE_breve(BREVES) {id_breve}>
+			#INCLURE{fond=inclure/resume/breve,id_article}
+	    </BOUCLE_breve>
+
+	    <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
+			#INCLURE{fond=inclure/resume/rubrique,id_rubrique}
+	    </BOUCLE_rubrique>
+
+	    <BOUCLE_syndic(SITES) {id_syndic}>
+			#INCLURE{fond=inclure/resume/site,id_syndic}
+	    </BOUCLE_syndic>
+
+	    <//B_forum_parent>
+
+		#FORMULAIRE_FORUM
+	</div>
+
+</section>

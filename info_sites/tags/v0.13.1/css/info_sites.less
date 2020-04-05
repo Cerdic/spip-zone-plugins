@@ -1,0 +1,966 @@
+@import "css/variables.less";
+
+.bg-primary {
+  background-color: @bg-primary;
+  color: white;
+}
+
+.bg-primary-light {
+  background-color: @bg-primary-light;
+  color: white;
+}
+
+.bg-success {
+  background-color: @bg-success;
+  color: white;
+}
+
+.bg-info {
+  background-color: @bg-info;
+  color: white;
+}
+
+.bg-warning {
+  background-color: @bg-warning;
+  color: white;
+}
+
+.bg-danger {
+  background-color: @bg-danger;
+  color: white;
+}
+
+.bg-orange {
+  background-color: @bg-orange;
+  color: white;
+}
+
+.bg-violet {
+  background-color: @bg-violet;
+  color: white;
+}
+
+.bg-dark {
+  background-color: @bg-dark;
+  color: white;
+  #content {
+  	color: @gray-dark;
+  }
+}
+
+.bg-bright {
+  background-color: @bg-bright;
+  color: @gray-light;
+}
+
+.bg-reverse {
+  background-color: @bg-reverse;
+  color: @gray-light;
+}
+
+html, body {
+	background-color: @bg-success;
+}
+.page {
+	background-color: @bg-dark;
+}
+h1 {
+	small {
+		color: @gray-second;
+	}
+}
+.block {
+	margin-bottom: 1em;
+}
+.breadcrumb {
+	margin-top: 20px;
+}
+.icone {
+	&.s24 {
+		&.right {
+			a {
+				img {
+					margin-right: 0.5em;
+				}
+			}
+		}
+		&.left {
+			a {
+				img {
+					margin-left: 0.5em;
+				}
+			}
+		}
+	}
+}
+
+.introduction {
+	text-align: justify;
+}
+
+.publication {
+	color: @gray-light;
+}
+.pagination {
+	text-align: right;
+	width: 100%;
+	clear: both;
+	overflow: hidden;
+}
+
+table {
+	margin-bottom: 20px;
+	max-width: 100%;
+	width: 100%;
+	border: 1px solid #ddd;
+	+ .pagination {
+		margin-top: 0;
+	}
+	> caption {
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
+	}
+	> caption + thead, > thead:first-child {
+		> tr {
+			&:first-child {
+				> th, > td {
+				}
+			}
+		}
+	}
+	> thead {
+		> tr {
+			> th, > td {
+			}
+		}
+	}
+	tr {
+		> td {
+			&.bg-warning {
+				background-color: @bg-warning !important;
+				table {
+					color: @black;
+				}
+			}
+		}
+	}
+}
+
+.liste-objets {
+	margin-top: 1em;
+	border-top: 1px solid @gray-third;
+	&.projets_sites {
+		&.caption-wrap {
+			padding-top: 0.5em;
+			padding-bottom: 0.5em;
+		}
+	}
+}
+
+.liste {
+	&.documents_joints {
+		ul {
+			padding-left: 0;
+			list-style: none;
+			li {
+				padding-left: 50px;
+				position: relative;
+				border-top: 1px solid @gray-second;
+				padding-top: 1em;
+				margin-bottom: 1em;
+				.spip_logos {
+					position: absolute;
+					left: 0;
+				}
+			}
+		}
+	}
+	&.resultats {
+		background-color: @bg-bright;
+		border: 1px solid @gray-third;
+		padding: 1em;
+		margin-bottom: 2em;
+		h2 {
+			margin-top: 0;
+		}
+		.pagination {
+			margin-bottom: 0;
+		}
+	}
+}
+
+// --------
+// Les boutons de bootstrap
+// --------
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+.btn:hover, .btn:focus {
+    color: @gray-light;
+    text-decoration: none;
+}
+.btn:active, .btn.active {
+    outline: 0;
+    background-image: none;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.btn-default {
+    color: @gray-light;
+    background-color: @bg-bright;
+    border-color: darken(@bg-bright, 5%);
+    .badge {
+        color: @bg-bright;
+        background-color: @gray-light;
+    }
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open >.btn-default.dropdown-toggle {
+    color: @gray-light;
+    background-color: lighten(@gray-light, 41.5%);
+    border-color: lighten(@gray-light, 34.5%);
+}
+.btn-default:active, .btn-default.active, .open >.btn-default.dropdown-toggle {
+    background-image: none;
+}
+.btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
+    background-color: @bg-bright;
+    border-color: darken(@bg-bright, 5%);
+}
+.btn-primary {
+    color: white;
+    background-color: @bg-primary;
+    border-color: darken(@bg-primary, 5%); // #196fa5;
+    .badge {
+        color: @bg-primary;
+        background-color: white;
+    }
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open >.btn-primary.dropdown-toggle {
+    color: white;
+    background-color: darken(@bg-primary, 10%); // #15608f;
+    border-color: darken(@bg-primary, 17%); // #114b70;
+}
+.btn-primary:active, .btn-primary.active, .open >.btn-primary.dropdown-toggle {
+    background-image: none;
+}
+.btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
+    background-color: @bg-primary;
+    border-color: darken(@bg-primary, 5%); // #196fa5;
+}
+.btn-success {
+    color: white;
+    background-color: @bg-success; // @bg-success;
+    border-color: darken(@bg-success, 5%); // #1f9978;
+    .badge {
+        color: @bg-success; // @bg-success;
+        background-color: white;
+    }
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open >.btn-success.dropdown-toggle {
+    color: white;
+    background-color: darken(@bg-success, 10%); //#1a8468;
+    border-color: darken(@bg-success, 17%); //#146650;
+}
+.btn-success:active, .btn-success.active, .open >.btn-success.dropdown-toggle {
+    background-image: none;
+}
+.btn-success.disabled, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled.active, .btn-success[disabled], .btn-success[disabled]:hover, .btn-success[disabled]:focus, .btn-success[disabled]:active, .btn-success[disabled].active, fieldset[disabled] .btn-success, fieldset[disabled] .btn-success:hover, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success:active, fieldset[disabled] .btn-success.active {
+    background-color: @bg-success;
+    border-color: darken(@bg-success, 5%); // #1f9978;
+}
+.btn-info {
+    color: white;
+    background-color: @bg-info;
+    border-color: darken(@bg-info, 5%); // #1f9978;
+    .badge {
+        color: @bg-info;
+        background-color: white;
+    }
+}
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open >.btn-info.dropdown-toggle {
+    color: white;
+    background-color: darken(@bg-info, 10%); // #259aa2;
+    border-color:  darken(@bg-info, 17%); // #1e7e85;
+}
+.btn-info:active, .btn-info.active, .open >.btn-info.dropdown-toggle {
+    background-image: none;
+}
+.btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
+    background-color: @bg-info; // #2ec1cc;
+    border-color:  darken(@bg-info, 5%); // #29adb7;
+}
+.btn-warning {
+    color: white;
+    background-color: @bg-warning;
+    border-color: darken(@bg-warning, 5%);
+    .badge {
+        color: @bg-warning;
+        background-color: white;
+    }
+}
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open >.btn-warning.dropdown-toggle {
+    color: white;
+    background-color: darken(@bg-warning, 10%);
+    border-color: darken(@bg-warning, 17%);
+}
+.btn-warning:active, .btn-warning.active, .open >.btn-warning.dropdown-toggle {
+    background-image: none;
+}
+.btn-warning.disabled, .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled:active, .btn-warning.disabled.active, .btn-warning[disabled], .btn-warning[disabled]:hover, .btn-warning[disabled]:focus, .btn-warning[disabled]:active, .btn-warning[disabled].active, fieldset[disabled] .btn-warning, fieldset[disabled] .btn-warning:hover, fieldset[disabled] .btn-warning:focus, fieldset[disabled] .btn-warning:active, fieldset[disabled] .btn-warning.active {
+    background-color: @bg-warning;
+    border-color: darken(@bg-warning, 5%);
+}
+.btn-danger {
+    color: white;
+    background-color: @bg-danger;
+    border-color: darken(@bg-danger, 5%);
+    .badge {
+        color: @bg-danger;
+        background-color: white;
+    }
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open >.btn-danger.dropdown-toggle {
+    color: white;
+    background-color: darken(@bg-danger, 10%);
+    border-color: darken(@bg-danger, 17%);
+}
+.btn-danger:active, .btn-danger.active, .open >.btn-danger.dropdown-toggle {
+    background-image: none;
+}
+.btn-danger.disabled, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled]:active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active {
+    background-color: @bg-danger;
+    border-color: darken(@bg-danger, 5%);
+}
+.btn-link {
+    color: @gray-dark;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+}
+.btn-link, .btn-link:active, .btn-link[disabled], fieldset[disabled] .btn-link {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+    border-color: transparent;
+}
+.btn-link:hover, .btn-link:focus {
+    color: lighten(@black, 5%); // #0d0d0d;
+    text-decoration: underline;
+    background-color: transparent;
+}
+.btn-link[disabled]:hover, .btn-link[disabled]:focus, fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
+    color: lighten(@black, 60%); // #999999;
+    text-decoration: none;
+}
+.btn-lg, .btn-group-lg >.btn {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 2px;
+}
+.btn-sm, .btn-group-sm >.btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 2px;
+}
+.btn-xs, .btn-group-xs >.btn {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 2px;
+}
+.btn-block {
+    display: block;
+    width: 100%;
+    + .btn-block {
+            margin-top: 5px;
+        }
+}
+input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"].btn-block {
+    width: 100%;
+}
+
+
+
+// --------
+// Les boutons d'action
+// --------
+
+.boutons {
+	.largeur {
+		button {
+			width: 100%;
+		}
+		&.open {
+			ul.dropdown-menu {
+				width: 100%;
+			}
+		}
+	}
+}
+
+.boutons_block {
+	display: block;
+	border-collapse: collapse;
+	width: 100%;
+	overflow: hidden;
+	.boutons_action {
+		list-style: none;
+		padding-left: 0;
+		margin-bottom: 1em;
+		overflow: hidden;
+		width: 100%;
+		.action {
+			display: inline-block;
+			float: left;
+			width: 100%;
+			padding: 15px 5%;
+			font-size: 1.125em;
+			&:nth-child(odd) {
+			}
+			.bouton {
+				color: @white;
+				display: block;
+				padding: 15px 12.75%;
+				margin: -15px -12.5%;
+				background-color: @bg-info;
+				&:hover {
+					background-color: darken(@bg-info, 10%);
+					text-decoration: none;
+				}
+				&.creer {
+					background-color: @bg-info;
+					color: @white;
+					&:hover {
+						background-color: darken(@bg-info, 10%);
+					}
+				}
+				&.modifier {
+					background-color: @bg-success;
+					color: @white;
+					&:hover {
+						background-color: darken(@bg-success, 10%);
+					}
+				}
+				&.supprimer {
+					background-color: @bg-danger;
+					color: @white;
+					&:hover {
+						background-color: darken(@bg-danger, 10%);
+					}
+				}
+				&.editer_liens {
+					background-color: @bg-primary-light;
+					color: @white;
+					&:hover {
+						background-color: darken(@bg-primary-light, 10%);
+					}
+				}
+			}
+		}
+	}
+}
+
+.col-md-3 {
+	.boutons_action {
+		.action {
+			width: 100%;
+		}
+	}
+}
+
+
+// --------
+// Les grands blocs de pages
+// --------
+#header {
+	background-color: transparent;
+	> .row {
+		background-color: @gray-dark;
+	}
+	header {
+		h1 {
+			color: @white;
+			a {
+				color: @gray-lighter;
+			}
+		}
+	}
+	.form-search {
+		margin-top: 1em;
+		padding-top: 1em;
+
+		#formulaire_recherche {
+			.form-inline {
+				.form-group {
+					&:first-of-type {
+						width: 85%;
+						input {
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+
+	}
+}
+#extra {
+	padding-bottom: 1em;
+	.block {
+		.champ:first-child {
+			margin-top: 1em;
+		}
+		&.liste {
+			margin-top: 1em;
+		}
+	}
+}
+#aside {
+	color: @white;
+	a {
+		color: @white;
+		&:hover {
+			color: @black;
+		}
+	}
+	.menu {
+		&.menu_pages {
+			margin-top: 1em;
+			padding-top: 1px;
+			z-index: 1000;
+			ul {
+				margin-bottom: 2em;
+				> li {
+					font-size: 1em;
+					line-height: 1em;
+					&:hover {
+						background-color: @black;
+					}
+					a {
+						color: @white;
+						&.active {
+							color: @gray;
+						}
+						&:hover {
+							color: @white;
+							background-color: transparent;
+						}
+						&.active {
+						}
+						i {
+							width: 1.25em;
+							text-align: center;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#content {
+	background-color: @white;
+	overflow: hidden;
+}
+
+// On va styler tous les formulaires d'édition d'un objet.
+.formulaire_spip {
+	padding: 0.5em;
+	background-color: @gray-lighter;
+	overflow: hidden;
+	.titrem {
+		display: none;
+		visibility: hidden;
+	}
+	ul {
+		padding-left: 0;
+		list-style: none;
+		li {
+			overflow: hidden;
+			padding-bottom: 0.5em;
+			margin-bottom: 1em;
+			&.erreur {
+				.erreur_message {
+					font-weight: bold;
+					color: @bg-danger;
+					text-align: right;
+					display: none;
+				}
+				input, select {
+					border: 1px solid @bg-danger;
+				}
+			}
+			label {
+				width: 25%;
+				margin-right: 3%;
+				float: left;
+				text-align: right;
+				word-break:normal;
+				font-weight: normal;
+			}
+			&.obligatoire {
+				label {
+					font-weight: bold;
+				}
+			}
+			input, .edition, .explication, select, textarea {
+				width: 72%;
+				float: right;
+				margin-top: 0.3em;
+			}
+			.edition {
+				textarea {
+					width: 100%;
+				}
+			}
+			.explication {
+				margin-top: 0;
+				+ .choix {
+					margin-left: 28%;
+				}
+				+ input, .edition, .explication, select, textarea {
+					margin-top: 0;
+				}
+			}
+			.choix {
+				float: left;
+				margin-right: 1em;
+				overflow: hidden;
+				width: auto;
+				label {
+					width: auto;
+					margin-right: 0.5em;
+				}
+				input {
+					width: auto;
+				}
+			}
+			&.saisie_date {
+				position: relative;
+				.explication {
+					clear: right;
+				}
+				input {
+					width: 72%;
+					clear: right;
+				}
+				.ui-datepicker-trigger {
+					float: right;
+					position: absolute;
+					margin-left: 0;
+					right: 5px;
+					bottom: 10px;
+				}
+			}
+		}
+	}
+	.reponse_formulaire {
+		padding: 0.5em;
+		&.reponse_formulaire_ok {
+			background-color: @bg-success;
+			color: @white;
+		}
+		&.reponse_formulaire_erreur {
+			background-color: @bg-warning;
+			color: @white;
+		}
+	}
+	p.boutons {
+		width: 72%;
+		float: right;
+		input {
+		}
+	}
+}
+
+.cadre-formulaire-editer {
+	.formulaire_spip {
+		&:extend{.formulaire_spip};
+	}
+}
+
+#footer {
+	background-color: @black;
+	color: @white;
+	text-align: left;
+	padding-top: 2em;
+	padding-bottom: 2em;
+	background-image: url('images/spip_forme_web_dark.png');
+	background-repeat: no-repeat;
+	background-position: 50% 100%;
+	background-size: auto 50%;
+	a {
+		color: @white;
+	}
+	.menu_rubriques {
+
+		h2 {
+			display: none;
+		}
+		ul {
+			> li {
+				font-size: 1em;
+				a {
+					color: @gray-second;
+					&:hover {
+						color: @white;
+						background-color: transparent;
+					}
+					i {
+						min-width: 45px;
+					}
+				}
+			}
+		}
+	}
+}
+
+// On style les inclures prive/objets/contenu/xxxx.html
+	.champ {
+		overflow: hidden;
+		border-top: 1px solid @gray-lighter;
+		padding-top: 1em;
+		padding-bottom: 1px;
+		margin-bottom: 1em;
+		&.vide {
+			visibility: hidden;
+			display: none;
+		}
+		.label {
+			color: black;
+			display: block;
+			float: left;
+			font-size: 0.95em;
+			hyphens: auto;
+			line-height: 1.25em;
+			margin-right: 1%;
+			overflow: hidden;
+			text-align: left;
+			white-space: normal;
+			width: 25%;
+			word-wrap: break-word;
+		}
+		.span {
+			width: 70%;
+			float: right;
+			text-align: left;
+			display: block;
+		}
+	}
+
+// formulaire de liens dans le front
+.formulaire_editer_liens, .formulaire_editer_liens_simples {
+	margin: 1em 0;
+	display: block;
+	overflow: hidden;
+	position: relative;
+	padding: 0.5em;
+	border: 1px solid @brand-primary;
+	.over {
+		height: 1%;
+		left: -3000em;
+		position: absolute;
+	}
+	.toggle_box_link {
+		position: absolute;
+		right: 5px;
+		top: 5px;
+	}
+	.selecteur {
+		display: block;
+		h3.titrem {
+			background-color: @brand-primary;
+			margin: 0 -0.5em 0.5em;
+			font-size: 1.25em;
+			font-weight: bold;
+			padding: 0.5em;
+		}
+		.boutons {
+			padding: 0.5em;
+			border: 1px solid @brand-primary;
+			background-color: lighten(@brand-primary, 10%);
+			margin: 0.5em -0.5em -0.5em;
+			text-align: right;
+		}
+	}
+}
+button {
+	&.link {
+		background: none repeat scroll 0 0 transparent;
+		border: 0 none;
+		color: @gray-dark;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+// page de connexion au back office
+.page_login {
+	background-color: @bg-dark;
+	body {
+		background-color: @bg-dark;
+	}
+	#content {
+		.cartouche {
+			h1 {
+				margin: 0 auto;
+				width: 50%;
+			}
+		}
+		.formulaire_menu_lang {
+			width: 50%;
+			float: right;
+			margin: 1em auto;
+			text-align: right;
+		}
+	}
+	.container {
+		margin-top: 2em;
+		padding-top: 2em;
+		padding-bottom: 2em;
+		background-color: @white;
+		> .row {
+			position: relative;
+			header {
+				text-align: right;
+				margin-bottom: 1em;
+				h1 {
+					overflow: hidden;
+					margin-top: 0;
+					margin-bottom: 1em;
+					small {
+						display: block;
+					}
+				}
+			}
+			div.col-md-6 {
+				background-color: @white;
+				padding-top: 2em;
+				padding-bottom: 2em;
+			}
+		}
+	}
+}
+.formulaire_login {
+	#formulaire_login {
+		width: auto;
+		margin: 0 auto;
+	}
+	ul {
+		padding-left: 0;
+		margin: 0;
+		list-style: none;
+		li {
+			position: relative;
+			overflow: hidden;
+			label {
+				display: block;
+				float: left;
+				width: 42%;
+				margin-right: 3%;
+				padding: 10px 0;
+				font-weight: normal;
+			}
+			&.obligatoire {
+				label {
+					font-weight: bold;
+				}
+			}
+			.erreur_message {
+				display: block;
+				padding: 10px;
+			}
+			input {
+				width: 55%;
+				float: right;
+				display: block;
+				padding: 10px;
+				font-size: 1em;
+				height: auto;
+				box-sizing: border-box;
+				position: relative;
+				&.password, &[type='password'] {
+					&:before {
+						content: "hello";
+						display: block;
+						width: auto;
+						background-color: gray;
+					}
+				}
+				&[type='checkbox'] {
+					text-align: left;
+					width: auto;
+					float: left;
+					margin: 10px 10px 10px 0;
+
+				}
+			}
+			.details {
+				width: 55%;
+				float: right;
+				display: block;
+				padding: 5px 0;
+			}
+			#pass_securise {
+				position: absolute;
+				top: 10px;
+				right: 5px;
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	#aside {
+		.menu {
+			&.menu_pages {
+				ul {
+					> li {
+						a {
+							padding: 10px 0;
+							text-align: center;
+							i {
+								min-width: inherit;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

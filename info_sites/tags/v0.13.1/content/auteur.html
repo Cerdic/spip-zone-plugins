@@ -1,0 +1,56 @@
+<BOUCLE_content(AUTEURS){id_auteur}{tout}>
+	<header class="cartouche">
+		<h1 class="#EDIT{qui} fn" itemprop="name">[(#LOGO_AUTEUR|image_reduire|inserer_attribut{itemprop,image})]#NOM</h1>
+	</header>
+
+<section class="vcard" itemscope itemtype="http://schema.org/Person"> [(#REM) microformat vcard]
+	<div class="main">
+		[<div class="champ contenu_bio[ (#BIO*|strlen|?{'',vide})]">
+			<div class="label visible"><:info_bio:></div>
+			<div dir='#LANG_DIR' class='span #EDIT{bio} bio'>(#BIO)</div>
+		</div>]
+		[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+			<div class="label visible"><:email_2:></div>
+			<div dir='#LANG_DIR' class='span #EDIT{email} email'><a href="mailto:#EMAIL">(#EMAIL)</a></div>
+		</div>]
+		[<div class="champ contenu_nom_site[ (#NOM_SITE*|strlen|?{'',vide})]">
+			<div class="label visible"><:info_site_2:></div>
+			<div dir='#LANG_DIR' class='span #EDIT{nom_site} nom_site'>(#NOM_SITE)</div>
+		</div>]
+		[<div class="champ contenu_url_site[ (#URL_SITE*|strlen|?{'',vide})]">
+			<div class="label visible"><:voir_en_ligne:>&nbsp;:</div>
+			<div dir='#LANG_DIR' class='span #EDIT{url_site} url_site'><a href="#URL_SITE" class="spip_out">(#URL_SITE)</a></div>
+		</div>]
+	</div>
+
+	<aside>
+	<BOUCLE_autresobjets (spip_auteurs_liens) {id_auteur} {objet !IN article} {fusion objet} {par objet}>
+		#SET{ids_objet,#ARRAY}
+		<BOUCLE_where (spip_auteurs_liens) {objet} {id_auteur}>
+		[(#SET{ids_objet,[(#GET{ids_objet}|push{#ID_OBJET})]})]
+		</BOUCLE_where>
+		[(#SET{where,[(#OBJET|table_objet)].[(#OBJET|id_table_objet)] IN \([(#GET{ids_objet}|implode{','})]\)})]
+		</B_where>
+		#SET{table,#OBJET|table_objet}
+		[(#SET{titre,[#OBJET:info_(#GET{table})_liees_auteur]})]
+		[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_auteur}})]
+		<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_auteur,where=#GET{where,''},ajax,env} />
+		<div class="clearfix"></div>
+	</BOUCLE_autresobjets>
+
+	[(#PLUGIN{RSS_COMMITS}|oui)
+		[(#EMAIL|oui)
+		[(#SET{email,[(#EMAIL|explode{'@'}|table_valeur{0})]})]
+		<INCLURE{fond=objets/liste/commits,where=commits.auteur LIKE '%#GET{email}%',ajax} />]
+		[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
+		<INCLURE{fond=objets/liste/rss_commits, force=0, par=date_creation, auteur=^#GET{email}, env, ajax, sinon=<:commit:info_aucun_commit:>}>]
+	]
+		<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
+
+	</aside>
+
+	<footer>
+		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	</footer>
+</section>
+</BOUCLE_content>

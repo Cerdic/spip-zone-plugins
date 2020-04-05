@@ -1,0 +1,16 @@
+<BOUCLE_extra (PROJETS_CADRES) {id_projets_cadre} {tout}>
+<div class="dropdown boutons">
+<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownAction" data-toggle="dropdown"><:info_sites:btn_label_actions:> <span class="caret"></span></button>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownAction">
+	[(#AUTORISER{modifier,projets_cadre,#ID_PROJETS_CADRE})
+	    <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" title="<:projets_cadre:icone_modifier_projets_cadre|attribut_html:>"><i class="fa fa-pencil-square-o"></i> <:projets_cadre:icone_modifier_projets_cadre:></a></li>
+	]
+	</ul>
+</div>
+<div class="clearfix"></div>
+
+[(#REM) Lister les projets issus de ce cadre. ]
+<INCLURE{fond=prive/objets/liste/projets,id_projets_cadre=#ID_PROJETS_CADRE,env,ajax} />
+<div class="nettoyeur"></div>
+
+</BOUCLE_extra>

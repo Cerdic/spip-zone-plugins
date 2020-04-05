@@ -1,0 +1,17 @@
+[(#REM)
+	Est-ce qu'on se connecte a l'espace prive ou pas ?
+]#SET{prive,''}
+[(#ENV{url}|=={''}|?{#SET{prive,' '}})]
+[(#ENV{url}|match{^#EVAL{_DIR_RESTREINT_ABS}}|?{#SET{prive,' '}})]
+<section class="row">
+	<header class="col-md-6">
+		[<h1>(#GET{prive}|?{<:login_acces_prive:>,<:lien_connecter:>})
+		<small>#NOM_SITE_SPIP</small>
+		</h1>]
+
+		#MENU_LANG_ECRIRE
+	</header>
+	<div class="col-md-6">
+		[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
+	</div>
+</section>

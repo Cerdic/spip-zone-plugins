@@ -1,0 +1,30 @@
+
+[(#ID_ORGANISATION|intval|oui)
+	[(#AUTORISER{modifier,organisation,#ID_ORGANISATION}|sinon_interdire_acces)]
+][(#ID_ORGANISATION|intval|non)
+	[(#AUTORISER{creer,organisation}|sinon_interdire_acces)]
+]
+#SET{retour,#ENV{redirect}|sinon{#ID_ORGANISATION|intval|?{#URL_PAGE{organisation,id_organisation=#ID_ORGANISATION},#URL_PAGE{organisations}}}}
+#SET{id_parent,#ENV{id_parent}|sinon{#INFO_ID_PARENT{organisation,#ENV{id_organisation}}}}
+
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		[(#ID_ORGANISATION|oui)
+		[(#GET{retour}|icone_verticale{<:icone_retour:>,organisation,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		]
+		[[(#ID_ORGANISATION|?{<:contacts:organisation_editer:>,<:contacts:organisation_ajouter:>})]
+		<h2>(#ENV{titre,#INFO_NOM{organisation,#ID_ORGANISATION}|trim|sinon{<:info_sans_titre:>}})</h2>]
+	</div>
+
+	#SET{redirect,#ENV{redirect,#ID_ORGANISATION|generer_url_entite{organisation}}}
+	[(#ENV{retourajax,''}|oui)
+		#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+		<div class="ajax">
+	]
+	#FORMULAIRE_EDITER_ORGANISATION{#ENV{id_organisation,oui},#GET{id_parent},#GET{redirect},#ENV{associer_objet}}
+	[(#ENV{retourajax,''}|oui)
+		</div>
+		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#extra');/*\]\]>*/</script>
+	]
+
+</div>

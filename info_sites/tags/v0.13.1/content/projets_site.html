@@ -1,0 +1,23 @@
+<BOUCLE_projets_site (PROJETS_SITES) {id_projets_site} {tous}>
+[(#AUTORISER{voir,projets_site,#ID_PROJETS_SITE}|sinon_interdire_acces)]
+[(#BOITE_OUVRIR{[
+
+	<h2>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h2>
+],simple fiche_objet})]
+
+[(#LOGO_PROJETS_SITE|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})
+<div class="clearfix"></div>]
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/projets_site,id=#ID_PROJETS_SITE,id_projets_site=#ID_PROJETS_SITE,ajax=wysiwyg} />
+</div>
+<div class="clearfix"></div>
+
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_projets_site>
+[(#ENV**{type-page}|=={projets_site_edit}|?{#INCLURE{fond=prive/squelettes/contenu/projets_site_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_projets_site>

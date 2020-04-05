@@ -1,0 +1,25 @@
+<section>
+	[<header class="cartouche">
+		<h1><:resultats_recherche:>
+			<small>&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</small>
+		</h1>
+	</header>]
+
+	<div class="main">
+		<INCLURE{fond=liste/organisations-recherche,env,ajax} />
+
+		<INCLURE{fond=liste/contacts-recherche,env,ajax} />
+
+		<INCLURE{fond=liste/projets-recherche,env,ajax} />
+
+		[(#PLUGIN{RSS_COMMITS}|oui)<INCLURE{fond=liste/commits-recherche,env,ajax} />]
+
+		<INCLURE{fond=liste/projets_sites-recherche,env,ajax} />
+
+		<INCLURE{fond=liste/articles-recherche,env,ajax} />
+
+		<INCLURE{fond=liste/rubriques-recherche,env,ajax} />
+
+	</div>
+
+</section>
