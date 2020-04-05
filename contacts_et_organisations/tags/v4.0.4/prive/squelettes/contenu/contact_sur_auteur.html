@@ -1,0 +1,47 @@
+[(#REM) copie beaucoup le squelette contact
+	mais n'affiche pas tout (et pas d'ajax precharge)
+	et pas de pipeline complément (erreur js possible si 2 boutons "Ajouter un document" sont présents)
+]
+<BOUCLE_contact(CONTACTS){id_contact}{tous}>
+
+[(#REM|contacts_edition_integree_auteur|non|et{#AUTORISER{modifier,contact,#ID_CONTACT}})
+	[(#ID_CONTACT|afficher_qui_edite{contact}|non)
+		[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT}
+			|parametre_url{redirect,#SELF}
+			|icone_verticale{<:contacts:contact_editer:>,contact,edit,right})]
+	]
+	[(#ID_CONTACT|afficher_qui_edite{contact}|oui)
+		[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT}
+			|parametre_url{redirect,#SELF}
+			|icone_verticale{#ID_CONTACT|afficher_qui_edite{contact},warning-24,'',right})]
+	]
+]
+
+
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/contact,id=#ID_CONTACT,id_contact=#ID_CONTACT,ajax=wysiwyg}>
+</div>
+
+<div class="nettoyeur"></div>
+
+
+<div class="ajax">
+	#FORMULAIRE_EDITER_LIENS{organisations,contact,#ID_CONTACT,#AUTORISER{modifier,contact,#ID_CONTACT}}
+</div>
+
+
+[(#REM|contacts_edition_integree_auteur|non|et{#AUTORISER{modifier,contact,#ID_CONTACT}})
+
+	[(#ID_CONTACT|afficher_qui_edite{contact}|non)
+		[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT}|icone_verticale{<:contacts:contact_editer:>,contact,edit,right ajax})]
+	]
+	[(#ID_CONTACT|afficher_qui_edite{contact}|oui)
+		[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT}|icone_verticale{#ID_CONTACT|afficher_qui_edite{contact},warning-24,'',right ajax})]
+	]
+]
+
+[(#REM)
+\#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,contact,id,#ID_CONTACT},data,'<div class="nettoyeur"></div>'}}
+]
+</BOUCLE_contact>

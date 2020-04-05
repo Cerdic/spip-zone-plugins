@@ -1,0 +1,203 @@
+<INCLURE{fond=test/co_inc-entete,page,titre=C&O : Exemple d'annuaire} />
+
+
+[(#REM)
+-----------------------------------------------------------------------
+Détail d'un contact
+Affiché si un contact est demandé
+
+
+]
+<BOUCLE_Contact(CONTACTS){id_contact}>
+	<p class='ariane'>
+		<a href="#URL_PAGE{test/co_annuaire}">Annuaire</a>
+		<BOUCLE_OrganisationContact(ORGANISATIONS organisations_liens){id_contact}>
+			<BOUCLE_ArboOrganisations(ORGANISATIONS){id_organisation=#ID_PARENT}{tous}>
+				<BOUCLE_HierarchieArboOrganisations(BOUCLE_ArboOrganisations) />
+				[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ]
+				&gt; <a href="#URL_PAGE{test/co_annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a>
+			</BOUCLE_ArboOrganisations>
+			&gt; <a href="#URL_PAGE{test/co_annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a>
+		</BOUCLE_OrganisationContact>
+		&gt; #NOM
+	</p>
+
+	<h1>Contact : #PRENOM #NOM</h1>
+
+	<div class='description'>
+		<p>Un contact peut avoir des coordonnées attachées, avec le plugin «Coordonnées».
+		Pour afficher ses adresses, on peut faire :</p>
+<pre>
+&lt;BOUCLE_adr(ADRESSES){id_contact}>
+	\#CODE_POSTAL
+	\#VILLE
+	...
+</pre>
+	</div>
+
+	<B_AdressesContact>
+		<div class='exemple'>
+	<BOUCLE_AdressesContact(ADRESSES){id_contact}>
+		<p>[(#TITRE)<br />]
+		[(#VOIE)<br />]
+		[(#COMPLEMENT)<br />]
+		#CODE_POSTAL #VILLE</p>
+	</BOUCLE_AdressesContact>
+		</div>
+	</B_AdressesContact>
+</BOUCLE_Contact>
+
+
+
+
+[(#REM)
+-----------------------------------------------------------------------
+Détail d'une organisation
+Affiché si un contact n'est pas demandé, mais une organisation si
+
+
+]
+<BOUCLE_Organisation(ORGANISATIONS){id_organisation}>
+	<p class='ariane'>
+		<a href="#URL_PAGE{test/co_annuaire}">Annuaire</a>
+		<BOUCLE_ArboContacts(ORGANISATIONS){id_organisation=#ID_PARENT}{tous}>
+			<BOUCLE_HierarchieArboContacts(BOUCLE_ArboContacts) />
+			[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ]
+			&gt; <a href="#URL_PAGE{test/co_annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a>
+		</BOUCLE_ArboContacts>
+		&gt; #NOM
+	</p>
+
+	<h1>Organisation : #NOM</h1>
+
+	<div class='description'>
+		<p>Ses organisations filles s'attrapent avec <code>{id_parent=\#ID_ORGANISATION}</code> :</p>
+<pre>
+&lt;BOUCLE_o_filles(ORGANISATIONS){id_parent=\#ID_ORGANISATION}{par nom}>
+	\#PRENOM
+	\#NOM
+	...
+</pre>
+	</div>
+
+
+	<B_ListeOrganisationsFilles>
+		<ul class='exemple'>
+		<BOUCLE_ListeOrganisationsFilles(ORGANISATIONS){id_parent=#ID_ORGANISATION}{par nom}>
+		<li><a href="#URL_PAGE{test/co_annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a></li>
+		</BOUCLE_ListeOrganisationsFilles>
+		</ul>
+	</B_ListeOrganisationsFilles>
+
+	<div class='description'>
+		<p>Une organisation peut avoir des coordonnées attachées, avec le plugin «Coordonnées».
+		Pour afficher ses adresses, on peut faire :</p>
+<pre>
+&lt;BOUCLE_adr(ADRESSES){id_organisation}>
+	\#CODE_POSTAL
+	\#VILLE
+	...
+</pre>
+	</div>
+
+	<B_AdressesOrganisation>
+		<div class='exemple'>
+	<BOUCLE_AdressesOrganisation(ADRESSES){id_organisation}>
+		<p>[(#TITRE)<br />]
+		[(#VOIE)<br />]
+		[(#COMPLEMENT)<br />]
+		#CODE_POSTAL #VILLE</p>
+	</BOUCLE_AdressesOrganisation>
+		</div>
+	</B_AdressesOrganisation>
+
+
+	<div class='description'>
+		<p>Ses contacts sont une boucle simple :</p>
+<pre>
+&lt;BOUCLE_c(CONTACTS){id_organisation}{par nom}>
+	\#PRENOM
+	\#NOM
+	...
+</pre>
+	</div>
+
+	<B_ListeContacts>
+	<div class='exemple'>
+	<ul>
+	<BOUCLE_ListeContacts(CONTACTS){id_organisation}{par nom}>
+		<li>
+			<a href="#URL_PAGE{test/co_annuaire,id_contact=#ID_CONTACT}">
+			[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a>
+		</li>
+	</BOUCLE_ListeContacts>
+	</ul>
+	</div>
+	</B_ListeContacts>
+
+</BOUCLE_Organisation>
+
+
+
+[(#REM)
+-----------------------------------------------------------------------
+Liste des organisations.
+Affiché si ni un contact, ni une organisation n'est demandé
+
+
+]
+<B_ListeOrganisationsRacine>
+<h1>Liste des organisations</h1>
+
+<div class='description'>
+<p>Pour lister les organisations racine, on peut utiliser <code>{racine}</code> :</p>
+<pre>
+&lt;BOUCLE_o(ORGANISATIONS){racine}{par nom}>
+	\#NOM
+	...
+</pre>
+
+<p>Pour descendre dans toutes des organisations filles, il faut faire une
+recursion au sein de la boucle listant les filles :</p>
+<pre>
+&lt;B_o_filles>
+&lt;ul>
+&lt;BOUCLE_o_filles(ORGANISATIONS){id_parent=\#ID_ORGANISATION}{par nom}>
+	&lt;li>\#NOM
+		&lt;BOUCLE_o_recursion(BOUCLE_o_filles) />
+	&lt;/li>
+&lt;/BOUCLE_o_filles>
+&lt;/ul>
+&lt;/B_o_filles>
+</pre>
+
+<p>Cliquez les liens d'organisation pour explorer leurs informations :</p>
+</div>
+
+<div class='exemple'>
+<ul>
+<BOUCLE_ListeOrganisationsRacine(ORGANISATIONS){racine}{par nom}{pagination 50}>
+	<li><a href="#URL_PAGE{test/co_annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a>
+		<B_ListeOrganisationFilles>
+		<ul>
+		<BOUCLE_ListeOrganisationFilles(ORGANISATIONS){id_parent=#ID_ORGANISATION}{par nom}>
+		<li><a href="#URL_PAGE{test/co_annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a>
+			<BOUCLE_OrganisationsRecursion(BOUCLE_ListeOrganisationFilles)/>
+		</li>
+		</BOUCLE_ListeOrganisationFilles>
+		</ul>
+		</B_ListeOrganisationFilles>
+	</li>
+</BOUCLE_ListeOrganisationsRacine>
+</ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</div>
+</B_ListeOrganisationsRacine>
+<p class="erreur">Aucune organisation</p>
+<//B_ListeOrganisationsRacine>
+
+<//B_Organisation>
+
+<//B_Contact>
+
+<INCLURE{fond=test/co_inc-pied} />

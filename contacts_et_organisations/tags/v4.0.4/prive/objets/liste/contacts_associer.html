@@ -1,0 +1,76 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi nom,1
+	type_liaison,1
+}})
+]
+#SET{exclus,#ENV**{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutcoa,#EVAL{_request("debutcoa");}}}
+<input type="hidden" name="debutcoa" value="#GET{debut}" />
+<B_contacts>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutcoa,#EVAL{_request("debutcoa");}}}
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+#ANCRE_PAGINATION
+[<h3><:info_resultat_recherche:> &laquo;(#ENV{recherche})&raquo;</h3>]
+<div class="liste-objets liste-objets-associer contacts">
+<table class='spip liste'>
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{contacts:contact_un,contacts:contacts_nb}})</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(CONTACTS){si #_contacts:GRAND_TOTAL|>{20}}{tout}{!id_contact IN #GET{exclus}}{where?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_contact==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOM**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutcol,@#ID_CONTACT}|ancre_url{paginationcol}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="3"><p class='pagination'>(#GET{p})</p></td></tr>]
+
+		<tr class='first_row'>
+			<th class="picto" scope='col'></th>
+			<th class="nom" scope='col'>[(#TRI{multi nom,<:contacts:label_nom:>,ajax})]</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_contacts(CONTACTS){!id_contact IN #GET{exclus}}{recherche?}
+		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} coa}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
+			<td class="picto"><a href="[(#ID_CONTACT|generer_url_entite{contact})]">#INCLURE{fond=logo/contact, id_contact}</a></td>
+			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]">[(#PRENOM) ]#NOM</a></td>
+			<td class='action'>
+				[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
+					<button type="submit" class="button link add" name="ajouter_lien#EVAL{chr(91)}#OBJET-#ID_OBJET-contact-#ID_CONTACT#EVAL{chr(93)}" value="+"><:contacts:contact_ajouter_lien:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+				]
+			</td>
+
+		</tr>
+	</BOUCLE_contacts>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_contacts>
+[(#ENV{recherche}|oui)
+<div class="liste-objets liste-objets-associer contacts caption-wrap">
+<span class="caption"><strong>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</div>
+]<//B_contacts>

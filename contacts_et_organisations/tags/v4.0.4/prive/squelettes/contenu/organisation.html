@@ -1,0 +1,69 @@
+<BOUCLE_organisation(ORGANISATIONS){id_organisation}{tous}{si #ENV{exec}|=={organisation}}>
+[(#ID_AUTEUR|redirige_conditionnel_vers_auteur{organisation,#ID_ORGANISATION})]
+[(#BOITE_OUVRIR{[
+
+	[(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
+
+		[(#ID_ORGANISATION|afficher_qui_edite{organisation}|non)
+			[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|icone_verticale{<:contacts:organisation_editer:>,organisation,edit,right ajax preload})]
+		]
+		[(#ID_ORGANISATION|afficher_qui_edite{organisation}|oui)
+			[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|icone_verticale{#ID_ORGANISATION|afficher_qui_edite{organisation},warning-24,'',right ajax preload})]
+		]
+	]
+	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{organisation-24.png}|balise_img{organisation,cadre-icone})]</h1>
+],simple fiche_objet})]
+
+
+
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/organisation,id=#ID_ORGANISATION,id_organisation=#ID_ORGANISATION,ajax=wysiwyg}>
+</div>
+
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/organisations,
+	id_parent=#ID_ORGANISATION,
+	titre=<:contacts:info_organisations_filles:>,
+	ajax}>
+
+[(#CONFIG{contacts_et_organisations/utiliser_organisations_arborescentes}|et{#AUTORISER{creer,organisation}})
+	[(#URL_ECRIRE{organisation_edit,id_parent=#ID_ORGANISATION}
+		|parametre_url{redirect,#SELF}
+		|icone_verticale{<:contacts:organisation_creer_fille:>,organisation,add,right})]
+]
+
+<div class="nettoyeur"></div>
+
+<div class="ajax">
+	#FORMULAIRE_EDITER_LIENS{organisation,#ID_ORGANISATION,contacts,#AUTORISER{modifier,organisation,#ID_ORGANISATION}}
+</div>
+
+[(#VAL{spip_rubriques}|in_array{#CONFIG{contacts_et_organisations/lier_organisations_objets, #LISTE}}|oui)
+<div class="ajax">
+	#FORMULAIRE_EDITER_LIENS{organisation,#ID_ORGANISATION,rubriques,#AUTORISER{modifier,organisation,#ID_ORGANISATION}}
+</div>
+]
+
+
+[(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
+
+	[(#ID_ORGANISATION|afficher_qui_edite{organisation}|non)
+		[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|icone_verticale{<:contacts:organisation_editer:>,organisation,edit,right ajax preload})]
+	]
+	[(#ID_ORGANISATION|afficher_qui_edite{organisation}|oui)
+		[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|icone_verticale{#ID_ORGANISATION|afficher_qui_edite{organisation},warning-24,'',right ajax preload})]
+	]
+]
+
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_organisation>
+[(#ENV**{exec}|=={organisation_edit}|?{#INCLURE{fond=prive/squelettes/contenu/organisation_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_organisation>

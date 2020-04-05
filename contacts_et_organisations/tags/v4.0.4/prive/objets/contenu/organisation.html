@@ -1,0 +1,44 @@
+<BOUCLE_organisation(ORGANISATIONS){id_organisation?}{id_auteur?}>
+<div class="contenu-organisation">
+	[<div class="champ contenu_id_parent[ (#ID_PARENT*|intval|?{'',vide})]">
+		<div class="label visible"><:contacts:label_organisation_parente:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{id_parent} id_parent'><a href="[(#ID_PARENT|generer_url_entite{organisation})]">(#INFO_NOM{organisation,#ID_PARENT})</a></div>
+	</div>]
+	[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+		<div class="label visible"><:contacts:label_nom:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{nom} nom'>(#NOM)</div>
+	</div>]
+	[<div class="champ contenu_statut_juridique[ (#STATUT_JURIDIQUE*|strlen|?{'',vide})]">
+		<div class="label visible"><:contacts:label_statut_juridique:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{statut_juridique} statut_juridique'>(#STATUT_JURIDIQUE)</div>
+	</div>]
+	[<div class="champ contenu_identification[ (#IDENTIFICATION*|strlen|?{'',vide})]">
+		<div class="label visible"><:contacts:label_identification:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{identification} identification'>(#IDENTIFICATION)</div>
+	</div>]
+	[<div class="champ contenu_activite[ (#ACTIVITE*|strlen|?{'',vide})]">
+		<div class="label visible"><:contacts:label_activite:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{activite} activite'>(#ACTIVITE)</div>
+	</div>]
+	[<div class="champ contenu_url_site[ (#URL_SITE*|strlen|?{'',vide})]">
+		<div class="label visible"><:contacts:label_url_site:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{url_site} url_site'><a href="#URL_SITE">(#URL_SITE)</a></div>
+	</div>]
+	[<div class="champ contenu_date_creation[ (#DATE_CREATION*|!={0000-00-00 00:00:00}|?{'',vide})]">
+		<div class="label visible"><:contacts:label_date_creation:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{date_creation} date_creation'>(#DATE_CREATION|=={0000-00-00 00:00:00}|?{'',[(#DATE_CREATION|affdate)]})</div>
+	</div>]
+	[<div class="champ contenu_ouvertures[ (#OUVERTURES*|strlen|?{'',vide})]">
+		<div class="label visible"><:contacts:label_ouvertures:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{ouvertures} ouvertures'>(#OUVERTURES)</div>
+	</div>]
+	[<div class="champ contenu_tarifs[ (#TARIFS*|strlen|?{'',vide})]">
+		<div class="label visible"><:contacts:label_tarifs:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{tarifs} tarifs'>(#TARIFS)</div>
+	</div>]
+	[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+		<div class="label visible"><:contacts:label_descriptif:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{descriptif} descriptif'>(#DESCRIPTIF)</div>
+	</div>]
+</div>
+</BOUCLE_organisation>

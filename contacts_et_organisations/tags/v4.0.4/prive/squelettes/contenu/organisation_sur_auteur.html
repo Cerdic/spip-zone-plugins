@@ -1,0 +1,56 @@
+[(#REM) copie beaucoup le squelette organisation
+	mais n'affiche pas tout (et pas d'ajax precharge)
+	et pas de pipeline complément (erreur js possible si 2 boutons "Ajouter un document" sont présents)
+]
+<BOUCLE_organisation(ORGANISATIONS){id_organisation}{tous}>
+
+[(#REM|contacts_edition_integree_auteur|non|et{#AUTORISER{modifier,organisation,#ID_ORGANISATION}})
+	[(#ID_ORGANISATION|afficher_qui_edite{organisation}|non)
+		[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}
+			|parametre_url{redirect,#SELF}
+			|icone_verticale{<:contacts:organisation_editer:>,organisation,edit,right})]
+	]
+	[(#ID_ORGANISATION|afficher_qui_edite{organisation}|oui)
+		[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}
+			|parametre_url{redirect,#SELF}
+			|icone_verticale{#ID_ORGANISATION|afficher_qui_edite{organisation},warning-24,'',right})]
+	]
+]
+
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/organisation,id=#ID_ORGANISATION,id_organisation=#ID_ORGANISATION,ajax=wysiwyg}>
+</div>
+
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/organisations,
+	id_parent=#ID_ORGANISATION,id_auteur='',
+	titre=<:contacts:info_organisations_filles:>}>
+
+[(#CONFIG{contacts_et_organisations/utiliser_organisations_arborescentes}|et{#AUTORISER{creer,organisation}})
+	[(#URL_ECRIRE{organisation_edit,id_parent=#ID_ORGANISATION}
+		|parametre_url{redirect,#SELF}
+		|icone_verticale{<:contacts:organisation_creer_fille:>,organisation,add,right})]
+]
+
+<div class="nettoyeur"></div>
+
+<div class="ajax">
+	#FORMULAIRE_EDITER_LIENS{organisation,#ID_ORGANISATION,contacts,#AUTORISER{modifier,organisation,#ID_ORGANISATION}}
+</div>
+#SET{ids,#IDS_ORGANISATION_BRANCHE|array_diff{#LISTE{#ID_ORGANISATION}}}
+[(#GET{ids}|count|oui)
+<INCLURE{fond=prive/objets/liste/contacts,id_organisation=#GET{ids},id_auteur='',env,titre=<:contacts:contacts_filiales:>} />
+]
+
+[(#VAL{spip_rubriques}|in_any{#CONFIG{contacts_et_organisations/lier_organisations_objets}}|oui)
+<div class="ajax">
+	#FORMULAIRE_EDITER_LIENS{organisation,#ID_ORGANISATION,rubriques,#AUTORISER{modifier,organisation,#ID_ORGANISATION}}
+</div>
+]
+
+[(#REM)
+\#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION},data,'<div class="nettoyeur"></div>'}}
+]
+</BOUCLE_organisation>
