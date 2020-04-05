@@ -1,0 +1,62 @@
+#SET{compositions,#REM|compositions_lister_disponibles}
+
+<h1 class="grostitre"><:compositions:compositions:></h1>
+
+<B_compositions>
+[<h2>(#GRAND_TOTAL|singulier_ou_pluriel{compositions:info_1_composition,compositions:info_nb_compositions})</h2>]
+
+<BOUCLE_compositions(DATA){source tableau, #GET{compositions}}>
+
+	<B_pour>
+
+	[(#BOITE_OUVRIR{[(#CLE|objet_info{texte_objets}|_T)], simple, section})]
+
+	<div class='liste'>
+		<ul class="liste-items compositions">
+			<BOUCLE_pour(DATA){source tableau, #VALEUR}{par nom}>
+			<li class="item">
+				[ [<a href="(#IMAGE_EXEMPLE|balise_img|extraire_attribut{src})" class='mediabox exemple' title="<:compositions:voir_image_exemple|attribut_html:>">]
+					(#ICON|sinon{#CHEMIN_IMAGE{composition-24.png}}|image_reduire{24,24}|inserer_attribut{class,logo})
+					[(#IMAGE_EXEMPLE|oui)</a>]
+				]
+
+				<div class='presentation'>
+					<h4>[(#NOM|supprimer_numero)]</h4>
+					[<div class='descriptif'>(#DESCRIPTION)</div>]
+				</div>
+
+				<B_heritages>
+				[(#BOITE_OUVRIR{<:compositions:label_heritages:>, raccourcis})]
+					<:compositions:heritages:>
+					<ul class="spip">
+						<BOUCLE_heritages(DATA){source tableau, #BRANCHE}>
+							<li>#CLE (#VALEUR)</li>
+						</BOUCLE_heritages>
+					</ul>
+				#BOITE_FERMER
+				</B_heritages>
+
+				<B_util>
+					[(#BOITE_OUVRIR{[(#GRAND_TOTAL|singulier_ou_pluriel{compositions:une_utilisation,compositions:des_utilisations})], raccourcis})]
+					<div class='liste'>
+						<ul class='liste-items'>
+						<BOUCLE_util(DATA){source tableau, #_compositions:CLE|compositions_lister_utilisations{#CLE}}{pagination}>
+							<li class='item'>
+								<a href="[(#ID|generer_url_entite{#_compositions:CLE})]">[(#TITRE|supprimer_numero)][ | (#ID)]</a>
+							</li>
+						</BOUCLE_util>
+						</ul>
+					</div>
+					[<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
+				</B_util>
+			</li>
+			</BOUCLE_pour>
+		</ul>
+	</div>
+
+	#BOITE_FERMER
+	</B_pour>
+</BOUCLE_compositions>
+
+<h2><:compositions:info_aucune_composition:></h2>
+<//B_compositions>

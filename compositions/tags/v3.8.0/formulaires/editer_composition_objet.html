@@ -1,0 +1,102 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{objet}-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	]
+		<h4[
+			style="background-image: url((#ENV{_compositions/#ENV{composition}/icon}|image_reduire{24,24}|extraire_attribut{src}))"][
+			title="(#ENV{_compositions/#ENV{composition}/description}|attribut_html)"]>
+			<:compositions:composition_utilisee:>
+			<span class="composition_actuelle">[(#ENV{composition}|oui)[(#ENV{_compositions/#ENV{composition}/nom}|supprimer_numero|sinon{#ENV{composition}})]
+			][(#ENV{composition}|non)
+				[(#ENV{composition_heritee}|oui)
+					[(#ENV{composition_heritee}|=={'-'}|oui)<:compositions:composition_defaut:>]
+					[(#ENV{composition_heritee}|!={'-'}|oui)[(#ENV{_compositions}|table_valeur{''}|table_valeur{nom}|supprimer_numero|sinon{#ENV{composition_heritee}})]]
+					<span class="precision">(<:compositions:composition_heritee:>)</span>
+				]
+				[(#ENV{composition_heritee}|non)<:compositions:composition_defaut:>]
+			][(#ENV{composition_verrouillee}|oui) <img src="#CHEMIN_IMAGE{cadenas-16.png}" alt="" />]
+			</span>
+		</h4>
+		[(#ENV{editable})
+		<span class="toggle_box_link" style="display:none;">&#91;<a href="#"
+				onclick="var f=jQuery(this).parents('form').eq(0);f.find('p').show('fast');f.find('ul').show('fast');f.find('.toggle_box_link').hide('fast');return false;"
+				><:bouton_changer:></a>&#93;</span>
+		]
+		<div class="detail">
+			[(#ENV{composition_verrouillee}|oui)<p><:compositions:composition_verrouillee:></p>]
+			<B_heritages>
+				<p><:compositions:heritages:>
+			<BOUCLE_heritages(DATA){source tableau, #ENV{_compositions/#ENV{composition}/branche}}{', '}>#CLE (#VALEUR)</BOUCLE_heritages>
+				.</p>
+			</B_heritages>
+		</div>
+	
+		[(#ENV{editable})
+		<ul class="editer-groupe">
+			#SET{fl,compositions}
+			#SET{name,composition}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,''}
+			[<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				(#INCLURE{fond=formulaires/inc-selecteur_composition}{name=#GET{name}}{id=#GET{name}}{id_rubrique}{selected=#ENV{#GET{name}}}{_compositions}{composition_heritee})
+			</li>]
+	
+			#SET{lock,''}
+			[(#AUTORISER{webmestre}|et{#ENV{verrou_branche}|non}|et{#CONFIG{compositions/tout_verrouiller}|non}|oui)
+				#SET{name,composition_lock}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,''}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<label><:compositions:label_composition_explication:></label>
+					[(#ENV{_compositions}|is_array|oui)
+					<div class="choix">
+						<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
+						<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+					</div>]
+					[(#ENV{_compositions}|is_array|non)<input type="hidden" name="composition_lock" id="composition_lock" value="#ENV{composition_lock}" />]
+					[(#ENV{objet}|=={rubrique}|oui)
+					#SET{name,composition_branche_lock}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,''}
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<div class="choix">
+						<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
+						<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+					</div>]
+				</li>
+				#SET{lock,'oui'}
+			]
+			[(#ENV{verrou_branche}|oui)
+			<li class="editer editer_branche_verrouillee">
+				<label><:compositions:label_information:></label>
+				<:compositions:label_branche_verrouillee:>
+			</li>]
+			[(#CONFIG{compositions/tout_verrouiller}|oui)
+			<li class="editer editer_toutes_verouillees">
+				<label><:compositions:label_information:></label>
+				<:compositions:label_toutes_verrouilles:>
+			</li>]
+		</ul>
+		[(#GET{lock}|non)
+		<input type="hidden" name="composition_lock" id="composition_lock" value="#ENV{composition_lock}" />
+		[(#ENV{objet}|=={rubrique}|oui)
+		<input type="hidden" name="composition_branche_lock" id="composition_branche_lock" value="#ENV{composition_branche_lock}" />]]
+
+	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'>
+			<span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' name='annuler' value='<:bouton_annuler:>' />
+			<input type='submit' class='submit' name='changer' value='<:bouton_changer:>' />
+		</p>
+	</div></form>]
+</div>
+<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+		$(".formulaire_editer_composition_objet .toggle_box_link").show(0);
+		$(".formulaire_editer_composition_objet p").hide(0);
+		$(".formulaire_editer_composition_objet ul").hide(0);
+	});
+ //]]></script>

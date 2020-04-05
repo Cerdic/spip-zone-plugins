@@ -1,0 +1,42 @@
+<!-- DTD retrospective pour un fichier descriptif d'une composition, type-composition.xml -->
+
+<!--================ Entites XML std =========================-->
+
+<!ENTITY % HTMLlat1 PUBLIC
+   "-//W3C//ENTITIES Latin 1 for XHTML//EN"
+   "xhtml-lat1.ent">
+%HTMLlat1;
+
+<!ENTITY % HTMLsymbol PUBLIC
+   "-//W3C//ENTITIES Symbols for XHTML//EN"
+   "xhtml-symbol.ent">
+%HTMLsymbol;
+
+<!ENTITY % HTMLspecial PUBLIC
+   "-//W3C//ENTITIES Special for XHTML//EN"
+   "xhtml-special.ent">
+%HTMLspecial;
+
+<!--================ DTD originale =========================-->
+
+<!ENTITY % NAME "CDATA"> <!-- identificateur (type d'objet, composition) -->
+<!ENTITY % ITEM "CDATA"> <!-- chaine de langue -->
+<!ENTITY % PATH "CDATA"> <!-- chemin d'acces relatif a un fichier -->
+
+<!ENTITY % CONTENT "(description|icon|image_exemple|class|configuration)*" >
+
+<!ELEMENT composition (nom, %CONTENT;, branche*) >
+
+<!ELEMENT nom (%ITEM|#PCDATA)>
+
+<!ELEMENT description (%ITEM|#PCDATA)>
+<!ELEMENT icon (%PATH)>
+<!ELEMENT image_exemple (%PATH)>
+<!ELEMENT class (#PCDATA)>
+<!ELEMENT configuration (#PCDATA)>
+
+<!ELEMENT branche EMPTY>
+<!ATTLIST branche
+	type %NAME; #REQUIRED
+	composition %NAME; #REQUIRED
+>

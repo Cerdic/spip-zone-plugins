@@ -1,0 +1,38 @@
+[(#REM) <style>]
+
+.formulaire_editer_composition_objet .editer_composition .choix {min-height:24px; padding-top:4px;overflow: hidden }
+.formulaire_editer_composition_objet .editer_composition .choix input {display:block;float: #ENV{left};}
+.formulaire_editer_composition_objet .editer_composition .choix label {display:block;float: #ENV{left}; width: 80%; padding-#ENV{left}: 34px; margin-bottom: 0.5em;}
+.formulaire_editer_composition_objet .editer_composition .choix img.logo {float:#ENV{left};margin-#ENV{left}: -34px;margin-#ENV{right}:5px;}
+.formulaire_editer_composition_objet .editer_composition .choix .exemple img.logo { padding-bottom:2px; border-bottom:1px dotted #666; }
+.formulaire_editer_composition_objet .editer_composition .choix .exemple img.logo:hover { border-bottom:1px solid #666; }
+
+.formulaire_editer_composition_objet h4 {
+	padding-#ENV{left}: 30px;
+	background: url(#CHEMIN_IMAGE{composition-24.png}) no-repeat #ENV{left};
+	background-size: 24px;
+	min-height: 24px;
+	padding-top: 4px;
+	margin-bottom: 0;
+}
+.formulaire_editer_composition_objet h4 .precision {font-size: 85%;}
+
+.formulaire_editer_composition_objet .detail {
+	padding-#ENV{left}: 30px;
+}
+
+.formulaire_editer_composition_objet h4 span.composition_actuelle {font-weight: normal;}
+
+.formulaire_editer_composition_objet span.descriptif {font-style: italic; font-size: 0.875em;}
+
+body.compositions #contenu .item .logo {margin-#ENV{right}:1em; float: #ENV{left}; }
+body.compositions #contenu .item .exemple .logo { padding-bottom:2px; border-bottom:1px dotted #666; }
+body.compositions #contenu .item .exemple .logo:hover { border-bottom:1px solid #666; }
+body.compositions #contenu .item .presentation { overflow:auto; }
+body.compositions #contenu .item .presentation h4 {margin-bottom:0; }
+body.compositions #contenu .item .raccourcis ul {margin-bottom:0; }
+
+body.compositions #contenu .compositions { border-top:none; margin-bottom:0; }
+body.compositions #contenu .compositions > .item + .item { margin-top:.5em; }
+body.compositions #contenu .compositions .item:last-child { border-bottom:none; }
+

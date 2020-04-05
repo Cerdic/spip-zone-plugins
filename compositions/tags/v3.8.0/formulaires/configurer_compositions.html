@@ -1,0 +1,49 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_forums_contenu' id='formulaire_configurer_forums_contenu'>
+<h3 class='titrem'><:compositions:compositions:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#SELF"><div>
+		#ACTION_FORMULAIRE
+		<div class="editer-groupe">
+			#SET{name,objets}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:compositions:label_activer_composition_objets:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name},#LISTE{spip_articles,spip_rubriques}}}
+			</div>
+
+			<div class='editer configurer_chemin_compositions'>
+				<label for="chemin_compositions"><:compositions:label_chemin_compositions:></label>
+				[(#PLUGIN{z}|ou{#PLUGIN{zcore}}|non)<div class='explication'><:compositions:label_chemin_compositions_details:></div>]
+				<input type="text" name="chemin_compositions" value="[(#REM|compositions_chemin|entites_html)]" id="chemin_compositions" class="text" [(#PLUGIN{z}|ou{#PLUGIN{zcore}}|oui)disabled="true"] />
+			</div>
+			[(#PLUGIN{z}|ou{#PLUGIN{zcore}}|non)<div class='editer configurer_styliser_auto'>
+				<label><:compositions:label_styliser:></label>
+				<div class="choix">
+					<input type="checkbox" name="styliser_auto" [checked="(#ENV{styliser_auto}|=={non}|?{checked})"] id="styliser_auto" value='non' />
+					<label for="styliser_auto"><:compositions:label_styliser_auto:></label>
+				</div>
+			</div>
+			]
+			<div class='editer configurer_masquer_formulaire'>
+				<label><:compositions:label_masquer_formulaire:></label>
+				<div class="choix">
+					<input type="checkbox" name="masquer_formulaire" [checked="(#ENV{masquer_formulaire}|=={oui}|?{checked})"] id="masquer_formulaire" value='oui' />
+					<label for="masquer_formulaire"><:compositions:label_masquer_formulaire_composition:></label>
+				</div>
+			</div>
+			<div class='editer configurer_tout_verrouiller'>
+				<label><:compositions:label_tout_verrouiller:></label>
+				<div class="choix">
+					<input type="checkbox" name="tout_verrouiller" [checked="(#ENV{tout_verrouiller}|=={oui}|?{checked})"] id="tout_verrouiller" value='oui' />
+					<label for="tout_verrouiller"><:compositions:label_verrouiller_toutes_compositions:></label>
+				</div>
+			</div>
+		</div>
+		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+
+</div>

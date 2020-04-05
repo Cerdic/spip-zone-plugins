@@ -1,0 +1,13 @@
+<BOUCLE_compositions(DATA){source tableau, #ENV{_compositions}}{par nom}>
+<div class='choix'>
+<input type='radio' class='radio' name='#ENV{name}' id='#ENV{name}-#CLE' value='#CLE'[(#CLE|=={#ENV{selected}}|oui)checked='checked'] />
+<label for='#ENV{name}-#CLE'>
+	[ [<a href="(#IMAGE_EXEMPLE|balise_img|extraire_attribut{src})" class='mediabox exemple' title="<:compositions:voir_image_exemple|attribut_html:>">]
+		(#ICON|sinon{#CHEMIN_IMAGE{composition-base-24.png}}|image_reduire{24,24}|inserer_attribut{class,logo})
+		[(#IMAGE_EXEMPLE|oui)</a>]
+	]
+	[(#NOM|supprimer_numero)][(#ENV{composition_heritee}|et{#CLE|=={''}}|oui)(<:compositions:composition_heritee:>)]
+	[<br /><span class='descriptif'>(#DESCRIPTION)</span>]
+</label>
+</div>
+</BOUCLE_compositions>
