@@ -1,0 +1,24 @@
+<paquet
+	prefix="domlang"
+	categorie="navigation"
+	version="1.0.5"
+	etat="test"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/domlang-64.png"
+	documentation="https://contrib.spip.net/4913"
+>
+	<nom>Domaines par secteur de langue</nom>
+	<!-- Permet de définir 1 domaine pour chaque secteur de langue -->
+
+	<auteur>Matthieu Marcillaud</auteur>
+
+	<licence>GNU/GPL</licence>
+	<credit lien="https://www.iconfinder.com/icons/35171/rocket_icon">Web Design Creatives (Logo)</credit>
+
+	<pipeline nom="affiche_milieu" inclure="domlang_fonctions.php" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;[" /><!-- Juste pour la config. Si qqn·e a le temps de la passer en pur html, le faire ! -->
+	<necessite nom="php" compatibilite="[5.4.0;[" />
+
+	<utilise nom="urls" />
+</paquet>

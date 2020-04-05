@@ -1,0 +1,26 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><img src="#CHEMIN_IMAGE{domlang-24.png}" class="cadre-icone" /><:domlang:titre_ndd_par_secteur_langue:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div class="editer-groupe">
+		<BOUCLE_langues(DATA){source tableau,#CONFIG{langues_multilingue}|explode{","}}{par lang}>
+			[(#SET{label,[(#VAL{domlang:domaine_pour_langue}|_T{#ARRAY{lang,#VALEUR,nom,#VALEUR|traduire_nom_langue}})]})]
+			[(#SAISIE{input, domaines/#VALEUR,
+				label=#GET{label},
+				placeholder=#URL_SITE_SPIP,
+				conteneur_class=pleine_largeur})]
+		</BOUCLE_langues>
+		</div>
+
+		<input type="hidden" name="_meta_casier" value="domlang" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
