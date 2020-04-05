@@ -1,0 +1,6 @@
+#SET{fond, #SELF|match{(cfg=)(\w+?),2}}
+[(#CONFIG{#GET{fond}}|oui)
+#FORMULAIRE_SAUVEGARDER_SAVECFG
+<br />
+]
+#FORMULAIRE_GERER_SAVECFG

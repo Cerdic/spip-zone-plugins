@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_savecfg">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			#SET{fond, #SELF|match{(cfg=)(\w+?),2}}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:savecfg:sauvegarder_savecfg:></h3>
+						<ul>
+							<li>
+								<input type="hidden" name="fond" value="[(#ENV{nom})]" />
+								<label for="nom"><:savecfg:titre_sauvegarde:>[ (#ENV**{erreurs}|table_valeur{nom}|sinon{ <em><:ecrire:info_obligatoire_02:></em>})]</label>
+								<input type="text" size="10" class="text" name="titre" id="nom" value="" />
+								[<p>(#ENV**{erreurs}|table_valeur{nom})</p>]
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" value="<:savecfg:sauvegarder:>" />
+			</p>
+		</div>
+	</form>
+</div>
