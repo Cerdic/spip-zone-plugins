@@ -1,0 +1,17 @@
+<paquet
+	prefix="tabcsv"
+	categorie="edition"
+	version="0.1.5"
+	etat="stable"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="images/logo_tabcsv.png"
+	documentation="https://contrib.spip.net/4873"
+>
+
+	<nom>Importation CSV</nom>
+
+	<auteur lien="https://contrib.spip.net/Robert-Sebille">Robert Sebille</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+</paquet>
