@@ -1,0 +1,27 @@
+nom: '<:modelexergue:modelexergue_inserer:>'
+logo: 'images/modelexergue-24.png'
+icone_barre: 'modelexergue.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      label: '<:inserer_modeles:label_modele:>'
+      obligatoire: 'oui'
+      defaut: 'exergue'
+  -
+    saisie: 'input'
+    options:
+      nom: 'texte'
+      label: '<:modelexergue:modelexergue_texteinserer:>'
+      defaut: ''
+  -
+    saisie: 'selection'
+    options:
+      nom: 'position'
+      label: '<:inserer_modeles:label_alignement:>'
+      defaut: ''
+      datas:
+        left: '<:inserer_modeles:item_left:>'
+        center: '<:inserer_modeles:item_center:>'
+        right: '<:inserer_modeles:item_right:>'

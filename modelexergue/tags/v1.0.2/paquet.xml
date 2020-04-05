@@ -1,0 +1,25 @@
+<paquet
+	prefix="modelexergue"
+	categorie="edition"
+	version="1.0.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/modelexergue-64.png"
+	documentation="https://contrib.spip.net/4850"
+>
+	<!--
+		Paquet généré le 2016-12-18 20:57:54
+	-->
+
+	<nom>Modèle exergue</nom>
+	<!-- Insérez des exergues dans vos textes -->
+
+	<auteur lien='https://contrib.spip.net/RealET'>Jacques Pyrat</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head_css" inclure="modelexergue_pipelines.php" />
+	<pipeline nom="header_prive" inclure="modelexergue_pipelines.php" />
+
+
+</paquet>
