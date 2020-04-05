@@ -1,0 +1,32 @@
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
+
+/*
+  ===========
+  BOITE INFOS
+  ===========
+*/
+.infos .identifiant {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.infos .identifiant_icone {
+  display: none;
+  vertical-align: middle;
+}
+.infos .identifiant_label {
+  text-transform: uppercase;
+  font-size: 0.769em;
+  font-weight: bold;
+}
+.infos .identifiant_valeur {
+  display: block;
+  font-family: mono;
+  color: #333;
+}

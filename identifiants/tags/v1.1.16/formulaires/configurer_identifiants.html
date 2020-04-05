@@ -1,0 +1,46 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:identifiant:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="_meta_casier" value="identifiants" />
+
+		<div class="editer-groupe">
+
+			[(#REM) choix des objets sur lesquels l'ajout d'identifiants est possible ]
+			#SET{name,objets} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<p class="explication">
+					<:identifiant:champ_cfg_objets_explication:>
+					<B_objets_exclus><br>
+					<:identifiant:info_identifiants_objets_exclus:> :
+					<BOUCLE_objets_exclus(DATA){source table, #REM|tables_avec_identifiant|sinon{#ARRAY}}{","}>
+					[(#VALEUR|objet_info{texte_objets}|_T)]
+					</BOUCLE_objets_exclus>
+					</B_objets_exclus>
+					<B_objets_manquants><br>
+					<:identifiant:info_identifiants_objets_manquants:> :
+					<BOUCLE_objets_manquants(DATA){source table, #REM|identifiants_objets_manquants|sinon{#ARRAY}}{","}>
+					[(#VALEUR|objet_info{texte_objets}|_T)]
+					</BOUCLE_objets_manquants>
+				</B_objets_manquants>
+				</p>
+				<label><:identifiant:champ_cfg_objets_label:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				][(#INCLURE{fond=formulaires/inc-choisir-objets,
+					name=#GET{name},
+					selected=#ENV**{#GET{name}},
+					exclus=#GET{tables_exclues}})]
+			</div>
+
+		</div>
+
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
