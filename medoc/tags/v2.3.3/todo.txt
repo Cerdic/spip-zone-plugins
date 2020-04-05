@@ -1,0 +1,4 @@
+= TODO
+= pour Medoc
+
+- Ajuster la taille de « petite image » : mettre un lien aux images qui sont plus petites que, disons, 0,25 x la constante qui définit la taille des vignettes par défaut

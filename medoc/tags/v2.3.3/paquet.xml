@@ -1,0 +1,18 @@
+<paquet
+	prefix="medoc"
+	categorie="edition"
+	version="2.3.3"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="medoc.png"
+	documentation="https://contrib.spip.net/4026"
+>
+
+	<nom>Mod&#232;le &lt;doc&gt; unifi&eacute;</nom>
+
+	<auteur lien="http://spip.tetue.net">tetue</auteur>
+	<licence>GPL</licence>
+
+	<necessite nom="medias" compatibilite="[2.7.27;[" />
+
+</paquet>
