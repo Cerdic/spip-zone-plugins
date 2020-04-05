@@ -1,0 +1,21 @@
+<paquet
+	prefix="dame"
+	categorie="outil"
+	version="0.2.4"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="imgs/tyto_alba.png"
+	documentation="https://seenthis.net/sites/499366"
+>
+	<nom>Dame blanche</nom>
+	<!-- Gérer des dames blanches dans textwheel <dame></dame> -->
+
+	<auteur>ARNO*</auteur>     
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	<copyright>2014</copyright>
+
+	<pipeline nom="insert_head_css" action="inserer_entete" inclure="dame_pipelines.php" />          
+	<pipeline nom="header_prive" action="inserer_entete" inclure="dame_pipelines.php" />          
+	<pipeline nom="pre_propre" inclure="dame_pipelines.php" />
+
+</paquet>
