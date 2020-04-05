@@ -1,0 +1,44 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]En travaux 2.0
+			[en]Under construction 2.0
+			[it]In manutenzione 2.0
+		</multi>
+	</nom>
+	<prefix>entravaux</prefix>
+	<icon>icon/en_travaux.png</icon>
+
+	<version>2.0.9</version>
+	<etat>stable</etat>
+	<categorie>maintenance</categorie>
+
+	<slogan>Indiquer une phase de maintenance</slogan>
+	<description>
+		<multi>
+			[fr]&#192; activer avant une phase de maintenance, ce plugin affiche aussit&#244;t une page d'avertissement, {{&#224; la place}} du site public. Attention : seul le webmestre acc&#232;de encore &agrave; l'espace priv&#233; et au site public.
+			[en]Displays a defined page during maintenance period on all your public pages.
+			[it]Consente di visualizzare un messaggio personalizzabile durante una sessione di manutenzione su tutte le pagine del sito pubblico.
+		</multi>
+	</description>
+	<lien>https://contrib.spip.net/plugin-en-travaux-2-0</lien>
+	<auteur>
+		<multi>
+			[fr][Arnaud Ventre->ventrea@gmail.com], [C&#233;dric Morin->http://www.yterium.com] - 2006-2009
+			[en][Arnaud Ventre->ventrea@gmail.com], [C&#233;dric Morin->http://www.yterium.com] - 2006-2009
+			_ Translated from French by Etienne B. [->http://www.loiseau2nuit.net]
+			[it][Arnaud Ventre->ventrea@gmail.com], [C&#233;dric Morin->http://www.yterium.com] - 2006-2009
+		</multi>
+	</auteur>
+	<licence>GPL</licence>
+
+	<install>en_travaux_install.php</install>
+	<options>en_travaux_options.php</options>
+	<pipeline>
+		<nom>styliser</nom>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.7;2.1.99]" />
+</plugin>
