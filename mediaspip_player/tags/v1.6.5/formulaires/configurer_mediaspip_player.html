@@ -1,0 +1,70 @@
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer editer_cookie_volume[ (#ENV**{erreurs}|table_valeur{cookie_volume}|oui)erreur]">
+				<label><:mediaspip_player:label_cookie_volume:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cookie_volume})</span>]
+				<p class="explication"><:mediaspip_player:explication_cookie_volume:></p>
+				<div class="choix">
+					<input type="radio" name="cookie_volume" class="radio" value="oui" id="cookie_volume_oui"[ (#ENV{cookie_volume,'non'}|=={oui}|oui)checked="checked"]/>
+					<label for="cookie_volume_oui"><:item_oui:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="cookie_volume" class="radio" value="non" id="cookie_volume_non"[ (#ENV{cookie_volume,'non'}|=={non}|oui)checked="checked"]/>
+					<label for="cookie_volume_non"><:item_non:></label>
+				</div>
+			</li>
+			<li class="editer editer_mousewheel_non_charger[ (#ENV**{erreurs}|table_valeur{mousewheel_non_charger}|oui)erreur]">
+				<label for="mousewheel_non_charger"><:mediaspip_player:label_mousewheel_non_charger:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mousewheel_non_charger})</span>]
+				<p class="explication"><:mediaspip_player:explication_mousewheel_non_charger:></p>
+				<input type="checkbox" name="mousewheel_non_charger" id="mousewheel_non_charger"[(#ENV{mousewheel_non_charger}|=={on}|oui)checked="checked"] />
+			</li>
+			<li class="editer editer_slider_non_charger[ (#ENV**{erreurs}|table_valeur{slider_non_charger}|oui)erreur]">
+				<label for="slider_non_charger"><:mediaspip_player:label_slider_non_charger:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{slider_non_charger})</span>]
+				<p class="explication"><:mediaspip_player:explication_slider_non_charger:></p>
+				<input type="checkbox" name="slider_non_charger" id="slider_non_charger"[(#ENV{slider_non_charger}|=={on}|oui)checked="checked"] />
+			</li>
+			<li class="editer editer_slider_volume_orientation[ (#ENV**{erreurs}|table_valeur{slider_volume_orientation}|oui)erreur]">
+				<label><:mediaspip_player:label_slider_volume_orientation:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{slider_volume_orientation})</span>]
+				<p class="explication"><:mediaspip_player:explication_slider_volume_orientation:></p>
+				<div class="choix">
+					<input type="radio" name="slider_volume_orientation" class="radio" value="vertical" id="slider_volume_orientation_vertical"[ (#ENV{slider_volume_orientation,'vertical'}|=={vertical}|oui)checked="checked"]/>
+					<label for="slider_volume_orientation_vertical"><:mediaspip_player:valeur_vertical:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="slider_volume_orientation" class="radio" value="horizontal" id="slider_volume_orientation_horizontal"[ (#ENV{slider_volume_orientation,'vertical'}|=={horizontal}|oui)checked="checked"]/>
+					<label for="slider_volume_orientation_horizontal"><:mediaspip_player:valeur_horizontal:></label>
+				</div>
+			</li>
+			[(#PLUGIN{embed_code}|oui)
+			<li class="editer editer_video_largeur_embed[ (#ENV**{erreurs}|table_valeur{video_largeur_embed}|oui)erreur]">
+				<label for="video_largeur_embed"><:mediaspip_player:label_video_largeur_embed:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{video_largeur_embed})</span>]
+				<p class="explication"><:mediaspip_player:explication_video_largeur_embed:></p>
+				<input type="text" name="video_largeur_embed" class="text" id="video_largeur_embed" value="#ENV{video_largeur_embed}" size="4" maxlength="4" />
+			</li>
+			<li class="editer editer_video_hauteur_embed[ (#ENV**{erreurs}|table_valeur{video_hauteur_embed}|oui)erreur]">
+				<label for="video_hauteur_embed"><:mediaspip_player:label_video_hauteur_embed:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{video_hauteur_embed})</span>]
+				<p class="explication"><:mediaspip_player:explication_video_hauteur_embed:></p>
+				<input type="text" name="video_hauteur_embed" class="text" id="video_hauteur_embed" value="#ENV{video_hauteur_embed}" size="4" maxlength="4" />
+			</li>
+			<li class="editer editer_infos_embed[ (#ENV**{erreurs}|table_valeur{infos_embed}|oui)erreur]">
+				<label for="infos_embed"><:mediaspip_player:label_infos_embed:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{infos_embed})</span>]
+				<p class="explication"><:mediaspip_player:explication_infos_embed:></p>
+				<input type="checkbox" name="infos_embed" id="infos_embed"[(#ENV{infos_embed}|=={on}|oui)checked="checked"] />
+			</li>]
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

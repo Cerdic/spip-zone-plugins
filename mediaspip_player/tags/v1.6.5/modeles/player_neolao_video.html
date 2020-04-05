@@ -1,0 +1,139 @@
+[(#REM)
+
+	Lecteur Video flv-player de Neolao
+	
+	Documentation:
+	- player_flv_js.swf -> http://flv-player.net/players/js/documentation/
+	- player_flv_multi.swf -> http://flv-player.net/players/multi/documentation/
+	- player_flv_maxi.swf -> http://flv-player.net/players/maxi/documentation/
+	- player_flv.swf -> http://flv-player.net/players/normal/documentation/
+	- player_flv_mini.swf -> http://flv-player.net/players/mini/documentation/
+	
+	Options :
+	
+	- type (propre à SPIP) null|maxi|mini|multi|js
+	- largeur int : la taille du lecteur en largeur
+	- hauteur int : la taille du lecteur en hauteur (si elle est définie dans la base pour le document, on essaiera de garder les mêmes proportions)
+	
+	Les boutons
+	- showstop 0|1 : Affiche ou pas le bouton stop
+	- showvolume 0|1 : Affiche ou pas le slider de volume
+	- showtime 0|1 : Affiche ou pas le compteur de temps
+	- showfullscreen 0|1 : Affiche ou pas le bouton pour passer en plein écran
+	
+	Les couleurs
+	- bgcolor
+	- bgcolor1
+	- bgcolor2
+	- playercolor
+	- loadingcolor
+	- buttoncolor
+	- buttonovercolor
+	- slidercolor1
+	- slidercolor2
+	- sliderovercolor
+	- buffercolor
+	- bufferbgcolor
+	- titlecolor
+	
+	Autres options
+	- playertimeout int : le temps en millisecondes avant que la barre ne se cache
+	- playeralpha int (0-100) : la transparence de la barre
+	- buffer int : le temps en seconde de buffer nécessaire avant lecture
+	- buffermessage : le texte du message du buffer
+	- buffershowbg 0|1 : afficher le background du message de buffer
+	- titlesize int : la taille de police du titre
+	
+	
+]<BOUCLE_doc (DOCUMENTS) {id_document}>
+[(#SET{type,maxi})]
+[(#GET{type}|in_array{#LISTE{maxi,mini,js}}|non)#SET{type,maxi}]
+
+[(#REM)
+	Taille de la video
+]#SET{largeur,#ENV{largeur,#CONFIG{mediaspip_player/embed_video_largeur,#LARGEUR|sinon{400}}}}
+[(#HAUTEUR|>{0}|et{[(#LARGEUR|>{0})]}|oui)
+	#SET{ratio,#GET{largeur}|div{#LARGEUR}}
+	#SET{hauteur,#HAUTEUR|mult{#GET{ratio}}|floor}
+]
+[(#HAUTEUR|>{0}|et{#LARGEUR|>{0}}|non)
+	#SET{hauteur,#ENV{hauteur,#CONFIG{mediaspip_player/embed_video_hauteur,#HAUTEUR|sinon{300}}}}]
+
+[(#SET{flashvars,flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#GET{largeur})]&amp;height=[(#GET{hauteur})]})]
+
+[(#REM)
+	Affichage des boutons
+]
+#SET{showstop,#ENV{showstop,#CONFIG{lecteur_multimedia/neolao_video_showstop,1}}}
+[(#GET{showstop}|=={1}|oui)#SET{flashvars,#GET{flashvars}&amp;showstop=#GET{showstop}}]
+#SET{showvolume,#ENV{showvolume,#CONFIG{lecteur_multimedia/neolao_video_showvolume,0}}}
+[(#GET{showvolume}|=={1}|oui)#SET{flashvars,#GET{flashvars}&amp;showvolume=#GET{showvolume}}]
+#SET{showtime,#ENV{showtime,#CONFIG{lecteur_multimedia/neolao_video_showtime,0}}}
+[(#GET{showtime}|=={1}|oui)#SET{flashvars,#GET{flashvars}&amp;showtime=#GET{showtime}}]
+#SET{showfullscreen,#ENV{showfullscreen,#CONFIG{lecteur_multimedia/neolao_video_showfullscreen,1}}}
+[(#GET{showfullscreen}|=={1}|oui)#SET{flashvars,#GET{flashvars}&amp;showfullscreen=#GET{showfullscreen}}]
+#SET{showplayer,#ENV{showplayer,#CONFIG{lecteur_multimedia/neolao_video_showplayer,autohide}}}
+#SET{flashvars,#GET{flashvars}&amp;showplayer=#GET{showplayer}}
+#SET{showloading,#ENV{showloading,#CONFIG{lecteur_multimedia/neolao_video_showloading,autohide}}}
+#SET{flashvars,#GET{flashvars}&amp;showloading=#GET{showloading}}
+
+[(#REM)
+	Les couleurs
+]
+#SET{bgcolor,#ENV{bgcolor,#CONFIG{lecteur_multimedia/neolao_video_bgcolor}|sinon{#ffffff}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;bgcolor=#GET{bgcolor}}
+#SET{bgcolor1,#ENV{bgcolor1,#CONFIG{lecteur_multimedia/neolao_video_bgcolor1}|sinon{#ffffff}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;bgcolor1=#GET{bgcolor1}}
+#SET{bgcolor2,#ENV{bgcolor2,#CONFIG{lecteur_multimedia/neolao_video_bgcolor2}|sinon{#cccccc}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;bgcolor2=#GET{bgcolor2}}
+#SET{playercolor,#ENV{playercolor,#CONFIG{lecteur_multimedia/neolao_video_playercolor}|sinon{#000000}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;playercolor=#GET{playercolor}}
+#SET{loadingcolor,#ENV{loadingcolor,#CONFIG{lecteur_multimedia/neolao_video_loadingcolor}|sinon{#ffff00}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;loadingcolor=#GET{loadingcolor}}
+#SET{buttoncolor,#ENV{buttoncolor,#CONFIG{lecteur_multimedia/neolao_video_buttoncolor}|sinon{#ffffff}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;buttoncolor=#GET{buttoncolor}}
+#SET{buttonovercolor,#ENV{buttonovercolor,#CONFIG{lecteur_multimedia/neolao_video_buttonovercolor}|sinon{#ffff00}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;buttonovercolor=#GET{buttonovercolor}}
+#SET{slidercolor1,#ENV{slidercolor1,#CONFIG{lecteur_multimedia/neolao_video_slidercolor1}|sinon{#cccccc}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;slidercolor1=#GET{slidercolor1}}
+#SET{slidercolor2,#ENV{slidercolor2,#CONFIG{lecteur_multimedia/neolao_video_slidercolor2}|sinon{#888888}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;slidercolor2=#GET{slidercolor2}}
+#SET{sliderovercolor,#ENV{sliderovercolor,#CONFIG{lecteur_multimedia/neolao_video_sliderovercolor}|sinon{#ffff00}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;sliderovercolor=#GET{sliderovercolor}}
+#SET{buffercolor,#ENV{buffercolor,#CONFIG{lecteur_multimedia/neolao_video_buffercolor}|sinon{#ffffff}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;buffercolor=#GET{buffercolor}}
+#SET{bufferbgcolor,#ENV{bufferbgcolor,#CONFIG{lecteur_multimedia/neolao_video_bufferbgcolor}|sinon{#000000}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;bufferbgcolor=#GET{bufferbgcolor}}
+#SET{titlecolor,#ENV{titlecolor,#CONFIG{lecteur_multimedia/neolao_video_titlecolor}|sinon{#ffffff}|replace{#,''}}}
+#SET{flashvars,#GET{flashvars}&amp;titlecolor=#GET{titlecolor}}
+
+[(#REM)
+
+	Autres options
+	
+]
+#SET{playertimeout,#ENV{playertimeout,#CONFIG{lecteur_multimedia/neolao_video_playertimeout}}}
+[(#GET{playertimeout}|>{1}|oui)#SET{flashvars,#GET{flashvars}&amp;playertimeout=#GET{playertimeout}}]
+#SET{playeralpha,#ENV{playeralpha,#CONFIG{lecteur_multimedia/neolao_video_playeralpha}}}
+[(#GET{playeralpha}|>{1}|oui)#SET{flashvars,#GET{flashvars}&amp;playeralpha=#GET{playeralpha}}]
+#SET{buffer,#ENV{buffer,#CONFIG{lecteur_multimedia/neolao_video_buffer,5}}}
+[(#GET{buffer}|>{1}|oui)#SET{flashvars,#GET{flashvars}&amp;buffer=#GET{buffer}}]
+#SET{buffermessage,#ENV{buffermessage,#CONFIG{lecteur_multimedia/neolao_video_buffermessage}}}
+[(#GET{buffermessage}|strlen|>{1}|oui)#SET{flashvars,#GET{flashvars}&amp;buffermessage=#GET{buffermessage}}]
+#SET{buffershowbg,#ENV{buffershowbg,#CONFIG{lecteur_multimedia/neolao_video_buffershowbg,1}}}
+#SET{flashvars,#GET{flashvars}&amp;buffershowbg=#GET{buffershowbg}}
+#SET{titlesize,#ENV{titlesize,#CONFIG{lecteur_multimedia/neolao_video_titlesize,12}}}
+[(#GET{titlesize}|>{7}|oui)#SET{flashvars,#GET{flashvars}&amp;titlesize=#GET{titlesize}}]
+<div style="[width:(#GET{largeur,400})px;][height:(#GET{hauteur,300})px]">
+<object type="application/x-shockwave-flash" data="[(#CHEMIN{flash/player_flv[_(#GET{type})].swf}|url_absolue)]" width="[(#GET{largeur,400})]" height="[(#GET{hauteur,300})]">
+	<param name="movie" value="[(#CHEMIN{flash/player_flv[_(#GET{type})].swf}|url_absolue)]" />
+	<param
+		name="FlashVars"
+ 		value="#GET{flashvars}[&amp;title=(#TITRE|urlencode)][(#LOGO_DOCUMENT|extraire_attribut{src}|match{flv.png$}|non)[&amp;startimage=(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)]]&amp;ondoubleclick=fullscreen&amp;autoplay=#ENV{autoplay,#ENV{autostart,0}}[&amp;srturl=(#ENV{srturl})]" />
+<param name="wmode" value="transparent" />
+<param name="allowFullScreen" value="true" />[
+<strong>(#TITRE)</strong>][
+<span><a href="(#URL_DOCUMENT|url_absolue)" rel="enclosure">[(#URL_DOCUMENT|url_absolue)]</a></span>]
+</object>
+</div>
+</BOUCLE_doc>

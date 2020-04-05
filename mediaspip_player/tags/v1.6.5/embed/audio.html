@@ -1,0 +1,47 @@
+<BOUCLE_document(DOCUMENTS){id_document}>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+    <title>[(#TITRE|sinon{#FICHIER|basename})] - #NOM_SITE_SPIP</title>
+    <base target="_parent" />
+    <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+    <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+    [<link rel="stylesheet" href="(#CHEMIN{css/embed_code.css})">]
+</head>
+<B_document_lisible>
+<body id="document_#ID_DOCUMENT" class="document embed_document embed_document_#MEDIA document_full" dir="#LANG_DIR">
+<BOUCLE_document_lisible(DOCUMENTS){objet=document}{id_objet=#ID_DOCUMENT}{extension=mp3}{mode=conversion}{0,1}>
+<div id="player">
+	<div class="player-container">
+		[(#MODELE{player_flowplayer_audio,id_document,largeur=#ENV{largeur,100%},hauteur=#ENV{hauteur,100%},env})]
+	</div>
+</div>
+</BOUCLE_document_lisible>
+</body>
+</B_document_lisible>
+[(#EXTENSION|=={mp3}|oui)
+<body id="document_#ID_DOCUMENT" class="document embed_document embed_document_#MEDIA document_full" dir="#LANG_DIR">
+	<div id="player">
+		<div class="player-container">
+			[(#MODELE{player_flowplayer_audio,id_document,largeur=#ENV{largeur,100%},hauteur=#ENV{hauteur,100%},env})]
+		</div>
+	</div>
+</body>]
+[(#EXTENSION|=={mp3}|non)
+<body id="document_#ID_DOCUMENT" class="document embed_document embed_document_#MEDIA" dir="#LANG_DIR">
+<div class="infos_document">
+	<div class="error">
+		<p>
+			<:mediaspip_player:message_player_impossible:>
+		</p>
+	</div>
+	[<div class="logo">(#LOGO_DOCUMENT|image_reduire{100,100})</div>]
+	<div class="titre"><h1>[(#TITRE|sinon{[(#FICHIER|basename)]})]</h1></div>
+	[<div class="texte">(#DESCRIPTION)</div>]
+	[<div class="credits">(#CREDITS)</div>]
+</div>
+</body>]
+<//B_document_lisible>
+</html>
+</BOUCLE_document>
+#FILTRE{trim}

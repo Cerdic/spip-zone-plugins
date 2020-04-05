@@ -1,0 +1,28 @@
+<BOUCLE_doc(DOCUMENTS){id_document}>
+<BOUCLE_vignette(DOCUMENTS){id_document=#ID_VIGNETTE}>
+#SET{largeur_vignette,#LARGEUR}
+#SET{hauteur_vignette,#LARGEUR}
+</BOUCLE_vignette>
+#SET{largeur,#ENV{largeur,#CONFIG{mediaspip_player/embed_audio_largeur,#LARGEUR|>{0}|?{#LARGEUR,#GET{largeur_vignette,400}}}}}
+[(#GET{largeur}|match{%}|non)
+[(#HAUTEUR|>{0}|et{[(#LARGEUR|>{0})]}|oui)
+	#SET{ratio,#GET{largeur}|div{#LARGEUR}}
+	#SET{hauteur,#HAUTEUR|mult{#GET{ratio}}|floor}
+]
+[(#HAUTEUR|>{0}|et{#LARGEUR|>{0}}|non)
+	#SET{hauteur,#ENV{hauteur,#CONFIG{mediaspip_player/embed_video_hauteur,#HAUTEUR|sinon{#GET{hauteur_vignette,300}}}}}]
+
+[(#GET{hauteur}|=={0}|oui)
+	#SET{hauteur,#GET{largeur}|div{4}|mult{3}|floor}
+]]
+<div style="width:[(#GET{largeur,400px})];height:[(#GET{hauteur,#ENV{hauteur,300px}})]">
+<object type="application/x-shockwave-flash" data="[(#CHEMIN{flash/flowplayer.swf}|url_absolue|parametre_url{config,[(#URL_PAGE{flowplayer_embed.js}|parametre_url{id_document,#ID_DOCUMENT,&}|url_absolue)]})]" width="[(#GET{largeur,400})]" height="[(#GET{hauteur,#ENV{hauteur,300}})]">
+	<param name="movie" value="[(#CHEMIN{flash/flowplayer.swf}|url_absolue|parametre_url{config,[(#URL_PAGE{flowplayer_embed.js}|parametre_url{id_document,#ID_DOCUMENT,&}|url_absolue)]})]" />
+	<param name="wmode" value="transparent" />
+	<param name="allowFullScreen" value="true" />[
+<strong>(#TITRE)</strong>][
+<span><a href="(#URL_DOCUMENT|url_absolue)" rel="enclosure">[(#URL_DOCUMENT|url_absolue)]</a></span>]
+</object>
+</div>
+</BOUCLE_doc>
+#FILTRE{trim}

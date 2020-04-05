@@ -1,0 +1,10 @@
+[(#ENV{ajouter_conversion_#OBJET_#ID_OBJET,[(#VAL{ajouter_conversion_#OBJET_#ID_OBJET}|_request)]}|=={oui}|oui)
+<div class='nettoyeur'></div>
+<a href='[(#SELF|parametre_url{ajouter_conversion_#OBJET_#ID_OBJET,non})]' class='ajax bouton_fermer'>[(#CHEMIN_IMAGE{fermer-16.png}|balise_img)]</a>
+<div class="ajax">
+	#FORMULAIRE_JOINDRE_DOCUMENT{new,#ENV{id_objet,0},#ENV{objet,''},'conversion'}
+</div>
+<div class='nettoyeur'></div>
+]
+[(#ENV{ajouter_conversion_#OBJET_#ID_OBJET,[(#VAL{ajouter_conversion_#OBJET_#ID_OBJET}|_request)]}|=={oui}|non)
+[(#SELF|parametre_url{ajouter_conversion_#OBJET_#ID_OBJET,oui}|icone{<:mediaspip_player:bouton_ajouter_conversion:>,document-24.png,#LANG_RIGHT,new,ajax})]]
