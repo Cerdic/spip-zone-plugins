@@ -1,0 +1,18 @@
+<paquet
+	prefix="macros"
+	categorie="outil"
+	version="1.0.3"
+	etat="stable"
+	compatibilite="[3.0.11;3.2.*]"
+	documentation="https://github.com/bystrano/macros"
+	logo="prive/themes/images/macros-24.gif"
+>
+
+	<nom>Macros</nom>
+
+	<auteur>Michel Bystranowski</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+</paquet>
