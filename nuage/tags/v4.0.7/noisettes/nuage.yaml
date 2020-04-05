@@ -1,0 +1,31 @@
+nom: '<:nuage:noisette_nom_noisette:>'
+description: '<:nuage:noisette_description:>'
+icon: 'images/nuage-24.png'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'nuage_afficher_titre_noisette'
+      label: '<:nuage:noisette_label_afficher_titre:>'
+      defaut: 'on'
+  -
+    saisie: 'input'
+    options:
+      nom: 'nuage_titre_noisette'
+      label: '<:nuage:noisette_titre_noisette:>'
+      defaut: '<:nuage:noisette_titre_defaut:>'
+      afficher_si: '@nuage_afficher_titre_noisette@ == "on"'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'nuage_niveau_titre'
+      label: '<:nuage:noisette_label_niveau_titre:>'
+      defaut: 'h2'
+      cacher_option_intro: 'oui'
+      datas:
+        h1: 'h1'
+        h2: 'h2'
+        h3: 'h3'
+      afficher_si: '@nuage_afficher_titre_noisette@ == "on"'
+contexte:
+  - 'aucun'
