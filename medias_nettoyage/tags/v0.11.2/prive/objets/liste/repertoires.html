@@ -1,0 +1,36 @@
+[(#SET{spip_version,[(#SPIP_VERSION|intval)]})]
+
+<B_repertoires>
+[(#ANCRE_PAGINATION)]
+<div class="galerie medias repertoires">
+	[<h3>(#ENV{titre})</h3>]
+
+	<table class="spip liste">
+		[<caption>(#GRAND_TOTAL|singulier_ou_pluriel{medias_nettoyage:un_repertoire,medias_nettoyage:des_repertoires})</caption>]
+		<thead>
+			<tr class="first_row">
+				<th class="nom"><:medias_nettoyage:info_nom:> </th>
+				<th class="date secondaire"><:date:></th>
+				<th class="bdd"><:medias_nettoyage:en_bdd:></th>
+			</tr>
+		</thead>
+		<tbody>
+			<BOUCLE_repertoires (DATA) {source table, #ENV{repertoires,#ARRAY}} {par valeur} {pagination #ENV{nb,10}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
+				<td class="nom">#VALEUR</td>
+				<td class="date secondaire">[(#VAL{Y-m-d h:i:s}|date{#VALEUR|filemtime}|affdate)]</td>
+				<td>
+					<BOUCLE_en_bdd (DOCUMENTS) {extension=(#VALEUR|set_spip_doc)} {0,1}><:medias_nettoyage:oui:></BOUCLE_en_bdd></B_en_bdd>
+					<BOUCLE_distant (DOCUMENTS) {si [(#VALEUR|set_spip_doc|=={'distant'})]} {distant='oui'} {0,1}><:medias_nettoyage:oui:></BOUCLE_distant></B_distant><:medias_nettoyage:non:><//B_distant>
+					<//B_en_bdd>
+				</td>
+			</tr>
+			</BOUCLE_repertoires>
+		</tbody>
+	</table>
+	[<div class="pagination">(#PAGINATION{#ENV{pagination,prive}})</div>]
+</div>
+</B_repertoires>[
+<div class="liste-objets medias repertoires caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]
+<//B_repertoires>
