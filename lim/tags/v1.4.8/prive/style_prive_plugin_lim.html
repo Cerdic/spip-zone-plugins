@@ -1,0 +1,45 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+[(#REM) Saisies boutons radio sur une ligne ]
+.formulaire_spip .choix.ligne > label {margin-left:0px; margin-right:30px;}
+
+.formulaire_spip legend 	{margin-bottom:10px; letter-spacing:1px; background-color:[#(#ENV{foncee}|couleur_eclaircir)]}
+.formulaire_spip li.li_long { padding-left: 10px; padding-right: 10px; }
+
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+.lim_icon {
+	-webkit-transition: all .9s ease;
+	-moz-transition: 	all .9s ease;
+	-o-transition: 		all .9s ease;
+	transition: 		all .9s ease;
+	font-size:25px; 
+}
+.icon-on { color:[(#ENV{foncee})]; }
+.icon-off { color:#bebebe; }
+.formulaire_configurer_lim_logos .choix label { vertical-align:middle; }
+.center { text-align:center; }
+input[type=checkbox].lim_hidden {display:none; }
+.formulaire_configurer_lim_logos,
+.formulaire_configurer_lim_rubriques .pin				{ position:relative; top:10px; left:10px ;}
+.formulaire_configurer_lim_rubriques .secteur 			{ margin:0px 0 10px 0; padding:10px 5px 5px 5px; border:1px solid #ddd; border-radius:5px; background-color:#fff; }
+.formulaire_configurer_lim_rubriques .sousrub			{ padding-left:15px; margin-bottom:5px; }
+.formulaire_configurer_lim_rubriques .sousrub .sousrub	{ border-left:1px dotted #aaa; }
+
+img.info_logo_site, img.forbidden 	{ vertical-align:middle; }
