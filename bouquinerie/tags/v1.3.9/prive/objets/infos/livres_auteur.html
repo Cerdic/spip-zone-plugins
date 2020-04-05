@@ -1,0 +1,30 @@
+<BOUCLE_livres_auteur(LIVRES_AUTEURS){id_livres_auteur=#ENV{id}}{statut?}>
+<div class="infos">
+[(#SET{texte_objet,<:livres_auteur:titre_livres_auteur:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_LIVRES_AUTEUR</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{livres_auteurs,#ID_LIVRES_AUTEUR})]
+
+<div class='nb_elements'><!--nb_elements--></div>
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(LIVRES_AUTEURS){id_livres_auteur}>
+	[(#VAL{redirect}
+		|generer_url_action{type=livres_auteurs&id=#ID_LIVRES_AUTEUR}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,livres_auteurs,#ID_LIVRES_AUTEUR,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=livres_auteurs&id=#ID_LIVRES_AUTEUR}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_livres_auteur>

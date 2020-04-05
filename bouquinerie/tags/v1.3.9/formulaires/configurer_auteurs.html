@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:bouq:cfg_titre_contenu_auteurs:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div class="editer-groupe">
+			[(#SAISIE{oui_non_ligne, bio, label=<:livres_auteur:champ_bio_label:>, li_class=long_label})]
+			[(#SAISIE{oui_non_ligne, site_auteur, label=<:livres_auteur:info_site_web_livres_auteur:>, li_class=long_label})]
+		</div>
+
+		<input type="hidden" name="_meta_casier" value="bouq/auteurs" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

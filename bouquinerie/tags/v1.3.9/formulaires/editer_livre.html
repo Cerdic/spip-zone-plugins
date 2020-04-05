@@ -1,0 +1,100 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_livre,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_livre" value="#ENV{id_livre}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{input, titre, obligatoire=oui, label=<:livre:champ_titre_label:>})]
+
+			[(#CONFIG{bouq/livres/soustitre}|=={on}|oui)
+				[(#SAISIE{input, soustitre, label=<:livre:champ_soustitre_label:>})]
+			]
+
+			[(#CONFIG{bouq/livres/editeur}|=={on}|oui)
+				[(#SAISIE{input, editeur, label=<:livre:champ_editeur_label:>})]
+			]
+
+			[(#CONFIG{bouq/livres/edition}|=={on}|oui)
+				[(#SAISIE{input, edition, label=<:livre:champ_edition_label:>, explication=ex : 2e édition revue et augmentée})]
+			]
+
+			[(#CONFIG{bouq/livres/traduction}|=={on}|oui)
+				[(#SAISIE{input, traduction, label=<:livre:champ_traduction_label:>, explication=ex : Traduit de l’anglais par})]
+			]
+
+			[<div class="editer editer_parent[ (#ENV**{erreurs/id_parent}|oui)erreur]" style='padding-left: 20px; border-top: solid 1px #ccc;'>
+					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+					<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
+					]
+					(#VAL|chercher_rubrique{#ENV{id_livre},#ENV{id_parent},'livre',#ENV{id_secteur},'',0,form_simple})
+			</div>]
+
+			<div style='margin-bottom:20px; padding-left: 20px; border-bottom: solid 1px #ccc;' >
+				[(#CONFIG{bouq/livres/collection}|=={on}|oui)
+					[(#SAISIE{input, collection, label=<:livre:champ_collection_label:>})]
+				]
+
+				[(#CONFIG{bouq/livres/volume}|=={on}|oui)
+					[(#SAISIE{input, volume, label=<:livre:champ_volume_label:>})]
+				]
+			</div>	
+
+			[(#CONFIG{bouq/livres/texte}|=={on}|oui)
+				[(#SAISIE{textarea, texte, label=<:livre:champ_texte_label:>, conteneur_class=pleine_largeur, rows=16})]
+			]
+			
+			[(#CONFIG{bouq/livres/sommaire}|=={on}|oui)
+				[(#SAISIE{textarea, sommaire, label=<:livre:champ_sommaire_label:>, conteneur_class=pleine_largeur, class=inserer_barre_sommaire inserer_previsualisation, rows=12})]
+			]
+			
+			[(#CONFIG{bouq/livres/extrait}|=={on}|oui)
+				[(#SAISIE{textarea, extrait, label=<:livre:champ_extrait_label:>,   class=inserer_barre_forum inserer_previsualisation, rows=12})]
+			]
+			
+			[(#CONFIG{bouq/livres/infos_sup}|=={on}|oui)
+				[(#SAISIE{input, infos_sup, label=<:livre:champ_infos_sup_label:>})]
+			]
+		</div>
+
+		<fieldset style="border-bottom: solid 1px #ccc;">
+			<legend><:livre:caracteristiques:></legend>
+			<div class="editer-groupe">
+				[(#CONFIG{bouq/livres/isbn}|=={on}|oui)
+					[(#SAISIE{input, isbn, label=<:livre:champ_isbn_label:>})]
+				]
+
+				[(#CONFIG{bouq/livres/pages}|=={on}|oui)
+					[(#SAISIE{input, pages, label=<:livre:champ_pages_label:>})]
+				]
+				
+				[(#CONFIG{bouq/livres/reliure}|=={on}|oui)
+					[(#SAISIE{input, reliure, label=<:livre:champ_reliure_label:>, explication=<:livre:champ_reliure_explication:> })]
+				]
+							
+				[(#CONFIG{bouq/livres/largeur}|=={on}|oui)
+					[(#SAISIE{input, largeur, label=<:livre:champ_largeur_label:>})]
+				]
+							
+				[(#CONFIG{bouq/livres/hauteur}|=={on}|oui)
+					[(#SAISIE{input, hauteur, label=<:livre:champ_hauteur_label:>})]
+				]
+							
+				[(#CONFIG{bouq/livres/poids}|=={on}|oui)
+					[(#SAISIE{input, poids, label=<:livre:champ_poids_label:>, explication=<:livre:champ_poids_explication:> })]
+				]
+				[(#CONFIG{bouq/livres/prix}|=={on}|oui)
+					[(#SAISIE{input, prix, label=<:livre:champ_prix_label:>, explication=<:livre:champ_prix_explication:> })]
+				]
+			</div>
+		</fieldset>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

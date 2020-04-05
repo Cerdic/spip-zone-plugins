@@ -1,0 +1,13 @@
+<BOUCLE_contexte(LIVRES_AUTEURS){id_livres_auteur}>
+	<title>[(#PRENOM) ]#NOM[ - (#NOM_SITE_SPIP|textebrut)]</title>
+	<meta name="description" content="[(#BIO|?{[(#BIO|couper{150}|textebrut)], 'liste des livres publiés aux éditions Arléa'})]" />
+	[<link rel="canonical" href="(#URL_LIVRES_AUTEUR|url_absolue)" />]
+	<meta property="og:title" content="[(#PRENOM) ]#NOM"/>
+	[<meta property="og:image" content="(#LOGO_LIVRES_AUTEUR|fichier|url_absolue)"/>]
+	<meta property="og:url" content="#URL_LIVRES_AUTEUR"/>
+	<meta property="og:site_name" content="#NOM_SITE_SPIP"/>
+	[<meta property="og:description" content="(#BIO)"/>]
+	<meta name="twitter:title" content="#PRENOM #NOM" />
+	[<meta name="twitter:image" content="(#LOGO_LIVRES_AUTEUR|fichier|url_absolue)" />]
+	<meta name="twitter:url" content="#URL_LIVRES_AUTEUR" />
+</BOUCLE_contexte>

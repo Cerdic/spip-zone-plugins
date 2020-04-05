@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'code_128regular';
+    src: url('fonts/code128-webfont.woff2') format('woff2'),
+         url('fonts/code128-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.code_barre { font-family: 'code_128regular'; font-size: 4em; }

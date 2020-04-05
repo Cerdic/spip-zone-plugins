@@ -1,0 +1,12 @@
+[(#AUTORISER{voir,livres_auteur,#ID_LIVRES_AUTEUR}|sinon_interdire_acces)]
+
+<div class="liste">
+	<BOUCLE_objetslies(spip_livres_auteurs_liens){id_livres_auteur}{0,1}><h3><:livres_auteur:titre_objets_lies_livres_auteur:></h3></BOUCLE_objetslies>
+
+	<BOUCLE_listeobjets(spip_livres_auteurs_liens){id_livres_auteur}{fusion objet}{par objet}>
+		#SET{table,#OBJET|table_objet}
+		[(#SET{titre,[#OBJET:info_(#GET{table})_liees_livres_auteur]})]
+		[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_livres_auteur}})]
+		<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_livres_auteur,ajax,env} />
+	</BOUCLE_listeobjets>
+</div>

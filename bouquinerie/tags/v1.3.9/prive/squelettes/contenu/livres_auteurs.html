@@ -1,0 +1,10 @@
+<h1 class="grostitre"><:livres_auteur:titre_livres_auteurs:></h1>
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/livres_auteurs, env, ajax, sinon=<:livres_auteur:info_aucun_livres_auteur:>}>
+
+[(#AUTORISER{creer,livres_auteur})
+	[(#URL_ECRIRE{livres_auteur_edit,new=oui}|icone_verticale{<:livres_auteur:icone_creer_livres_auteur:>,livres_auteur,new,right})]
+]

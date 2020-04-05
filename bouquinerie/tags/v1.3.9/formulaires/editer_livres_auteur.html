@@ -1,0 +1,35 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_livres_auteur,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_livres_auteur" value="#ENV{id_livres_auteur}" />
+		<div class="editer-groupe">
+			[(#SAISIE{input, nom, obligatoire=oui, label=<:livres_auteur:champ_nom_label:>})]
+
+			[(#SAISIE{input, prenom, label=<:livres_auteur:champ_prenom_label:>})]
+
+			[(#CONFIG{bouq/auteurs/bio}|=={on}|oui)
+				[(#SAISIE{textarea, biographie, label=<:livres_auteur:champ_bio_label:>, conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=10})]
+			]
+		</div>
+		
+		[(#CONFIG{bouq/auteurs/site_auteur}|=={on}|oui)
+		<fieldset class='editer_liens_sites fieldset'>
+			<legend><:livres_auteur:info_site_web_livres_auteur:></legend>
+			<div class="editer-groupe">
+			[(#SAISIE{input, lien_titre, label=<:livres_auteur:champ_lien_titre_label:>})]
+
+			[(#SAISIE{input, lien_url, label=<:livres_auteur:champ_lien_url_label:>, placeholder='http://...'})]
+			</div>
+		</fieldset>
+		]
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

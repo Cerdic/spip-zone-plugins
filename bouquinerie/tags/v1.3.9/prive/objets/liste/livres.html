@@ -1,0 +1,40 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date_parution,-1,
+	id_livre,1,
+	points,-1
+}})]<B_liste_livres>
+#ANCRE_PAGINATION
+<div class="liste-objets livres">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{livre:info_1_livre,livre:info_nb_livres}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="titre" scope="col" colspan='2'>[(#TRI{titre,<:livre:champ_titre_label:>,ajax})]</th>
+			<th class='auteur' scope='col'><:livres_auteur:texte_auteur_livre:></th>
+			<th class="date" scope="col">[(#TRI{date_parution,<:livre:texte_date_parution:>,ajax})]</th> 
+			<th class="id" scope="col">[(#TRI{id_livre,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_livres(LIVRES){id_livre?}{id_rubrique?}{id_secteur?}{livres_auteurs_liens.id_livres_auteur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="statut">[(#STATUT|puce_statut{livre,#ID_LIVRE,#ID_RUBRIQUE})]</td> 
+			<td class="titre principale"[(#LOGO_LIVRE_NORMAL|non)colspan='2']><a href="[(#ID_LIVRE|generer_url_entite{livre})]" title="<:info_numero_abbreviation|attribut_html:> #ID_LIVRE">[<span class="surtitre">N°(#VOLUME)</span>][(#RANG). ]#TITRE[<span class="soustitre">(#SOUSTITRE)</span>]</a></td>
+			[<td class='logo'>(#LOGO_LIVRE_NORMAL|image_reduire{90,70})</td>]
+			<td class='auteur'><div class="inner"><BOUCLE_auteurs(LIVRES_AUTEURS spip_livres_auteurs_liens){id_livre}{', '}><a href="[(#ID_LIVRES_AUTEUR|generer_url_entite{livres_auteur})]">#PRENOM #NOM</a></BOUCLE_auteurs></div></td>
+			<td class="date secondaire">[(#DATE_PARUTION|affdate_jourcourt)]</td> 
+			<td class="id">[(#AUTORISER{modifier,livre,#ID_LIVRE}|?{
+				<a href="[(#URL_ECRIRE{livre_edit,id_livre=#ID_LIVRE})]">#ID_LIVRE</a>,
+				#ID_LIVRE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_livres>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_livres>[
+<div class="liste-objets livres caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_livres>

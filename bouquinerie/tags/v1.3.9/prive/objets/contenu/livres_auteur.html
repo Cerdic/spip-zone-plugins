@@ -1,0 +1,11 @@
+<BOUCLE_livres_auteur(LIVRES_AUTEURS){id_livres_auteur}{statut?}>
+
+[<div class="champ contenu_biographie[ (#BIOGRAPHIE*|strlen|?{'',vide})]">
+	<span dir="#LANG_DIR" class="#EDIT{biographie} biographie">(#BIOGRAPHIE)</span>
+</div>]
+
+<div class="champ contenu_nom_site[ (#LIEN_TITRE*|sinon{#LIEN_URL*}|strlen|?{'',vide})]">
+	<label><:livres_auteur:info_site_web_livres_auteur:></label>
+	<div dir='#LANG_DIR' class='#EDIT{hyperlien} nom_site'>[<a href='(#LIEN_URL)'>][(#LIEN_TITRE|sinon{<:info_site:>})][(#LIEN_URL|oui)</a>]</div>
+</div>
+</BOUCLE_livres_auteur>

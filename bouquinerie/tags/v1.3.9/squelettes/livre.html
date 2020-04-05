@@ -1,0 +1,101 @@
+[(#REM)	Compatibilité avec le plugin Zcore
+		Voir aussi : https://contrib.spip.net/Zcore
+]
+	<BOUCLE_principale_zcore(LIVRES){id_livre}{si #PLUGIN{zcore}}>
+	<INCLURE{fond=structure,env,id_rubrique=#ENV{id_rubrique,#ID_RUBRIQUE},id_secteur=#ID_SECTEUR,type-page=livre,composition=#COMPOSITION} />
+	</BOUCLE_principale_zcore>
+
+[(#REM) sinon si le plugin Zcore pas activé, c'est le code de squelette ci-dessous qui est utilisé]
+	<BOUCLE_principale(LIVRES){id_livre}{si #PLUGIN{zcore}|non}>
+	<!DOCTYPE html>
+	<html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js">
+	<head>
+		<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+		<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+		[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+		[<link rel="canonical" href="(#URL_LIVRE|url_absolue)" />]
+		<INCLURE{fond=inclure/head} />
+	</head>
+
+	<body class="pas_surlignable page_livre">
+	<div class="page">
+		<INCLURE{fond=inclure/header} />
+		<INCLURE{fond=inclure/nav,env} />
+		
+		<article class="main">
+			<div class="wrapper hfeed">
+				<div class="content hentry" id="content">
+					<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_titre}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+			
+					<header class="cartouche clearfix">
+						<h1 class="#EDIT{titre} surlignable entry-title">[(#LOGO_LIVRE|image_reduire{150,*}) ]#TITRE</h1>
+						[<h2 class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</h2>]
+						[<div class="#EDIT{editeur} editeur">(#EDITEUR)</div>]
+						<time pubdate>[(#DATE_PARUTION|affdate_mois_annee)][ <span class="sep">((#EDITION))</span>]</time>
+						<div class="auteurs">Auteur(s) : <INCLURE{fond=inclure/auteur_signature, id_livre, role=ecrivain, lien=oui}></div>
+						[(#STATUT|=={refuse}|oui)<b class="h4 txt-rouge">Livre épuisé</b>]
+						<INCLURE{fond=inclure/auteur_signature, id_livre, role=traducteur, lien=oui}>
+						<INCLURE{fond=inclure/auteur_signature, id_livre, role=illustrateur, lien=oui}>
+						<INCLURE{fond=inclure/auteur_signature, id_livre, role=photographe, lien=oui}>
+						<INCLURE{fond=inclure/auteur_signature, id_livre, role=postfacier, lien=oui}>
+						<INCLURE{fond=inclure/auteur_signature, id_livre, role=prefacier, lien=oui}>
+
+						Collection : <b>#INFO_TITRE{rubrique, #ID_RUBRIQUE}</b>
+						[<br>Collection : (#COLLECTION)]
+						[<br>Numéro dans la collection : (#VOLUME)]
+					</header>
+					<main>
+						[<div class="#EDIT{texte} texte surlignable clearfix">(#TEXTE|image_reduire{672,*})</div>]
+						[<div class="#EDIT{sommaire} sommaire surlignable clearfix">(#SOMMAIRE|image_reduire{672,*})</div>]
+						[<hr /><quote class="#EDIT{extrait} extrait surlignable">(#EXTRAIT|image_reduire{672,*})</i></quote>]
+					</main>
+					<footer class="clearfix">
+						
+						[<br>(#PAGES) pages][ - (#PRIX)]
+						[<br>Dimensions : (#LARGEUR) x [(#HAUTEUR)] cm]
+						[<br>(#INFOS_SUP)]
+						[<br>ISBN : (#ISBN) ]
+						[<br>Crédit couverture : (#TITRE_LOGO)]
+						<div class="code">
+							<span class='code_barre'>#ISBN</span>
+						</div>
+					</footer>
+					
+					[(#REM) Gestion du portfolio et des documents ]
+					[(#INCLURE{fond=inclure/documents,id_livre,id_rubrique='',env})]
+					
+					[<div class="notes"><hr />(#NOTES)</div>]
+					
+					[(#REM) Forum du livre ]
+					<INCLURE{fond=inclure/forum,id_livre} />
+					[<h2 class="forum-titre"><:forum:form_pet_message_commentaire:></h2>
+					(#FORMULAIRE_FORUM)]
+			
+				</div><!--.content-->
+			</div><!--.wrapper-->
+
+			<div class="aside">
+				<INCLURE{fond=inclure/navsub, id_rubrique} />
+				#FORMULAIRE_RECHERCHE
+		
+				[(#REM) Livres dans la meme rubrique ] 
+				<B_livres_rubrique>
+				<div class="menu">
+					<h2><:meme_rubrique:></h2>
+					<ul>
+						<BOUCLE_livres_rubrique(LIVRES){exclus} {id_rubrique} {!par date} {0,10}>
+						<li><a href="#URL_LIVRE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+						</BOUCLE_livres_rubrique>
+					</ul>
+				</div>
+				</B_livres_rubrique>
+				
+			</div><!--.aside-->
+		</article><!--.main-->
+
+		<INCLURE{fond=inclure/footer,self=#SELF} />
+
+	</div><!--.page-->
+	</body>
+	</html>
+	</BOUCLE_principale>

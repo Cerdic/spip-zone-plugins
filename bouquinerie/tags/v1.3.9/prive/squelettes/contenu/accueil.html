@@ -1,0 +1,35 @@
+<h1 class="none"><:icone_accueil:></h1>
+
+[(#REM)
+
+	Les livres recents
+
+]
+<INCLURE{fond=prive/objets/liste/livres,titre=<:livre:texte_livres_recents:>,statut=publie,par=date_parution,nb=5,env,ajax} />
+
+
+[(#REM)
+
+	Vos livres en cours
+
+]
+[(#SET{titre,#URL_ECRIRE{articles,id_auteur=#SESSION{id_auteur}}|afficher_plus_info|concat{<:info_en_cours_validation:>}})]
+<INCLURE{fond=prive/objets/liste/livres,titre=#GET{titre},statut=prepa,id_auteur=#SESSION{id_auteur},par=date_parution,env,ajax} />
+
+[(#REM)
+
+	En cours de validation
+
+][
+	[(#BOITE_OUVRIR{<:texte_en_cours_validation:>,'basic highlight'})]
+	(#PIPELINE{accueil_encours,#INCLURE{fond=prive/objets/liste/livres,titre=<:livre:info_livres_proposes:>,statut=prop,id_rubrique,par=date_parution,ajax,env}})
+
+	[(#VAL{a_suivre}|bouton_spip_rss)]
+
+	#BOITE_FERMER
+]
+
+
+[(#REM|afficher_enfant_rub|image_reduire{245,0})
+<div class='nettoyeur'></div>
+]

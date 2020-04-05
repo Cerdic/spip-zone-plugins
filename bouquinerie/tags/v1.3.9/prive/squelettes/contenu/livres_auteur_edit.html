@@ -1,0 +1,36 @@
+[(#ID_LIVRES_AUTEUR|oui)
+	[(#AUTORISER{modifier,livres_auteur,#ID_LIVRES_AUTEUR}|sinon_interdire_acces)]
+	[(#SET{id_parent,#INFO_ID_RUBRIQUE{livres_auteur,#ID_LIVRES_AUTEUR}})]
+]
+
+
+[(#ID_LIVRES_AUTEUR|non)
+	[(#AUTORISER{creer,livres_auteur}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ID_LIVRES_AUTEUR|?{#ID_LIVRES_AUTEUR|generer_url_entite{livres_auteur},#URL_ECRIRE{livres_auteurs}}}}
+
+
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_LIVRES_AUTEUR|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,livres_auteur,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_LIVRES_AUTEUR|?{<:livres_auteur:icone_modifier_livres_auteur:>,<:livres_auteur:icone_creer_livres_auteur:>})]
+		<h1>(#ENV{titre,#INFO_NOM{livres_auteur,#ID_LIVRES_AUTEUR}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_LIVRES_AUTEUR|generer_url_entite{livres_auteur}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_LIVRES_AUTEUR{#ENV{id_livres_auteur,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

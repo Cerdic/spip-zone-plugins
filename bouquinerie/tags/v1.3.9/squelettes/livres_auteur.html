@@ -1,0 +1,72 @@
+[(#REM)	Compatibilité avec le plugin Zcore : si activé on utilise la boucle ci-dessous
+		Voir aussi : https://contrib.spip.net/Zcore
+]
+	<BOUCLE_principale_zcore(LIVRES_AUTEURS){id_livres_auteur}{tous}{si #PLUGIN{zcore}}>
+	<INCLURE{fond=structure, env, type-page=livres_auteur,composition=#COMPOSITION} />
+	</BOUCLE_principale_zcore>
+
+[(#REM) sinon si le plugin Zcore pas activé, c'est le code de squelette ci-dessous qui est utilisé]
+	<BOUCLE_principale(LIVRES_AUTEURS){id_livres_auteur}{si #PLUGIN{zcore}|non}>
+	<!DOCTYPE html PUBLIC>
+	<html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js">
+	<head>
+		<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+		<title>[(#PRENOM|textebrut) ][(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+		<INCLURE{fond=inclure/head}>
+	</head>
+
+	<body class="pas_surlignable page_auteur_livre">
+	<div class="page">
+
+		<INCLURE{fond=inclure/header} />
+		<INCLURE{fond=inclure/nav,env} />
+
+		<div class="main">
+			[(#REM) Contenu principal : affichage de l'auteur ]
+			<div class="wrapper">
+				<div class="content" id="content">
+					<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; <strong class="on">#PRENOM (#NOM)</strong>]</p>
+			
+					<div class="vcard">[(#REM) microformat vcard]
+					<div class="cartouche">
+						[(#LOGO_AUTEUR_LIVRE|image_reduire{224,*})]
+						<h1 class="#EDIT{qui} fn">#PRENOM #NOM</h1>
+					</div>
+			
+					[<div class="#EDIT{biographie} texte note">(#BIOGRAPHIE)</div>]
+					[<p class="#EDIT{lien_titre} hyperlien"><:voir_en_ligne:> : <a href="(#LIEN_URL)" class="url org spip_out">[(#LIEN_TITRE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+					</div>
+			
+					[<div class="notes"><hr />(#NOTES)</div>]
+			
+				</div><!--.content-->
+			</div><!--.wrapper-->
+		
+			<div class="aside">
+		
+				<INCLURE{fond=inclure/navsub} />
+				#FORMULAIRE_RECHERCHE
+
+				[(#REM) Livres de l'auteur ]
+				<B_livres>
+				<div class="menu">
+					#ANCRE_PAGINATION
+					<h2>Livres de cet auteur (#GRAND_TOTAL)</h2>
+					<ul>
+						<BOUCLE_livres(LIVRES spip_livres_auteurs_liens){id_livres_auteur}{exclus}{role=ecrivain}{par titre,id_rubrique}{pagination}>
+						<li><a href="#URL_LIVRE">#TITRE</a></li>
+						</BOUCLE_livres>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</div>
+				</B_livres>
+		
+			</div><!--.aside-->
+		</div><!--.main-->
+
+		<INCLURE{fond=inclure/footer,self=#SELF} />
+
+	</div><!--.page-->
+	</body>
+	</html>
+	</BOUCLE_principale>

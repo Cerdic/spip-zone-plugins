@@ -1,0 +1,84 @@
+<BOUCLE_livre(LIVRES){id_livre}{statut?}>
+
+[<div class="champ contenu_editeur[ (#EDITEUR*|strlen|?{'',vide})]">
+	<label><:livre:champ_editeur_label:> : </label>
+	<b dir="#LANG_DIR" class="#EDIT{editeur} editeur">(#EDITEUR)</b>
+</div>]
+
+[<div class="champ contenu_edition[ (#EDITION*|strlen|?{'',vide})]">
+	<label><:livre:champ_edition_label:> : </label>
+	<b dir="#LANG_DIR" class="#EDIT{edition} edition">(#EDITION)</b>
+</div>]
+
+[<div class="champ contenu_traduction[ (#TRADUCTION*|strlen|?{'',vide})]">
+	<label><:livre:champ_traduction_label:> : </label>
+	<b dir="#LANG_DIR" class="#EDIT{traduction} traduction">(#TRADUCTION*)</b>
+</div>]
+
+[<div class="champ contenu_texte contenu_descriptif[ (#TEXTE*|strlen|?{'',vide})]">
+	<h2><:livre:champ_texte_label:></h2>
+	<span dir="#LANG_DIR" class="#EDIT{texte} texte">(#TEXTE)</span>
+</div>]
+
+[<div class="champ contenu_sommaire [ (#SOMMAIRE*|strlen|?{'',vide})]">
+	<h2><:livre:champ_sommaire_label:></h2>
+	<span dir="#LANG_DIR" class="#EDIT{sommaire} sommaire">(#SOMMAIRE)</span>
+</div>]
+
+[<div class="champ contenu_extrait contenu_descriptif[ (#EXTRAIT*|strlen|?{'',vide})]">
+	<label class='label'><:livre:champ_extrait_label:> : </label>
+	<i dir="#LANG_DIR" class="#EDIT{extrait} extrait">(#EXTRAIT)</i>
+</div>]
+
+[<div class="champ contenu_infos_sup[ (#INFOS_SUP*|strlen|?{'',vide})]">
+	<label><:livre:champ_infos_sup_label:> : </label>
+	<b dir="#LANG_DIR" class="#EDIT{infos_sup} infos_sup">(#INFOS_SUP)</b>
+</div>]
+
+<div style="background-color:#eee; margin:10px 0; padding:10px;">
+
+	[<div class="champ contenu_isbn[ (#ISBN*|strlen|?{'',vide})]">
+		<label><:livre:champ_isbn_label:> : </label>
+		<b dir="#LANG_DIR" class="#EDIT{isbn} isbn">(#ISBN)</b>
+	</div>]
+
+	[<div class="champ contenu_pages[ (#PAGES*|strlen|?{'',vide})]">
+		<label><:livre:champ_pages_label:> : </label>
+		<b dir="#LANG_DIR" class="#EDIT{pages} pages">(#PAGES)</b>
+	</div>]
+
+	[<div class="champ contenu_reliure[ (#RELIURE*|strlen|?{'',vide})]">
+		<label><:livre:champ_reliure_label:> : </label>
+		<b dir="#LANG_DIR" class="#EDIT{reliure} reliure">(#RELIURE)</b>
+	</div>]
+
+	[(#CONFIG{bouq/livres/largeur}|=={on}|oui)
+		[<div class="champ contenu_largeur[ (#LARGEUR*|strlen|?{'',vide})]">
+			<label><:livre:champ_largeur_label:> : </label>
+			<b dir="#LANG_DIR" class="#EDIT{largeur} largeur">(#LARGEUR)</b>
+		</div>]
+	]
+
+	[(#CONFIG{bouq/livres/hauteur}|=={on}|oui)
+		[<div class="champ contenu_hauteur[ (#HAUTEUR*|strlen|?{'',vide})]">
+			<label><:livre:champ_hauteur_label:> : </label>
+			<b dir="#LANG_DIR" class="#EDIT{hauteur} hauteur">(#HAUTEUR)</b>
+		</div>]
+	]
+
+	[(#CONFIG{bouq/livres/poids}|=={on}|oui)
+		[<div class="champ contenu_poids">
+			<label><:livre:champ_poids_label:> : </label>
+			<b dir="#LANG_DIR" class="#EDIT{poids} poids">(#POIDS) g</b>
+		</div>]
+	]
+
+	[(#CONFIG{bouq/livres/prix}|=={on}|oui)
+		[<div class="champ contenu_prix[ (#PRIX*|strlen|?{'',vide})]">
+			<label><:livre:champ_prix_label:> : </label>
+			<b dir="#LANG_DIR" class="#EDIT{prix} prix">(#PRIX|floatval) €</b>
+		</div>]
+	]
+</div>
+
+</BOUCLE_livre>
