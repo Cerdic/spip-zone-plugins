@@ -1,0 +1,118 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=crayons -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+
+<h3 class='titrem'>[(#CHEMIN{images/crayon-24.png}|image_reduire{24}|inserer_attribut{class,cadre-icone}|inserer_attribut{alt,''})]<:crayons:titre_config_crayons:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+#SET{erreurs,#ENV**{erreurs}|table_valeur{barretypo}}
+<li class="editer editer_barretypo[ (#GET{erreurs}|oui)erreur]">
+	<label for="barretypo"><:crayons:label_barre_typo:></label>
+	[<span class='erreur_message'>(#GET{erreurs})</span>]
+	<div class="choix">
+		<input type="checkbox" name="barretypo" class="checkbox"  value='on' id='barretypo'[ (#ENV{barretypo}|oui)checked="checked"] />
+		<label for='barretypo'><:crayons:label_activer_barre_typo:></label>
+		[(#PLUGIN{porte_plume,version}|version_compare{'1.5','>='}|oui)
+			[<p class="attention">
+				(#VAL{PORTE_PLUME_PUBLIC}|defined|et{#VAL{PORTE_PLUME_PUBLIC}|constant}
+					|ou{#CONFIG{barre_outils_public}|=={non}})
+					<:crayons:activation_barre_impossible:>
+			</p>]
+		]
+	</div>
+</li>
+
+#SET{erreurs,#ENV**{erreurs}|table_valeur{msgNoChange}}
+<li class="editer editer_messages[ (#GET{erreurs}|oui)erreur]">
+	<label><:crayons:label_message:></label>
+	[<span class='erreur_message'>(#GET{erreurs})</span>]
+	<div class="choix">
+		<input type="checkbox" name="msgNoChange" class="checkbox" value='on' id='msgNoChange'[ (#ENV{msgNoChange}|oui)checked="checked"] />
+		<label for='msgNoChange'><:crayons:label_msg_no_change:></label>
+	</div>
+	<div class="choix">
+		<input type="checkbox" name="msgAbandon" class="checkbox" value='on' id='msgAbandon'[ (#ENV{msgAbandon}|oui)checked="checked"] />
+		<label for='msgAbandon'><:crayons:label_msg_abandon:></label>
+	</div>
+</li>
+
+#SET{erreurs,#ENV**{erreurs}|table_valeur{filet}}
+<li class="editer editer_effets[ (#GET{erreurs}|oui)erreur]">
+	<label><:crayons:label_effets:></label>
+	[<span class='erreur_message'>(#GET{erreurs})</span>]
+	<div class="choix">
+		<input type="checkbox" name="filet" class="checkbox" value='on' id='filet'[ (#ENV{filet}|oui)checked="checked"] />
+		<label for='filet'><:crayons:label_filet:></label>
+	</div>
+	<div class="choix">
+		<input type="checkbox" name="yellow_fade" class="checkbox" value='on' id='yellow_fade'[ (#ENV{yellow_fade}|oui)checked="checked"] />
+		<label for='yellow_fade'><:crayons:label_yellow_fade:></label>
+	</div>
+	<div class="choix">
+		<input type="checkbox" name="clickhide" class="checkbox" value='on' id='clickhide'[ (#ENV{clickhide}|oui)checked="checked"] />
+		<label for='clickhide'><:crayons:label_clickhide:></label>
+	</div>
+</li>
+
+
+#SET{erreurs,#ENV**{erreurs}|table_valeur{reduire_logo}}
+<li class="editer editer_reduire_logo[ (#GET{erreurs}|oui)erreur]">
+	<label><:crayons:label_reduire_logo:></label>
+	[<span class='erreur_message'>(#GET{erreurs})</span>]
+	<p class='explication'><:crayons:explication_reduire_logo:></p>
+	<input type="text" name="reduire_logo" class="text" size="3" id='reduire_logo' value="[(#ENV{reduire_logo}|intval)]" />
+</li>
+
+<li class="fieldset fieldset_crayons_prive">
+	<h3 class="legend"><:crayons:legend_editer_prive:></h3>
+	<ul>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{espaceprive}}
+		<li class="editer editer_reduire_logo[ (#GET{erreurs}|oui)erreur]">
+			<label><:crayons:label_espaceprive:></label>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<div class="choix">
+				<input type="checkbox" name="espaceprive" class="checkbox"  value='on' id='espaceprive'[ (#ENV{espaceprive}|oui)checked="checked"] />
+				<label for='espaceprive'><:crayons:label_activer_crayons_prive:></label>
+			</div>
+		</li>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{exec_autorise}}
+		<li class="editer editer_exec_autorise[ (#GET{erreurs}|oui)erreur]">
+			<label><:crayons:label_exec_autorise:></label>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<p class='explication'><:crayons:explication_exec_autorise:></p>
+			<input type="text" name="exec_autorise" class="text"  id='exec_autorise' value="[(#ENV{exec_autorise}|attribut_html)]" />
+		</li>
+	</ul>
+</li>
+
+
+<li class="fieldset fieldset_crayons_upload experimental">
+	<h3 class="legend"><:crayons:legend_documents:></h3>
+	<ul>
+		<li class="editer editer_reduire_logo[ (#GET{erreurs}|oui)erreur]">
+			<label><:crayons:info_experimental:></label>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<div class="choix">
+				<input type="checkbox" name="upload" class="checkbox"  value='on' id='upload'[ (#ENV{upload}|oui)checked="checked"] />
+				<label for='upload'><:crayons:label_upload_document:></label>
+			</div>
+		</li>
+	</ul>
+</li>
+
+
+</ul>
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+</p>
+</div>
+</form>
+</div>
