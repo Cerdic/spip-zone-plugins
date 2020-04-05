@@ -1,0 +1,43 @@
+[(#REM)
+
+	Liste des sélections liées à au moins un objet
+
+][(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	id_selection,1,
+	points,-1,
+	id_objet,1,
+	objet,1,
+}})]
+<B_liste_selections>
+#ANCRE_PAGINATION
+<div class="liste-objets selections">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{selection:info_1_selection,selection:info_nb_selections}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='titre' scope='col'>[(#TRI{L2.objet,<:onglet_contenu:>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:selection:champ_titre_label:>,ajax})]</th>
+			<th class='nb_contenus' scope='col'><:selection:champ_nombre_contenus:></th>
+			<th class='id' scope='col'>[(#TRI{id_selection,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_selections(SELECTIONS selections_liens){!orphelins}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par id_objet}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='titre principale'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})] ([(#OBJET|objet_info{texte_objet}|_T)])</a></td>
+			<td class='titre principale'><a href="[(#ID_SELECTION|generer_url_entite{selection})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SELECTION">[(#RANG). ]#TITRE</a></td>
+			<td class='nb_contenus id'><BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}> </BOUCLE_contenus>#TOTAL_BOUCLE</B_contenus>0<//B_contenus>[/#LIMITE(#LIMITE|>{0}|oui)]</td>
+			<td class='id'>[(#AUTORISER{modifier,selection,#ID_SELECTION}|?{
+				<a href="[(#URL_ECRIRE{selection_edit,id_selection=#ID_SELECTION})]">#ID_SELECTION</a>,
+				#ID_SELECTION
+			})]</td>
+		</tr>
+	</BOUCLE_liste_selections>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_selections>[
+<div class="liste-objets selections caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_selections>

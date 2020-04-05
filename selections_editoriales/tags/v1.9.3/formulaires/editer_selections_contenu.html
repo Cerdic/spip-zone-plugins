@@ -1,0 +1,39 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_selections_contenu,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		#SET{params, #ARRAY{objets_exclus, #LISTE{selections, selections_contenus}}|json_encode{1}|attribut_html}
+		[(#SET{attributs, data-selecteur="generique" data-select-php="oui" data-select-params="[(#GET{params})]"})]
+		
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			[(#SAISIE{input, url,
+				label=<:selections_contenu:champ_url_label:>,
+				explication=<:selections_contenu:champ_url_explication:>,
+				attributs=#GET{attributs}})]
+				
+			[(#SAISIE{input, titre,
+				label=<:selections_contenu:champ_titre_label:>,
+				explication=<:selections_contenu:champ_titre_explication:>})]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:selections_contenu:champ_descriptif_label:>,
+				inserer_barre=edition,
+				rows=5})]
+			
+			[(#SAISIE{input, css,
+				label=<:selections_contenu:champ_css_label:>,
+				explication=<:selections_contenu:champ_css_explication:>})]
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons">
+			<a class="ajax" href="[(#SELF|parametre_url{editer_contenu,non})]"><:bouton_annuler:></a>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+	]
+</div>

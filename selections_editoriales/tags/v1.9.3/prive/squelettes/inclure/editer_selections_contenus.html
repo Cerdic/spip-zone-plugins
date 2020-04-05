@@ -1,0 +1,175 @@
+[(#REM)
+
+	Édition des contenus d'une sélection
+
+	Paramètres :
+		**obligatoire
+
+		- **id_selection : n° d'une sélection
+		- editer_selection : 'oui' afficher les header/footer
+		- editer_contenu :
+			- n° d'un contenu à modifier
+			- 'new' pour en créer un
+			- 'non' pour cacher le formulaire
+		- editer_contenu_logo : n° d'un contenu pour éditer son logo
+
+]
+<BOUCLE_selection(SELECTIONS){id_selection}>
+#SET{self,#ENV*{self,#SELF}}
+[(#BOITE_OUVRIR{
+	[(#ENV{editer_selection}|=={oui}|oui)
+		<h3 class="titrem"><a href="[(#ENV{id_selection}|generer_url_entite{selection})]"><:info_numero_abbreviation:>[(#ENV{id_selection})][(#ENV{vu}|=={oui}|oui)[(#CHEMIN_IMAGE{vu-16-10.png}|balise_img)]] - [(#INFO_TITRE{selection,#ENV{id_selection}}|sinon{<:ecrire:info_sans_titre:>})]</a></h3>
+	],
+	selection simple[ (#ENV{id_selection_ajoutee}|=={#ID_SELECTION}|?{append})]}
+	|inserer_attribut{id,selection#ID_SELECTION}
+)]
+	<div class="liste-items selections_contenus" id="editer_selections_contenus-#ID_SELECTION">
+
+		<BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}{par rang}>
+		<div class="item" id="selection#ID_SELECTION-contenu#ID_SELECTIONS_CONTENU" data-id_selections_contenu="#ID_SELECTIONS_CONTENU">
+
+			<div class="item__body">
+				[(#CONFIG{activer_logos}|=={oui}|oui)
+					#SET{editer_logo,#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}}
+					[<a class="ajax item__logo" title="<:info_telecharger_nouveau_logo|trim{:}:>" href="[(#GET{self}|parametre_url{editer_contenu_logo,#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}|?{'',#ID_SELECTIONS_CONTENU}})]">
+						<span style="position:relative;">
+						(#LOGO_SELECTIONS_CONTENU|sinon{#CHEMIN{prive/images/rayures-gris.gif}}|image_reduire{90,70}|inserer_attribut{alt,<:info_telecharger_nouveau_logo|trim{:}:>}|inserer_attribut{class,logo})
+						<span style="position: absolute;bottom: 0; left: 0; background-color: rgba(255,255,255,0.8);padding:1px 5px; font-size:80%;">[(#GET{editer_logo}|?{<:bouton_fermer:>,<:bouton_modifier:>})</span>]
+					</span>
+					</a>]
+				]
+				<div class="item__content">
+					<h4 class="titrem"><span class="#EDIT{titre}"[ title="(#OBJET|objet_info{texte_objet}|_T|attribut_html) #ID_OBJET"]>[(#URL|lien_ou_expose{#TITRE,#URL|non})]</span></h4>
+					<div class="descriptif #EDIT{descriptif}">#DESCRIPTIF</div>
+					[<div class="css #EDIT{css}"><code>(#CHAMP_SQL{css}|attribut_html)</code></div>]
+
+					[(#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
+						<a class="ajax edit" style="font-size: 90%;" href="[(#GET{self}|parametre_url{editer_contenu,#ID_SELECTIONS_CONTENU})]"><strong><:bouton_modifier:></strong></a>
+					]
+					[(#AUTORISER{supprimer,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
+						[(#BOUTON_ACTION{<:lien_supprimer:>, #URL_ACTION_AUTEUR{supprimer_selections_contenu,#ID_SELECTIONS_CONTENU,#GET{self}}, delete  ajax todo})]
+					]
+				</div>
+				[(#ENV{editer_contenu,non}|=={non}|oui)
+				<div class="item__actions actions">
+					[(#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
+						[(#BOUTON_ACTION{
+							[(#CHEMIN_IMAGE{rang_haut-16.png}|balise_img{<:selections_contenu:deplacer_avant:>})],
+							#URL_ACTION_AUTEUR{deplacer_selections_contenu, #ID_SELECTIONS_CONTENU-haut, #GET{self}},
+							ajax link move move_up
+						})]
+						[(#BOUTON_ACTION{
+							[(#CHEMIN_IMAGE{rang_bas-16.png}|balise_img{<:selections_contenu:deplacer_apres:>})],
+							#URL_ACTION_AUTEUR{deplacer_selections_contenu, #ID_SELECTIONS_CONTENU-bas, #GET{self}},
+							ajax link move move_down
+						})]
+						[(#CHEMIN_IMAGE{rang_deplacer-16.png}|balise_img{<:selections_contenu:deplacer:>, move move_sort})]
+					]
+				</div>
+				]
+			</div>
+
+			[(#REM) Formulaires d'édition d'un contenu ]
+			[(#ENV{editer_contenu}|=={#ID_SELECTIONS_CONTENU}|et{#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}})
+				<div class="ajax">
+					#FORMULAIRE_EDITER_SELECTIONS_CONTENU{#ID_SELECTIONS_CONTENU}
+				</div>
+			]
+
+			[(#REM) Formulaires d'édition du logo d'un contenu ]
+			[(#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}|et{#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}})
+				<div class="item__formulaire ajax">
+					#FORMULAIRE_EDITER_LOGO{selections_contenu,#ID_SELECTIONS_CONTENU}
+				</div>
+			]
+
+		</div>
+		</BOUCLE_contenus>
+
+		[(#REM) Bouton pour ajouter un contenu ]
+		[(#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}|et{#ENV{editer_contenu}|non|ou{#ENV{editer_contenu}|=={new}|non}}|oui)
+			<div class="item">
+				[(#GET{self}|parametre_url{id_selection,#ID_SELECTION}|parametre_url{editer_contenu,new}|ancre_url{editer_selections_contenus-[(#ID_SELECTION)]}|icone_horizontale{<:selections_contenu:texte_ajouter_selections_contenu:>,selection,add,ajax center})]
+			</div>
+		]
+
+		[(#REM) Formulaire d'ajout d'un contenu ]
+		[(#ENV{editer_contenu}|=={new}|et{#ENV{id_selection}|=={#ID_SELECTION}}|et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
+		<div class="ajax">
+			#FORMULAIRE_EDITER_SELECTIONS_CONTENU{new,#ID_SELECTION}
+		</div>]
+	</div>
+
+	[(#REM) Footer / boutons d'actions ]
+	#SET{objet_associer,#ENV{objet}|!={selection}|?{#ENV{objet}}}
+	#SET{id_objet_associer,#GET{objet_associer}|?{#ENV{id_objet}}}
+	[(#ENV{editer_contenu,non}|=={non}|ou{#ENV{editer_contenu,non}|=={new}|et{#ENV{id_selection_contenu}|!={#ID_SELECTION}}})
+		#BOITE_PIED{act}
+		[(#SET{data,[(#VAL{
+			[(#ENV{exec}|=={selection}|non)
+				[(#AUTORISER{supprimer,selection,#ID_SELECTION}|oui)
+					[(#BOUTON_ACTION{<:selection:bouton_supprimer_selection:>,#URL_ACTION_AUTEUR{supprimer_selection,#ID_SELECTION,#GET{self}},ajax})]
+				]
+			]
+			[(#GET{objet_associer}|et{#GET{id_objet_associer}}|oui)
+				[(#AUTORISER{dissocierselections,#GET{objet_associer},#GET{id_objet_associer}}|et{#ENV{vu}|=={non}}|oui)
+					[(#BOUTON_ACTION{<:selection:bouton_enlever_selection:>,[(#URL_ACTION_AUTEUR{dissocier_selection,[(#ENV{id_objet})]-[(#ENV{objet})]-#ID_SELECTION--safe,#GET{self}})],ajax})]
+				]
+			]
+			[(#REM)
+			[(#ENV{exec}|=={selection}|non)
+				[(#AUTORISER{modifier,selection,#ID_SELECTION}|oui)
+					<a href="[(#URL_ECRIRE{selection_edit,id_selection=#ID_SELECTION}|parametre_url{redirect,#GET{self}|ancre_url{selection#ID_SELECTION}})]"><:selection:bouton_modifier_selection:></a>
+				]
+			]
+			]
+		})]})]
+		[(#PIPELINE{afficher_actions_selection,#ARRAY{
+			args, #ARRAY{
+				id_selection,#ID_SELECTION,
+				objet, #GET{objet_associer},
+				id_objet, #GET{id_objet_associer},
+				editer_contenu, #ENV{editer_contenu},
+			},
+			data, #GET{data}
+		}})]
+	]
+#BOITE_FERMER
+
+<script type="text/javascript">
+/*<![CDATA[*/
+;(function($){
+	$(function(){
+		$('#editer_selections_contenus-#ID_SELECTION').sortable({
+			items : '.item',
+			handle : '.move_sort',
+			cursor : 'move',
+			axis : 'y'
+		});
+		
+		$('#editer_selections_contenus-#ID_SELECTION').on('sortupdate', function(event, ui) {
+			// URL de base de l'action
+			var url_action = '[(#VAL{deplacer_selections_contenu}|generer_url_action{"", 1})]';
+			// On récupère l'identifiant du contenu qui a bougé
+			var id_contenu = ui.item.data('id_selections_contenu');
+			// On calcule le rang où il arrive à la fin
+			var rang = ui.item.index() + 1;
+			
+			// URL finale
+			url_action = parametre_url(url_action, 'arg', id_contenu + '-' + rang)
+			
+			//console.log(url_action);
+			
+			var request = $.ajax({
+				type: 'POST',
+				url: url_action
+			});
+			request.done(function() {
+				$('#editer_selections_contenus-#ID_SELECTION').ajaxReload();
+			});
+		});
+	});
+})(jQuery);
+/*]]>*/
+</script>
+</BOUCLE_selection>

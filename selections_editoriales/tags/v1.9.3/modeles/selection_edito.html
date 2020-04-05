@@ -1,0 +1,24 @@
+<BOUCLE_selection_edito(SELECTIONS) {id_selection=#ENV{id}}>
+	<B_selection_contenus>
+	<section class="selection_edito[ (#ENV{css_conteneur})]">
+		[<h[(#ENV{niveau_titre,3})]>(#ENV{afficher_titre}|=={non}|?{#ENV{titre,''},#TITRE})</h[(#ENV{niveau_titre,3})]>]
+		<BOUCLE_selection_contenus(SELECTIONS_CONTENUS){id_selection}{par rang}>
+			<article class="entry contenu hentry[ (#ENV{css_element})]">
+				<a href="#URL" rel="bookmark"[(#ENV{cacher_titre_element}|oui)title="[(#TITRE|attribut_html)]"]>
+				<strong class="entry-title">
+					[(#ENV{cacher_logo_element}|non)
+					[(#LOGO_SELECTIONS_CONTENU|image_reduire{#ENV{largeur_logo,500},#ENV{hauteur_logo,500}}|responsive_logo)]]
+					[(#ENV{cacher_titre_element}|non)<span class="titre #EDIT{titre}">#TITRE</span>]
+				</strong>
+				[(#ENV{cacher_descriptif_element}|non)
+				[(#ENV{coupe}|oui)
+				[<div class="#EDIT{descriptif} descriptif entry-content">(#DESCRIPTIF|couper{#ENV{coupe}, #ENV{suite, "&nbsp;(...)"}})</div>]]
+				[(#ENV{coupe}|non)
+				<div class="#EDIT{descriptif} descriptif entry-content">#DESCRIPTIF</div>]]
+				</a>
+			</article>
+		</BOUCLE_selection_contenus>
+	</section>
+	</B_selection_contenus>
+</BOUCLE_selection_edito>
+#FILTRE{trim}
