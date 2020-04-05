@@ -1,0 +1,89 @@
+<plugin>
+	<nom><multi>[fr]NoiZetier[de]Nussbaum</multi></nom>
+	<slogan><multi>[fr]Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z[de]Verwaltung der Code-N&#239;sse, als Erg&#228;nzung der Z-Squelette oder als eigenst&#228;ndiges Modu.</multi></slogan>
+	<auteur>Joseph, Matthieu Marcillaud</auteur>
+	<licence>GPL v3</licence>
+	<version>1.1.5</version>
+	<version_base>0.4</version_base>
+	<etat>stable</etat>
+	<description>Le noiZetier fournit une interface dans l’espace priv&#233; permettant de choisir, pour chaque page, des noisettes &#224; ajouter aux blocs contenu, navigation et extra de chaque page. Les noisettes viennent ainsi compl&#233;ter les contenus par d&#233;faut pr&#233;vus par le squelette.</description>
+	<lien>https://contrib.spip.net/?article3393</lien>
+	<icon>img/noizetier-128.png</icon>
+	<prefix>noizetier</prefix>
+	<fonctions>noizetier_fonctions.php</fonctions>
+	<install>base/noizetier_installation.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/noizetier_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/noizetier_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>noizetier_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>recuperer_fond</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>compositions_lister_disponibles</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig</nom>
+		<inclure>noizetier_ieconfig.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jqueryui_forcer</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>noizetier_lister_pages</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>noizetier_blocs_defaut</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>noizetier_config_export</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>noizetier_config_import</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+
+
+	<bouton id='noizetier' parent="configuration">
+		<url>noizetier</url>
+		<titre>noizetier:editer_noizetier_titre</titre>
+		<icone>img/noizetier-24.png</icone>
+	</bouton>
+	<bouton id='bando_noizetier' parent="bando_squelette">
+		<url>noizetier</url>
+		<titre>noizetier:editer_noizetier_titre</titre>
+		<icone>images/noizetier-16.png</icone>
+	</bouton>
+	<categorie>maintenance</categorie>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="spip_bonux" version="[1.8.10;]" />
+	<necessite id="YAML" version="[1.4.1;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="jqueryui" version="[1.8.5;]" />
+	<necessite id="verifier" />
+	<utilise id="compositions" version="[2.0.0;]" />
+	<utilise id="Zpip" version="[;1.9.99]" />
+</plugin>

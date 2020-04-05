@@ -1,0 +1,56 @@
+<h1><:noizetier:editer_noizetier_titre:></h1>
+<div class="noizetier-explications">
+	<:noizetier:editer_noizetier_explication:>
+</div>
+
+#SET{auth,#AUTORISER{configurer,noizetier}}
+<div class="formulaire_spip">
+<ul class="liste_items liste_noizetier_pages">
+	<BOUCLE_pages(POUR){tableau #NOIZETIER_LISTE_PAGES}{par cle}>
+	<li class="item" [ style="background-image:url((#VALEUR|table_valeur{icon}|find_in_path|image_reduire{24}|extraire_attribut{src}));"]>
+		<div class="ligne">
+			<div class="titre">[(#VALEUR|table_valeur{nom})]</div>
+			[<div class="infos">(#VALEUR|table_valeur{description})</div>]
+			<p class='actions'>[(#GET{auth}|oui)
+				<span class='lien_modifier'>&#91;<a href='[(#URL_ECRIRE{configurer_page,page=#CLE})]'><:noizetier:editer_configurer_page:></a>&#93;</span> 
+			]
+			</p>
+		</div>
+	</li>
+	</BOUCLE_pages>
+</ul>
+</div>
+<div class="nettoyeur" />
+
+<!--#navigation-->
+<div class="cadre infos cadre-info">
+	[(#PLUGIN{compositions}|oui)
+	<div>
+		<a href="#URL_ECRIRE{noizetier_compositions}" class="cellule-h">
+			[<img src="(#CHEMIN{img/compositions-24.png})" style="vertical-align:middle;" alt="<:noizetier:editer_compositions:>" />]
+			<span style="vertical-align:middle;"><:noizetier:editer_compositions:></span>
+		</a>
+	</div>
+	]
+	[(#PLUGIN{ieconfig}|oui)
+	<div>
+		<a href="#URL_ECRIRE{ieconfig_export}" class="cellule-h">
+			[<img src="(#CHEMIN{img/export.png})" style="vertical-align:middle;" alt="<:noizetier:editer_exporter_configuration:>" />]
+			<span style="vertical-align:middle;"><:noizetier:editer_exporter_configuration:></span>
+		</a>
+	</div>
+	<div>
+		<a href="#URL_ECRIRE{ieconfig_import}" class="cellule-h">
+			[<img src="(#CHEMIN{img/import.png})" style="vertical-align:middle;" alt="<:noizetier:editer_importer_configuration:>" />]
+			<span style="vertical-align:middle;"><:noizetier:editer_importer_configuration:></span>
+		</a>
+	</div>
+	]
+</div>
+
+<!--/#navigation-->
+
+<!--#extra-->
+[(#PLUGIN{compositions}|non)<p><:noizetier:compositions_non_installe:></p>]
+[(#PLUGIN{ieconfig}|non)<p><:noizetier:ieconfig_non_installe:></p>]
+<!--/#extra-->
