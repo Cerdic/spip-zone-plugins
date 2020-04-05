@@ -1,0 +1,21 @@
+<paquet
+	prefix="formidable_mailsubscribers"
+	categorie="communication"
+	version="1.0.1"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/formidable_mailsubscribers-64.png"
+	documentation="https://contrib.spip.net/5097"
+>
+
+	<nom>Formidable : abonnements à des listes de diffusion</nom>
+
+	<auteur lien="https://bravecassine.com">tcharlss</auteur>
+	<auteur lien="https://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="formidable" compatibilite="[3.5.3;]" />
+	<necessite nom="mailsubscribers" compatibilite="[1.10.0;]" />
+
+</paquet>
