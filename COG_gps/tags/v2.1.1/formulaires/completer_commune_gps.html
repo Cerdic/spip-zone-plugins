@@ -1,0 +1,22 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+	<ul>
+	    <li class="editer_fichier obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+				<label for="fichier"><:cog:fichiers:></label>
+				[(#ENV{fichier}|non)<span class="erreur">Le fichier n'est pas pr&eacute;sent dans le r&eacute;pertoire #ENV{repertoire}</span>]
+				[(#ENV{fichier}|oui)<span>Le fichier est pr&eacute;sent dans le r&eacute;pertoire &laquo;#ENV{repertoire}&raquo;</span>]
+
+	    </li>
+            </ul>
+	 [(#ENV{fichier}|oui) <p class='boutons'><input type='submit' class='submit' value='<:coggps:bouton_completer:>' /></p>]
+	</div></form>
+
+
+</div>
