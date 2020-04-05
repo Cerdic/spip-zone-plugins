@@ -1,0 +1,140 @@
+[(#REM)
+	Règles de validation javascript pour le formulaire
+	Nécessite la librairie jquery-validate
+	
+	http://bassistance.de/jquery-plugins/jquery-plugin-validation/
+]
+
+[(#SET{config_inscription3,#CONFIG{inscription3,#ARRAY}})]
+
+[(#LANG|=={en}|non)
+	<script type="text/javascript" src="#CHEMIN{lib/jquery-validation-1.9.0/localization/messages_#LANG.js}"></script>
+]
+<script type="text/javascript"><!--
+	jQuery.validator.addMethod("chainenombre", function(value, element) {
+		return this.optional(element) || /^[A-Za-z0-9\-\'\.ßÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
+	}, "<:inscription3:erreur_champ_obligatoire:>, <:inscription3:erreur_chaine_valide:> <:inscription3:chainenombre:>");
+
+	jQuery.validator.addMethod("chaine", function(value, element) {
+		return this.optional(element) || /^[A-Za-z\-\'\.ßÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
+	}, "<:inscription3:erreur_champ_obligatoire:>, <:inscription3:erreur_chaine_valide:> <:inscription3:erreur_chainelettre:>");
+
+	jQuery.validator.addMethod("postal", function(value, element) {
+		return this.optional(element) || /^[A-Z]{1,2}[-|\s][0-9]{3,6}$|^[0-9]{3,6}$|^[0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$|^[A-Z]{1,2} [0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$/.test(value);
+	}, "<:inscription3:erreur_champ_obligatoire:>, <:inscription3:erreur_cp_valide:>");
+
+	jQuery.validator.addMethod("numero", function(value, element) {
+		return this.optional(element) || /^[0-9\+\. \-]+$/.test(value);
+	}, "<:inscription3:erreur_champ_obligatoire:>, <:inscription3:erreur_numero_valide:>");
+
+	jQuery(document).ready(function() {
+	// validate signup form on submit
+	jQuery("#inscription").validate({
+		event: "keyup",
+		errorPlacement: function(error, element) {
+			error.appendTo( element.parent("li") ).after("");
+		},
+		rules: {
+			sexe:{[(#GET{config_inscription3}|table_valeur{sexe_obligatoire}|=={on}|?{required: true})]},
+			nom_famille: {[(#GET{config_inscription3}|table_valeur{nom_famille_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
+			prenom:{[(#GET{config_inscription3}|table_valeur{prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
+			nom: {[(#GET{config_inscription3}|table_valeur{nom}|=={on}|?{required: true,}),]chainenombre:true, rangeLength:[2,20]},
+			username: {[(#GET{config_inscription3}|table_valeur{username_obligatoire}|=={on}|?{required: true,}),]chainenombre:true, rangeLength:[4,20]},
+			adresse: {[(#GET{config_inscription3}|table_valeur{adresse_obligatoire}|=={on}|?{required: true,}),] rangeLength:[5,1000]},
+			code_postal: {[(#GET{config_inscription3}|table_valeur{code_postal_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
+			ville: {[(#GET{config_inscription3}|table_valeur{ville_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
+			email: {[(#GET{config_inscription3}|table_valeur{email}|=={on}|?{required: true,}),]email:true, rangeLength:[5,80]},
+			telephone: {[(#GET{config_inscription3}|table_valeur{telephone_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			fax: {[(#GET{config_inscription3}|table_valeur{fax_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			mobile: {[(#GET{config_inscription3}|table_valeur{mobile_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			profession: {[(#GET{config_inscription3}|table_valeur{profession_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,30]},
+			societe: {[(#GET{config_inscription3}|table_valeur{societe_obligatoire}|=={on}|?{required: true,}),]chainenombre:true, rangeLength:[3,30]},
+			secteur:{[(#GET{config_inscription3}|table_valeur{secteur_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
+			fonction: {[(#GET{config_inscription3}|table_valeur{fonction_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
+			divers: {[(#GET{config_inscription3}|table_valeur{commentaire_obligatoire}|=={on}|?{required: true,}),]rangeLength:[3,1000]},
+			pays:{[(#GET{config_inscription3}|table_valeur{pays_obligatoire}|=={on}|?{required: true,''})]}
+		},
+		messages: {
+			sexe: {
+				required:"<:inscription3:erreur_champ_obligatoire:>"
+			},
+			nom_famille: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				chaine:"<:inscription3:erreur_chaine_valide:> <:inscription3:erreur_chainelettre:>"
+			},
+			prenom:{
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				chaine:"<:inscription3:erreur_chaine_valide:> <:inscription3:erreur_chainelettre:>"
+			},
+			nom: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				chainenombre:"<:inscription3:erreur_chaine_valide:> <:inscription3:chainenombre:>"
+			},
+			username: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				chainenombre:"<:inscription3:erreur_chaine_valide:> <:inscription3:chainenombre:>"
+			},
+			adresse: {
+				required:"<:inscription3:erreur_champ_obligatoire:>"
+			},
+			code_postal: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				postal:"<:inscription3:erreur_cp_valide:>"
+			},
+			ville: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				chaine:"<:inscription3:erreur_chaine_valide:> <:inscription3:erreur_chainelettre:>"
+			},
+			pays: {
+				required:"<:inscription3:erreur_champ_obligatoire:>"
+			},
+			email: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				email:"<:verifier:erreur_email:>"
+			},
+			telephone: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				numero:"<:inscription3:erreur_numero_valide:>"
+			},
+			fax: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				numero:"<:inscription3:erreur_numero_valide:>"
+			},
+			mobile: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				numero:"<:inscription3:erreur_numero_valide:>"
+			},
+			profession: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				chaine:"<:inscription3:erreur_chaine_valide:> <:inscription3:erreur_chainelettre:>"
+			},
+			societe: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				chaine:"<:inscription3:erreur_chaine_valide:> <:inscription3:chainenombre:>"
+			},
+			secteur:{
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				chaine:"<:inscription3:erreur_chaine_valide:>"
+			},
+			fonction: {
+				required:"<:inscription3:erreur_champ_obligatoire:>",
+				chaine:"<:inscription3:erreur_chaine_valide:> <:inscription3:erreur_chainelettre:>"
+			},
+			divers:{
+				required:"<:inscription3:erreur_champ_obligatoire:>"
+			}
+		}
+	});
+
+	// propose username and name by combining first- and lastname
+	jQuery("#username, #nom").focus(function() {
+		var prenom = jQuery("#prenom").val();
+		var nom = jQuery("#nom_famille").val();
+		if(prenom && nom && !this.value) {
+			this.value = prenom + "." + nom;
+		}
+	});
+	jQuery('.obligatoire label').append('*');
+});// -->
+</script>
+#FILTRE{trim}

@@ -1,0 +1,52 @@
+[(#REM)
+	La page de l'auteur actuellement identifié
+	
+	Ce qui diffère du squelette auteur de Zpip :
+	-* 
+]
+<BOUCLE_contenu_auteur(AUTEURS){id_auteur}{tout}>
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><span><:info_auteurs:></span>[<span class="sep"> &gt; </span><strong class="on">(#NOM|couper{80})</strong>]</p>
+
+<div class="contenu-principal">
+	<div class="vcard">[(#REM) microformat vcard]
+		<div class="cartouche">
+			[<div class="logo #EDIT{logo}">
+			(#LOGO_AUTEUR|sinon{#CHEMIN{images/logo_auteur_defaut.png}}|image_reduire{80,80}
+				|inserer_attribut{class,spip_logos}|inserer_attribut{alt,''})
+			</div>]
+			<h1 class="h1">#NOM</h1>
+		</div>
+		
+		[(#ENV{email_modif}|=={ok}|oui)
+		<div class="formulaire_spip">
+			<p class="reponse_formulaire reponse_formulaire_ok"><:inscription3:message_modif_email_ok:></p>
+		</div>]
+		[(#ENV{email_confirm}|oui)
+		<div class="formulaire_spip">
+			<p class="reponse_formulaire reponse_formulaire_erreur"><:form_auteur_envoi_mail_confirmation{email=#ENV{email_confirm}}:></p>
+		</div>]
+		
+		[(#REM)
+			Les autres informations concernant l'auteur
+		]
+		#MODELE{fiche_utilisateur,id=#ID_AUTEUR,env}
+	</div>[(#REM) / vcard]
+
+	[(#REM) Articles de l'auteur ]
+	<B_articles>
+	<div class="liste articles">
+		#ANCRE_PAGINATION
+		<h2 class="h2"><:inscription3:vos_articles_auteur:> (#GRAND_TOTAL)</h2>
+		<ul class="liste-items">
+			<BOUCLE_articles(ARTICLES) {id_auteur} {!par popularite} {pagination 10}>
+			<li class="item"><a href="#URL_ARTICLE">#TITRE</a></li>
+			</BOUCLE_articles>
+		</ul>
+		[<p class="pagination">(#PAGINATION)</p>]
+	</div>
+	</B_articles>
+	
+</div>
+</BOUCLE_contenu_auteur>

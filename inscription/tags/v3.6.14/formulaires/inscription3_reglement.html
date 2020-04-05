@@ -1,0 +1,51 @@
+[(#REM)
+
+	Inclusion de formulaire utilisée si l'option d'accepter un règlement est 
+	configurée.
+	
+	-* Elle est forcément obligatoire
+	-* Si un article est sélectionné correspondant au règlement, on vérifie s'il a une
+	traduction dans la langue en cours
+	-* Sinon on affiche uniquement une case à cocher
+]
+<[(#DIV|sinon{li})] class="fieldset info_reglement">
+	<h3 class="legend">
+		<:inscription3:legende_reglement:>
+	</h3>
+
+<BOUCLE_page_reglement(ARTICLES){reglement}{tout}{!par date}{0,1}{origine_traduction}>
+<BOUCLE_trad(ARTICLES){traduction}{lang}{0,1}>
+[(#REM) Si on a une traduction du reglement dans notre langue, on l'utilise]
+<[(#DIV|sinon{ul})]>
+	[(#SET{label,[(#VAL{inscription3:label_public_reglement_url}|_T{#ARRAY{url,#URL_ARTICLE}})]})]
+	[(#PLUGIN{mediabox}|et{#PLUGIN{Z}|ou{#PLUGIN{Zpip}}}|oui)
+		[(#SET{js,[onclick="if (jQuery.modalbox) {jQuery.modalbox('(#URL_ARTICLE|parametre_url{var_zajax,#PLUGIN{Zpip}|?{content,contenu}})');return false;}"]})]
+		[(#SET{label,[(#VAL{inscription3:label_public_reglement_url_mediabox}|_T{#ARRAY{url,#URL_ARTICLE,js,#GET{js}}})]})]
+	]
+	[(#SAISIE{case,reglement,
+		label_case=#GET**{label},
+		obligatoire=oui})]
+</[(#DIV|sinon{ul})]>
+</BOUCLE_trad>
+[(#REM) On prend l'article original si pas de traduction]
+<[(#DIV|sinon{ul})]>
+	[(#SET{label,[(#VAL{inscription3:label_public_reglement_url}|_T{#ARRAY{url,#URL_ARTICLE}})]})]
+	[(#PLUGIN{mediabox}|et{#PLUGIN{Z}|ou{#PLUGIN{Zpip}}}|oui)
+		[(#SET{js,[onclick="if (jQuery.modalbox) {jQuery.modalbox('(#URL_ARTICLE|parametre_url{var_zajax,#PLUGIN{Zpip}|?{content,contenu}})');return false;}"]})]
+		[(#SET{label,[(#VAL{inscription3:label_public_reglement_url_mediabox}|_T{#ARRAY{url,#URL_ARTICLE,js,#GET{js}}})]})]
+	]
+	[(#SAISIE{case,reglement,
+		label_case=#GET**{label},
+		obligatoire=oui})]
+</[(#DIV|sinon{ul})]>
+<//B_trad>
+</BOUCLE_page_reglement>
+</B_page_reglement>
+[(#REM) Si pas d'article, le label n'a pas de lien]
+<[(#DIV|sinon{ul})]>
+	[(#SAISIE{case,reglement,
+		label_case=<:inscription3:label_public_reglement:>,
+		obligatoire=oui})]
+</[(#DIV|sinon{ul})]>
+<//B_page_reglement>
+</[(#DIV|sinon{li})]>

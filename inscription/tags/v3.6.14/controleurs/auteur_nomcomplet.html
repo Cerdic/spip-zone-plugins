@@ -1,0 +1,77 @@
+[(#REM)
+
+	Controleur pour le crayon 'nom-complet', uniquement html
+	Validation JS pour les champs spécifiés obligatoires
+	Si les champs ne sont pas activés dans le CFG, ils n'apparaissent pas...
+
+]
+#CACHE{0}
+<BOUCLE_b(AUTEURS){id_auteur=#ENV{id_auteurs_elargi}}{tout}>
+[<script type="text/javascript" src="(#PRODUIRE{fond=crayons_validation.js,lang=#ENV{lang}})"></script>]
+<script type="text/javascript">
+	if (typeof cQuery.fn.validate == "function") {
+		var me = cQuery(".auteur-nomcomplet-#ID_AUTEUR");
+		var id = me.crayon().find('form');
+
+		function validation(){
+			var validator = cQuery(id).validate({
+				onkeyup:function(){
+					validation();
+				},
+				showErrors: function(errors, errorList) {
+					crayon_affiche_submit(me,id);
+					validator.defaultShowErrors();
+				},
+				success: function(label){
+					label.parents('li.erreur').removeClass('erreur');
+					label.remove();
+					crayon_affiche_submit(me,id)
+				},
+				rules: {
+					#ENV{name_nom_famille}: {
+						chaine:true,
+						rangelength:[2,30]
+					},
+					#ENV{name_prenom}: {
+						chaine:true,
+						rangelength:[2,20]
+					}
+				},
+				messages: {
+					#ENV{name_nom_famille}: {
+						chaine:"<:inscription3:chaine_valide:> <:inscription3:chainelettre:>"
+					},
+					#ENV{name_prenom}: {
+						chaine:"<:inscription3:chaine_valide:> <:inscription3:chainelettre:>"
+					}
+				}
+			});
+			//On test le formulaire pour chercher les potentielles erreurs
+			validator.form();
+			crayon_affiche_submit(me,id);
+		}
+		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
+		id.find('.obligatoire label').append(' <span class="obligatoire"><:info_obligatoire_02:></span>');
+		setTimeout('validation()',500);
+	}
+</script>
+	<fieldset[ style="(#ENV{style})"]>
+		<legend><:inscription3:votre_nom_complet:></legend>
+		<ul>
+			[(#CONFIG{inscription3/nom_famille_fiche_mod}|=={on}|ou{#SESSION{statut}|=={0minirezo}}|oui)
+			[(#CONFIG{inscription3/nom_famille_obligatoire}|=={on}|oui)#SET{nom_famille_obl,true}]
+			<li class="editer[(#GET{nom_famille_obl}|oui)obligatoire]">
+				<label><:inscription3:label_nom_famille:></label>
+				<input class="crayon-active text[(#GET{nom_famille_obl}|oui) obligatoire]" name="#ENV{name_nom_famille}" style="width:#ENV{largeur}px;" value="[(#NOM_FAMILLE**|entites_html)]" />
+			</li>]
+
+			[(#CONFIG{inscription3/prenom_fiche_mod}|=={on}|ou{#SESSION{statut}|=={0minirezo}}|oui)
+			[(#CONFIG{inscription3/prenom_obligatoire}|=={on}|oui)#SET{prenom_obl,true}]
+			<li class="editer[(#GET{prenom_obl}|oui)obligatoire]">
+				<label><:inscription3:label_prenom:></label>
+				<input class="crayon-active text[(#GET{prenom_obl}|oui) obligatoire]" name="#ENV{name_prenom}" style="width:#ENV{largeur}px;" value="[(#PRENOM**|entites_html)]" />
+			</li>]
+		</ul>
+	</fieldset>
+</BOUCLE_b>
+<//B_b>

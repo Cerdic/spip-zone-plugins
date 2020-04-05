@@ -1,0 +1,16 @@
+[(#SET{titre, [(#ENV*{titre,<:inscription3:menu_titre_lien_inscription:>}|typo)]})]
+
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre">#GET{titre}</div>
+	<div class="infos"><:inscription3:menu_info_inscription3:></div>
+]
+<BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
+	[(#SESSION{id_auteur}|non)
+		[(#AUTORISER{inscrireauteur,1comite}|ou{#AUTORISER{inscrireauteur,6forum}}|ou{#REM|tester_config}|oui)
+		<li class="menu-entree[ (#ENV{css})]">
+			<a href="[(#URL_PAGE{#ENV{page,inscription}})]">
+				#GET{titre}
+			</a>
+		</li>]
+	]
+</BOUCLE_appel>

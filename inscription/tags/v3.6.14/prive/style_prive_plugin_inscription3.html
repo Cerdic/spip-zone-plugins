@@ -1,0 +1,98 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,#ENV{couleur_claire,edf3fe}}
+#SET{foncee,#ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.raccourcis ul,.legend ul{
+	list-style-type:none;
+	padding-#GET{left}:30px;
+}
+.raccourcis li{
+	margin-top:5px
+}
+
+#principal {
+	margin:0%;
+}
+
+sup {font-size:60%}
+
+.search_field{
+	width:100px
+}
+
+#case{
+	width:120px
+}
+
+.cadre-info {margin-bottom:10px}
+
+td.label,th.label{
+	position:relative;
+	text-align:#GET{left};
+	vertical-align:top;
+	width:120px;
+	display:block;
+}
+
+td.label label{
+	margin-#GET{left}:0;
+	float:none;
+	width:auto;
+}
+
+table.spip th{
+	vertical-align:middle;
+}
+
+table.spip th.both{
+	background:[#(#GET{claire}|couleur_eclaircir) ]url(#CHEMIN{images/fle_both.gif})[ (#GET{right})] center no-repeat;
+	padding-#GET{right}:20px;
+
+}
+
+table.spip th.on{
+	background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
+}
+
+table.spip th.asc{
+	background:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir) ]url(#CHEMIN{images/fle_asc.gif})[ (#GET{right})] center no-repeat;
+	padding-#GET{right}:20px;
+}
+
+table.spip th.desc{
+	background:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir) ]url(#CHEMIN{images/fle_desc.gif})[ (#GET{right})] center no-repeat;
+	padding-#GET{right}:20px;
+}
+
+table.spip tr.erreur td{
+	background-color:#FFD0BF;
+}
+
+table.inscription3 th.label{
+	width:auto;
+}
+.formulaire_configurer li.sans_padding{
+	padding-left:0;
+}
+
+#page .formulaire_spip li.editer_reglement_article > label{
+	float:#GET{left};
+	margin-#GET{right}:30px;
+}

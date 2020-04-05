@@ -1,0 +1,29 @@
+[(#REM)
+
+	Affiche les champs de login ou de mot de passe
+	N'affiche quelque chose que si le champ login ou mot de passe est activé
+	Sur le champ de password, si l'option de complexité de mot de passe est activée, 
+	on insère un js de vérification.
+	
+]
+
+[(#CONFIG{inscription3/login}|=={on}|ou{[(#CONFIG{inscription3/pass}|=={on})]}|oui)
+	[(#CONFIG{inscription3/login}|=={on}|oui)
+		[(#CONFIG{inscription3/login_obligatoire}|=={on}|oui)[(#SET{login_obligatoire,oui})]]
+		[(#SAISIE{input,login,
+			obligatoire=#GET{login_obligatoire},
+			label=<:inscription3:label_login:>,
+			size=30})]
+	]
+	[(#CONFIG{inscription3/pass}|=={on}|oui)
+		<[(#DIV|sinon{li})] class="editer editer_password[ (#CONFIG{inscription3/pass_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{pass}|oui)erreur]">
+			<label for="pass"><:inscription3:label_pass:>[(#CONFIG{inscription3/pass_obligatoire}|=={on}|?{<span class='obligatoire'><:info_obligatoire_02:></span>})]</label>
+			[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{pass})</p>]
+			<input type="password" class="text" autocomplete="off" name="pass" id="pass" value="#ENV{pass}" size="30" />
+			<label for="password1"><:inscription3:label_password_retaper:>[(#CONFIG{inscription3/pass_obligatoire}|=={on}|?{<span class='obligatoire'><:info_obligatoire_02:></span>})]</label>
+			<input type="password" class="text" autocomplete="off" name="password1" id="password1" value="#ENV{password1}" size="30" />
+			[(#CONFIG{inscription3/password_complexite}|=={on}|oui)[(#INCLURE{fond=formulaires/inc-js_pass_verification,password=pass,env})]]
+		</[(#DIV|sinon{li})]>
+	]
+]
+#FILTRE{trim}

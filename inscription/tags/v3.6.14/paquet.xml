@@ -1,0 +1,64 @@
+<paquet
+	prefix="inscription3"
+	categorie="auteur"
+	version="3.6.14"
+	etat="stable"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/inscription3-64.png"
+	schema="3.0.2"
+	documentation="https://www.mediaspip.net/spip.php?rubrique87"
+>
+
+	<nom>Inscription 3</nom>
+	<!-- étendre les informations sur les auteurs -->
+
+	<auteur>cmtmt2003</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+	<auteur>BoOz</auteur>
+
+	<copyright>2007-2018</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="i3_charger_formulaire" action="" />
+	<pipeline nom="i3_verifier_formulaire" action="" />
+	<pipeline nom="i3_traiter_formulaire" action="" />
+	<pipeline nom="i3_form_fin" action="" />
+	<pipeline nom="i3_form_debut" action="" />
+	<pipeline nom="i3_validation_methods" action="" />
+	<pipeline nom="i3_cfg_form" action="" />
+	<pipeline nom="i3_exceptions_des_champs_auteurs_elargis" inclure="inscription3_pipelines.php" />
+	<pipeline nom="i3_exceptions_chargement_champs_auteurs_elargis" inclure="inscription3_pipelines.php" />
+	<pipeline nom="i3_verifications_specifiques" inclure="inscription3_pipelines.php" />
+	<pipeline nom="i3_definition_champs" inclure="inscription3_pipelines.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/inscription3.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/inscription3.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/inscription3.php" />
+	<pipeline nom="autoriser" inclure="inscription3_autoriser.php" />
+	<pipeline nom="pre_insertion" inclure="inscription3_pipelines.php" />
+	<pipeline nom="affiche_droite" inclure="inscription3_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="inscription3_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="inscription3_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="inscription3_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="inscription3_pipelines.php" />
+	<pipeline nom="editer_contenu_objet" inclure="inscription3_pipelines.php" />
+	<pipeline nom="notifications_destinataires" inclure="inscription3_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="inscription3_pipelines.php" />
+	<pipeline nom="openid_recuperer_identite" inclure="inscription3_pipelines.php" />
+	<pipeline nom="openid_inscrire_redirect" inclure="inscription3_pipelines.php" />
+	<pipeline nom="post_edition" inclure="inscription3_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="cextras" compatibilite="[3.4.1;]" />
+	<necessite nom="verifier" compatibilite="[1.0.6;]" />
+
+	<lib nom="jquery-validation-1.10.0" lien="https://github.com/downloads/jzaefferer/jquery-validation/jquery-validation-1.10.0.zip" />
+
+	<utilise nom="Z" compatibilite="[1.7.28;]" />
+	<utilise nom="mediabox" compatibilite="[1.0.1;]" />
+	<utilise nom="pages" compatibilite="[1.2.2;]" />
+	<utilise nom="notifications" compatibilite="[3.2.0;]" />
+	<utilise nom="openid" compatibilite="[2.0.0;[" />
+
+	<menu nom="inscription3_adherents" titre="inscription3:icone_afficher_utilisateurs" parent="menu_activite" icone="images/inscription3-16.png" action="inscription3_adherents" />
+	<menu nom="configurer_inscription3" titre="inscription3:icone_configurer_inscription3" parent="menu_configuration" icone="images/inscription3-16.png" action="configurer_inscription3" />
+</paquet>
