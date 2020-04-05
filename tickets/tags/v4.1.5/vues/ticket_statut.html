@@ -1,0 +1,9 @@
+[(#REM)
+
+	Vue pour le crayon 'ticket_statut'
+	
+]
+#CACHE{0}
+<BOUCLE_ticket(TICKETS){id_ticket}{tout}>
+	[[(#STATUT|tickets_icone_statut{true}) ](#STATUT|tickets_texte_statut)]
+</BOUCLE_ticket>

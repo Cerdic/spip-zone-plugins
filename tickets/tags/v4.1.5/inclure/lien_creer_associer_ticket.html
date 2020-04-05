@@ -1,0 +1,10 @@
+[(#REM)
+	Noisette pour créer et associer un nouveau ticket à l'objet #ENV{associer_objet}
+	
+	Ex. dans une boucle article, pour associer un nouveau ticket à l'article en cours :
+		#INCLURE{fond=inclure/lien_creer_associer_ticket,associer_objet=article|#ID_ARTICLE,env}
+]
+[(#ENV{associer_objet}|et{#AUTORISER{creer, ticket,'','',#ARRAY{associer_objet,#ENV{associer_objet}}}}|oui)
+<div class='clearfix ajout_ticket'>
+	[(#URL_PAGE{editer_ticket}|parametre_url{associer_objet,#ENV{associer_objet}}|icone{<:tickets:creer_ticket:>,ticket-24.png,#LANG_RIGHT,new,ajax})]
+</div>]

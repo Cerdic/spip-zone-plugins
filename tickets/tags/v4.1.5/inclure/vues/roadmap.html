@@ -1,0 +1,30 @@
+<BOUCLE_versions(spip_mots){id_groupe=#CONFIG{tickets/general/id_groupe_versions}}{!par num titre}>
+<B_tickets_versions>
+[(#SET{ouvert,0})][(#SET{resolu,0})][(#SET{ferme,0})]
+<div class="ajax">
+	[<h2 class="h2">(#TITRE|sinon{<:tickets:info_sans_version:>})[ ((#GRAND_TOTAL))]</h2>]
+	<BOUCLE_tickets_versions(TICKETS){id_mot}>
+	[(#STATUT|=={ouvert}|oui)[(#SET{ouvert,#GET{ouvert}|plus{1}})]]
+	[(#STATUT|=={resolu}|oui)[(#SET{resolu,#GET{resolu}|plus{1}})]]
+	[(#STATUT|=={ferme}|oui)[(#SET{ferme,#GET{ferme}|plus{1}})]]
+	</BOUCLE_tickets_versions>
+	[(#SET{todo,#GRAND_TOTAL|moins{#GET{ferme}}|moins{#GET{resolu}}|div{#GRAND_TOTAL}|mult{100}})]
+	[(#SET{percent_done,#VAL{100}|moins{#GET{todo}}})]
+	<div class="infos_version">
+		<table class="progress" style="width:50%">
+			<tbody>
+				<tr>
+					<td class="closed" style="width:[(#GET{percent_done})%]"></td>
+					<td class="todo" style="width:[(#GET{todo})%]"></td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="progress">[(#GET{percent_done}|round)%]</p>
+		<p class="progress_info">[(#GRAND_TOTAL|singulier_ou_pluriel{tickets:info_demande,tickets:info_demandes})][ - (#GET{resolu}|singulier_ou_pluriel{tickets:info_demande_resolue,tickets:info_demandes_resolues})][ - (#GET{ouvert}|singulier_ou_pluriel{tickets:info_demande_ouverte,tickets:info_demandes_ouvertes})][ - (#GET{ferme}|singulier_ou_pluriel{tickets:info_demande_fermee,tickets:info_demandes_fermees})]</p>
+	</div>
+	[(#INCLURE{fond=inclure/liste_tickets,env,groupemots_#ID_GROUPE=#LISTE{#ID_MOT},ajax,
+		cacher_texte=oui,
+		champs_caches=#LISTE{maj,date}}|trim)]
+</div>
+</B_tickets_versions>
+</BOUCLE_versions>

@@ -1,0 +1,14 @@
+[(#REM)
+
+	Controleur pour le crayon 'ticket_statut'
+	
+]
+#CACHE{0}
+<BOUCLE_t(TICKETS){id_ticket}{statut==.*}>
+<select class="crayon-active" name="#ENV{name_#ENV{crayon_modele}}"
+	style="width:#ENV{largeur}px;#ENV{style}" >
+	<BOUCLE_statuts(DATA){source tableau,#ENV{id_ticket}|tickets_liste_statut}>
+		<option value="#CLE"[(#STATUT|=={#CLE}|oui)selected='selected']>[(#VALEUR)]</option>
+	</BOUCLE_statuts>
+</select>
+</BOUCLE_t>

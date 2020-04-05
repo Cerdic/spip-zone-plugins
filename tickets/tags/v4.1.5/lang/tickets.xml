@@ -1,0 +1,34 @@
+<traduction
+	module="tickets"
+	id="tickets--tickets-c1e74"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/tickets.git"
+	reference="fr">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=ar" total="240" traduits="173" relire="0" modifs="0" nouveaux="67" pourcent="72.08">
+		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
+	</langue>
+	<langue code="de" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=de" total="240" traduits="239" relire="0" modifs="1" nouveaux="0" pourcent="99.58">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
+	</langue>
+	<langue code="en" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=en" total="240" traduits="239" relire="0" modifs="1" nouveaux="0" pourcent="99.58">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
+		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Martin McCaffery" lien="https://trad.spip.net/auteur/martin-mccaffery" />
+	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=es" total="240" traduits="239" relire="0" modifs="1" nouveaux="0" pourcent="99.58">
+		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
+		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=fr" total="240" traduits="240" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=nl" total="240" traduits="240" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+	</langue>
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=sk" total="240" traduits="239" relire="0" modifs="1" nouveaux="0" pourcent="99.58">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>

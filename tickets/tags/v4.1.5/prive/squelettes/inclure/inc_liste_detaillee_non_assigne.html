@@ -1,0 +1,56 @@
+[(#REM) Noisette d'affichage d'une liste detaillee des tickets suivant des criteres passes en arguments]
+
+[(#REM) Récupération de la liste des groupes et mots]
+#SET{mots_pargroupe,#ARRAY}
+#SET{colonnes_groupes,#ARRAY}
+<BOUCLE_groupesmots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
+	[(#ENV{groupemots_#ID_GROUPE}|oui)
+		#SET{mots_pargroupe, #GET{mots_pargroupe}|array_merge{#ENV{groupemots_#ID_GROUPE}}}
+	]
+	[(#CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_par_groupe}
+		|ou{#CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_pour_tous}}
+		|ou{#CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_par_groupe_important}|et{#OBLIGATOIRE|=={oui}|oui}})
+		#SET{colonnes_groupes, #GET{colonnes_groupes}|push{#ARRAY{id_groupe,#ID_GROUPE,titre,#TITRE}}
+	]
+</BOUCLE_groupesmots>
+
+<B_detaillee>
+#BOITE_OUVRIR{#CHEMIN_IMAGE{ticket-24.png}|balise_img{'',cadre-icone}|concat{#ENV{titre}},'simple','titrem'}
+<div class="liste-objets tickets">
+[<div class="pagination">(#PAGINATION{prive})</div>]
+<table width="100%" class="spip liste">
+	<thead>
+		<tr>
+			<th colspan="3" style="text-align:center;"><:tickets:champ_titre:></th>
+		<BOUCLE_si_colonne_mots_unique_th(CONDITION){si #CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_pour_tous}}>
+			<th><:tickets:champ_mots_th:></th>
+		</BOUCLE_si_colonne_mots_unique_th>
+			<BOUCLE_colonnes_groupesmots_titre_th(DATA){source table, #GET{colonnes_groupes}}>
+			<th>#VALEUR{titre}</th>
+			</BOUCLE_colonnes_groupesmots_titre_th>
+		<//B_si_colonne_mots_unique_th>
+			<th><:tickets:champ_date:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_detaillee(TICKETS){!par date}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne=0}{statut?}{mots_pargroupe #GET{mots_pargroupe}}>
+		<tr>
+			<td style="width: 10px;">[(#STATUT|puce_statut{ticket,#ID_TICKET})]</td>
+			<td><b>##ID_TICKET</b></td>
+			<td><a href="[(#ID_TICKET|generer_url_entite{ticket})]">#TITRE</a></td>
+		<BOUCLE_si_colonne_mots_unique(CONDITION){si #CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_pour_tous}}>
+			<td>#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,cacher_aucun_resultat=oui,env,ajax}</td>
+		</BOUCLE_si_colonne_mots_unique>
+		<BOUCLE_colonnes_groupesmots_titre(DATA){source table, #GET{colonnes_groupes}}>
+			<td>#INCLURE{fond=vues/groupemots_ticket,id_groupes_mot=#ID_TICKET|concat{-,#VALEUR{id_groupe}},cacher_aucun_resultat=oui,env,ajax}</td>
+		</BOUCLE_colonnes_groupesmots_titre>
+		<//B_si_colonne_mots_unique>
+			<td>[(#DATE|affdate)]</td>
+		</tr>
+		</BOUCLE_detaillee>
+	</tbody>
+</table>
+</div>
+#BOITE_FERMER
+</B_detaillee>
+<br />

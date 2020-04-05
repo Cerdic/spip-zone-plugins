@@ -1,0 +1,20 @@
+<BOUCLE_si_afficher_public(CONDITION){si #PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|et{#CONFIG{tickets/general/desactiver_public,off}|!={on}}|oui}>
+
+<div class="ticket contenu-principal">
+	<div class="cartouche">
+		#SET{url,#URL_PAGE{editer_ticket}}
+		<BOUCLE_groupesmots_url(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
+			[(#ENV{groupemots_#ID_GROUPE}|oui)
+				#SET{url, #GET{url}|parametre_url{groupemots_#ID_GROUPE,#ENV{groupemots_#ID_GROUPE}}}
+			]
+		</BOUCLE_groupesmots_url>
+		[(#AUTORISER{ecrire, ticket}|oui)
+		<a class="i_new" href="#GET{url}"><:tickets:creer_ticket:></a>]
+		<h1 class="titre"><:tickets:tickets:></h1>
+	</div>
+	[(#INCLURE{fond=inclure/vues/vues_tickets,env,ajax})]
+</div>
+</BOUCLE_si_afficher_public>
+	<p class="notice"><:tickets:message_page_publique_indisponible:></p>
+<//B_si_afficher_public>
+#FILTRE{trim}

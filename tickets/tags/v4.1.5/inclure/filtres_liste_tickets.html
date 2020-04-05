@@ -1,0 +1,52 @@
+<BOUCLE_si_afficher_filtres(CONDITION){si #ENV{afficher_filtres}|=={oui}|oui}>
+	[(#SET{url_defiltrer,[(#SELF|parametre_url{recherche|date_debut|date_fin|statut|auteurs|id_auteur|assignes|id_assigne,''})]})]
+	[(#ENV{recherche}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{recherche,''})]})]
+		<p><:tickets:champ_recherche:> #ENV{recherche}</p>
+	][(#ENV{date_debut}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{date_debut,''})]})]
+		<p><:tickets:champ_date_debut:> [(#ENV{date_debut}|affdate)]</p>
+	][(#ENV{date_fin}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{date_fin,''})]})]
+		<p><:tickets:champ_date_fin:> [(#ENV{date_fin}|affdate)]</p>
+	]
+	<B_pour_statuts>
+	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{statuts,''}|parametre_url{statut,''})]})]
+	<p><:tickets:champ_statut:> 
+	<BOUCLE_pour_statuts(DATA){source table, #ENV{statuts,#ARRAY}}{', '}>[(#VALEUR|tickets_texte_statut)]</BOUCLE_pour_statuts>
+	</p>
+	</B_pour_statuts>
+	<B_auteurs>
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{auteurs,''})]})]
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{id_auteur,''})]})]
+		<p><:tickets:champ_id_auteur:> 
+		<BOUCLE_auteurs(AUTEURS){id_auteur IN #ENV{auteurs,#ENV{id_auteur}}}{', '}>
+		#NOM
+		</BOUCLE_auteurs>
+		</p>
+	</B_auteurs>
+	<B_assignes>
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{assignes,''})]})]
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{id_assigne,''})]})]
+		<p><:tickets:champ_id_assigne:>
+		<BOUCLE_assignes(AUTEURS){id_auteur IN #ENV{assignes,#ENV{id_assigne}}}{', '}>
+		#NOM
+		</BOUCLE_assignes>
+		</p>
+	</B_assignes>
+	<BOUCLE_groupesmots_filtre(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
+		<B_mots_groupe_filtre>
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{groupemots_#ID_GROUPE,''})]})]
+		<p><:tickets:ajout_deux_points{texte=#TITRE}:>
+		<BOUCLE_mots_groupe_filtre(MOTS){id_groupe}{id_mot IN #ENV{groupemots_#ID_GROUPE}}{par num titre}{', '}>
+			[(#TITRE|supprimer_numero)]
+		</BOUCLE_mots_groupe_filtre>
+		</p>
+		</B_mots_groupe_filtre>
+	</BOUCLE_groupesmots_filtre>
+	[(#ENV{url_defiltrer}|=={oui}|oui)
+	<div class="actions">
+		<a href="#GET{url_defiltrer}"><:tickets:lien_supprimer_filtres:></a>
+	</div>]
+</BOUCLE_si_afficher_filtres>
+#FILTRE{trim}

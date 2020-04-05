@@ -1,0 +1,140 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:tickets:cfg_form_tickets_general:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE
+		<[(#DIV|sinon{ul})] class="editer-groupe">
+			[(#PLUGIN{medias}|oui)
+			<[(#DIV|sinon{li})] class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:tickets:cfg_lgd_fichiers:></h3>
+				<[(#DIV|sinon{ul})]>
+						[(#SAISIE{case, joindre_fichiers,
+							label=<:tickets:cfg_lbl_joindre_fichiers:>,
+							label_case=<:tickets:cfg_lbl_case_joindre_fichiers:>})]
+						[(#SAISIE{input, formats_documents_ticket,
+							label=<:tickets:cfg_lbl_formats_documents_ticket:>,
+							explication=<:tickets:cfg_explication_formats_documents_ticket:>})]
+				</[(#DIV|sinon{ul})]>
+				</fieldset>
+			</[(#DIV|sinon{li})]>
+			]
+
+			<[(#DIV|sinon{li})] class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:tickets:cfg_lgd_commentaires:></h3>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					[(#SAISIE{radio, forums_publics,
+						label=<:tickets:cfg_lbl_forums_publics:>,
+						defaut=posteriori,
+						datas=[(#ARRAY{
+							non,<:tickets:cfg_bouton_radio_desactiver_forum_public:>,
+							posteriori,<:forum:bouton_radio_publication_immediate:>,
+							priori,<:forum:bouton_radio_moderation_priori:>,
+							abo,<:forum:bouton_radio_enregistrement_obligatoire:>,
+						})]})]
+				</[(#DIV|sinon{ul})]>
+				</fieldset>
+			</[(#DIV|sinon{li})]>
+
+			<[(#DIV|sinon{li})] class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:tickets:cfg_lgd_notifications:></h3>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					[(#EVAL{defined("_TICKETS_AUTORISATION_NOTIFIER")}|non)
+						[(#SAISIE{radio,notif_destinataires,
+							label=<:tickets:cfg_lbl_notif_destinataires:>,
+							defaut=assigne,
+							explication=<:tickets:explication_notif_destinataire:>,
+							datas=[(#ARRAY{
+								assigne,<:tickets:cfg_notif_assigne:>,
+								webmestre,<:tickets:cfg_notif_webmestre:>,
+								0minirezo,<:tickets:cfg_notif_admin:>,
+								1comite,<:tickets:cfg_notif_auteur:>,
+								liste,<:tickets:cfg_notif_liste:>,
+							})]}
+						)]
+
+						[(#SAISIE{auteurs,notif_auteurs,
+							label=<:tickets:cfg_notif_liste_auteurs:>,
+							multiple=oui,
+							option_statut=oui})]
+					]
+					[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|non)
+					<[(#DIV|sinon{li})] class="editer">
+						<label><:tickets:cfg_lbl_notification_publique:></label>
+						<p class="explication"><:tickets:message_zpip_inactif:></p>
+					</[(#DIV|sinon{li})]>
+					]
+				</[(#DIV|sinon{ul})]>
+
+				</fieldset>
+			</[(#DIV|sinon{li})]>
+
+			<[(#DIV|sinon{li})] class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:tickets:cfg_lgd_objets:></h3>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					<[(#DIV|sinon{li})] class="editer editer_tickets_associer">
+						<label><:tickets:info_tickets_cles_association:></label>
+						<INCLURE{fond=formulaires/inc-choisir-tables-liees,selected=#ENV*{tables_liees},name=tables_liees} />
+					</[(#DIV|sinon{li})]>
+				</[(#DIV|sinon{ul})]>
+				</fieldset>
+			</[(#DIV|sinon{li})]>
+			
+			<[(#DIV|sinon{li})] class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:tickets:cfg_lgd_champs_options_autres:></h3>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+				[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|oui)
+					[(#SAISIE{case, desactiver_public,
+						label=<:tickets:cfg_lbl_desactiver_public:>,
+						label_case=<:tickets:cfg_explication_desactiver_public:>,
+						defaut=''})]
+					]
+				[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|non)
+					<[(#DIV|sinon{li})]>
+						<label><:tickets:cfg_lbl_desactiver_public:></label>
+						<p class="explication"><:tickets:message_zpip_inactif:></p>
+					</[(#DIV|sinon{li})]>
+				]
+				[(#SAISIE{case, cacher_moteurs,
+					label_case=<:tickets:cfg_explication_cacher_moteurs:>,
+					label=<:tickets:cfg_lbl_cacher_moteurs:>,
+					defaut=on})]
+				[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|oui)
+					[(#SAISIE{case, notification_publique,
+						label=<:tickets:cfg_lbl_notification_publique:>,
+						label_case=<:tickets:cfg_lbl_case_notification_publique:>})]
+				]
+
+		<script type="text/javascript">
+		//<![CDATA[
+			jQuery(function($) {
+				// on cache la liste des auteurs
+				function verifier_affichage_notif_auteurs(){
+					if ($('input[name=notif_destinataires]:checked').val()=='liste'){
+						$(".editer_notif_auteurs").not('.visible').show();
+					} else {
+						$(".editer_notif_auteurs").not('.visible').hide();
+					}
+				};
+				verifier_affichage_notif_auteurs();
+				$("input[name=notif_destinataires]").change(function(){verifier_affichage_notif_auteurs()});
+			});
+		//]]>
+		</script>
+				</[(#DIV|sinon{ul})]>
+				</fieldset>
+			</[(#DIV|sinon{li})]>
+		</[(#DIV|sinon{ul})]>
+		<input type="hidden" name="_meta_casier" value="tickets/general" />
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

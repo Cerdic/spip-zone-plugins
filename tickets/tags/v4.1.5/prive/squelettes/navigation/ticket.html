@@ -1,0 +1,8 @@
+[(#ID_TICKET|generer_info_entite{ticket,[(#VAL{ticket}|id_table_objet)],'**'}|intval|=={#ID_TICKET}|sinon_interdire_acces)]
+<BOUCLE_nav(TICKETS){id_ticket}{statut?}{si #ENV{exec}|=={ticket}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','ticket','id',#ID_TICKET}}}
+#BOITE_FERMER
+</BOUCLE_nav>
+[(#ENV{exec}|=={ticket_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/ticket_edit,env}>]
+<//B_nav>

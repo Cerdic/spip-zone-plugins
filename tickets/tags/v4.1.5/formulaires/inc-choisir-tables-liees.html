@@ -1,0 +1,8 @@
+<BOUCLE_objets(POUR){tableau #REM|lister_tables_objets_sql}>[(#VALEUR{editable}|oui)
+#SET{id,#ENV{name}|replace{\W,'_'}|concat{'_',#CLE}}
+<div class="choix choix_#CLE">
+	<input type="checkbox"  id="#GET{id}" name="#ENV{name}\[\]"
+				 value="#VALEUR{table_objet}"[(#VALEUR{table_objet}|in_any{#ENV{selected}})checked="checked"] />
+	<label for="#GET{id}">[(#VALEUR{texte_objets}|_T)]</label>
+</div>
+]</BOUCLE_objets>

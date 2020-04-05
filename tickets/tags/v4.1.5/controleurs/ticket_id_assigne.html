@@ -1,0 +1,13 @@
+[(#REM)
+
+	Controleur pour le crayon 'ticket_id_assigne'
+	
+]
+#CACHE{0}
+<BOUCLE_t(TICKETS){id_ticket}{statut==.*}>
+<select class="crayon-active" name="#ENV{name_#ENV{crayon_modele}}"
+	style="width:#ENV{largeur}px;#ENV{style}" >
+	<option value="0" [(#ID_ASSIGNE|=={0}|?{" selected='selected'",""})]><:tickets:no_assignation:></option>
+	[(#ID_ASSIGNE|tickets_select_assignation)]
+</select>
+</BOUCLE_t>
