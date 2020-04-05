@@ -1,0 +1,13 @@
+[(#REM) Fil d'Ariane ]
+<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:pass_erreur:>[ (#ENV{status,404})]</strong></p>
+
+<div class="contenu-principal">
+	<div class="cartouche">
+		<h1 class="h1"><:pass_erreur:>[ (#ENV{status,404})]</h1>
+	</div>
+	[<div class="chapo">(#ENV*{erreur}|propre)</div>]
+
+    [(#REM) Traitement des erreurs ]
+    <INCLURE{fond=inclure/inc-erreur}{env}{status=#ENV{status,404}}>
+
+</div>

@@ -1,0 +1,19 @@
+<div class="formulaire_spip formulaire_bug_report ajax" id="formulaire_bug_report#ENV{url}">
+<br class='bugajaxie' />
+	<h3><:spip400:report_a_bug:></h3>
+[(#ENV**{code_erreur}|=={401}|oui)
+	<p><:spip400:report_an_authorized_bug_comment:></p>
+][(#ENV**{code_erreur}|=={401}|non)
+	<p><:spip400:report_a_bug_comment:></p>
+]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<input type="hidden" name="url_bug" value="#ENV{url_bug}" />
+	<input type="hidden" name="code_erreur" value="#ENV{code_erreur}" />
+	<p class="boutons"><input type="submit" class="submit" name="valide" value="<:spip400:report_a_bug_envoyer:>" /></p>
+</form>
+]
+</div>

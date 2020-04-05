@@ -1,0 +1,24 @@
+#CACHE{0}
+[(#SET{url_error,[(#EVAL{spip_400_self()}|sinon{#ENV{cible,#SELF}})]})]
+
+<div class="texte entry-content">
+
+[(#ENV{status}|=={404}|oui)
+	<h3><:spip400:404_error:></h3>
+	<p><:spip400:404_error_comment{plan=#URL_PAGE{plan},sommaire=#URL_SITE_SPIP,ecrire=#URL_PAGE{login}}|propre:></p>
+	#FORMULAIRE_BUG_REPORT{404,#GET{url_error}}
+][(#ENV{status}|=={401}|oui)
+	<h3><:spip400:401_error:></h3>
+	[(#SESSION{id_auteur}|oui)
+		<p><:spip400:401_error_comment_connected{plan=#URL_PAGE{plan},sommaire=#URL_SITE_SPIP,ecrire=#URL_PAGE{login}}|propre:></p>
+		#FORMULAIRE_BUG_REPORT{401,#GET{url_error}}
+	][(#SESSION{id_auteur}|non)
+		<p><:spip400:401_error_comment_notconnected{plan=#URL_PAGE{plan},sommaire=#URL_SITE_SPIP,ecrire=#URL_PAGE{login}}|propre:></p>
+		#FORMULAIRE_LOGIN{#ENV{cible},'',0}
+	]
+]
+
+</div>
+
+[(#REM) Ecriture d'un log specifique ]
+[(#EVAL{spip_400_log('[(#ENV{status,404})]','[(#GET{url_error})]')})]
