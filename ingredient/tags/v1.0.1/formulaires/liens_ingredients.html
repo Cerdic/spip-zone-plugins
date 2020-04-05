@@ -1,0 +1,24 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+  <h3 class="titrem">[(#CHEMIN_IMAGE{ingredient-add-24.png}|balise_img{'', cadre-icone})]<:ingredient:texte_ajouter_ingredient:></h3>
+
+  [<p class="reponse_formulaire reponse_formulaire_erreur">
+  (#ENV*{message_erreur})
+  </p>]
+  [<p class="reponse_formulaire reponse_formulaire_ok">
+    (#ENV**{message_ok})
+  </p>]
+
+  [(#EDITABLE|oui)
+  <form action="#ENV{action}" method="post">
+    #ACTION_FORMULAIRE{#ENV{action}}
+    <ul>
+      #GENERER_SAISIES{#ENV{_saisies}}
+    </ul>
+
+    <p class="boutons">
+      <input type="submit" class="submit" value="<:pass_ok:>" />
+    </p>
+  </form>
+  ]
+</div>

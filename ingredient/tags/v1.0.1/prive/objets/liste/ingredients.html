@@ -1,0 +1,40 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	id_ingredient,1,
+	points,-1
+}})]<B_liste_ingredients>
+#ANCRE_PAGINATION
+<div class="liste-objets ingredients">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{ingredient:info_1_ingredient,ingredient:info_nb_ingredients}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:ingredient:champ_titre_label:>,ajax})]</th>
+      <th class="action" scope="col"></th>
+			<th class='id' scope='col'>[(#TRI{id_ingredient,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_ingredients(INGREDIENTS){id_mot?}{auteurs_liens.id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{ingredient-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_INGREDIENT|image_reduire{20,26})]<a href="[(#ID_INGREDIENT|generer_url_entite{ingredient})]" title="<:info_numero_abbreviation|attribut_html:> #ID_INGREDIENT">[(#RANG). ][(#TITRE|ucfirst)]</a></td>
+      <td class="action">
+        [(#AUTORISER{supprimer, ingredient, #ID_INGREDIENT})
+        [(#BOUTON_ACTION{<:lien_supprimer:>, #URL_ACTION_AUTEUR{supprimer_ingredient, #ID_INGREDIENT, #SELF}, ajax , Supprimer cet ingredients ?})]
+        ]
+      </td>
+			<td class='id'>[(#AUTORISER{modifier,ingredient,#ID_INGREDIENT}|?{
+				<a href="[(#URL_ECRIRE{ingredient_edit,id_ingredient=#ID_INGREDIENT})]">#ID_INGREDIENT</a>,
+				#ID_INGREDIENT
+			})]</td>
+		</tr>
+	</BOUCLE_liste_ingredients>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_ingredients>[
+<div class="liste-objets ingredients caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_ingredients>

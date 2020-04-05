@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,ingredient,#ID_INGREDIENT}|sinon_interdire_acces)]
+<BOUCLE_ingredient(INGREDIENTS){id_ingredient}{si #ENV{exec}|=={ingredient}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,ingredient,#ID_INGREDIENT})
+		[(#ID_INGREDIENT|afficher_qui_edite{ingredient}|non)
+			[(#URL_ECRIRE{ingredient_edit,id_ingredient=#ID_INGREDIENT}|icone_verticale{<:ingredient:icone_modifier_ingredient:>,ingredient,edit,right ajax preload})]
+		]
+		[(#ID_INGREDIENT|afficher_qui_edite{ingredient}|oui)
+			[(#URL_ECRIRE{ingredient_edit,id_ingredient=#ID_INGREDIENT}|icone_verticale{#ID_INGREDIENT|afficher_qui_edite{ingredient},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>}) [(#CHEMIN_IMAGE{ingredient-24.png}|balise_img{ingredient,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{ingredient,#ID_INGREDIENT}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/ingredient,id=#ID_INGREDIENT,id_ingredient=#ID_INGREDIENT,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,ingredient,#ID_INGREDIENT})
+	[(#ID_INGREDIENT|afficher_qui_edite{ingredient}|non)
+		[(#URL_ECRIRE{ingredient_edit,id_ingredient=#ID_INGREDIENT}|icone_verticale{<:ingredient:icone_modifier_ingredient:>,ingredient,edit,right ajax preload})]
+	]
+	[(#ID_INGREDIENT|afficher_qui_edite{ingredient}|oui)
+		[(#URL_ECRIRE{ingredient_edit,id_ingredient=#ID_INGREDIENT}|icone_verticale{#ID_INGREDIENT|afficher_qui_edite{ingredient},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,ingredient,id,#ID_INGREDIENT},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_ingredient>
+[(#ENV**{exec}|=={ingredient_edit}|?{#INCLURE{fond=prive/squelettes/contenu/ingredient_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_ingredient>

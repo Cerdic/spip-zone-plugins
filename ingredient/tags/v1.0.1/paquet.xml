@@ -1,0 +1,39 @@
+<paquet
+	prefix="ingredient"
+	categorie="edition"
+	version="1.0.1"
+	etat="dev"
+	compatibilite="[3.0.17;3.2.*]"
+	logo="prive/themes/spip/images/ingredient-64.png"
+	documentation=""
+	schema="1.0.0"
+>
+	<!--
+		Paquet genere le 2015-02-02 18:06:00
+		(Vous pouvez bien entendu supprimer ces commentaires)
+	-->
+
+	<nom>ingrédients</nom>
+
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs -->
+	<auteur lien='http://p.henix.be'>Phenix</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="chosen" compatibilite="[1.0.0;]" />
+
+	<pipeline nom="autoriser" inclure="ingredient_autorisations.php" />
+
+	<pipeline nom="pre_edition_lien" inclure="ingredient_pipelines.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/ingredient.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/ingredient.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/ingredient.php" />
+	<pipeline nom="affiche_milieu" inclure="ingredient_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="ingredient_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="ingredient_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="ingredient_pipelines.php" />
+
+	<menu nom="ingredients" titre="ingredient:titre_ingredients" parent="menu_edition" icone="images/ingredient-16.png" action="ingredients" />
+</paquet>

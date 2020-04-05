@@ -1,0 +1,7 @@
+<BOUCLE_ingredient(INGREDIENTS){id_ingredient=#ENV{id}}>
+<div class='infos'>
+[(#SET{texte_objet,<:ingredient:titre_ingredient:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_INGREDIENT</p></div>
+
+</div>
+</BOUCLE_ingredient>

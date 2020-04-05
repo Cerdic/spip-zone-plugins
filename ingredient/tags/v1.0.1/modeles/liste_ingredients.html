@@ -1,0 +1,15 @@
+<B_ingredient_liee>
+	<table[ class="(#ENV{table_class})"]>
+		<caption><:ingredient:titre_liste_ingredients:></caption>
+		<tr>
+			<th><:ingredient:champ_titre_quantite:></th>
+			<th><:ingredient:titre_ingredients:></th>
+		</tr>
+		<BOUCLE_ingredient_liee(INGREDIENTS ingredients_liens){id_article}{par titre}>
+			<tr[ class="(#ENV{tr_class})"]>
+				<td[ class="(#ENV{td_class})"]>#QUANTITE</td>
+				<td[ class="(#ENV{td_class})"]><a href="#URL_INGREDIENT">[(#TITRE|ucfirst)]</a></td>
+			</tr>
+		</BOUCLE_ingredient_liee>
+	</table>
+</B_ingredient_liee>

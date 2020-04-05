@@ -1,0 +1,35 @@
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{ingredient-32.png}|balise_img{'',cadre-icone})]<:ingredient:titre_ingredients:>, basic})]
+<B_ingredient_liee>
+  <table>
+    <tr>
+      <th></th>
+      <th><:ingredient:champ_titre_quantite:></th>
+      <th><:ingredient:titre_ingredients:></th>
+      <th></th>
+    </tr>
+    <BOUCLE_ingredient_liee(INGREDIENTS ingredients_liens){id_article}{pagination}>
+      <tr>
+        <td>[(#LOGO_INGREDIENT|image_reduire{20,20})]</td>
+        <td>#QUANTITE</td>
+        <td><a href="#URL_ECRIRE{ingredient, id_ingredient=#ID_INGREDIENT}">[(#TITRE|ucfirst)]</a></td>
+        <td>
+          [(#AUTORISER{ingredient, dissocier}|oui)
+          [(#BOUTON_ACTION{<:ingredient:retirer_lien_ingredient:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{X})], #URL_ACTION_AUTEUR{supprimer_lien, ingredient-#ID_INGREDIENT-article-#ID_OBJET, #SELF}, link delete ajax})]
+          ]
+
+        </td>
+      </tr>
+    </BOUCLE_ingredient_liee>
+  </table>
+  [<p class="pagination">(#PAGINATION{prive})</p>]
+</B_ingredient_liee>
+<p>
+  <:ingredient:info_aucun_ingredient:>
+</p>
+<//B_ingredient_liee>
+
+<a href="[(#REM|generer_url_ecrire_entite_edit{ingredient}|parametre_url{redirect,#SELF|parametre_url{dummy,'','&'}})]" class="popin">
+  Créer un nouvel ingredient
+</a>
+
+#BOITE_FERMER

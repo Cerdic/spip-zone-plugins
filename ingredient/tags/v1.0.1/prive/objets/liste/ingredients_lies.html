@@ -1,0 +1,70 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	id_ingredient,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutingl,#EVAL{_request("debutingl");}}}
+<B_liste_ingredients>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutingl,#EVAL{_request("debutingl");}}}
+#SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies ingredients">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{ingredient:info_1_ingredient,ingredient:info_nb_ingredients}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(INGREDIENTS){tout}{id_ingredient IN #GET{selection}}{where?}
+			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_ingredient==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#TITRE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutingl,@#ID_INGREDIENT}|ancre_url{paginationingl}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
+
+		<tr class='first_row'>
+			<th class='titre' scope='col'>[(#TRI{multi titre,<:ingredient:champ_titre_label:>,ajax})]</th>
+      <th class='quantite' scope='col'><:ingredient:quantite:></th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_ingredients(INGREDIENTS){id_ingredient IN #GET{selection}}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} ingl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_INGREDIENT|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='titre'>
+        [(#LOGO_INGREDIENT|image_reduire{20,20})]
+        <a href="[(#ID_INGREDIENT|generer_url_entite{ingredient})]">#TITRE</a>
+      </td>
+      <td class="quantite">
+        [(#REM) <INCLURE{fond=prive/squelettes/quantite, env} /> ]
+        <input name="quantite" type="text" value=""/>
+        <input type="submit" value="ok"/>
+
+        <button name="quantite[]">test</button>
+      </td>
+			<td class='action'>
+				[(#ENV{editable}|oui)
+					<button class="button link delete" name="supprimer_lien\[ingredient-#ID_INGREDIENT-#OBJET-#ID_OBJET\]" value="X"><:ingredient:retirer_lien_ingredient:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_ingredients>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[ingredient-*-#OBJET-#ID_OBJET\]" value="X"><:ingredient:retirer_tous_liens_ingredients:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_ingredients>
+<div class="liste-objets liste-objets-lies INGREDIENTS caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:ingredient:info_aucun_ingredient:>})]</strong>
+</div>
+<//B_liste_ingredients>
