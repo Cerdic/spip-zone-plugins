@@ -1,0 +1,74 @@
+<BOUCLE_reservation_communication(RESERVATION_COMMUNICATIONS){id_reservation_communication}{statut?}>
+
+[<div class="champ contenu_id_evenement[ (#ID_EVENEMENT|>{0}|?{'',vide})]">
+	<label><:agenda:info_evenement:> : </label>
+	
+	<span dir='#LANG_DIR' class='#EDIT{id_evenement} id_evenement'><a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}">(#INFO_TITRE{evenement,#ID_EVENEMENT})</a></span>
+</div>]
+
+[<div class="champ contenu_id_article[ (#ID_ARTICLE|>{0}|?{'',vide})]">
+	<label><:ecrire:info_article:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_article} id_article'><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}">(#INFO_TITRE{article,#ID_ARTICLE})</a></span>
+</div>]
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_titre_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_texte_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{texte} texte'>(#TEXTE)</span>
+</div>]
+
+[<div class="champ contenu_date_redac[ (#DATE_REDAC*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_date_redac_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_redac} date_redac'>(#DATE_REDAC)</span>
+</div>]
+
+[<div class="champ contenu_date_envoi[ (#DATE_ENVOI*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_date_envoi_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_envoi} date_envoi'>(#DATE_ENVOI)</span>
+</div>]
+
+[<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_type_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{type} type'>(#TYPE)</span>
+</div>]
+[(#REM) desactivé pour le moment
+[<div class="champ contenu_html_email[ (#HTML_EMAIL*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_html_email_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{html_email} html_email'>(#HTML_EMAIL)</span>
+</div>]
+
+[<div class="champ contenu_texte_email[ (#TEXTE_EMAIL*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_texte_email_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{texte_email} texte_email'>(#TEXTE_EMAIL)</span>
+</div>]
+
+[<div class="champ contenu_recurrence[ (#RECURRENCE*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_recurrence_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{recurrence} recurrence'>(#RECURRENCE)</span>
+</div>]
+
+[<div class="champ contenu_email_test[ (#EMAIL_TEST*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_email_test_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{email_test} email_test'>(#EMAIL_TEST)</span>
+</div>]
+
+[<div class="champ contenu_total[ (#TOTAL*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_total_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{total} total'>(#TOTAL)</span>
+</div>]
+
+[<div class="champ contenu_current[ (#CURRENT*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_current_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{current} current'>(#CURRENT)</span>
+</div>]
+
+[<div class="champ contenu_failed[ (#FAILED*|strlen|?{'',vide})]">
+	<label><:reservation_communication:champ_failed_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{failed} failed'>(#FAILED)</span>
+</div>]
+]
+</BOUCLE_reservation_communication>

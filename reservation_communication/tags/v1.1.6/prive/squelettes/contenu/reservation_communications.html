@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/reservation_communications, par=titre, env, ajax, sinon=<:reservation_communication:info_aucun_reservation_communication:>}>
+
+[(#AUTORISER{creer,reservation_communication})
+	[(#URL_ECRIRE{reservation_communication_edit,new=oui}|icone_verticale{<:reservation_communication:icone_creer_reservation_communication:>,reservation_communication,new,right})]
+]

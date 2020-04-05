@@ -1,0 +1,33 @@
+<paquet
+	prefix="reservation_communication"
+	categorie="communication"
+	version="1.1.6"
+	etat="stable"
+	compatibilite="[3.0.17;3.3.*]"
+	logo="prive/themes/spip/images/reservation_communication-64.png"
+	documentation="https://contrib.spip.net/Reservation-Communications"
+	schema="1.0.0"
+>
+	<nom>Réservation Comunications</nom>
+
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs -->
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
+	<licence>GNU/GPL</licence>
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
+	<necessite nom="reservation_evenement" compatibilite="[1.29.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+
+	<pipeline nom="autoriser" inclure="reservation_communication_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/reservation_communication.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/reservation_communication.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/reservation_communication.php" />
+	<pipeline nom="affiche_enfants" inclure="reservation_communication_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="reservation_communication_pipelines.php" />
+	<pipeline nom="afficher_complement_objet" inclure="reservation_communication_pipelines.php" />
+	<pipeline nom="reservation_compteur_action" inclure="reservation_communication_pipelines.php" />
+	<pipeline nom="notifications_archive" inclure="reservation_communication_pipelines.php" />
+	<pipeline nom="reservation_evenement_objets_navigation" inclure="reservation_communication_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="reservation_communication_pipelines.php" />
+
+	<menu nom="reservation_communications" titre="reservation_communication:titre_reservation_communications" parent="menu_activite" icone="images/reservation_communication-16.png" action="reservation_communications" />
+</paquet>
