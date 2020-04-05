@@ -1,0 +1,33 @@
+<plugin>
+	<nom>Tooltip</nom>
+	<prefix>tooltip</prefix>
+	<icon>icon/tooltip.png</icon>
+
+	<version>1.6.1</version>
+	<etat>stable</etat>
+	<categorie>navigation</categorie>
+
+	<slogan>Infobulles jQuery</slogan>
+	<description>
+		Infobulles en jQuery et CSS, accessibles au clavier.
+		_ D'apr&egrave;s le script jQuery &laquo;&nbsp;Tooltip&nbsp;&raquo;.
+	</description>
+	<lien>http://bassistance.de/jquery-plugins/jquery-plugin-tooltip/</lien>
+	<auteur>[J&#246;rn Zaefferer->http://bassistance.de] - 2006-2008</auteur>
+	<licence>MIT/GPL</licence>
+
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>tooltip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>tooltip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>tooltip_pipelines.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[1.9.1;3.1.99]" />
+</plugin>

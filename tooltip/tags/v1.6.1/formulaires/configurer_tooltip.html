@@ -1,0 +1,33 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="fieldset">
+			<ul>
+				<li class="editer editer_selecteur[ (#ENV**{erreurs}|table_valeur{selecteur}|oui)erreur]">
+					<label for="selecteur"><:tooltip:label_selecteur:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur})</span>]
+					<p class="explication"><:tooltip:explication_selecteur:></p>
+					<input type="text" name="selecteur" class="text" id="selecteur" size="60" value="#ENV*{selecteur}" />
+				</li>
+				<li class="editer editer_showurl[ (#ENV**{erreurs}|table_valeur{showurl}|oui)erreur]">
+					<label for="showurl"><:tooltip:label_showurl:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{showurl})</span>]
+					<div class="choix">
+						<input type="checkbox" name="showurl" id="showurl"[(#ENV*{showurl}|=={on}|oui)checked="checked"] />
+					</div>
+					
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+	<p class="boutons">
+		<input type="submit" name="enregistrer" class="submit" value="<:bouton_valider:>" />
+	</p>
+</div></form>
+</div>
