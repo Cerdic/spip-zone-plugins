@@ -1,0 +1,101 @@
+#SET{prix_objet, #PRIX*{#ENV{objet},#ENV{id_objet}}}
+#SET{options_liees, #ARRAY}
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<B_options_liees>
+	<h3 class="titrem">Options liées</h3>
+	<div class="liste-objets [(#VAL{option}|objet_info{table_objet})]">
+		<table class='spip liste'>
+			[<caption><strong class="caption"><a href="[(#ID_OPTIONSGROUPE|generer_url_entite{optionsgroupe})]">(#TITRE_GROUPE)</a></strong></caption>]
+			<thead>
+			<tr class='first_row'>
+				<th class='titre principale' scope='col'><:option:champ_titre_label:></th>
+				<th class='principale' scope='col'>Prix option HT</th>
+				<th class='principale' scope='col'>Prix option TTC</th>
+				<th class='principale' scope='col'>Prix final TTC</th>
+				<th class='id' scope='col'></th>
+				<th class='id' scope='col'></th>
+			</tr>
+			</thead>
+			<tbody>
+				<BOUCLE_options_liees(OPTIONS spip_options_liens spip_optionsgroupes)
+					{par titre_groupe, rang, options_liens.prix_option_objet, titre}
+					{options_liens.objet=#ENV{objet}}{options_liens.id_objet=#ENV{id_objet}}{si #ENV{modifier_option}|non}>
+				
+				[(#REM) |unique sur l'id, pas sur le titre, au cas où deux groupes aient le même nom ]
+				[<tr class="row-inverse (#ID_OPTIONSGROUPE|unique)"><td colspan="6"><strong>[(#TITRE_GROUPE|supprimer_numero)]</strong></td></tr>]
+				
+				#SET{prix_final, #PRIX_OPTION*{#ENV{objet},#ENV{id_objet},#ID_OPTION}}
+				#SET{prix_option, #GET{prix_final}|moins{#GET{prix_objet}}}
+				#SET{options_liees, #GET{options_liees}|push{#ID_OPTION} }
+				<tr class="row_even">
+					<td class='titre principale'>#TITRE</td>
+					<td>[(#PRIX_OPTION_OBJET|prix_formater)]</td>
+					<td>[(#GET{prix_option}|prix_formater)]</td>
+					<td>[(#GET{prix_final}|prix_formater)]</td>
+					<td>[(#BOUTON_ACTION{<:option:modifier:>,#SELF|parametre_url{id_option,#ID_OPTION}|parametre_url{modifier_option,1},ajax})]</td>
+					<td>[(#BOUTON_ACTION{<:option:retirer:>,#URL_ACTION_AUTEUR{supprimer_option_objet,#ENV{objet}-#ENV{id_objet}-#ID_OPTION,#SELF},ajax,<:option:retirer_lien_option:> ?})]</td>
+				</tr>
+				</BOUCLE_options_liees>
+			</tbody>
+		</table>
+	</div>
+	</B_options_liees>
+
+	
+</div>
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	[(#REM) mode édition du prix d'une option ]
+	<BOUCLE_modifier_option(CONDITION){si #ENV{modifier_option}}>
+	<h3 class="titrem">Modifier le prix d'une option</h3>
+	<form method="post" action="#ENV{action}">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+			<BOUCLE_modifoption(OPTIONS){par num titre}{id_option}{options_liens.objet}{options_liens.id_objet}>
+			<div class="editer">
+				<h3>[(#TITRE)]</h3>
+			</div>
+			<input type="hidden" name="id_option" value="#ENV{id_option}" />
+			<input type="hidden" name="ttc" value="#ENV{ttc}" />
+			<input type="hidden" name="modifier_option" value="1" />
+			[(#SAISIE{input, prix, label=#ENV{ttc}|?{<:option:champ_prix_option_ttc_label:>,<:option:champ_prix_option_label:>}, explication=<:option:explication_laisser_vide:>,valeur=#ENV{prix,#PRIX_OPTION_OBJET}})]
+			</BOUCLE_modifoption>
+		</div>
+		<p class="boutons">
+			<a href="[(#SELF|parametre_url{modifier_option,''})]" class="ajax bouton">Annuler</a>
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</form>
+	</BOUCLE_modifier_option>
+
+	[(#REM) mode ajout d'options ]
+	<form method="post" action="#ENV{action}">
+		<h3 class="titrem">Ajouter une option</h3>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+			<BOUCLE_groupes(OPTIONSGROUPES){par num titre_groupe}>
+			<B_options>
+			<div class="editer">
+				<label for="ajout_option_groupe_#ID_OPTIONSGROUPE">#TITRE_GROUPE</label>
+				<select id="ajout_option_groupe_#ID_OPTIONSGROUPE" name="id_option_groupe_#ID_OPTIONSGROUPE">
+				<option value=""></option>
+				<BOUCLE_options(OPTIONS){par rang, prix_defaut, num titre}{id_optionsgroupe}{id_option !IN #GET{options_liees}}>
+				<option value="#ID_OPTION">#TITRE : [(#PRIX_DEFAUT|prix_formater)]</option>
+				</BOUCLE_options>
+				</select>
+			</div>
+			</B_options>
+			</BOUCLE_groupes>
+		</div>
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="Ajouter" /></p>
+	</form>
+	<//B_modifier_option>
+		
+	</form>
+</div>

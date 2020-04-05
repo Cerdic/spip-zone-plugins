@@ -1,0 +1,15 @@
+<div class="formulaire formulaire_spip formulaire_navigation_filtre">
+	#ENV{action}
+	<form method='post'>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+
+			#SAISIE{optionsgroupes,id_optionsgroupe,label=Groupe}
+			#SAISIE{input, recherche, label=Recherche}
+			
+		</div>
+		<p class="boutons"><input type="submit" class="submit" name="valide" value="Recherche"/></p>
+	</form>
+</div>
+
+[(#URL_ECRIRE{optionsgroupes}|icone_horizontale{<:optionsgroupe:gerer_groupes:>,optionsgroupe})]

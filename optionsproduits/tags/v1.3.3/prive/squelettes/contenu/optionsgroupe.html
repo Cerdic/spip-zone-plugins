@@ -1,0 +1,47 @@
+[(#AUTORISER{voir,optionsgroupe,#ID_OPTIONSGROUPE}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{optionsgroupe}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{optionsgroupe}|objet_info{url_edit}})]
+<BOUCLE_optionsgroupe(OPTIONSGROUPES){id_optionsgroupe}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,optionsgroupe,#ID_OPTIONSGROUPE})
+		[(#ID_OPTIONSGROUPE|afficher_qui_edite{optionsgroupe}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_optionsgroupe=#ID_OPTIONSGROUPE}|icone_verticale{<:optionsgroupe:icone_modifier_optionsgroupe:>,optionsgroupe,edit,right ajax preload})]
+		]
+		[(#ID_OPTIONSGROUPE|afficher_qui_edite{optionsgroupe}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_optionsgroupe=#ID_OPTIONSGROUPE}|icone_verticale{#ID_OPTIONSGROUPE|afficher_qui_edite{optionsgroupe},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE_GROUPE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{optionsgroupe-24.png}|balise_img{optionsgroupe,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{optionsgroupe,#ID_OPTIONSGROUPE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/optionsgroupe,id=#ID_OPTIONSGROUPE,id_optionsgroupe=#ID_OPTIONSGROUPE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,optionsgroupe,id,#ID_OPTIONSGROUPE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/optionsgroupe-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/optionsgroupe-enfants,id_optionsgroupe,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,optionsgroupe,id_optionsgroupe,#ID_OPTIONSGROUPE,objet,optionsgroupe,id_objet,#ID_OPTIONSGROUPE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_optionsgroupe>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_optionsgroupe>

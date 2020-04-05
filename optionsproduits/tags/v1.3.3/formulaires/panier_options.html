@@ -1,0 +1,48 @@
+#SET{prix,#ENV*{prix}}
+<div class="formulaire_spip overflow-visible">
+	<form action="#ENV{action}" method="post" class="js-achat-form achat">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="objet" value="#ENV{objet}">
+		<input type="hidden" name="id_objet" value="#ENV{id_objet}">
+		<input type="hidden" name="prix_objet" value="#GET{prix}">
+		
+		[(#REM) les options listées par groupe ]
+		#SET{options, #ENV{options}|explode{|}}
+		<BOUCLE_optionsgroupes(OPTIONSGROUPES){par rang, titre_groupe}>
+		<B_radio>
+			<div class="editer editer_radio editer_options_objet">
+				<label>#TITRE_GROUPE</label>
+				<BOUCLE_radio(OPTIONS){id_optionsgroupe}{options_liens.objet=#ENV{objet}}{options_liens.id_objet=#ID_OBJET}{par rang, prix_option_objet}{doublons}>
+				[(#SET{prix_option, #PRIX_OPTION*{#ENV{objet},#ID_OBJET,#ID_OPTION}})]
+				[(#SET{prix_option_seule, #GET{prix_option}|moins{#GET{prix}}})]
+				<div class="choix">
+					[(#LOGO_OPTION|image_reduire{240,200})]
+					<input data-prixoption="#GET{prix_option_seule}" type="radio" name="id_option#ID_OPTIONSGROUPE" class="radio"
+						   id="champ_id_option_[(#ID_OPTIONSGROUPE)]_[(#COMPTEUR_BOUCLE)]"
+						   [(#COMPTEUR_BOUCLE|=={1}|et{#ENV{#VAL{id_option}|concat{#ID_OPTIONSGROUPE}}|non})checked="checked"]
+						   [(#ID_OPTION|in_array{#GET{options}}|oui)checked="checked"] value="#ID_OPTION" />
+					<label for="champ_id_option_[(#ID_OPTIONSGROUPE)]_[(#COMPTEUR_BOUCLE)]">
+						#TITRE [(#PRIX_OPTION_OBJET|=={0}|non) [(#GET{prix_option}|>{#GET{prix}}|oui)+][(#GET{prix_option}|<{#GET{prix}}|oui)-][(#GET{prix_option}|moins{#GET{prix}}|prix_formater)] ]
+						[<span class="description_option">(#DESCRIPTION|propre|PtoBR)</span>]
+					</label>
+				</div>
+				</BOUCLE_radio>
+			</div>
+		</B_radio>
+		</BOUCLE_optionsgroupes>
+
+		<p class="prix_objet">
+			<strong><span class="js-prix_objet_valeur">[(#GET{prix}|prix_formater)]</span></strong>
+		</p>
+
+		<div class="editer">
+			<label for="quantite"><:options:quantite:/></label>
+			<input id="quantite" name="quantite" type="text" value="1">
+		</div>
+
+		<button type="submit" class="ajouter-panier">
+			<:options:ajouter_au_panier:/>
+		</button>
+		
+	</form>
+</div>

@@ -1,0 +1,46 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,-1,
+	id_optionsgroupe,1,
+	points,-1,
+	compteur_options,-1,
+}})]
+#SET{activer_rang, #ENV{exec}|in_array{#RANG_LISTE_OBJETS} }
+[(#GET{activer_rang}|oui) [(#VAL{rang}|setenv{par})] #SET{tri,rang}]
+<B_liste_optionsgroupes>
+#ANCRE_PAGINATION
+<div class="liste-objets optionsgroupes">
+<table class="spip liste" data-objet="optionsgroupes">
+	[<caption><strong class="caption">(#ENV*{titre_groupe,#GRAND_TOTAL|singulier_ou_pluriel{optionsgroupe:info_1_optionsgroupe,optionsgroupe:info_nb_optionsgroupes}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			[(#GET{activer_rang}|oui)<th class="picto" scope="col"></th>]
+			<th class="picto" scope="col"></th>
+			[(#GET{activer_rang}|oui)<th class="rang" scope="col">[(#TRI{rang,<span title="<:rang:lien_trier_rang|attribut_html:>"><:rang:info_rang_abbr:></span>,ajax})]</th>]
+			<th class="titre" scope="col">[(#TRI{titre_groupe,<:optionsgroupe:champ_titre_label:>,ajax})]</th>
+			<th class="date" scope="col">[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class="id" scope="col">[(#TRI{id_optionsgroupe,ID,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_optionsgroupes(OPTIONSGROUPES)
+		{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,rang},#GET{defaut_tri}}{par num titre_groupe}{pagination #ENV{nb,10}}>
+		<tr [(#GET{activer_rang}|oui)data-id_objet="#ID_OPTIONSGROUPE"] class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			[(#GET{activer_rang}|oui)<td class="picto">[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>]
+			<td class="picto">[(#CHEMIN_IMAGE{optionsgroupe-16.png}|balise_img)]</td>
+			[(#GET{activer_rang}|oui)<td class="rang">[(#RANG).]</td>]
+			<td class="titre principale">[(#LOGO_OPTIONSGROUPE|image_reduire{20,26})]<a href="[(#ID_OPTIONSGROUPE|generer_url_entite{optionsgroupe})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OPTIONSGROUPE">#TITRE_GROUPE</a></td>
+			<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td> 
+			<td class="id">[(#AUTORISER{modifier,optionsgroupe,#ID_OPTIONSGROUPE}|?{
+				<a href="[(#URL_ECRIRE{optionsgroupe_edit,id_optionsgroupe=#ID_OPTIONSGROUPE})]">#ID_OPTIONSGROUPE</a>,
+				#ID_OPTIONSGROUPE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_optionsgroupes>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_optionsgroupes>[
+<div class="liste-objets optionsgroupes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_optionsgroupes>

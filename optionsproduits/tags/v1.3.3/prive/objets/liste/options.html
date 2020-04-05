@@ -1,0 +1,52 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,-1,
+	id_option,1,
+	points,-1,
+	compteur_produits, -1,
+	id_optionsgroupe,1
+}})]
+#SET{activer_rang, #ENV{id_optionsgroupe}|et{#VAL{options}|in_array{#RANG_LISTE_OBJETS}} }
+[(#GET{activer_rang}|oui) [(#VAL{rang}|setenv{par})] #SET{tri,rang}]
+<B_liste_options>
+#ANCRE_PAGINATION
+<div class="liste-objets options">
+<table class="spip liste" data-objet="options">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{option:info_1_option,option:info_nb_options}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			[(#GET{activer_rang}|oui)<th class="picto" scope="col"></th>]
+			<th class="picto" scope="col"></th>
+			[(#GET{activer_rang}|oui)<th class="rang" scope="col">[(#TRI{rang,<span title="<:rang:lien_trier_rang|attribut_html:>"><:rang:info_rang_abbr:></span>,ajax})]</th>]
+			[(#ENV{id_optionsgroupe}|non)<th class="titre" scope="col">[(#TRI{id_optionsgroupe,Groupe,ajax})]</th>]
+			<th class="titre" scope="col">[(#TRI{titre,<:option:champ_titre_label:>,ajax})]</th>
+			<th class="" scope="col">[(#TRI{prix_defaut,Prix HT,ajax})]</th> 
+			<th class="" scope="col">[(#TRI{compteur_produits,Produits,ajax})]</th> 
+			<th class="id" scope="col">[(#TRI{id_option,ID,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_options(OPTIONS){compteur_left produits}
+		{id_optionsgroupe?}{id_mot?}{id_auteur?}{where?}{recherche?}
+		{tri #ENV{par,rang},#GET{defaut_tri}}{par num titre}{pagination #ENV{nb,20}}>
+		<tr [(#GET{activer_rang}|oui)data-id_objet="#ID_OPTION"] class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			[(#GET{activer_rang}|oui)<td class="picto">[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>]
+			<td class="picto">[(#CHEMIN_IMAGE{option-16.png}|balise_img)]</td>
+			[(#GET{activer_rang}|oui)<td class="rang">[(#RANG).]</td>]
+			[(#ENV{id_optionsgroupe}|non)<td class="titre">[(#INFO_TITRE_GROUPE{optionsgroupes,#ID_OPTIONSGROUPE}|supprimer_numero|sinon{<em>Aucun</em>})]</td>]
+			<td class="titre principale">[(#LOGO_OPTION|image_reduire{20,26})]<a href="[(#ID_OPTION|generer_url_entite{option})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OPTION">#TITRE</a></td>
+			<td class="secondaire numeric">[(#PRIX_DEFAUT|prix_formater)]</td> 
+			<td class="secondaire center">[(#COMPTEUR{produits})]</td> 
+			<td class="id">[(#AUTORISER{modifier,option,#ID_OPTION}|?{
+				<a href="[(#URL_ECRIRE{option_edit,id_option=#ID_OPTION})]">#ID_OPTION</a>,
+				#ID_OPTION
+			})]</td>
+		</tr>
+	</BOUCLE_liste_options>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_options>[
+<div class="liste-objets options caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_options>
