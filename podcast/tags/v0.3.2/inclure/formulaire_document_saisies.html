@@ -1,0 +1,36 @@
+		#SET{name,podcast}#SET{obli,''}#SET{defaut,#CONFIG{podcast/podcast_auto}}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<[(#ENV{_tag})] class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label><:podcast:cfg_titre_podcast:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]
+			<div class="choix">
+				#SET{val,non}
+				<input type="hidden" name="#GET{name}" value="#GET{val}" />
+				#SET{val,oui}
+				<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"  [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+				<label for="#GET{name}_#GET{val}"><:podcast:label_dans_podcast:></label>
+			</div>
+		</[(#ENV{_tag})]>
+		#SET{name,explicit}#SET{obli,''}#SET{defaut,#CONFIG{podcast/explicit_defaut}}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<[(#ENV{_tag})] class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]
+			#SET{val,yes}
+			<div class="choix">
+				<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+				<label for="#GET{name}_#GET{val}"><:podcast:label_contenu_explicit:></label>
+			#SET{val,clean}
+				<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+				<label for="#GET{name}_#GET{val}"><:podcast:valeur_clean:></label>
+			#SET{val,no}
+				<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+				<label for="#GET{name}_#GET{val}"><:item_non:></label>
+			</div>
+			<style>
+				.formulaire_spip .editer_podcast {padding-bottom: 0}
+				.formulaire_spip .editer_podcast .choix {border-bottom: 0;border-bottom-left-radius: 0;border-bottom-right-radius: 0}
+				.formulaire_spip .editer_explicit {padding-top: 0}
+				.formulaire_spip .editer_explicit .choix {border-top: 0;border-top-left-radius: 0;border-top-right-radius: 0}
+				.editer_explicit .choix label{margin-right: 2em;}
+			</style>
+		</[(#ENV{_tag})]>

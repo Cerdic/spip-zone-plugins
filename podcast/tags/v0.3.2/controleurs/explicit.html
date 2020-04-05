@@ -1,0 +1,15 @@
+[(#REM)
+
+	Controleur pour le crayon 'explicit' sur un document
+
+]<BOUCLE_d(DOCUMENTS){id_document}{tout}>
+<select class="crayon-active" name="#ENV{name_explicit}"
+ style="width:#ENV{largeur}px;#ENV{style}">
+	<option value="yes"[
+	(#EXPLICIT|=={oui}|?{selected="selected"})]><:item_oui:></option>
+	<option value="clean"[
+	(#EXPLICIT|=={clean}|?{selected="selected"})]><:podcast:valeur_clean:></option>
+	<option value="no"[
+	(#EXPLICIT|=={no}|?{selected="selected"})]><:item_non:></option>
+</select>
+</BOUCLE_d>

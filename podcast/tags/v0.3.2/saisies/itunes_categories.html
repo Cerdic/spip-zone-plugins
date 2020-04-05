@@ -1,0 +1,126 @@
+[(#REM)
+
+  ### /!\ boucle POUR (spip Bonux) ###
+
+  Parametres :
+  - ** datas : tableau de donnees cle=>valeur
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - class : classe(s) css ajoutes au select
+
+  Exemple d'appel :
+	[(#SAISIE{itunes_categories,category,
+		label=<:podcast:label_categories:>,
+		type=main})]
+]
+
+[(#SET{datas_main, [(#ARRAY{
+	Arts,<:podcast:itunes_cat_arts:>,
+	Business,<:podcast:itunes_cat_business:>,
+	Comedy,<:podcast:itunes_cat_comedy:>,
+	Education,<:podcast:itunes_cat_education:>,
+	Games &amp; Hobbies,<:podcast:itunes_cat_games_hobbies:>,
+	Government &amp; Organizations,<:podcast:itunes_cat_government_organizations:>,
+	Health,<:podcast:itunes_cat_health:>,
+	Kids &amp; Family,<:podcast:itunes_cat_kids_family:>,
+	Music,<:podcast:itunes_cat_music:>,
+	News &amp; Politics,<:podcast:itunes_cat_news_politics:>,
+	Religion &amp; Spirituality,<:podcast:itunes_cat_religion_spirituality:>,
+	Science &amp; Medicine,<:podcast:itunes_cat_science_medicine:>,
+	Society &amp; Culture,<:podcast:itunes_cat_society_culture:>,
+	Sports &amp; Recreation,<:podcast:itunes_cat_sports_recreation:>,
+	Technology,<:podcast:itunes_cat_technology:>,
+	TV &amp; Film,<:podcast:itunes_cat_tv_film:>
+})]})]
+
+[(#SET{datas_arts, [(#ARRAY{
+	Design,<:podcast:itunes_cat_design:>,
+	Fashion & Beauty,<:podcast:itunes_cat_fashion_beauty:>,
+	Food,<:podcast:itunes_cat_food:>,
+	Literature,<:podcast:itunes_cat_literature:>,
+	Performing Arts,<:podcast:itunes_cat_performing_arts:>,
+	Visual Arts,<:podcast:itunes_cat_visual_arts:>
+})]})]
+
+[(#SET{datas_business, [(#ARRAY{
+	Business News,<:podcast:itunes_cat_business_news:>,
+	Careers,<:podcast:itunes_cat_careers:>,
+	Investing,<:podcast:itunes_cat_investing:>,
+	Management & Marketing,<:podcast:itunes_cat_management_marketting:>,
+	Shopping,<:podcast:itunes_cat_business_shopping:>
+})]})]
+
+[(#SET{datas_education, [(#ARRAY{
+	Education Technology,<:podcast:itunes_cat_education_technology:>,
+	Higher Education,<:podcast:itunes_cat_higher_education:>,
+	K-12,<:podcast:itunes_cat_k_12:>,
+	Language Courses,<:podcast:itunes_cat_language_courses:>,
+	Training,<:podcast:itunes_cat_training:>
+})]})]
+
+[(#SET{datas_games_&amp;_hobbies, [(#ARRAY{
+	Automotive,<:podcast:itunes_cat_automotive:>,
+	Aviation,<:podcast:itunes_cat_aviation:>,
+	Hobbies,<:podcast:itunes_cat_hobbies:>,
+	Other Games,<:podcast:itunes_cat_other_games:>,
+	Video Games,<:podcast:itunes_cat_video_games:>
+})]})]
+
+[(#SET{datas_government_&amp;_organizations, [(#ARRAY{
+	Local,<:podcast:itunes_cat_local:>,
+	National,<:podcast:itunes_cat_national:>,
+	Non-Profit,<:podcast:itunes_cat_non_profit:>,
+	Regional,<:podcast:itunes_cat_regional:>
+})]})]
+
+[(#SET{datas_health, [(#ARRAY{
+	Alternative Health,<:podcast:itunes_cat_alternative_health:>,
+	Fitness & Nutrition,<:podcast:itunes_cat_fitness_nutrition:>,
+	Self-Help,<:podcast:itunes_cat_self_help:>,
+	Sexuality,<:podcast:itunes_cat_sexuality:>
+})]})]
+
+[(#SET{datas_religion_&amp;_spirituality, [(#ARRAY{
+	Buddhism,<:podcast:itunes_cat_buddhism:>,
+	Christianity,<:podcast:itunes_cat_christianity:>,
+	Hinduism,<:podcast:itunes_cat_hinduism:>,
+	Islam,<:podcast:itunes_cat_islam:>,
+	Judaism,<:podcast:itunes_cat_judaism:>,
+	Other,<:podcast:itunes_cat_other:>,
+	Spirituality,<:podcast:itunes_cat_spirituality:>
+})]})]
+
+[(#SET{datas_science_&amp;_medicine, [(#ARRAY{
+	Medicine,<:podcast:itunes_cat_medicine:>,
+	Natural Sciences,<:podcast:itunes_cat_natural_sciences:>,
+	Social Sciences,<:podcast:itunes_cat_social_sciences:>
+})]})]
+
+[(#SET{datas_society_&amp;_culture, [(#ARRAY{
+	History,<:podcast:itunes_cat_history:>,
+	Personal Journals,<:podcast:itunes_cat_personnal_journals:>,
+	Philosophy,<:podcast:itunes_cat_philosophy:>,
+	Places & Travel,<:podcast:itunes_cat_places_travel:>
+})]})]
+
+[(#SET{datas_sports_&amp;_recreation, [(#ARRAY{
+	Amateur,<:podcast:itunes_cat_amateur:>,
+	College & High School,<:podcast:itunes_cat_college_high_school:>,
+	Outdoor,<:podcast:itunes_cat_outdoor:>,
+	Professional,<:podcast:itunes_cat_professional:>
+})]})]
+
+[(#SET{datas_technology, [(#ARRAY{
+	Gadgets,<:podcast:itunes_cat_gadgets:>,
+	Tech News,<:podcast:itunes_cat_tech_news:>,
+	Podcasting,<:podcast:itunes_cat_podcasting:>,
+	Software How-To,<:podcast:itunes_cat_software_how_to:>
+})]})]
+
+#SET{datas,#GET{datas_#ENV{type}}}
+
+<select name="#ENV{nom}[]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] multiple="multiple">
+<BOUCLE_categorie(POUR){tableau #GET{datas}}>
+	<option value="#CLE"[(#CLE|in_array{#ENV{valeur,#ARRAY}}|oui) selected="selected"]>#VALEUR</option>
+</BOUCLE_categorie>
+</select>
