@@ -1,0 +1,40 @@
+[(#REM)
+
+	Barre de liens vers les réseaux sociaux.
+
+	Paramètres :
+	**obligatoire
+	*conseillé
+
+	- id_rezosocio : un ou plusieurs identifiants
+	- type_rezo : facebook | twitter, etc.
+	- liaison : '' | objet_lie | objet_contexte 
+	- objet_lie : raccourci d'un objet lié sous la forme 'objetN', ex. : article10, rubrique20
+	- par : champ utilisé pour le tri, défaut = type_rezo + sinum titre
+	- class_rezo : classe ajoutée au conteneur
+
+]
+[(#REM) objet lié en fonction du paramètre liaison ]
+[(#ENV{liaison}|=={objet_contexte}|oui)
+	#SET{objet,#ENV{page}|objet_type}
+	#SET{id_objet,#ENV{#GET{objet}|id_table_objet}}
+]
+[(#ENV{liaison}|=={objet_lie}|oui)
+	#SET{objet_extrait,#ENV{objet_lie}|typer_raccourci}
+	#SET{objet,#GET{objet_extrait}|table_valeur{1}}
+	#SET{id_objet,#GET{objet_extrait}|table_valeur{2}}
+]
+
+[(#REM) Vider certains params issus de selects multiples si besoin ]
+<BOUCLE_vider(DATA) {source table, #LISTE{id_rezosocio,type_rezo}}>
+[(#ENV{#VALEUR}|is_array|et{#ENV{#VALEUR}|array_filter|non}|oui)
+	[(#EVAL{null}|setenv{#VALEUR})]
+]
+</BOUCLE_vider>
+
+<INCLURE{fond=inclure/rezosocios,
+	objet=#GET{objet},
+	id_objet=#GET{id_objet},
+	class=#ENV{class_rezo},
+	env}
+>
