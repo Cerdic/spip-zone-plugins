@@ -21,7 +21,7 @@
 	<div class='pin'><img src='#CHEMIN_IMAGE{rubrique-16.png}'></div>
 	<div class='secteur'>
 		<div class="grid_rub">
-			<div class="titre_rub"><a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}">#TITRE</a></div>
+			<div class="titre_rub titre_rub--secteur"><a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}">#TITRE</a></div>
 			<BOUCLE_par_traduction1(DATA){source tableau,#GET{traductions}}{par valeur}>
 				[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#CLE}{#CLE=#ENV{#CLE}}{id_rubrique=#ID_RUBRIQUE}{secteur=oui})]
 			</BOUCLE_par_traduction1>
@@ -37,8 +37,11 @@
 </BOUCLE_titre_rubrique>
 
 <style type="text/css">
+.pleine_largeur .formulaire_spip.formulaire_configurer_lim_rubriques {
+	max-width: calc(57em + #GET{nbre_objets} * 3em);
+}
 .grid_rub {
-	display:grid;
+	display: grid;
 	grid-template-columns: 3fr repeat(#GET{nbre_objets}, 1fr);
 	justify-items: center;
 	align-items: center;
