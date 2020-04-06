@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_titre_rezosocios' => 'Configuration de "Réseaux sociaux"',
 	'cfg_activer_habillage_explication' => 'Substitue les titres par des icônes dans les entrées (modèle, menu, noisette). Celles-ci sont basées sur la police Socicon.',
 	'cfg_activer_habillage_label' => 'Habillage',
 	'cfg_activer_habillage_label_case' => 'Activer l’habillage sur le site public.',
