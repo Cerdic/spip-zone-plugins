@@ -120,34 +120,36 @@ function controleur_dist($regs, $c = null) {
 		$options['hauteurMini'] = 80; // base de hauteur mini
 		$option['inmode'] = 'controleur';
 		$options['controleur'] = $controleur;
-	} elseif (preg_match(",[\n\r],", $valeur[$champ])
-		or (($champ == 'valeur') && ($id == 'descriptif_site'))
-		or
-	// on regarde le type tel que defini dans serial
-	// (attention il y avait des blob dans les vieux spip)
-		($sqltype = colonne_table($type, $champ)) &&
-		(in_array($sqltype['type'], array('mediumtext', 'longblob', 'longtext')) ||
-		(($sqltype['type'] == 'text' || $sqltype['type'] == 'blob')
-		and in_array($champ, array('descriptif', 'bio'))))) {
-		// si la valeur fait plusieurs lignes on doit mettre un textarea
-		// derogation specifique pour descriptif_site de spip_metas
-		$options['hauteurMini'] = 80; // hauteur mini d'un textarea
-		$option['inmode'] = 'texte';
-	} else { // ligne, hauteur naturelle
-		$options['hauteurMaxi'] = 0;
-		$option['inmode'] = 'ligne';
-		// c'est un nombre entier
-		if ($sqltype['long']) {
-			// si long est [4,3] sa longueur maxi est 8 (1234,123)
-			if (is_array($sqltype['long'])) {
-				if (count($sqltype['long']) == 2) {
-					$inputAttrs['maxlength'] = $sqltype['long'][0] + 1 + $sqltype['long'][1];
+	}
+	else {
+		$sqltype = colonne_table($type, $champ);
+		$inmode = crayons_determine_input_mode($type, $champ, $sqltype);
+		// car particulier prioritaire : si la valeur actuelle comporte des retour ligne il faut un mode texte
+		if (preg_match(",[\n\r],", $valeur[$champ])
+		  or ($champ == 'valeur') && ($id == 'descriptif_site')) {
+			$inmode = 'texte';
+		}
+		if ($inmode === 'texte') {
+			// si la valeur fait plusieurs lignes on doit mettre un textarea
+			// derogation specifique pour descriptif_site de spip_metas
+			$options['hauteurMini'] = 80; // hauteur mini d'un textarea
+			$option['inmode'] = 'texte';
+		} else { // ligne, hauteur naturelle
+			$options['hauteurMaxi'] = 0;
+			$option['inmode'] = 'ligne';
+			// c'est un nombre entier
+			if ($sqltype['long']) {
+				// si long est [4,3] sa longueur maxi est 8 (1234,123)
+				if (is_array($sqltype['long'])) {
+					if (count($sqltype['long']) == 2) {
+						$inputAttrs['maxlength'] = $sqltype['long'][0] + 1 + $sqltype['long'][1];
+					} else {
+						// on ne sait pas ce que c'est !
+						$inputAttrs['maxlength'] = $sqltype['long'][0];
+					}
 				} else {
-					// on ne sait pas ce que c'est !
-					$inputAttrs['maxlength'] = $sqltype['long'][0];
+					$inputAttrs['maxlength'] = $sqltype['long'];
 				}
-			} else {
-				$inputAttrs['maxlength'] = $sqltype['long'];
 			}
 		}
 	}
@@ -165,6 +167,38 @@ function controleur_dist($regs, $c = null) {
 	$status = null;
 
 	return array($html,$status);
+}
+
+/**
+ * Determiner le type d'input pour le crayon
+ * heuristique automatique historique basee sur le type du champ
+ * mais l'utilisateur peut definir une fonction personalisee par type pour ajuster champ par champ
+ * le retour de la fonction utilisateur est ignoree si ce n'est pas ligne ou texte, et dans ce cas c'est la valeur automatique qui est prise en compte
+ * @param string $type
+ * @param string $champ
+ * @param array $sqltype
+ * @return string
+ *   texte ou ligne
+ */
+function crayons_determine_input_mode($type, $champ, $sqltype) {
+	$inmode = 'ligne';
+	// autodetermination
+	// on regarde le type tel que defini dans serial
+	// (attention il y avait des blob dans les vieux spip)
+	if ($sqltype
+	  && (in_array($sqltype['type'], array('mediumtext', 'longblob', 'longtext')) ||
+	      (($sqltype['type'] == 'text' || $sqltype['type'] == 'blob') and in_array($champ, array('descriptif', 'bio'))))){
+		$inmode = 'texte';
+	}
+	// si une fonction utilisateur existe pour ce type, on l'appelle
+	if (function_exists($f = 'crayons_determine_input_mode_type_' . $type)
+	  or function_exists($f = $f . '_dist')) {
+		$user_inmode = $f($type, $champ, $sqltype);
+		if (in_array($user_inmode, ['ligne', 'texte'])) {
+			$inmode = $user_inmode;
+		}
+	}
+	return $inmode;
 }
 
 // Definition des crayons
