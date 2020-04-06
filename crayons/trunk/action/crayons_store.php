@@ -399,7 +399,7 @@ function vues_dist($type, $modele, $id, $content, $wid) {
 			}
 		}
 
-		if ($valeur) {
+		if (!empty($valeur) or (is_scalar($valeur) and strlen($valeur))) {
 			// seul spip core sait rendre les donnees
 			if (function_exists('appliquer_traitement_champ')) {
 				$valeur = appliquer_traitement_champ($valeur, $modele, table_objet($table));
