@@ -389,6 +389,7 @@ $.fn.activatecrayon = function(percent) {
 				e.cancelBubble = true;
 			})
 			// focus par defaut (crayons sans textarea/text, mais uniquement menus ou fichiers)
+			.find('select:visible:not(:disabled):not([readonly]):first').focus().end()
 			.find('input:visible:not(:disabled):not([readonly]):first').focus().end()
 			.find("textarea.crayon-active,input.crayon-active[type=text]")
 				.each(function(n){
