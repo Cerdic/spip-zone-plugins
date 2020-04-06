@@ -1,4 +1,5 @@
-[(#ENV{id_rezosocio}|explode{','}|setenv{id_rezosocio})]
+[(#ENV{id_rezosocio}|explode{','}|array_filter|setenv{id_rezosocio})]
+#SET{habillage,#CONFIG{rezosocios/activer_habillage}|oui}
 
 <B_rezosocios_formulaire>
 <div class="titre">
@@ -9,16 +10,19 @@
 </B_rezosocios_formulaire>
 
 <B_rezosocios_menu>
-<li class="menu-items__item menu-items__item_rezosocios menu-entree item sociaux[ (#ENV{css})]">
+<li class="menu-items__item menu-items__item_rezosocios menu-entree item sociaux[ sociaux_(#GET{habillage}|?{themed,simple})][ (#ENV{css})]">
 	<BOUCLE_rezosocios_menu(REZOSOCIOS) {id_rezosocio?} {si #ENV{appel_menu}}>
 	#SET{rezo,#TYPE_REZO*|rezosicos_classe_socicon}
 	<a
 		href="[(#TYPE_REZO*|rezosocios_url{#NOM_COMPTE})]"
-		class="menu-items__lien spip_out external[ (#GET{rezo})][ (#ENV{css_lien})]"
+		class="menu-items__lien spip_out external sociaux__link[ (#GET{rezo})][ (#ENV{css_lien})]"
 		rel="external"
-		lang="#LANG"
-		title="[(#TITRE|attribut_html)]"
+		[(#GET{habillage}|oui)title="[(#TITRE|attribut_html)]"]
+		[lang="(#LANG)"]
 	>
-		<span class="socicon socicon-[(#GET{rezo})]"></span>
+		[(#GET{habillage}|oui)
+		<span class="socicon[ socicon-(#GET{rezo})]"></span>
+		]
+		[<span class="menu-items__texte"[ (#GET{habillage}|oui)aria-hidden="true" focusable="false"]>(#TITRE)</span>]
 	</a>
 	</BOUCLE_rezosocios_menu>

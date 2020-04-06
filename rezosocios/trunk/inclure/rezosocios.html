@@ -26,7 +26,7 @@
 	points,-1
 }}
 <B_rezosocios>
-<div class="sociaux[ (#GET{habillage}|oui)sociaux_themed][ (#ENV{class}|attribut_html)][ (#ENV{align}|attribut_html)]">
+<div class="sociaux[ sociaux_(#GET{habillage}|?{themed,simple})][ (#ENV{class}|attribut_html)][ (#ENV{align}|attribut_html)]">
 	<ul class="sociaux__list sociaux-list">
 		<BOUCLE_rezosocios (REZOSOCIOS)
 			{id_rezosocio?}
@@ -36,18 +36,19 @@
 			{tri #ENV{par,type_rezo},#GET{defaut_tri}}
 			{par sinum titre}
 		>
+		#SET{rezo,#TYPE_REZO*|rezosicos_classe_socicon}
 		<li class="sociaux__item">
 			<a
 				href="[(#TYPE_REZO*|rezosocios_url{#NOM_COMPTE})]"
+				class="sociaux__link spip_out external[ (#GET{rezo})]"
 				rel="external"
-				class="sociaux__link[ (#TYPE_REZO*) ]spip_out external"
-				title="[(#TITRE|attribut_html)]"
-				lang="#LANG"
+				[(#GET{habillage}|oui)title="[(#TITRE|attribut_html)]"]
+				[lang="(#LANG)"]
 			>
 				[(#GET{habillage}|oui)
-				<span class="sociaux__icon socicon socicon-[(#TYPE_REZO*|rezosicos_classe_socicon)]"></span>
+				<span class="sociaux__icon socicon[ socicon-(#GET{rezo})]"></span>
 				]
-				<span class="sociaux__name name">[(#TITRE|sinon{#TYPE_REZO})]</span>
+				[<span class="sociaux__name name"[ (#GET{habillage}|oui)aria-hidden="true" focusable="false"]>(#TITRE)</span>]
 			</a>
 		</li>
 		</BOUCLE_rezosocios>

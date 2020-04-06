@@ -1,7 +1,24 @@
 /**
  * Habillage par défaut du composant "sociaux".
  * Cette feuille de style peut-être surchargée.
+ *
+ * .sociaux.sociaux_themed : habillage activé (icône uniquement)
+ * .sociaux.sociaux_simple : habillage désactivé (texte uniquement)
  */
+
+/* Texte caché quand l'abillage est activé */
+.sociaux [aria-hidden=true] {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
 .sociaux__list {
 	display: flex;
 	flex-flow: row wrap;
@@ -38,12 +55,10 @@ a.sociaux__link[rel=external]:after {
 	content: none; /* unicode éventuel avec tinytypo ou autre */
 }
 
-.sociaux__name {
-	display: none;
-}
+/* Icônes et couleurs par type */
 
 .sociaux .socicon {
-	display: block;
+	display: inline-block;
 	font-size: 1.4em;
 	padding: .5em;
 	border-radius: 1em;
@@ -51,8 +66,6 @@ a.sociaux__link[rel=external]:after {
 	background: #000;
 	transition: all 0.2s;
 }
-
-/* Couleurs par type */
 
 .sociaux .socicon-facebook {
 	background: #3E5B98;
