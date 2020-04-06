@@ -1,7 +1,7 @@
 <paquet
 	prefix="rezosocios"
 	categorie="edition"
-	version="1.0.1"
+	version="1.0.2"
 	etat="stable"
 	compatibilite="[3.2.0;3.3.*]"
 	schema="0.2.0"
