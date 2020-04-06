@@ -20,9 +20,13 @@
 }
 
 .sociaux__list {
+	display: -webkit-box;
 	display: flex;
-	flex-flow: row wrap;
-	align-items: center;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	        flex-flow: row wrap;
+	-webkit-box-align: center;
+	        align-items: center;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -64,6 +68,7 @@ a.sociaux__link[rel=external]:after {
 	border-radius: 1em;
 	color: #fff;
 	background: #000;
+	-webkit-transition: all 0.2s;
 	transition: all 0.2s;
 }
 
