@@ -272,7 +272,7 @@ Exemple :
 	'selection_inverse' => 'Inverse selection',
 	'selection_tout' => 'Select all',
 	'shiftentermode' => 'Shift + Enter gives:',
-	'spipification' => 'Copyright &copy; 2009 <a <a style="text-decoration:underline;color:blue;cursor:pointer;" href="http://code.google.com/p/ckeditor-spip-plugin/">Plugin SPIP</a> - Fr&#233;d&#233;ric Bonnaud, Mehdi Cherifi, Emmanuel Dreyfus',
+	'spipification' => 'Copyright &copy; 2009 <a <a style="text-decoration:underline;color:blue;cursor:pointer;" href="https://zone.spip.net/trac/spip-zone/browser/spip-zone/_plugins_/ckeditor-spip-plugin">Plugin SPIP</a> - Fr&#233;d&#233;ric Bonnaud, Mehdi Cherifi, Emmanuel Dreyfus',
 	'spip_defaut' => 'SPIP by default',
 	'styles' => 'Styles:',
 	'supprimer' => 'Delete',

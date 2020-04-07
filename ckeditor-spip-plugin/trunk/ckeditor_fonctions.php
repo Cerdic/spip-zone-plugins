@@ -279,7 +279,7 @@ function ckeditor_preparescript($config) {
 			$cke_cfg= array() ;
 			$removePlugins = array() ;
 			$allPlugins = array('about', 'blockquote', 'div', 'docprops', 'find', 'flash', 'horizontalrule', 'iframe', 'image', 'indent', 'justify', 'link', 'list', 'maximize', 'newpage', 'pagebreak', 'pastefromword', 'pastetext', 'placeholder', 'preview', 'print', 'removeformat', 'save', 'selection', 'showblocks', 'smiley', 'sourcearea', 'specialchar', 'table', 'templates', 'uicolor', 'undo', 'wsc', 'colorbutton','scayt','basicstyles','forms') ;
-			$requiredPlugins = array('clipboard','basicstyles','list','link','about') ; // requis par la barre d'outils basique
+			$requiredPlugins = array('clipboard','basicstyles','list','link','about','indent','table') ; // requis par la barre d'outils basique
 
 			foreach($_COOKIE as $cookie => $value) { // fix pb avec la langue du dictionnaire
 				if (preg_match('~^scayt_~', $cookie)) {
@@ -587,7 +587,7 @@ function ckeditor_preparescript($config) {
 			$cke_cfg['skin'] = ckeditor_lire_config('skin', _CKE_SKIN_DEF) ;
 			$cke_cfg['enterMode'] = $ENTERMODE[ckeditor_lire_config('entermode', _CKE_ENTERMODE_DEF)] ;
 			$cke_cfg['shiftEnterMode'] = $ENTERMODE[ckeditor_lire_config('shiftentermode', _CKE_SHIFTENTERMODE_DEF)] ;
-			$cke_cfg['stylesCombo_stylesSet'] = "spip-styles:".url_absolue(_DIR_RACINE.'spip.php?page=spip-styles') ;
+			$cke_cfg['stylesCombo_stylesSet'] = "spip-styles:".url_absolue(_DIR_RACINE.'spip.php?page=spip-styles.js') ;
 			$cke_cfg['removeDialogTabs'] = 'link:advanced' ;
 			$cke_cfg['fontSize_sizes'] = ckeditor_lire_config('fontsizes', _CKE_FONTSIZES_DEF) ;
 			$cke_cfg['dialog_startupFocusTab'] = true ;
@@ -598,10 +598,13 @@ function ckeditor_preparescript($config) {
 			if ($cke_cfg['forcePasteAsPlainText'] && ! in_array('pastefromword', $removePlugins)) {
 				$removePlugins[] = 'pastefromword';
 			}
+			if (ckeditor_lire_config('devtools', _CKE_DEVTOOLS_DEF) !='on') {
+				$removePlugins[] = 'devtools';
+			}
 			$cke_cfg['removePlugins'] = join(',',$removePlugins) ;
-			if(ckeditor_lire_config('conversion', _CKE_CONVERSION_DEF)=='aucune')
-				$cke_cfg['fullPage'] = true ;
-
+			//https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html#cfg-allowedContent
+			$cke_cfg['allowedContent'] = true; //Disable HTML cleanup
+			$cke_cfg['fullPage'] = false;
 	}
 
 	$ckeditor_config_post = charger_fonction('ckeditor_config_post','');
@@ -611,9 +614,9 @@ function ckeditor_preparescript($config) {
 
 	if (!$init_done) {
 		$script = "
-	<script type=\"application/javascript\" src=\"".url_absolue(_CKE_JS)."\"></script>
+	<script type=\"application/javascript\" src=\"".url_absolue(timestamp(_CKE_JS))."\"></script>
 	<script type=\"application/javascript\">CKEDITOR.config.jqueryOverrideVal=true;</script>
-	<script type=\"application/javascript\" src=\"".url_absolue(_CKE_JQUERY)."\"></script>
+	<script type=\"application/javascript\" src=\"".url_absolue(timestamp(_CKE_JQUERY))."\"></script>
 	<script type=\"application/javascript\" src=\"".(function_exists("produire_fond_statique")?produire_fond_statique("ckeditor4spip.js"):url_absolue(_DIR_RACINE."?page=ckeditor4spip.js"))."\"></script>\n";
 		if (isset($load_extra_js)) { 
 			$script .= "	<script type=\"application/javascript\" src=\"$load_extra_js\"></script>\n" ;

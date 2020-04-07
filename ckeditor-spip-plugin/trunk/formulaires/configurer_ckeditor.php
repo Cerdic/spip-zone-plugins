@@ -40,7 +40,7 @@ function formulaires_configurer_ckeditor_charger_dist() {
 					'options' => array(
 						'nom' => 'skin',
 						'label' => _T('ckeditor:choisir_skin'),
-						'defaut' => 'kama',
+						'defaut' => 'moono-lisa',
 						'cacher_option_intro' => 'oui',
 						'datas' => $cke_skins
 					)

@@ -273,7 +273,7 @@ Exemple :
 	'selection_inverse' => '&#1575;&#1582;&#1578;&#1610;&#1575;&#1585; &#1605;&#1593;&#1603;&#1608;&#1587;',
 	'selection_tout' => '&#1575;&#1582;&#1578;&#1610;&#1575;&#1585; &#1603;&#1604; &#1605;&#1606;',
 	'shiftentermode' => 'Shift + Enter &#1610;&#1589;&#1576;&#1581;:',
-	'spipification' => '&#1581;&#1602;&#1608;&#1602; &#1575;&#1604;&#1578;&#1571;&#1604;&#1610;&#1601; &#1608;&#1575;&#1604;&#1606;&#1588;&#1585; &copy; 2009 <a <a style="text-decoration:underline;color:blue;cursor:pointer;" href="http://code.google.com/p/ckeditor-spip-plugin/">Plugin SPIP</a> - Fr&#233;d&#233;ric Bonnaud, Mehdi Cherifi, Emmanuel Dreyfus',
+	'spipification' => '&#1581;&#1602;&#1608;&#1602; &#1575;&#1604;&#1578;&#1571;&#1604;&#1610;&#1601; &#1608;&#1575;&#1604;&#1606;&#1588;&#1585; &copy; 2009 <a <a style="text-decoration:underline;color:blue;cursor:pointer;" href="https://zone.spip.net/trac/spip-zone/browser/spip-zone/_plugins_/ckeditor-spip-plugin">Plugin SPIP</a> - Fr&#233;d&#233;ric Bonnaud, Mehdi Cherifi, Emmanuel Dreyfus',
 	'spip_defaut' => 'SPIP &#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;',
 	'styles' => '&#1575;&#1604;&#1571;&#1606;&#1605;&#1575;&#1591;:',
 	'supprimer' => '', /* missing (Supprimer) */
