@@ -9,6 +9,23 @@
  */
 
 /**
+ * Determiner si on affiche le login ou l'email
+ * @param $login
+ * @param $email
+ * @return mixed
+ */
+function incarner_login_affiche($login, $email) {
+	$login_aff = $login ? $login : $email;
+	// si le login est un md5 et qu'on a un email, afficher l'email
+	if (strlen($login_aff) == 32
+		and !preg_match(",[^0-9a-f],i", $login_aff)
+	  and $email) {
+		$login_aff = $email;
+	}
+	return $login_aff;
+}
+
+/**
  * Afficher un lien pour incarner un auteur sur sa page
  *
  * @pipeline affiche_gauche
@@ -25,24 +42,33 @@ function incarner_boite_infos($flux) {
 		$id_auteur = $flux['args']['id'];
 
 		if ($id_auteur != session_get('id_auteur')) {
-			$login = sql_getfetsel(
-				'login',
+			$auteur = sql_fetsel(
+				'login,email',
 				'spip_auteurs',
 				'id_auteur=' . intval($id_auteur)
 			);
-			if ($login) {
-				$url_self = urlencode(self());
-				$url_action = generer_url_action(
-					'incarner',
-					'login=' . $login . '&redirect=' . $url_self
-				);
+			$login_aff = incarner_login_affiche($auteur['login'], $auteur['email']);
+			if ($login_aff) {
+				if ($auteur_login_possible = auth_identifier_login($auteur['login'], '')){
+					$url_self = urlencode(self());
+					$url_action = generer_url_action(
+						'incarner',
+						'login=' . $auteur['login'] . '&redirect=' . $url_self
+					);
+					$disabled = "";
+				}
+				else {
+					$url_action = "#";
+					$disabled = " class='disabled'";
+				}
 
 				$flux['data'] .= '<span class="icone horizontale lien_incarner">';
-				$flux['data'] .= '<a href="' . $url_action . '">';
+				$flux['data'] .= '<a href="' . $url_action . '"'.$disabled.'>';
 				$flux['data'] .= '<img src="' . find_in_path('images/logo_incarner_24.png') . '" width="24" height="24" /><b>';
-				$flux['data'] .= _T('incarner:incarner_login', array('login' => $login));
+				$flux['data'] .= _T('incarner:incarner_login', array('login' => $login_aff));
 				$flux['data'] .= '</b></a>';
 				$flux['data'] .= '</span>';
+				$flux['data'] .= '<style type="text/css">.icone a.disabled {color:#888 !important;opacity:0.75;}.icone a.disabled b {color:inherit !important;}.icone a.disabled img {filter: grayscale(100%);background-color: transparent !important;}.icone a.disabled:hover,.icone a.disabled:focus,.icone a.disabled:active {color:#888 !important;cursor:default !important;}</style>';
 			}
 		}
 	}
@@ -81,8 +107,8 @@ function incarner_affichage_final($html) {
 
 	include_spip('base/abstract_sql');
 
-	$login = sql_getfetsel(
-		'login',
+	$auteur = sql_fetsel(
+		'login,email',
 		'spip_auteurs',
 		'id_auteur=' . intval($id_auteur)
 	);
@@ -90,20 +116,21 @@ function incarner_affichage_final($html) {
 	$self = urlencode(self());
 	$url = generer_url_action(
 		'incarner',
-		'login=' . $login . '&redirect=' . $self
+		'login=' . $auteur['login'] . '&redirect=' . $self
 	);
 
 	$url_logout = generer_url_action(
 		'incarner',
 		'logout=oui&redirect=' . $self
 	);
+	$login_aff = incarner_login_affiche($auteur['login'], $auteur['email']);
 
 	$lien = '<div class="menu-incarner' . (test_espace_prive() ? ' prive' : '') . '">';
 	$lien .= '<a class="bouton-incarner" href="' . $url_logout . '">';
 	$lien .= _T('incarner:logout_definitif');
 	$lien .= '</a>';
 	$lien .= '<a class="bouton-incarner" href="' . $url . '">';
-	$lien .= _T('incarner:reset_incarner', array('login' => $login));
+	$lien .= _T('incarner:reset_incarner', array('login' => $login_aff));
 	$lien .= '</a>';
 	$lien .= '</div>';
 
