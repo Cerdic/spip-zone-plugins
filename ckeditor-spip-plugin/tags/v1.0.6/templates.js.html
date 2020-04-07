@@ -1,0 +1,23 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/javascript[; charset=(#CHARSET)]})]
+<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
+CKEDITOR.addTemplates( 'ckeditor-spip',
+{
+	// Le nom du répertoire qui contient les images des modèles :
+	#SET{chemin, 'ecrire/'}
+	imagesPath : [(#GET{chemin}|url_absolue|json_encode)],
+
+	// Les définitions des modèles :
+	templates :
+		[
+<BOUCLE_templates(POUR){tableau #CONFIG{ckeditor/modeles}}>
+			{ // Modèle : #COMPTEUR_BOUCLE / #TOTAL_BOUCLE
+				title: [(#CLE|json_encode)],
+				image: [(#VALEUR{image}|json_encode)],
+				description: [(#VALEUR{desc}|json_encode)],
+				html: [(#VALEUR{modele}|json_encode)]
+			}[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+</BOUCLE_templates>
+		]
+});
+</BOUCLE_si>

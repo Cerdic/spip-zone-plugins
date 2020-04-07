@@ -1,0 +1,32 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html>
+	<head>
+		<title><:ckeditor:selection_document_spip:></title>
+		<script type="text/javascript">  
+			function SelectFile(url) {  
+				var parent_window = (window.parent == window) ? window.opener : window.parent ;  
+				parent_window.CKEDITOR.tools.callFunction( <?php echo intval(_request('CKEditorFuncNum')); ?>, url, '');  
+				window.close();  
+			}  
+		</script>  
+		<link rel="stylesheet" type="text/css" href="#CHEMIN{css/filebrowser.css}" />
+	</head>
+<body>
+	<form name='selectdoc' action='#' method='post'>
+#SET{type,#EVAL{$_REQUEST['type']}}
+<BOUCLE_t1(CONDITION){si #GET{type}|=={tout}}>
+	<INCLURE{fond=modeles/inc-documents-tous}{env}{ajax} />
+</BOUCLE_t1>
+<BOUCLE_t2(CONDITION){si #ENV{rubrique,XXX}|=={XXX}}>
+	<INCLURE{fond=modeles/inc-documents-articles}{env}{ajax} />
+</BOUCLE_t2>
+	<INCLURE{fond=modeles/inc-documents-rubriques}{env}{ajax} />
+<//B_t2>
+<//B_t1>
+	</form>
+</body>
+</html>
+</BOUCLE_si>
