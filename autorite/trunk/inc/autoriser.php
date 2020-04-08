@@ -483,7 +483,6 @@ if (!function_exists ('autoriser_auteurs_voir')) {
 	function autoriser_auteurs_voir ($faire, $type, $id, $qui, $opt) {
 		if (isset($GLOBALS['autorite']['redacteurs_voir_auteurs'])
 		        and $GLOBALS['autorite']['redacteurs_voir_auteurs']) {
-			echo 'val='.$GLOBALS['autorite']['redacteurs_voir_auteurs'].'!<br/>';
 			return in_array ($qui['statut'], array('0minirezo', '1comite'));
 		} else
 			return ($qui['statut'] == '0minirezo');
