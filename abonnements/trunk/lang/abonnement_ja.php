@@ -58,6 +58,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'notification_echeance_chapo' => '<p>こんにちは @nom@さん,</p>',
+	'notification_echeance_corps' => '<p>@nom@さん、こんにちは</p>
+		<p>@nom_site_spip@を "@offre@"プランで定期購読されている方にこのメールを配信しています。</p>
+		<p>この定期購読は<strong>@echeance@</strong>で期限が切れます。<br/>
+		期限が切れる前に更新をおすすめします。</p>
+		<p>ご不明な点がありましたらご連絡ください。よろしくお願い致します。</p>',
 	'notification_echeance_sujet_jours_apres' => 'あなたの定期購読は @duree@ 日前に終了しています !',
 	'notification_echeance_sujet_jours_avant' => 'あなたの定期購読は あと@duree@日で終了します !',
 	'notification_echeance_sujet_jours_pendant' => 'あなたの定期購読は今日終了します !',
