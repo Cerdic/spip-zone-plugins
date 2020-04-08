@@ -30,7 +30,7 @@ include_spip('inc/saisies_afficher_si_php');
  * @param array $args Tableau d'arguments du formulaire
  * @return array Retourne les saisies du formulaire sinon false
  */
-function saisies_chercher_formulaire($form, $args) {
+function saisies_chercher_formulaire($form, $args, $je_suis_poste=false) {
 	$saisies = array();
 
 	if ($fonction_saisies = charger_fonction('saisies', 'formulaires/'.$form, true)) {
@@ -42,7 +42,7 @@ function saisies_chercher_formulaire($form, $args) {
 		$saisies = pipeline(
 			'formulaire_saisies',
 			array(
-				'args' => array('form' => $form, 'args' => $args),
+				'args' => array('form' => $form, 'args' => $args, 'je_suis_poste' => $je_suis_poste),
 				'data' => $saisies
 			)
 		);

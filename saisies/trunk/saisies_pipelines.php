@@ -115,7 +115,7 @@ function saisies_formulaire_charger($flux) {
 
 	// Il faut que la fonction existe et qu'elle retourne bien un tableau
 	include_spip('inc/saisies');
-	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args']);
+	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args'], $flux['args']['je_suis_poste']);
 
 	if ($saisies) {
 		// On ajoute au contexte les champs à déclarer
@@ -183,7 +183,7 @@ function saisies_styliser($flux) {
 function saisies_formulaire_verifier($flux) {
 	// Il faut que la fonction existe et qu'elle retourne bien un tableau
 	include_spip('inc/saisies');
-	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args']);
+	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args'], true);
 	if ($saisies and !saisies_lister_par_etapes($saisies)) {
 		$erreurs = saisies_verifier($saisies);
 
@@ -214,7 +214,7 @@ function saisies_formulaire_verifier($flux) {
 function saisies_formulaire_verifier_etape($flux) {
 	// Il faut que la fonction existe et qu'elle retourne bien un tableau
 	include_spip('inc/saisies');
-	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args']);
+	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args'], true);
 	if ($saisies and $etapes = saisies_lister_par_etapes($saisies)) {
 		// On récupère les sous-saisies de cette étape précise
 		$saisies_etape = $etapes[$flux['args']['etape']]['saisies'];
