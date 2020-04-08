@@ -74,6 +74,18 @@ function filtre_icone_anchor_from_name($name) {
 		case "close":
 			$ancre = 'x';
 			break;
+		case "chevron-top":
+			$ancre = 'chevron-up';
+			break;
+		case "chevron-bottom":
+			$ancre = 'chevron-down';
+			break;
+		case "caret-top":
+			$ancre = 'caret-up';
+			break;
+		case "caret-bottom":
+			$ancre = 'caret-down';
+			break;
 		default:
 			$ancre = $name;
 			break;
