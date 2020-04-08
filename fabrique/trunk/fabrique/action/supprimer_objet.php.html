@@ -49,10 +49,12 @@ function action_supprimer_#ENV{type}_dist($arg=null) {
 	$arg = intval($arg);
 
 	// cas suppression
-	if ($arg) {
-		sql_delete('#TABLE',  '#ID_OBJET=' . sql_quote($arg));
-	}
-	else {
-		spip_log("action_supprimer_#ENV{type}_dist $arg pas compris");
+	if (autoriser('supprimer', '#ENV{type}', $arg)) {
+		if ($arg) {
+			sql_delete('#TABLE',  '#ID_OBJET=' . sql_quote($arg));
+		}
+		else {
+			spip_log("action_supprimer_#ENV{type}_dist $arg pas compris");
+		}
 	}
 }
