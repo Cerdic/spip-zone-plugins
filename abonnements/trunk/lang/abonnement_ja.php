@@ -63,6 +63,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		<p>この定期購読は<strong>@echeance@</strong>で期限が切れます。<br/>
 		期限が切れる前に更新をおすすめします。</p>
 		<p>ご不明な点がありましたらご連絡ください。よろしくお願い致します。</p>',
+	'notification_echeance_corps_apres' => '<p>@nom_site_spip@を« @offre@ »プランで定期購読されていた方にメールを差し上げています。</p>
+	<p>この定期購読は : 
+<strong>@echeance@</strong>前に期限切れになりました。<br/>
+	更新をおすすめします。</p>', # RELIRE
+	'notification_echeance_corps_avant' => '<p>@nom_site_spip@を« @offre@ »プランで定期購読されている方にこのメールを配信しています。</p>
+	<p>この定期購読は : 
+<strong>@echeance@</strong>後に期限切れになります。<br/>
+	期限が切れる前の更新をおすすめします。</p>',
+	'notification_echeance_corps_pendant' => '<p>@nom_site_spip@を« @offre@ »プランで定期購読されている方にこのメールをお送りしています。</p>
+	<p>この定期購読の期限は今日までです。<br/>
+	期限が切れる前の更新をおすすめします。</p>',
+	'notification_echeance_signature' => '<p>ご不明な点がございましたら、ご連絡ください。よろしくお願い致します。</p>',
 	'notification_echeance_sujet_jours_apres' => 'あなたの定期購読は @duree@ 日前に終了しています !',
 	'notification_echeance_sujet_jours_avant' => 'あなたの定期購読は あと@duree@日で終了します !',
 	'notification_echeance_sujet_jours_pendant' => 'あなたの定期購読は今日終了します !',
