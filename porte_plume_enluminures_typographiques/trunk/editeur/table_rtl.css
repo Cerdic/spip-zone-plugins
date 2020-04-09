@@ -5,15 +5,13 @@ body{
 }
 a img{border:none}
 #enregistrer{
-	display:block;
-	width:10em;
-	margin:1em auto;
-	padding:0.5em;
-	font-size:14px;
-	text-align:center;
-	text-decoration:none;
-	background:#eee;
-	border:1px outset #aaa;
+	border-radius:12px 0 12px 0;
+	background: #f5f5f5;
+	border:none;
+	color:#555;
+	font:bold 12px Verdana;
+	padding:6px 0 6px 0;
+	box-shadow:1px 1px 3px #999;
 }
 div{text-align:right;margin-bottom:0.5em;}
 div span{float:right;width:10em}
