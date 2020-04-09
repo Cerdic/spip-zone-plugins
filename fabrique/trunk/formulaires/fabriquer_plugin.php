@@ -206,6 +206,9 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 		if ($o['table'] and !$o['table_type']) {
 			$data['objets'][$c]['table_type'] = objet_type($data['objets'][$c]['cle_primaire']);
 		}
+		if (!empty($o['champ_date_ignore'])) {
+			$data['objets'][$c]['champ_date'] = '';
+		}
 	}
 
 	// sinon c'est creation du plugin

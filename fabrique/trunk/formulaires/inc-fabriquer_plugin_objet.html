@@ -137,6 +137,9 @@
 		[(#CHAMP|in_array{#LISTE{date_publication,date_creation,date}}|oui) #SET{defaut_date,#CHAMP} ]
 		</BOUCLE_list_champs>
 	</datalist>
+	[(#REM) si explicitement pas de date, ne pas définir le champ. ]
+	[(#ENV{objets/#CLE/champ_date_ignore}|oui) #SET{defaut_date,''} ]
+
 	
 	[(#SET{id_objet,[(#ENV{objets/#CLE/id_objet}|sinon{id_objet})]})]
 	<p class='notice'><:fabrique:avertissement_champs{id_objet=#GET{id_objet}}:></p>
@@ -246,6 +249,11 @@
 			label=<:fabrique:label_champ_date_publication:>,
 			explication=<:fabrique:label_champ_date_publication_explication:>,
 			list=champs_date, defaut=#GET{defaut_date}, inserer_fin=#GET{datalist_aide}})]
+
+		[(#SAISIE{case, objets/#CLE/champ_date_ignore,
+			label=<:fabrique:label_champ_date_publication_ignore:>,
+			label_case=<:fabrique:label_champ_date_publication_ignore_case:>,
+			defaut=''})]
 		</div>
 	</fieldset>
 	<fieldset>

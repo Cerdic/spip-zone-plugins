@@ -1,8 +1,14 @@
-Plugin Fabrique pour SPIP
-Ce plugin génère d'autres plugins !
------------------------------------
+# Plugin Fabrique pour SPIP
 
-2.6.1 le31 03 2020
+Ce plugin génère d'autres plugins !
+
+
+x.y.z le aa bb 2020
+-------------------
+* Permettre de ne pas gérer une date de publication sur un objet éditorial, même si un champ approchant (date, date_publication) existe.
+* Autorisation de suppression sur l’action supprimer un objet (sans gestion de statuts)
+
+2.6.1 le 31 03 2020
 -----------------------
 * Ajout de l’utorisation de voir la page objets.
 
