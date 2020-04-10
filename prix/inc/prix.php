@@ -23,6 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = '') {
 	include_spip('base/objets');
+	include_spip('prix_fonctions'); // pas chargé automatiquement dans certains cas
 	$prix_ht = 0;
 
 	// Arrondi de la devise
@@ -113,6 +114,7 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = '') 
  */
 function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = '') {
 	include_spip('base/objets');
+	include_spip('prix_fonctions'); // pas chargé automatiquement dans certains cas
 
 	// Arrondi de la devise
 	$devise = prix_devise_defaut();
