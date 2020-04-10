@@ -18,8 +18,8 @@
 	<necessite nom="verifier" compatibilite="[1.9.6;]" />
 	<necessite nom="cvtupload" compatibilite="[1.20.0;]" />
 	<utilise nom="saisies" compatibilite="[3.31.1;]" />
-	<utilise nom="lim" compatibilite="[2.2.2;]" />
-	<utilise nom="gis" compatibilite="[4.47.18;]" />
+	<utilise nom="lim" />
+	<utilise nom="gis" />
 
 	<pipeline nom="autoriser" inclure="emplois_autorisations.php" /> 
 

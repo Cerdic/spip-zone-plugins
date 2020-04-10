@@ -25,8 +25,9 @@ include_spip('inc/editer');
  */
 function formulaires_editer_offre_fichiers() {
 	$offre_pdf = lire_config('emplois/offres/offre_pdf');
-	if ( !test_espace_prive() AND $offre_pdf == 'oui' )
+	if ($offre_pdf == 'oui' ) {
 		return array('offre_pdf');
+	}
 }
 
 /**
@@ -118,25 +119,24 @@ function formulaires_editer_offre_verifier_dist($id_offre='new', $id_rubrique=0,
 		$erreurs['email'] = "email non valide";
 	}
 
-	// le formulaire d'upload de fichier n'a lieu que dans l'espace publique
+	// Gestion de l'upload de fichier
+	// tester le type de fichier : on teste $_FILES et pas _request('_fichiers') car sinon, on le teste à chaque passage et pas au premier upload
+	$offre_pdf = lire_config('emplois/offres/offre_pdf');
+	if ($offre_pdf == 'oui') {
+		if (!empty($_FILES['offre_pdf']['tmp_name']) AND $_FILES['offre_pdf']['type'] != 'application/pdf') {
+			//unset le fichier qui a quand même été chargé
+			if (isset($_FILES['offre_pdf']))
+				unset($_FILES['offre_pdf']);
+			// envoi erreur
+			$erreurs['offre_pdf'] = 'Vous devez choisir un fichier au format PDF';
+			$erreurs['message_erreur'] .= "\n Vous devez choisir un fichier au format PDF";
+		}
+	}
+
+	// Anti Spam : Honey Pot uniquement utile dans l'espace publique
 	if (!test_espace_prive()) {
-		// Honeypot
 		if (strlen(_request('nobot')) > 0) {
 			$erreurs['message_erreur'] = _T('pass_rien_a_faire_ici');
-		}
-
-		// Gestion de l'upload de fichier
-		// tester le type de fichier : on teste $_FILES et pas _request('_fichiers') car sinon, on le teste à chaque passage et pas au premier upload
-		$offre_pdf = lire_config('emplois/offres/offre_pdf');
-		if ($offre_pdf == 'oui') {
-			if (!empty($_FILES['offre_pdf']['tmp_name']) AND $_FILES['offre_pdf']['type'] != 'application/pdf') {
-				//unset le fichier qui a quand même été chargé
-				if (isset($_FILES['offre_pdf']))
-					unset($_FILES['offre_pdf']);
-				// envoi erreur
-				$erreurs['offre_pdf'] = 'Vous devez choisir un fichier au format PDF';
-				$erreurs['message_erreur'] .= "\n Vous devez choisir un fichier au format PDF";
-			}
 		}
 	}
 
@@ -180,47 +180,41 @@ function formulaires_editer_offre_traiter_dist($id_offre='new', $id_rubrique=0, 
 
 	// l'upload de PDF a t'il été activé ?
 	$offre_pdf = lire_config('emplois/offres/offre_pdf');
+	$fichiers_uploade = _request('_fichiers');
 
-	if (!test_espace_prive() and $offre_pdf == 'oui') {
+	if (isset($fichiers_uploade['offre_pdf']) AND $fichiers_uploade['offre_pdf']) {
 
-		$fichiers_uploade = _request('_fichiers');
+	   // vérifier si le l'offre d'emploi a déjà un PDF
+	   $offre_document = sql_getfetsel('id_document_offre',
+	      'spip_offres a JOIN spip_documents d ON(a.id_document_offre = d.id_document)',
+	      'id_offre = ' . intval($id_offre));
 
-		if (isset($fichiers_uploade['offre_pdf']) AND $fichiers_uploade['offre_pdf']) {
+	   
+	   // test : soit un numéro du document à mettre à jour, soit 'new'
+	   $id_document == $offre_document ? $offre_document : 'new';
 
-		   // vérifier si le l'offre d'emploi a déjà un PDF
-		   $offre_document = sql_getfetsel('id_document_offre',
-		      'spip_offres a JOIN spip_documents d ON(a.id_document_offre = d.id_document)',
-		      'id_offre = ' . intval($id_offre));
-		   
-		   // test : soit un numéro du document à mettre à jour, soit 'new'
-		   $id_document = $offre_document ? $offre_document : 'new';
-		   
-		   // ajouter le document et l'associer' à l'offre d'emploi
-		   $ajouter_documents = charger_fonction('ajouter_documents', 'action');
-		   // utile pour déterminer le mode : pas utile ici -> include_spip('formulaires/joindre_document');
+	   // ajouter le document et l'associer' à l'offre d'emploi
+	   $ajouter_documents = charger_fonction('ajouter_documents', 'action');
+	   $nouveaux_docs = $ajouter_documents($id_document, array($fichiers_uploade['offre_pdf']), 'offre', $id_offre, 'document');
 
-		  	// $mode             = joindre_determiner_mode('auto', $id_offre, 'offre');
-		   $nouveaux_docs    = $ajouter_documents($id_document, array($fichiers_uploade['offre_pdf']), 'offre', $id_offre, 'document');
+	   $id_document_cree = $nouveaux_docs[0];
+	   if (!is_numeric($id_document_cree)) {
+	      return array('message_erreur' => _L('Erreur lors de l\'enregistrement du fichier'));
+	   }
 
-		   $id_document_cree = $nouveaux_docs[0];
-		   if (!is_numeric($id_document_cree)) {
-		      return array('message_erreur' => _L('Erreur lors de l\'enregistrement du fichier'));
-		   }
+	   // mettre à jour l'id du document pdf dans l'offre d'emploi
+	   sql_updateq('spip_offres', array('id_document_offre' => $id_document_cree), 'id_offre = ' . $id_offre);
 
-		   // mettre à jour l'id du document pdf dans l'offre d'emploi
-		   sql_updateq('spip_offres', array('id_document_offre' => $id_document_cree), 'id_offre = ' . $id_offre);
+	   // attention : prendre en compte la notion de confidentialité
+	   // mettre à jour le titre du document
+	   // sql_updateq('spip_documents', array('titre' => _L('Affiche') . ' "' . _request('titre') . '"'), 'id_document = ' . $id_document_cree);
 
-		   // attention : prendre en compte la notion de confidentialité
-		   // mettre à jour le titre du document
-		   // sql_updateq('spip_documents', array('titre' => _L('Affiche') . ' "' . _request('titre') . '"'), 'id_document = ' . $id_document_cree);
-
-		}
-		// renvoyer id_document au cas où le formulaire est dans un bloc ajax 
-		if (isset($id_document_cree)) {
-			set_request('id_document_offre', $id_document_cree);
-		}
-		
 	}
+	// renvoyer id_document au cas où le formulaire est dans un bloc ajax 
+	if (isset($id_document_cree)) {
+		set_request('id_document_offre', $id_document_cree);
+	}
+		
 
 	// Important : passer id_offre dans l'environnement au cas ou le formulaire est dans un bloc ajax
 	set_request('id_offre', $id_offre);

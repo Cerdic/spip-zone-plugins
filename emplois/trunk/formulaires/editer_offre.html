@@ -90,9 +90,7 @@
 		<!--extra-->
 
 		[(#CONFIG{emplois/offres/offre_pdf}|=={oui}|oui)
-			[(#REM|test_espace_prive|non)
-				<INCLURE{fond=formulaires/inc-pdf_joint,env, nom_input=offre_pdf, type_objet=offre, id_document=#ENV{id_document_offre}, id=#ENV{id_offre},ajax=pdf_upload}>
-			]
+				<INCLURE{fond=formulaires/inc-pdf_joint,env, nom_input=offre_pdf, type_objet=offre, id_document=#ENV{id_document_offre}, id=#ENV{id_offre}, ajax=pdf_upload}>
 		]
 		
 		[(#REM|test_espace_prive|oui)
