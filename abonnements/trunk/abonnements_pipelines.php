@@ -84,6 +84,7 @@ function abonnements_post_edition($flux) {
 		}
 
 		$modifs = array();
+		$modifs_instituer = array();
 
 		// Si l'échéance est VIDE, et que pourtant l'offre parente A BIEN une durée
 		// alors c'est qu'il faut initialiser les dates !
@@ -107,7 +108,7 @@ function abonnements_post_edition($flux) {
 					and $jourdhui >= $abonnement['date_debut']
 					and $jourdhui <= $abonnement['date_echeance']
 			) {
-				$modifs['statut'] = 'actif';
+				$modifs_instituer['statut'] = 'actif';
 				spip_log("Post-édition : passage de l’abonnement $id_abonnement en actif", 'abonnements.'._LOG_INFO);
 				spip_log($abonnement, 'abonnements.'._LOG_INFO);
 			}
@@ -125,7 +126,7 @@ function abonnements_post_edition($flux) {
 						)
 					)
 			) {
-				$modifs['statut'] = 'inactif';
+				$modifs_instituer['statut'] = 'inactif';
 				spip_log("Post-édition : passage de l’abonnement $id_abonnement en inactif", 'abonnements.'._LOG_INFO);
 				spip_log($abonnement, 'abonnements.'._LOG_INFO);
 			}
@@ -135,6 +136,11 @@ function abonnements_post_edition($flux) {
 		if (!empty($modifs)) {
 			include_spip('action/editer_objet');
 			objet_modifier('abonnement', $flux['args']['id_objet'], $modifs);
+		}
+		// Pour le statut on fait à part (pb de double entrée avec Champs Extras)
+		if (!empty($modifs_instituer)) {
+			include_spip('action/editer_objet');
+			objet_instituer('abonnement', $flux['args']['id_objet'], $modifs_instituer);
 		}
 	}
 	// Détection magique du plugin Commandes et d'une commande d'offre d'abonnement
