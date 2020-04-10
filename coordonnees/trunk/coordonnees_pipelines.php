@@ -138,3 +138,95 @@ function coordonnees_jquery_plugins($scripts) {
 	
 	return $scripts;
 }
+
+/**
+ * Modifier les saisies d'adresses chargées si on est dans un formulaire posté et que le pays a changé, car ce ne sont plus les mêmes vérification à faire
+ * 
+ * @param array $flux
+ * @return array
+ **/
+function coordonnees_formulaire_saisies($flux) {
+	// Si on est dans un form posté
+	if ($flux['args']['je_suis_poste']) {
+		// On récupère les pays qui ont changé par l'API
+		if (
+			$pays_modifies = _request('coordonnees_noms_pays_modifies')
+			and is_array($pays_modifies)
+		) {
+			include_spip('inc/saisies');
+			
+			// Pour chaque pays modifié
+			foreach ($pays_modifies as $nom) {
+				// On récupère le nouveau pays changé
+				$code_pays = saisies_request($nom);
+				
+				// On va chercher où se trouve ce champ et se placer à cette endroit du tableau de saisies
+				if ($chemin_pays = saisies_chercher($flux['data'], $nom, true)) {
+					$cle_pays = array_pop($chemin_pays);
+					$bon_endroit = &$flux['data'];
+					foreach ($chemin_pays as $cle) {
+						$bon_endroit = &$bon_endroit[$cle];
+					}
+					
+					// On va chercher l'identifiant de cette adresse
+					$identifiant = $bon_endroit[$cle_pays]['options']['adresse-id'];
+					
+					// Le champ de pays est-il obligatoire ?
+					$obligatoire = $bon_endroit[$cle_pays]['options']['obligatoire'];
+					
+					// On va supprimer tous les champs qui suivent de la même adresse
+					foreach ($bon_endroit as $cle=>$saisie) {
+						if ($cle != $cle_pays) {
+							// Dès qu'on a trouvé un champ de la même adresse, on le vire
+							if (isset($saisie['options']['adresse-id']) and $saisie['options']['adresse-id'] == $identifiant) {
+								unset($bon_endroit[$cle]);
+							}
+							// Dès que ce n'est plus de la même adresse on arrête tout, c'est qu'on a fini
+							else {
+								break;
+							}
+						}
+					}
+					
+					// On génère les champs de saisies propre à ce pays (et donc avec les vérifs pour ce pays)
+					$saisies_pays = coordonnees_adresses_saisies_par_pays($code_pays, $obligatoire);
+					
+					// Si le name a au moins un crochet
+					if ($modele = $nom and strpos($modele, '[') !== false) {
+						// On remplace le champ pays par $0
+						$modele = str_replace('pays', '$0', $modele);
+						// On transforme toutes les saisies avec ce modèle
+						$saisies_pays =  saisies_transformer_noms(
+							$saisies_pays,
+							'/^\w+$/',
+							$modele
+						);
+					}
+					
+					// On rajoute de nouveau le hidden, en PHP cette fois, 
+					// car si ça s'arrête dans verifier() il faut continuer de dire que ce n'est pas le même pays qu'au chargement
+					$saisies_pays[] = array(
+						'saisie' => 'hidden',
+						'options' => array(
+							'nom' => 'coordonnees_noms_pays_modifies[]',
+							'defaut' => $nom,
+							'valeur_forcee' => $nom,
+						),
+					);
+					
+					// On remet l'identifiant
+					foreach ($saisies_pays as $cle=>$saisie) {
+						$saisies_pays[$cle]['options']['adresse-id'] = $identifiant;
+						$saisies_pays[$cle]['options']['attributs'] = 'data-adresse-id="'.$identifiant.'"';
+					}
+					
+					// On insère ces champs juste après le pays
+					array_splice($bon_endroit, $cle_pays+1, 0, $saisies_pays);
+				}
+			}
+		}
+	}
+	
+	
+	return $flux;
+}

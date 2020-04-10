@@ -61,6 +61,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 				'class' => 'select2 chosen',
 				'defaut' => lire_config('pays/code_pays_defaut'),
 				'code_pays' => 'oui',
+				'adresse-id' => $identifiant,
 				'attributs' => 'data-adresse-id="'.$identifiant.'"',
 			)
 		);
@@ -70,6 +71,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 	$saisies_pays = coordonnees_adresses_saisies_par_pays($code_pays_defaut ? $code_pays_defaut : 'FR', $obligatoire);
 	// On identifie cette adresse là pour pouvoir la manipuler indépendamment
 	foreach ($saisies_pays as $cle=>$saisie) {
+		$saisies_pays[$cle]['options']['adresse-id'] = $identifiant;
 		$saisies_pays[$cle]['options']['attributs'] = 'data-adresse-id="'.$identifiant.'"';
 	}
 	

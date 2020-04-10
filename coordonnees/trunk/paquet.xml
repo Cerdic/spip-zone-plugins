@@ -1,7 +1,7 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="3.0.1"
+	version="3.0.2"
 	schema="1.10.0"
 	etat="dev"
 	compatibilite="[3.2.0;3.3.*]"
@@ -15,7 +15,7 @@
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="coordonnees" reference="fr" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[3.36.3;]" />
 	<necessite nom="pays" compatibilite="[3.3.0;]" />
 	<necessite nom="verifier" compatibilite="[0.1.15;]" />
 
@@ -37,6 +37,7 @@
 	<!-- Pour JS des adresses -->
 	<pipeline nom="header_prive" inclure="coordonnees_pipelines.php" />
 	<pipeline nom="jquery_plugins" inclure="coordonnees_pipelines.php" />
+	<pipeline nom="formulaire_saisies" inclure="coordonnees_pipelines.php" />
 
 	<menu nom="coordonnees" titre="coordonnees:titre_coordonnees" parent="menu_edition" icone="images/addressbook-16.png" action="coordonnees" />
 </paquet>
