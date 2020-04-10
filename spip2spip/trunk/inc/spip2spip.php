@@ -213,7 +213,6 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 $_date_modif = $article['date_modif'];
                                 $_nom_site = $article['nom_site'];
                                 $_url_site = $article['url_site'];
-                                $_virtuel = $article['virtuel'];
                                 $_lang = $article['lang'];
                                 $_logo = $article['logo'];
                                 $_logosurvol = $article['logosurvol'];
@@ -249,7 +248,6 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                     'id_secteur' => $_id_secteur,
                                     'descriptif' => $_descriptif,
                                     'chapo' => $_chapo,
-                                    'virtuel' => $_virtuel,
                                     'texte' => $_texte,
                                     'ps' => $_ps,
                                     'statut' => $_statut,
@@ -485,7 +483,7 @@ function analyser_backend_spip2spip($rss) {
     include_spip("inc_texte.php"); // pour couper()
     include_spip("inc_filtres.php"); // pour filtrer_entites()
 
-    $xml_tags = array('surtitre', 'titre', 'soustitre', 'descriptif', 'chapo', 'texte', 'ps', 'auteur', 'auteurs', 'link', 's2s_url_site_distant', 's2s_id_article_distant', 'trad', 'date', 'date_redac', 'date_modif', 'statut', 'nom_site', 'url_site', 'virtuel', 'evenements', 'lang', 'logo', 'logosurvol', 'keyword', 'mots', 'licence', 'documents');
+    $xml_tags = array('surtitre', 'titre', 'soustitre', 'descriptif', 'chapo', 'texte', 'ps', 'auteur', 'auteurs', 'link', 's2s_url_site_distant', 's2s_id_article_distant', 'trad', 'date', 'date_redac', 'date_modif', 'statut', 'nom_site', 'url_site', 'evenements', 'lang', 'logo', 'logosurvol', 'keyword', 'mots', 'licence', 'documents');
 
     $syndic_regexp = array(
         'item' => ',<item[>[:space:]],i',
@@ -507,7 +505,6 @@ function analyser_backend_spip2spip($rss) {
         'date' => ',<date[^>]*>(.*?)</date[^>]*>,ims',
         'date_redac' => ',<date_redac[^>]*>(.*?)</date_redac[^>]*>,ims',
         'date_modif' => ',<date_modif[^>]*>(.*?)</date_modif[^>]*>,ims',
-        'virtuel' => ',<virtuel[^>]*>(.*?)</virtuel[^>]*>,ims',
         'nom_site' => ',<nom_site[^>]*>(.*?)</nom_site[^>]*>,ims',
         'url_site' => ',<url_site[^>]*>(.*?)</url_site[^>]*>,ims',
         'evenements' => ',<evenements[^>]*>(.*?)</evenements[^>]*>,ims',
