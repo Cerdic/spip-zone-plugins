@@ -35,13 +35,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_abonnement' => '1件の定期購読',
 	'info_1_abonnement_actif' => '1件の有効な定期購読',
 	'info_1_abonnement_inactif' => '1件の無効な定期購読', # RELIRE
+	'info_1_abonnement_notifier' => '通知が必要な定期購読', # RELIRE
+	'info_abonnements_auteur' => 'この人の全定期購読', # RELIRE
 	'info_aucun_abonnement' => '定期購読はありません',
 	'info_aucun_abonnement_actif' => '有効な定期購読はありません',
 	'info_aucun_abonnement_inactif' => '無効な定期購読はありません', # RELIRE
+	'info_aucun_abonnement_notifier' => '通知が必要な定期購読はありません', # RELIRE
 	'info_date_fin' => '終了日：@date@',
 	'info_nb_abonnements' => '@nb@ 件の定期購読',
 	'info_nb_abonnements_actifs' => '@nb@ 件の有効な定期購読',
 	'info_nb_abonnements_inactifs' => '@nb@ 件の無効な定期購読',
+	'info_nb_abonnements_notifier' => '通知の必要な定期購読が@nb@件あります', # RELIRE
 	'info_numero_abbr' => '番号',
 	'info_numero_abbr_maj' => '番号',
 
@@ -55,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_dates' => '日付',
 	'label_duree' => '期間',
 	'label_montant' => '合計',
+	'label_statut' => 'ステータス', # RELIRE
 
 	// N
 	'notification_echeance_chapo' => '<p>こんにちは @nom@さん,</p>',
@@ -80,5 +85,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notification_echeance_sujet_jours_pendant' => 'あなたの定期購読は今日終了します !',
 	'notification_echeance_sujet_mois_apres' => 'あなたの定期購読は @duree@ か月前に終了しました !',
 	'notification_echeance_sujet_mois_avant' => 'あなたの定期購読はあと@duree@か月で終了します !',
-	'notification_echeance_sujet_mois_pendant' => 'あなたの定期購読は今月で終了します !'
+	'notification_echeance_sujet_mois_pendant' => 'あなたの定期購読は今月で終了します !',
+
+	// R
+	'retirer_lien_abonnement' => 'この定期購読を取り消す', # RELIRE
+	'retirer_tous_liens_abonnements' => 'すべての定期購読を取り消す', # RELIRE
+
+	// S
+	'statut_actif' => '有効な',
+	'statut_actifs' => '有効な',
+	'statut_inactif' => '無効な',
+	'statut_inactifs' => '無効な',
+	'statut_tous' => '全', # RELIRE
+
+	// T
+	'texte_ajouter_abonnement' => '定期購読を追加する',
+	'texte_changer_statut_abonnement' => 'この定期購読は :',
+	'texte_creer_associer_abonnement' => '定期購読を申し込んで紐付ける', # RELIRE
+	'titre_abonnement' => '定期購読',
+	'titre_abonnements' => '定期購読',
+	'titre_abonnements_rubrique' => '特定欄の購読', # RELIRE
+	'titre_abonnements_suivre' => '定期購読を続ける', # RELIRE
+	'titre_langue_abonnement' => 'この定期購読の使用言語', # RELIRE
+	'titre_logo_abonnement' => 'この定期購読のロゴ' # RELIRE
 );
