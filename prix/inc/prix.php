@@ -138,7 +138,7 @@ function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = '') {
 	// On va d'abord chercher le prix HT. On délègue le test de présence de l'objet dans cette fonction.
 	$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
 	$objet = objet_type($objet);
-	$options_ht = array_merge($options, array('arrondi'=>0));
+	$options_ht = array_merge($options, array('arrondi' => false));
 	$prix = $prix_ht = $fonction_prix_ht($objet, $id_objet, $options_ht);
 	$taxes = array();
 
