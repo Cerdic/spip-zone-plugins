@@ -1,0 +1,192 @@
+<div class='formulaire_spip formulaire_configurer formulaire_#FORM' id='formulaire_#FORM'>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<p class="explication"><:adaptive_images:explication_configuration_doc:></p>
+
+	<form method="post" action="#SELF"><div>
+		#ACTION_FORMULAIRE
+		#SET{fl,adaptive_images}
+		<div class="editer-groupe">
+			#SET{name,markup_method}#SET{obli,''}#SET{defaut,'3layers'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,3layers}
+				<div class="choix">
+					<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+				#SET{val,srcset}
+				<div class="choix">
+					<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</div>
+
+			#SET{name,lowsrc_jpg_bg_color}#SET{obli,''}#SET{defaut,'#ffffff'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</div>
+			#SET{name,max_width_1x}#SET{obli,''}#SET{defaut,'640'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</div>
+			#SET{name,max_width_mobile_version}#SET{obli,''}#SET{defaut,'320'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</div>
+			#SET{name,min_width_1x}#SET{obli,''}#SET{defaut,'320'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</div>
+			#SET{name,min_filesize}#SET{obli,''}#SET{defaut,'20'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</div>
+			#SET{name,default_bkpts}#SET{obli,''}#SET{defaut,'160,320,480,640,960,1440'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</div>
+			#SET{name,on_demand_production}#SET{obli,''}#SET{defaut,'0'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,0}
+				<input type="hidden" name="#GET{name}" value="#GET{val}" />
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+				<p class="explication"><:adaptive_images:explication_on_demand_production:></p>
+			</div>
+			#SET{name,lazy_load}#SET{obli,''}#SET{defaut,'0'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,0}
+				<input type="hidden" name="#GET{name}" value="#GET{val}" />
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</div>
+
+			<div class="fieldset">
+				<fieldset>
+					<legend><:adaptive_images:legend_compression_jpg:></legend>
+					<p class="explication"><:adaptive_images:explication_compression_jpg:></p>
+					<div class="editer-groupe">
+						#SET{name,10x_jpg_quality}#SET{obli,''}#SET{defaut,'75'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+						</div>
+						#SET{name,15x_jpg_quality}#SET{obli,''}#SET{defaut,'65'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+						</div>
+						#SET{name,20x_jpg_quality}#SET{obli,''}#SET{defaut,'45'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+
+			<div class="fieldset">
+				<fieldset>
+					<legend><:adaptive_images:legend_miniature_preview:></legend>
+					<p class="explication"><:adaptive_images:explication_thumbnail_method:></p>
+					#SET{name,thumbnail_method}#SET{obli,''}#SET{defaut,'lowsrc'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+						<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]
+						#SET{val,gradients}
+						<div class="choix">
+							<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+						</div>
+						#SET{val,lowsrc}
+						<div class="choix">
+							<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+						</div>
+						<div class="suite fieldset">
+							<p class="explication"><:adaptive_images:explication_miniature_basse_def:></p>
+							<div class="editer-groupe">
+								#SET{name2,lowsrc_width}#SET{obli2,''}#SET{defaut2,'128'}#SET{erreurs2,#ENV**{erreurs}|table_valeur{#GET{name2}}}
+								<div class="editer long_label editer_[(#GET{name2})][ (#GET{obli2})][ (#GET{erreurs2}|oui)erreur]">
+									<label for="#GET{name2}">[(#GET{fl}|concat{':label_',#GET{name2}}|_T)]</label>[
+									<span class='erreur_message'>(#GET{erreurs2})</span>
+									]<input type="text" name="#GET{name2}" class="text" value="#ENV*{#GET{name2},#GET{defaut2}}" id="#GET{name2}" [(#HTML5|et{#GET{obli2}})required='required']/>
+								</div>
+								#SET{name2,lowsrc_jpg_quality}#SET{obli,''}#SET{defaut2,'40'}#SET{erreurs2,#ENV**{erreurs}|table_valeur{#GET{name2}}}
+								<div class="editer long_label editer_[(#GET{name2})][ (#GET{obli2})][ (#GET{erreurs2}|oui)erreur]">
+									<label for="#GET{name2}">[(#GET{fl}|concat{':label_',#GET{name2}}|_T)]</label>[
+									<span class='erreur_message'>(#GET{erreurs2})</span>
+									]<input type="text" name="#GET{name2}" class="text" value="#ENV*{#GET{name2},#GET{defaut2}}" id="#GET{name2}" [(#HTML5|et{#GET{obli2}})required='required']/>
+								</div>
+							</div>
+						</div>
+						#SET{val,potrace}
+						<div class="choix">
+							<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+						</div>
+						#SET{val,geometrize}
+						<div class="choix">
+							<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+						</div>
+					</div>
+
+					#SET{name,thumbnail_debug}#SET{obli,''}#SET{defaut,'0'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]
+						#SET{val,0}
+						<input type="hidden" name="#GET{name}" value="#GET{val}" />
+						#SET{val,1}
+						<div class="choix">
+							<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+						</div>
+					</div>
+
+				</fieldset>
+			</div>
+
+		</div>
+
+		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+
+</div>
+<style type="text/css">
+	.suite {padding-left: 40px;}
+	.choix + .suite {
+		border-top:1px solid #ddd;
+	}
+</style>

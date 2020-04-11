@@ -1,0 +1,33 @@
+<BOUCLE_logo(DOCUMENTS){id_document=#ID_ANNEXE}{mode?}{statut?}>#SET{logo,#LOGO_DOCUMENT}#SET{url,#URL_DOCUMENT}</BOUCLE_logo>
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{mode}' id='formulaire_#FORM-#ENV{mode}-#ENV{id,new}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form action="#ENV{action}#formulaire_annexer_document-#ENV{mode}-#ENV{id,new}" method="post" enctype='multipart/form-data'><div>
+		[<p class="notice">(#ENV*{_warning_ratio})</p>]
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<div class="editer-groupe">
+			<div class="editer editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
+				<label for="#ENV{mode}">[(#VAL{'adaptive_images:label_fichier_'}|concat{#ENV{mode}}|_T)]</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
+				]
+				[<a href="#GET{url}">#GET{logo}</a>
+				<div class="fichier">(#ENV*{annexe}|table_valeur{fichier})</div>
+				<div class="infos">
+		  	[<span class='type'>(#ENV{annexe}|table_valeur{type_document}) - </span>]
+				<span class='taille'>[(#ENV{annexe}|table_valeur{largeur}|ou{#ENV{annexe}|table_valeur{hauteur}}|oui)[(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#ENV{annexe}|table_valeur{largeur},hauteur_vignette,#ENV{annexe}|table_valeur{hauteur}}})] -
+				][(#ENV{annexe}|table_valeur{taille}|taille_en_octets|texte_backend)]</span>
+				</div>
+			][(#ENV*{annexe}|non)[(#VAL{'adaptive_images:aucun_'}|concat{#ENV{mode}}|_T{#ARRAY{width,#ENV{_width},width_hr,#ENV{_width_hr}}})]]
+				<p class='actions'>
+				[(#ENV*{annexe}|oui)  <input type='submit' class='submit' name='supprimer' value='<:medias:bouton_supprimer|attribut_html:>' />]
+				&#91;<a href='#' onclick='jQuery("##FORM-#ENV{mode}").toggle("fast");return false;'><:bouton_changer:></a>&#93;
+				</p>
+				<div id='#FORM-#ENV{mode}' style='display:none;'>
+				[(#INCLURE{fond=formulaires/inc-upload_document}{env}{joindre_upload=oui})]
+				</div>
+	    </div>
+		</div>
+	</div></form>
+	]
+</div>
