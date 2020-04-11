@@ -175,10 +175,12 @@ function balise_LISTER_CHOIX_dist($p) {
  */
 function calculer_balise_LISTER_CHOIX($objet, $colonne, $applatir = true) {
 	if ($options = calculer_balise_CHAMP_EXTRA($objet, $colonne)) {
-		if ((isset($options['datas']) and $options['datas'])
-			or (isset($options['data']) and $options['data'])) {
+		if (
+			!empty($options['datas'])
+			or !empty($options['data'])
+		) {
 			include_spip('inc/saisies');
-			$choix = $options['datas'] ? $options['datas'] : $options['data'];
+			$choix = !empty($options['datas']) ? $options['datas'] : $options['data'];
 			$choix = saisies_chaine2tableau($choix);
 			// applatir les sous-groupes si présents
 			if ($applatir) {
