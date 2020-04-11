@@ -416,9 +416,11 @@ function saisies_trouver_data($description, $disable_choix = false) {
 /**
  * Aplatit une description tabulaire en supprimant les sous-groupes.
  * Ex : les data d'une saisie de type select
- * @param string $tab Le tableau à aplatir
- * @param bool $montrer_groupe mettre à false pour ne pas montrer le sous-groupe dans les label humain
- * @return $nouveau_tab
+ *
+ * @param array $tab            Le tableau à aplatir
+ * @param bool  $montrer_groupe mettre à false pour ne pas montrer le sous-groupe dans les label humain
+ *
+ * @return array
  */
 function saisies_aplatir_tableau($tab, $montrer_groupe = true) {
 	$nouveau_tab = array();
