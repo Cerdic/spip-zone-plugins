@@ -12,7 +12,9 @@
 
     <BOUCLE_document2 (DOCUMENTS) {si #ENV{img2}|oui} {id_document=#ENV{img2}}>
     <div class="quickflip-image">
+    <a href="#" [title="(#TITRE)"]>
     [(#FICHIER|image_reduire{#GET{tailleimage}})]
+    </a>
     </div>
     </BOUCLE_document2>
 
@@ -36,7 +38,9 @@
 <div class="quickflip-recto">
     <div class="quickflip-image">
     <BOUCLE_document1 (DOCUMENTS) {id_document=#ENV{img1}}>
+    <a href="#" [title="(#TITRE)"]>
     [(#FICHIER|image_reduire{#GET{tailleimage}})]
+    </a>
     </BOUCLE_document1>
     </div>
 
