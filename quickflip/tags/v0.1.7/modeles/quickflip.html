@@ -1,0 +1,59 @@
+#SET{tailleimage,#ENV{largeur,400}}
+
+    <BOUCLE_document (DOCUMENTS) {id_document=#ENV{img1}}>
+	[(#SET{width,[(#FICHIER|image_reduire{#GET{tailleimage}}|extraire_attribut{width} )]} )]
+	[(#SET{height,[(#FICHIER|image_reduire{#GET{tailleimage}}|extraire_attribut{height} )]} )]
+    </BOUCLE_document>
+
+<div class="quickflip-wrapper" style="[width:(#GET{width})px;][height:(#GET{height})px;]">
+
+
+<div class="quickflip-verso">
+
+    <BOUCLE_document2 (DOCUMENTS) {si #ENV{img2}|oui} {id_document=#ENV{img2}}>
+    <div class="quickflip-image">
+    [(#FICHIER|image_reduire{#GET{tailleimage}})]
+			[<div class="quickflip-titre-image">
+			(#TITRE)
+			[<div  class="quickflip-descriptif-image">(#DESCRIPTIF)</div>]
+			</div>]
+    </div>
+    </BOUCLE_document2>
+
+    <BOUCLE_document3 (DOCUMENTS) {si #ENV{img2}|non} {id_document=#ENV{img1}}>
+    <div class="quickflip-texte" style="[width:(#GET{width}|moins{4})px;][height:(#GET{height})px;]">
+        [<div class="quickflip-titre">(#TITRE)</div>]
+        [<div class="quickflip-descriptif">(#DESCRIPTIF)</div>]
+        [<div class="quickflip-licence" style="[width:(#GET{width}|moins{4})px;]">(#LICENCE)</div>]
+        [<div class="quickflip-credits" style="[width:(#GET{width}|moins{4})px;]"><span class="quickflip-credits-texte">Crédits : (#CREDITS)</span></div>]
+    </div>
+    </BOUCLE_document3>
+
+    <div class="quickflip-lien">
+        <a href="#" class="quickFlipCta">
+            <img src="#CHEMIN{images/coin.png}" alt="" />
+        </a>
+    </div>
+
+</div>
+
+<div class="quickflip-recto">
+    <div class="quickflip-image">
+    <BOUCLE_document1 (DOCUMENTS) {id_document=#ENV{img1}}>
+    [(#FICHIER|image_reduire{#GET{tailleimage}})]
+			[<div class="quickflip-titre-image">
+			(#TITRE)
+			[<div  class="quickflip-descriptif-image">(#DESCRIPTIF)</div>]
+			</div>]
+    </BOUCLE_document1>
+    </div>
+
+    <div class="quickflip-lien">
+        <a href="#" class="quickFlipCta">
+            <img src="#CHEMIN{images/coin.png}" alt="" />
+        </a>
+    </div>
+
+</div>
+
+</div>
