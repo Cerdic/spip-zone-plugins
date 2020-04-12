@@ -13,6 +13,20 @@
 .quickflip-image img {
 	width: 100%;
 	height: 100%;
+	margin-bottom: -3px;
+}
+.quickflip-titre-image{
+    width: 100%;
+    min-height: 30px;
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    color: white !important;
+    font-size: 1.5rem;
+}
+.quickflip-descriptif-image{
+    font-size: 1rem;
 }
 .quickflip-texte, .quickflip-licence, .quickflip-credits{
 	background-color: #E5E5E5;
@@ -25,12 +39,12 @@
 	margin: 15px 80px 0 15px;
 	min-height: 40px;
 	text-align: center;
-	font-size: 20px;
+	font-size: 1.8rem;
 	font-weight: bold;
 }
 .quickflip-descriptif {
 	margin: 10px;
-	font-size: 12px;
+	font-size: 1rem;
 }
 .quickflip-licence {
 	text-align: left;
@@ -44,7 +58,7 @@
 }
 .quickflip-credits {
 	text-align: right;
-	font-size: 10px;
+	font-size: 0.8rem;
 	position: absolute;
 	bottom: 0;
 	height: 20px;
@@ -63,14 +77,12 @@
     height: 30px;
     position: absolute;
     bottom: 0;
-    background-color: black;
-    opacity: 0.5;
+    background-color: rgba(0, 0, 0, 0.6);
     text-align: center;
 }
 .quickflip-lienart a{
     color: white !important;
-    font-size: 18px;
-    padding-left: 15px;
+    font-size: 1.5rem;
 }
 /* pour retrouver le flux normal d'affichage */
 .nettoyeur {
@@ -79,7 +91,7 @@
 	padding: 0;
 	border: none;
 	height: 0;
-	line-height: 1px;
+	line-height: 0.1;
 	font-size: 1px;
 	visibility: hidden;
 }
