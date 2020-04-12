@@ -1,11 +1,11 @@
 .lazyload {
     opacity: 0;
 }
-/* [1] utilisation de body pour surpasser un block ayant la propriété cover */
-body .lazyloading {/* 1 */
+/* [1] utilisation de !important pour surpasser un block ayant la propriété background cover */
+.lazyloading {/* 1 */
   opacity: .5;
   background: #f7f7f7 url(../images/loader.gif) no-repeat center;
-  background-size: 32px;/* 1 */
+  background-size: 32px !important;/* 1 */
 }
 
 .lazyloaded {
