@@ -14,9 +14,11 @@
 
     <BOUCLE_verso(ARTICLES){id_article=#ENV{article}}>
     <div class="quickflip-texte" style="[width:(#GET{width}|moins{4})px;][height:(#GET{height})px;]">
-        [<div class="quickflip-titre">(#TITRE)</div>]
+        [<div class="quickflip-titre"><a href="#URL_ARTICLE">(#TITRE)</a></div>]
         [<div class="quickflip-descriptif">(#DESCRIPTIF)</div>]
     </div>
+
+
     </BOUCLE_verso>
 
     <div class="quickflip-lien">
