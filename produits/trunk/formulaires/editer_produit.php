@@ -201,13 +201,15 @@ function formulaires_editer_produit_charger($id_produit = 'new', $id_rubrique = 
 		$contexte['parent'] = 'rubrique|'.($contexte['id_rubrique'] ? $contexte['id_rubrique'] : $id_rubrique);
 	}
 
-	//Calculer le prix TTC selon le contexte
-	$taxe = floatval($contexte['taxe'] ? $contexte['taxe'] : lire_config('produits/taxe', 0));
+	$taxe = 0;
 	if (strlen($contexte['taxe'])) {
+		// Pour le calcul du TTC
+		$taxe = floatval($contexte['taxe']);
+		// Pour le remplissage du champ
 		$contexte['taxe'] = 100 * $contexte['taxe'];
 	}
-	$contexte['_taxe_defaut'] = 100 * lire_config('produits/taxe', 0);
 
+	//Calculer le prix TTC selon le contexte
 	$precision_ttc = intval(lire_config('produits/precision_ttc', 2));
 	$contexte['prix_ht'] = floatval($contexte['prix_ht']);
 	$contexte['prix_ttc'] = round($contexte['prix_ht'] * (1+$taxe), $precision_ttc);
@@ -280,7 +282,7 @@ function formulaires_editer_produit_traiter($id_produit = 'new', $id_rubrique = 
 	}
 
 	if (lire_config('produits/editer_ttc')) {
-		$prix_ht = _request('prix_ttc') / (1 + _request('taxe', lire_config('produits/taxe', 0)));
+		$prix_ht = _request('prix_ttc') / (1 + _request('taxe', 0));
 		set_request('prix_ht', $prix_ht);
 	}
 
