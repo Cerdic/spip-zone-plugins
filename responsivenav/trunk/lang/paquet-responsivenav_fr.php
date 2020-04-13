@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
-	'responsivenav_description' => '',
+	'responsivenav_description' => 'Adaptation pour SPIP du plugin responsive Nav de viljamis pour SPIP',
 	'responsivenav_nom' => 'Responsive Nav',
 	'responsivenav_slogan' => 'Un menu responsive dans vos squelettes',
 );
