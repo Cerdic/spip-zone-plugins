@@ -1,0 +1,30 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:emplois:cfg_titre_configurer_cvs:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div class="editer-groupe">
+			<div class="editer long_label editer_activer_cvs[ (#ENV**{erreurs}|table_valeur{activer_cvs}|oui)erreur]">
+				<label for="activer_cvs"><:emplois:cfg_label_activer_cvs:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{activer_cvs})</span>
+				]<div class="choix">
+					<input type="radio" name="activer_cvs" id="activer_cvs_oui" value="oui"
+					[(#CONFIG{emplois/cvs/activer_cvs}|=={oui}|oui)checked="checked"] /><label for="activer_cvs_oui"><:item_oui:></label>
+					&nbsp;&nbsp;
+					<input type="radio" name="activer_cvs" id="activer_cvs_non" value="non"
+					[(#CONFIG{emplois/cvs/activer_cvs}|=={oui}|non)checked="checked"] /><label for="activer_cvs_non"><:item_non:></label>
+				</div>
+			</div>
+		</div>
+
+		<input type="hidden" name="_meta_casier" value="emplois/cvs" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

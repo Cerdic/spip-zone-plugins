@@ -1,0 +1,54 @@
+[(#AUTORISER{voir,offre,#ID_OFFRE}|sinon_interdire_acces)]
+<BOUCLE_offre(OFFRES){id_offre}{statut==.*}{si #ENV{exec}|=={offre}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,offre,#ID_OFFRE})
+		[(#ID_OFFRE|afficher_qui_edite{offre}|non)
+			[(#URL_ECRIRE{offre_edit,id_offre=#ID_OFFRE}|icone_verticale{<:offre:icone_modifier_offre:>,offre,edit,right ajax preload})]
+		]
+		[(#ID_OFFRE|afficher_qui_edite{offre}|oui)
+			[(#URL_ECRIRE{offre_edit,id_offre=#ID_OFFRE}|icone_verticale{#ID_OFFRE|afficher_qui_edite{offre},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{offre-24.png}|balise_img{offre,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{offre,#ID_OFFRE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/offre,id=#ID_OFFRE,id_offre=#ID_OFFRE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,offre,#ID_OFFRE})
+	[(#ID_OFFRE|afficher_qui_edite{offre}|non)
+		[(#URL_ECRIRE{offre_edit,id_offre=#ID_OFFRE}|icone_verticale{<:offre:icone_modifier_offre:>,offre,edit,right ajax preload})]
+	]
+	[(#ID_OFFRE|afficher_qui_edite{offre}|oui)
+		[(#URL_ECRIRE{offre_edit,id_offre=#ID_OFFRE}|icone_verticale{#ID_OFFRE|afficher_qui_edite{offre},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,offre,id,#ID_OFFRE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/offre-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/offre-enfants,id_offre,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,offre,id_offre,#ID_OFFRE,objet,offre,id_objet,#ID_OFFRE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_offre>
+[(#ENV**{exec}|=={offre_edit}|?{#INCLURE{fond=prive/squelettes/contenu/offre_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_offre>

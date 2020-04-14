@@ -1,0 +1,32 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:emplois:cfg_titre_configurer_cvs_contenus:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<div class="editer-groupe">
+
+			<div class="editer long_label editer_cv_pdf[ (#ENV**{erreurs}|table_valeur{cv_pdf}|oui)erreur]">
+				<label for="cv_pdf"><:emplois:champ_joindre_pdf_label:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cv_pdf})</span>
+				]<p class="explication">Pouvoir joindre un PDF depuis le formulaire publique</p>
+				<div class="choix">
+					<input type="radio" name="cv_pdf" id="cv_pdf_oui" value="oui"
+					[(#CONFIG{emplois/cvs/cv_pdf}|=={oui}|oui)checked="checked"] /><label for="cv_pdf_oui"><:item_oui:></label>
+					&nbsp;&nbsp;
+					<input type="radio" name="cv_pdf" id="cv_pdf_non" value="non"
+					[(#CONFIG{emplois/cvs/cv_pdf}|=={oui}|non)checked="checked"] /><label for="offre_pdf_non"><:item_non:></label>
+				</div>
+			</div>
+		</div>
+
+		<input type="hidden" name="_meta_casier" value="emplois/cvs" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

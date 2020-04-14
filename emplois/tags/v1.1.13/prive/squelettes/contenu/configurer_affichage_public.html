@@ -1,0 +1,10 @@
+[(#AUTORISER{configurer,_emplois}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:emplois:titre_page_configurer_emplois:></h1>
+
+[(#REM) <!-- Barre d'onglets de premier niveau --> ]
+[(#VAL{emplois}|barre_onglets{configurer_affichage_public})]
+
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_AFFICHAGE_PUBLIC
+</div>

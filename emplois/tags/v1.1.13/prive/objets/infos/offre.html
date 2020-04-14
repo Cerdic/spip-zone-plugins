@@ -1,0 +1,28 @@
+<BOUCLE_offre(OFFRES){id_offre=#ENV{id}}{statut?}>
+<div class="infos">
+[(#SET{texte_objet,<:offre:titre_offre:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_OFFRE</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{offres,#ID_OFFRE})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(OFFRES){id_offre}>
+	[(#VAL{redirect}
+		|generer_url_action{type=offres&id=#ID_OFFRE}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,offres,#ID_OFFRE,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=offres&id=#ID_OFFRE}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_offre>

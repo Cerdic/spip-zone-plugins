@@ -1,0 +1,34 @@
+<div class="formulaire_spip formulaire_repondre_offre" id="formulaire_repondre_offre#ENV{id}">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+[(#ENV{editable})
+<form method='post' action='#ENV{action}#formulaire_repondre_offre_#ENV{id}'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<div class="editer-groupe">
+		<div class='editer saisie_email_message_auteur obligatoire[ (#ENV*{erreurs}|table_valeur{email_message_auteur}|oui)erreur]'>
+			[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{email_message_auteur})</span>]
+			<input type="text" class="text" name="email_message_auteur" id="email_message_auteur#ENV{id}" placeholder='email' value="#ENV{email_message_auteur}" />
+		</div>
+		<div class='editer saisie_sujet_message_auteur obligatoire[ (#ENV*{erreurs}|table_valeur{sujet_message_auteur}|oui)erreur]'>
+			<div><b>Réponse à l'offre : #TITRE</b></div>
+			<input type="hidden" class="text" name="sujet_message_auteur" id="sujet_message_auteur#ENV{id}" value="Réponse à l'offre N&ordm;#ID_OFFRE" size="30" />
+		</div>
+		<div class='editer saisie_texte_message_auteur obligatoire[ (#ENV*{erreurs}|table_valeur{texte_message_auteur}|oui)erreur]'>
+			[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{texte_message_auteur})</span>]
+			<textarea name="texte_message_auteur" id="texte_message_auteur#ENV{id}" placeholder='Message…' rows="8" cols="60">#ENV{texte_message_auteur}</textarea>
+		</div>
+	</div>
+
+	[(#REM) Piege a robots spammeurs ]
+	<p style="display: none;">
+		<label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+	</p>
+	<button class="btn-rouge" type="submit">
+		<span>Envoyer</span>
+		<i class="icon-send"></i>
+	</button>
+</form>
+]
+</div>

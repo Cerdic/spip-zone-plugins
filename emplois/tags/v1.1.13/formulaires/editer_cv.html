@@ -1,0 +1,40 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_cv'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#REM|test_espace_prive|non)
+		<INCLURE{fond=formulaires/inc-identite-auteur-cv,env}>
+	]
+
+	[(#EDITABLE|oui)
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_cv" value="#ENV{id_cv}" />
+		<input type="hidden" name="id_document_cv" value="#ENV{id_document_cv,0}" />
+
+		<div class="editer-groupe">
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+
+			[(#CONFIG{emplois/cvs/cv_pdf}|=={oui}|oui)
+				[(#REM|test_espace_prive|non)
+					<INCLURE{fond=formulaires/inc-pdf_joint,env, nom_input=cv_pdf, type_objet=cv, id_document=#ENV{id_document_cv}, id=#ENV{id_cv}, ajax=pdf_upload}>
+				]
+			]
+		</div>
+		
+		[(#REM|test_espace_prive|oui)
+			<p class="boutons"><button type="submit" class="submit boutons"><:bouton_enregistrer:></button></p>
+		]
+		[(#REM|test_espace_prive|non)
+			[(#REM) Piege a robots spammeurs ]
+			<p style="display: none;">
+				<label for="nobot"><:antispam_champ_vide:></label>
+				<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+			</p>
+			<INCLURE{fond=formulaires/inc-emplois-valider}>
+		]
+
+	</div></form>
+	]
+</div>

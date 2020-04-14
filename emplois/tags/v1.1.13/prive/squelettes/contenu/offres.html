@@ -1,0 +1,11 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+#SET{autres, #LISTE{prepa, publie, poubelle}}
+<INCLURE{fond=prive/objets/liste/offres, env, statut=prop, suffixe_titre=à valider,  ajax, sinon=<:offre:info_aucun_offre_a_valider:>}>
+<INCLURE{fond=prive/objets/liste/offres, env, statut=#GET{autres}, suffixe_titre=en ligne, ajax, sinon=<:offre:info_aucun_offre:>}>
+<INCLURE{fond=prive/objets/liste/offres, env, statut=refuse, suffixe_titre=refusé, ajax sinon=<:offre:info_aucun_offre_refuse:>}>
+
+[(#AUTORISER{creer,offre})
+	[(#URL_ECRIRE{offre_edit,new=oui}|icone_verticale{<:offre:icone_creer_offre:>,offre,new,right})]
+]

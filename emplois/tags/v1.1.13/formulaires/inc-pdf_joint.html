@@ -1,0 +1,38 @@
+<BOUCLE_pdf_joint(DOCUMENTS){id_document}{tous}>
+	<div class="media">
+		<div class="media-left">
+			<img class="media-object" src="[(#LOGO_DOCUMENT|extraire_attribut{src})]" alt="#EXTENSION">
+		</div>
+		<div class="media-body">
+			<h4 class="media-heading" style="position:absolute; z-index:1;">
+				[<a target="_blank"  href="#URL_DOCUMENT">(#FICHIER|basename|couper{40})</a>]
+				<span class="small">[[(#TAILLE|taille_en_octets)]]</span>
+			</h4>
+		</div>
+		<div class="media-right" style="vertical-align:middle;">
+			<a class='btn btn-bleu suppr_doc' href="#URL_ACTION_AUTEUR{supprimer_pdf,#ID_DOCUMENT-#TYPE_OBJET-#ID}"><:emplois:supprimer:></a>
+		</div>
+	</div>
+</BOUCLE_pdf_joint>
+
+</B_pdf_joint>
+	#SET{name,#ENV{nom_input}}
+	#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<div class="editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="#GET{name}"><:emplois:votre:>[ (#VAL{emplois:#ENV{type_objet}}|_T) ](<:emplois:format_pdf:>)</label>
+		[<span class="erreur_message">(#GET{erreurs})</span>]
+		<input type="file" class="file" name="#GET{name}" id="#GET{name}" size="40" accept="application/pdf" />
+	</div>
+<//B_pdf_joint>
+
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
+		$('.suppr_doc').on('click', function(){
+			ajaxReload('pdf_upload', {
+				args:{id_document:0}
+			});
+		});
+	});
+})(jQuery);
+</script>

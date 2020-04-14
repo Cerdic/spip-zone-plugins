@@ -1,0 +1,35 @@
+<BOUCLE_offre(OFFRES){id_offre}{statut?}>
+
+[(#CONFIG{emplois/offres/activer_deposant|=={oui}|oui})
+	<h3 style="margin-top:1.5em; font-weight:normal; letter-spacing:1px; color:#999; border-bottom:solid 1px #999;"><:emplois:cfg_legend_contenu_offre_deposant:></h3>
+	[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+		<span dir="#LANG_DIR" class="#EDIT{nom} nom"><b>(#NOM)</b></span>
+	</div>]
+
+	[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+		<span dir="#LANG_DIR" class="#EDIT{email} email"><a class='spip_mail' href="#EMAIL"> (#EMAIL)</a></span>
+	</div>]
+
+	[<div class="champ contenu_telephone[ (#TELEPHONE*|strlen|?{'',vide})]">
+		<label><:offre:champ_telephone_label_cours:> : </label>
+		<span dir="#LANG_DIR" class="#EDIT{telephone} telephone"><b>(#TELEPHONE)</b></span>
+	</div>]
+]
+
+<h3 style="margin-top:1.5em; font-weight:normal; letter-spacing:1px; color:#999; border-bottom:solid 1px #999;"><:emplois:cfg_legend_contenu_offre_description_offre:></h3>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:offre:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_texte_offre[ (#TEXTE_OFFRE*|strlen|?{'',vide})]" style="margin:20px 0;">
+	<span dir="#LANG_DIR" class="#EDIT{texte_offre} texte_offre">(#TEXTE_OFFRE)</span>
+</div>]
+
+[<div class="champ contenu_date_fin[ (#DATE_FIN*|strlen|?{'',vide})]">
+	<label><:offre:champ_date_fin_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{date_fin} date_fin">(#DATE_FIN|!={0000-00-00 00:00:00}|oui)[<b>(#DATE_FIN|affdate)</b>]</span>
+</div>]
+
+</BOUCLE_offre>
