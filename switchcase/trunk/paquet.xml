@@ -1,7 +1,7 @@
 <paquet
 	prefix="switchcase"
 	categorie="outil"
-	version="0.4.0"
+	version="0.4.1"
 	etat="stable"
 	compatibilite="[2.1.0;3.3.*]"
 	logo="images/switchcase-32.png"
