@@ -56,5 +56,46 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_an' => '1 年',
 	'info_1_heure' => '1 時間',
 	'info_1_jour' => '1 日',
-	'info_1_mois' => '1ヶ月'
+	'info_1_jours_apres' => '1 日後',
+	'info_1_jours_avant' => '1 日前',
+	'info_1_mois' => '1ヶ月',
+	'info_1_mois_apres' => '1 か月後',
+	'info_1_mois_avant' => '1 か月前',
+	'info_abonnementsoffres_auteur' => 'この編集者の定期購読プラン',
+	'info_aucun_abonnementsoffre' => '定期購読プランはありません',
+	'info_aucune_notification' => '通知はありません',
+	'info_nb_abonnementsoffres' => '@nb@ 件の定期購読プラン',
+	'info_nb_ans' => '@nb@ 年',
+	'info_nb_heures' => '@nb@ 時間',
+	'info_nb_jours' => '@nb@ 日',
+	'info_nb_jours_apres' => '@nb@ 日後',
+	'info_nb_jours_avant' => '@nb@ 日前',
+	'info_nb_mois' => '@nb@ か月',
+	'info_nb_mois_apres' => '@nb@ か月後',
+	'info_nb_mois_avant' => '@nb@ か月前',
+
+	// M
+	'message_notifier_ok' => '通知は確かに送信されました',
+	'message_notifier_verifier_abonnements' => '通知を送信する前にこの利用者を確認する', # RELIRE
+
+	// N
+	'nb_abonnements' => '購読数',
+
+	// R
+	'retirer_lien_abonnementsoffre' => 'この定期購読プランを取り消す',
+	'retirer_tous_liens_abonnementsoffres' => 'すべての定期購読プランを取り消す',
+
+	// S
+	'statut_prive' => '個人',
+	'statut_publie' => 'ネット出版',
+
+	// T
+	'texte_ajouter_abonnementsoffre' => '定期購読プランを追加する',
+	'texte_changer_statut_abonnementsoffre' => 'この定期購読プランは :',
+	'texte_creer_associer_abonnementsoffre' => '定期購読プランを作成しリンクする',
+	'titre_abonnementsoffre' => '定期購読プラン',
+	'titre_abonnementsoffres' => '定期購読プラン',
+	'titre_langue_abonnementsoffre' => 'この定期購読プランの使用言語',
+	'titre_logo_abonnementsoffre' => 'この定期購読プランのロゴ',
+	'titre_notifier_abonnementsoffre' => '通知を送信する'
 );
