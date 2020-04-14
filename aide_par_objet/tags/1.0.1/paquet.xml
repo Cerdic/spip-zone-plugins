@@ -1,0 +1,21 @@
+<paquet
+	prefix="aide_par_objet"
+	categorie="outil"
+	version="1.0.1"
+	etat="test"
+	compatibilite="[3.2.1;3.2.*]"
+	logo="prive/themes/spip/images/aide_par_objet-64.png"
+	documentation="https://contrib.spip.net/5244"
+>
+
+	<nom>Aide par Objet</nom>
+	<!-- Un plugin pour nourrir par des informations la partie (gauche) de l'espace privée ! -->
+
+	<auteur lien="https://contrib.spip.net/aide_par_objet">Vincent CALLIES</auteur>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="affiche_gauche" inclure="aide_par_objet_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="aide_par_objet_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="aide_par_objet_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="aide_par_objet_pipelines.php" />
+</paquet>
