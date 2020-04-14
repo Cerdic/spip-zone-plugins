@@ -32,6 +32,10 @@ function emplois_upgrade($nom_meta_base_version, $version_cible) {
 		array('emplois_maj_metas')
 	);
 
+	$maj['1.0.2'] = array(
+		array('sql_alter',"TABLE `spip_offres` ADD `id_auteur` bigint(21) NOT NULL DEFAULT 0 AFTER `id_secteur`" )
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

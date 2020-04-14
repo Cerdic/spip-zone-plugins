@@ -51,6 +51,7 @@ function emplois_declarer_tables_objets_sql($tables) {
 			'id_offre'           => 'bigint(21) NOT NULL',
 			'id_rubrique'        => 'bigint(21) NOT NULL DEFAULT 0', 
 			'id_secteur'         => 'bigint(21) NOT NULL DEFAULT 0', 
+			'id_auteur'          => 'bigint(21) NOT NULL DEFAULT 0',
 			'id_document_offre'  => 'bigint(21) NOT NULL DEFAULT 0',
 			'nom'                => 'text NOT NULL DEFAULT ""',
 			'email'              => 'tinytext NOT NULL DEFAULT ""',
