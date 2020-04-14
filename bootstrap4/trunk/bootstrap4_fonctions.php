@@ -27,9 +27,20 @@ function filtre_prefixer_css_dist($css) {
  */
 function navbar_responsive($nav, $class_collapse = 'nav-collapse-main'){
 	static $navbarcount = 1;
+
 	if (strpos($nav,'navbar-collapse')!==false) return $nav;
 
+	// les classes BS4
 	$respnav = $nav;
+	if (strpos($respnav, 'navbar-nav') === false) {
+		$respnav = str_replace("menu-liste", "menu-liste navbar-nav", $respnav);
+	}
+	if (strpos($respnav, 'nav-item') === false){
+		$respnav = str_replace("menu-entree", "menu-entree nav-item", $respnav);
+	}
+	if (strpos($respnav, 'nav-link') === false){
+		$respnav = str_replace("menu-items__lien", "menu-items__lien nav-link", $respnav);
+	}
 
 	$uls = extraire_balises($nav,"ul");
 	$n = 1;
