@@ -104,7 +104,7 @@ class FacteurMail extends PHPMailer {
 		// on utilise facteur_log_debug qui filtre log SPIP en _LOG_DEBUG
 		$this->SMTPDebug = 0;
 		$this->Debugoutput = __NAMESPACE__ . '\FacteurMail::logDebug';
-		// Il est possible d'avoir beaucoup plus de logs avec 2, 3 ou 4, ce qui logs les �changes complets avec le serveur
+		// Il est possible d'avoir beaucoup plus de logs avec 2, 3 ou 4, ce qui logs les échanges complets avec le serveur
 		// utiliser avec un define('_MAX_LOG',1000); car sinon on est limite a 100 lignes par hit et phpMailer est tres verbeux
 		if (defined('_FACTEUR_DEBUG_SMTP')){
 			$this->SMTPDebug = _FACTEUR_DEBUG_SMTP;
@@ -199,7 +199,7 @@ class FacteurMail extends PHPMailer {
 	public function setDest($email) {
 		$this->clearAllRecipients();
 
-		//Pour un envoi multiple de mail, $email doit �tre un tableau avec les adresses.
+		//Pour un envoi multiple de mail, $email doit être un tableau avec les adresses.
 		if (is_array($email)){
 			foreach ($email as $cle => $adresseMail){
 				if (!$this->AddAddress($adresseMail)){
@@ -433,12 +433,12 @@ class FacteurMail extends PHPMailer {
 		}
 
 		if (function_exists('iconv') && $mode=='texte_brut'){
-			$text = str_replace('?', "'", $text);
+			$text = str_replace('’', "'", $text);
 			$text = iconv("UTF-8", "ISO-8859-1//TRANSLIT", $text);
 			return str_replace('&#8217;', "'", $text);
 		} else {
 			if ($mode=='texte_brut'){
-				$text = str_replace('?', "'", $text);
+				$text = str_replace('’', "'", $text);
 			}
 			$text = unicode2charset(utf_8_to_unicode($text), 'iso-8859-1');
 			return str_replace('&#8217;', "'", $text);
