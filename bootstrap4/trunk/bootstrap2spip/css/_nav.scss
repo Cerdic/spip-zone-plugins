@@ -21,6 +21,13 @@ ul.nav,ol.nav {margin-left: 0;}
   margin-top: $rem-vert-margin / 2;
 }
 
+.menu-items__item {
+  @extend .nav-item;
+}
+.menu-items__lien {
+  @extend .nav-link;
+}
+
 // NAV LIST
 // --------
 .well .nav-list,
