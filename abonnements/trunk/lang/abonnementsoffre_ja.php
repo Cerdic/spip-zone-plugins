@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_associer_abonnementsoffre' => '定期購読プランを作成しリンクする',
 	'titre_abonnementsoffre' => '定期購読プラン',
 	'titre_abonnementsoffres' => '定期購読プラン',
+	'titre_abonnementsoffres_rubrique' => '特定欄の定期購読プラン', # RELIRE
 	'titre_langue_abonnementsoffre' => 'この定期購読プランの使用言語',
 	'titre_logo_abonnementsoffre' => 'この定期購読プランのロゴ',
 	'titre_notifier_abonnementsoffre' => '通知を送信する'
