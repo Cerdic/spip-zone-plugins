@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function afftimezone($date, $timezone, $format) {
 	$tz_string = agenda_tz_to_string($date, $timezone, $format);
 	if ($tz_string) {
-		$tz_string = " <i class='date-tz'>$tz_string</i>";
+		$tz_string = "<i class='date-tz'>$tz_string</i>";
 	}
 	return $tz_string;
 }
