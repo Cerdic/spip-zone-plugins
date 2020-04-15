@@ -1,0 +1,21 @@
+<paquet
+	prefix="redirection"
+	categorie="performance"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.2.7;3.2.*]"
+	logo="prive/themes/spip/images/redirection-64.png"
+	documentation="https://contrib.spip.net/5249"
+	schema="1.0.0" 
+>
+	<nom>Redirection</nom>
+	<!-- Affiche un texte sur les pages du site avant de les rediriger. -->
+
+	<auteur lien='https://elastick.net'>Anne-lise Martenot</auteur>
+
+	<licence>GNU/GPL</licence>
+	<pipeline nom="affichage_final" inclure="redirection_pipelines.php" />
+	<pipeline nom="insert_head" inclure="redirection_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="redirection_pipelines.php" />
+
+</paquet>

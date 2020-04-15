@@ -1,0 +1,4 @@
+#redirect_parent{position:absolute; top:0; width:100%; background:#FFF; padding:2em; font-family: helvetica,sans-serif;}
+#redirect_enfant{position:relative; margin:0 auto; width:50%}
+#redirect_enfant a{color:#33b5e5}
+
