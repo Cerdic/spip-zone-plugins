@@ -55,6 +55,7 @@ function inc_fonds_pages_to_array_dist($exclure_pages_bdd = '', $groupby_dossier
 
 	// A partir de spip 3.3.0, la colonne categorie a disparu dans spip_plugins
 	$version = explode('-',$GLOBALS['spip_version_affichee'])[0];
+	include_spip('plugins/installer');
 	if (spip_version_compare($version, '3.3.0', '>=')) {
 		$where = [
 			'plugins.prefixe = ' . sql_quote('zcore'),
