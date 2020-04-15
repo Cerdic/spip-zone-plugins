@@ -52,6 +52,21 @@ function inc_fonds_pages_to_array_dist($exclure_pages_bdd = '', $groupby_dossier
 	// 1-2) Dossiers des plugins actifs de catégorie "squelette" ou "outil" pour zcore.
 	// On récupère le dossier de chaque plugin grâce aux colonnes "constante" et "src_archive".
 	$dossiers_plugins = array();
+
+	// A partir de spip 3.3.0, la colonne categorie a disparu dans spip_plugins
+	$version = explode('-',$GLOBALS['spip_version_affichee'])[0];
+	if (spip_version_compare($version, '3.3.0', '>=')) {
+		$where = [
+			'plugins.prefixe = ' . sql_quote('zcore'),
+			'paquets.actif = ' . sql_quote('oui'),
+		];
+	} else {
+		$where = [
+			'(categorie = ' . sql_quote('squelette') . ' OR plugins.prefixe = ' . sql_quote('zcore') . ')',
+			'paquets.actif = ' . sql_quote('oui'),
+		];
+	}
+
 	if ($plugins = sql_allfetsel(
 		array(
 			'plugins.prefixe',
@@ -60,10 +75,7 @@ function inc_fonds_pages_to_array_dist($exclure_pages_bdd = '', $groupby_dossier
 		),
 		'spip_paquets AS paquets' .
 			' INNER JOIN spip_plugins AS plugins ON plugins.id_plugin = paquets.id_plugin',
-		array (
-			'(categorie = ' . sql_quote('squelette') . ' OR plugins.prefixe = ' . sql_quote('zcore') . ')',
-			'paquets.actif = ' . sql_quote('oui'),
-		)
+		$where
 	)){
 		foreach ($plugins as $plugin){
 			// Noter tous les dossiers, sauf ceux de zcore
