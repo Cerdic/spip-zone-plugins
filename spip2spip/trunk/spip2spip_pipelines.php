@@ -18,6 +18,7 @@ function spip2spip_taches_generales_cron($taches_generales)
 	} else {
 		$taches_generales['spip2spip_syndic'] = 60*5;  // tous les 5 min par defaut
 	}
+	$taches_generales['spip2spip_nettoyage'] = 60*60*24; // Une fois par jour
 	return $taches_generales;
 }
 

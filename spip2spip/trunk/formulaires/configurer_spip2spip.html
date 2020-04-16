@@ -57,33 +57,17 @@
                     defaut=non})]
                 </ul>
             </fieldset>
+			
+            <!-- Nettoyage  -->
             <fieldset>
-                <legend><:spip2spip:cfg_import_motcle:></legend>
+                <legend><:spip2spip:cfg_nettoyage:></legend>
                 <ul>
-                    [(#SAISIE{checkbox, import_mot_article,
-                    label='',
-                    datas=#ARRAY{on,<:spip2spip:cfg_import_mot_article:>}})]
+                    <!-- intervalle nettoyage -->
+                    [(#SAISIE{input, intervalle_nettoyage,
+                    label=<:spip2spip:cfg_nettoyage_intervalle:>,
+					explication=<:spip2spip:cfg_nettoyage_explication:>,
+					defaut=0})]
 
-                    [(#SAISIE{checkbox, import_mot_evnt,
-                    label='',
-                    datas=#ARRAY{on,<:spip2spip:cfg_import_mot_evnt:>}})]
-
-                    [(#SAISIE{radio, import_mot_groupe_creer,
-                    label=,
-                    explication=<:spip2spip:cfg_import_mot_groupe_creer:>,
-                    datas=#ARRAY{
-                    oui,<:spip2spip:cfg_import_mot_groupe_creer_oui:>,
-                    non,<:spip2spip:cfg_import_mot_groupe_creer_non:>}})]
-
-                    #SET{groupe_motcle,#ARRAY}
-                    <BOUCLE_groupes1 (GROUPES_MOTS){par titre}{titre !=- spip2spip - }>
-                    [(#SET{groupe_motcle,#GET{groupe_motcle}|array_merge{#ARRAY{#TITRE,#ID_GROUPE}}})]
-                    </BOUCLE_groupes1>
-                    [(#SET{groupe_motcle, #GET{groupe_motcle}|array_flip})]
-
-                    [(#SAISIE{selection,import_mot_groupe,
-                    label=,
-                    datas=#GET{groupe_motcle}})]
                 </ul>
             </fieldset>
 
