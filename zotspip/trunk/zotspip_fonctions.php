@@ -27,7 +27,7 @@ function balise_REFERENCE_dist($p) {
 	$date = champ_sql('date', $p);
 	if (!$style) $style='""';
 	if (!$souligne) $souligne='array()';
-	
+
 	$p->code = "zotspip_calculer_reference($csljson,$annee,$style,$souligne,$date,htmlentities($_lang ? $_lang : \$GLOBALS['spip_lang']))";
 	return $p;
 }
@@ -41,7 +41,7 @@ function zotspip_calculer_reference($csljson,$annee,$style,$souligne,$date,$lang
 		$style = lire_config('zotspip/csl_defaut') ? lire_config('zotspip/csl_defaut') : 'apa';
 	}
 	$data = json_decode($csljson);
-	
+
 	if (isset($data->issued->raw) && lire_config('zotspip/corriger_date')) { // Correction de la date de publication (si fournie brute et si option activée)
 		unset($data->issued->raw);
 		// Gestion des cas où la date est de la forme yyyy-mm ou yyyy-mm-dd
@@ -54,7 +54,7 @@ function zotspip_calculer_reference($csljson,$annee,$style,$souligne,$date,$lang
 	}
 
 	if (!is_array($souligne)) $souligne = explode(';',$souligne);
-	
+
 	if (count($souligne)){
 		foreach ($souligne as $aut_souligne) {
 			if(!strpos($aut_souligne,',')) $aut_souligne .= ', ';
@@ -69,7 +69,7 @@ function zotspip_calculer_reference($csljson,$annee,$style,$souligne,$date,$lang
 						$data->editor[$cle]->family = '§§'.$data->editor[$cle]->family.'§§';
 		}
 	}
-	
+
 	if (!isset($citeproc[$style])) {
 		include_spip('inc/distant');
 		$csl = spip_file_get_contents(find_in_path("csl/$style.csl"));
@@ -80,11 +80,11 @@ function zotspip_calculer_reference($csljson,$annee,$style,$souligne,$date,$lang
 		}
 		$citeproc[$style] = new citeproc($csl,$lang);
 	}
-	
+
 	$ret = $citeproc[$style]->render($data, 'bibliography');
 	if (count($souligne))
 		$ret = preg_replace(',§§(.+)§§,U','<span style="text-decoration:underline;">$1</span>',$ret);
-	
+
 	return $ret;
 }
 
@@ -244,7 +244,7 @@ function zotspip_content_disposition ($format) {
 // Récupère un fichier distant
 function zotspip_recuperer_fichier($fichier, $titre, $id_zitem, $mimetype, $json) {
 	$snapshot = (substr($fichier,-4) == 'view'); // Il s'agit d'un snapshot
-	if ($snapshot) { 
+	if ($snapshot) {
 		$url_snapshot = substr($fichier,0,-5).'?key='.lire_config('zotspip/api_key');
 		$json = json_decode($json, true);
 		$filename = $json['filename'];
@@ -262,7 +262,7 @@ function zotspip_recuperer_fichier($fichier, $titre, $id_zitem, $mimetype, $json
 		$titre .= '.'.$ext;
 	}
 	$url_locale = _DIR_VAR."cache-zotspip/$id_zitem/$titre";
-	
+
 	if (!@file_exists($url_locale)) {
 		include_spip('inc/distant');
 		include_spip('inc/flock');
@@ -296,7 +296,7 @@ function zotspip_decode_64_nom($p_event, &$p_header){
 function critere_zotsip_depuis($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$table = $boucle->id_table;
-	$boucle->where[] = "zotspip_calcul_depuis(\$Pile[0]['depuis'],$table)";
+	$boucle->where[] = "zotspip_calcul_depuis(\$Pile[0]['depuis'],'$table')";
 }
 function zotspip_calcul_depuis($depuis,$table) {
 	$annee = false;

@@ -1,13 +1,13 @@
 <paquet
 	prefix="zotspip"
 	categorie="edition"
-	version="3.6.0"
+	version="3.6.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/zotspip-48.png"
 	schema="0.4"
 	documentation="https://contrib.spip.net/spip.php?article4161"
->	
+>
 
 	<nom>ZotSpip</nom>
 	<!-- La puissance de Zotero dans votre Spip -->
