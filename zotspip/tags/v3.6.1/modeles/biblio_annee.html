@@ -1,0 +1,21 @@
+#SET{details,#ENV{details}|=={non}|?{'',#ENV{details,'on'}}}
+#SET{export,#ENV{export}|=={non}|?{'','on'}}
+#SET{liens,#ENV{liens}|=={non}|?{'','on'}}
+#SET{souligne,#ENV{auteur}|et{#ENV{souligne}|!={non}}|?{#ENV{auteur},''}}
+#SET{alea,#EVAL{rand()}} [(#REM) besoin d'un alea pour unique car le modele peut etre appele plusieurs fois (typiquement pour l'intro, puis pour le texte). ]
+[(#REM) pagination de 50 car limite pour l'export des references. ]
+<B_biblio>
+#ANCRE_PAGINATION
+[(#GET{export}|oui)
+	<form method="get" action="spip.php" target="_blank">
+	<input type="hidden" name="page" value="zotspip_unapi">]
+<BOUCLE_biblio(ZITEMS spip_zitems_zcollections spip_zcollections){id_parent==0}{auteur?}{type_ref?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{spip_zcollections.zcollection?}{zotsip_depuis}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{pagination #ENV{max,50}}>
+[[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h4 class="h4">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{annee_#GET{alea}})</h4><ul class="spip">]
+#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne},form_export=#GET{export}}
+</BOUCLE_biblio>
+</ul>
+[(#ENV{max}|non)[<p class="pagination">(#PAGINATION)</p>]]
+[(#GET{export}|oui)
+	#INCLURE{fond=inclure/zotspip_form_export_select}
+	</form>]
+</B_biblio>

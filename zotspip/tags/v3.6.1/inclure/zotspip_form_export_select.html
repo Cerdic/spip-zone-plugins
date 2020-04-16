@@ -1,0 +1,34 @@
+<div class="zotspip_export_select">
+---
+<div class="zotspip_select_all" style="display:none;">
+	<a href="javascript:void(0);"  onClick="jQuery('input.zotspip_select_ref').attr('checked','checked');zotspip_test_if_ref_select();"><:zotspip:selectionner_tout:></a> | 
+	<a href="javascript:void(0);"  onClick="jQuery('input.zotspip_select_ref').removeAttr('checked');zotspip_test_if_ref_select();"><:zotspip:deselectionner_tout:></a>
+</div>
+<:zotspip:exporter_selection:>
+<select name="format">
+	<option value="bibtex">BibTeX</option>
+	<option value="mods">MODS</option>
+	<option value="refer">Refer/BibIX</option>
+	<option value="rdf_bibliontology">Bibliographic Ontology RDF</option>
+	<option value="rdf_dc">Unqualified Dublin Core RDF</option>
+	<option value="rdf_zotero">Zotero RDF</option>
+	<option value="ris">RIS (EndNote)</option>
+	<option value="wikipedia">Wikipedia Citation Templates</option>
+</select>
+<input type="submit" class="submit zotspip_export_button" value="<:zotspip:exporter:>" />
+</div>
+<script type="text/javascript">// <![CDATA[
+	jQuery(document).ready(function(){
+		jQuery('.zotspip_select_all').show();
+		zotspip_test_if_ref_select = function () {
+			if (jQuery('input.zotspip_select_ref:checked').length>0) 
+				jQuery('.zotspip_export_button').removeAttr('disabled');
+			else
+				jQuery('.zotspip_export_button').attr('disabled', 'disabled');
+		};
+		zotspip_test_if_ref_select();
+		jQuery('input.zotspip_select_ref').change(function() {
+			zotspip_test_if_ref_select();
+		});
+	});
+ //]]></script>

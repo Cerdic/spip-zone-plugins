@@ -1,0 +1,26 @@
+#BOITE_OUVRIR{'','simple'}
+	[(#URL_ECRIRE{zcreators}|icone_horizontale{<:zotspip:liste_createurs:>,zcreators-24})]
+	[(#URL_ECRIRE{ztags}|icone_horizontale{<:zotspip:liste_tags:>,ztags-24})]
+#BOITE_FERMER
+
+<div class="formulaire_spip">
+<h3 class="titrem"><:zotspip:filtrer:></h3>
+<form action="." method="get"><div>
+	<input type="hidden" name="exec" value="zitems" />
+	<ul>
+		[(#SAISIE{zotspip_creator,auteur,label=<:zotspip:label_auteur:>})]
+		[(#SAISIE{zotspip_annee,annee,label=<:zotspip:label_annee:>})]
+		[(#SAISIE{input,recherche,label=<:zotspip:label_recherche_libre:>})]
+		[(#SAISIE{zotspip_type,type_ref,label=<:zotspip:label_type_ref:>})]
+		[(#SAISIE{zotspip_tag,tag,label=<:zotspip:label_tag:>})]
+		[(#SAISIE{zotspip_zcollection,zcollection,label=<:zotspip:label_zcollection:>})]
+		[(#SAISIE{zotspip_publication,publication,label=<:zotspip:label_publication:>})]
+		[(#SAISIE{zotspip_editeur,editeur,label=<:zotspip:label_editeur:>})]
+		[(#SAISIE{zotspip_conference,conference,label=<:zotspip:label_conference:>})]
+		[(#SAISIE{zotspip_collection,collection,label=<:zotspip:label_collection:>})]
+		[(#SAISIE{zotspip_type_doc,type_doc,label=<:zotspip:label_type_doc:>})]
+		[(#SAISIE{csl,csl,label=<:zotspip:label_csl:>,cacher_option_intro=on,defaut=#CONFIG{zotspip/csl_defaut}})]
+	</ul>
+	<p class="boutons"><input type="submit" class="submit" value="<:zotspip:filtrer:>" /></p>
+</div></form>
+</div>

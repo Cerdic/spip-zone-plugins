@@ -1,0 +1,53 @@
+<BOUCLE_zitem(ZITEMS){id_zitem}>
+<[(#ENV{liste}|?{li,div})] class="zotspip_item"[(#ENV{icones}|oui)style="list-style-type:none; padding-left:20px; background:url([(#TYPE_REF|zotspip_icone_type{#MIMETYPE,#FICHIER}|extraire_attribut{src})]) no-repeat 0 0px;"]>
+	[(#ENV{form_export}|oui)<input type="checkbox" name="id#EVAL**{chr(91)}#EVAL**{chr(93)}" value="#ID_ZITEM" class="zotspip_select_ref" />]
+	[(#ENV{liens}|oui)<div class="liens">
+			[<a href="http://dx.doi.org/(#DOI|trim|urlencode)" title="<:zotspip:identifier_via_doi:>"><img src="#CHEMIN{images/zotero/go.png}" alt=""></a><br />]
+			[<a href="http://www.worldcat.org/isbn/(#ISBN|trim|urlencode)" title="<:zotspip:identifier_via_isbn:>"><img src="#CHEMIN{images/zotero/go.png}" alt=""></a><br />]
+			[<a href="(#URL)" title="<:zotspip:lien_ressource:>"><img src="#CHEMIN{images/zotero/url.png}" alt=""></a><br />]
+	</div>]
+	[(#TYPE_REF|=={attachment}|ou{#TYPE_REF|=={note}}|non)
+		#REFERENCE{#ENV{csl},#ENV{souligne}}]
+	[(#TYPE_REF|=={note}|oui)
+		<div class="note">#RESUME</div>]
+	[(#TYPE_REF|=={attachment}|oui)
+		[(#FICHIER|oui)[<a href="#URL_PAGE{zotspip_file,zitem=#ID_ZITEM}">(#TITRE)</a>] [(#POIDS|>{0}|oui)[(#POIDS|taille_en_octets)]] [(<a href="(#URL)"><:zotspip:source:></a>)]]
+		[(#FICHIER|non)[<a href="#URL">(#TITRE)</a>]]]
+	<abbr class="unapi-id" title="#ID_ZITEM"></abbr>
+	[(#ENV{details}|ou{#ENV{export}}|oui)
+	[(#ENV{nojs}|non)<div class="afficher_details" id="afficher_details_#ID_ZITEM" style="display:none;"><a href="javascript:void(0);"  onClick="$('#details_#ID_ZITEM').toggle(400);"><:zotspip:afficher_masquer_details:></a></div>]
+	<div class="details" id="details_#ID_ZITEM">]
+	[(#ENV{details}|oui)<div class="details">
+		[(#ENV{details}|=={complet}|non)
+			[(#TYPE_REF|=={note}|non)[<div class="resume"><strong><:zotspip:resume:></strong> (#RESUME)</div>]]
+			[<div class="tags"><strong><:zotspip:tags:></strong> (#INCLURE{fond=inclure/zitem_tags,id_zitem}).</div>]
+		][(#ENV{details}|=={complet}|oui)
+			#ZITEM_DETAILS
+		]
+		#INCLURE{fond=inclure/zitem_sousitems,id_parent=#ENV{id_zitem}}
+	</div>]
+	[(#ENV{export}|oui)<div class="export">
+		<strong><:zotspip:exporter_reference:></strong>
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=bibtex}">BibTeX</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=mods}">MODS</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=refer}">Refer/BibIX</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=rdf_bibliontology}">Bibliographic Ontology RDF</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=rdf_dc}">Unqualified Dublin Core RDF</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=rdf_zotero}">Zotero RDF</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=ris}">RIS (EndNote)</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=wikipedia}">Wikipedia Citation Templates</a>
+	</div>]
+	[(#ENV{details}|ou{#ENV{export}}|oui)</div>]
+	[(#ENV{afficher_id}|oui)<div style="text-align:right;"><:zotspip:reference_num:> #ID_ZITEM</div>]
+	[(#ENV{lien_voir}|oui)<div style="text-align:right;"><a href="[(#ID_ZITEM|voir_sur_zotero)]" target="_blank"><:zotspip:voir_sur_zotero:></a></div>]
+	[(#ENV{lien_modif}|oui)<div style="text-align:right;"><a href="[(#ID_ZITEM|modifier_sur_zotero)]" target="_blank"><:zotspip:modifier_en_ligne:></a></div>]
+[(#ENV{liste}|?{</li>,</div>})]
+[(#ENV{nojs}|non)
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#afficher_details_#ID_ZITEM').show();
+		$('#details_#ID_ZITEM').hide();
+	});
+ </script>
+ ]
+</BOUCLE_zitem>

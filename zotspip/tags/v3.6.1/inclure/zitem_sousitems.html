@@ -1,0 +1,12 @@
+<BOUCLE_sousitems(ZITEMS){id_parent=#ENV{id_parent}}{par type_ref}{type_ref?}>
+<div class="sousitem">
+[(#TYPE_REF|zotspip_icone_type{#MIMETYPE,#FICHIER})]
+[(#TYPE_REF|=={attachment}|oui)
+	[(#FICHIER|oui)[<a href="#URL_PAGE{zotspip_file,zitem=#ID_ZITEM}">(#TITRE)</a>] [(#POIDS|>{0}|oui)[(#POIDS|taille_en_octets)]] [(<a href="(#URL)"><:zotspip:source:></a>)]]
+	[(#FICHIER|non)[<a href="#URL">(#TITRE)</a>]]
+][(#TYPE_REF|=={note}|oui)
+	<:zotero:itemtypes_note:>
+	<div class="note">#RESUME</div>
+]
+</div>
+</BOUCLE_sousitems>

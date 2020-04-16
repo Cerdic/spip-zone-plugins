@@ -1,0 +1,3 @@
+#SET{suffixes,#ENV{id}|zotspip_suffixes_ref}<BOUCLE_ref(ZITEMS){id_zitem IN #ENV{id}|zotspip_ids_ref}{'<br />'}>
+	<abbr class="unapi-id" title="#ID_ZITEM"></abbr>[(#REFERENCE|zotspip_div_en_span)][ &#91;(#GET{suffixes}|table_valeur{#ID_ZITEM})&#93;]
+</BOUCLE_ref>

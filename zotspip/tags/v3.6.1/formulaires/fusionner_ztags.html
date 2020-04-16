@@ -1,0 +1,25 @@
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{modifier,zotero}}>
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem"><:zotspip:remplacer_par:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{message_ok}|oui)<p class="notice" style="margin:10px;"><:zotspip:confimer_remplacement{source=#ENV{tag},dest=#ENV{dest}}:></p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#ENV{message_ok}|oui)<input type="hidden" name="dest" value="#ENV{dest}" />]
+		<BOUCLE_si(CONDITION){si #ENV{message_ok}|non}><ul>
+			<li class="editer editer_dest">
+				<select name="dest" class="select" id="dest">
+					<BOUCLE_dest(ZTAGS){fusion tag}{par tag}{!tag=#ENV{tag}}>
+					<option value="#TAG">#TAG</option>
+					</BOUCLE_dest>
+				</select>
+			</li>
+		</ul></BOUCLE_si>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			[(#ENV{message_ok}|non)<input type='submit' class='submit' value='<:zotspip:remplacer_par:>' name="remplacer" />]
+			[(#ENV{message_ok}|oui)<input type='submit' name="cancel" class='submit' value='<:bouton_annuler:>' />
+			<input type='submit' class='submit' value='<:zotspip:confirmer:>' name="confirmer" />]
+		</p>
+	</div></form>
+</div>
+</BOUCLE_autoriser>

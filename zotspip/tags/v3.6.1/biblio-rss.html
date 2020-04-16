@@ -1,0 +1,20 @@
+#CACHE{0}#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}<B_RSS><?xml version="1.0" encoding="#CHARSET" ?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+<channel>
+	<title>[&#91;(#NOM_SITE_SPIP|texte_backend)&#93; <:zotspip:dernieres_publications:>]</title>
+	<link>[(#URL_PAGE{biblio}|url_absolue|texte_backend)]</link>
+	<language>[(#ENV{lang}|texte_backend)]</language>
+	<BOUCLE_RSS(ZITEMS){id_parent==0}{par date_ajout}{inverse}{0,50}{si #CONFIG{zotspip/flux_rss}}>
+	<item>
+		<title>[(#TITRE|texte_backend)]</title>
+		[(#CONFIG{zotspip/page_biblio}|oui)<link>[(#URL_PAGE{zitem,id=#ID_ZITEM}|url_absolue|texte_backend)]</link>]
+		<dc:format>text/html</dc:format>
+		<description>[(#MODELE{ref,id=#ID_ZITEM}|texte_backend)]</description>
+		<content:encoded>[(#INCLURE{fond=inclure/zitem,id_zitem,csl,details=complet,export=oui,nojs=on}|liens_absolus|texte_backend)]</content:encoded>
+	</item></BOUCLE_RSS>
+</channel>
+</rss>
+</B_RSS>

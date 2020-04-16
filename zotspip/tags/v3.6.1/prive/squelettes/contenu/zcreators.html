@@ -1,0 +1,12 @@
+<h1 class="grostitre"><:zotspip:liste_createurs:></h1>
+
+<B_zcreators>
+<ul class="liste-items">
+	<BOUCLE_zcreators(ZCREATORS){fusion auteur}{par auteur}>
+	<li class="item">
+		<a href="#URL_ECRIRE{zcreator,auteur=#AUTEUR}">#AUTEUR</a>
+		<span style="float:right;"><BOUCLE_nb(ZCREATORS){auteur}></BOUCLE_nb>[(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb})]<//B_nb></span>
+	</li>
+	</BOUCLE_zcreators>
+</ul>
+</B_zcreators>
