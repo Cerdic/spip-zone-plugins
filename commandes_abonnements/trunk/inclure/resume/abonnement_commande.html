@@ -52,7 +52,7 @@
 <BOUCLE_is_commande(CONDITION) {si #GET{commande}}>
 
 [(#REM) L'offre d'abonnement liée ]
-<BOUCLE_offre(ABONNEMENTS_OFFRES) {id_abonnements_offre = #GET{commande/id_abonnements_offre}}>
+<BOUCLE_offre(ABONNEMENTS_OFFRES) {id_abonnements_offre = #GET{commande/id_abonnements_offre}}{tout}>
 #SET{offre, #ARRAY{
 	logo,           #LOGO_ABONNEMENTS_OFFRE|extraire_attribut{src},
 	titre,          #TITRE,
