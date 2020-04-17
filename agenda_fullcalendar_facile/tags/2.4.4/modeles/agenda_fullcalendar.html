@@ -1,0 +1,54 @@
+<link rel='stylesheet' type='text/css' href='#CHEMIN{lib/fullcalendar/fullcalendar.min.css}' />
+<script type='text/javascript' src='#CHEMIN{lib/moment/moment-with-locales.min.js}'></script>
+<script type='text/javascript' src='#CHEMIN{lib/fullcalendar/fullcalendar.min.js}'></script>
+<script type='text/javascript' src='#CHEMIN{lib/fullcalendar/locale-all.js}'></script>
+<script type="text/javascript">/*<![CDATA[*/
+jQuery(function($) {
+
+	$('#agenda').fullCalendar({
+			locale: '[(#LANG|strtolower)]',
+			editable: false,
+			navLinks: true,
+			eventLimit: true,
+			firstDay: #CONFIG{calendriermini/jour1,1},
+			events: "[(#URL_PAGE{agenda.json}|parametre_url{couleur,#ENV{couleur},&})]",
+			header: {
+				left: [(#LANG_DIR|=={ltr}|?{"'prevYear,prev,next,nextYear today'","'listMonth,month,agendaWeek,agendaDay'"})],
+				center: 'title',
+				right: [(#LANG_DIR|=={ltr}|?{"'agendaDay,agendaWeek,month,listMonth'","'today nextYear,next,prev,prevYear'"})]
+				},
+			fixedWeekCount: false,
+			eventRender: function( event, element, view ) {
+				var title = element.find('.fc-title, .fc-list-item-title');
+				title.html(title.text());
+			},
+			allDayHtml:'<:organiseur:cal_jour_entier|textebrut:>',
+			loading: function(bool) {
+				if (bool) $('#calendrier-loading').show();
+				else $('#calendrier-loading').hide();
+			},
+	})
+
+});
+/*]]>*/</script>
+<div id="agenda">
+</div>
+<B_agenda>
+<div id="calendrier-loading">
+<p class="pagination">#PAGINATION</p>
+<BOUCLE_agenda(DATA){source json, #PRODUIRE{fond=agenda.json, start=0,end=2147483647,_=#REM|time}|url_absolue}{pagination 15}>
+    <dl>
+			[(#VALEUR{allDay}|=={true}|?{#SET{end,#VALEUR{end}|agenda_dateplus{-1}},#SET{end,#VALEUR{end}}})]
+        [<dt><:agenda:evenement_titre:></dt>
+        <dd><a href="#VALEUR{url}">(#VALEUR{title})</a></dd>]
+
+        [<dt><:agenda:evenement_date:></dt>
+        <dd>(#VALEUR{start}|Agenda_affdate_debut_fin{#GET{end},#VALEUR{allDay}|=={true}|?{non,oui}})</dd>]
+
+        [<dt><:agenda:evenement_descriptif:></dt>
+        <dd>(#VALEUR{description})</dd>]
+    </dl>
+</BOUCLE_agenda>
+<p class="pagination">#PAGINATION</p>
+</div>
+</B_agenda>

@@ -1,0 +1,40 @@
+#SET{start,#ENV{start}|strtotime}
+#SET{end,#ENV{end}|strtotime}
+
+#HTTP_HEADER{Content-type:application/json;charset=#CHARSET}
+[<BOUCLE_evenements(EVENEMENTS){', '}{par date_debut}
+{!evenement_passe #ENV{start}}{!evenement_a_venir #ENV{end}}
+	>
+	[(#HORAIRE|=={non}|?{
+		#SET{date_fin,#DATE_FIN|full_calendar_jplusun},
+		#SET{date_fin,#DATE_FIN}
+	})]
+	#SET{tableau,#ARRAY{id,#ID_EVENEMENT,
+		title,(#TITRE|html2unicode|unicode2charset),
+		allDay,(#HORAIRE|=={non}|?{#EVAL{true},#EVAL{false}}),
+		start,#DATE_DEBUT,
+		end,#GET{date_fin},
+		url,#URL_ARTICLE,
+		description,(#DESCRIPTIF|html2unicode|unicode2charset),
+	}}
+
+[(#ENV{couleur}|=={rubrique}|oui)
+#SET{tableau,#GET{tableau}|array_merge{#ARRAY{
+	color,
+	#INCLURE{fond=inc-couleur-objet,objet=rubrique,id_objet=#ID_RUBRIQUE}}
+	}
+}]
+[(#ENV{couleur}|=={article}|oui)
+#SET{tableau,#GET{tableau}|array_merge{#ARRAY{
+	color,
+	#INCLURE{fond=inc-couleur-objet,objet=article,id_objet=#ID_ARTICLE}}
+	}
+}]
+[(#ENV{couleur}|=={evenement}|oui)
+#SET{tableau,#GET{tableau}|array_merge{#ARRAY{
+	color,
+	#INCLURE{fond=inc-couleur-objet,objet=evenement,id_objet=#ID_EVENEMENT}}
+	}
+}]
+[(#GET{tableau}|json_encode)]
+</BOUCLE_evenements>]
