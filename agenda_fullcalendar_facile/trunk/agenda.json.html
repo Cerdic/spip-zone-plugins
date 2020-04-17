@@ -3,9 +3,7 @@
 
 #HTTP_HEADER{Content-type:application/json;charset=#CHARSET}
 [<BOUCLE_evenements(EVENEMENTS){', '}{par date_debut}
-{agendafull date_debut,date_fin, periode,
-	#VAL{Y}|date{#GET{start}}, #VAL{m}|date{#GET{start}},     #VAL{d}|date{#GET{start}},
-	#VAL{Y}|date{#GET{end}}, #VAL{m}|date{#GET{end}}, #VAL{d}|date{#GET{end}}}
+{!evenement_passe #ENV{start}}{!evenement_a_venir #ENV{end}}
 	>
 	[(#HORAIRE|=={non}|?{
 		#SET{date_fin,#DATE_FIN|full_calendar_jplusun},
