@@ -1,0 +1,34 @@
+#SET{abonnements,0}
+#SET{refus,0}
+<BOUCLE_notifications(NOTIFICATIONS_ABONNEMENTS){id_auteur}>
+[(#MODES|oui)
+	[(#SET{abonnements,[(#GET{abonnements}|plus{1})]})]
+]
+[(#MODES|non)
+	[(#SET{refus,[(#GET{refus}|plus{1})]})]
+]
+</BOUCLE_notifications>
+
+[(#GET{abonnements}|>{0}
+	|ou{#GET{refus}|>{0}}
+	|ou{#ENV{id_auteur}|notifications_lister_creables|count|>{0}}|oui)
+
+	[(#SET{titre_boite, [(#SESSION{id_auteur}|=={#ENV{id_auteur}}|?{<:notifavancees:infos_mes_notifications:>,<:notifavancees:infos_notifications:>})]})]
+
+	[(#BOITE_OUVRIR{#CHEMIN{images/notifications-24.png}|balise_img{'',cadre-icone}|concat{#GET{titre_boite}}, 'simple', 'titrem'})]
+
+	[(#GET{abonnements}|oui)
+		<p><:notifavancees:infos_nb_abonnements{nb=#GET{abonnements}}:></p>
+	]
+	[(#GET{refus}|oui)
+		<p><:notifavancees:infos_nb_refus{nb=#GET{refus}}:></p>
+	]
+	[(#AUTORISER{configurer_notifications, auteur, #ENV{id_auteur}}|oui)
+		<p class="boutons">
+			<a href="[(#URL_ECRIRE{notifications_auteur}|parametre_url{id_auteur,#ENV{id_auteur}})]"><:notifavancees:config_modifier_notifications_auteur:></a>
+		</p>
+	]
+
+	#BOITE_FERMER
+
+]
