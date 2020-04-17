@@ -402,6 +402,20 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 			$contexte[$cle_objet] = $id;
 		}
 
+		// Utiliser de préférence la langue du destinataire dans le contexte,
+		// à moins qu'il y en ait une forcée dans les options.
+		if (
+			(
+				!empty($options['lang'])
+				and $langue_auteur = $options['lang']
+			) or (
+				intval($destinataire)
+				and $langue_auteur = sql_getfetsel('lang', 'spip_auteurs', 'id_auteur='.intval($destinataire))
+			)
+		) {
+			$contexte['lang'] = $langue_auteur;
+		}
+
 		//Si un expéditeur est défini on l'utilise
 		if ($options['from'])
 			$contenu['from'] = $options['from'];
