@@ -6,7 +6,7 @@
 	compatibilite="[2.0.0;3.2.99]"
 	logo="img/picto_colorscope_128x128.png"
 	documentation="https://contrib.spip.net/Plugin-Colorscope-Pour-visualiser-les-codes-couleur"
->	
+	>
 
 	<nom>Colorscope</nom>
 	<!-- Colorer les codes hexa -->

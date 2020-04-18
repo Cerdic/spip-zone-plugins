@@ -11,9 +11,9 @@ include_spip('inc/filtres_images');
 
 //pour conserver compatibilité avant SPIP 3.1
 if (!function_exists('_couleur_hex_to_dec')) {
-function	_couleur_hex_to_dec($couleur) {
-	return couleur_hex_to_dec($couleur);
-}
+	function	_couleur_hex_to_dec($couleur) {
+		return couleur_hex_to_dec($couleur);
+	}
 }
 
 function colorscope_post_typo($texte) {
@@ -44,7 +44,7 @@ function luminance($couleur) {
 function format_decimal($couleur) {
 	$couleurs = _couleur_hex_to_dec($couleur); // modifi SPIP 3.1
 	$rouge = $couleurs['red'];
-	$vert = $couleurs['green'];	
+	$vert = $couleurs['green'];
 	$bleu = $couleurs['blue'];
 
 	$couleur_dec = "rgb(".$rouge.",".$vert.",".$bleu.")";

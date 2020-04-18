@@ -16,4 +16,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colorscope_description' => 'Remplace les codes hexa des couleurs dans un texte SPIP, par un bloc de la dite couleur, en conservant son code à l\'intérieur.',
 	'colorscope_slogan' => 'Colorer les codes hexa',
 );
-?>
+

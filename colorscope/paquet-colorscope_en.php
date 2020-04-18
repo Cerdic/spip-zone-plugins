@@ -16,4 +16,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colorscope_description' => 'Replaces hexadecimal color codes in a SPIP text, with a bloc with the relevant color in background, mentionning its hexa code.',
 	'colorscope_slogan' => 'Give colours to hex codes',
 );
-?>
+
