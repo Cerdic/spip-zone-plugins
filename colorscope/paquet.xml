@@ -1,0 +1,17 @@
+<paquet
+	prefix="colorscope"
+	categorie="edition"
+	version="0.5.0"
+	etat="test"
+	compatibilite="[2.0.0;3.2.99]"
+	logo="img/picto_colorscope_128x128.png"
+	documentation="https://contrib.spip.net/Plugin-Colorscope-Pour-visualiser-les-codes-couleur"
+>	
+
+	<nom>Colorscope</nom>
+	<!-- Colorer les codes hexa -->
+	<auteur lien="http://www.cym.fr">Cyril MARION (Ateliers CYM)</auteur>
+	<copyright>2010-2011</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<pipeline nom="post_typo" inclure="colorscope_pipelines.php" />
+</paquet>
