@@ -196,6 +196,7 @@ function jeux_sudoku($texte, $indexJeux, $form=true) {
 	  elseif ($valeur==_JEUX_SUDOKU) $sudoku = calcul_tableau_sudoku($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_SOLUTION) $solution = calcul_tableau_sudoku($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
+	  elseif ($valeur==_JEUX_COPYRIGHT) $html .= '<div class="jeux_copyright">' . $tableau[$i+1] . '</div>';
 	}
 	return  ($titre?"<div class=\"jeux_titre sudoku_titre\">$titre</div>":'')
 			. calcul_erreurs_sudoku($sudoku, $solution, $indexJeux)

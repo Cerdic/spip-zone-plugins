@@ -1,4 +1,12 @@
-<script src='http://chesstuff.googlecode.com/svn/deployChessViewer.js' type='text/javascript'></script>
+#SET{path, #CHEMIN{javascript/deployChessViewer.js}|url_absolue}
+<script type="text/javascript">
+	var _JEUX_CODEBASE = "[(#GET{path}|dirname)]/"; //'http://chesstuff.googlecode.com/svn/bin/';
+</script>
+<script src="#GET{path}" type='text/javascript'></script>
+<!--
+	src='http://chesstuff.googlecode.com/svn/deployChessViewer.js'
+	https://github.com/chessplus/chesstuff/blob/master/deployChessViewer.js 
+-->
 <script id="oChessViewer" type="text/javascript">
 /*
 <BOUCLE_pgn(DOCUMENTS){id_document=#ENV{id}}{doublons}>

@@ -119,6 +119,7 @@ function jeux_pendu($texte, $indexJeux, $form=true) {
 	 if ($valeur==_JEUX_TITRE) $html .= pendu_titre($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_PENDU) $mots = jeux_liste_mots(jeux_majuscules($tableau[$i+1]));
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
+	  elseif ($valeur==_JEUX_COPYRIGHT) $html .= '<div class="jeux_copyright">' . $tableau[$i+1] . '</div>';
   }
   $js .= "\n\tpendu_Mots[$indexJeux]=new Array('".join("','",$mots)."');";
   $html .= pendu_pendu($js, $indexJeux);

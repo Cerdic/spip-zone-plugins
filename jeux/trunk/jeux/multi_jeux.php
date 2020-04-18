@@ -61,6 +61,7 @@ function jeux_multi_jeux($texte, $indexJeux) {
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
+	  elseif ($valeur==_JEUX_COPYRIGHT) $html .= '<div class="jeux_copyright">' . $tableau[$i+1] . '</div>';
 	  elseif ($valeur==_JEUX_SCORE) $categ_score = $tableau[$i+1];
 	}
 

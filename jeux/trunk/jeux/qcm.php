@@ -180,14 +180,14 @@ function qcm_affiche_la_question(&$qcms, $indexJeux, $indexQCM, $gestionPoints) 
 	$codeHTML .= "\n<div class='qcm_proposition'>";
 
 	if ($trou) {
-		if (($sizeInput = intval(jeux_config('trou')))==0)
+		if (($sizeInput = intval(jeux_config('trou'))) == 0)
 			foreach($qcms[$indexQCM]['propositions'] as $mot) $sizeInput = max($sizeInput, strlen($mot));
 		$prop = jeux_minuscules($temp);
 		$codeHTML .= " &nbsp; &nbsp; &nbsp;<input name='$nameInput' id='$idInput' class='jeux_input qcm_input' size='$sizeInput' type='text' /> ";
 	} elseif ($qrm) {
 		// cases a cocher
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) 
-			$codeHTML .= "<input type='checkbox' class='jeux_cocher qcm_cocher' name='{$nameInput}[]' value='$i' id='{$idInput}-$i' /><label for='{$idInput}-$i'>&nbsp;"	. $valeur.'</label>' . ($i % $nbcol?' &nbsp; ':'<br />');
+			$codeHTML .= "<input type='checkbox' class='jeux_cocher qcm_cocher' name='{$nameInput}[]' value='$i' id='{$idInput}-$i' /><label for='{$idInput}-$i'><span></span>&nbsp;"	. $valeur.'</label>' . ($i % $nbcol?' &nbsp; ':'<br />');
 	// S'il y a trop de choix, utiliser une liste a la place des boutons radio
 	} elseif ($qcms[$indexQCM]['nbpropositions']>jeux_config('max_radios')) {
 		$codeHTML .= "<select name='$nameInput' id='$idInput' class='qcm_select'><option value=''>"._T('jeux:votre_choix').'</option>';
@@ -196,7 +196,7 @@ function qcm_affiche_la_question(&$qcms, $indexJeux, $indexQCM, $gestionPoints) 
 	} else {
 		// boutons radio
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) 
-			$codeHTML .= "<input type='radio' class='jeux_radio qcm_radio' name='$nameInput' value='$i' id='{$idInput}-$i' /><label for='{$idInput}-$i'>&nbsp;$valeur</label>" . ($i % $nbcol?' &nbsp; ':'<br />');
+			$codeHTML .= "<input type='radio' class='jeux_radio qcm_radio' name='$nameInput' value='$i' id='{$idInput}-$i' /><label for='{$idInput}-$i'><span></span>&nbsp;$valeur</label>" . ($i % $nbcol?' &nbsp; ':'<br />');
 	}
 	$codeHTML .= '</div><br /></div>';
 
@@ -353,6 +353,7 @@ function jeux_qcm($texte, $indexJeux, $form=true) {
 	  	$indexQCM++;
 	  }
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
+	  elseif ($valeur==_JEUX_COPYRIGHT) $html .= '<div class="jeux_copyright">' . $tableau[$i+1] . '</div>';
 	  elseif ($valeur==_JEUX_SCORE) $categ_score = $tableau[$i+1];
   }
 

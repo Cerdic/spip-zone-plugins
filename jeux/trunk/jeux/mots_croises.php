@@ -225,25 +225,35 @@ function jeux_mots_croises_init() {
 	
 // decode une grille de mots croises 
 // traitement du jeu : jeu_{mon_jeu}()
-function jeux_mots_croises($texte, $indexJeux, $form=true) {
+function jeux_mots_croises($texte, $indexJeux, $form = true) {
     
-	$horizontal = $vertical = $solution = $html = false;
-	$titre = _T('motscroises:titre');
+	$horizontal = $vertical = $grille = $html = false;
+	// $titre = _T('motscroises:titre');
     // parcourir tous les #SEPARATEURS
 	$tableau = jeux_split_texte('mots_croises', $texte);
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_HORIZONTAL) $horizontal = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_VERTICAL) $vertical = $tableau[$i+1];
-	  elseif ($valeur==_JEUX_SOLUTION) $solution = calcul_tableau_grille($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_SOLUTION) {
+		  $html .= '@@GRILLEMC@@';
+		  $grille = calcul_tableau_grille($tableau[$i+1]);
+	  } 
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
+	  elseif ($valeur==_JEUX_COPYRIGHT) $html .= '<div class="jeux_copyright">' . $tableau[$i+1] . '</div>';
+		
 	}
-	return 	'<div class="mots_croises">'
-			. calcul_erreurs_grille($solution, $indexJeux)
-			. affichage_grille_mc($solution, $indexJeux, $form)
+	$grille = '<div class="mots_croises_grille">'
+			. calcul_erreurs_grille($grille, $indexJeux)
+			. affichage_grille_mc($grille, $indexJeux, $form)
 			. affichage_definitions($horizontal, $vertical)
 	// solution
-			. (jeux_form_reponse($indexJeux, 'SOL') ? affichage_grille_mc($solution, $indexJeux, $form, true) : '')
-			. '</div><br class="jeux_nettoyeur"/>';
+			. (jeux_form_reponse($indexJeux, 'SOL') ? affichage_grille_mc($grille, $indexJeux, $form, true) : '')
+			. '</div><div class="jeux_nettoyeur"></div>';
+	
+	return '<div class="mots_croises">'
+			. ($titre?'<div class="jeux_titre mots_croises_titre">'.$titre.'<hr /></div>':'')
+			. str_replace('@@GRILLEMC@@', $grille, $html)
+			. '</div>';
 }
 ?>

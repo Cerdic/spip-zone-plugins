@@ -26,10 +26,11 @@ define('_JEUX_HEAD2', "<!-- CSS/JS JEUX (AUTO) -->");
 
 // separateurs utilisables a l'interieur des balises ci-dessus
 // format a utiliser dans la redaction : [separateur]
-define('_JEUX_TITRE', 'titre');		// separateur indiquant le titre du jeu
-define('_JEUX_TEXTE', 'texte');		// separateur indiquant un contenu a garder telquel
-define('_JEUX_CONFIG', 'config');	// separateur permettant de passer des parametres au jeu
-#define('_JEUX_CONFIG', 'input');	// separateur permettant d'inserer un <input/> non evalue
+define('_JEUX_TITRE', 'titre');			// separateur indiquant le titre du jeu
+define('_JEUX_TEXTE', 'texte');			// separateur indiquant un contenu a garder telquel
+define('_JEUX_COPYRIGHT', 'copyright');	// separateur indiquant un contenu a encapsuler dans un <div class="jeux_copyright"/>
+define('_JEUX_CONFIG', 'config');		// separateur permettant de passer des parametres au jeu
+#define('_JEUX_CONFIG', 'input');		// separateur permettant d'inserer un <input/> non evalue
 define('_JEUX_REPONSE', 'reponse');
 define('_JEUX_SOLUTION', 'solution');
 define('_JEUX_SCORE', 'score');
@@ -67,18 +68,18 @@ $jeux_caracteristiques = array(
 // tous les jeux doivent etre listes ci-apres.
 // monjeu est le jeu traite dans le fichier jeux/monjeu.php
  'SEPARATEURS' => array(
-	'multi_jeux' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_MULTI_JEUX, _JEUX_CONFIG, _JEUX_SCORE),
-	'sudoku' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_SUDOKU, _JEUX_SOLUTION, _JEUX_CONFIG),
+	'multi_jeux' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_MULTI_JEUX, _JEUX_CONFIG, _JEUX_SCORE),
+	'sudoku' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_SUDOKU, _JEUX_SOLUTION, _JEUX_CONFIG),
 //	'kakuro' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_KAKURO, _JEUX_SOLUTION, _JEUX_CONFIG),
-	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION, _JEUX_CONFIG),
-	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_QCM, _JEUX_QRM, _JEUX_QUIZ, _JEUX_CONFIG, _JEUX_SCORE),
-	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE, _JEUX_AUTEUR, _JEUX_RECUEIL),
-	'devinettes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DEVINETTE, _JEUX_CHARADE, _JEUX_REPONSE, _JEUX_CONFIG),
-	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU, _JEUX_CONFIG, _JEUX_SCORE),
-	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_PENDU, _JEUX_CONFIG),
-	'diag_echecs' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DIAG_ECHECS, _JEUX_COLORATION, _JEUX_CONFIG),
+	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION, _JEUX_CONFIG),
+	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_QCM, _JEUX_QRM, _JEUX_QUIZ, _JEUX_CONFIG, _JEUX_SCORE),
+	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE, _JEUX_AUTEUR, _JEUX_RECUEIL),
+	'devinettes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_DEVINETTE, _JEUX_CHARADE, _JEUX_REPONSE, _JEUX_CONFIG),
+	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_TROU, _JEUX_CONFIG, _JEUX_SCORE),
+	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_PENDU, _JEUX_CONFIG),
+	'diag_echecs' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_DIAG_ECHECS, _JEUX_COLORATION, _JEUX_CONFIG),
 	'chesstuff' => array(_JEUX_CHESSSTUFF, _JEUX_CONFIG),
-	'saisies' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_LABEL, _JEUX_SAISIE, _JEUX_CONFIG),
+	'saisies' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_LABEL, _JEUX_SAISIE, _JEUX_CONFIG),
   ),
 
 // liste des signatures caracteristiques d'un jeu.

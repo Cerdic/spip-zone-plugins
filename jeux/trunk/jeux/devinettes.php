@@ -96,6 +96,7 @@ function jeux_devinettes($texte, $indexJeux, $form=true) {
 	  elseif ($valeur==_JEUX_CHARADE) $html .= devinettes_charade($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_REPONSE) $html .= devinettes_reponse($tableau[$i+1], "devinettes_{$indexJeux}_$i");
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
+	  elseif ($valeur==_JEUX_COPYRIGHT) $html .= '<div class="jeux_copyright">' . $tableau[$i+1] . '</div>';
   }
   return $html;
 }

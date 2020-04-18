@@ -185,10 +185,16 @@ function jeux_saisies($texte, $indexJeux, $form=true) {
 	// parcours des [separateurs]
 	$tableau = jeux_split_texte('saisies', $texte);
 	foreach($tableau as $i => $valeur) if ($i & 1) {
-	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
-	  elseif ($valeur==_JEUX_TEXTE && strlen($tableau[$i+1])) $html .= '<div class="jeux_saisies_texte">'.$tableau[$i+1].'</div>';
-	  elseif ($valeur==_JEUX_LABEL) $html .= jeux_saisies_label($tableau[$i+1]);
-	  elseif ($valeur==_JEUX_SAISIE) $html .= jeux_saisies_saisie($jeux_saisies, $indexJeux, $tableau[$i+1]);
+	 if ($valeur==_JEUX_TITRE) 
+		  $titre = $tableau[$i+1];
+	  elseif ($valeur==_JEUX_TEXTE && strlen($tableau[$i+1])) 
+		  $html .= '<div class="jeux_saisies_texte">' . $tableau[$i+1] . '</div>';
+	  elseif ($valeur==_JEUX_COPYRIGHT && strlen($tableau[$i+1])) 
+		  $html .= '<div class="jeux_saisies_texte jeux_copyright">' . $tableau[$i+1] . '</div>';
+	  elseif ($valeur==_JEUX_LABEL) 
+		  $html .= jeux_saisies_label($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_SAISIE) 
+		  $html .= jeux_saisies_saisie($jeux_saisies, $indexJeux, $tableau[$i+1]);
 	}
 
 	// calcul des extremes

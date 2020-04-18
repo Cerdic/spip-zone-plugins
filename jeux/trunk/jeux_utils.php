@@ -66,17 +66,19 @@ function jeux_split_texte($jeu, &$texte) {
   $expr = '/(\['.join('\]|\[', $jeux_caracteristiques['SEPARATEURS'][$jeu]).'\])/';
   $tableau = preg_split($expr, $texte, -1, PREG_SPLIT_DELIM_CAPTURE);
 //  foreach($tableau as $i => $valeur) $tableau[$i] = preg_replace('/^\[(.*)\]$/', '\\1', trim($valeur));
-  foreach($tableau as $i => $valeur) if (($i & 1) && preg_match('/^\[(.*)\]$/', trim($valeur), $reg)) {
-   $tableau[$i] = strtolower(trim($reg[1]));
-   if ($reg[1]==_JEUX_CONFIG && $i+1<count($tableau)) jeux_config_ecrase($tableau[$i+1]); 
-  }
+  foreach($tableau as $i => $valeur)
+	  if (($i & 1) && preg_match('/^\[(.*)\]$/', trim($valeur), $reg)) {
+	    $tableau[$i] = strtolower(trim($reg[1]));
+	    if ($reg[1] == _JEUX_CONFIG && $i+1 < count($tableau)) jeux_config_ecrase($tableau[$i+1]); 
+	  }
   return $tableau;
 }  
 
 // transforme un texte en listes html 
 function jeux_listes($texte) {
 	$tableau = preg_split("/[\r\n]+/", trim($texte));	
-	foreach ($tableau as $i=>$valeur) if (($valeur=trim($valeur))!='') $tableau[$i] = "<li>$valeur</li>\n";
+	foreach ($tableau as $i=>$valeur)
+		if (($valeur = trim($valeur)) != '') $tableau[$i] = "<li>$valeur</li>\n";
 	$texte = implode('', $tableau);
 	return "<ol>$texte</ol>";
 }
