@@ -1,41 +1,28 @@
-1	<plugin>
-2	
-3	        <version>0.5.0</version>
-4	       
-5	        <nom>Colorscope</nom>
-6	
-7	        <slogan>
-8	                <multi>
-9	                [fr]Colorer les codes hexa
-10	                [en]Give colours to hex codes
-11	                </multi>
-12	        </slogan>
-13	       
-14	        <prefix>colorscope</prefix>
-15	
-16	        <auteur>[Cyril MARION (Ateliers CYM)->http://www.cym.fr]</auteur>
-17	       
-18	   <licence>&#169; 2010-2020 - Licence GNU/GPL</licence>
-19	
-20	        <etat>stable</etat>
-21	       
-22	        <icon>img/picto_colorscope_128x128.png</icon>
-23	       
-24	        <lien>https://contrib.spip.net/Plugin-Colorscope-Pour-visualiser-les-codes-couleur</lien>
-25	
-26	        <description>
-27	                <multi>
-28	                [fr]Remplace les codes hexa des couleurs dans un texte SPIP, par un bloc de la dite couleur, en conservant son code &#224; l'int&#233;rieur.
-29	                [en]Replaces hexadecimal color codes in a SPIP text, with a bloc with the relevant color in background, mentionning its hexa code.
-30	                </multi>
-31	        </description>
-32	
-33	        <pipeline>
-34	                <nom>post_typo</nom>
-35	                <inclure>colorscope_pipelines.php</inclure>
-36	        </pipeline>
-37	       
-38	        <categorie>edition</categorie>
-39	        <necessite id="SPIP" version="[2.0.0;3.2.99]" />
-40	       
-41	</plugin>
+	<plugin>
+	        <version>0.5.0</version>
+	        <nom>Colorscope</nom>
+	        <slogan>
+	                <multi>
+	                [fr]Colorer les codes hexa
+	                [en]Give colours to hex codes
+	                </multi>
+	        </slogan>
+	        <prefix>colorscope</prefix>
+	        <auteur>[Cyril MARION (Ateliers CYM)->http://www.cym.fr]</auteur>
+	   <licence>&#169; 2010-2020 - Licence GNU/GPL</licence>
+	        <etat>stable</etat>
+	        <icon>img/picto_colorscope_128x128.png</icon>
+	        <lien>https://contrib.spip.net/Plugin-Colorscope-Pour-visualiser-les-codes-couleur</lien>
+	        <description>
+	                <multi>
+	                [fr]Remplace les codes hexa des couleurs dans un texte SPIP, par un bloc de la dite couleur, en conservant son code &#224; l'int&#233;rieur.
+	                [en]Replaces hexadecimal color codes in a SPIP text, with a bloc with the relevant color in background, mentionning its hexa code.
+	                </multi>
+	        </description>
+	        <pipeline>
+	                <nom>post_typo</nom>
+	                <inclure>colorscope_pipelines.php</inclure>
+	        </pipeline>
+	        <categorie>edition</categorie>
+	        <necessite id="SPIP" version="[2.0.0;3.2.99]" />
+	</plugin>
