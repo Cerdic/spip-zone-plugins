@@ -1,6 +1,6 @@
 $(function() {
 	$(".tablesorter").tablesorter({
-		widgets: ["zebra","stickyHeaders", "filter","print", "columnSelector", "output", "resizable"],
+		widgets: ["zebra","stickyHeaders", "filter","print", "columnSelector", "output", "resizable", "reorder"],
 		widgetOptions: {
 			columnSelector_container : $('#columnSelector'),
       print_columns: 's',
