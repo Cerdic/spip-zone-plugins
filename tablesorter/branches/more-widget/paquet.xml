@@ -1,0 +1,26 @@
+<paquet
+	prefix="tablesorter"
+	categorie="navigation"
+	version="2.1.0"
+	etat="stable"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="images/tablesorter-128.png"
+	documentation="https://contrib.spip.net/Tablesorter-pour-SPIP"
+	schema="1"
+	>
+
+	<nom>Tablesorter</nom>
+	<!-- Avec tableSorter, le tri sera top ! -->
+
+	<auteur lien="http://lovepeacenukes.com/">Chistian Bach</auteur>
+	<auteur>cym</auteur>
+	<auteur>b_b</auteur>
+	<auteur>Eric Lupinacci</auteur>
+	<auteur>BoOz</auteur>
+
+	<credit lien="https://www.flaticon.com/authors/smashicons">Icons made by Smashicons from www.flaticon.com</credit>
+
+	<pipeline nom="insert_head_css" inclure="tablesorter_pipelines.php" />
+	<pipeline nom="insert_head" inclure="tablesorter_pipelines.php" />
+	<pipeline nom="header_prive" inclure="tablesorter_pipelines.php" />
+</paquet>
