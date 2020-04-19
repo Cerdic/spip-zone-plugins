@@ -11,9 +11,12 @@ use Box\Spout\Common\Entity\Style\Color;
 function action_formidable_tablesorter_export() {
 	$data = json_decode(_request('data'));
 	$type_export = _request('type_export');
+	$filename = _request('filename');
+
 	$style_entete = (new StyleBuilder())
 		->setFontBold()
 		->build();
+
 	if ($type_export == 'csv') {
 		$writer = WriterEntityFactory::createCSVWriter();
 	} elseif ($type_export == 'ods') {
@@ -21,7 +24,7 @@ function action_formidable_tablesorter_export() {
 	} else {
 		$writer = WriterEntityFactory::createXLSXWriter();
 	}
-	$writer->openToBrowser("export.$type_export");
+	$writer->openToBrowser("$filename.$type_export");
 	//
 	$i = 0;
 	foreach ($data as $row => $content) {

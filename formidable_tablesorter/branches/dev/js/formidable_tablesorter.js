@@ -21,12 +21,13 @@ output_saveFileName: 'toto.xlsx',
 		$('#total').text(total-filtres);
 		}
 	);
-	type_export = 'csv';
   $('.print').click(function() {
     $('.tablesorter').trigger('printTable');
   });
 	type_export = 'csv'
+	filename = 'nom';
 	$('.output').click(function() {
+		filename = $('table.tablesorter').data('identifiant');
 		type_export = $(this).val();
 		$('.tablesorter').trigger('outputTable');
 		return false;
@@ -40,6 +41,7 @@ function call_formidable_tablesorter_export(config, data, url) {
 	var form = $('<form></form>').attr('action', url_action_formidable_tablesorter_export).attr('method', 'post');
 	form.append($("<input></input>").attr('type', 'hidden').attr('name', 'data').attr('value', data));
 	form.append($("<input></input>").attr('type', 'hidden').attr('name', 'type_export').attr('value', type_export));
+	form.append($("<input></input>").attr('type', 'hidden').attr('name', 'filename').attr('value', filename));
 	form.appendTo('body').submit().remove();
 	return false;
 }

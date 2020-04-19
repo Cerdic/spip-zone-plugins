@@ -7,7 +7,7 @@
 	#SET{cextras,#VAL{spip_formulaires_reponses}|appliquer_filtre{champs_extras_objet}|sinon{#LISTE}}
 	<B_reponses>
 	#INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter_boutons,total=#TOTAL_BOUCLE}
-	<table id="formidable_tablesorter#ID_FORMULAIRE" class="tablesorter">
+	<table data-identifiant="#IDENTIFIANT" id="formidable_tablesorter#ID_FORMULAIRE" class="tablesorter">
 		<B_entete>
 		<caption>#TITRE</caption>
 		<thead>
