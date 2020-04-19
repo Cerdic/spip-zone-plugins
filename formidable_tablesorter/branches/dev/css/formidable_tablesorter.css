@@ -11,6 +11,9 @@
 	box-sizing:border-box;
 	padding:4px;
 }
+.formidable_tablesorter .columnSelectorButton{
+	display:inline-block;
+}
 .tablesorter-ignoreRow th {
 	border:1px black solid;
 	text-align:center;
