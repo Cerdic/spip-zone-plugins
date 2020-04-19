@@ -1,4 +1,4 @@
-<BOUCLE_formulaires_reponses(FORMULAIRES_REPONSES){id_formulaires_reponse} {si #AUTORISER{modifier,formulairesreponse,#ID_FORMULAIRES_REPONSE}}>
+<BOUCLE_formulaires_reponses(FORMULAIRES_REPONSES){id_formulaires_reponse} {tout}{si #AUTORISER{modifier,formulairesreponse,#ID_FORMULAIRES_REPONSE}}>
 	#SET{redirect,#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE,true}}
 	<div class='cadre-formulaire-editer'>
 		<div class='entete-formulaire'>
