@@ -6,7 +6,11 @@
 			<label class="submit columnSelectorButton" for="colSelect1"><:formidable_ts:colonnes:></label>
 			<div id="columnSelector"></div>
 		</div>
-		<button class="submit button output"><:formidable_ts:exporter:></button>
+		<div class="output">
+			<button class="submit button output" value="csv"><:formidable_ts:exporter_csv:></button>
+			<button class="submit button output" value="ods"><:formidable_ts:exporter_ods:></button>
+			<button class="submit button output" value="xlsx"><:formidable_ts:exporter_xlsx:></button>
+		</div>
 		<button class="submit button reset"><:formidable_ts:reset:></button>
 		<span class="totalWrapper"><:formidable_ts:nb_lignes:>&nbsp;<span id="total">#ENV{total}</span></span>
 	</div>

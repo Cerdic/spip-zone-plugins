@@ -7,10 +7,12 @@ $(function() {
       print_rows: 'f',
 			print_extraCSS: 'table{font-size:10pt}',
       filter_saveFilters : true,
-			output_saveFileName : 'export.csv',
-			output_encoding      : 'data:application/octet-stream;charset=utf8,',
-			output_wrapQuotes: 'true',
+			output_separator: 'array',
 			output_delivery: 'download',
+output_saveFileName: 'toto.xlsx',
+			output_callback: function(config, data, url) {
+				return call_formidable_tablesorter_export(config, data, url);
+			},
 			resizable_addLastColumn: true
 		}
 	}).bind('filterEnd', function(event, config){
@@ -19,10 +21,13 @@ $(function() {
 		$('#total').text(total-filtres);
 		}
 	);
+	type_export = 'csv';
   $('.print').click(function() {
     $('.tablesorter').trigger('printTable');
   });
+	type_export = 'csv'
 	$('.output').click(function() {
+		type_export = $(this).val();
 		$('.tablesorter').trigger('outputTable');
 		return false;
 	});
@@ -30,3 +35,11 @@ $(function() {
 		$('.tablesorter').trigger('filterReset');
 	});
 });
+
+function call_formidable_tablesorter_export(config, data, url) {
+	var form = $('<form></form>').attr('action', url_action_formidable_tablesorter_export).attr('method', 'post');
+	form.append($("<input></input>").attr('type', 'hidden').attr('name', 'data').attr('value', data));
+	form.append($("<input></input>").attr('type', 'hidden').attr('name', 'type_export').attr('value', type_export));
+	form.appendTo('body').submit().remove();
+	return false;
+}
