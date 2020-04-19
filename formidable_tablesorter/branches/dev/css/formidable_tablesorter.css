@@ -7,9 +7,6 @@
 .formidable_tablesorter .boutons{
 	text-align:left;
 }
-.boutons > * {
-	display:inline-block;
-}
 .formidable_tablesorter .boutons label {
 	box-sizing:border-box;
 	padding:4px;
