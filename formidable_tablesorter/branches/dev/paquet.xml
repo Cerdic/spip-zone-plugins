@@ -15,7 +15,7 @@
 	<pipeline nom="affiche_gauche" inclure="formidable_ts_pipelines.php" />
 
 	<necessite nom="formidable" compatibilite="[3.46.4;[" />
-	<necessite nom="spout" compatibilite="[1.2.1;[" />
+	<necessite nom="spout" compatibilite="[1.2.2;[" />
 	<necessite nom="tablesorter" compatibilite="[2.1.0;[" />
 	<necessite nom="saisies" compatibilite="[3.29.0;[" />
 	<utilise nom="prive_fluide" compatibilite="[1.2.3;[" />
