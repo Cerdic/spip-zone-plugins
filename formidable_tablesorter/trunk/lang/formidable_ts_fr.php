@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_lignes' => 'Nombre de lignes affichées :',
 
 	// R
-	'reset' => 'Réinitialiser les fitlres',
+	'reset' => 'Réinitialiser les filtres',
 
 	// T
 	'tableau_reponses' => 'Tableau des réponses'
