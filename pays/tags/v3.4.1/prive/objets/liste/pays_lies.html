@@ -1,0 +1,60 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi nom,1,
+	id_pays,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutpayl,#EVAL{_request("debutpayl");}}}
+<B_liste_pays>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutpayl,#EVAL{_request("debutpayl");}}}
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies pays">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{pays:info_1_pays,pays:info_nb_pays}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(PAYS){tout}{id_pays IN #GET{selection}}{where?}
+			{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_pays==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOM**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutpayl,@#ID_PAYS}|ancre_url{paginationpayl}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
+
+		<tr class='first_row'>
+			<th class='nom' scope='col'>[(#TRI{multi nom,<:pays:label_nom:>,ajax})]</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_pays(PAYS){id_pays IN #GET{selection}}
+		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} payl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_PAYS|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='nom'>[(#LOGO_PAYS|image_reduire{20,20})]<a href="[(#ID_PAYS|generer_url_entite{pays})]">#NOM</a></td>
+
+			<td class='action'>
+				[(#ENV{editable}|oui)
+					<button type="submit" class="button link delete" name="supprimer_lien\[pays-#ID_PAYS-#OBJET-#ID_OBJET\]" value="X"><:pays:retirer_lien_pays:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_pays>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[pays-*-#OBJET-#ID_OBJET\]" value="X"><:pays:retirer_tous_liens_pays:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_pays>
+<div class="liste-objets liste-objets-lies PAYS caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:pays:info_aucun_pays:>})]</strong>
+</div>
+<//B_liste_pays>

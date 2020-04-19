@@ -1,0 +1,64 @@
+[(#REM)
+
+
+	Adaptation pour fonctionner avec le plugin pays.
+
+	Parametres :
+	- class : classe(s) css ajoutes au select
+	- option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+	- cacher_option_intro : pas de premier option vide	(defaut:"")
+	- champ_pays : choix du champ à utiliser comme valeur, 'id_pays' par défaut.
+	               id_pays | code | code_alpha3 | code_num | nom
+	               à préférer au paramètre 'code_pays', qu'il rend obsolète.
+	- code_pays : (obsolète) pour utiliser le code pays à 2 chiffres au lieu du nom.
+	              utiliser champs_pays=code à la place.
+	- multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
+	- defaut : valeur par defaut si pas présente dans l'environnement
+	- valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+	- size : la taille du sélecteur (seulement si multiple)
+
+	Exemple d'appel :
+	[(#SAISIE{pays, pays,
+		label=<:plugin:info_pays:>})]
+]<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"[ size="(#ENV{size})"]][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ (#ENV*{attributs})]>
+	#SET{selected,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+	<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_pays(PAYS){id_pays ?IN #ENV{id_pays}}{par multi nom}>[
+
+	(#REM) définition des valeurs et des labels correspondants à chaque champ. ][
+	(#SET{mapping_champs,#ARRAY{
+		id_pays,     #ARRAY{valeur,#ID_PAYS,     label,#NOM},
+		code,        #ARRAY{valeur,#CODE,        label,#NOM},
+		code_alpha3, #ARRAY{valeur,#CODE_ALPHA3, label,#CODE_ALPHA3|concat{'. ',#NOM}},
+		code_num,    #ARRAY{valeur,#CODE_NUM,    label,#CODE_NUM|concat{'. ',#NOM}},
+		nom,         #ARRAY{valeur,#NOM,         label,#NOM}}})][
+
+	(#REM) définition du champ à utiliser : param champ_pays > code_pays > id_pays. ][
+	(#SET{champ_pays,#ENV{champ_pays,#ENV{code_pays}|=={oui}|?{code,id_pays}}})][
+	(#SET{champ_pays,#GET{champ_pays}|in_array{#GET{mapping_champs}|array_keys}|?{#GET{champ_pays},id_pays}})][
+
+	(#REM) définition de la valeur et du label. ][
+	(#SET{pays,#GET{mapping_champs/#GET{champ_pays}/valeur}})][
+	(#SET{label,#GET{mapping_champs/#GET{champ_pays}/label}})
+	][(#ENV{multiple}|oui)
+		<option value="#GET{pays}"[(#GET{pays}|in_array{#GET{selected}|is_array|?{#GET{selected},#GET{selected}|explode{','}}}|oui) selected="selected"]>[(#GET{label})]</option>]
+		[(#ENV{multiple}|non)
+		<option value="#GET{pays}"[(#GET{pays}|=={#GET{selected}}|oui) selected="selected"]>[(#GET{label})]</option>]
+	</BOUCLE_pays>
+</select>
+[(#ENV{multiple}|oui)
+<div class="explication liste-selection"></div>
+<script type="text/javascript">
+(function(){
+	var id = 'champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]';
+	function actualise_liste_selection(){
+		var selected = \[\];
+		jQuery('#'+id).find(':selected').each(function(){selected.push(jQuery(this).html())});
+		jQuery('#'+id+' + .liste-selection').html(selected.join(', '));
+	}
+	jQuery(actualise_liste_selection);
+	jQuery('#'+id).on('change', actualise_liste_selection);
+})();
+</script>
+]
