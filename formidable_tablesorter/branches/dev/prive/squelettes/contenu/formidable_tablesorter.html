@@ -5,6 +5,8 @@
 	#SET{saisies,#SAISIES|unserialize}
 	#SET{saisies_finales,#GET{saisies}|saisies_lister_finales}
 	#SET{cextras,#VAL{spip_formulaires_reponses}|appliquer_filtre{champs_extras_objet}|sinon{#LISTE}}
+
+	<INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter-filtres}{env}/>
 	<B_reponses>
 	#INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter_boutons,total=#TOTAL_BOUCLE}
 	<table data-identifiant="#IDENTIFIANT" id="formidable_tablesorter#ID_FORMULAIRE" class="tablesorter">
@@ -45,9 +47,9 @@
 		</thead>
 		</B_entete>
 		<tbody>
-		<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
+			<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}{statut==#ENV{statut,'.*'}}>
 		<tr>
-			<td><a href="#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE}">#ID_FORMULAIRES_REPONSE</a></td>
+			<td><a href="#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE}">[(#STATUT|puce_statut{formulaires_reponse,#ID_FORMULAIRES_REPONSE}) ]#ID_FORMULAIRES_REPONSE</a></td>
 			<td data-text="#DATE">[(#DATE|affdate_heure)]</td>
 			[(#GET{cextras}|cextras2td{#ID_FORMULAIRES_REPONSE})]
 			<BOUCLE_champ(POUR){tableau #GET{saisies_finales}}>
