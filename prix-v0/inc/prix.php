@@ -63,13 +63,13 @@ function inc_prix_ht_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
  * @param int $arrondi Mettre -1 pour ne pas arrondir
  * @return float Retourne le prix TTC de l'objet sinon 0
  */
-function inc_prix_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
+function inc_prix_dist($type_objet, $id_objet, $arrondi = 2, $serveur = '') {
 	include_spip('base/connect_sql');
 	
 	// On va d'abord chercher le prix HT. On délègue le test de présence de l'objet dans cette fonction.
 	$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
 	$type_objet = objet_type($type_objet);
-	$prix = $prix_ht = $fonction_prix_ht($type_objet, $id_objet, 0, $serveur);
+	$prix = $prix_ht = $fonction_prix_ht($type_objet, $id_objet, -1, $serveur);
 	
 	// On cherche maintenant s'il existe une personnalisation pour les taxes : prix_<objet>() dans prix/<objet>.php
 	if ($fonction_prix_objet = charger_fonction($type_objet, 'prix/', true)){
