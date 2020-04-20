@@ -11,8 +11,8 @@
 	<div class='label'><:produits:produit_champ_prix_ht_label:></div>
 	<div dir='#LANG_DIR' class='#EDIT{prix_ht} prix_ht'>[(#PRIX_HT*|appliquer_filtre{prix_formater,true})]</div>
 </div>
-#SET{taxe,#TAXE|floatval|>{0}|?{#TAXE,#CONFIG{produits/taxe,0}}}
-<div class="champ contenu_taxe[ (#GET{taxe}|strlen|?{'',vide})]">
+#SET{taxe,#TAXE|floatval}
+<div class="champ contenu_taxe[ (#GET{taxe}|floatval|?{'',vide})]">
 	<div class='label'><:produits:produit_champ_taxe_label:></div>
 	<div dir='#LANG_DIR' class='#EDIT{taxe} taxe'>[(#GET{taxe}|mult{100})&nbsp;&#37;]</div>
 </div>

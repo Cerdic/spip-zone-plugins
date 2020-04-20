@@ -21,6 +21,7 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 	include_spip('inc/config');
 	$editer_ttc = lire_config('produits/editer_ttc');
 	$taxe_defaut = 100 * lire_config('produits/taxe', 0);
+	$nouveau_produit = (intval($id_produit) > 0);
 
 	$saisies = array(
 		array(
@@ -65,11 +66,16 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 			'options' => array(
 				'nom' => 'taxe',
 				'label' => _T('produits:produit_champ_taxe_label'),
-				'explication' => _T(
-					'produits:produit_champ_taxe_explication',
-					array('taxe' => $taxe_defaut.'&nbsp;&#37;')
+				// Taxe par défaut uniquement pour les nouveaux produits
+				'explication' => _T('produits:produit_champ_taxe_format') .
+				($nouveau_produit ?
+					'' :
+					'. <br>' . _T(
+						'produits:produit_champ_taxe_explication',
+						array('taxe' => $taxe_defaut.'&nbsp;&#37;')
+					)
 				),
-				'defaut' => $taxe_defaut,
+				'defaut' => ($nouveau_produit ? null : $taxe_defaut),
 				'inserer_fin' => '<span class="pourcent">&nbsp;&#37;</span>'
 			),
 			'verifier' => array(
@@ -277,12 +283,13 @@ function formulaires_editer_produit_verifier($id_produit = 'new', $id_rubrique =
  */
 function formulaires_editer_produit_traiter($id_produit = 'new', $id_rubrique = 0, $retour = '', $lier_trad = 0) {
 	set_request('id_parent', produits_id_parent());
-	if ($taxe = _request('taxe')) {
-		set_request('taxe', $taxe/100);
-	}
+
+	// Normaliser la taxe
+	$taxe = floatval(_request('taxe'));
+	set_request('taxe', $taxe/100);
 
 	if (lire_config('produits/editer_ttc')) {
-		$prix_ht = _request('prix_ttc') / (1 + _request('taxe', 0));
+		$prix_ht = _request('prix_ttc') / (1 + $taxe);
 		set_request('prix_ht', $prix_ht);
 	}
 
@@ -295,11 +302,9 @@ function formulaires_editer_produit_traiter($id_produit = 'new', $id_rubrique = 
 		objet_associer(array("auteur"=>$id_auteur), array("produit"=>$retours['id_produit']));
 	}
 
-	// cas d’erreur conserver la valeur de taxe saisie.
+	// En cas d’erreur, repasser la taxe en base 100 saisie.
 	if (!empty($retours['message_erreur'])) {
-		if ($taxe = _request('taxe')) {
-			set_request('taxe', $taxe*100);
-		}
+		set_request('taxe', $taxe*100);
 	}
 	return $retours;
 }

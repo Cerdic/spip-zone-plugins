@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_champ_rubrique_label' => 'Rubrique',
 	'produit_champ_taxe_explication' => 'Valeur par défaut sur le site : @taxe@. Ce champ peut être laissé vide.',
 	'produit_champ_taxe_label' => 'Taxe',
+	'produit_champ_taxe_format' => 'Nombre entre 1 et 100',
 	'produit_champ_texte_label' => 'Texte',
 	'produit_champ_titre_label' => 'Titre',
 	'produit_editer' => 'Éditer le produit',
