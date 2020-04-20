@@ -1,0 +1,39 @@
+<paquet
+	prefix="produits"
+	categorie="outil"
+	version="1.2.17"
+	etat="test"
+	compatibilite="[3.0.13;3.2.*]"
+	logo="prive/themes/spip/images/produits-64.png"
+	documentation=""
+	schema="1.1.4"
+>
+
+	<nom>Produits</nom>
+
+	<auteur>Les Développements Durables, http://www.ldd.fr</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="verifier" compatibilite="[1.0.4;]" />
+
+	<pipeline nom="autoriser" inclure="produits_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/produits.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/produits.php" />
+	<pipeline nom="accueil_encours" inclure="produits_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="produits_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="produits_pipelines.php" />
+	<pipeline nom="grappes_objets_lies" inclure="produits_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="produits_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="produits_pipelines.php" />
+	<pipeline nom="post_insertion" inclure="produits_pipelines.php" />
+	<pipeline nom="calculer_rubriques" inclure="produits_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="produits_pipelines.php" />
+	<pipeline nom="objet_compte_enfants" inclure="produits_pipelines.php" />
+	<pipeline nom="corbeille_table_infos" inclure="produits_pipelines.php" />
+	<pipeline nom="compositions_declarer_heritage" inclure="produits_pipelines.php" />
+
+	<menu nom="produits" titre="produit:titre_produits" parent="menu_edition" icone="images/produit-16.png" action="produits" />
+	<menu nom="produit_creer" titre="produit:icone_creer_produit" parent="outils_rapides" icone="images/produit-new-16.png" action="produit_edit" parametres="new=oui" />
+</paquet>
