@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'massicot_description' => 'Este plugin permite modificar o tamanho e e reenquadrar os logotipos e as imagens diretamente no espaço privado de SPIP. ',
+	'massicot_description' => 'Este plugin permite modificar o tamanho e reenquadrar os logotipos e as imagens diretamente no espaço privado de SPIP. ',
 	'massicot_nom' => 'Massicot',
 	'massicot_slogan' => 'Reenquadre suas imagens no SPIP!'
 );
