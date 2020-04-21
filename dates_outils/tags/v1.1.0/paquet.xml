@@ -1,0 +1,22 @@
+<paquet
+	prefix="dates_outils"
+	categorie="outil"
+	version="1.1.0"
+	etat="test"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="prive/themes/spip/images/dates_outils-64.png"
+	documentation="https://git.spip.net/spip-contrib-extensions/dates_outils"
+>
+
+	<nom>Dates outils</nom>
+	<!-- Des outil pour la gestion des dates -->
+
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL v3</licence>
+
+	<traduire module="dates_outils" reference="fr" gestionnaire="salvatore" />
+
+
+	<utilise nom="agenda" compatibilite="[3.14.11;]" />
+</paquet>
