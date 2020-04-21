@@ -34,6 +34,12 @@ $mes_saisies = array(
       'icone' => 'pensebete-24',
     ),
     'saisies' => array( // les champs dans le fieldset 
+      array( // champ retour nécessaire notamment à la création pour aller directement au contenu
+          'saisie' => 'hidden',
+          'options' => array(
+            'nom' => 'retour',
+           )
+      ),
        array( // champ id_pensebete (numéro unique du pense-bête)
           'saisie' => 'hidden',
           'options' => array(
@@ -246,7 +252,7 @@ function formulaires_editer_pensebete_traiter_dist($id_pensebete='new', $id_rubr
 	}
 
 	// on traite les données
-	$retours = formulaires_editer_objet_traiter('pensebete',_request('id_pensebete'),$id_parent,$lier_trad,_request('retour'),_request('config_fonc'),_request('row'),_request('hidden'));
+	$retours = formulaires_editer_objet_traiter('pensebete',_request('id_pensebete'),$id_parent,$lier_trad,$retour,_request('config_fonc'),_request('row'),_request('hidden'));
 	
 	// associer le pensebete à un objet
 	if (_request('associer_objet') AND $id_pensebete=$retours['id_pensebete']) {			
