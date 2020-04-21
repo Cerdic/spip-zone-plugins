@@ -1,0 +1,50 @@
+/* Présentation des offres d'emploi et des CVs dans un tableau responsive (merci grid-layout)
+ un seul breakpoint à 400px : 
+ -> au dessus c'est de l'affichage en tableau classique
+ -> en dessous, c'est du mobile : 
+ 	affichage vertical
+ 	+ masquer l'entête du tableau
+ 	+ utilisation de l'attribut  data-name pour nommer certaines ligne si besoin
+*/
+
+.table_jobs { 
+	table-layout:fixed;
+	margin:1em 0;
+	border-top: 3px solid #e5e5e5;
+	border-bottom: 3px solid #e5e5e5;
+}
+
+.table_jobs thead { 
+	font-weight: bold; text-align: left;
+	border-bottom: solid 2px #e5e5e5;
+}
+
+.table_jobs tbody tr:nth-of-type(even) {
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table_jobs tr > th,
+.table_jobs tr > td {
+	padding:5px 0;
+}
+
+.table_jobs .table-date 	{ width:10%; }
+.table_jobs .table-titre 	{ word-wrap: break-word; }
+.table_jobs .table-pdf 		{ width:10%; text-align: center;}
+
+
+.table_jobs caption {  background: none; border-bottom: 1px solid; text-align: left; font-weight: bold; }
+.table_jobs tfoot { border-top: 1px solid; }
+
+@media (max-width: 400px) {
+	tr {
+		display:grid;
+	}
+	thead {
+		display:none;
+	}
+
+	[data-name]::before {
+		content: attr(data-name) " : ";
+	}
+}

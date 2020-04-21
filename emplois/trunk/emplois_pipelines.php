@@ -14,6 +14,22 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
+ * Inserer la CSS de emplois si config cochee
+ *
+ * @param $flux
+ * @return $flux
+ */
+function emplois_insert_head_css($head) {
+	include_spip('inc/config');
+	$cfg = lire_config('emplois/affichage_public/css_public');
+	if ($cfg and $cfg == 'on') {
+		$head .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('css/emplois.css').'" />';
+	}
+
+	return $head;
+}
+
+/**
  * Ajouter les objets sur les vues de rubriques
  *
  * @pipeline affiche_enfants

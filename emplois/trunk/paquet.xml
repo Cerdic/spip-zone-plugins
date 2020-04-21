@@ -1,7 +1,7 @@
 <paquet
 	prefix="emplois"
 	categorie="divers"
-	version="1.1.14"
+	version="1.1.15"
 	etat="dev"
 	compatibilite="[3.1.1;3.2.*]"
 	logo="prive/themes/spip/images/emplois-64.png"
@@ -28,6 +28,7 @@
 	<pipeline nom="objet_compte_enfants" inclure="emplois_pipelines.php" /> 
 	<pipeline nom="optimiser_base_disparus" inclure="emplois_pipelines.php" /> 
 	<pipeline nom="trig_propager_les_secteurs" inclure="emplois_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="emplois_pipelines.php" />
 	<pipeline nom="post_insertion" inclure="emplois_pipelines.php" />
 	<pipeline nom="post_edition" inclure="emplois_pipelines.php" />
 	<pipeline nom="post_edition_lien" inclure="emplois_pipelines.php" />
@@ -39,5 +40,8 @@
 	<onglet nom="configurer_emplois" titre="emplois:onglet_offres" parent="emplois" icone="images/offre-24.png" />
 	<onglet nom="configurer_cvs" titre="emplois:onglet_cvs" parent="emplois" icone="images/cv-24.png" />
 	<onglet nom="configurer_affichage_public" titre="emplois:onglet_affichage_public" parent="emplois" icone="images/espace_public-24.png" />
+
+	<chemin path="./" />
+	<chemin path="squelettes" type='public'/>
 
 </paquet>

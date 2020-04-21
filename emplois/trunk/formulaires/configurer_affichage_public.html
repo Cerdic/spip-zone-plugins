@@ -11,6 +11,9 @@
 
 		<div class="editer-groupe">
 
+			[(#SAISIE{case, css_public, label=<:emplois:cfg_affichage_emplois:>, label_case=<:emplois:cfg_label_case_activer_css:>})]
+
+
 			<div class="editer long_label editer_placeholder[ (#ENV**{erreurs}|table_valeur{placeholder}|oui)erreur]">
 				<label for="placeholder"><:emplois:cfg_label_placeholder:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{placeholder})</span>
