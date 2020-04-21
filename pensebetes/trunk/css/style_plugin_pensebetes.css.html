@@ -1,14 +1,7 @@
-/* --------------------------------------------------------------
-
-   style_prive_defaut.css
-   Disposition des Penses-bêtes
-   
-   Merci à Chris Heilmann pour son article dont nous nous inspirons :
-   Create a Sticky Note Effect in 5 Easy Steps with CSS3 and HTML5
-   https://code.tutsplus.com/tutorials/create-a-sticky-note-effect-in-5-easy-steps-with-css3-and-html5--net-13934
-   
-   -------------------------------------------------------------- */
-
+.monpostit.article {
+  background:transparent;
+  float:left;
+}
 
 .monpostit {
   padding:0;
@@ -72,11 +65,11 @@
 	margin:0;
 	font-weight:bold;
 	font-size: 120%;
-	background-image: url(http://localhost:8888/plugins/pensebetes/prive/themes/spip/images/damier_clair-16.png);
+	background-image: url([(#CHEMIN_IMAGE{damier_clair-16.png}|url_absolue|protocole_implicite)]);
 	background-repeat: repeat;
 }
 .monpostit ul li p{
-margin:0;
+ margin:0;
  padding:0;
  }
 .monpostit ul li a{
@@ -99,8 +92,7 @@ margin:0;
   z-index:5;
 }
 
-/* icone en bord haut du pensebete 
-.pensebete-icone {position: absolute; top: -16px; left: 10px;}*/
+/* icone en bord haut du pensebete */
 .pensebete-icone {position: relative; top: -5em; right: 0.1em; float:right}
 
 .itineraire{

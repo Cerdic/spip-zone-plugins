@@ -16,16 +16,34 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Ajout de la feuille de style de Pensebetes,
+ * dans l'espace public si demandé
+ * Appelé aussi depuis le privé avec $prive à true.
  *
- * @pipeline header_prive
+ * @pipeline insert_head_css
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
 
-function pensebetes_header_prive($flux){
-	$flux .= '<link rel="stylesheet" href="' . _DIR_PLUGIN_PENSEBETES  .'prive/themes/spip/style_prive_pensebetes.css" type="text/css" media="all" />';
+function pensebetes_insert_head_css($flux, $prive = false) {
+	// toujours autoriser pour le prive.
+	if ($prive or lire_config('pensebetes/espacepublic')) {
+        $css = direction_css(produire_fond_statique('css/style_plugin_pensebetes.css'), lang_dir());
+        $flux .= '<link rel="stylesheet" href="'.$css.'" type="text/css" />';
+	}
 	return $flux;
 }
+
+/**
+ * Ajout de la CSS du Pensebetes au head privé
+ *
+ * @pipeline insert_header_prive_css
+ * @param string $flux Contenu du head
+ * @return string Contenu du head complété
+ */
+function pensebetes_insert_head_prive_css($flux) {
+	return pensebetes_insert_head_css($flux, true);
+}
+
 
 /**
  * Ajout de contenu à gauche de la page,

@@ -10,7 +10,12 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
+		<fieldset>
+			<legend><:pensebete:cfg_privee:></legend>
 		<div class="editer-groupe">
+				[(#SAISIE{explication,explication_privee,
+					titre=<:pensebete:cfg_explication:>,
+					texte=<:pensebete:cfg_explication_privee:>})]
 
 #SET{mes_lieux,#ARRAY}
 #SET{mes_lieux,#GET{mes_lieux}|array_merge{#ARRAY{'accueil',(#VAL{icone_accueil}|_T)}}}
@@ -33,10 +38,25 @@
 	[(#SAISIE{checkbox, mes_boites}
 	{label=<:pensebete:cfg_boites:>}
 	{datas=#ARRAY{accueil,<:icone_accueil:>,auteur,<:info_auteurs:>}})]
+		</div>
+		</fieldset>
+
+		<fieldset>
+			<legend><:pensebete:cfg_publique:></legend>
+		<div class="editer-groupe">
+
+				[(#SAISIE{explication,explication_publique,
+					titre=<:pensebete:cfg_explication:>,
+					texte=<:pensebete:cfg_explication_publique:>})]
+
+				[(#SAISIE{oui_non,espacepublic,
+					label=<:pensebete:cfg_partie_publique:>,
+					explication=<:pensebete:cfg_explication_partie_publique:>})]
+		</div>
+		</fieldset>
 
 <!--extra-->
 
-		</div>
 
 		<input type="hidden" name="_meta_casier" value="pensebetes" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

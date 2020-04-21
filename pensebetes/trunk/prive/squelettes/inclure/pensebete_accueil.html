@@ -1,6 +1,8 @@
+#SET{modele_de_pagination,prive} [(#ENV{modele_de_pagination}|match{'precedent_suivant|page|prive'}|oui) [(#SET{modele_de_pagination,#ENV{modele_de_pagination}})] ]
+
 <B_affiche_pensebetes>
   [(#ANCRE_PAGINATION)]
-[<p class='pagination'>(#PAGINATION{prive})</p>]
+[<p class='pagination'>(#PAGINATION{#GET{modele_de_pagination}})</p>]
 <div class="monpostit">
 <ul>
 <BOUCLE_affiche_pensebetes(PENSEBETES){id_objet?}{objet?}{id_pensebete?}{id_mot?}{id_donneur?}{id_receveur?}{where?}{recherche?}{pagination 4}>

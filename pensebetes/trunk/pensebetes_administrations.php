@@ -52,6 +52,7 @@ function pensebetes_vider_tables($nom_meta_base_version) {
 	effacer_config("pensebetes/mes_objets");
 	effacer_config("pensebetes/mes_lieux");
 	effacer_config("pensebetes/mes_boites");
+	effacer_config("pensebetes/espacepublic");
 	effacer_meta($nom_meta_base_version);
 }
 
