@@ -1,7 +1,7 @@
 <?php
 /**
- * Critères pour la gestion de dates empruntées du plugin agenda
- * Tirées de agenda/public/agenda.php.
+ * Critères pour la gestion de dates empruntÃ©es du plugin agenda
+ * Tirés de agenda/public/agenda.php.
  *
  * @plugin     Dates outils
  * @copyright  2018 - 2020

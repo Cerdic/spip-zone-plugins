@@ -1,11 +1,11 @@
 <paquet
 	prefix="dates_outils"
 	categorie="outil"
-	version="1.0.13"
+	version="1.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/dates_outils-64.png"
-	documentation="https://github.com/abelass/dates_outils"
+	documentation="https://git.spip.net/spip-contrib-extensions/dates_outils"
 >
 
 	<nom>Dates outils</nom>
