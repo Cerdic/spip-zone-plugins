@@ -3,7 +3,7 @@
  * Définit les variables de langue du plugin Pensebetes
  *
  * @plugin     Pensebetes
- * @copyright  2019
+ * @copyright  2019-2020
  * @author     Vincent CALLIES
  * @licence    GNU/GPL
  * @package    SPIP\Pensebetes\Lang
@@ -14,19 +14,26 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_boites'=>"Boites d'activité sur le côté de :",
-	'cfg_lieux'=>"Pense-bêtes dans (lieux) :",
-	'cfg_objets'=>"Pense-bêtes sur (objets) :",
+	'cfg_boites' => "Boites d'activité sur le côté de :",
+	'cfg_lieux' => "Pense-bêtes dans (lieux) :",
+	'cfg_objets' => "Pense-bêtes sur (objets) :",
+	'cfg_explication' => "Explication :",
+	'cfg_publique' => "Espace public",
+	'cfg_explication_publique' => "Le pense-bête peut être visualisé, par l'incorporation d'un MODELE.",
+	'cfg_privee' => "Espace privé",
+	'cfg_explication_privee' => "Le pense-bête y est un moyen de communication entre les auteurs, invisible de la partie publique.",
+	'cfg_partie_publique' => "Style dans la partie publique (pour l'utilisation du MODELE) :",
+	'cfg_explication_partie_publique' => "L'installation de la feuille de style privée du plugin dans la partie publique vous permet de bénéficier de l'apparence du Pense-bête tel que vous la voyez dans la partie privée. Il ne s'agit que d'une option de configuration car votre thème pour l'espace public pourrait prévoir une autre apparence.",
 	
 	// E
-	'explication_titre'=> "Votre titre doit être bref (17 caractères).",
-	'explication_texte'=> "Votre texte doit allé droit au but (110 caractères).",
-	'erreur_suppression'=> "Vous n'avez pas l'autorisation de supprimer ce pense-bête",
-	'erreur_titre'=> "Erreur",
-	'erreur_association'=>"Le pense-bête est créé (n° @id_pensebete@) mais l'association à l'objet éditorial n'a pas pu être faite.",
+	'explication_titre' => "Votre titre doit être bref (17 caractères).",
+	'explication_texte' => "Votre texte doit allé droit au but (110 caractères).",
+	'erreur_suppression' => "Vous n'avez pas l'autorisation de supprimer ce pense-bête",
+	'erreur_titre' => "Erreur",
+	'erreur_association' => "Le pense-bête est créé (n° @id_pensebete@) mais l'association à l'objet éditorial n'a pas pu être faite.",
 
 	// I
-	'info_lassociation'=>"L'association",
+	'info_lassociation' => "L'association",
 	'icone_creer_pensebete' => "Créer un pense-bête",
 	'icone_modifier_pensebete' => "Modifier ce pense-bête",
 	'info_aucun_pensebete' => "Aucun pense-bête",

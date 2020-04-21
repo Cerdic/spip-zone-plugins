@@ -3,7 +3,7 @@
  * Définit les variables de langue du plugin Pensebetes (anglais / english)
  *
  * @plugin     Pensebetes
- * @copyright  2019
+ * @copyright  2019-2020
  * @author     Vincent CALLIES
  * @licence    GNU/GPL
  * @package    SPIP\Pensebetes\Lang
@@ -17,7 +17,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_boites'=>"Activity box on the side of :",
 	'cfg_lieux'=>"Sticky notes in (places):",
 	'cfg_objets'=>"Sticky notes on (objects):",
-	
+	'cfg_explication' => "Explanation :",
+	'cfg_publique' => "Public space",
+	'cfg_explication_publique' => "The sticky note can be visualized, by incorporating a MODELE.",
+	'cfg_privee' => "Private space",
+	'cfg_explication_privee' => "The sticky note is a means of communication between the authors, invisible from the public.",
+	'cfg_partie_publique' => "Style in the public part (for using the MODELE):",
+	'cfg_explication_partie_publique' => "Installing the plugin's private style sheet in the public part allows you to benefit from the appearance of the sticky note as you see it in the private part. This is only a configuration option as your theme for the public space could provide a different appearance.",
+		
 	// E
 	'explication_titre'=> "Your title must be brief (17 characters).",
 	'explication_texte'=> "Your text must have gone straight to the point (110 characters).",
