@@ -9,8 +9,9 @@
  * @package    SPIP\Emplois\Pipelines
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
  * {offres_en_cours}
@@ -59,6 +60,3 @@ function emplois_calculer_date_reference($idb, &$boucles, $crit) {
 	else
 		return "date('Y-m-d H:i:00')";
 }
-
-
-?>

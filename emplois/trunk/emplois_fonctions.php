@@ -13,6 +13,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+include_spip('public/emplois');
+
 /**
  * afficher le placeholder dans le formulaire de l'espace publique
  *
