@@ -46,13 +46,29 @@ function action_supprimer_pensebete_dist($id_pensebete=null){
 
 	// cas suppression
 	if ($id_pensebete) {
+		$espace_prive = test_espace_prive();
+		// avant de supprimer, si on est dans l'espace public, on garde la liaison
+		if (!$espace_prive){
+			$liens = sql_fetsel("id_objet,objet", "spip_pensebetes_liens", "id_pensebete=$id_pensebete");
+			if (!$liens) return;
+		}
+
 		sql_delete('spip_pensebetes',  'id_pensebete=' . intval($id_pensebete));
 		// si l'on est en train de visualiser le contenu du pense-bête
 		// sa suppression ne permet pas la redirection prévue :
-		if (_request('exec')=='pensebete') {
+		$espace_prive = test_espace_prive();
+		if (_request('exec')=='pensebete' and $espace_prive) {
+			// Nous sommes dans l'espace privé et l'on regarde le contenu d'un pensebete
+			// On le supprimer, il faut revenir vers la liste des pensesbetes
 			include_spip('inc/headers');
-			$redirect=generer_url_ecrire('pensebetes');
+			$redirect = generer_url_ecrire('pensebetes');
 			redirige_par_entete($redirect);
+		} elseif(!$espace_prive) {
+			// nous sommes dans l'espace public (identifié) et l'on supprime le pensebete
+			// il faut invalider le cache
+			// pour que la page et le modèle puissent être rafraîchis.
+			include_spip('inc/invalideur');
+			suivre_invalideur("id='".$liens['objet']."/".$liens['id_objet']."'");
 		}
 	}
 	else {
