@@ -1,0 +1,29 @@
+[(#ID_PENSEBETE|intval|oui)
+	[(#AUTORISER{modifier,pensebete,#ID_PENSEBETE}|sinon_interdire_acces)]]
+[(#ID_PENSEBETE|intval|non)
+	[(#AUTORISER{creer,pensebete,#ID_PENSEBETE,'','',#ARRAY{associer_objet,#ENV{associer_objet}}}|sinon_interdire_acces)]]
+
+#SET{retour,#ENV{redirect}|sinon{#ENV{id_pensebete}|?{#URL_ECRIRE{pensebete,id_pensebete=#ID_PENSEBETE},#URL_ECRIRE{pensebetes}}}}
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_PENSEBETE|intval|oui)
+	[(#GET{retour}|icone_verticale{<:icone_retour:>,pensebete,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+	 [(#ID_PENSEBETE|intval|?{<:pensebete:icone_modifier_pensebete:>,<:pensebete:texte_ajouter_pensebete:>})]
+	 <h1>(#ENV{titre,#INFO_TITRE{pensebete,#ID_PENSEBETE}|sinon{<:pensebete:texte_nouveau_pensebete:>}})</h1>
+	]
+	[(#ENV{associer_objet}|oui)<span title="[(#ENV{associer_objet}|strtr{'|',' '})]" class="formulaire_spip explication"><:pensebete:texte_association:>]
+</div>
+#SET{redirect,#ENV{redirect,#ID_PENSEBETE|generer_url_entite{pensebete}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		#FORMULAIRE_EDITER_PENSEBETE{#ENV{id_pensebete,oui},#ENV{id_groupe},#GET{redirect},#ENV{associer_objet}}
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/if (window.jQuery) jQuery('#navigation>div,#extra>div').ajaxReload({args:{exec:'#ENV{exec}'}});/*\]\]>*/</script>
+]
+</div>
+

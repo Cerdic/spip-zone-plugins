@@ -1,0 +1,30 @@
+[(#REM) MODELE pour afficher :
+ - les pense-bêtes liées à un objet éditorial 
+ 		avec pour arguments obligatoires :
+   			objet et id_objet 
+   		et en argument optionnel sens (receveur|donneur) qui par defaut sera receveur
+ - un pense-bête créer sur mesure 
+ 		avec des arguments ;
+]
+
+#SET{modele_de_pagination,precedent_suivant}
+[(#ENV{modele_de_pagination}|match{'precedent_suivant|page|prive'}|oui)
+ [(#SET{modele_de_pagination,#ENV{modele_de_pagination}})] ]
+[(#ENV{sens}|match{'receveur|donneur|data'}|oui)
+ [(#SET{sens,#ENV{sens}})] ]
+
+
+[(#SESSION{id_auteur}|oui|et{#ID_OBJET}|et{#OBJET}|et{#GET{sens}|match{'receveur|donneur'}})
+ [(#GET{sens}|=={receveur}|oui) 
+   [(#INCLURE{fond=prive/squelettes/inclure/pensebete_accueil, modele_de_pagination=#GET{modele_de_pagination},id_receveur=#SESSION{id_auteur},id_objet=#ENV{id_objet},objet=#ENV{objet}})]
+ ] 
+ [(#GET{sens}|=={donneur}) 
+  [(#INCLURE{fond=prive/squelettes/inclure/pensebete_accueil, modele_de_pagination=#GET{modele_de_pagination},id_donneur=#SESSION{id_auteur},id_objet=#ENV{id_objet},objet=#ENV{objet}})]
+ ]
+]
+
+
+[(#GET{sens}|=={data}|oui)
+  [(#INCLURE{fond=prive/squelettes/inclure/pensebete_en_argument,env})]
+]
+

@@ -1,0 +1,13 @@
+[(#REM) squelette pour un pense-bête contruit avec des agruments]
+<div class="monpostit #ENV{class}">
+<ul>
+  <li>
+    <div class="pensebete #ENV{class}">
+    <h2>#TITRE</h2>
+      <span class="itineraire"><:pensebete:label_de:>&nbsp;#EMETTEUR&nbsp;<:pensebete:label_a:>&nbsp;#RECEVEUR - #MA_DATE</span>
+<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">[(#CHEMIN_IMAGE{#OBJET-24}|balise_img|inserer_attribut{class, 'pensebete-icone'})]</a>
+      #TEXTE
+	</div>
+  </li>
+</ul>
+</div>

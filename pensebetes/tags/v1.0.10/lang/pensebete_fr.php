@@ -1,0 +1,85 @@
+<?php
+/**
+ * Définit les variables de langue du plugin Pensebetes
+ *
+ * @plugin     Pensebetes
+ * @copyright  2019-2020
+ * @author     Vincent CALLIES
+ * @licence    GNU/GPL
+ * @package    SPIP\Pensebetes\Lang
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// C
+	'cfg_boites' => "Boites d'activité sur le côté de :",
+	'cfg_lieux' => "Pense-bêtes dans (lieux) :",
+	'cfg_objets' => "Pense-bêtes sur (objets) :",
+	'cfg_explication' => "Explication :",
+	'cfg_publique' => "Espace public",
+	'cfg_explication_publique' => "Le pense-bête peut être visualisé, par l'incorporation d'un MODELE.",
+	'cfg_privee' => "Espace privé",
+	'cfg_explication_privee' => "Le pense-bête y est un moyen de communication entre les auteurs, invisible de la partie publique.",
+	'cfg_partie_publique' => "Style dans la partie publique (pour l'utilisation du MODELE) :",
+	'cfg_explication_partie_publique' => "L'installation de la feuille de style privée du plugin dans la partie publique vous permet de bénéficier de l'apparence du Pense-bête tel que vous la voyez dans la partie privée. Il ne s'agit que d'une option de configuration car votre thème pour l'espace public pourrait prévoir une autre apparence.",
+	
+	// E
+	'explication_titre' => "Votre titre doit être bref (17 caractères).",
+	'explication_texte' => "Votre texte doit allé droit au but (110 caractères).",
+	'erreur_suppression' => "Vous n'avez pas l'autorisation de supprimer ce pense-bête",
+	'erreur_titre' => "Erreur",
+	'erreur_association' => "Le pense-bête est créé (n° @id_pensebete@) mais l'association à l'objet éditorial n'a pas pu être faite.",
+
+	// I
+	'info_lassociation' => "L'association",
+	'icone_creer_pensebete' => "Créer un pense-bête",
+	'icone_modifier_pensebete' => "Modifier ce pense-bête",
+	'info_aucun_pensebete' => "Aucun pense-bête",
+	'info_le_pensebete' => "Le pense-bête",
+	'info_1_pensebete' => "Un pense-bête",
+	'info_nb_pensebetes' => "@nb@ pense-bêtes",
+	'info_aucun_pensebete_donne'=>"Aucun pense-bête donné",
+	'info_aucun_pensebete_recu'=>"Aucun pense-bête reçu",
+	'info_1_pensebete_donne' => "Un pense-bête donné",
+	'info_nb_pensebetes_donnes' => "@nb@ pense-bêtes donnés",
+	'info_1_pensebete_recu' => "Un pense-bête reçu",
+	'info_nb_pensebetes_recus' => "@nb@ pense-bêtes reçus",
+	
+	// L
+	'label_date' => "Date",
+	'label_de' => "De",
+	'label_a' => "à",
+	'label_donneur' => "De",
+	'label_receveur' => "Pour",
+	'label_titre' => "Titre",
+	'label_texte' => "Message",
+	'label_infos' => "Informations",
+	'lien_ajouter_pensebete' => "Ajouter ce pense-bête",
+	'lien_retirer_pensebete' => "Retirer ce pense-bête",
+	'lien_retirer_pensebetes' => "Retirer tous les pense-bêtes",
+
+	
+	// T
+	'texte_ajouter_pensebete' => "Ajouter un pense-bête",
+	'texte_avertissement_retrait' => "Êtes-vous sûr de vouloir supprimer ce pense-bête ?",
+	'texte_changer_statut' => "Ce pense-bête est :",
+	'texte_creer_associer_pensebete'=> "Créer un pense-bête et l'associer",
+	'texte_associer_pensebete'=> "Voulez vous associer ce pense-bête à cet objet ?",
+	'texte_nouveau_pensebete'=> "Nouveau pense-bête",
+	'texte_association'=> "Association",
+	'titre_pensebete' => "Pense-bête",
+	'titre_pensebetes' => "Pense-bêtes",
+	'titre_activite_mur' => "Activité du mur",
+	'titre_pensebetes_rubrique' => "Pense-bêtes de la rubrique",
+	'titre_langue_pensebete' => "Langue de ce pense-bête",
+	'titre_logo_pensebete' => "Logo du pense-bête",
+	'titre_murs' => "Les Pense-bêtes...",
+	'titre_mur_mien' => "sur mon mur",
+	'titre_murs_autres' => "sur les murs des autres",
+	'titre_mur_de' => "sur le mur de @auteur@",
+	'titre_sur_mur' => "de @auteur@ sur mon mur",
+);
+
+?>

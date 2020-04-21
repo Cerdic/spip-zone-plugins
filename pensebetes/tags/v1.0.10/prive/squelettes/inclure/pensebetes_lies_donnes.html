@@ -1,0 +1,40 @@
+[(#SET{defaut_tri,#ARRAY{
+	num titre,1,
+	titre,1,
+	date,#ENV{date_sens,-1},
+	id_pensebete,1
+}})
+]
+<input type="hidden" name="debutpensebetel" value='#ENV{debutpensebetel,#EVAL{_request("debutpensebetel");}}' />
+<B_liste_pensebete>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies pensebetes">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{pensebete:info_1_pensebete_donne,pensebete:info_nb_pensebetes_donnes}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:pensebete:label_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:pensebete:label_date:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_pensebete(PENSEBETES){id_donneur=#SESSION{id_auteur}}{id_pensebete?}{id_objet?}{objet}{where?}{tri #ENV{par,titre},#GET{defaut_tri}}{par num titre,titre}{pagination #ENV{nb,10} pensebetel}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_PENSEBETE|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='picto'>[(#CHEMIN_IMAGE{pensebete-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_PENSEBETE|image_reduire{20,20})]<a href="[(#ID_PENSEBETE|generer_url_entite{pensebete})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PENSEBETE">[(#RANG). ]#TITRE</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='action'><button type="submit" class="button link delete" name="supprimer_lien[pensebete-#ID_PENSEBETE-#OBJET-#ID_OBJET]" value="X"><:pensebete:lien_retirer_pensebete:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
+		</tr>
+	</BOUCLE_liste_pensebete>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[pensebete-*-#OBJET-#ID_OBJET\]" value="X"><:pensebete:lien_retirer_pensebetes:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_pensebete>
+<div class="liste-objets liste-objets-lies pensebetes caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:pensebete:info_aucun_pensebete_donne:>}) ]</strong>
+</div>
+<//B_liste_pensebete>
