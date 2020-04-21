@@ -5,7 +5,7 @@
  *
  * @plugin     Dates outils
  * @copyright  2018 - 2020
- * @author     Rainer MÃ¼ller
+ * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Dates_outils\Filtres
  */
