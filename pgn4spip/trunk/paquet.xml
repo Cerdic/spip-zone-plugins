@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="3.0.1"
 	etat="stable"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="pgn4spip.png"
 	documentation="https://contrib.spip.net/pgn4spip"
 >
