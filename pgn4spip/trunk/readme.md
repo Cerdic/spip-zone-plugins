@@ -37,7 +37,10 @@ ________________
 
 1. Installation du plug-in
 
-Comme tous les plugins, en auto via svp après avoir créé un dossier plugins/auto/
+Depuis la version 3.0 du plugin pgn4spip s'installe comme tous les plugins, en auto via svp (après avoir créé un dossier plugins/auto/)
+Il n'est plus utile d'installer la lib et les 11Mo de pgn4web. Une version allégée de pgn4web est incluse dans le plugin.
+
+Attention : toutes les tailles d'échiquier ne sont plus disponibles.
 
 ________________
 
@@ -79,23 +82,30 @@ Test09 Live horizontal : diffusion en temps réel de la partie live.pgn mode hor
 Test10 Live vertical   : diffusion en temps réel de la partie live.pgn mode vertical
 
 Le répertoire test\ n'est pas nécessaire à l'exécution du plugin.
+
 ________________
 
-3.1 Résolution de problèmes
+4. Tailles de pièces disponibles :
+Alpha : taille 30, squareSize 38
+Merida : pieceSize 44, squareSize 56
+USCF: taille 20, squareSize 22
 
-Symptôme 1 : avec le Couteau Suisse activé
+Pour installer une taille alternative récupérer dans l'original de pgn4web la taille de police correspondante et la ranger dans le dossier correspondant pgn4spip/pgn4web/images.
+Attention lors d'une prochaine mise à jour  (alpha, merida ou uscf)
+________________
+
+5. 1 Résolution de problèmes
+
+Symptôme 1 : avec le Couteau Suisse activé, ou "guillemets typographiques" ou "ortho-typo"
 A la place de l'échiquier, je vois l'entête du PGN avec éventuellement
 quelques étranges guillemets ou même des figurines d'Echecs à l'intérieur des commentaires PGN.
 
-Solution 1: désactiver pgn4spip puis réactiver pgn4spip.
-Cela permet d'activer pgn4spip après le Couteau Suisse.
-
-Solution 2: si le problème persiste, essayer à nouveau en vidant le cache de SPIP
+Si ce problème se produit: désactiver pgn4spip puis réactiver pgn4spip.
+Cela permet d'activer la fonction decorrection des guillemets de pgn4spip après celle des plugins d'amélioration des guillemets.
+si le problème persiste, essayer à nouveau en vidant le cache de SPIP
 entre la désactivation et la réactivation du plugin pgn4spip.
-SPIP 3 : Maintenance > Vider le cache > Cliquer "Vider le cache" dans Taille du répertoire cache.
 
-Solution 3: si le problème persiste, essayer à nouveau en vidant également le cache du navigateur sinon
-désactiver le Couteau Suisse ou sa lame "Améliorations des textes : Guillemets typographiques".
+Ce problème n'est pas constaté sur les versions récentes de SPIP (3.2.7 et 3.3.0-dev) et celles des plugins de typographie.
 ____________
 
 Symptôme 2 : les paramètres à l'intérieur de la balise <pgn> de document attaché ne sont pas pris en compte
@@ -108,7 +118,7 @@ sauf après une valeur et le paramètre suivant.
 Voir test\Test05
 ________________
 
-3.2 Diffusion en live de la partie d'Echecs
+5. 2 Diffusion en live de la partie d'Echecs
 
 test\Test09 et Test10 montrent l'usage du paramètre movesDisplay=live et refreshMinutes=0.25
 qui gérent le rafraichissement périodique de l'échiquier à partir du fichier

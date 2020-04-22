@@ -1,13 +1,13 @@
 /*
  *  pgn4web javascript chessboard
- *  copyright (C) 2009-2016 Paolo Casaschi
+ *  copyright (C) 2009-2020 Paolo Casaschi
  *  see README file and http://pgn4web.casaschi.net
  *  for credits, license and more details
  */
 
 "use strict";
 
-var pgn4web_version = '3.02';
+var pgn4web_version = '3.05';
 
 var pgn4web_project_url = "http://pgn4web.casaschi.net";
 var pgn4web_project_author = "Paolo Casaschi";
@@ -788,7 +788,7 @@ function CurrentFEN() {
   thisFEN += CurrentPly%2 ? " b" : " w";
 
   // castling availability: always in the KQkq form
-  // note: wrong FEN for Chess960 positions with inner castling rook
+  // knownbug: wrong FEN for Chess960 positions with inner castling rook
   var CastlingFEN = "";
   if (RookForOOCastling(0) !== null) { CastlingFEN += PiecesArr[0].toUpperCase(); }
   if (RookForOOOCastling(0) !== null) { CastlingFEN += PiecesArr[1].toUpperCase(); }
@@ -1059,13 +1059,14 @@ function CheckLegality(what, plyCount) {
   }
 
   // capture: "square to" occupied by opposite color piece (except en-passant)
-  // promotion: "square to" moved piece different from piece
   if (!mvCapture) {
     if (Board[mvToCol][mvToRow] !== 0) { return false; }
   }
   if ((mvCapture) && (Color(Board[mvToCol][mvToRow]) != 1-MoveColor)) {
     if ((mvPiece != 6) || (!HistEnPassant[plyCount]) || (HistEnPassantCol[plyCount] != mvToCol) || (mvToRow != 5-3*MoveColor)) { return false; }
   }
+
+  // promotion: "square to" moved piece different from piece
   if (mvIsPromotion) {
     if (mvPiece != 6) { return false; }
     if (mvPieceOnTo >= 6) { return false; }
@@ -1073,7 +1074,9 @@ function CheckLegality(what, plyCount) {
   }
 
   // piece move: which same type piece could move there?
-  for (var pieceId = 0; pieceId < 16; ++pieceId) {
+  var howManyCandidates = 0;
+  var candidatePieceId = -1;
+  for (var pieceId = 15; pieceId >= 0; --pieceId) {
     if (PieceType[MoveColor][pieceId] == mvPiece) {
       if (mvPiece == 1) { retVal = CheckLegalityKing(pieceId); }
       else if (mvPiece == 2) { retVal = CheckLegalityQueen(pieceId); }
@@ -1082,15 +1085,32 @@ function CheckLegality(what, plyCount) {
       else if (mvPiece == 5) { retVal = CheckLegalityKnight(pieceId); }
       else if (mvPiece == 6) { retVal = CheckLegalityPawn(pieceId); }
       if (retVal) {
+        // board updated: king in check?
         mvPieceId = pieceId;
-        // board updated: king check?
         StoreMove(plyCount);
-        if (!IsCheck(PieceCol[MoveColor][0], PieceRow[MoveColor][0], MoveColor)) { return true; }
-        else { UndoMove(plyCount); }
+        if (!IsCheck(PieceCol[MoveColor][0], PieceRow[MoveColor][0], MoveColor)) {
+          howManyCandidates++;
+          candidatePieceId = pieceId;
+        }
+        UndoMove(plyCount);
       }
     }
   }
+
+// patch: for rejecting rather than guessing ambiguous move replace the code till the end of this function with the following line
+// if (howManyCandidates == 1) { mvPieceId = candidatePieceId; StoreMove(plyCount); return true; } else { return false; }
+
+  if (howManyCandidates > 0) {
+    mvPieceId = candidatePieceId;
+    StoreMove(plyCount);
+    if (howManyCandidates > 1) {
+      var text = (Math.floor(plyCount / 2) + 1) + ((plyCount % 2) === 0 ? '. ' : '... ');
+      myAlert('error: guessed ambiguous ply ' + text + MovesVar[CurrentVar][plyCount] + ' in game ' + (currentGame+1) + ' variation ' + CurrentVar);
+    }
+    return true;
+  }
   return false;
+
 }
 
 function CheckLegalityKing(thisKing) {
@@ -1578,7 +1598,7 @@ function fixCommonPgnMistakes(text) {
   text = text.replace(/[\u2010-\u2015]/g,"-"); // "hyphens" to "-"
   text = text.replace(/\u2024/g,"."); // "one dot leader" to "."
   text = text.replace(/[\u2025-\u2026]/g,"..."); // "two dot leader" and "ellipsis" to "..."
-  text = text.replace(/\\"/g,"'"); // fix [Opening "Queen\"s Gambit"]
+  text = text.replace(/\\"/g,"'"); // fix [Opening "Queen\"s gambit"]
   return text;
 }
 
@@ -2148,7 +2168,7 @@ function InitFEN(startingFEN) {
     while (cc != " ") {
       if (cc == "/") {
         if (ii != 8) {
-          myAlertFEN(FenString, "char " + ll);
+          myAlertFEN(FenString, "piece placement: each row needs 8 squares");
           InitFEN();
           return;
         }
@@ -2156,21 +2176,21 @@ function InitFEN(startingFEN) {
         jj--;
       }
       if (ii == 8) {
-        myAlertFEN(FenString, "char " + ll);
+        myAlertFEN(FenString, "piece placement: each row needs 8 squares");
         InitFEN();
         return;
       }
       if (!isNaN(cc)) {
         ii += parseInt(cc,10);
         if ((ii < 0) || (ii > 8)) {
-          myAlertFEN(FenString, "char " + ll);
+          myAlertFEN(FenString, "piece placement: each row needs 8 squares");
           InitFEN();
           return;
         }
       }
       if (cc === PiecesArr[0].toUpperCase()) {
         if (PieceType[0][0] != -1) {
-          myAlertFEN(FenString, "char " + ll);
+          myAlertFEN(FenString, "piece placement: more than 1 white king");
           InitFEN();
           return;
         }
@@ -2180,7 +2200,7 @@ function InitFEN(startingFEN) {
         ii++;
       } else if (cc === PiecesArr[0].toLowerCase()) {
         if (PieceType[1][0] != -1) {
-          myAlertFEN(FenString, "char " + ll);
+          myAlertFEN(FenString, "piece placement: more than 1 black king");
           InitFEN();
           return;
         }
@@ -2192,7 +2212,7 @@ function InitFEN(startingFEN) {
       for (kk = 1; kk < 6; kk++) {
         if (cc === PiecesArr[kk].toUpperCase()) {
           if (nn == 16) {
-            myAlertFEN(FenString, "char " + ll);
+            myAlertFEN(FenString, "piece placement: more than 16 white pieces");
             InitFEN();
             return;
           }
@@ -2203,7 +2223,7 @@ function InitFEN(startingFEN) {
           ii++;
         } else if (cc === PiecesArr[kk].toLowerCase()) {
           if (mm==16) {
-            myAlertFEN(FenString, "char " + ll);
+            myAlertFEN(FenString, "piece placement: more than 16 black pieces");
             InitFEN();
             return;
           }
@@ -2217,17 +2237,18 @@ function InitFEN(startingFEN) {
       cc = ll < FenString.length ? FenString.charAt(ll++) : " ";
     }
     if ((ii != 8) || (jj !== 0)) {
-      myAlertFEN(FenString, "char " + ll);
+      myAlertFEN(FenString, "piece placement: string termination issue");
       InitFEN();
       return;
     }
     if ((PieceType[0][0] == -1) || (PieceType[1][0] == -1)) {
-      myAlertFEN(FenString, "missing King");
+      myAlertFEN(FenString, "missing king");
       InitFEN();
       return;
     }
     if (ll == FenString.length) {
-      FenString += "w " + assumedCastleRights() + " - 0 1";
+      FenString += " w " + assumedCastleRights() + " - 0 1";
+      ll++;
     }
     cc = FenString.charAt(ll++);
     if ((cc == "w") || (cc == "b")) {
@@ -2265,7 +2286,7 @@ function InitFEN(startingFEN) {
           if (Board[CastlingShort[0]][0] == 3) { break; }
         }
         if (CastlingShort[0] <= PieceCol[0][0]) {
-          myAlertFEN(FenString, "missing castling Rook " + cc);
+          myAlertFEN(FenString, "missing castling rook " + cc);
           CastlingShort[0] = -1;
         }
       } else if (cc === PiecesArr[1].toUpperCase()) {
@@ -2273,7 +2294,7 @@ function InitFEN(startingFEN) {
           if (Board[CastlingLong[0]][0] == 3) { break; }
         }
         if (CastlingLong[0] >= PieceCol[0][0]) {
-          myAlertFEN(FenString, "missing castling Rook " + cc);
+          myAlertFEN(FenString, "missing castling rook " + cc);
           CastlingLong[0] = -1;
         }
       } else if (cc === PiecesArr[0].toLowerCase()) {
@@ -2281,7 +2302,7 @@ function InitFEN(startingFEN) {
           if (Board[CastlingShort[1]][7] == -3) { break; }
         }
         if (CastlingShort[1] <= PieceCol[1][0]) {
-          myAlertFEN(FenString, "missing castling Rook " + cc);
+          myAlertFEN(FenString, "missing castling rook " + cc);
           CastlingShort[1] = -1;
         }
       } else if (cc === PiecesArr[1].toLowerCase()) {
@@ -2289,7 +2310,7 @@ function InitFEN(startingFEN) {
           if (Board[CastlingLong[1]][7] == -3) { break; }
         }
         if (CastlingLong[1] >= PieceCol[1][0]) {
-          myAlertFEN(FenString, "missing castling Rook " + cc);
+          myAlertFEN(FenString, "missing castling rook " + cc);
           CastlingLong[1] = -1;
         }
       }
@@ -2304,7 +2325,7 @@ function InitFEN(startingFEN) {
           if (castlingRookCol > PieceCol[color][0]) { CastlingShort[color] = castlingRookCol; }
           if (castlingRookCol < PieceCol[color][0]) { CastlingLong[color] = castlingRookCol; }
         } else {
-          myAlertFEN(FenString, "missing castling Rook " + cc);
+          myAlertFEN(FenString, "missing castling rook " + cc);
         }
       }
       cc = ll<FenString.length ? FenString.charAt(ll++) : " ";
@@ -2361,6 +2382,10 @@ function InitFEN(startingFEN) {
     }
     StartPly += 2*(fullMoveNumber-1);
 
+    if (IsCheck(PieceCol[MoveColor ? 0 : 1][0], PieceRow[MoveColor ? 0 : 1][0], MoveColor ? 0 : 1)) {
+      myAlertFEN(FenString, (MoveColor ? "Black" : "White") + " to move checking " + (MoveColor ? "white" : "black") + " king");
+    }
+
     HistEnPassant[StartPly] = newEnPassant;
     HistEnPassantCol[StartPly] = newEnPassantCol;
     HistNull[StartPly] = 0;
@@ -2368,7 +2393,7 @@ function InitFEN(startingFEN) {
   }
 }
 
-// castling rights assuming Kings and Rooks starting positions as in normal chess
+// castling rights assuming kings and rooks starting positions as in normal chess
 function assumedCastleRights() {
   var ii, rights = "";
   if ((PieceRow[0][0] === 0) && (PieceCol[0][0] === 4)) {
@@ -2700,7 +2725,7 @@ function OpenGame(gameId) {
     if (gameDemoMaxPly[gameId] <= PlyNumber) { PlyNumber = PlyNumberVar[0] = gameDemoMaxPly[gameId]; }
   }
 
-  PrintHTML();
+  PrintHTML(false);
 }
 
 var CurrentVar = -1;
@@ -3301,31 +3326,33 @@ function fixCommentForDisplay(comment) {
 
 var tableSize = 0;
 var textSelectOptions = '';
-function PrintHTML() {
+function PrintHTML(forceBoardUpdate) {
   var ii, jj, text, theObj, squareId, imageId, squareCoord, squareTitle, numText, textSO;
 
   // chessboard
 
   if (theObj = document.getElementById("GameBoard")) {
-    text = '<TABLE CLASS="boardTable" ID="boardTable" CELLSPACING=0 CELLPADDING=0';
-    text += (tableSize > 0) ? ' STYLE="width: ' + tableSize + 'px; height: ' + tableSize + 'px;">' : '>';
-    for (ii = 0; ii < 8; ++ii) {
-      text += '<TR>';
-      for (jj = 0; jj < 8; ++jj) {
-        squareId = 'tcol' + jj + 'trow' + ii;
-        imageId = 'img_' + squareId;
-        text += (ii+jj)%2 === 0 ? '<TD CLASS="whiteSquare" ID="' + squareId + '" BGCOLOR="#FFFFFF"' : '<TD CLASS="blackSquare" ID="' + squareId + '" BGCOLOR="#D3D3D3"';
-        text += ' ALIGN="center" VALIGN="middle" ONCLICK="clickedSquare(' + ii + ',' + jj + ')">';
-        squareCoord = IsRotated ? String.fromCharCode(72-jj,49+ii) : String.fromCharCode(jj+65,56-ii);
-        squareTitle = squareCoord;
-        if (boardTitle[jj][ii] !== '') { squareTitle += ': ' + boardTitle[jj][ii]; }
-        text += '<IMG SRC="'+ ClearImg.src + '" CLASS="pieceImage" STYLE="border: none; display: block; vertical-align: middle;" ONCLICK="boardOnClick[' + jj + '][' + ii + '](this, event);" ID="' + imageId + '" TITLE="' + squareTitle + '" ' + 'ONFOCUS="this.blur()" /></TD>';
+    if (forceBoardUpdate || !document.getElementById("boardTable")) {
+      text = '<TABLE CLASS="boardTable" ID="boardTable" CELLSPACING=0 CELLPADDING=0';
+      text += (tableSize > 0) ? ' STYLE="width: ' + tableSize + 'px; height: ' + tableSize + 'px;">' : '>';
+      for (ii = 0; ii < 8; ++ii) {
+        text += '<TR>';
+        for (jj = 0; jj < 8; ++jj) {
+          squareId = 'tcol' + jj + 'trow' + ii;
+          imageId = 'img_' + squareId;
+          text += (ii+jj)%2 === 0 ? '<TD CLASS="whiteSquare" ID="' + squareId + '" BGCOLOR="#FFFFFF"' : '<TD CLASS="blackSquare" ID="' + squareId + '" BGCOLOR="#D3D3D3"';
+          text += ' ALIGN="center" VALIGN="middle" ONCLICK="clickedSquare(' + ii + ',' + jj + ')">';
+          squareCoord = IsRotated ? String.fromCharCode(72-jj,49+ii) : String.fromCharCode(jj+65,56-ii);
+          squareTitle = squareCoord;
+          if (boardTitle[jj][ii] !== '') { squareTitle += ': ' + boardTitle[jj][ii]; }
+          text += '<IMG SRC="'+ ClearImg.src + '" CLASS="pieceImage" STYLE="border: none; display: block; vertical-align: middle;" ONCLICK="boardOnClick[' + jj + '][' + ii + '](this, event);" ID="' + imageId + '" TITLE="' + squareTitle + '" ' + 'ONFOCUS="this.blur()" /></TD>';
+        }
+        text += '</TR>';
       }
-      text += '</TR>';
-    }
-    text += '</TABLE>';
+      text += '</TABLE>';
 
-    theObj.innerHTML = text;
+      theObj.innerHTML = text;
+    }
   }
 
   if (theObj = document.getElementById("boardTable")) {
@@ -3660,7 +3687,7 @@ function FlipBoard() {
   var oldHighlightOption = highlightOption;
   if (oldHighlightOption) { SetHighlight(false); }
   IsRotated = !IsRotated;
-  PrintHTML();
+  PrintHTML(true);
   RefreshBoard();
   if (oldHighlightOption) { SetHighlight(true); }
 }
