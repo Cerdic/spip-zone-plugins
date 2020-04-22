@@ -341,3 +341,16 @@ function saisies_liens_ouvrants($texte) {
 	}
 	return $texte;
 }
+
+/** 
+ * Afficher un statut traduit 
+ * 
+ * @param string $statut Le statut (publie, refuse, ...)
+ * @param string $objet Le type d’objet (article, rubrique, ...)
+ * @return string La traduction du statut, si on la trouve, sinon simplement la clé...
+*/
+function saisies_statut_titre($statut, $objet = '') {
+	include_spip('inc/puce_statut');
+	$titre = statut_titre($objet, $statut);
+	return $titre ? $titre : $statut; 
+}

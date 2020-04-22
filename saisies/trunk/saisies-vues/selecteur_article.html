@@ -12,12 +12,12 @@
 	<B_articles_selectionnes>
 	<ul>
 	<BOUCLE_articles_selectionnes(ARTICLES){id_article IN #ENV*{valeur}|picker_selected{article}}>
-		<li class="choix">#TITRE (<:article:> #ID_ARTICLE) - #STATUT</li>
+		<li class="choix">#TITRE (<:article:> #ID_ARTICLE) - [(#STATUT|saisies_statut_titre{article})]</li>
 	</BOUCLE_articles_selectionnes>
 	</ul>
 	</B_articles_selectionnes>
 </BOUCLE_test_multiple>
 	<BOUCLE_article_selectionne(ARTICLES){id_article IN #ENV*{valeur}|picker_selected{article}}>
-	  	<p>#TITRE (<:article:> #ID_ARTICLE) - #STATUT</p>
+		<p>#TITRE (<:article:> #ID_ARTICLE) - [(#STATUT|saisies_statut_titre{article})]</p>
 	</BOUCLE_article_selectionne>
 <//B_test_multiple>
