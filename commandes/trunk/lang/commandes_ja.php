@@ -133,20 +133,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_actions' => 'アクション',
+	'label_bank_uid' => '定期購読の銀行UID', # RELIRE
 	'label_commande_dates' => '日付',
 	'label_dont_taxe' => '内、税金分', # RELIRE
 	'label_filtre_clients' => '顧客', # RELIRE
 	'label_filtre_dates' => '日付',
 	'label_filtre_echeances_type' => '支払方法',
+	'label_filtre_etats' => '状態', # RELIRE
 	'label_filtre_paiement' => '支払方法',
 	'label_filtre_tous' => 'すべて', # RELIRE
 	'label_filtre_tous_clients' => 'すべての顧客', # RELIRE
 	'label_filtre_tous_echeances_type' => 'すべての支払い方法',
 	'label_filtre_tous_mode_paiements' => 'すべての方法',
+	'label_filtre_tous_statuts' => 'すべての状態', # RELIRE
 	'label_filtre_toutes' => 'すべて', # RELIRE
 	'label_filtre_toutes_dates' => 'すべての日付',
 	'label_infos' => 'お知らせ', # RELIRE
 	'label_montant_ttc' => '税込み合計',
+	'label_objet' => '関連する内容',
+	'label_objets' => '関連する内容',
+	'label_passee_le' => '送付日は', # RELIRE
+	'label_payee_le' => '支払日は',
 	'label_prix' => '価格',
 	'label_prix_unitaire' => '税別単価',
 	'label_quantite' => '数量',
@@ -172,11 +179,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_administrateur_label' => 'アドミニストレータを選ぶ :',
 	'notifications_expediteur_choix_administrateur' => 'アドミニストレータ',
 	'notifications_expediteur_choix_email' => 'メール',
+	'notifications_expediteur_choix_facteur' => '同じくプラグイン Facteur', # RELIRE
 	'notifications_expediteur_choix_webmaster' => 'ウェブ管理者',
 	'notifications_expediteur_email_label' => '発信者のメール :',
 	'notifications_expediteur_explication' => 'この販売者と購入者に対する通知の発信者を選ぶ',
 	'notifications_expediteur_label' => '発信者',
 	'notifications_expediteur_webmaster_label' => 'ウェブ管理者を選ぶ :',
+	'notifications_explication' => '注文のステータス変化に応じて通知機能はメールを送信します : 承認待ち, 処理中, 送信済み, 一部支払い済み, 支払い済み, 差し戻し, 一部差し戻し。 この機能には<a href="https://plugins.spip.net/notifavancees.html">プラグインNotifications Avancées</a>が必要です。',
 	'notifications_parametres' => '通知のパラメーター',
 	'notifications_quand_explication' => 'どのようなステータスの変化で通知を送信しますか ?',
 	'notifications_quand_label' => '送信条件', # RELIRE
@@ -192,14 +201,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'parametres_cfg_titre' => 'パラメーター',
+	'parametres_duree_vie_explication' => '入力途中の注文を中断と見做すまでの有効期限（時間）を制限する',
+	'parametres_duree_vie_label' => '有効期限',
 	'passer_la_commande' => '注文を出す', # RELIRE
 
 	// R
+	'recapitulatif' => '注文一覧 :',
 	'reference' => 'レファレンス',
 	'reference_label' => 'レファレンス :',
 	'reference_ref' => 'リファレンス @ref@',
 
 	// S
+	'simuler' => 'ステータスの変化をシミュレートする', # RELIRE
 	'statut_abandonne' => '中断された',
 	'statut_attente' => '承認待ち',
 	'statut_encours' => '進行中', # RELIRE
@@ -223,12 +236,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_adresses_client' => '顧客の住所',
 	'titre_adresses_commande' => 'この注文に関連するメールアドレス',
 	'titre_commandes_actives' => '有効な注文',
+	'titre_commandes_auteur' => 'この人の注文',
 	'titre_contenu_commande' => '注文の内容',
 	'titre_informations_client' => '顧客',
+	'titre_logo_commande' => '注文のロゴ',
 	'titre_statuts_actifs_parametres' => '有効な注文',
+	'type_adresse_facturation' => '請求書作成',
 	'type_adresse_livraison' => '商品の発送',
 
 	// U
+	'une_commande_de' => '以下の注文 : ', # RELIRE
 	'une_commande_sur' => '@nom@ 様の注文',
 
 	// V
