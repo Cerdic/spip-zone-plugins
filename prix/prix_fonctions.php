@@ -236,12 +236,17 @@ function filtres_prix_formater_dist($prix, $options = array()) {
  */
 function prix_markup($prix, $devise = '', $classe = '') {
 
-	$pattern_devise = '/[^\d\,\.\s]+/'; // tout ce qui n'est pas nombre ou espace
-	$pattern_nombre = '/[\d\,\.]+/'; // nombre = chiffres, virgules ou points
-	$devise = ($devise ?: (preg_match($pattern_devise, $prix, $m) ? $m[0] : '')); // fallback si devise pas donnée
+	// Devise = tout ce qui n'est pas nombre ou espace
+	$pattern_devise = '/[^\d\,\.\s]+/';
+	// Nombre = chiffres, virgules ou points éventuellement séparés par des espaces
+	$pattern_nombre = '/([\d\,\.]+ ?)+/';
+	// Fallback si aucune devise donnée
+	$devise = ($devise ?: (preg_match($pattern_devise, $prix, $m) ? $m[0] : ''));
+	// Les classes
 	$classe = (!empty($classe) ? $classe : 'montant');
 	$classe_devise = "${classe}__devise ${classe}__devise_".strtolower($devise);
 	$classe_nombre = "${classe}__nombre";
+	// Markupisons
 	$cherche = array(
 		$pattern_devise,
 		$pattern_nombre,
