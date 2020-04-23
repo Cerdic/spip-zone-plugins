@@ -54,7 +54,7 @@
 			[(#GET{cextras}|cextras2td{#ID_FORMULAIRES_REPONSE})]
 			<BOUCLE_champ(POUR){tableau #GET{saisies_finales}}>
 			[(#VALEUR{saisie}|!={explication}|oui)
-			<td>[(#VOIR_REPONSE{#VALEUR{options/nom},valeur_uniquement}|html2unicode)]</td>
+			<td[ class="(#VOIR_REPONSE{#VALEUR{options/nom},edit})"]>[(#VOIR_REPONSE{#VALEUR{options/nom},valeur_uniquement}|html2unicode)]</td>
 			]
 			</BOUCLE_champ>
 		</tr>
