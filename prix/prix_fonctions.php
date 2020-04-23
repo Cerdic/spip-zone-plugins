@@ -166,7 +166,7 @@ function filtres_prix_formater_dist($prix, $options = array()) {
 	$options = prix_alias_options_formater($options);
 
 	// S'assurer d'avoir un nombre flottant
-	$prix = floatval(str_replace(',', '.', $prix));
+	$prix = floatval(str_replace(' ', '', str_replace(',', '.', $prix)));
 
 	// Devise à utiliser
 	$devise = (!empty($options['currency']) ? $options['currency'] : prix_devise_defaut());
@@ -207,10 +207,10 @@ function filtres_prix_formater_dist($prix, $options = array()) {
 	}
 
 	// Enfin, on encapsule le tout
-	if (empty($options['brut'])) {
-		$classe = (!empty($options['class']) ? $options['class'] : null);
-		$prix_formate = prix_markup($prix_formate, $devise, $classe);
-	}
+	// if (empty($options['brut'])) {
+	// 	$classe = (!empty($options['class']) ? $options['class'] : null);
+	// 	$prix_formate = prix_markup($prix_formate, $devise, $classe);
+	// }
 
 	return $prix_formate;
 }
@@ -237,9 +237,9 @@ function filtres_prix_formater_dist($prix, $options = array()) {
 function prix_markup($prix, $devise = '', $classe = '') {
 
 	// Devise = tout ce qui n'est pas nombre ou espace
-	$pattern_devise = '/[^\d\,\.\s]+/';
+	$pattern_devise = '/[^\d\,\.\s\-]+/';
 	// Nombre = chiffres, virgules ou points éventuellement séparés par des espaces
-	$pattern_nombre = '/([\d\,\.]+ ?)+/';
+	$pattern_nombre = '/((?:[\d\,\.\-]+ ?)+)/';
 	// Fallback si aucune devise donnée
 	$devise = ($devise ?: (preg_match($pattern_devise, $prix, $m) ? $m[0] : ''));
 	// Les classes
