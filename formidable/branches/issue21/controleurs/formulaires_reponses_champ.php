@@ -8,6 +8,7 @@
  * @return array Liste html, erreur
  */
 function controleurs_formulaires_reponses_champ_dist($regs, $c = null) {
+	include_spip('inc/saisies');
 	list(,$crayon, $type, $champ, $id) = $regs;
 	$id_formulaires_reponses_champ = $regs[4];
 
