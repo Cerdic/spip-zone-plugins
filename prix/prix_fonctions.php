@@ -138,6 +138,9 @@ function prix_formater($prix, $options = array()) {
  *     Valeur du prix à formater
  * @param array $options
  *     Tableau d'options :
+ *     - brut :                    (String|Boolean) pour ne pas encapsuler dans un <span>
+ *     - class :                   (String) nom de la classe pour encapsuler
+ *                                 Défaut : montant
  *     - currency|devise :         (String) devise, code alphabétique à 3 lettres.
  *                                 Défaut : celle configurée
  *     - locale :                  (String) identifiant d'une locale (fr-CA) ou code de langue SPIP (fr_tu)
@@ -154,7 +157,7 @@ function prix_formater($prix, $options = array()) {
  *     - currency_display :        (String) symbol | code | none.
  *                                 Défaut : symbol
  * @return string|float
- *     Retourne une chaine contenant le prix formaté avec une devise
+ *     Retourne une chaine contenant le prix formaté avec une devise, encapsulée dans un <span>
  */
 function filtres_prix_formater_dist($prix, $options = array()) {
 	prix_loader();
@@ -198,12 +201,61 @@ function filtres_prix_formater_dist($prix, $options = array()) {
 		$currencyFormatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
 		$prix_formate = $currencyFormatter->formatCurrency($prix, $devise);
 
-	// 3) Sinon, on fait le formatage du pauvre, au doigt mouillé
+	// 3) En dernier recours on fait le formatage du pauvre
 	} else {
 		$prix_formate = str_replace('.', ',', $prix) . '&nbsp;' . $devise;
 	}
 
+	// Enfin, on encapsule le tout
+	if (empty($options['brut'])) {
+		$classe = (!empty($options['class']) ? $options['class'] : null);
+		$prix_formate = prix_markup($prix_formate, $devise, $classe);
+	}
+
 	return $prix_formate;
+}
+
+/**
+ * Encapsule un prix dans un <span> en séparant nombre et devise, en mode BEM.
+ *
+ * @example
+ *     (sans retour ligne, là c'est pour lisibilité)
+ *     ````
+ *     <span class="montant">
+ *       <span class="montant__nombre">3,14</span>
+ *       <span class="montant__devise montant__devise_eur">EUR</span>
+ *     </span>
+ *    ````
+ *
+ * @param string $prix
+ * @param string $devise
+ *     Code alphabétique à 3 lettres, par défaut tiré du prix (mais le préciser si possible)
+ * @param string $classe
+ *     Classe parente à utiliser, défaut = 'montant'
+ * @return string
+ */
+function prix_markup($prix, $devise = '', $classe = '') {
+
+	$pattern_devise = '/[^\d\,\.\s]+/'; // tout ce qui n'est pas nombre ou espace
+	$pattern_nombre = '/[\d\,\.]+/'; // nombre = chiffres, virgules ou points
+	$devise = ($devise ?: (preg_match($pattern_devise, $prix, $m) ? $m[0] : '')); // fallback si devise pas donnée
+	$classe = (!empty($classe) ? $classe : 'montant');
+	$classe_devise = "${classe}__devise ${classe}__devise_".strtolower($devise);
+	$classe_nombre = "${classe}__nombre";
+	$cherche = array(
+		$pattern_devise,
+		$pattern_nombre,
+	);
+	$remplace = array(
+		"<span class=\"$classe_devise\">$0</span>",
+		"<span class=\"$classe_nombre\">$0</span>",
+	);
+	$prix =
+		"<span class=\"$classe\">" .
+		preg_replace($cherche, $remplace, $prix) .
+		'</span>';
+
+	return $prix;
 }
 
 /**
