@@ -12,19 +12,26 @@ function controleurs_formulaires_reponses_champ_dist($regs, $c = null) {
 	list(,$crayon, $type, $champ, $id) = $regs;
 	$id_formulaires_reponses_champ = $regs[4];
 
+	// Cas 1. On est sur un champ déjà enregistreé
+	if (strpos($id_formulaires_reponses_champ, 'new') === false) {
 	// Recuperer id_formulaires_reponse et id_formulaire
 	// Note, sans doute pourrait-on passer directement cela en classe
 	// Mais
 	// 1. Cela ferait une exception
 	// 2. Des gens utilisent peut être pas #VOIR_REPONSE{xxx,edit}
-	$data = sql_fetsel('*', 'spip_formulaires_reponses_champs JOIN spip_formulaires_reponses JOIN spip_formulaires', "id_formulaires_reponses_champ=$id_formulaires_reponses_champ AND spip_formulaires_reponses.id_formulaires_reponse = spip_formulaires_reponses_champs.id_formulaires_reponse AND spip_formulaires.id_formulaire = spip_formulaires_reponses.id_formulaire");
-	$id_formulaires_reponse = $data['id_formulaires_reponse'];
+		//
+		$data = sql_fetsel('saisies, nom, valeur', 'spip_formulaires_reponses_champs JOIN spip_formulaires_reponses JOIN spip_formulaires', "id_formulaires_reponses_champ=$id_formulaires_reponses_champ AND spip_formulaires_reponses.id_formulaires_reponse = spip_formulaires_reponses_champs.id_formulaires_reponse AND spip_formulaires.id_formulaire = spip_formulaires_reponses.id_formulaire");
+		$nom = $data['nom'];
+		$valeur = $data['valeur'];
+	} else {
+		$valeur = '';
+		preg_match('#new-(.*)-(.*)#', $id_formulaires_reponses_champ, $match);
+		$nom = $match[1];
+		$id_formulaires_reponse = $match[2];
+		$data = sql_fetsel('saisies', 'spip_formulaires_reponses JOIN spip_formulaires', "id_formulaires_reponse=$id_formulaires_reponse  AND spip_formulaires.id_formulaire = spip_formulaires_reponses.id_formulaire");
+	}
 
-
-	$nom = $data['nom'];
-	$valeur = $data['valeur'];
 	$saisie = saisies_chercher(unserialize($data['saisies']), $nom);
-	$valeur = $data['valeur'];
 
 	$n = new Crayon(
 		$type . '-valeur-' . $id_formulaires_reponses_champ,
