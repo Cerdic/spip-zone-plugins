@@ -12,8 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_attributs_html_interdits' => 'It is not possible to insert images or use the html attributes <tt>class</tt> or <tt>style</tt>',
 	'erreur_blacklist' => 'You have been blacklisted, you can not post messages anymore.',
-	'erreur_jeton' => 'Unable to take account of your message. Thank you to resubmit!',
-	'erreur_spam' => 'Unable to take account of your message!',
+	'erreur_jeton' => 'Unable to process your message. Thank you for resubmitting.',
+	'erreur_spam' => 'Unable to process your message!',
 	'erreur_spam_doublon' => 'An identical message already exists!',
 	'erreur_spam_ip' => 'Too many comments detrimental to the quality!',
 	'erreur_url_deja_spammee' => 'This message contains suspicious links that look like SPAM. Thanks to delete them.',
