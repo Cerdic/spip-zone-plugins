@@ -1,0 +1,54 @@
+<!-- action nrffe -->
+[<!--(#REM) 
+
+	action-nrffe : 
+	_____________
+
+	En cas de réponse valide, on charge la valeur en js
+	pour les input (id="champ_xxx") du formulaire courant  
+	xxx correspondant à l'une des clés disponibles :
+	Nom | Prenom | NrFFE | AffType | Actif | NeLe | Sexe | Elo | Rapide | Cat | Fide | Federation | Mute | ClubRef | ClubCode | ClubNom
+
+
+ -->]
+#SET{json,''}
+<BOUCLE_getJoueur(DATA){source echecs, http://service.echecs.asso.fr/Joueurs.asmx/GetJoueur?Ref=#ENV{ref}}{si #ENV{ref}|oui}>
+	[(#VALEUR|table_valeur{0}|json_encode|set{json})] 
+</BOUCLE_getJoueur>
+
+<BOUCLE_msg(CONDITION){si #GET{json}|oui }>
+	<script type="text/javascript">
+		
+		var peupler_nrffe_#ENV{ref} = function() {
+
+			var $form = jQuery('.nrffe_#ENV{id}').closest('form');
+
+			var data = #GET{json};
+			[//(#REM) Jquery.spip.debug = 1; pour activer les logs dans la console]
+			jQuery.spip.log(data);
+
+			if (Object.keys(data).length) {
+				Object.keys(data).map(function(key, index) {
+					var $input = $form.find("#champ_"+key).first();
+					if ($input.length) {
+						$input.val(data[key]);
+					}
+				});
+			}
+		};
+		peupler_nrffe_#ENV{ref}();
+
+	</script>
+	<div class="reponse_formulaire reponse_formulaire_ok">
+		<p>
+			Les informations disponibles pour la référence <b>#ENV{ref}</b> ont été collectées. <br>Vous pouvez continuer la saisie avant de soumettre le formulaire.
+		</p>
+	</div>
+</BOUCLE_msg>
+	[<!--(#REM) Si on a ref, mais aucun résultat, c'est qu'il y a eu un pb  -->]
+	[(#ENV{ref}|oui)
+	<div class="reponse_formulaire reponse_formulaire_erreur">
+		<p>Aucune information valide obtenue avec la référence <b>#ENV{ref}</b>. Veuillez ré-essayer.</p>		
+	</div>
+	]
+<//B_msg>

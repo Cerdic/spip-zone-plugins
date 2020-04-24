@@ -1,0 +1,16 @@
+[(#REM)
+	Seules quelques infos du joueur sont reprises ici 
+		]
+
+<B_lecture_wsdl2>
+
+	<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Joueurs.asmx/GetJoueur?Ref=#ENV{Ref}}>
+		<BOUCLE_joueur(DATA){source table,#VALEUR}>
+			<h1> Archives elo de #VALEUR{Prenom} &nbsp;  #VALEUR{Nom} </h1> 
+			NrFFE : &nbsp; #VALEUR{NrFFE}, &nbsp; Titre Fide: &nbsp;#VALEUR{FideTitre} <br />
+			Elo &nbsp; : &nbsp; #VALEUR{Elo} , &nbsp; Rapide &nbsp; : &nbsp; #VALEUR{Rapide} , &nbsp; Catégorie : &nbsp; #VALEUR{Cat}, &nbsp; Fédération : &nbsp; #VALEUR{Federation}
+			<br />
+		</BOUCLE_joueur>
+	</BOUCLE_lecture_wsdl2>
+
+</B_lecture_wsdl2>

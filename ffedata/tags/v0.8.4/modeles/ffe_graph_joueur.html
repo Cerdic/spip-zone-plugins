@@ -1,0 +1,17 @@
+[(#REM) on reproduit ici le même fichier que dans modeles,
+Par facilité d'utilisation	]
+
+#SET{data,''}
+#SET{labels,''}
+
+<BOUCLE_lecture_wsdl4(DATA){source echecs, http://service.echecs.asso.fr/Joueurs.asmx/GetHisto?Ref=#ENV{Ref}}>
+
+	<BOUCLE_donnees4(DATA){source table,#VALEUR}{!par DateArchive} {0,45} >
+	#SET{labels, #GET{labels}|concat{",",#VALEUR{DateArchive}|affdate_mois_annee}}
+	#SET{data,#GET{data}|concat{",",#VALEUR{Elo}}
+	</BOUCLE_donnees4>
+
+</BOUCLE_lecture_wsdl4>
+#SET{data,#GET{data}|substr{1}|explode{','}|array_reverse|implode{','}}
+#SET{labels,#GET{labels}|substr{1}|explode{','}|array_reverse|implode{','}}
+[(#MODELE{chart}{id=classement4,type=line,width=auto,height=auto,canvaswidth=850,canvasheight=450,datasets=#GET{data},labels=#GET{labels}})]

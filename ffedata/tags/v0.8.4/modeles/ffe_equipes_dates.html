@@ -1,0 +1,39 @@
+[(#REM)
+	Un modèle pour afficher les dates à venir des rencontres d'une équipe
+	paramtères à saisir au modèle :
+	saison=  (2016 pour la saison 2015/2016)
+	ref=  (le numéro de "GroupeId" par ex 1283 pour le groupe A de Régionale 1 de Midi-Pyrénées) 
+	equipe= (le numéro de l'équipe, par exemple 2557 pour l'équipe de Blagnac)
+<ffe_equipes_pv|saison=2016|ref=1283|equipe=2557>
+	]
+<table class="spip echecspv" >
+
+<BOUCLE_enum(DATA){enum 1,10}>
+	#SET{idronde,#VALEUR}
+
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Equipes.asmx/GetPVs?saison=#ENV{saison}&ref=#ENV{ref}}>
+	
+	<BOUCLE_blanc(DATA){source table, #VALEUR**}{Ronde=#GET{idronde}}{EquipeBlancRef=#ENV{equipe}}>
+	<tr>
+<th>Ronde [(#VALEUR{Ronde})]</th>
+<th>[(#VALEUR{PVDate}|affdate)]</th>
+<th>#VALEUR{EquipeBlancNom}-#VALEUR{EquipeNoirNom}</th>
+<th>à #VALEUR{Lieu}</th>
+	</tr>
+
+	</BOUCLE_blanc>
+
+	<BOUCLE_noir(DATA){source table, #VALEUR**}{Ronde=#GET{idronde}}{EquipeNoirRef=#ENV{equipe}}>
+	<tr>
+<th>Ronde [(#VALEUR{Ronde})]</th>
+<th>[(#VALEUR{PVDate}|affdate)]</th>
+<th>#VALEUR{EquipeNoirNom}-#VALEUR{EquipeBlancNom}</th>
+<th>#VALEUR{Lieu}</th>
+	</tr>
+	</BOUCLE_noir>
+
+</BOUCLE_lecture_wsdl2>
+</BOUCLE_enum>  
+</table>
+
+</B_lecture_wsdl2>
