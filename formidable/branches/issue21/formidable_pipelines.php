@@ -313,7 +313,6 @@ function formidable_corbeille_table_infos($flux) {
  * @return array
  */
 function formidable_crayons_controleur($flux) {
-	spip_log($flux, 'formidable_crayons');
 	// si Crayons a déjà trouvé de contrôleur PHP, on ne fait rien
 	if ($flux['data'] != 'controleur_dist') {
 		return $flux;
@@ -324,6 +323,5 @@ function formidable_crayons_controleur($flux) {
 			$flux['data'] = charger_fonction('formulaires_reponses_champ', 'controleurs');
 	}
 
-	spip_log($flux, 'formidable_crayons');
 	return $flux;
 }

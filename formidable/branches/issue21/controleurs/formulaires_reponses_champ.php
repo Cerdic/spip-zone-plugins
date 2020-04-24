@@ -40,7 +40,6 @@ function controleurs_formulaires_reponses_champ_dist($regs, $c = null) {
 	// Crayons utilise son propre formalisme pour le 'name' des saisies.
 	$nom_crayons = 'content_' . $key . '_valeur';
 	$saisie['options']['nom'] = $nom_crayons;
-	spip_log($this_saisie, 'formidable_crayons');
 
 	$contexte = array('_saisies' => array($saisie), $nom_crayons =>  $valeur);
 	$html = $n->formulaire($contexte);
