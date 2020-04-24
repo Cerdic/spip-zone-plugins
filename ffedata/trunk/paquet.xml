@@ -1,9 +1,9 @@
 <paquet
 	prefix="ffedata"
 	categorie="divers"
-	version="0.8.3"
-	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	version="0.8.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/ffedata-32.png"
 	documentation="https://www.ressources-echecs.net/le-plugin-FFE-Data"
 	schema="1.0.0" 
