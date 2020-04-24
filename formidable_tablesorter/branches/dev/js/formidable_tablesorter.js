@@ -37,6 +37,10 @@ output_saveFileName: 'toto.xlsx',
 	});
 });
 
+$.tablesorter.defaults.textExtraction = function(node, table, cellIndex){
+    return $(node).attr('data-sort-value') || $(node).text();
+}
+
 function call_formidable_tablesorter_export(config, data, url) {
 	var form = $('<form></form>').attr('action', url_action_formidable_tablesorter_export).attr('method', 'post');
 	form.append($("<input></input>").attr('type', 'hidden').attr('name', 'data').attr('value', data));

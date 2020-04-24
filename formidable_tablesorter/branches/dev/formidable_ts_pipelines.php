@@ -24,3 +24,17 @@ function formidable_ts_affiche_gauche($flux) {
 	}
 	return $flux;
 }
+
+/**
+ * Pipeline permettant de définit de régler data-sort-value
+ * @array $flux 'args' => array('valeur' => , 'saisie' => ),  'data' => ce qu'on veut retourner dans l'attribut
+ * @return $flux
+ * Pour l'heure ne concerne que les évènements, permet de donner la date brute (TIMESTAMP)
+**/
+function formidable_ts_formidable_ts_data_sort_value($flux) {
+	if ($flux['args']['saisie']['saisie'] === 'evenements') {
+		$flux['data'] = sql_getfetsel('date_debut', 'spip_evenements', 'id_evenement='.$flux['args']['valeur']);
+
+	}
+	return $flux;
+}

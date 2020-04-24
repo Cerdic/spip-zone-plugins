@@ -29,3 +29,19 @@ function cextras2td($cextras, $id_formulaires_reponse) {
 	}
 	return $txt;
 }
+
+/**
+ * Appelle le pipeline formidable_ts_data_sort_value
+ * Pour rempli l'attribut data-sort-value sur les td du tableau
+ * @param $str|int valeur brut du champ de formulaire
+ * @param $saisie decrit la saisie
+ **/
+function formidable_ts_data_sort_value($valeur, $saisie) {
+	return pipeline ('formidable_ts_data_sort_value', array(
+		'args' => array(
+			'valeur' => $valeur,
+			'saisie' => $saisie
+		),
+		'data' => ''
+	));
+}
