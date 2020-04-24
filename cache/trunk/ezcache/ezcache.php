@@ -91,7 +91,7 @@ function ezcache_cache_configurer($plugin) {
 	// le dossier de base.
 	// -- Vérification de la localisation de la racine qui ne peut être que dans les trois dossiers SPIP
 	//    prévus.
-	if (!in_array($configuration['racine'], array('_DIR_CACHE', '_DIR_TMP', '_DIR_VAR'))) {
+	if (!in_array($configuration['racine'], array('_DIR_CACHE', '_DIR_TMP', '_DIR_ETC', '_DIR_VAR'))) {
 		$configuration['racine'] = $configuration_defaut['racine'];
 	}
 	// -- Sous-dossier spécifique au plugin
