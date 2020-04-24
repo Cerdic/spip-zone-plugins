@@ -23,7 +23,7 @@ function controleurs_formulaires_reponses_champ_dist($regs, $c = null) {
 
 	$nom = $data['nom'];
 	$valeur = $data['valeur'];
-	$saisies = saisies_lister_par_nom(unserialize($data['saisies']));
+	$saisie = saisies_chercher(unserialize($data['saisies']), $nom);
 	$valeur = $data['valeur'];
 
 	$n = new Crayon(
@@ -33,7 +33,6 @@ function controleurs_formulaires_reponses_champ_dist($regs, $c = null) {
 	);
 	$key = $n->key;
 
-	$saisie = $saisies[$nom];
 	unset($saisie['options']['label']);
 	unset($saisie['options']['explication']);
 	unset($saisie['options']['class']);
@@ -50,7 +49,7 @@ function controleurs_formulaires_reponses_champ_dist($regs, $c = null) {
 
 	// probablement pas la meilleure idée du siècle…
 	// mais tenter d'afficher correctement le picker de date du plugin saisies dans l'espace public
-	if (!test_espace_prive() and saisies_lister_avec_type($saisies, 'date')) {
+	if (!test_espace_prive() and $saisie['saisie'] == 'date') {
 		$scripts = '<link rel="stylesheet" type="text/css" href="' . find_in_path('css/ui/jquery-ui.css') . '" />';
 	}
 
