@@ -102,7 +102,7 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $s
 		if (isset($reponses_valeurs[$id_formulaires_reponse][$nom]['id'])) {
 			$valeur = $reponses_valeurs[$id_formulaires_reponse][$nom]['id'];
 		} else {
-			$valeur = "new-$nom-$id_formulaires_reponse";
+			$valeur = sql_insertq('spip_formulaires_reponses_champs', array('id_formulaires_reponse' => $id_formulaires_reponse, 'nom' => $nom));
 		}
 		return 'crayon '.'formulaires_reponses_champ-valeur-'. $valeur;
 	}
