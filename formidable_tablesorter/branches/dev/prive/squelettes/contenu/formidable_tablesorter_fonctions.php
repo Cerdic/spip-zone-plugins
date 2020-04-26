@@ -19,10 +19,12 @@ function cextras2td($cextras, $id_formulaires_reponse) {
 	$sql = sql_fetsel('*', 'spip_formulaires_reponses', "id_formulaires_reponse=$id_formulaires_reponse");
 	foreach ($cextras as $champ) {
 		if ($champ['saisie'] != 'explication') {
-
+			$attributs = '';
 			// Crayonnage
 			if (test_plugin_actif('crayons')) {
-				$attributs = ' class="'.classe_boucle_crayon('formulaires_reponse', $champ['options']['nom'], $id_formulaires_reponse).'"';
+				if (autoriser('crayonner','formulaires_reponse', $id_formulaires_reponse, '', array('modele' => $champ['options']['nom']))) {
+					$attributs = ' class="'.classe_boucle_crayon('formulaires_reponse', $champ['options']['nom'], $id_formulaires_reponse).'"';
+				}
 			} else {
 				$atrributs = '';
 			}
