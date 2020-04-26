@@ -1,5 +1,5 @@
 [(#AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}|sinon_interdire_acces)]
-#INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter_entete}
+#INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter_entete, env}
 <BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}{si #AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}}>
 	<h1>#TITRE</h1>
 	#SET{saisies,#SAISIES|unserialize}
