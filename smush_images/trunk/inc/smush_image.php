@@ -142,7 +142,7 @@ function image_smush($im) {
 			if (file_exists($dest)) {
 				spip_unlink($dest);
 			}
-			exec('pngnq -f '.$im.' && optipng -o5 '.$nq.' -out '.$dest);
+			exec('pngnq -f '.$im.' && optipng -quiet -o5 '.$nq.' -out '.$dest);
 
 			/**
 			 * Comparaison des version jpg et png si cela est le cas
