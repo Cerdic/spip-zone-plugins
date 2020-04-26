@@ -19,12 +19,21 @@ function cextras2td($cextras, $id_formulaires_reponse) {
 	$sql = sql_fetsel('*', 'spip_formulaires_reponses', "id_formulaires_reponse=$id_formulaires_reponse");
 	foreach ($cextras as $champ) {
 		if ($champ['saisie'] != 'explication') {
+
+			// Crayonnage
 			if (test_plugin_actif('crayons')) {
 				$crayons = ' class="'.classe_boucle_crayon('formulaires_reponse', $champ['options']['nom'], $id_formulaires_reponse).'"';
 			} else {
 				$crayons = '';
 			}
-			$txt .= "<td$crayons>".implode(calculer_balise_LISTER_VALEURS('formulaires_reponses', $champ['options']['nom'],$sql[$champ['options']['nom']]), ', ').'</td>';
+			// Comment afficher le champ ? avec traitement ou de manière brut/liste valeur ?
+			if (isset($champ['options']['traitements'])) {
+				$valeur = appliquer_traitement_champ($sql[$champ['options']['nom']], $champ['options']['nom'], 'formulaires_reponse');
+			} else {
+				$valeur = implode(calculer_balise_LISTER_VALEURS('formulaires_reponses', $champ['options']['nom'],$sql[$champ['options']['nom']]), ', ');
+			}
+
+			$txt .= "<td$crayons>$valeur</td>";
 		}
 	}
 	return $txt;
