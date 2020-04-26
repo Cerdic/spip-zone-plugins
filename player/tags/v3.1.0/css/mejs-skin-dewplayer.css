@@ -1,0 +1,88 @@
+/* Dewplayer */
+.mejs__container.mejs__dewplayer {
+	background: none;
+}
+.mejs__dewplayer .mejs__controls {
+	background: none;
+}
+
+.mejs__dewplayer .mejs__controls, .mejs__dewplayer .mejs__button, .mejs__dewplayer .mejs__time, .mejs__dewplayer .mejs__time-rail {
+	height: 30px;
+}
+
+.mejs__dewplayer .mejs__controls .mejs__playpause-button  {
+	width: 42px;
+}
+.mejs__dewplayer .mejs__controls .mejs__playpause-button button {
+	background: url(img/controls-dewplayer.png) no-repeat left -32px;
+	width: 36px;
+	margin-right: 0;
+	margin-top: 7px;
+}
+.mejs__dewplayer .mejs__controls .mejs__play button:hover {
+	background-position: left 0;
+}
+.mejs__dewplayer .mejs__controls .mejs__pause button {
+	background-position: left -64px;
+}
+.mejs__dewplayer .mejs__controls .mejs__pause button:hover {
+	background-position: left -96px;
+}
+
+.mejs__dewplayer .mejs__controls div.mejs__time-rail {
+	padding-top: 2px;
+}
+.mejs__dewplayer .mejs__controls .mejs__time-rail span {
+	height:16px;
+	border-radius: 4px;
+}
+.mejs__dewplayer .mejs__controls .mejs__time {
+	padding-top: 5px;
+	height: 25px;
+}
+.mejs__dewplayer .mejs__controls .mejs__time-rail .mejs__time-total {
+	background: #eaeaea;
+}
+.mejs__dewplayer .mejs__controls .mejs__time-rail .mejs__time-loaded {
+	background: #eaeaea;
+}
+.mejs__dewplayer .mejs__controls .mejs__time-rail .mejs__time-current {
+	background: #A7DE6B;
+}
+.mejs__dewplayer .mejs__controls .mejs__currenttime-container{
+	position: absolute;
+	top:6px;
+	right:50%;
+	margin-right: -18px;
+	color:#fff;
+	z-index:2;
+	height: 12px;
+}
+.mejs__dewplayer .mejs__controls .mejs__currenttime-container::after {
+	content:"|";
+	display: block;
+	position: absolute;
+	color: #fff;
+	right:-1px;
+	top:1px;
+	height:16px;
+	width:auto;
+	padding:5px 0 0;
+}
+.mejs__dewplayer .mejs__controls .mejs__duration-container {
+	position: absolute;
+	top:6px;
+	left:50%;
+	margin-left: 18px;
+	color:#fff;
+	z-index:2;
+	height: 12px;
+}
+.mejs__dewplayer .mejs__controls .mejs__volume-button {
+	width:1px;
+	visibility:hidden;
+}
+.mejs__dewplayer .mejs__controls .mejs__horizontal-volume-slider {
+	width:1px;
+	visibility:hidden;
+}
