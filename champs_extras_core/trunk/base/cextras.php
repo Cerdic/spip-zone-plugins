@@ -136,7 +136,7 @@ function cextras_declarer_tables_interfaces($interfaces){
 			$traitement = defined($traitement) ? constant($traitement) : $traitement;
 
 			// SPIP 3 permet de declarer par la table sql directement.
-			$interfaces['table_des_traitements'][$balise][$table] = $traitement;
+			$interfaces['table_des_traitements'][$balise][table_objet($table)] = $traitement;
 
 		}
 	}
