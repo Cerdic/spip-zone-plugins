@@ -22,10 +22,16 @@ function cextras2td($cextras, $id_formulaires_reponse) {
 
 			// Crayonnage
 			if (test_plugin_actif('crayons')) {
-				$crayons = ' class="'.classe_boucle_crayon('formulaires_reponse', $champ['options']['nom'], $id_formulaires_reponse).'"';
+				$attributs = ' class="'.classe_boucle_crayon('formulaires_reponse', $champ['options']['nom'], $id_formulaires_reponse).'"';
 			} else {
-				$crayons = '';
+				$atrributs = '';
 			}
+
+			// Data-sort
+			if ($sort = formidable_ts_data_sort_value($sql[$champ['options']['nom']], $champ, 'extra')) {
+				$attributs .= " data-sort-value='$sort'";
+			}
+
 			// Comment afficher le champ ? avec traitement ou de manière brut/liste valeur ?
 			if (isset($champ['options']['traitements'])) {
 				$valeur = appliquer_traitement_champ($sql[$champ['options']['nom']], $champ['options']['nom'], 'formulaires_reponse');
@@ -33,7 +39,7 @@ function cextras2td($cextras, $id_formulaires_reponse) {
 				$valeur = implode(calculer_balise_LISTER_VALEURS('formulaires_reponses', $champ['options']['nom'],$sql[$champ['options']['nom']]), ', ');
 			}
 
-			$txt .= "<td$crayons>$valeur</td>";
+			$txt .= "<td$attributs>$valeur</td>";
 		}
 	}
 	return $txt;
@@ -42,14 +48,17 @@ function cextras2td($cextras, $id_formulaires_reponse) {
 /**
  * Appelle le pipeline formidable_ts_data_sort_value
  * Pour rempli l'attribut data-sort-value sur les td du tableau
- * @param $str|int valeur brut du champ de formulaire
- * @param $saisie decrit la saisie
+ * @param str|int $valeur valeur brute du champ de formulaire
+ * @param array $saisie decrit la saisie
+ * @param string $type='champ' ou bien 'extra'
+ * @return string valeur du data-sort-attribut
  **/
-function formidable_ts_data_sort_value($valeur, $saisie) {
+function formidable_ts_data_sort_value($valeur, $saisie, $type = 'champ') {
 	return pipeline ('formidable_ts_data_sort_value', array(
 		'args' => array(
 			'valeur' => $valeur,
-			'saisie' => $saisie
+			'saisie' => $saisie,
+			'type' => $type
 		),
 		'data' => ''
 	));
