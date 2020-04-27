@@ -1,0 +1,11 @@
+[(#REM)
+
+	Controleur pour le crayon 'auteur_email', uniquement html
+
+]
+#CACHE{0}
+
+<BOUCLE_a(AUTEURS){id_auteur}{tous}>
+<input class="crayon-active" name="#ENV{name_email}"
+ style="width:#ENV{largeur}px;#ENV{style}" value="[(#EMAIL**|entites_html)]" />
+</BOUCLE_a>

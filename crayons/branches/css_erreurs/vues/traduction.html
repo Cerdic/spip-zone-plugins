@@ -1,0 +1,6 @@
+<?php
+$i18n = 'i18n_[(#ENV{hash}|texte_script)]';
+$chaine = '[(#ENV{crayon_modele}|texte_script)]';
+if ( isset($GLOBALS[$i18n]) && isset($GLOBALS[$i18n][$chaine]) ){
+  echo $GLOBALS[$i18n][$chaine];
+}
