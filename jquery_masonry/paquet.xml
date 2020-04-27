@@ -1,9 +1,9 @@
 <paquet
 	prefix="jquerymasonry"
 	categorie="multimedia"
-	version="0.4.3"
+	version="0.5.0"
 	etat="test"
-	compatibilite="[2.1.0;3.1.*]"
+	compatibilite="[2.1.0;3.3.*]"
 	logo="prive/themes/spip/images/jquerymasonry-32.png"
 	schema="0.1"
 	documentation="https://contrib.spip.net/JQuery-Masonry"
