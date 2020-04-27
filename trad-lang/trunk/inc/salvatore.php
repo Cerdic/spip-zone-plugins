@@ -478,6 +478,25 @@ function salvatore_log($msg = '', $display_function = null, $display_time = fals
  */
 function salvatore_fail($sujet, $corps){
 	$corps = rtrim($corps) . "\n\n";
+
+	// masquer les mots de passe dans le message si jamais...
+	$pass_to_hide = [];
+	if (!empty($GLOBALS['SVNPASSWD'])) {
+		$pass_to_hide[] = $GLOBALS['SVNPASSWD'];
+	}
+	if (!empty($domaines_exceptions_credentials)) {
+		foreach ($domaines_exceptions_credentials as $domain => $credential) {
+			if (!empty($credential['pass'])) {
+				$pass_to_hide[] = $credential['pass'];
+			}
+		}
+	}
+	foreach ($pass_to_hide as $pass) {
+		$replace = "xxxxxxxx@";
+		$sujet = str_replace("$pass@", $replace, $sujet);
+		$corps = str_replace("$pass@", $replace, $corps);
+	}
+
 	salvatore_envoyer_mail($sujet, $corps);
 	throw new Exception($corps);
 }
