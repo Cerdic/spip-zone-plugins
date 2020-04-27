@@ -138,10 +138,11 @@ function prix_formater($prix, $options = array()) {
  *     Valeur du prix à formater
  * @param array $options
  *     Tableau d'options :
- *     - brut :                    (String|Boolean) pour ne pas encapsuler dans un <span>
- *     - class :                   (String) nom de la classe pour encapsuler
+ *     - markup :                  (String|Boolean) pour encapsuler ou pas dans un <span>
+ *                                 Défaut: true
+ *     - class :                   (String) nom de la classe parente pour encapsuler
  *                                 Défaut : montant
- *     - currency|devise :         (String) devise, code alphabétique à 3 lettres.
+ *     - currency :                (String) devise, code alphabétique à 3 lettres.
  *                                 Défaut : celle configurée
  *     - locale :                  (String) identifiant d'une locale (fr-CA) ou code de langue SPIP (fr_tu)
  *     - style :                   (String) standard | accounting.
@@ -162,11 +163,8 @@ function prix_formater($prix, $options = array()) {
 function filtres_prix_formater_dist($prix, $options = array()) {
 	prix_loader();
 
-	// Alias des options
-	$options = prix_alias_options_formater($options);
-
 	// S'assurer d'avoir un nombre flottant
-	$prix = floatval(str_replace(' ', '', str_replace(',', '.', $prix)));
+	$prix = floatval(str_replace(array(',', ' '), array('.', ''), $prix));
 
 	// Devise à utiliser
 	$devise = (!empty($options['currency']) ? $options['currency'] : prix_devise_defaut());
@@ -175,26 +173,23 @@ function filtres_prix_formater_dist($prix, $options = array()) {
 	$locale = (!empty($options['locale']) ? $options['locale'] : prix_locale_defaut());
 	$locale = prix_langue_vers_locale($locale);
 
+	// Options (celles propres au formatter + diverses)
+	$options_defaut = array(
+		'locale'           => $locale,
+		'currency_display' => 'code', // pour l'accessibilité
+		'markup'           => true, // encapsuler
+	);
+	$options = array_merge($options_defaut, is_array($options) ? $options : array());
+
 	// 1) De préférence, on utilise la librairie Intl de Commerceguys
 	if (extension_loaded('bcmath')) {
 
-		// Options : on pose celles de base puis on ajoute celles passées en paramètre.
-		$options_base = array(
-			'locale'           => $locale,
-			'currency_display' => 'code', // pour l'accessibilité
-		);
-		if (is_array($options)) {
-			$options = prix_filtrer_options_formater($options);
-			$options = array_merge($options_base, $options);
-		} else {
-			$options = $options_base;
-		}
-
-		// Formatons
+		// Éviter les exceptions invalid argument.
+		$options_formatter = prix_normaliser_options_formatter($options);
 		$numberFormatRepository = new CommerceGuys\Intl\NumberFormat\NumberFormatRepository;
 		$currencyRepository = new CommerceGuys\Intl\Currency\CurrencyRepository;
-		$currencyFormatter = new CommerceGuys\Intl\Formatter\CurrencyFormatter($numberFormatRepository, $currencyRepository, $options);
-		$prix_formate = $currencyFormatter->format($prix, $devise);
+		$currencyFormatter = new CommerceGuys\Intl\Formatter\CurrencyFormatter($numberFormatRepository, $currencyRepository);
+		$prix_formate = $currencyFormatter->format($prix, $devise, $options_formatter);
 
 	// 2) Sinon on se rabat sur la librairie Intl PECL
 	} elseif (extension_loaded('intl')) {
@@ -203,64 +198,60 @@ function filtres_prix_formater_dist($prix, $options = array()) {
 
 	// 3) En dernier recours on fait le formatage du pauvre
 	} else {
-		$prix_formate = str_replace('.', ',', $prix) . '&nbsp;' . $devise;
+		$prix_nombre = str_replace('.', ',', $prix);
+		$prix_formate = $prix_nombre . '&nbsp;' . $devise;
 	}
 
 	// Enfin, on encapsule le tout
-	// if (empty($options['brut'])) {
-	// 	$classe = (!empty($options['class']) ? $options['class'] : null);
-	// 	$prix_formate = prix_markup($prix_formate, $devise, $classe);
-	// }
+	if (!empty($options['markup'])) {
+		$classe = (!empty($options['class']) ? $options['class'] : null);
+		// S'assurer que le montant soit arrondi selon la devise, même si c'est en principe fait en amont
+		$arrondi_devise = intval(prix_devise_info($devise, 'fraction'));
+		$montant = round($prix, $arrondi_devise);
+		$prix_formate = prix_ajouter_markup($prix_formate, $montant, $devise, $classe);
+	}
 
 	return $prix_formate;
 }
 
 /**
- * Encapsule un prix dans un <span> en séparant nombre et devise, en mode BEM.
+ * Encapsule un prix dans des <span> en isolant la devise, en mode BEM.
+ *
+ * @note
+ * On n'encapsule pas le nombre dans un span car la devise peut être incluse dedans,
+ * ex. : -AED123
  *
  * @example
  *     (sans retour ligne, là c'est pour lisibilité)
  *     ````
- *     <span class="montant">
- *       <span class="montant__nombre">3,14</span>
- *       <span class="montant__devise montant__devise_eur">EUR</span>
+ *     <span class="montant" data-montant-nombre="3.14" data-montant-devise="EUR">
+ *       3,14 <span class="montant__devise">EUR</span>
  *     </span>
  *    ````
  *
- * @param string $prix
+ * @param string $prix_formate
+ *     Prix formaté avec éventuellement la devise ou le symbole
+ * @param float $montant
+ *     Prix sans formatage
  * @param string $devise
- *     Code alphabétique à 3 lettres, par défaut tiré du prix (mais le préciser si possible)
+ *     Code alphabétique à 3 lettres
  * @param string $classe
  *     Classe parente à utiliser, défaut = 'montant'
  * @return string
  */
-function prix_markup($prix, $devise = '', $classe = '') {
+function prix_ajouter_markup($prix_formate, $montant, $devise, $classe = '') {
 
-	// Devise = tout ce qui n'est pas nombre ou espace
-	$pattern_devise = '/[^\d\,\.\s\-]+/';
-	// Nombre = chiffres, virgules ou points éventuellement séparés par des espaces
-	$pattern_nombre = '/((?:[\d\,\.\-]+ ?)+)/';
-	// Fallback si aucune devise donnée
-	$devise = ($devise ?: (preg_match($pattern_devise, $prix, $m) ? $m[0] : ''));
-	// Les classes
+	// Les classes BEM
 	$classe = (!empty($classe) ? $classe : 'montant');
-	$classe_devise = "${classe}__devise ${classe}__devise_".strtolower($devise);
-	$classe_nombre = "${classe}__nombre";
-	// Markupisons
-	$cherche = array(
-		$pattern_devise,
-		$pattern_nombre,
-	);
-	$remplace = array(
-		"<span class=\"$classe_devise\">$0</span>",
-		"<span class=\"$classe_nombre\">$0</span>",
-	);
-	$prix =
-		"<span class=\"$classe\">" .
-		preg_replace($cherche, $remplace, $prix) .
-		'</span>';
+	$classe_devise = "${classe}__devise";
 
-	return $prix;
+	// Markupisons
+	$cherche_devise = '/[^\d\-\.\,\(\)\s x{00a0}]+/u';
+	$remplace_devise = "<span class=\"$classe_devise\">$0</span>";
+	$prix_formate = preg_replace($cherche_devise, $remplace_devise, $prix_formate);
+	$prix_formate = "<span class=\"$classe\" data-montant-nombre=\"$montant\" data-montant-devise=\"$devise\">" . $prix_formate . '</span>';
+
+	return $prix_formate;
 }
 
 /**
@@ -446,7 +437,7 @@ function prix_langue_vers_locale($code_langue) {
  * @param array $valeurs
  * @return array
  */
-function prix_filtrer_options_formater($options) {
+function prix_normaliser_options_formatter($options) {
 	$options_valides = array(
 		'locale',
 		'style',
@@ -473,31 +464,6 @@ function prix_filtrer_options_formater($options) {
 				$options[$k] = true;
 			} elseif (in_array($v, array('false', 'non'))) {
 				$options[$k] = false;
-			}
-		}
-	}
-	return $options;
-}
-
-/**
- * Fonction privée pour changer les alias dans le tableau d'option du formatter
- *
- * @param array $options
- * @return array
- */
-function prix_alias_options_formater($options) {
-	$options_alias = array(
-		'currency' => 'devise',
-		'float'    => 'flottant',
-	);
-	if (is_array($options)) {
-		foreach ($options as $k => $v) {
-			foreach ($options_alias as $option => $alias) {
-				if ($k == $alias) {
-					$options[$option] = $v;
-					unset($options[$k]);
-					break;
-				}
 			}
 		}
 	}

@@ -23,73 +23,103 @@
 	</script>
 	<style>
 		.page { padding: 3em 0; }
-		body h1.ui.header { margin-bottom: 3em; }
+		body h1.ui.header:last-child { margin-bottom: 3em; }
+		[class^=montant] { transition: all 0.2s }
+		.montant:hover .montant__devise,
+		.montant:active .montant__devise { color: #21ba45; }
 	</style>
 </head>
 <body>
 	<main class="page">
-	<div class="ui text container">
 
+	<div class="ui text container">
 		<h1 class="ui center aligned header">
 			[(#CHEMIN{#PLUGIN{prix,logo}}|balise_img)][(#PLUGIN{prix,nom})] : <:prix:icone_voir_demo:>
 		</h1>
+	</div>
 
-		#SET{lesprix,#LISTE{"123456.789","9876.54","-2.99"}}
-		#SET{prix,#ENV{prix,#GET{lesprix/0}}|floatval}
-		<section class="section">
+	[(#REM) Démo formatage des prix ]
+	<section class="section section_formats">
+	#SET{lesprix,#LISTE{"123.45","123 456.78", "123 456 789.99", "-1.99", "-123 456.78"}}
+	#SET{prix,#ENV{prix,#GET{lesprix/0}}}
 
-			<h2 class="ui header">Formatage des prix</h2>
+		<div class="ui text container">
+			<div class="ui basic segment">
+				<h2 class="ui header">Formatage des prix</h2>
+				<p>Exemple de formatage des prix selon les devises et les langues.</p>
+				<p class="ui violet inverted segment"><code class="ui code">\[\(\#VALEUR|prix_formater\{\#ARRAY\{currency,EUR,locale,fr-CA\}\}\)\]</code></p>
+			</div>
+		</div>
 
-			<p>Exemple de formatage des prix selon les devises et les langues.</p>
+		<div class="ui container" style="margin-top:3em">
+			<div class="ui stackable grid">
 
-			<pre class="ui violet inverted segment"><code class="ui code">\[\(\#VALEUR|prix_formater\{\#ARRAY\{currency,EUR,locale,fr-CA\}\}\)\]</code></pre>
-
-			<table class="ui collapsing sortable table">
-				<thead>
-					<tr>
-						<th colspan="4" class="no-sort">
-							Langue :
-							<select class="ui dropdown">
+				<div class="four wide column">
+					<div class="ui form">
+						<div class="field">
+							<label for="formater_langue">Langue :</label>
+							<select class="ui search selection dropdown" id="formater_langue">
 								<BOUCLE_langues(DATA) {source table, #REM|prix_lister_langues}>
 								<option value="[(#SELF|parametre_url{locale,#CLE}|attribut_html)]"[ (#CLE|=={#ENV{locale}}|oui)selected]>#VALEUR</option>
 								</BOUCLE_langues>
 							</select>
-							Prix :
-							<select class="ui dropdown">
+						</div>
+						<div class="field">
+							<label for="formater_prix">Prix :</label>
+							<select class="ui dropdown" id="formater_prix">
 								<BOUCLE_prix(DATA) {source table, #GET{lesprix}}>
 								<option value="[(#SELF|parametre_url{prix,#VALEUR}|attribut_html)]"[ (#VALEUR|=={#GET{prix}}|oui)selected]>#VALEUR</option>
 								</BOUCLE_prix>
 							</select>
-							#SET{active,#ENV{style}|=={accounting}|?{active}}
-							#SET{param,#GET{active}|?{'',accounting}}
-							[<a href="(#SELF|parametre_url{style,#GET{param}})" class="ui toggle basic button[ (#GET{active})]">Format comptable</span>]
-						</th>
-					</tr>
-					<tr>
-						<th><:prix:label_devise_nom:></th>
-						<th><:prix:label_devise_code:></th>
-						<th><:prix:label_devise_symbole:></th>
-						<th>Prix formaté</th>
-					</tr>
-				</thead>
-				<tbody>
-				<BOUCLE_devises(DATA) {source table, #REM|prix_lister_devises} {par cle}>
-					<tr>
-						<td>#VALEUR{nom}</td>
-						<td>#VALEUR{code}</td>
-						<td>#VALEUR{symbole}</td>
-						<td class="right aligned">
-							#SET{options,#ARRAY{currency,#CLE,locale,#ENV{locale},style,#ENV{style}}}
-							[(#GET{prix}|prix_formater{#GET{options}})]
-						</td>
-					</tr>
-				</BOUCLE_devises>
-				</tbody>
-			</table>
+						</div>
+						<div class="field">
+							<label for="formater_format">Format :</label>
+							<select class="ui dropdown" id="formater_format">
+								<option value="[(#SELF|parametre_url{style,''}|attribut_html)]"[ (#ENV{style}|non)selected]>normal</option>
+								<option value="[(#SELF|parametre_url{style,accounting}|attribut_html)]"[ (#ENV{style}|=={accounting}|oui)selected]>comptable</option>
+							</select>
+						</div>
+						<div class="field">
+							<label for="formater_devise">Devise :</label>
+							<select class="ui dropdown" id="formater_devise">
+								<option value="[(#SELF|parametre_url{currency_display,''}|attribut_html)]"[ (#ENV{currency_display}|non)selected]>devise</option>
+								<option value="[(#SELF|parametre_url{currency_display,symbol}|attribut_html)]"[ (#ENV{currency_display}|=={symbol}|oui)selected]>symbole</option>
+							</select>
+						</div>
+					</div>
+				</div>
 
-		</section>
+				<div class="twelve wide column">
+					<table class="ui compact sortable selectable table">
+						<thead>
+							<tr>
+								<th><:prix:label_devise_nom:></th>
+								<th><:prix:label_devise_code:></th>
+								<th><:prix:label_devise_symbole:></th>
+								<th>Prix formaté</th>
+							</tr>
+						</thead>
+						<tbody>
+						<BOUCLE_devises(DATA) {source table, #REM|prix_lister_devises} {par cle}>
+							<tr>
+								<td>#VALEUR{nom}</td>
+								<td>#VALEUR{code}</td>
+								<td>#VALEUR{symbole}</td>
+								<td class="right aligned">
+									#SET{options,#ARRAY{currency,#CLE,locale,#ENV{locale},style,#ENV{style},currency_display,#ENV{currency_display}}|array_filter}
+									[(#GET{prix}|prix_formater{#GET{options}})]
+								</td>
+							</tr>
+						</BOUCLE_devises>
+						</tbody>
+					</table>
+				</div>
 
-	</div>
+			</div>
+		</div>
+
+	</section>
+
 </main>
 </body>
 </html>
