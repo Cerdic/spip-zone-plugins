@@ -3,8 +3,8 @@
     	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     	[(#ENV{editable})
     	<form method="post" action="#ENV{action}">
-    		#ACTION_FORMULAIRE
-    		<input type="hidden" name="formulaires_reponses" value="#ENV{id_formulaires_reponse}" />
+				#ACTION_FORMULAIRE{#ENV{action}}
+    		<input type="hidden" name="id_formulaires_reponse" value="#ENV{id_formulaires_reponse}" />
     		<!--extra-->
     		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
     	</form>
