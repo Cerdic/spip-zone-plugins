@@ -511,6 +511,12 @@ function saisies_charger_infos($type_saisie, $saisies_repertoire = 'saisies') {
 				foreach ($heritage as $h) {
 					$saisie = array_replace_recursive(saisies_charger_infos($h,$saisies_repertoire),$saisie);
 				}
+				if (isset($saisie['heritage_rejeter_options'])) {
+					$options = &$saisie['options'];
+					foreach($saisie['heritage_rejeter_options'] as $rejet) {
+						$options = saisies_supprimer($options, $rejet);
+					}
+				}
 			}
 			$saisie['titre'] = (isset($saisie['titre']) and $saisie['titre'])
 				? _T_ou_typo($saisie['titre']) : $type_saisie;
