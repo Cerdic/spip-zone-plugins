@@ -1,0 +1,71 @@
+[(#REM) 
+
+	Produit soit un select, soit des checkbox.
+
+	Par défaut, c'est un select avec valeur unique.
+	Si on donne un id_groupe configuré pour du multiple, alors c'est un checkbox.
+
+	On peut forcer la saisie select avec le paramètre forcer_select.
+	On peut forcer unqiue/multiple avec le parametre multiple.
+
+	Parametres :
+	- forcer_select : forcer l'utilisation d'un select
+	- multiple : si quelquechose est passe, la saisie est multiple
+	- id_groupe : groupe des mots clés à afficher
+                Note : si ce groupe de mot est configuré pour avoir plusieurs
+                mots possibles, alors une liste de cases à cocher est
+                affichée au lieu du sélecteur habituel.
+                Utiliser `forcer_select=oui` pour éviter ce comportement
+                (par exemple en utilisation avec Chosen)
+	- groupes_exclus : liste d'ids de groupe dont on ne veut pas les mots
+  - class : classe(s) css ajoutes au select
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  - size : la taille du sélecteur (seulement si multiple)
+
+  Exemple d'appel :
+	[(#SAISIE{mot, en_region,
+		label=<:plugin:en_region:>})]
+]
+[(#REM)
+	Si groupe précis demandé, on affiche les mots à plat
+	Sinon, on regroupe par groupe de mots
+]
+#SET{data,#ARRAY}
+<BOUCLE_data(MOTS)
+	{id_groupe?}
+	{!id_groupe IN #ENV{groupes_exclus}}
+	{par id_groupe, num titre, titre}
+>
+[(#ENV{id_groupe}|intval|oui)
+	#SET{data,#GET{data}|plus{#ARRAY{#ID_MOT,#TITRE}}}
+][(#ENV{id_groupe}|intval|non)
+	#SET{data_groupe,#GET{data/#TYPE}|sinon{#ARRAY}|plus{#ARRAY{#ID_MOT,#TITRE}}}
+	#SET{data,#GET{data}|array_merge{#ARRAY{#TYPE,#GET{data_groupe}}}}
+	]
+</BOUCLE_data>
+
+[(#REM)
+	Valeurs multiples :
+	- on prend le paramètre 'multiple' en priorité
+	- sinon, vrai par défaut s'il y a un groupe d'indiqué et que sa conf est ok
+]
+#SET{multiple,#ENV{multiple}|is_null|non|?{
+	#ENV{multiple},
+	#ENV{id_groupe}|?{#INFO_UNSEUL{groupemots,#ENV{id_groupe}}|!={oui}}
+}}
+
+[(#REM)
+	Type de saisie :
+	- select si valeur unique ou option 'forcer_select'
+	- checkbox si multiple
+]
+#SET{saisie, #GET{multiple}|?{
+		#ENV{forcer_select}|?{selection_multiple,checkbox},
+		selection}
+}
+
+[(#REM) Inclusion de la saisie choisie ]
+<INCLURE{fond=saisies/#GET{saisie}, data=#GET{data}, env}>
