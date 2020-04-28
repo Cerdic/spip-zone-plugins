@@ -545,7 +545,7 @@ function saisies_recuperer_heritage($saisie, $type_mere, $saisies_repertoire = '
 	if (isset($saisie['heritage_modifier_options'])) {
 		foreach ($saisie['heritage_modifier_options'] as $c => $option) {
 			$nom_option = $option['options']['nom'];
-			$options_mere = saisies_modifier($options_mere,$nom_option,$option);
+			$options_mere = saisies_modifier($options_mere, $nom_option, $option);
 		}
 		unset($saisie['heritage_modifier_options']);
 	}
