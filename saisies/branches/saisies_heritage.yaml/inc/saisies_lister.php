@@ -507,10 +507,8 @@ function saisies_charger_infos($type_saisie, $saisies_repertoire = 'saisies') {
 			// On peut avoir plusieurs saisies mère.
 			// Dans le cas, la dernière de la liste l'emporte sur les précédentes
 			if (isset($saisie['heritage'])) {
-				$heritage = array_reverse(explode(',', $saisie['heritage']));
-				foreach ($heritage as $mere) {
-					$saisie = saisies_recuperer_heritage($type_saisie, $saisie, $mere, $saisies_repertoire);
-				}
+				$type_mere = $saisie['heritage'];
+				$saisie = saisies_recuperer_heritage($saisie, $type_mere, $saisies_repertoire);
 			}
 			$saisie['titre'] = (isset($saisie['titre']) and $saisie['titre'])
 				? _T_ou_typo($saisie['titre']) : $type_saisie;
@@ -529,13 +527,12 @@ function saisies_charger_infos($type_saisie, $saisies_repertoire = 'saisies') {
 
 /**
  * Permet à une saisie d'hériter des options et valeur par défaut d'une autre saisies
- * @param string $type_saisie le type de la saisie
- * @param array $saisie la saisie qui hérite
+ * @param string $saisie la saisie
  * @param string $type_mere le type de la saisie dont on hérite
  * @param string $saisies_repertoire = 'saisies'
  * @return array
 **/
-function saisies_recuperer_heritage($type_saisie, $saisie, $type_mere, $saisies_repertoire = 'saisies') {
+function saisies_recuperer_heritage($saisie, $type_mere, $saisies_repertoire = 'saisies') {
 	$mere = saisies_charger_infos($type_mere, $saisies_repertoire);
 	$options_mere = &$mere['options'];
 	unset($saisie['heritage']);
