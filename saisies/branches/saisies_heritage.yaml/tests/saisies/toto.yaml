@@ -1,9 +1,9 @@
 heritage: 'input'
+titre: 'toto'
+description: 'toto_description'
 heritage_supprimer_options:
   - 'placeholder'
   - 'type'
-titre: 'toto'
-description: 'toto_description'
 heritage_modifier_options:
       -
         options:
