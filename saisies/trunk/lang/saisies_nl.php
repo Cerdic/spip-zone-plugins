@@ -245,7 +245,7 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank">volledige docum
 	'tout_selectionner' => 'Alles/niets selecteren',
 
 	// V
-	'verifier_valeurs_acceptables_explication' => 'Controleer of de geposte waarde zich bevindt binnen de toegelaten waardes zoals gedefinieerd voor het veld. Gebruik deze optie niet wanneer velden dynamisch worden gevuld of door middel van Javascript.',
+	'verifier_valeurs_acceptables_explication' => 'Controleer of de geposte waarde zich bevindt binnen de toegelaten waardes zoals gedefinieerd voor het veld. Gebruik deze optie niet wanneer velden dynamisch of door middel van Javascript worden gevuld.',
 	'verifier_valeurs_acceptables_label' => 'Toegelaten waarden verifiëren',
 	'vue_sans_reponse' => '<i>Zonder antwoord</i>',
 
