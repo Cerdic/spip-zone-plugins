@@ -1,10 +1,10 @@
 heritage: 'input'
-heritage_rejeter_options:
+heritage_supprimer_options:
   - 'placeholder'
   - 'type'
 titre: 'toto'
 description: 'toto_description'
-heritage_remplacer_options:
+heritage_modifier_options:
       -
         options:
           nouveau_type_saisie: 'toto'

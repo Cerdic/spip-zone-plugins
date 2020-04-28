@@ -538,16 +538,19 @@ function saisies_charger_infos($type_saisie, $saisies_repertoire = 'saisies') {
 function saisies_recuperer_heritage($type_saisie, $saisie, $type_mere, $saisies_repertoire = 'saisies') {
 	$mere = saisies_charger_infos($type_mere, $saisies_repertoire);
 	$options_mere = &$mere['options'];
-	if (isset($saisie['heritage_rejeter_options'])) {
-		foreach($saisie['heritage_rejeter_options'] as $rejet) {
+	unset($saisie['heritage']);
+	if (isset($saisie['heritage_supprimer_options'])) {
+		foreach($saisie['heritage_supprimer_options'] as $rejet) {
 			$options_mere = saisies_supprimer($options_mere, $rejet);
 		}
+		unset($saisie['heritage_supprimer_options']);
 	}
-	if (isset($saisie['heritage_remplacer_options'])) {
-		foreach ($saisie['heritage_remplacer_options'] as $c => $option) {
+	if (isset($saisie['heritage_modifier_options'])) {
+		foreach ($saisie['heritage_modifier_options'] as $c => $option) {
 			$nom_option = $option['options']['nom'];
 			$options_mere = saisies_modifier($options_mere,$nom_option,$option);
 		}
+		unset($saisie['heritage_modifier_options']);
 	}
 	return array_replace_recursive($mere,$saisie);
 	return $saisie;

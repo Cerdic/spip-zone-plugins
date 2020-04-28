@@ -315,33 +315,6 @@
 							),
 						),
 					),
-					'heritage' => 'input',
-					'heritage_rejeter_options' =>
-					array (
-						0 => 'placeholder',
-						1 => 'type',
-					),
-					'heritage_remplacer_options' =>
-					array (
-						0 =>
-						array (
-							'options' =>
-							array (
-								'nouveau_type_saisie' => 'toto',
-								'nom' => 'defaut',
-								'label' => 'toto',
-								'size' => 50,
-							),
-							'verifier' =>
-							array (
-								'type' => 'toto_verifier',
-								'options' =>
-								array (
-									'normaliser' => true,
-								),
-							),
-						),
-					),
 				),
 				1 => 'toto',
 				2 => 'tests/saisies/'
