@@ -537,8 +537,8 @@ function saisies_recuperer_heritage($saisie, $type_mere, $saisies_repertoire = '
 	$options_mere = &$mere['options'];
 	unset($saisie['heritage']);
 	if (isset($saisie['heritage_supprimer_options'])) {
-		foreach($saisie['heritage_supprimer_options'] as $rejet) {
-			$options_mere = saisies_supprimer($options_mere, $rejet);
+		foreach($saisie['heritage_supprimer_options'] as $option) {
+			$options_mere = saisies_supprimer($options_mere, $option);
 		}
 		unset($saisie['heritage_supprimer_options']);
 	}
