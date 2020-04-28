@@ -549,6 +549,14 @@ function saisies_recuperer_heritage($saisie, $type_mere, $saisies_repertoire = '
 		}
 		unset($saisie['heritage_modifier_options']);
 	}
+	if (isset($saisie['heritage_inserer_options'])) {
+		foreach ($saisie['heritage_inserer_options'] as $option) {
+			$chemin = $option['chemin'];
+			unset($option['chemin']);
+			$options_mere = saisies_inserer($options_mere, $option, $chemin, false);
+		}
+		unset($saisie['heritage_inserer_options']);
+	}
 	return array_replace_recursive($mere,$saisie);
 	return $saisie;
 }

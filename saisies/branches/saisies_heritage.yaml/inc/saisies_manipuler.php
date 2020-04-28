@@ -62,11 +62,11 @@ function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
  * @param array $chemin
  *     Position complète où insérer la saisie.
  *     En absence, insère la saisie à la fin.
- *
+ * @param bool $identifier = true. Mettre à false pour ne pas identifier
  * @return array
  *     Tableau des saisies complété de la saisie insérée
  */
-function saisies_inserer($saisies, $saisie, $chemin = array()) {
+function saisies_inserer($saisies, $saisie, $chemin = array(), $identifier = true) {
 	// On enlève les options générales avant de manipuler
 	if (isset($saisies['options'])) {
 		$options_generales = $saisies['options'];
@@ -76,7 +76,9 @@ function saisies_inserer($saisies, $saisie, $chemin = array()) {
 	// On vérifie quand même que ce qu'on veut insérer est correct
 	if ($saisie['saisie'] and $saisie['options']['nom']) {
 		// ajouter un identifiant
-		$saisie = saisie_identifier($saisie);
+		if ($identifier) {
+			$saisie = saisie_identifier($saisie);
+		}
 
 		// Par défaut le parent c'est la racine
 		$parent = &$saisies;
