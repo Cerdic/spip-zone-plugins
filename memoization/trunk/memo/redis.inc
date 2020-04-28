@@ -2,6 +2,8 @@
 if (!defined('_CACHE_NAMESPACE'))
 	define('_CACHE_NAMESPACE', $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].":");
 
+if (!defined('_LOCK_MAX'))
+	define('_LOCK_MAX', 30); # max lock time (seconds)
 
 class MCacheBackend_redis extends MCacheBackend {
 
@@ -84,6 +86,7 @@ class MCacheBackend_redis extends MCacheBackend {
 		$value = isset($value) ? intval($value) : 1;
 		$new_value = $this->redis->incrBy(_CACHE_NAMESPACE.$key, $value);
 		if (!is_null($ttl)) {
+			$ttl = intval($ttl);
 			$this->redis->setTimeout(_CACHE_NAMESPACE.$key, $ttl);
 		}
 		return $new_value;
