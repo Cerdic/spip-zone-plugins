@@ -241,7 +241,7 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank">document
 	'tout_selectionner' => 'Tout (dé)sélectionner',
 
 	// V
-	'verifier_valeurs_acceptables_explication' => 'Vérifier que la valeur postée se trouve parmis celles autorisées lors de la définition des champs. Ne pas utiliser cette options si tu remplis dynamiquement des champs dans tes squelettes ou les remplis grâce à javascript.',
+	'verifier_valeurs_acceptables_explication' => 'Vérifier que la valeur postée se trouve parmis celles autorisées lors de la définition des champs. Ne pas utiliser cette options si tu remplis dynamiquement des champs dans tes squelettes ou les remplis grâce à javascript.', # MODIF
 	'verifier_valeurs_acceptables_label' => 'Vérifier les valeurs acceptables',
 	'vue_sans_reponse' => '<i>Sans réponse</i>',
 

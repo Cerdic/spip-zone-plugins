@@ -246,7 +246,7 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'tout_selectionner' => '(Un)select all',
 
 	// V
-	'verifier_valeurs_acceptables_explication' => 'Check that the posted value is among those allowed when defining fields. Do not use this option if you dynamically fill fields in your templates or fill them with javascript.',
+	'verifier_valeurs_acceptables_explication' => 'Check that the posted value is among those allowed when defining fields. Do not use this option if you dynamically fill fields in your templates or fill them with javascript.', # MODIF
 	'verifier_valeurs_acceptables_label' => 'Check the acceptable values',
 	'vue_sans_reponse' => '<i>(no data entered)</i>',
 
