@@ -246,7 +246,6 @@ function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs) {
 			$modifs['saisie'] = $type;
 			unset($modifs['options']['nouveau_type_saisie']);
 		}
-
 		// On remplace tout
 		$parent[$position] = $modifs;
 

@@ -508,15 +508,8 @@ function saisies_charger_infos($type_saisie, $saisies_repertoire = 'saisies') {
 			// Dans le cas, la dernière de la liste l'emporte sur les précédentes
 			if (isset($saisie['heritage'])) {
 				$heritage = array_reverse(explode(',', $saisie['heritage']));
-				foreach ($heritage as $h) {
-					if (isset($saisie['heritage_rejeter_options'])) {
-						$h = saisies_charger_infos($h,$saisies_repertoire);
-						$options = &$h['options'];
-						foreach($saisie['heritage_rejeter_options'] as $rejet) {
-							$options = saisies_supprimer($options, $rejet);
-						}
-					}
-					$saisie = array_replace_recursive($h,$saisie);
+				foreach ($heritage as $mere) {
+					$saisie = saisies_recuperer_heritage($type_saisie, $saisie, $mere, $saisies_repertoire);
 				}
 			}
 			$saisie['titre'] = (isset($saisie['titre']) and $saisie['titre'])
@@ -533,6 +526,33 @@ function saisies_charger_infos($type_saisie, $saisies_repertoire = 'saisies') {
 
 	return $saisie;
 }
+
+/**
+ * Permet à une saisie d'hériter des options et valeur par défaut d'une autre saisies
+ * @param string $type_saisie le type de la saisie
+ * @param array $saisie la saisie qui hérite
+ * @param string $type_mere le type de la saisie dont on hérite
+ * @param string $saisies_repertoire = 'saisies'
+ * @return array
+**/
+function saisies_recuperer_heritage($type_saisie, $saisie, $type_mere, $saisies_repertoire = 'saisies') {
+	$mere = saisies_charger_infos($type_mere, $saisies_repertoire);
+	$options_mere = &$mere['options'];
+	if (isset($saisie['heritage_rejeter_options'])) {
+		foreach($saisie['heritage_rejeter_options'] as $rejet) {
+			$options_mere = saisies_supprimer($options_mere, $rejet);
+		}
+	}
+	if (isset($saisie['heritage_remplacer_options'])) {
+		foreach ($saisie['heritage_remplacer_options'] as $c => $option) {
+			$nom_option = $option['options']['nom'];
+			$options_mere = saisies_modifier($options_mere,$nom_option,$option);
+		}
+	}
+	return array_replace_recursive($mere,$saisie);
+	return $saisie;
+}
+
 
 /**
  * Quelles sont les saisies qui se débrouillent toutes seules, sans le _base commun.
