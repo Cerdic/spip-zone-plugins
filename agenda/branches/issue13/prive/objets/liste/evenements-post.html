@@ -11,10 +11,16 @@ Dans ce cas on prend une date très petite ou très grande, selon le sens du tri
 [(#REM) Si un evenement passe, on commence par le jour de cet evenement]
 	#SET{id_evenement,#ID_EVENEMENT}
 </BOUCLE_un>
-	<BOUCLE_debut(EVENEMENTS){evenement_a_venir #GET{date_debut}}{statut==.*}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{par date_debut}{0,1}>
+[(#SET{defaut_tri,#ARRAY{
+	date_debut,#ENV{date_sens,-1},
+	titre,1,
+	id_evenement,1,
+	points,-1
+}})]
+	<BOUCLE_debut(EVENEMENTS){evenement_a_venir #GET{date_debut}}{statut==.*}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{0,1}{tri #ENV{par,date_debut},#GET{defaut_tri},session_evenements}>
 		#SET{id_evenement,#ID_EVENEMENT}
 	</BOUCLE_debut>
-		<BOUCLE_last(EVENEMENTS){statut==.*}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{!par date_debut}{0,1}>
+		<BOUCLE_last(EVENEMENTS){statut==.*}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{!tri #ENV{par,date_debut},#GET{defaut_tri},session_evenements}{0,1}>
 			#SET{id_evenement,#ID_EVENEMENT}
 		</BOUCLE_last>
 	<//B_debut>
