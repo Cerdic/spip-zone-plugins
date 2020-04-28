@@ -19,6 +19,7 @@ defaut:
   options:
     readonly: 'on'
     label: 'toto'
+    sql: 'BIGINT (255)',
   verifier:
     type: 'toto'
     options:

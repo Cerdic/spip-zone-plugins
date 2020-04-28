@@ -303,7 +303,7 @@
 						array (
 							'label' => 'toto',
 							'size' => 40,
-							'sql' => 'text DEFAULT \'\' NOT NULL',
+							'sql' => 'BIGINT (255)',
 							'readonly' => 'on',
 						),
 						'verifier' =>
