@@ -558,7 +558,6 @@ function saisies_recuperer_heritage($saisie, $type_mere, $saisies_repertoire = '
 		unset($saisie['heritage_inserer_options']);
 	}
 	return array_replace_recursive($mere,$saisie);
-	return $saisie;
 }
 
 
