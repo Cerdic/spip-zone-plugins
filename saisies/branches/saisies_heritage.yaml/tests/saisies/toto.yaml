@@ -1,0 +1,25 @@
+heritage: 'input'
+heritage_rejeter_options:
+  - 'placeholder'
+  - 'type'
+titre: 'toto'
+description: 'toto_description'
+heritage_remplacer_options:
+      -
+        options:
+          nouveau_type_saisie: 'toto'
+          nom: 'defaut'
+          label: 'toto'
+          size: 50
+        verifier:
+          type: 'toto_verifier'
+          options:
+            normaliser: true
+defaut:
+  options:
+    readonly: 'on'
+    label: 'toto'
+  verifier:
+    type: 'toto'
+    options:
+      normaliser: true
