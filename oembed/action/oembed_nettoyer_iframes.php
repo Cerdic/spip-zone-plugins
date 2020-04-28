@@ -55,7 +55,9 @@ function action_oembed_nettoyer_iframes_dist() {
 						if (strpos($iframe, 'youtube') !== false) {
 							if (strpos($src, '/embed/') !== false) {
 								$url = str_replace('?', '&', $src);
+								$url = str_replace('/embed/videoseries&', '/playlist?', $url);
 								$url = str_replace('/embed/', '/watch?v=', $url);
+								$url = str_replace('&feature=player_embedded', '', $url);
 								echo "$pre Youtube $url<br />";
 							}
 							if (!$url) {
@@ -90,7 +92,7 @@ function action_oembed_nettoyer_iframes_dist() {
 								var_dump($iframe);
 								die('vimeo inconnue');
 							}
-						} elseif (strpos($iframe, 'soundcloud') !== false) {
+						} /*elseif (strpos($iframe, 'soundcloud') !== false) {
 							// un peu complique :
 							// il faut faire une requete oembed sur l'url api, avec iframe=false
 							// pour recuperer du html avec un lien vers la page soundcloud
@@ -113,7 +115,7 @@ function action_oembed_nettoyer_iframes_dist() {
 								var_dump($iframe);
 								die('soundcloud inconnue');
 							}
-						} else {
+						} */else {
 							echo "$pre iframe inconnue : ".entites_html($iframe).'<br />';
 						}
 						if ($url) {
