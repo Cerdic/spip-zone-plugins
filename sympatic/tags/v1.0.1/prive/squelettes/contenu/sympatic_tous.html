@@ -1,0 +1,9 @@
+<h1 class="grostitre"><:sympatic:sympatic_tous_titre:></h1>
+
+<INCLURE{fond=prive/objets/liste/sympatic,nb=#ENV{nb,15},env,ajax,sinon=<:sympatic:listes_aucune:>} />
+
+[(#AUTORISER{creer, sympatic}|oui)
+[(#URL_ECRIRE{sympatic_edit}
+	|parametre_url{nouveau,oui}
+	|icone_verticale{<:sympatic:titre_creer_liste:>,sympatic-24,new,right})]
+]

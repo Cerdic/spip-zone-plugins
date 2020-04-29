@@ -1,0 +1,18 @@
+[(#ID_LISTE|oui)
+	[(#AUTORISER{modifier,sympatic,#ID_LISTE}|sinon_interdire_acces)]
+][(#ID_LISTE|non)
+	[(#AUTORISER{creer,sympatic,#ID_LISTE}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect,#URL_ECRIRE{sympatic_tous}}}
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		[(#ID_LISTE|oui)
+		[(#GET{redirect}|icone_verticale{<:icone_retour:>,sympatic-24,'',left retour})]
+		]
+		[
+			[(#ID_LISTE|?{<:sympatic:titre_modifier_liste:>,<:sympatic:titre_creer_liste:>})]
+			<h1>(#ENV{titre,#INFO_TITRE{sympatic_listes,#ID_LISTE}|sinon{<:info_sans_titre:>}})</h1>
+		]
+	</div>
+	[(#FORMULAIRE_SYMPATIC_EDITER_LISTE{#ENV{id_liste},#GET{redirect}})]
+</div>

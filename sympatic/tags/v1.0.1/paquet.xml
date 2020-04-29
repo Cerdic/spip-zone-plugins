@@ -1,0 +1,28 @@
+<paquet
+	prefix="sympatic"
+	categorie="communication"
+	version="1.0.1"
+	etat="stable"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="images/sympatic.png"
+	schema="0.3.0"
+	documentation="https://contrib.spip.net/4074"
+>
+
+	<nom>Sympatic</nom>
+	<!-- Gestion des abonnements à des listes sympa depuis SPIP -->
+
+	<auteur>b_b</auteur>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/sympatic.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/sympatic.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/sympatic.php" />
+	<pipeline nom="autoriser" inclure="sympatic_autoriser.php" />
+	<pipeline nom="pre_edition" inclure="sympatic_pipelines.php" />
+	<pipeline nom="post_edition" inclure="sympatic_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="sympatic_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+
+	<menu nom="sympatic_tous" titre="sympatic:icone_sympatic_tous" parent="menu_edition" icone="images/sympatic-16.png" />
+</paquet>
