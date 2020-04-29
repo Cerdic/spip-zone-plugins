@@ -76,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_notifier_ok' => '通知は確かに送信されました',
-	'message_notifier_verifier_abonnements' => '通知を送信する前にこの利用者を確認する', # RELIRE
+	'message_notifier_verifier_abonnements' => '通知を送信する前にこのユーザーを確認する',
 
 	// N
 	'nb_abonnements' => '購読数',
