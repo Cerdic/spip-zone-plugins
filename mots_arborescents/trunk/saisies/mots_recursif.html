@@ -39,7 +39,7 @@
 	[(#REM) valeur doit être un tableau ! ]
 	#SET{valeur_forcee, #ENV{valeur_forcee}|saisies_valeur2tableau}
 	<BOUCLE_checkmots(MOTS){racine}{par num titre, titre}{id_groupe}>
-	<div class="choix choix_#ID_MOT[ (#ENV{class})] motsar-racine">[(#SET{id,champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_[(#ID_MOT|concat{'-',#ENV{nom}}|md5)]})]
+	<div class="choix choix_#ID_MOT[ (#ENV{class})] motsar-mot motsar-racine" data-id_mot="#ID_MOT">[(#SET{id,champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_[(#ID_MOT|concat{'-',#ENV{nom}}|md5)]})]
 		[(#SET{checked,[(#ID_MOT|in_array{#GET{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)]})]
 		[(#ENV{interdire_racine}|oui)<label>#TITRE</label>]
 		[(#ENV{interdire_racine}|non)
@@ -48,7 +48,7 @@
 		]
 	</div>
 	<BOUCLE_check_enfants(MOTS){id_parent}{id_groupe?}{par num titre, titre}>
-	<div class="choix choix_#ID_MOT[ (#ENV{class})] motsar-enfant">[(#SET{id,champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_[(#ID_MOT|concat{'-',#ENV{nom}}|md5)]})]
+	<div class="choix choix_#ID_MOT[ (#ENV{class})] motsar-mot motsar-enfant" data-id_mot="#ID_MOT" data-id_parent="#ID_PARENT">[(#SET{id,champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_[(#ID_MOT|concat{'-',#ENV{nom}}|md5)]})]
 		[(#SET{checked,[(#ID_MOT|in_array{#GET{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)]})]
 		[(#PROFONDEUR|mostar_tabulation)]
 		<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="#GET{id}"[ (#GET{checked})checked="checked"] value="#ID_MOT"[ (#ENV*{attributs})] />
@@ -57,6 +57,45 @@
 	<BOUCLE_check_recursif(BOUCLE_check_enfants) />
 	</BOUCLE_check_enfants>
 	</BOUCLE_checkmots>
+
+	<BOUCLE_test_config(CONDITION){si #CONFIG{motsar/checkbox_repliables}}>
+	<script>
+        $(function() {
+            function motsarCheckRacine(id_mot) {
+                var cbRacine = $('.motsar-mot[data-id_mot=' + id_mot + ']').find('input');
+                var cbEnfants = $('.motsar-mot[data-id_parent=' + id_mot + ']');
+                // replier ou déplier les enfants en fonction de l'état
+                if(cbRacine.is(':checked')) {
+                    cbEnfants.show();
+                } else {
+                    cbEnfants.hide();
+                    cbEnfants.each(function() {
+                        $(this).find('input').prop('checked', false);
+                    });
+                }
+                // vérifier chaque enfant
+                cbEnfants.each(function() {
+                    motsarCheckRacine($(this).data('id_mot'))
+                });
+                // ajouter une bordure sous le dernier item visible
+                $('.motsar-mot--last').removeClass('motsar-mot--last');
+                $('.editer').each(function() {
+                    $(this).find('.motsar-mot:visible').last().addClass('motsar-mot--last');
+                });
+            }
+
+            $('.motsar-enfant').hide();
+            $('.motsar-mot').each(function() {
+                var idMot = $(this).data('id_mot');
+                motsarCheckRacine(idMot)
+                $(this).find('input').on('change', function() {
+                    motsarCheckRacine(idMot)
+                });
+            });
+        });
+	</script>
+	</BOUCLE_test_config>
+	
 </BOUCLE_multiples>
 
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>

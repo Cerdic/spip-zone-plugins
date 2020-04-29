@@ -19,6 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creation_mot_enfant' => 'Créer un mot enfant',
 	'info_modifier_groupe' => '<strong>Attention : ce mot clé possède des enfants.</strong><br /> Si vous le déplacez dans un groupe de mot clé qui ne permet pas des arborescences de mots, votre arborescence sera perdue : tous les mots enfants seront placés à la racine du nouveau groupe.',
 
+	// L
+	'label_checkbox_repliables' => 'Saisie',
+	'label_case_checkbox_repliables' => 'Utiliser des groupes de checkboxes repliables dans les saisies',
+
 	// O
 	'option_autoriser_mots_arborescents' => 'Mots arborescents',
 	'option_autoriser_mots_arborescents_explication' => "Autoriser pour ce groupe la création d'arborescence de mots ?",

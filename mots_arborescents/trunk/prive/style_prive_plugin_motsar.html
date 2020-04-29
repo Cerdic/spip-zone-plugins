@@ -6,6 +6,7 @@
 #SET{foncee,##ENV{couleur_foncee,3874b0}}
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+[(#REM)<style>]
 
 .editer_groupe_mot select[name=id_groupe] optgroup { padding:.5em 3px 3px 3px; }
 .editer_groupe_mot select[name=id_groupe] option { padding:3px 3px 3px 25px; }
@@ -17,12 +18,9 @@ span.profondeur_mot { opacity:.3; }
 .liste-objets.mots .motsar span.profondeur_mot { display: table-cell; padding-right: 0.5em; }
 .liste-objets.mots .motsar a { display: table-cell; }
 
-.choix.motsar-racine,
-.choix.motsar-enfant { display: table; width: 100%; }
-.choix.motsar-racine { padding-bottom: 0.5em; }
-.choix.motsar-enfant + .choix.motsar-racine { padding-top: 1em; }
-.choix.motsar-enfant span.profondeur_mot { display: table-cell; opacity: 0; }
-.choix.motsar-racine .checkbox,
-.choix.motsar-enfant .checkbox { display: table-cell; }
-.choix.motsar-racine label,
-.choix.motsar-enfant label { display: table-cell; padding-left: 0.5em; width: 100%; }
+.choix.motsar-mot { display: flex; justify-content: flex-start; align-items: flex-start; padding: 0.3em;}
+.choix.motsar-mot + .choix.motsar-mot { padding: 0.3em;}
+.choix.motsar-mot span.profondeur_mot { opacity: 0; white-space: nowrap; }
+.choix.motsar-mot .checkbox { margin-top: 4px; }
+.choix.motsar-mot label { padding-left: 0.25em; width: 100%; }
+.formulaire_spip .choix.motsar-mot--last { border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;	border-bottom: 1px solid #ddd; }
