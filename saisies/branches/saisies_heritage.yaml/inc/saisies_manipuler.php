@@ -66,7 +66,7 @@ function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
  * @return array
  *     Tableau des saisies complété de la saisie insérée
  */
-function saisies_inserer($saisies, $saisie, $chemin = array(), $identifier = true) {
+function saisies_inserer($saisies, $saisie, $chemin = array()) {
 	// On enlève les options générales avant de manipuler
 	if (isset($saisies['options'])) {
 		$options_generales = $saisies['options'];
@@ -76,9 +76,7 @@ function saisies_inserer($saisies, $saisie, $chemin = array(), $identifier = tru
 	// On vérifie quand même que ce qu'on veut insérer est correct
 	if ($saisie['saisie'] and $saisie['options']['nom']) {
 		// ajouter un identifiant
-		if ($identifier) {
-			$saisie = saisie_identifier($saisie);
-		}
+		$saisie = saisie_identifier($saisie);
 
 		// Par défaut le parent c'est la racine
 		$parent = &$saisies;

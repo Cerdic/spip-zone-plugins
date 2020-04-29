@@ -431,8 +431,8 @@ function saisies_lister_disponibles($saisies_repertoire = 'saisies', $inclure_ob
 					)
 				) {
 					if (!isset($saisie['obsolete'])
-							or $saisie['obsolete'] == false
-							or $inclure_obsoletes
+						or $saisie['obsolete'] == false
+						or $inclure_obsoletes
 					) {
 						$saisies[$type_saisie] = $saisie;
 					}
@@ -531,7 +531,7 @@ function saisies_charger_infos($type_saisie, $saisies_repertoire = 'saisies') {
  * @param string $type_mere le type de la saisie dont on hérite
  * @param string $saisies_repertoire = 'saisies'
  * @return array
-**/
+ **/
 function saisies_recuperer_heritage($saisie, $type_mere, $saisies_repertoire = 'saisies') {
 	$mere = saisies_charger_infos($type_mere, $saisies_repertoire);
 	$options_mere = &$mere['options'];
@@ -553,7 +553,7 @@ function saisies_recuperer_heritage($saisie, $type_mere, $saisies_repertoire = '
 		foreach ($saisie['heritage_inserer_options'] as $option) {
 			$chemin = $option['chemin'];
 			unset($option['chemin']);
-			$options_mere = saisies_inserer($options_mere, $option, $chemin, false);
+			$options_mere = saisies_inserer($options_mere, $option, $chemin);
 		}
 		unset($saisie['heritage_inserer_options']);
 	}

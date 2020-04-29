@@ -13,13 +13,16 @@ require $remonte.'tests/test.inc';
 find_in_path("../plugins/saisies/inc/saisies.php",'',true);
 
 // chercher la fonction si elle n'existe pas
-if (!function_exists($f='saisies_charger_infos')){
-	find_in_path("inc/filtres.php",'',true);
-	$f = chercher_filtre($f);
+function tester_saisies_charger_infos($saisie, $chemin) {
+	if (!function_exists($f='saisies_charger_infos')){
+		find_in_path("inc/filtres.php",'',true);
+		$f = chercher_filtre($f);
+	}
+	return saisies_supprimer_identifiants($f($saisie, $chemin));
 }
+$g =  'tester_saisies_charger_infos';
 
-$err = tester_fun($f, essais_saisies_charger_infos());
-effacer_config('tests_saisies_config');
+$err = tester_fun($g, essais_saisies_charger_infos());
 
 // si le tableau $err est pas vide ca va pas
 if ($err) {
