@@ -21,12 +21,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_date_fin_label' => 'この定期購読の終了日',
 	'champ_dates_debut_label' => '定期購読の開始日',
 	'champ_dates_fin_label' => '定期購読の終了日',
-	'champ_id_abonnements_offre_label' => '定期購読プラン', # RELIRE
-	'champ_id_auteur_label' => '利用者', # RELIRE
+	'champ_id_abonnements_offre_label' => '定期購読プラン',
+	'champ_id_auteur_label' => 'ユーザー',
 	'champ_notifier_statut_label' => '定期購読のステータス',
 
 	// E
-	'erreur_id_abonnements_offre' => '定期購読プランから選択してください', # RELIRE
+	'erreur_id_abonnements_offre' => '定期購読プランから選択してください',
 
 	// I
 	'icone_creer_abonnement' => '定期購読を申し込む',
@@ -34,18 +34,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_renouveler_abonnement' => 'この定期購読を更新する。',
 	'info_1_abonnement' => '1件の定期購読',
 	'info_1_abonnement_actif' => '1件の有効な定期購読',
-	'info_1_abonnement_inactif' => '1件の無効な定期購読', # RELIRE
-	'info_1_abonnement_notifier' => '通知が必要な定期購読', # RELIRE
+	'info_1_abonnement_inactif' => '1件の無効な定期購読',
+	'info_1_abonnement_notifier' => '通知が必要な定期購読',
 	'info_abonnements_auteur' => 'この人の全定期購読', # RELIRE
 	'info_aucun_abonnement' => '定期購読はありません',
 	'info_aucun_abonnement_actif' => '有効な定期購読はありません',
-	'info_aucun_abonnement_inactif' => '無効な定期購読はありません', # RELIRE
-	'info_aucun_abonnement_notifier' => '通知が必要な定期購読はありません', # RELIRE
+	'info_aucun_abonnement_inactif' => '無効な定期購読はありません',
+	'info_aucun_abonnement_notifier' => '通知が必要な定期購読はありません',
 	'info_date_fin' => '終了日：@date@',
 	'info_nb_abonnements' => '@nb@ 件の定期購読',
 	'info_nb_abonnements_actifs' => '@nb@ 件の有効な定期購読',
 	'info_nb_abonnements_inactifs' => '@nb@ 件の無効な定期購読',
-	'info_nb_abonnements_notifier' => '通知の必要な定期購読が@nb@件あります', # RELIRE
+	'info_nb_abonnements_notifier' => '通知の必要な定期購読が@nb@件あります',
 	'info_numero_abbr' => '番号',
 	'info_numero_abbr_maj' => '番号',
 
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_dates' => '日付',
 	'label_duree' => '期間',
 	'label_montant' => '合計',
-	'label_statut' => 'ステータス', # RELIRE
+	'label_statut' => 'ステータス',
 
 	// N
 	'notification_echeance_chapo' => '<p>こんにちは @nom@さん,</p>',
@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notification_echeance_corps_apres' => '<p>@nom_site_spip@を« @offre@ »プランで定期購読されていた方にメールを差し上げています。</p>
 	<p>この定期購読は : 
 <strong>@echeance@</strong>前に期限切れになりました。<br/>
-	更新をおすすめします。</p>', # RELIRE
+	更新をおすすめします。</p>',
 	'notification_echeance_corps_avant' => '<p>@nom_site_spip@を« @offre@ »プランで定期購読されている方にこのメールを配信しています。</p>
 	<p>この定期購読は : 
 <strong>@echeance@</strong>後に期限切れになります。<br/>
@@ -88,8 +88,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notification_echeance_sujet_mois_pendant' => 'あなたの定期購読は今月で終了します !',
 
 	// R
-	'retirer_lien_abonnement' => 'この定期購読を取り消す', # RELIRE
-	'retirer_tous_liens_abonnements' => 'すべての定期購読を取り消す', # RELIRE
+	'retirer_lien_abonnement' => 'この定期購読を取り消す',
+	'retirer_tous_liens_abonnements' => 'すべての定期購読を取り消す',
 
 	// S
 	'statut_actif' => '有効な',
@@ -101,11 +101,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_ajouter_abonnement' => '定期購読を追加する',
 	'texte_changer_statut_abonnement' => 'この定期購読は :',
-	'texte_creer_associer_abonnement' => '定期購読を申し込んで紐付ける', # RELIRE
+	'texte_creer_associer_abonnement' => '定期購読を作成して紐付ける', # RELIRE
 	'titre_abonnement' => '定期購読',
 	'titre_abonnements' => '定期購読',
 	'titre_abonnements_rubrique' => '特定欄の購読', # RELIRE
 	'titre_abonnements_suivre' => '定期購読を続ける', # RELIRE
-	'titre_langue_abonnement' => 'この定期購読の使用言語', # RELIRE
-	'titre_logo_abonnement' => 'この定期購読のロゴ' # RELIRE
+	'titre_langue_abonnement' => 'この定期購読の使用言語',
+	'titre_logo_abonnement' => 'この定期購読のロゴ'
 );
