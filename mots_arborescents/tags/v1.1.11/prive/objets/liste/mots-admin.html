@@ -1,0 +1,17 @@
+[(#REM)
+	Surcharge du plugin mots
+	- Permet le filtre sur id_parent, id_mot_racine ou profondeur
+	- Lister avec une certaine arborescence
+]
+<BOUCLE_groupe(GROUPES_MOTS){id_groupe}{mots_arborescents=oui}{si #ENV{id_groupe}|intval}>
+	<BOUCLE_cpt_mots(MOTS)
+		{id_mot?}{id_groupe?}{id_parent?}{id_mot_racine ?}{profondeur ?}
+		{id_rubrique?}{id_article?}{where?} />
+		#SET{total,#TOTAL_BOUCLE}
+		#SET{titre,#ENV*{titre,#GET{total}|singulier_ou_pluriel{info_1_mot_cle,info_nb_mots_cles}}}
+	<//B_cpt_mots>
+
+	[(#INCLURE{fond=prive/objets/liste/mots-admin-arborescents, env, titre=#GET{titre}})]
+</BOUCLE_groupe>
+	[(#INCLURE{fond=prive/objets/liste/mots-admin-plat, env})]
+<//B_groupe>

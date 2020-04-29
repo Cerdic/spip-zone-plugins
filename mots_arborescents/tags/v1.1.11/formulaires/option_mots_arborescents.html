@@ -1,0 +1,9 @@
+#SET{attention,''}
+[(#ENV{mots_arborescents}|=={oui}|oui) [(#SET{attention,<:motsar:option_autoriser_mots_arborescents_attention:>})] ]
+
+[(#SAISIE{oui_non, mots_arborescents,
+	label=<:motsar:option_autoriser_mots_arborescents:>,
+	explication=<:motsar:option_autoriser_mots_arborescents_explication:>,
+	attention=#GET{attention},
+	valeur_oui=oui,
+	valeur_non=non})] 

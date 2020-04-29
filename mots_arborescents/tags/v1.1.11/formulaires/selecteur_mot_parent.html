@@ -1,0 +1,9 @@
+
+[(#REM) on interdit la selection de soi et de ses enfants ]
+#SET{exclus,#LISTE}
+[(#ENV{id_mot}|intval|oui) #SET{exclus,#ENV{id_mot}|calcul_branche_mot_in|explode{','}} ]
+
+[(#SAISIE{mots_recursif, id_parent,
+	id_groupe,
+	label=<:motsar:mot_parent:>,
+	exclus=#GET{exclus}})] 

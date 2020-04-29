@@ -1,0 +1,26 @@
+<div id="formulaire_#FORM" class='formulaire_spip formulaire_configurer formulaire_#FORM'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+	<form method="post" action="#ENV{action}#formulaire_#FORM">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+
+			<div class="editer-groupe">
+
+				[(#SAISIE{case, checkbox_repliables, label=<:motsar:label_checkbox_repliables:>, label_case=<:motsar:label_case_checkbox_repliables:>})]
+
+			</div>
+
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+
+			<p class="boutons">
+				<input type="submit" class="submit" value="<:bouton_enregistrer:>"/>
+			</p>
+
+		</div>
+	</form>
+	</BOUCLE_editable>
+</div>
