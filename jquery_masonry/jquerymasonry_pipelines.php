@@ -18,13 +18,15 @@ function jquerymasonry_insert_head($flux){
 			if($conf_jquerymasonry["multicolonne".$i] != "on") {
 				$styles .= "\n".$conf_jquerymasonry["container".$i]." ".$conf_jquerymasonry["items".$i]."{width:".$conf_jquerymasonry["largeur".$i]."px;margin:".$conf_jquerymasonry["marge".$i]."px;float:left;}\n" ;
 			}
-			$executer .= "$(\"".$conf_jquerymasonry["container".$i]."\").masonry({" ;
-			$executer .= "itemSelector:'".$conf_jquerymasonry["items".$i]."'," ;
+			$executer .= "$(\"".$conf_jquerymasonry["container".$i]."\").imagesLoaded( function() {";
+			$executer .= "	$(\"".$conf_jquerymasonry["container".$i]."\").masonry({" ;
+			$executer .= "	itemSelector:'".$conf_jquerymasonry["items".$i]."'," ;
 			if($conf_jquerymasonry["multicolonne".$i] == "on") {
 				$executer .= "columnWidth:".$largeur."," ;
 			}
-			$executer .= "isRTL:".(lang_dir()=="rtl"?"true":"false")."," ;
-			$executer .= "isAnimated:".($conf_jquerymasonry["animation".$i]=="on"?"true":"false") ;
+			$executer .= "	isRTL:".(lang_dir()=="rtl"?"true":"false")."," ;
+			$executer .= "	isAnimated:".($conf_jquerymasonry["animation".$i]=="on"?"true":"false") ;
+			$executer .= "	});" ;
 			$executer .= "});" ;
 		}
 	}
@@ -32,6 +34,7 @@ function jquerymasonry_insert_head($flux){
 	// S'il y a au moins un element
 	if($conf_jquerymasonry["nombre"]>0) {
 		$flux .= "\n".'<script src="'.url_absolue(find_in_path('javascript/'.$js_acharger)).'" type="text/javascript"></script>';
+		$flux .= "\n".'<script src="'.url_absolue(find_in_path('javascript/imagesloaded.pkgd.min.js')).'" type="text/javascript"></script>';
 		if($conf_jquerymasonry["multicolonne".$i] != "on") {
 			$flux .= "\n".'<style type="text/css">'.$styles.'</style>';
 		}
