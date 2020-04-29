@@ -11,7 +11,7 @@
 	box-sizing:border-box;
 	padding:4px;
 }
-.formidable_tablesorter .columnSelectorButton{
+.formidable_tablesorter #columnSelectorButton{
 	display:inline-block;
 }
 .tablesorter-ignoreRow th {
@@ -23,12 +23,6 @@
 }
 #columnSelector label{
 	display:block;
-}
-#colSelect1:checked ~ #columnSelector {
-  display: block;
-}
-#columnSelector {
-  display: none;
 }
 
 

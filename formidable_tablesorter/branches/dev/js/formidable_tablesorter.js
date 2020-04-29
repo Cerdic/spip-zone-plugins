@@ -36,6 +36,20 @@ output_saveFileName: 'toto.xlsx',
 		$('.tablesorter').trigger('filterReset');
 	});
 });
+$(function() {
+	flag_cs = false;
+	$('#columnSelector').css('display','none');
+	$('#columnSelectorButton').click(function () {
+		if (flag_cs) {
+			flag_cs = false;
+			$('#columnSelector').hide(1200);
+		} else {
+			flag_cs = true;
+			$('#columnSelector').show(1200);
+		}
+	}
+	);
+});
 
 $.tablesorter.defaults.textExtraction = function(node, table, cellIndex){
     return $(node).attr('data-sort-value') || $(node).text();
