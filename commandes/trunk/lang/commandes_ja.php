@@ -96,15 +96,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_1_commande' => '1 件の注文',
 	'info_1_commande_active' => '1 件の有効な注文',
-	'info_1_commande_statut_abandonne' => '中断された注文', # RELIRE
+	'info_1_commande_statut_abandonne' => '中断された注文',
 	'info_1_commande_statut_attente' => '承認待ちの注文',
 	'info_1_commande_statut_encours' => '作成中の注文',
 	'info_1_commande_statut_envoye' => '送信された注文',
 	'info_1_commande_statut_erreur' => 'エラーの注文',
 	'info_1_commande_statut_partiel' => '一部支払い済みの注文',
 	'info_1_commande_statut_paye' => '支払い済みの注文',
-	'info_1_commande_statut_retour' => '戻された注文', # RELIRE
-	'info_1_commande_statut_retour_partiel' => '一部戻された注文', # RELIRE
+	'info_1_commande_statut_retour' => '差し戻された注文',
+	'info_1_commande_statut_retour_partiel' => '一部差し戻された注文',
 	'info_1_detail' => '注文の詳細',
 	'info_aucun_client' => 'この注文にはだれも紐づけされていません', # RELIRE
 	'info_aucun_commande' => '注文はありません',
@@ -116,10 +116,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_date_paiement_vide' => '未払いの注文',
 	'info_nb_commandes' => '@nb@ 件の注文',
 	'info_nb_commandes_actives' => '@nb@ 件の有効な注文',
-	'info_nb_commandes_statut_abandonne' => '@nb@ 件の中断された注文', # RELIRE
+	'info_nb_commandes_statut_abandonne' => '@nb@ 件の中断された注文',
 	'info_nb_commandes_statut_attente' => '@nb@ 件の注文が承認待ちです',
 	'info_nb_commandes_statut_envoye' => '@nb@ 件の注文が送信されました', # RELIRE
-	'info_nb_commandes_statut_erreur' => '@nb@ 件のエラー注文', # RELIRE
+	'info_nb_commandes_statut_erreur' => '@nb@ 件のエラー注文',
 	'info_nb_commandes_statut_partiel' => '@nb@ 件の一部支払い済みの注文',
 	'info_nb_commandes_statut_paye' => '@nb@ 件の支払い済みの注文',
 	'info_nb_commandes_statut_retour' => '@nb@ 件の指し戻された注文',
@@ -165,7 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'merci_de_votre_commande' => 'ご注文を確かに受け取りました。ありがとうございました。',
-	'merci_de_votre_commande_paiement' => '<b>@reference@</b>の注文を確かに受け取りました。しばらくお待ちください。', # RELIRE
+	'merci_de_votre_commande_paiement' => '<b>@reference@</b>の注文を確かに受け取りました。しばらくお待ちください。',
 	'modifier_commande_statut' => 'この注文は :',
 	'montant' => '合計',
 
