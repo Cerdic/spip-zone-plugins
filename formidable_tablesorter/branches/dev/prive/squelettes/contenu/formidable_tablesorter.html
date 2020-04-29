@@ -19,7 +19,7 @@
 				[(#GET{cextras}|count|oui)
 					[<th colspan="(#GET{cextras}|count)"></th>]
 				]
-				<BOUCLE_entete_fieldsets(POUR) {tableau #GET{saisies}}>
+				<BOUCLE_entete_fieldsets(POUR) {tableau #GET{saisies}}{cle !== 'options'}>
 					[(#VALEUR{saisies}|non)
 						[(#VALEUR{saisie}|!={explication}|oui)
 						<th></th>
