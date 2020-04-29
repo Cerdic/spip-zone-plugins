@@ -18,6 +18,7 @@ function jquerymasonry_insert_head($flux){
 			if($conf_jquerymasonry["multicolonne".$i] != "on") {
 				$styles .= "\n".$conf_jquerymasonry["container".$i]." ".$conf_jquerymasonry["items".$i]."{width:".$conf_jquerymasonry["largeur".$i]."px;margin:".$conf_jquerymasonry["marge".$i]."px;float:left;}\n" ;
 			}
+			// contournement glitch lancement trop tôt https://masonry.desandro.com/layout.html#imagesloaded
 			$executer .= "$(\"".$conf_jquerymasonry["container".$i]."\").imagesLoaded( function() {";
 			$executer .= "	$(\"".$conf_jquerymasonry["container".$i]."\").masonry({" ;
 			$executer .= "	itemSelector:'".$conf_jquerymasonry["items".$i]."'," ;
