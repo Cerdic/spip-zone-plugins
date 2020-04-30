@@ -17,7 +17,7 @@ output_saveFileName: 'toto.xlsx',
 			},
 			resizable_addLastColumn: true
 		}
-	}).bind('filterEnd', function(event, config){
+	}).bind('filterEnd', function(event, config) {
 		total = $(this).find('tbody tr').length;
 		filtres = $(this).find('tbody tr.filtered').length;
 		$('#total').text(total-filtres);
