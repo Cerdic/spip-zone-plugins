@@ -6,6 +6,8 @@ $(function() {
       print_columns: 's',
       print_rows: 'f',
 			print_extraCSS: 'table{font-size:10pt}',
+			filter_filterLabel: filter_filterLabel,
+			filter_placeholder: {search:filter_placeholder},
       filter_saveFilters : true,
 			output_separator: 'array',
 			output_delivery: 'download',

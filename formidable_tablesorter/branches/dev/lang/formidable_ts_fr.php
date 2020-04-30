@@ -14,7 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter_ods' => 'Exporter au format ODS (LibreOffice)',
 	'exporter_csv' => 'Exporter au format CSV',
 	'exporter_xlsx' => 'Exporter au format XLSX (Excel)',
-
+	'filtre' => 'Filtre',
+	'filtrer_colonne' => 'Filtrer la colonne {{label}}',
 	// I
 	'imprimer' => 'Imprimer le tableau',
 
