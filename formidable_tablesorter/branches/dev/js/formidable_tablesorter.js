@@ -26,8 +26,6 @@ output_saveFileName: 'toto.xlsx',
   $('.print').click(function() {
     $('.tablesorter').trigger('printTable');
   });
-	type_export = 'csv'
-	filename = 'nom';
 	$('.output').click(function() {
 		filename = $('table.tablesorter').data('identifiant');
 		type_export = $(this).val();
