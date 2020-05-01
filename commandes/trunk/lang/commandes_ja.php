@@ -20,10 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_supprimer' => '削除する',
 
 	// B
-	'bonjour' => 'こんにちは', # RELIRE
+	'bonjour' => 'こんにちは',
 
 	// C
-	'commande_client' => '顧客', # RELIRE
+	'commande_client' => '顧客',
 	'commande_creer' => '注文する',
 	'commande_date' => '日付',
 	'commande_date_paiement' => '支払日',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_reference_numero' => 'レファレンス番号',
 	'commande_statut' => 'ステータス',
 	'commande_titre' => '注文',
-	'commandes_titre' => '注文', # RELIRE
+	'commandes_titre' => '注文',
 	'configurer_notifications_commandes' => '通知を設定する',
 	'configurer_titre' => '注文のプラグインを設定する',
 	'confirmer_supprimer_commande' => '本当に注文を取り消しますか？',
