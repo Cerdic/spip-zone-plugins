@@ -54,8 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_date_a_partir' => '開始：',
-	'label_date_depuis' => '開始
-開始：',
+	'label_date_depuis' => '開始日：',
 	'label_dates' => '日付',
 	'label_duree' => '期間',
 	'label_montant' => '合計',
@@ -104,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_associer_abonnement' => '定期購読を作成して紐付ける', # RELIRE
 	'titre_abonnement' => '定期購読',
 	'titre_abonnements' => '定期購読',
-	'titre_abonnements_rubrique' => '特定欄の購読', # RELIRE
+	'titre_abonnements_rubrique' => '見出しの購読',
 	'titre_abonnements_suivre' => '定期購読を続ける', # RELIRE
 	'titre_langue_abonnement' => 'この定期購読の使用言語',
 	'titre_logo_abonnement' => 'この定期購読のロゴ'
