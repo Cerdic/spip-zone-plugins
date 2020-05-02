@@ -115,12 +115,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaires_dupliquer_copie' => '(copie)',
 	'formulaires_introduction' => 'Créez et configurez ici les formulaires de votre site.',
 	'formulaires_nouveau' => 'Créer un nouveau formulaire',
+	'formulaires_reponse_cextras' => 'Champs extras associés à la réponse',
 	'formulaires_reponses_corbeille_tous' => '@nb@ réponses de formulaire dans la corbeille',
 	'formulaires_reponses_corbeille_un' => 'Une réponse de formulaire dans la corbeille',
 	'formulaires_supprimer' => 'Supprimer le formulaire',
 	'formulaires_supprimer_confirmation' => 'Attention, cela supprimera aussi tous les résultats. Êtes-vous sûr de vouloir supprimer ce formulaire ?',
 	'formulaires_tous' => 'Tous les formulaires',
-	'formulaires_reponse_cextras' => 'Champs extras associés à la réponse',
 
 	// H
 	'heures_minutes_secondes' => '@h@h @m@min @s@s',
