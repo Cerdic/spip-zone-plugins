@@ -104,6 +104,14 @@ function champs_extras_saisies_inserer_classe_crayons($saisies, $type, $id) {
 	include_spip('crayons_fonctions');
 	if (function_exists('classe_boucle_crayon')) {
 		foreach ($saisies as $cle => $saisie) {
+			$opt = array(
+				'saisie' => $saisie,
+				'type' => $type,
+				'champ' => $saisie['options']['nom']
+			);
+			if (!autoriser('modifierextra', $type, $id, '', $opt)) {
+				continue;
+			}
 			$opt_class = 'vue_class';
 			if ($saisie['saisie'] == 'fieldset') {
 				$opt_class = 'conteneur_class';
