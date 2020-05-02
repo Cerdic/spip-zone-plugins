@@ -22,6 +22,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function coloration_code_header_prive_css($flux) {
 	$css2 = find_in_path('prive/themes/spip/coloration_code.css');
+	if (!PLUGIN_COLORATION_CODE_STYLES_INLINE and !PLUGIN_COLORATION_CODE_SANS_STYLES and $f = find_in_path('css/coloration_code.css')) {
+		$flux .= '<link rel="stylesheet" href="' . direction_css($f) . '" type="text/css" media="all" />';
+	}
 	$flux .= "\n<link rel='stylesheet' type='text/css' href='$css2' id='csscoloration_code'>\n";
 	return $flux;
 }
