@@ -22,7 +22,12 @@ function cextras2td($cextras, $id_formulaires_reponse) {
 			$attributs = '';
 			// Crayonnage
 			if (test_plugin_actif('crayons')) {
-				if (autoriser('crayonner','formulaires_reponse', $id_formulaires_reponse, '', array('modele' => $champ['options']['nom']))) {
+				$opt = array(
+					'saisie' => $champ,
+					'type' => 'formulaires_reponse',
+					'champ' => $champ['options']['nom']
+				);
+				if (autoriser('modifierextra', 'formulaires_reponse', $id_formulaires_reponse, '', $opt)) {
 					$attributs = ' class="'.classe_boucle_crayon('formulaires_reponse', $champ['options']['nom'], $id_formulaires_reponse).'"';
 				}
 			} else {
