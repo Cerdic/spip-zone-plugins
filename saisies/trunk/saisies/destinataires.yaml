@@ -78,7 +78,7 @@ options:
   -
     saisie: 'fieldset'
     options:
-      nom: 'obli'
+      nom: 'validation'
       label: '<:saisies:option_groupe_validation:>'
     saisies:
       -

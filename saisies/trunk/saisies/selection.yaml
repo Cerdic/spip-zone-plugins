@@ -127,7 +127,7 @@ options:
   -
     saisie: 'fieldset'
     options:
-      nom: 'obligatoire'
+      nom: 'validation'
       label: '<:saisies:option_groupe_validation:>'
     saisies:
       -
