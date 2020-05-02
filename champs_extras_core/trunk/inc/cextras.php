@@ -60,7 +60,7 @@ function cextras_objets_valides(){
  * S'assurer de l'absence de clé, qui fait croire à saisies que le tableau est déjà à plat
  * alors que ce n'est pas forcément encore le cas (ie: il peut y avoir des fieldset à prendre
  * en compte).
- * 
+ *
  * @param Array $saisies liste de saisies
  * @return array Liste de ces saisies triees par nom ayant une option sql définie
  */
@@ -128,7 +128,7 @@ function champs_extras_saisies_inserer_classe_crayons($saisies, $type, $id) {
 
 /**
  * Créer les champs extras (colonnes en base de données)
- * definies par le lot de saisies donné 
+ * definies par le lot de saisies donné
  *
  * @param string $table
  *     Nom de la table SQL
@@ -163,7 +163,7 @@ function champs_extras_creer($table, $saisies) {
 			$desc['field'][$nom] = $saisie['options']['sql'];
 		}
 	}
-	
+
 	// executer la mise a jour
 	include_spip('base/create');
 	creer_ou_upgrader_table($table, $desc, true, true);
@@ -194,13 +194,13 @@ function champs_extras_supprimer($table, $saisies) {
 
 	if (!$saisies) {
 		return false;
-	}	
-	
+	}
+
 	$desc = lister_tables_objets_sql($table);
 
 	$ok = true;
 	foreach ($saisies as $saisie) {
-		$nom = $saisie['options']['nom'];	
+		$nom = $saisie['options']['nom'];
 		if (isset($desc['field'][$nom])) {
 			$ok &= sql_alter("TABLE $table DROP COLUMN $nom");
 		}
@@ -211,11 +211,11 @@ function champs_extras_supprimer($table, $saisies) {
 
 /**
  * Modifier les champs extras (colonne dans la base de données)
- * definies par le lot de saisies donné   
+ * definies par le lot de saisies donné
  *
  * Permet de changer la structure SQL ou le nom de la colonne
  * des saisies
- * 
+ *
  * @param string $table
  *     Nom de la table SQL
  * @param array $saisies_nouvelles
@@ -256,7 +256,7 @@ function champs_extras_modifier($table, $saisies_nouvelles, $saisies_anciennes) 
  * @param array $maj_item
  *     Un des éléments du tableau d'upgrade $maj,
  *     il sera complété des actions d'installation des champs extras demandés
- * 
+ *
  * @return bool
  *     false si les déclarations sont mal formées
  *     true sinon
@@ -283,11 +283,11 @@ function cextras_api_upgrade($declaration_champs_extras, &$maj_item) {
  *     ```
  *     cextras_api_vider_tables(motus_declarer_champs_extras());
  *     ```
- * 
+ *
  * @param array $declaration_champs_extras
  *     Liste de champs extras à désinstaller, c'est à dire la liste de saisies
  *     présentes dans le pipeline declarer_champs_extras() du plugin qui demande la désinstallation
- * 
+ *
  * @return bool
  *     false si déclaration mal formée
  *     true sinon
@@ -304,17 +304,17 @@ function cextras_api_vider_tables($declaration_champs_extras) {
 
 
 /*
- * 
+ *
  * Rechercher les champs non declares mais existants
  * dans la base de donnee en cours
  * (code d'origine : _fil_)
- * 
+ *
  */
 
 /**
  * Liste les tables et les champs que le plugin et spip savent gérer
  * mais qui ne sont pas déclarés à SPIP
- * 
+ *
  * @param string $connect
  *     Nom du connecteur de base de données
  * @return array
@@ -367,7 +367,7 @@ function extras_champs_anormaux($connect='') {
 			foreach($champs as $champ => $desc) {
 				if (!isset($tables_spip[$table]['field'][$champ])) {
 					if (!isset($nchamps[$table])) {
-						$nchamps[$table] = array(); 
+						$nchamps[$table] = array();
 					}
 					$nchamps[$table][$champ] = $desc;
 				}
@@ -387,7 +387,7 @@ function extras_champs_anormaux($connect='') {
 /**
  * Établit la liste de tous les champs de toutes les tables de la connexion
  * sql donnée
- * 
+ *
  * Ignore la table 'spip_test'
  *
  * @param string $connect
@@ -397,7 +397,7 @@ function extras_champs_anormaux($connect='') {
  */
 function extras_base($connect='') {
 	$champs = array();
-	
+
 	foreach (extras_tables($connect) as $table) {
 		if ($table != 'spip_test') {
 			$champs[$table] = extras_champs($table, $connect);
@@ -409,7 +409,7 @@ function extras_base($connect='') {
 
 /**
  * Liste les tables SQL disponibles de la connexion sql donnée
- * 
+ *
  * @param string $connect
  *     Nom du connecteur de base de données
  * @return array
@@ -452,23 +452,23 @@ function extras_champs($table, $connect) {
 
 /**
  * Retourne les saisies de champs extras d'un objet éditorial indiqué
- * 
+ *
  * Les saisies sont filtrées, par défaut par l'autorisation de modifier chaque champs extras.
  * Des options peuvent modifier le comportement.
  *
- * @param string $objet 
+ * @param string $objet
  *     Type de l'objet éditorial
- * @param int|null $id_objet 
+ * @param int|null $id_objet
  *     Identifiant de l'objet (si connu) peut servir aux autorisations.
  * @param array $options {
- *     @var string $autoriser 
+ *     @var string $autoriser
  *         'voir' ou 'modifier' (par défaut) : type d'autorisation testé, appellera voirextra ou modifierextra…
  *     @var string[] $whitelist
  *         Liste blanche de noms de champs : ces champs seront à afficher, et uniquement eux (modulo l'autorisation sur chaque champ)
  *     @var string[] $blacklist
  *         Liste noire de noms de champs : ces champs ne seront pas affichés (quelque soit l'autorisation sur chaque champ)
  * }
- * @return array 
+ * @return array
  *     Liste de saisies, les champs extras sur l'objet indiqué
 **/
 function cextras_obtenir_saisies_champs_extras($objet, $id_objet = null, $options = array()) {

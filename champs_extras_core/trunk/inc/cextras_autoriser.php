@@ -18,11 +18,11 @@ function cextras_autoriser(){}
 
 
 /**
- * Retourne si une saisie peut s'afficher ou non 
+ * Retourne si une saisie peut s'afficher ou non
  *
  * Teste les options de restrictions de la saisie si il y en a
  * et calcule en fonction l'autorisation
- * 
+ *
  * @param array $saisie
  *     Saisie que l'on traite.
  * @param string $action
@@ -42,7 +42,7 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 	if (!$saisie) {
 		return true;
 	}
-	
+
 	if (!isset($saisie['options']['restrictions']) OR !$saisie['options']['restrictions']) {
 		return true;
 	}
@@ -97,7 +97,7 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 
 	// enlever tous les false (0, '')
 	$restrictions = array_filter($restrictions);
-	
+
 	if ($restrictions) {
 		foreach ($restrictions as $type => $ids) {
 			$ids = explode(':', $ids);
@@ -111,7 +111,7 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 		// aucune des restrictions n'a ete validee
 		return false;
 	}
-	
+
 	return true;
 }
 
@@ -121,14 +121,14 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
  * Cherche une autorisation spécifique pour le champ si elle existe
  * (autoriser_{objet}_voirextra_{colonne}_dist), sinon applique
  * l'autorisation prévue par la description de la saisie
- * 
+ *
  * @example
  *     ```
  *     autoriser('voirextra','auteur', $id_auteur,'',
  *         array('champ'=>'prenom', 'saisie'=>$saisie, ...));
  *     ```
  *     Appelle ``autoriser_auteur_voirextra_prenom_dist()`` si la fonction existe...
- * 
+ *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
  * @param  int    $id    Identifiant de l'objet
@@ -156,7 +156,7 @@ function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
  * Cherche une autorisation spécifique pour le champ si elle existe
  * (autoriser_{objet}_modifierextra_{colonne}_dist), sinon applique
  * l'autorisation prévue par la description de la saisie
- * 
+ *
  * @example
  *     ```
  *     autoriser('modifierextra','auteur', $id_auteur,'',
@@ -189,10 +189,10 @@ function autoriser_modifierextra_dist($faire, $type, $id, $qui, $opt){
 
 /**
  * Fonction d'aide pour créer des autorisations de champs spécifiques
- * 
+ *
  * Permet d'indiquer que tels champs extras se limitent à telle ou telle rubrique
  * et cela en créant à la volée les fonctions d'autorisations adéquates.
- * 
+ *
  * @example
  *     ```
  *     restreindre_extras('article', array('nom', 'prenom'), array(8, 12));
@@ -252,7 +252,7 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubriqu
 
 /**
  * Fonction d'autorisation interne à la fonction restreindre_extras()
- * 
+ *
  * Teste si un objet à le droit d'afficher des champs extras
  * en fonction de la rubrique (ou autre defini dans la cible)
  * dans laquelle il se trouve et des rubriques autorisées
@@ -301,11 +301,11 @@ function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $cible='rubriq
 
 /**
  * Fonction d'autorisation interne à la fonction restreindre_extras()
- * 
+ *
  * Teste si un objet à le droit d'afficher des champs extras
  * en fonction de la rubrique (ou autre defini dans la cible)
  * dans laquelle il se trouve et des rubriques autorisées
- * 
+ *
  * Le dernier argument donne la colonne à chercher dans l'objet correspondant
  *
  * @param string $objet
@@ -329,14 +329,14 @@ function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id
 	if (isset($opt['contexte'][$_id_cible])) {
 		$id_cible = intval($opt['contexte'][$_id_cible]);
 	}
-  
+
 	if (!$id_cible) {
 		// on tente de le trouver dans la table de l'objet
 		$table = table_objet_sql($objet);
 		$id_table = id_table_objet($table);
 		include_spip('base/objets');
 		$desc = lister_tables_objets_sql($table);
-  
+
 		if (isset($desc['field'][$_id_cible])) {
 			$id_cible = sql_getfetsel($_id_cible, $table, "$id_table=".sql_quote($id_objet));
 		}
@@ -345,7 +345,7 @@ function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id
 	if (!$id_cible) {
 		// on essaie aussi dans le contexte d'appel de la page
 		$id_cible = _request($_id_cible);
-		
+
 		// on tente en cas de id_secteur de s'appuyer sur un eventuel id_rubrique
 		if (!$id_cible and $_id_cible == 'id_secteur') {
 			if ($i = _request('id_rubrique')) {
@@ -372,7 +372,7 @@ function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id
  * spécifique au test d'appartenance à une branche de rubrique
  *
  * @note ATTENTION, c'est gourmand en requetes SQL :)
- * 
+ *
  * @see inc_restreindre_extras_objet_sur_rubrique_dist()
  * @param string $objet
  *     Objet possédant les extras
@@ -427,7 +427,7 @@ function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt,
 			return true;
 		}
 	}
-	
+
 	// on teste si l'objet est dans une sous rubrique de celles mentionnee...
 	if ($id_rubrique) {
 		$id_parent = $id_rubrique;
@@ -437,7 +437,7 @@ function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt,
 			}
 		}
 	}
-		  
+
     return false;
 }
 
@@ -531,7 +531,7 @@ function inc_restreindre_extras_objet_sur_groupemot_dist($objet, $id_objet, $opt
 			}
 		}
 	}
-		  
+
     return false;
 }
 
