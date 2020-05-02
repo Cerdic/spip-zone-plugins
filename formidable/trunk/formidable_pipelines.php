@@ -297,3 +297,65 @@ function formidable_corbeille_table_infos($flux) {
 	);
 	return $flux;
 }
+
+
+/**
+ * Définir une fonction de contrôleur pour Crayons si on tente d'éditer un champ d'une réponse de formulaire.
+ *
+ * Si on édite un champ d'une réponse de formulaires avec Crayons, sans avoir créé manuellement de contrôleur spécifique
+ * pour le champ en question, Crayons propose soit un textarea, soit un input.
+ *
+ * Vu que l'on connaît les déclarations de nos champ , on va les utiliser pour créer
+ * un formulaire d'édition plus adapté à notre champ.
+ *
+ * @pipeline crayons_controleur
+ * @param array $flux
+ * @return array
+ */
+function formidable_crayons_controleur($flux) {
+	// si Crayons a déjà trouvé de contrôleur PHP, on ne fait rien
+	if ($flux['data'] != 'controleur_dist') {
+		return $flux;
+	}
+	$type = $flux['args']['type'];
+
+	if ($type === 'formulaires_reponses_champ') {
+			$flux['data'] = charger_fonction('formulaires_reponses_champ', 'controleurs');
+	}
+
+	return $flux;
+}
+
+/**
+ * Vérifier une saisie envoyée depuis un formulaire de Crayons.
+ *
+ * @pipeline crayons_verifier
+ * @param array $flux
+ * @return array
+ */
+function formidable_crayons_verifier($flux) {
+	// Le nom du modèle envoyé par le controleur/formulaires_reponses_champs.
+	if ($flux['args']['modele'] !== 'valeur' and $flux['args']['type'] !== 'formulaires_reponses_champ') {
+		return $flux;
+	}
+	include_spip('inc/saisies');
+	$id = $flux['args']['id'];
+	$valeur = $flux['args']['content']['valeur'];
+
+	$data = sql_fetsel('nom,saisies', 'spip_formulaires_reponses_champs JOIN spip_formulaires_reponses JOIN spip_formulaires', "id_formulaires_reponses_champ=$id AND spip_formulaires_reponses.id_formulaires_reponse = spip_formulaires_reponses_champs.id_formulaires_reponse AND spip_formulaires.id_formulaire = spip_formulaires_reponses.id_formulaire");
+	$saisies = unserialize($data['saisies']);
+	$saisie = saisies_chercher($saisies, $data['nom']);
+	if (isset($saisie['verifier'])) {
+		$verifier = $saisie['verifier'];
+		$verif_fonction = charger_fonction('verifier', 'inc', true);
+		$erreur = $verif_fonction($valeur, $verifier['type'], $verifier['options'], $normaliser);
+		if ($erreur) {
+			$flux['data']['erreurs']['valeur'] = $erreur;
+		} elseif (!is_null($normaliser)) {
+			$flux['data']['normaliser']['valeur'] = $normaliser;
+		}
+	}
+
+
+	return $flux;
+}

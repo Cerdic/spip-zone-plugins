@@ -99,7 +99,12 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $s
 
 	// Si on demande edit > mode crayon > on génère le crayon correspond
 	if ($type_retour == 'edit') {
-		return 'crayon '.'formulaires_reponses_champ-valeur-'. $reponses_valeurs[$id_formulaires_reponse][$nom]['id'];
+		if (isset($reponses_valeurs[$id_formulaires_reponse][$nom]['id'])) {
+			$valeur = $reponses_valeurs[$id_formulaires_reponse][$nom]['id'];
+		} else {
+			$valeur = sql_insertq('spip_formulaires_reponses_champs', array('id_formulaires_reponse' => $id_formulaires_reponse, 'nom' => $nom));
+		}
+		return 'crayon '.'formulaires_reponses_champ-valeur-'. $valeur;
 	}
 	// Si on trouve bien la saisie demandée
 	if ($saisie = saisies_chercher($formulaires_saisies[$id_formulaire], $nom)) {

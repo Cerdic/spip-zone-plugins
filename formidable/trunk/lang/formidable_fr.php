@@ -120,12 +120,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaires_supprimer' => 'Supprimer le formulaire',
 	'formulaires_supprimer_confirmation' => 'Attention, cela supprimera aussi tous les résultats. Êtes-vous sûr de vouloir supprimer ce formulaire ?',
 	'formulaires_tous' => 'Tous les formulaires',
+	'formulaires_reponse_cextras' => 'Champs extras associés à la réponse',
 
 	// H
 	'heures_minutes_secondes' => '@h@h @m@min @s@s',
 
 	// I
 	'icone_modifier_formulaires_reponse' => 'Modifier la réponse',
+	'icone_modifier_formulaires_reponse_cextras' => 'Modifier les champs extra associés à la réponse',
 	'icone_retour_formulaires_reponse' => 'Retour à la réponse',
 	'id_formulaires_reponse' => 'Identifiant de la réponse',
 	'identification_par_cookie' => 'Par cookie (identifiant aléatoire, ne stocke aucune information personnelle)',
