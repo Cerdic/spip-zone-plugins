@@ -23,7 +23,6 @@ options:
         options:
           nom: 'moderer_admins'
           label_case: '<:formidable:traiter_enregistrement_option_moderer_admins_explication:>'
-          defaut: 'on'
           afficher_si: '@traitements[enregistrement][moderation]@ == "priori"'
       -
         saisie: 'case'
