@@ -1,5 +1,8 @@
 $(function() {
-	$(".tablesorter").tablesorter({
+	formidable_ts = $(".tablesorter");
+});
+$(function() {
+	formidable_ts.tablesorter({
 		widgets: ["zebra","stickyHeaders", "filter","print", "reorder", "columnSelector", "output", "resizable"],
 		widgetOptions: {
 			columnSelector_container : $('#columnSelector'),
@@ -27,16 +30,16 @@ output_saveFileName: 'toto.xlsx',
 		}
 	);
   $('.print').click(function() {
-    $('.tablesorter').trigger('printTable');
+    formidable_ts.trigger('printTable');
   });
 	$('.output').click(function() {
 		filename = $('table.tablesorter').data('identifiant');
 		type_export = $(this).val();
-		$('.tablesorter').trigger('outputTable');
+		formidable_ts.trigger('outputTable');
 		return false;
 	});
 	$('.reset').click(function() {
-		$('.tablesorter').trigger('filterReset');
+		formidable_ts.trigger('filterReset');
 	});
 });
 $(function() {
