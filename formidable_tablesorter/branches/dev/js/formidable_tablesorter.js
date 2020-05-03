@@ -42,6 +42,8 @@ output_saveFileName: 'toto.xlsx',
 		formidable_ts.trigger('filterReset');
 	});
 });
+
+/** Réglage du column selector **/
 $(function() {
 	flag_cs = false;
 	$('#columnSelector').css('display','none');
@@ -57,10 +59,12 @@ $(function() {
 	);
 });
 
+/** Extraction de textes, notamment pour le tri **/
 $.tablesorter.defaults.textExtraction = function(node, table, cellIndex){
     return $(node).attr('data-sort-value') || $(node).text();
 }
 
+/** Fonctions d'export **/
 function call_formidable_tablesorter_export(config, data, url) {
 	var form = $('<form></form>').attr('action', url_action_formidable_tablesorter_export).attr('method', 'post');
 	form.append($("<input></input>").attr('type', 'hidden').attr('name', 'data').attr('value', data));
@@ -70,6 +74,7 @@ function call_formidable_tablesorter_export(config, data, url) {
 	return false;
 }
 
+/** Customisation du filtrage **/
 // Filtrer sur les textes, pas sur data-sort-value
 $.tablesorter.filter.types.start = function(config, data) {
 	data.exact = data.$cells[data.index];
