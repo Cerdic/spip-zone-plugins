@@ -63,3 +63,11 @@ function call_formidable_tablesorter_export(config, data, url) {
 	form.appendTo('body').submit().remove();
 	return false;
 }
+
+// Filtrer sur les textes, pas sur data-sort-value
+$.tablesorter.filter.types.start = function(config, data) {
+	data.exact = data.$cells[data.index];
+	data.exact = data.exact.innerText;
+	data.iExact = data.exact.toLowerCase();
+	return null;
+}
