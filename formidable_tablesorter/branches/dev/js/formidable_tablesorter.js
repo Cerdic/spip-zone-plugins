@@ -1,6 +1,6 @@
 $(function() {
 	$(".tablesorter").tablesorter({
-		widgets: ["zebra","stickyHeaders", "filter","print", "columnSelector", "output", "resizable", "reorder"],
+		widgets: ["zebra","stickyHeaders", "filter","print", "reorder", "columnSelector", "output", "resizable"],
 		widgetOptions: {
 			columnSelector_container : $('#columnSelector'),
       print_columns: 's',
@@ -14,6 +14,9 @@ $(function() {
 output_saveFileName: 'toto.xlsx',
 			output_callback: function(config, data, url) {
 				return call_formidable_tablesorter_export(config, data, url);
+			},
+			reorder_complete : function () {
+				formidable_table_sorter_post_reorder();
 			},
 			resizable_addLastColumn: true
 		}
@@ -70,4 +73,9 @@ $.tablesorter.filter.types.start = function(config, data) {
 	data.exact = data.exact.innerText;
 	data.iExact = data.exact.toLowerCase();
 	return null;
+}
+
+
+function formidable_table_sorter_post_reorder() {
+	$('#columnSelector').empty();
 }
