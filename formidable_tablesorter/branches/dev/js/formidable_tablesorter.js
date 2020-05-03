@@ -14,7 +14,7 @@ $(function() {
       filter_saveFilters : true,
 			output_separator: 'array',
 			output_delivery: 'download',
-output_saveFileName: 'toto.xlsx',
+			output_saveFileName: 'toto.xlsx',
 			output_callback: function(config, data, url) {
 				return call_formidable_tablesorter_export(config, data, url);
 			},
