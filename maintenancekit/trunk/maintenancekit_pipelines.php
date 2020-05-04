@@ -3,7 +3,7 @@
  * Utilisations de pipelines par Kit de maintenance
  *
  * @plugin     Kit de maintenance
- * @copyright  2018
+ * @copyright  2020
  * @author     erational
  * @licence    GNU/GPL
  * @package    SPIP\Maintenancekit\Pipelines
