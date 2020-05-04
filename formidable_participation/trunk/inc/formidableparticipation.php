@@ -3,20 +3,17 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('formidable_fonctions');
 /**
  * Détermine au moment de le saisie du formulaire si la personne participe ou pas
- * @param int|val $id_formulaire
- * @param int|val $id_formulaires_reponse
  * @param array $options les options du traitement participation
  * @return str oui|non
  **/
-function formidableparticipation_choix_participation($id_formulaire, $id_formulaires_reponse, $options) {
+function formidableparticipation_choix_participation($options) {
 	if ($options['participation_auto'] == 'auto') {
 		$choix_participation = 'oui';
 	} elseif ($options['champ_choix_participation']) {
-		$choix_participation =
-			calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $options['champ_choix_participation'], '', 'brut', '');
+		$choix_participation = _request($options['champ_choix_participation']);
+
 		if ($options['choix_participation_oui']) {
 			$participation_oui = $options['choix_participation_oui'];
 		}
@@ -33,16 +30,14 @@ function formidableparticipation_choix_participation($id_formulaire, $id_formula
 
 /**
  * Détermine au moment de le saisie du formulaire si la personne participe ou pas
- * @param int|val $id_formulaire
- * @param int|val $id_formulaires_reponse
  * @param array $options les options du traitement participation
  * @return array tableau des $id_evenement
  **/
-function formidableparticipation_id_evenement($id_formulaire, $id_formulaires_reponse, $options) {
+function formidableparticipation_id_evenement($options) {
 	if ($options['evenement_type'] == 'fixe') {
 		$id_evenement = $options['id_evenement_participation'];
 	} elseif ($options['evenement_type'] == 'variable' and isset($options['champ_evenement_participation'])) {
-		$id_evenement = calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $options['champ_evenement_participation'], '', 'brut', '');
+		$id_evenement = _request($options['champ_evenement_participation']);
 	}
 	if (!is_array($id_evenement)) {
 		$id_evenement = array($id_evenement);
