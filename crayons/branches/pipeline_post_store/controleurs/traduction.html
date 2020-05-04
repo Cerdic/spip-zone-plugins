@@ -1,0 +1,9 @@
+[(#REM)
+	Controleur pour le crayon 'traduction', uniquement html
+]
+[(#CACHE{0})]
+
+<input class="crayon-active" name="content_#ENV{key}_#ENV{motif_langue}" style="width:#ENV{largeur}px;#ENV{style}" value="[(#ENV{value}|sinon{#ENV{traduction}})]" />
+
+
+
