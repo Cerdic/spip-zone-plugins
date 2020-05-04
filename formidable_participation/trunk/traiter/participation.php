@@ -73,7 +73,7 @@ function traiter_participation_dist($args, $retours){
 			'organisme' => $organisme_participation,
 			'nb_inscriptions' => $nb_inscriptions,
 			'id_auteur' => (isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:0),
-			'parrain' => 'form'.$formulaire['id_formulaire'].':'.$formulaire['identifiant'],
+			'parrain' => 'form'.$formulaire['id_formulaire'].':'.$formulaire['identifiant'],// Garder pour des raisons historique, même si apparement jamais servi
 			'tracking_id' => $id_formulaires_reponse,//Garder pour des raisons historiques, même si apparement jamais servi
 			'id_formulaires_reponse' => $id_formulaires_reponse,
 			'id_formulaire' => $args['id_formulaire']
