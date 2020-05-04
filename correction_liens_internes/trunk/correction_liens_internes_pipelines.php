@@ -57,8 +57,12 @@ function correction_liens_internes_correction_url_public($mauvaise_url, $composa
 	// Pour le cas où on a copié-collé une URL depuis espace public.
 	$ancre = isset($composants_url['fragment']) ? '#' . $composants_url['fragment'] : '';
 
-	list($fond, $contexte) = urls_decoder_url(str_replace($ancre, '', $mauvaise_url));
+	// Url courte /<xx> (avec ou sans le plugin url par numero d'article)
+	if (preg_match('#^\/(\d*)$#', $composants_url['path'], $match)) {
+		return array('article', $match[1], $ancre);
+	}
 
+	list($fond, $contexte) = urls_decoder_url(str_replace($ancre, '', $mauvaise_url));
 	if(
 			($objet = isset($contexte['type']) ? $contexte['type'] : $fond) &&
 			($id_objet = $contexte[id_table_objet($objet)])
@@ -101,7 +105,6 @@ function correction_liens_internes_correction($texte, $raccourci_spip = true){
 	// http ou https, même combat
 	$url_site = str_replace('https\://', 'https?\://', $url_site);
 	$url_site = str_replace('http\://', 'https?\://', $url_site);
-
 	// on repère les mauvaises URLs
 	$match = array();
 	$objet = '';
