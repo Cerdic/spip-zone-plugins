@@ -17,6 +17,7 @@ function traiter_participation_dist($args, $retours){
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
 	$traitements = unserialize($formulaire['traitements']);
+	$id_formulaires_reponse = $retours['id_formulaires_reponse'];
 
 	// saisies dans le formulaire
 	if ($options['champ_choix_participation']) {
@@ -40,7 +41,6 @@ function traiter_participation_dist($args, $retours){
 	}
 
 	$choix_participation = formidableparticipation_choix_participation($options);
-	$id_formulaires_reponse = $retours['id_formulaires_reponse'];
 
 
 	// Si la réponse n'est pas publié (modération a priori), alors la réponse est non, en attendant une éventuelle future publication
