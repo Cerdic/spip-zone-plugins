@@ -13,6 +13,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
+			<th class='id_gis' scope='col'>[(#TRI{id_gis,<:info_numero_abbreviation:>,ajax})]</th>
 			<th class='titre' scope='col'>[(#TRI{multi titre,<:info_titre:>,ajax})]</th>
 			<th class='action' scope='col'>&nbsp;</th>
 		</tr>
@@ -21,6 +22,8 @@
 	<BOUCLE_liste_gis(GIS){id_gis IN #GET{selection}}{where?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} gisl}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_GIS|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class='picto'>[(#CHEMIN_IMAGE{gis-16.png}|balise_img)]</td>
+			<td class='id_gis'><a href="[(#URL_ECRIRE{gis_edit,id_gis=#ID_GIS})]"
+				title="<:gis:texte_voir_gis:>">#ID_GIS</a></td>
 			<td class='titre principale'>[(#LOGO_GIS|image_reduire{20,20})]<a href="[(#ID_GIS|generer_url_entite{gis})]"
 				title="<:gis:texte_voir_gis:>">[(#TITRE|sinon{<:ecrire:info_sans_titre:>})]</a></td>
 			<td class='action'>
