@@ -12,35 +12,43 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/formidableparticipation');
-function traiter_participation_dist($args, $retours){
+include_spip('formidable_fonctions');
+function traiter_participation_dist($args, $retours) {
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
 	$traitements = unserialize($formulaire['traitements']);
+	$id_formulaire = $formulaire['id_formulaire'];
 	$id_formulaires_reponse = $retours['id_formulaires_reponse'];
 
 	// saisies dans le formulaire
 	if ($options['champ_choix_participation']) {
-		$choix_participation = _request($options['champ_choix_participation']);
+		$champ = $options['champ_choix_participation'];
+		$choix_participation = calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $champ, '', 'brut', '');
+
 	}
 
 	if ($options['champ_email_participation']) {
-		$email_participation = _request($options['champ_email_participation']);
+		$champ = $options['champ_email_participation'];
+		$email_participation = calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $champ, '', 'brut', '');
 	}
 
 	if ($options['champ_nom_participation']) {
-		$nom_participation = _request($options['champ_nom_participation']);
+		$champ = $options['champ_nom_participation'];
+		$nom_participation = calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $champ, '', 'brut', '');
 	}
 
 	if ($options['champ_prenom_participation']) {
-		$prenom_participation = _request($options['champ_prenom_participation']);
+		$champ = $options['champ_prenom_participation'];
+		$prenom_participation = calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $champ, '', 'brut', '');
 	}
 
 	if ($options['champ_organisme_participation']) {
-		$organisme_participation = _request($options['champ_organisme_participation']);
+		$champ = $options['champ_organisme_participation'];
+		$organisme_participation = calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $champ, '', 'brut', '');
 	}
 
-	$choix_participation = formidableparticipation_choix_participation($options);
+	$choix_participation = formidableparticipation_choix_participation($id_formulaire, $id_formulaires_reponse, $options);
 
 
 	// Si la réponse n'est pas publié (modération a priori), alors la réponse est non, en attendant une éventuelle future publication
@@ -50,13 +58,13 @@ function traiter_participation_dist($args, $retours){
 	}
 
 	// détermination de l'évènement où s'inscrire
-	$id_evenement = formidableparticipation_id_evenement($options);
+	$id_evenement = formidableparticipation_id_evenement($id_formulaire, $id_formulaires_reponse, $options);
 
 	// Nombre total d'inscription
 	if (isset($options['plusieurs_fois']) and $options['plusieurs_fois']) {
 		$nb_inscriptions = 0;
 		foreach ($options['champ_nb_inscriptions'] as $champ) {
-			$nb_inscriptions = $nb_inscriptions + _request($champ);
+			$nb_inscriptions = $nb_inscriptions + intval(calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $champ, '', 'brut', ''));
 		}
 	} else {
 		$nb_inscriptions = 1;

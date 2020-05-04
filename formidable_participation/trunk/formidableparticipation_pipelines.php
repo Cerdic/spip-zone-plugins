@@ -106,3 +106,45 @@ function formidableparticipation_post_edition($flux) {
 	return $flux;
 }
 
+/**
+ * Lorsqu'on édite un champ avec crayons, actualiser les liens de réponse
+ * @param array $flux
+ * @return $flux
+**/
+function formidableparticipation_crayons_post_store($flux) {
+	if ($flux['args']['type'] !== 'formulaires_reponses_champ') {
+		return $flux;
+	}
+	$id = $flux['args']['id'];
+	include_spip('inc/saisies');
+	// Trouver la saisie
+	$data = sql_fetsel('spip_formulaires.id_formulaire, spip_formulaires_reponses.id_formulaires_reponse, nom,saisies,traitements', 'spip_formulaires_reponses_champs JOIN spip_formulaires_reponses JOIN spip_formulaires', "id_formulaires_reponses_champ=$id AND spip_formulaires_reponses.id_formulaires_reponse = spip_formulaires_reponses_champs.id_formulaires_reponse AND spip_formulaires.id_formulaire = spip_formulaires_reponses.id_formulaire");
+	$traitements = unserialize($data['traitements']);
+	// Pas de traitement participation, on ignore la suite
+	if (!isset($traitements['participation'])) {
+		return $flux;
+	}
+
+	$saisies = unserialize($data['saisies']);
+	$saisie = saisies_chercher($saisies, $data['nom']);
+	// On est pas en saisie evenement et bien on ignore :-)
+	if ($saisie['saisie'] !== 'evenements') {
+		return $flux;
+	}
+	// Chercher la fonction de traitement standard
+	$traiter = charger_fonction('participation', 'traiter');
+	// Determination des arguments
+	$retours = array(
+		'traitements' => array(),
+		'id_formulaires_reponse' => $data['id_formulaires_reponse']
+	);
+	$args = array(
+		'formulaire'  => $data,
+		'id_formulaire' => $data['id_formulaire'],
+		'id_formulaires_reponse' => $data['id_formulaires_reponse'],
+		'options' => $traitements['participation']);
+	unset($args['formulaire']['nom']);
+	$traiter($args, $retours);
+	return $flux;
+}
+
