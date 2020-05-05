@@ -41,7 +41,7 @@ use Box\Spout\Common\Entity\Style\Color;
  * @return string
  */
 function inc_exporter_csv_dist($titre, $resource, $delim = ', ', $entetes = null, $envoyer = true) {
-
+d($titre);
 	$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
 
 	if ($delim == 'TAB') {
@@ -89,7 +89,7 @@ function inc_exporter_csv_dist($titre, $resource, $delim = ', ', $entetes = null
 		header("Content-Disposition: attachment; filename=$filename");
 		//non supporte
 		//Header("Content-Type: text/plain; charset=$charset");
-		header("Content-Length: $length");
+		header('Content-Length: '.filesize($fichier));
 		ob_clean();
 		flush();
 		readfile($fichier);

@@ -1,7 +1,7 @@
 <paquet
 	prefix="spout_spipcsv"
 	categorie="outil"
-	version="1.0.0"
+	version="1.0.1"
 	etat="stable"
 	compatibilite="[3.1.8;3.3.*]"
 	logo="img_pack/spout_spipcsv-48.png"
