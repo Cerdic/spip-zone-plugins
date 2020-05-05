@@ -442,53 +442,6 @@ function autoriser_autoassocieralbum_dist($faire, $type, $id, $qui, $opts) {
 
 
 /**
- * Autorisation à déplacer des documents.
- *
- * Il faut que l'option soit activée, être admin complet,
- * ou dans le contexte d'un objet, avoir le droit de modifier tous les albums liés.
- *
- * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opts  Options de cette autorisation
- * @return bool          true s'il a le droit, false sinon
- */
-function autoriser_deplacerdocumentsalbums_dist($faire, $type, $id, $qui, $opts) {
-
-	include_spip('inc/config');
-	// dans le contexte d'un objet, on doit pouvoir modifier tous les albums liés
-	if ($type and intval($id) > 0) {
-		$autoriser_modifier_albums = true;
-		include_spip('action/editer_liens');
-		if (is_array($liens_albums = objet_trouver_liens(array('album' => '*'), array($type => $id)))
-			and count($liens_albums)) {
-			foreach ($liens_albums as $l) {
-				if (!autoriser('modifier', 'album', $l['id_album'])) {
-					$autoriser_modifier_albums = false;
-					break;
-				}
-			}
-		}
-	} else {
-		// sinon, il faut qu'il y ait au moins 2 albums
-		$autoriser_modifier_albums = sql_countsel('spip_albums') > 1;
-	}
-
-	$autoriser = (
-		lire_config('albums/deplacer_documents', '') == 'on'
-		and
-		(
-			$qui['statut'] == '0minirezo' and !$qui['restreint']
-			or $autoriser_modifier_albums
-		)
-	) ? true : false;
-
-	return $autoriser;
-}
-
-
-/**
  * Autorisation de vider un album
  *
  * Il faut qu'il y ait des documents, et être admin complet
