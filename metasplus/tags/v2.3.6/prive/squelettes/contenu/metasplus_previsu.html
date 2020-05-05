@@ -1,0 +1,57 @@
+[(#REM)
+
+	Page de prévisualisation des métadonnées d'un objet éditorial
+
+	Paramètres :
+		**obligatoire
+
+		- **page : type de page
+		- **objet : type d'objet
+		- **id_objet : id de l'objet
+		- **id_patate : id de l'objet
+
+]
+#SET{cle_objet,   #ENV{objet}|id_table_objet}
+#SET{contexte,    #ARRAY{type-page,#ENV{page},objet,#ENV{objet},id_objet,#ENV{id_objet}}}
+#SET{fond,        #GET{contexte}|metasplus_selectionner_fond}
+#SET{texte_objet, #ENV{objet}|objet_info{texte_objet}|_T}
+#SET{redirect,    #ENV{id_objet}|generer_url_entite{#ENV{objet}}}
+
+<h1 class="grostitre"><:metasplus:titre_previsu:></h1>
+
+<p class="notice">Dans cette prévisualisation, les URLs pointent vers le privé, mais rassurez-vous, elles sont correctes dans les pages publiques.</p>
+
+#BOITE_OUVRIR{'',info}
+[(#GET{redirect}|icone_verticale{[(#ENV{objet}|objet_info{texte_retour}|_T)],#ENV{objet}|objet_info{icone_objet},'',right retour metasplus})]
+<dl>
+	<dt><:metasplus:label_previsu_objet:> :</dt>
+	<dd>
+		<:titre_cadre_numero_objet{objet=#GET{texte_objet}}|mb_strtolower|ucfirst|replace{':',''}:>[(#ENV{id_objet})][ : «&nbsp;(#INFO_TITRE{#ENV{objet},#ENV{id_objet}})&nbsp;»]
+	</dd>
+	<dt><:metasplus:label_previsu_fond:> :</dt>
+	<dd><code>#GET{fond}.html</code></dd>
+</dl>
+#BOITE_FERMER
+
+#BOITE_OUVRIR{'',simple metasplus}
+[(#PLUGIN{coloration_code}|non)<pre><code>]
+[(#GET{fond}|recuperer_fond{
+	#ARRAY{
+		type-page,#ENV{page},
+		objet,#ENV{objet},
+		id_objet,#ENV{id_objet},
+		#GET{cle_objet},#ENV{id_objet},
+	}}
+	|appliquer_filtre{
+		#PLUGIN{coloration_code}|?{coloration_code_color,htmlentities},
+		#PLUGIN{coloration_code}|?{spip,#EVAL{null}}
+	}
+	|replace{'^\s+',''}
+)]
+[(#PLUGIN{coloration_code}|non)</code></pre>]
+#BOITE_FERMER
+
+<style>
+	code.html {display:block;overflow-x:auto}
+	.box.simple.metasplus{overflow-x:auto}
+</style>

@@ -1,0 +1,12 @@
+<traduction
+	module="paquet-metasplus"
+	id="paquet-metasplus--metasplus-23d39"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/metasplus.git"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-metasplus?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="raphael" lien="https://trad.spip.net/auteur/raphael-7042" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-metasplus?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+</traduction>
