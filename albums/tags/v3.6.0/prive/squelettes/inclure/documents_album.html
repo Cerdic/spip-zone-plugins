@@ -1,0 +1,28 @@
+[(#REM)
+
+	Affichage des documents d'un album.
+
+	Inclus dans :
+		prive/squelettes/inclure/albums.html
+		pipeline «afficher_complement_objet»
+
+	Utilise :
+		prive/squelettes/inclure/document_album.html
+
+	Paramètres (*obligatoire) :
+		*id_album    identifiant de l'album
+		editable     «non» pour ne pas afficher les outils d'édition
+
+]
+#SET{editable,  #ENV{editable}|!={non}|et{#AUTORISER{modifier,album,#ID_ALBUM}}|?{1}}
+<div class="documents-album liste_items[ (#GET{editable}|oui)editable] documents ordonner_rang_lien" id="documents-album#ID_ALBUM" data-lien="[(#VAL{album}|concat{'/',#ID_ALBUM}|attribut_html)]">
+	<B_documents_album>
+	#ANCRE_PAGINATION
+	<div class="sortable">
+	<BOUCLE_documents_album(DOCUMENTS documents_liens types_documents){id_album}{par rang_lien}{tout}{pagination #ENV{pagination_documents,10} #VAL{album}|concat{#ID_ALBUM}}>
+	<INCLURE{fond=prive/squelettes/inclure/document_album, id_document, id_album, editable=#GET{editable}}>
+	</BOUCLE_documents_album>
+	</div>
+	[<div class='pagination'>(#PAGINATION{prive})</div>]
+	</B_documents_album>
+</div><!-- .documents-album.liste-items -->
