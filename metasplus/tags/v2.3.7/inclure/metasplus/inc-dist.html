@@ -1,0 +1,186 @@
+[(#REM)
+
+	Métas+ : ce squelette contient le code des métas pour Dublin Core, Open Graph et Twitter.
+	Ici aucune requête SQL, on doit recevoir toutes les données.
+	Il est inclus dans inclure/metasplus/dist.html, voir ce dernier pour les explications et les paramètres.
+
+]
+[(#REM)
+
+
+	============================================
+	1) Normalisation et vérification des valeurs
+	============================================
+
+
+]
+#SET{titre,      #ENV{titre}|trim|html_entity_decode|supprimer_tags|textebrut}
+#SET{desc,       #ENV{desc}|trim|html_entity_decode|supprimer_tags|textebrut}
+#SET{url,        #ENV{url}|trim}
+#SET{date,       #ENV{date}|trim}
+#SET{maj,        #ENV{maj}|trim}
+#SET{lang,       #ENV{langue}|trim}
+#SET{og-type,    #ENV{og-type}|trim}
+#SET{dc-type,    #ENV{dc-type}|trim}
+#SET{territoire, #ENV{territoire}|=={en}|?{uk,#ENV{territoire,#ENV{langue}}}|strtoupper|trim}
+#SET{locale,     #ENV{langue}|concat{_,#GET{territoire}}|trim}
+#SET{couper,     200}
+#SET{dimensions, #ARRAY{
+	opengraph, 1200:630,
+	twitter,   506:253,
+}}
+[(#REM)
+	auteurs
+]
+#SET{auteurs,#ARRAY}
+<BOUCLE_normaliser_auteurs(DATA){source table, #ENV{auteurs}|is_array|?{#ENV{auteurs},#ENV{auteurs}|explode{','}}|array_filter}>
+#SET{auteurs,#GET{auteurs}|push{#VALEUR|trim|html_entity_decode|supprimer_tags|textebrut}}
+</BOUCLE_normaliser_auteurs>
+[(#REM)
+	mots-clés
+]
+#SET{mots,#ARRAY}
+<BOUCLE_normaliser_mots(DATA){source table, #ENV{mots}|is_array|?{#ENV{mots},#ENV{mots}|explode{','}}|array_filter}>
+#SET{mots,#GET{mots}|push{#VALEUR|trim|html_entity_decode|supprimer_tags|textebrut}}
+</BOUCLE_normaliser_mots>
+[(#REM)
+	Logos
+]
+#SET{logos,#ARRAY}
+<BOUCLE_normaliser_logos(DATA){source table, #ENV{logos}|is_array|?{#ENV{logos},#ENV{logos}|explode{','}}|array_filter}>
+#SET{valeur,#VALEUR|is_array|?{
+	#ARRAY{
+		url, #VAL{#VALEUR{url}|supprimer_timestamp},
+		alt, #VAL{#VALEUR{alt}|trim|supprimer_tags|textebrut},
+	},
+	#ARRAY{url,#VALEUR|supprimer_timestamp}
+}|array_filter}
+[(#CHEMIN{#GET{valeur/url}}|oui)
+#SET{logos,#GET{logos}|push{#GET{valeur}}}
+]
+</BOUCLE_normaliser_logos>
+[(#REM)
+
+
+	============================
+	2) Affichage des métadonnées
+	============================
+
+
+]
+[(#REM)
+
+	===========
+	Dublin Core
+	===========
+
+	http://dublincore.org
+
+]
+<BOUCLE_dublincore(CONDITION) {si #CONFIG{metasplus/dublincore}}>
+<!-- Dublin Core -->
+<link rel="schema.DC" href="https://purl.org/dc/elements/1.1/" />
+<link rel="schema.DCTERMS" href="https://purl.org/dc/terms/" />
+<meta name="DC.Format" content="text/html" />
+[<meta name="DC.Type" content="(#GET{dc-type})" />]
+[<meta name="DC.Language" scheme="rfc1766" content="(#GET{lang})" />]
+[<meta name="DC.Title" lang="#GET{lang}" content="(#GET{titre}|attribut_html)" />]
+[<meta name="DC.Description.Abstract" lang="#GET{lang}" content="(#GET{desc}|couper{#GET{couper},'…'}|attribut_html)" />]
+[<meta name="DC.Date" scheme="DCTERMS.W3CDTF" content="(#GET{date}|affdate{Y-m-d})" />]
+[<meta name="DC.Date.Modified" scheme="DCTERMS.W3CDTF" content="(#GET{maj}|affdate{Y-m-d})" />]
+[<meta name="DC.Identifier" scheme="URI" content="(#GET{url}|url_absolue)" />]
+[<meta name="DC.Publisher" content="(#NOM_SITE_SPIP|attribut_html)" />]
+[<meta name="DC.Source" scheme="URI" content="(#URL_SITE_SPIP)" />]
+<BOUCLE_auteurs_dublincore(DATA){source table, #GET{auteurs}}>
+[<meta name="DC.Creator" content="(#VALEUR|attribut_html)" />]
+</BOUCLE_auteurs_dublincore>
+<BOUCLE_mots_dublincore(DATA) {source table, #GET{mots}}>
+[<meta name="DC.Subject" content="(#VALEUR|attribut_html)" />]
+</BOUCLE_mots_dublincore>
+</BOUCLE_dublincore>
+[(#REM)
+
+	==========
+	Open Graph
+	==========
+
+	http://ogp.me
+	https://developers.facebook.com/docs/sharing/opengraph/object-properties
+	https://developers.facebook.com/docs/sharing/webmasters/images
+	https://developers.facebook.com/tools/debug/
+
+]
+<BOUCLE_opengraph(CONDITION) {si #CONFIG{metasplus/opengraph}}>
+<!-- Open Graph -->
+[(#GET{logos}|count|oui)
+<meta property="og:rich_attachment" content="true" />
+]
+[<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />]
+[<meta property="og:type" content="(#GET{og-type}|attribut_html)" />]
+[<meta property="og:title" content="(#GET{titre}|attribut_html)" />]
+[<meta property="og:locale" content="(#GET{locale})" />]
+[<meta property="og:url" content="(#GET{url}|url_absolue)" />]
+[<meta property="og:description" content="(#GET{desc}|couper{#GET{couper},'…'}|attribut_html)" />]
+#SET{largeur,#GET{dimensions/opengraph}|explode{:}|table_valeur{0}}
+#SET{hauteur,#GET{dimensions/opengraph}|explode{:}|table_valeur{1}}
+<BOUCLE_logos_opengraph(DATA) {source table, #GET{logos}}>
+#SET{src, #VALEUR{url}|image_recadre{#GET{dimensions/opengraph},-,focus}
+	|image_reduire{#GET{largeur},#GET{hauteur}}
+	|extraire_attribut{src}
+	|sinon{#VALEUR{url}}
+	|supprimer_timestamp}
+[(#VAL{finfo_file}|function_exists|oui)
+#SET{finfo,#EVAL{FILEINFO_MIME_TYPE}|finfo_open}
+#SET{mimetype,#GET{finfo}|finfo_file{#GET{src}}}
+]
+[<meta property="og:image" content="(#GET{src}|url_absolue)" />]
+[<meta property="og:image:width" content="(#GET{src}|largeur)" />]
+[<meta property="og:image:height" content="(#GET{src}|hauteur)" />]
+[<meta property="og:image:type" content="(#GET{mimetype})" />]
+[<meta property="og:image:alt" content="(#VALEUR{alt}|couper{80}|attribut_html)" />]
+</BOUCLE_logos_opengraph>
+<BOUCLE_article_opengraph(CONDITION) {si #GET{og-type}|=={article}}>
+[<meta property="article:published_time" content="(#GET{date}|affdate{Y-m-d})" />]
+[<meta property="article:modified_time" content="(#GET{maj}|affdate{Y-m-d})" />]
+<BOUCLE_auteurs_opengraph(DATA){source table, #GET{auteurs}}>
+[<meta property="article:author" content="(#VALEUR|attribut_html)" />]
+</BOUCLE_auteurs_opengraph>
+<BOUCLE_mots_opengraph(DATA) {source table, #GET{mots}}>
+[<meta property="article:tag" content="(#VALEUR|attribut_html)" />]
+</BOUCLE_mots_opengraph>
+</BOUCLE_article_opengraph>
+[(#REM) Si plugin facebook, on envoie la méta fb:app_id ]
+[<meta property="fb:app_id" content="(#CONFIG{facebook/cle})" />]
+</BOUCLE_opengraph>
+[(#REM)
+
+	============
+	Twitter Card
+	============
+
+	https://dev.twitter.com/cards/types/summary
+	https://dev.twitter.com/cards/types/summary-large-image
+	https://cards-dev.twitter.com/validator
+
+]
+<BOUCLE_twitter(CONDITION) {si #CONFIG{metasplus/twitter}}>
+<!-- Twitter Card -->
+<meta name="twitter:card" content="[(#GET{logos}|count|?{summary_large_image,summary})]" />
+[<meta name="twitter:title" content="(#GET{titre}|attribut_html)" />]
+[<meta name="twitter:description" content="(#GET{desc}|couper{#GET{couper},'…'}|attribut_html)" />]
+<meta name="twitter:dnt" content="on" />
+[<meta name="twitter:url" content="(#GET{url}|url_absolue)" />]
+#SET{largeur,#GET{dimensions/twitter}|explode{:}|table_valeur{0}}
+#SET{hauteur,#GET{dimensions/twitter}|explode{:}|table_valeur{1}}
+<BOUCLE_images_twitter(DATA) {source table, #GET{logos}} {0,1}>
+#SET{src, #VALEUR{url}|image_recadre{#GET{dimensions/twitter},-,focus}
+	|image_reduire{#GET{largeur},#GET{hauteur}}
+	|extraire_attribut{src}
+	|sinon{#VALEUR{url}}
+	|timestamp}
+[<meta name="twitter:image" content="(#GET{src}|url_absolue)" />]
+[<meta property="twitter:image:alt" content="(#VALEUR{alt}|couper{80}|attribut_html)" />]
+</BOUCLE_images_twitter>
+</BOUCLE_twitter>
+
+#FILTRE{trim}
