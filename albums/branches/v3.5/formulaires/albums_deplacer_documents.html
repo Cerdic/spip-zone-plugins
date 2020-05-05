@@ -1,0 +1,51 @@
+[(#REM)
+
+	Formulaire permettant de déplacer des documents entre albums par cliquer-glisser.
+	Pour manipuler également les documents des portfolios d'un objet, il faut donner #OBJET et #ID_OBJET en paramètre.
+	Par défaut, le formulaire est caché, il n'apparaît que si des changements ont lieu (l'affichage est géré dans le script).
+	Ce formulaire est prévu pour l'espace privé, et fonctionne uniquement avec les squelettes respectant une certaine nomenclature.
+	Cf. javascript/javascript/albums_glisser_deposer.js.html
+
+][(#REM)
+
+	Inclus dans:
+		prive/squelettes/contenu/portfolio_albums.html
+		prive/squelettes/contenu/albums.html
+
+]
+<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+#SET{poste,#ENV{_pipelines/formulaire_fond/je_suis_poste}}
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_albums_deplacer_documents[_(#ENV{objet})][(#ENV{id_objet})]"[ (#GET{poste}|non)style="display:none;"]>
+
+	<span class="image_loading"></span>
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})
+	[(#CHEMIN_IMAGE{fermer-16.png}|balise_img{'',bouton fermer}|inserer_attribut{title,<:bouton_fermer:>})]</div>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})
+	[(#CHEMIN_IMAGE{fermer-16.png}|balise_img{'',bouton fermer}|inserer_attribut{title,<:bouton_fermer:>})]</div>]
+
+	<form method='post' action='#ENV{action}' name='formulaire_#FORM' id='formulaire_#FORM'><div>
+
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="_deplacements" value="[(#ENV{_deplacements})]" />
+
+		<p class='boutons'[ style="direction: (#LANG_DIR|=={ltr}|?{rtl,ltr})"]>
+			<strong class="titrounet">[(#VAL{document}|objet_icone{16}) ]<:album:titre_documents_deplaces:></strong>
+			<input class='submit' type='submit' name='valider' value="<:album:bouton_valider_deplacer_documents:>"/>
+			<input class='submit link' type='submit' name='annuler' value="<:bouton_annuler:>"/>
+		</p>
+
+		[(#ENV**{_js})]
+
+	</div></form>
+
+	<!-- script glisser deposer albums -->
+	<script type='text/javascript'>/*<![CDATA[*/
+	[(#INCLURE{fond=javascript/albums_glisser_deposer.js,
+		objet,
+		id_objet,
+		poste=#GET{poste}}|compacte{js})]
+	/*]]>*/</script>
+
+</div>
+</BOUCLE_editable>
+

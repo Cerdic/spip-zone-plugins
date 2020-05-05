@@ -1,0 +1,35 @@
+[(#REM)
+
+	Ajouter un album à un objet.
+	Icône permettant d'afficher le formulaire d'ajout d'un album à un objet éditorial.
+
+][(#REM)
+
+	Inclus dans :
+		prive/squelettes/contenu/albums_afficher_complement_objet.html
+
+][(#REM)
+
+	paramètres (*obligatoire):
+		*objet       type d'objet auquel associer les albums
+		*id_objet    identifiant de l'objet
+		*ajouter     paramètre URL indiquant quand afficher le formulaire d'ajout («&ajouter=album» pour afficher)
+		lier_trad    pour lier une traduction lors de la création d'un album
+
+][(#AUTORISER{ajouteralbum,#ENV{objet},#ENV{id_objet}}|oui)
+<a name="ajouter-album"></a>
+<div class="ajouter-album">
+	[(#ENV{ajouter}|=={albums}|oui)
+	<div class='nettoyeur'></div>
+	<a href="[(#SELF|parametre_url{ajouter,''})]" class="ajax bouton_fermer">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img{<:bouton_fermer:>}|inserer_attribut{title,<:bouton_fermer:>})]</a>
+	<div class="ajax">
+		#FORMULAIRE_AJOUTER_ALBUM{#ENV{objet},#ENV{id_objet},'',#ENV{lier_trad}}
+	</div>
+	<div class='nettoyeur'></div>
+	]
+	[(#ENV{ajouter}|=={albums}|non)
+	[(#SELF|parametre_url{ajouter,albums}
+		|icone_verticale{<:album:icone_ajouter_album:>,album,new,ajax #LANG_RIGHT})]
+	]
+</div><!-- .ajouter-album -->
+]
