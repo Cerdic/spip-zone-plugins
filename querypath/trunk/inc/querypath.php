@@ -27,7 +27,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Permet de chercher et modifier du HTML
  * http://http://querypath.org/
 **/
-include_spip('lib/querypath-3.0.3/src/qp');
+include_spip('lib/querypath-3.0.4/src/qp');
 
 
 /**
