@@ -1,0 +1,14 @@
+<BOUCLE_gis(GIS){id_gis=#ENV{id}}>
+<div class='infos'>
+	<div class='numero'><:gis:info_numero_gis:><p>#ID_GIS</p></div>
+
+	[(#AUTORISER{supprimer,gis,#ID_GIS}|oui)
+		[(#URL_ACTION_AUTEUR{
+			supprimer_gis,
+			#ID_GIS,
+			#URL_ECRIRE{gis_tous}
+			}|icone_horizontale{<:gis:bouton_supprimer_gis:>,gis-24,del}
+		)]
+	]
+</div>
+</BOUCLE_gis>

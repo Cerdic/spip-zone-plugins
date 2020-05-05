@@ -1,0 +1,36 @@
+[(#ID_GIS|oui)
+	[(#AUTORISER{modifier,gis,#ID_GIS}|sinon_interdire_acces)]
+][(#ID_GIS|non)
+	[(#AUTORISER{creer,gis,#ID_GIS,'','',#ARRAY{associer_objet,#ENV{associer_objet}}}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect,#ENV{id_gis}|?{#URL_ECRIRE{gis,id_gis=#ID_GIS},#URL_ECRIRE{gis_tous}}}}
+
+#SET{objet, #ENV{objet, ''}}
+#SET{id_objet, #ENV{id_objet, 0}}
+[(#ENV{associer_objet}|oui)
+	[(#SET{array_objet, #ENV{associer_objet}|explode{'|'}})]
+	#SET{objet, #GET{array_objet}|table_valeur{0}}
+	#SET{id_objet, #GET{array_objet}|table_valeur{1}}
+]
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_GIS|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,gis,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_GIS|?{<:gis:texte_modifier_gis:>,<:gis:texte_creer_gis:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{gis,#ID_GIS}|sinon{<:gis:titre_nouveau_point:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_GIS|generer_url_entite{gis}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_GIS{#ENV{id_gis,oui},#GET{objet},#GET{id_objet},#GET{redirect},'',#ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</div>

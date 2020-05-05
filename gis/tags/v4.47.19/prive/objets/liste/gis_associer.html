@@ -1,0 +1,55 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+}})
+]
+#SET{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+#SET{debut,#ENV{debutgisa,#EVAL{_request("debutgisa");}}}
+<input type="hidden" name="debutgisa" value="#GET{debut}" />
+<B_liste_gis>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutgisa,#EVAL{_request("debutgisa");}}}
+#ANCRE_PAGINATION
+[<h3><:info_resultat_recherche:> &laquo;(#ENV{recherche})&raquo;</h3>]
+<div class="liste-objets liste-objets-associer gis">
+<table class='spip liste'>
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{gis:info_1_gis,gis:info_nb_gis}})</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</caption>]
+	<thead>
+		<tr class='first_row'>
+            <th class='picto' scope='col'></th>
+            <th class='titre' scope='col'>[(#TRI{multi titre,<:info_titre:>,ajax})]</th>
+            <th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_gis(GIS){!id_gis IN #GET{exclus}}{tout}{where?}{recherche?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,5} gisa}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#CHEMIN_IMAGE{gis-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_GIS|image_reduire{20,20})]<a href="[(#ID_GIS|generer_url_entite{gis})]"
+				title="<:gis:texte_voir_gis:>">[(#TITRE|sinon{<:ecrire:info_sans_titre:>})]</a></td>
+			<td class='action'><button type="submit" class="button link" name="ajouter_lien[gis-#ID_GIS-#OBJET-#ID_OBJET]" value="+"><:gis:lien_ajouter_gis:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+		</tr>
+	</BOUCLE_liste_gis>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_gis>
+[(#ENV{recherche}|oui)
+<div class="liste-objets liste-objets-associer gis caption-wrap">
+<span class="caption"><strong>[(#VAL{gis:info_recherche_gis_zero}|_T{#ARRAY{cherche_gis,#ENV{recherche}}})]</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</div>
+]<//B_liste_gis>

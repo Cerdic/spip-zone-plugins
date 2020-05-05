@@ -1,0 +1,46 @@
+[(#SET{defaut_tri,#ARRAY{
+	objet,#ENV{objet_sens,-1},
+	id_objet,1
+}})]
+
+#SET{objets_legitimes, #VAL{objet_type}|array_map{#VAL|lister_tables_objets_sql|array_keys}}
+
+<B_liste_objets>
+#ANCRE_PAGINATION
+<div class="liste-objets objets_gis">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{gis:info_1_objet_gis,gis:info_nb_objets_gis}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+            <th class='picto' scope='col'></th>
+			<th class='objet' scope='col'>[(#TRI{objet,<:gis:info_objet:>,ajax})]</th>
+			<th class='id_objet' scope='col'>[(#TRI{id_objet,<:gis:info_id_objet:>,ajax})]</th>
+			<th class='titre principale' scope='col'><:gis:titre_objet:></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_objets(GIS_LIENS){id_gis}{objet IN #GET{objets_legitimes}}{tri #ENV{order,objet},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#OBJET|objet_icone{16})]</td>
+			<td class='objet'>[(#OBJET|objet_info{texte_objet}|_T)]</td>
+			<td class='id_objet'>[(#ID_OBJET)]</td>
+            <td class='titre principale'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]"
+				title="<:gis:info_voir_fiche_objet:> <:info_numero_abbreviation|attribut_html:> #ID_OBJET">#INFO_TITRE{#OBJET,#ID_OBJET}</a></td>
+			<td class='action'>
+				[(#AUTORISER{delier, gis, #ID_GIS, '', #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}|oui)
+					[(#BOUTON_ACTION{
+						<:gis:info_supprimer_lien:>  [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],
+						#URL_ACTION_AUTEUR{editer_lien_gis,delier/#ID_GIS/#OBJET/#ID_OBJET,#SELF},
+						ajax})]
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_objets>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_objets>[
+<div class="liste-elements objets_gis"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_objets>
