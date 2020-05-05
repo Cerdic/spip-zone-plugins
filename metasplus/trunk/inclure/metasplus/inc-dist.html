@@ -50,10 +50,10 @@
 <BOUCLE_normaliser_logos(DATA){source table, #ENV{logos}|is_array|?{#ENV{logos},#ENV{logos}|explode{','}}|array_filter}>
 #SET{valeur,#VALEUR|is_array|?{
 	#ARRAY{
-		url, #VALEUR{url},
+		url, #VAL{#VALEUR{url}|supprimer_timestamp},
 		alt, #VAL{#VALEUR{alt}|trim|supprimer_tags|textebrut},
 	},
-	#ARRAY{url,#VALEUR}
+	#ARRAY{url,#VALEUR|supprimer_timestamp}
 }|array_filter}
 [(#CHEMIN{#GET{valeur/url}}|oui)
 #SET{logos,#GET{logos}|push{#GET{valeur}}}
