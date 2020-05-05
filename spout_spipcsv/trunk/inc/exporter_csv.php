@@ -41,7 +41,7 @@ use Box\Spout\Common\Entity\Style\Color;
  * @return string
  */
 function inc_exporter_csv_dist($titre, $resource, $delim = ', ', $entetes = null, $envoyer = true) {
-d($titre);
+
 	$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
 
 	if ($delim == 'TAB') {
