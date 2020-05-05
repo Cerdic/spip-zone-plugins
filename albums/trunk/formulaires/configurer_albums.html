@@ -26,16 +26,21 @@
 		<div class="editer-groupe">
 
 			[(#REM) choix des objets sur lesquels l'ajout d'albums est possible ]
-			#SET{name,objets} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			#SET{name,objets}
+			#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:album:label_activer_album_objets:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}, exclus=#LISTE{spip_albums,spip_documents}}>
-			</li>
+			</div>
 
 			[(#REM) utiliser un titre par défaut pour les nouveaux albums ]
-			#SET{name,utiliser_titre_defaut} #SET{obli,''} #SET{defaut,#CONFIG{albums/utiliser_titre_defaut}} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}} #SET{val,on}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			#SET{name,utiliser_titre_defaut}
+			#SET{obli,''}
+			#SET{defaut,#CONFIG{albums/utiliser_titre_defaut}}
+			#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			#SET{val,on}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:album:label_utiliser_titre_defaut:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
@@ -43,9 +48,9 @@
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
 					<label for="#GET{name}_#GET{val}"><:album:label_case_utiliser_titre_defaut:></label>
 				</div>
-			</li>
+			</div>
 
-		</ul>
+		</div>
 
 	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	<!--extra-->
