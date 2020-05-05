@@ -51,9 +51,23 @@ function metasplus_identifier_contexte($url) {
 			$res[$id_table_objet] = $id_objet; // ça peut servir
 		}
 
-	// 2) Sinon c'est en principe une page lambda avec 'page' en query string
+	// 2) Sinon c'est en principe une page lambda avec 'page' en query string ou la page d'accueil d'un multidomaine
 	} elseif (!$res['type-page']) {
 		$res['type-page'] = _request('page');
+		
+		if(test_plugin_actif('multidomaines')) {
+			$multidomaines = lire_config('multidomaines');
+			foreach ($multidomaines as $id_rubrique => $domaine) {
+				if ($domaine['url'] && rtrim($url, '/') == $domaine['url']) {
+					$res['type-page']  = 'rubrique';
+					$res['erreur']     = false;
+					$res['objet']      = 'rubrique';
+					$res['id_objet']   = $id_rubrique;
+					$res['id_article'] = $id_rubrique;
+					$res['url']        = $url;
+				}
+			}
+		}
 	}
 
 	return $res;
