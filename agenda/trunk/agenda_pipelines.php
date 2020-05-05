@@ -343,7 +343,7 @@ function agenda_propres_creer_chaine_url($flux) {
 }
 
 /**
- * Pour la saisie de type événement, indique si les données renvoyées sont tabulaire ou pas
+ * Pour la saisie de type événement, indique si les données renvoyées sont tabulaires ou pas
  * @param $flux
  * @return $flux
 **/
