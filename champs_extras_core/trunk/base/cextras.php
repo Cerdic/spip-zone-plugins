@@ -22,6 +22,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @note
  *     Ne pas utiliser dans le code de cette fonction
  *     table_objet() qui ferait une réentrance et des calculs faux.
+ *     Ni charger `public/interfaces` trop tôt (qui fait de même)
+ *     en appelant automatiquement declarer_interfaces()
+ * 
+ *     Du coup, le champ 'traitements' des champs extras ne peut
+ *     appeler directement les constantes _TRAITEMENT_TYPO
+ *     ou _TRAITEMENT_RACCOURCIS ; elles sont du coup déclarées, si besoin,
+ *     en tant que chaine. ie: `'traitements' => '_TRAITEMENT_TYPO',`
+ *     et non `'traitements' => _TRAITEMENT_TYPO,`.
+ *     L’expression correcte est reformée ensuite dans `cextras_declarer_tables_interfaces()`
+ * 
+ *     On peut aussi utiliser une fonction spécifique, tel que `'traitements' => 'propre(%s)',`.
  *
  * @pipeline declarer_tables_objets_sql
  * @param array $tables
@@ -32,7 +43,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function cextras_declarer_tables_objets_sql($tables){
 
 	include_spip('inc/cextras');
-	include_spip('public/interfaces');
 
 	// recuperer les champs crees par les plugins
 	// array($table => array(Liste de saisies))
@@ -96,6 +106,10 @@ function cextras_declarer_tables_objets_sql($tables){
 /**
  * Déclarer les nouvelles infos sur les champs extras ajoutés
  * en ce qui concerne les traitements automatiques sur les balises.
+ * 
+ * @note
+ *     public/interfaces est forcément chargé ici, vu que c’est
+ *     lui qui exécute le pipeline...
  *
  * @pipeline declarer_tables_interfaces
  * @param array $interfaces
@@ -107,12 +121,11 @@ function cextras_declarer_tables_interfaces($interfaces){
 
 	include_spip('inc/cextras');
 	include_spip('inc/saisies');
-	include_spip('public/interfaces');
 
 	// si saisies a ete supprime par ftp, on sort tranquilou sans tuer SPIP.
 	// champs extras sera ensuite desactive par admin plugins.
 	if (!function_exists('saisies_lister_avec_sql')) {
-		return $tables;
+		return $interfaces;
 	}
 
 	// recuperer les champs crees par les plugins
@@ -137,7 +150,6 @@ function cextras_declarer_tables_interfaces($interfaces){
 
 			// SPIP 3 permet de declarer par la table sql directement.
 			$interfaces['table_des_traitements'][$balise][table_objet($table)] = $traitement;
-
 		}
 	}
 
