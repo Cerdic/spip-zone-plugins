@@ -2,7 +2,6 @@
 
 
 
-	error_reporting(E_ERROR | E_PARSE);
 	echo "<?php\n" ;
 	echo "\n" ;
 	echo "// This is a SPIP module file  --  Ceci est un fichier module de SPIP\n" ;
