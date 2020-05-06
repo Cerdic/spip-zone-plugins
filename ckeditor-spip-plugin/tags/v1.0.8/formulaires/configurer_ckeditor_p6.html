@@ -1,0 +1,44 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:ckeditor:ckeditor_p5_titre:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+[
+		<ul>
+			(#GENERER_SAISIES{#ENV{saisies_cke_page6_3}})
+		</ul>
+	<p class="boutons"><span class="image_loading">&nbsp;</span>
+		<input type="submit" name="retour" value="<:ckeditor:retour:>" />
+		<input type="submit" name="enregistrer_modele" value="<:ckeditor:enregistrer_modele:>" />
+	</p>
+]
+[
+		<ul>
+			(#GENERER_SAISIES{#ENV{saisies_cke_page6_1}})
+		</ul>
+
+	<p class="boutons">
+		<input type="submit" name="nouveau_modele" value="<:ckeditor:nouveau_modele:>" />
+	</p>
+]	
+[
+		<ul>
+			(#GENERER_SAISIES{#ENV{saisies_cke_page6_2}})
+		</ul>
+			
+	<p class="boutons"><span class="image_loading">&nbsp;</span>
+		<input type="submit" name="editer_modele" value="<:ckeditor:editer_modele:>" />
+		<input type="submit" name="supprimer_modele" value="<:ckeditor:supprimer_modele:>" onclick="javascript:return confirm('<:ckeditor:confirmer_supprimer_modele:>');"/>
+	</p>
+]
+
+	</div>
+</form>
+</div>

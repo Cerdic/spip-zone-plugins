@@ -1,0 +1,15 @@
+<B_doc>
+	[(#ANCRE_PAGINATION)]
+	<div>[(#CONFIG{ckeditor/insertall}|oui)<a class='ckbutton' href='[(#URL_PAGE{select_documents}|parametre_url{rubrique,#ENV{rubrique}}|parametre_url{CKEditor,#ENV{CKEditor}}|parametre_url{CKEditorFuncNum,#ENV{CKEditorFuncNum}}|parametre_url{langCode,#ENV{langCode}}|parametre_url{type,tout})]' title='<:ckeditor:tous_documents:>'><:ckeditor:tous:></a>] [[(#CONFIG{ckeditor/insertall}|oui)|] (#PAGINATION) | ]
+	</div>
+<BOUCLE_doc(DOCUMENTS){id_rubrique=#ENV{rubrique}}{tout}{mode IN document,image}{pagination 16}>
+	<div class='fichier'>
+		<div class='fichier-apercu'>
+			<a onclick="SelectFile('[(#EXTENSION|match{(jpg|gif|png)}|?{#FICHIER,[(#LOGO_DOCUMENT||image_reduire{150,50}|extraire_attribut{src})]}|url_absolue|parametre_url{docid,#ID_DOCUMENT})]');">[(#EXTENSION|match{(jpg|gif|png)}|?{[(#FICHIER|image_reduire{150,50})],[(#LOGO_DOCUMENT||image_reduire{150,50})]})]</a>
+ 		</div>
+		<div class='fichier-nom'>[(#TITRE|sinon{[(#FICHIER|basename)]})]</div>
+	</div>
+</BOUCLE_doc>
+	[(#CONFIG{ckeditor/insertall}|oui)<div><a class='ckbutton' href='[(#URL_PAGE{select_documents}|parametre_url{rubrique,#ENV{rubrique}}|parametre_url{CKEditor,#ENV{CKEditor}}|parametre_url{CKEditorFuncNum,#ENV{CKEditorFuncNum}}|parametre_url{langCode,#ENV{langCode}}|parametre_url{type,tout})]'><:ckeditor:tous:></a></div>]
+	#MODELE{inc-aucun-document}
+<//B_doc>

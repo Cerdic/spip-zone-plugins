@@ -1,0 +1,47 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: application/json[; charset=(#CHARSET)]})]
+<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
+{
+	"article":{
+		"label":"<:ckeditor:type_article:>",
+		"selectCategorie":"?page=rubriques-links-json",
+		"nomCategorie":"<:ckeditor:label_section:>",
+		"selectItem":"?page=articles-links-json&id_rubrique=",
+		"nomItem":"<:ckeditor:label_article:>"
+	},
+
+	"breve":{
+		"label":"<:ckeditor:type_breve:>",
+		"selectCategorie":"?page=rubriques-links-json",
+		"nomCategorie":"<:ckeditor:label_section:>",
+		"selectItem":"?page=breves-links-json&id_rubrique=",
+		"nomItem":"<:ckeditor:label_breve:>"
+	},
+
+	"rubrique":{
+		"label":"<:ckeditor:type_section:>",
+		"selectCategorie":"?page=rubriques-links-json",
+		"nomCategorie":"<:ckeditor:label_section:>"
+	},
+[(#REM)
+	"groupemots":{
+		"label":"<:ckeditor:type_groupemot:>",
+		"selectCategorie":"?page=groupemots-links-json",
+		"nomCategorie":"<:ckeditor:label_groupe_mots:>"
+	},
+]
+	"mot":{
+		"label":"<:ckeditor:type_mot:>",
+		"selectCategorie":"?page=groupemots-links-json",
+		"nomCategorie":"<:ckeditor:label_groupe_mots:>",
+		"selectItem":"?page=mots-links-json&id_groupe=",
+		"nomItem":"<:ckeditor:label_mot:>"
+	},
+
+	"auteur":{
+		"label":"<:ckeditor:type_auteur:>",
+		"selectCategorie":"?page=auteurs-links-json",
+		"nomCategorie":"<:ckeditor:label_auteur:>"
+	}
+}
+</BOUCLE_si>
