@@ -106,16 +106,15 @@ function linkcheck_lister_liens($champs) {
 				}
 			}
 
-			// Ajout du prefix http:// si necessaire
-			foreach ($tab_temp as &$url_site) {
-				$temp=$url_site;
-				if (preg_match('#^([a-zA-Z0-9\-]*\.)([a-zA-Z0-9\-]*\.)#', $temp)) {
-					$url_site = 'http://' . $url_site;
-				}
-			}
-			// Ajout au tableau du lien
-			$url_site = trim($url_site);
 			if (!empty($tab_temp)) {
+				// Ajout du prefix http:// si necessaire
+				foreach ($tab_temp as &$url_site) {
+					$url_site=trim($url_site);
+					if (preg_match('#^([a-zA-Z0-9\-]*\.)([a-zA-Z0-9\-]*\.)#', $url_site)) {
+						$url_site = 'http://' . $url_site;
+					}
+				}
+				// Ajout au tableau du lien
 				$tab_temp = array_unique($tab_temp);
 				$liens = array_unique(array_merge($liens, $tab_temp));
 			}

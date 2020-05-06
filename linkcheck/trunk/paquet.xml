@@ -1,14 +1,13 @@
 <paquet
 	prefix="linkcheck"
 	categorie="maintenance"
-	version="1.5.3"
+	version="1.5.4"
 	etat="stable"
-	compatibilite="[3.0.5;3.2.*]"
+	compatibilite="[3.0.5;3.3.*]"
 	logo="prive/themes/spip/images/linkcheck-64.png"
 	documentation="https://contrib.spip.net/article4605"
 	schema="1.4.4"
 >
-
 	<nom>LinkCheck</nom>
 
 	<auteur lien="http://www.brgm.fr">BRGM</auteur>
