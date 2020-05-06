@@ -1,0 +1,42 @@
+[(#REM) reglages des variables ]
+#SET{largeur,150}
+#SET{hauteur,#GET{largeur}}
+#SET{class,spip_logo}
+
+[(#REM)
+
+  1. logo contribué de la rubrique
+  2. image liée à la rubrique
+  3. logo de la rubrique parente
+  4. logo standard des rubriques
+  5. logo par défaut des rubriques
+  6. logo du site SPIP 
+
+]
+
+[(#REM) 1. recuperer le logo de rubrique de facon classique ]
+#SET{logo,#ENV*{logo_rubrique}}
+
+[(#REM) 2. s'il n'existe pas, chercher une image associee a la rubrique ;
+On teste "rubon" pour respecter l'ordre des priorités ]
+
+<BOUCLE_doc(DOCUMENTS)
+  {si (#GET{logo}|match{rubon}|non)}
+  {id_rubrique}
+  {par date}
+  {0,1}
+>
+#SET{logo,#FICHIER}
+</BOUCLE_doc>
+
+[(#GET{logo}|non)
+  #SET{logo,#CHEMIN{logo/rubrique.png}}
+]
+
+[(#REM) traiter/recadrer le logo ]
+[(#GET{logo}
+    |sinon{#LOGO_SITE_SPIP}
+    |image_passe_partout{#GET{largeur},#GET{hauteur}}
+    |image_recadre{#GET{largeur},#GET{hauteur},center,transparent}
+    |inserer_attribut{class,#GET{class}}
+)]

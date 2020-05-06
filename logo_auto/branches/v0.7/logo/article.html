@@ -1,0 +1,50 @@
+[(#REM) reglages des variables ]
+#SET{largeur,150}
+#SET{hauteur,#GET{largeur}}
+#SET{class,spip_logo}
+
+[(#REM)
+
+  1. logo contribué de l'article
+  2. image liée à l'article
+  3. logo par défaut des articles
+  4. logo de la rubrique 
+
+]
+
+[(#REM) 1. recuperer le logo d'article de facon classique ]
+#SET{logo,#ENV*{logo_article}}
+
+[(#REM) 2. s'il n'existe pas, chercher une image associee a l'article ;
+On teste "arton" pour respecter l'ordre des priorités ]
+
+<BOUCLE_doc(DOCUMENTS)
+  {si (#GET{logo}|match{arton}|non)}
+  {id_article}
+  {extension IN jpg, gif, png}
+  {par date}
+  {0,1}
+>
+#SET{logo,#FICHIER}
+</BOUCLE_doc>
+
+[(#GET{logo}|non)
+  #SET{logo,#CHEMIN{logo/article.png}}
+]
+
+<BOUCLE_art(ARTICLES)
+  {si (#GET{logo}|non)}
+  {id_article}>
+  <BOUCLE_rub(RUBRIQUES)
+    {id_rubrique}
+  >
+  #SET{logo,#LOGO_RUBRIQUE}
+  </BOUCLE_rub>
+</BOUCLE_art>
+
+[(#REM) traiter/recadrer le logo ]
+[(#GET{logo}
+    |image_passe_partout{#GET{largeur},#GET{hauteur}}
+    |image_recadre{#GET{largeur},#GET{hauteur},center,transparent}
+    |inserer_attribut{class,#GET{class}}
+)]

@@ -1,0 +1,36 @@
+[(#REM) reglages des variables ]
+#SET{largeur,150}
+#SET{hauteur,#GET{largeur}}
+#SET{class,spip_logo}
+
+[(#REM)
+
+  1. image extraite de l'article syndiqué
+  2. apercite de la page syndiquée
+  3. logo du site
+  4. logo par défaut des articles syndiqués
+
+]
+
+[(#REM) recuperer une image dans l'article syndiqué, sinon… ]
+<BOUCLE_syndic_articles(SYNDIC_ARTICLES){id_syndic_article}>
+[(#SET{logo,[(#DESCRIPTIF
+  |extraire_balise{img}
+  |vider_attribut{width}
+  |vider_attribut{height}
+  |vider_attribut{style}
+  |vider_attribut{align}
+  |vider_attribut{alt}
+  |sinon{[<img src="(#VAL{http://www.apercite.fr/api/apercite/240x180/oui/oui/#URL_ARTICLE}|copie_locale{modif})">]}
+  |sinon{#LOGO_SITE}
+  |sinon{[<img src="(#CHEMIN{logo/syndic_article.jpg})">]}
+)]
+})]
+</BOUCLE_syndic_articles>
+
+[(#REM) traiter/recadrer le logo ]
+[(#GET{logo}
+    |image_passe_partout{#GET{largeur},#GET{hauteur}}
+    |image_recadre{#GET{largeur},#GET{hauteur},center,transparent}
+    |inserer_attribut{class,#GET{class}}
+)]

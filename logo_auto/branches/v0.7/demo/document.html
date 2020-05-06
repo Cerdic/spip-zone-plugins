@@ -1,0 +1,24 @@
+<!doctype html>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="none">
+<INCLURE{fond=inclure/head}>
+[<link rel="stylesheet" href="(#CHEMIN{demo/logo_auto.css})" type="text/css" media="all">]
+</head>
+
+<body>
+	<INCLURE{fond=demo/nav}>
+	&lt;INCLURE{fond=logo/document}{id_document}> en attendant &#35;LOGO_DOCUMENT
+	<hr>
+
+	<BOUCLE_logos(DOCUMENTS){par hasard}{0,50}>
+	<div class="logo_auto left text-left">
+		<a href="#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}"[ title="(#FICHIER|basename|attribut_html)"]>
+			<INCLURE{fond=logo/document}{id_document}>
+			<small>[(#EXTENSION|strtoupper)] | [(#FICHIER|basename)]</small>
+		</a>
+	</div>
+	</BOUCLE_logos>
+</body>
+</html>
