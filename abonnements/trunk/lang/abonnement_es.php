@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_abonnement_actif' => 'Ninguna inscripción activa',
 	'info_aucun_abonnement_inactif' => 'Ninguna inscripción inactiva',
 	'info_aucun_abonnement_notifier' => 'Ninguina suscripción a notificar',
+	'info_date_fin' => 'Termina el @date@', # MODIF
 	'info_nb_abonnements' => '@nb@  inscripciones',
 	'info_nb_abonnements_actifs' => '@nb@  inscripciones activas',
 	'info_nb_abonnements_inactifs' => '@nb@ inscripciones inactivas',
@@ -52,12 +53,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'job_desactivation' => 'Desactivación de la inscripción @id@',
 
 	// L
-	'label_date_a_partir' => 'A partir del',
-	'label_date_depuis' => 'Desde el',
-	'label_dates' => 'Fechas',
-	'label_duree' => 'Duración',
-	'label_montant' => 'Monto',
-	'label_statut' => 'Estatus',
+	'label_date_a_partir' => 'A partir del', # MODIF
+	'label_date_depuis' => 'Desde el', # MODIF
+	'label_dates' => 'Fechas', # MODIF
+	'label_duree' => 'Duración', # MODIF
+	'label_montant' => 'Monto', # MODIF
+	'label_statut' => 'Estatus', # MODIF
 
 	// N
 	'notification_echeance_chapo' => '<p>Buenos días @nom@,</p>',

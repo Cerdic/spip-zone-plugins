@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_abonnement' => 'No subscription',
 	'info_aucun_abonnement_actif' => 'No active subscription',
 	'info_aucun_abonnement_inactif' => 'No inactive subscription',
+	'info_date_fin' => 'fin le @date@', # MODIF
 	'info_nb_abonnements' => '@nb@ subscriptions',
 	'info_nb_abonnements_actifs' => '@nb@ active subscriptions',
 	'info_nb_abonnements_inactifs' => '@nb@ inactive subscriptions',
@@ -46,12 +47,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'job_desactivation' => 'Deactivation of the subscription @id@',
 
 	// L
-	'label_date_a_partir' => 'Starting from',
-	'label_date_depuis' => 'Since',
-	'label_dates' => 'Dates',
-	'label_duree' => 'Duration',
-	'label_montant' => 'Amount',
-	'label_statut' => 'Status',
+	'label_date_a_partir' => 'Starting from', # MODIF
+	'label_date_depuis' => 'Since', # MODIF
+	'label_dates' => 'Dates', # MODIF
+	'label_duree' => 'Duration', # MODIF
+	'label_montant' => 'Amount', # MODIF
+	'label_statut' => 'Status', # MODIF
 
 	// N
 	'notification_echeance_chapo' => '<p>Hello @nom@,</p>',

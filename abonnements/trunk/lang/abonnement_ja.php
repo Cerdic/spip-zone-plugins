@@ -32,16 +32,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_abonnement' => '定期購読を申し込む',
 	'icone_modifier_abonnement' => 'この定期購読を変更する',
 	'icone_renouveler_abonnement' => 'この定期購読を更新する。',
-	'info_1_abonnement' => '1件の定期購読',
-	'info_1_abonnement_actif' => '1件の有効な定期購読',
-	'info_1_abonnement_inactif' => '1件の無効な定期購読',
-	'info_1_abonnement_notifier' => '通知が必要な定期購読',
+	'info_1_abonnement' => '1件の定期購読', # MODIF
+	'info_1_abonnement_actif' => '1件の有効な定期購読', # MODIF
+	'info_1_abonnement_inactif' => '1件の無効な定期購読', # MODIF
+	'info_1_abonnement_notifier' => '通知が必要な定期購読', # MODIF
 	'info_abonnements_auteur' => 'この人の全定期購読', # RELIRE
 	'info_aucun_abonnement' => '定期購読はありません',
 	'info_aucun_abonnement_actif' => '有効な定期購読はありません',
 	'info_aucun_abonnement_inactif' => '無効な定期購読はありません',
 	'info_aucun_abonnement_notifier' => '通知が必要な定期購読はありません',
-	'info_date_fin' => '終了日：@date@',
+	'info_date_fin' => '終了日：@date@', # MODIF
 	'info_nb_abonnements' => '@nb@ 件の定期購読',
 	'info_nb_abonnements_actifs' => '@nb@ 件の有効な定期購読',
 	'info_nb_abonnements_inactifs' => '@nb@ 件の無効な定期購読',
@@ -53,12 +53,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'job_desactivation' => '定期購読 @id@　を無効にする',
 
 	// L
-	'label_date_a_partir' => '開始：',
-	'label_date_depuis' => '開始日：',
-	'label_dates' => '日付',
-	'label_duree' => '期間',
-	'label_montant' => '合計',
-	'label_statut' => 'ステータス',
+	'label_date_a_partir' => '開始：', # MODIF
+	'label_date_depuis' => '開始日：', # MODIF
+	'label_dates' => '日付', # MODIF
+	'label_duree' => '期間', # MODIF
+	'label_montant' => '合計', # MODIF
+	'label_statut' => 'ステータス', # MODIF
 
 	// N
 	'notification_echeance_chapo' => '<p>こんにちは @nom@さん,</p>',
