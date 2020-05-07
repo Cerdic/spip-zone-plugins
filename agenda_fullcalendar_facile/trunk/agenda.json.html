@@ -2,7 +2,7 @@
 #SET{end,#ENV{end}|strtotime}
 
 #HTTP_HEADER{Content-type:application/json;charset=#CHARSET}
-[<BOUCLE_evenements(EVENEMENTS){', '}{par date_debut}
+\[<BOUCLE_evenements(EVENEMENTS){', '}{par date_debut}
 {!evenement_passe #ENV{start}}{!evenement_a_venir #ENV{end}}
 	>
 	[(#HORAIRE|=={non}|?{
@@ -36,5 +36,13 @@
 	#INCLURE{fond=inc-couleur-objet,objet=evenement,id_objet=#ID_EVENEMENT}}
 	}
 }]
+<BOUCLE_mots (MOTS) {si #ENV{couleur}|=={mot}|oui} {id_evenement}{par id_mot}>
+[(#COULEUR|oui)
+	#SET{tableau,#GET{tableau}|array_merge{#ARRAY{
+		color,
+		#INCLURE{fond=inc-couleur-objet,objet=mot,id_objet=#ID_MOT}}
+	}
+}]
+</BOUCLE_mots>
 [(#GET{tableau}|json_encode)]
-</BOUCLE_evenements>]
+</BOUCLE_evenements>\]
