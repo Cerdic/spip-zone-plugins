@@ -3,7 +3,7 @@ $(function() {
 });
 $(function() {
 	formidable_ts.tablesorter({
-		widgets: ["zebra","stickyHeaders", "filter","print", "reorder", "columnSelector", "output", "resizable"],
+		widgets: ["zebra","stickyHeaders", "filter","print", "reorder", "columnSelector", "output", "resizable", "savesort"],
 		widgetOptions: {
 			columnSelector_container : $('#columnSelector'),
       print_columns: 's',
