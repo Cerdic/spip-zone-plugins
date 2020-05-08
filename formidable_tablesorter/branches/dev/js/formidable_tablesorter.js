@@ -1,7 +1,9 @@
+/** Appeler jquery table sorter
+ * et lier les actions
+**/
+formidable_ts = '';
 $(function() {
 	formidable_ts = $(".tablesorter");
-});
-$(function() {
 	formidable_ts.tablesorter({
 		widgets: ["zebra","stickyHeaders", "filter","print", "reorder", "columnSelector", "output", "resizable", "savesort"],
 		widgetOptions: {
@@ -20,7 +22,7 @@ $(function() {
 				return call_formidable_tablesorter_export(config, data, url);
 			},
 			reorder_complete : function () {
-				formidable_table_sorter_post_reorder();
+				formidable_ts_post_reorder();
 			},
 			resizable_addLastColumn: true
 		}
@@ -42,6 +44,7 @@ $(function() {
 	$('.reset').click(function() {
 		formidable_ts.trigger('filterReset');
 	});
+	formidable_ts_init_reorder();
 });
 
 /** Réglage du column selector **/
@@ -84,7 +87,50 @@ $.tablesorter.filter.types.start = function(config, data) {
 	return null;
 }
 
+/** Reordonnnancement des colonnes **/
 
-function formidable_table_sorter_post_reorder() {
+// Après le réordonnancement, reinitialiser le column selecteur + sauver les infos sur l'état
+function formidable_ts_post_reorder() {
 	$('#columnSelector').empty();
+	headers = formidable_ts.find('.tablesorter-headerRow th');
+	positions = [];
+	headers.each(function () {
+		positions.push({
+			'original' : $(this).attr('data-column-original-position'),
+			'final' : $(this).attr('data-column')
+			});// Tableau position final  => position original
+		}
+	);
+	$.tablesorter.storage(formidable_ts, 'tablesorter-reorder', positions, {});
 }
+
+// Au début du chargement, reordonnancer les colonnes
+function formidable_ts_init_reorder() {
+	positions = $.tablesorter.storage(formidable_ts, 'tablesorter-reorder');
+	// Et le remplir
+	if (positions) {
+		// Faire un clone de l'original, qui servira de modèle
+		copy_ts = formidable_ts.clone();
+		// Vider l'original
+		$('tr', formidable_ts).empty();
+
+		// Et le reremplir
+		rows_copy = copy_ts.find('tr');
+		rows_original = formidable_ts.find('tr');
+		for (column of positions) {
+			original = column['original'];
+			row = 0;
+			rows_original.each(function() {
+					row_copy = rows_copy.eq(row);
+					td_ou_th = row_copy.children()[original];
+					$(this).append(td_ou_th.outerHTML);
+					row++;
+				}
+			);
+		}
+		// Reinitialiser tout
+		formidable_ts.trigger('resetToLoadState');
+	}
+}
+
+

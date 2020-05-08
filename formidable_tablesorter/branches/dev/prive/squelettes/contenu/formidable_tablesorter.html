@@ -10,7 +10,6 @@
 	<B_reponses>
 	#INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter_boutons,total=#TOTAL_BOUCLE}
 	<table data-identifiant="#IDENTIFIANT" id="formidable_tablesorter#ID_FORMULAIRE" class="tablesorter">
-		<B_entete>
 		<caption>#TITRE</caption>
 		<thead>
 			<tr class="tablesorter-ignoreRow">
@@ -30,20 +29,23 @@
 					]
 				</BOUCLE_entete_fieldsets>
 			</tr>
-			<tr>
-				<th>#</th>
-				<th><:info_numero_abbreviation:></th>
-				<th><:date:></th>
+			<tr class="tablesorter-headerRow">
+				<th data-column-original-position="0">#</th>
+				<th data-column-original-position="1"><:info_numero_abbreviation:></th>
+				<th data-column-original-position="2"><:date:></th>
+				#SET{original_position,2}
 				<BOUCLE_entete_cextras(POUR){tableau #GET{cextras}}>
+					#SET{original_position,#GET{original_position}|plus{1}}
 					[(#VALEUR{saisie}|!={explication}|oui)
-						[<th>(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
+					[<th data-column-original-position="#GET{original_position}">(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
 					]
 				</BOUCLE_entete_cextras>
 				<BOUCLE_entete(POUR) {tableau #GET{saisies_finales}}>
+				#SET{original_position,#GET{original_position}|plus{1}}
 				[(#VALEUR{saisie}|!={explication}|oui)
-					[<th>(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
+				[<th data-column-original-position="#GET{original_position}">(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
 				]
-		</BOUCLE_entete>
+				</BOUCLE_entete>
 			</tr>
 		</thead>
 		</B_entete>
