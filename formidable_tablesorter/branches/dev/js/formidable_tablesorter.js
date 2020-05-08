@@ -5,7 +5,7 @@ $(function() {
 	formidable_ts.tablesorter({
 		widgets: ["zebra","stickyHeaders", "filter","print", "reorder", "columnSelector", "output", "resizable", "savesort"],
 		widgetOptions: {
-			columnSelector_container : $('#columnSelector'),
+			columnSelector_container: $('#columnSelector'),
       print_columns: 's',
       print_rows: 'f',
 			print_extraCSS: 'table{font-size:10pt}',
