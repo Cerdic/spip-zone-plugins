@@ -1,0 +1,42 @@
+<div class="formulaire_spip formulaire_#ENV{form}">
+	#ENV*{_saisies/options/inserer_debut}
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	
+	[(#ENV{editable}|oui)
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		[(#ENV{_etape}|oui)
+			#SET{etapes, #ENV{_saisies}|saisies_lister_par_etapes}
+			<INCLURE{fond=formulaires/inc-saisies-cvt-etapes, etapes=#GET{etapes}, env} />
+		]
+		
+		<[(#DIV|sinon{ul})] class="editer-groupe">
+			#SET{saisies, #ENV{_saisies}}
+			[(#ENV{_etape}|oui)
+				#SET{saisies, #GET{etapes}|table_valeur{#ENV{_etape}/saisies}}
+			]
+			#GENERER_SAISIES{#GET{saisies}}
+		</[(#DIV|sinon{ul})]>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<p class="boutons">
+			<span class="image_loading"></span>
+			[(#SET{label_valider, #ENV{_saisies/options/texte_submit, #ENV{saisies_texte_submit, <:bouton_enregistrer:>}}})]
+			[(#ENV{_etape}|et{#ENV{_etape}|!={#ENV{_etapes}}})
+				[(#SET{label_valider, #ENV{_saisies/options/etapes_suivant, <:bouton_suivant:>}})]
+			]
+			[(#ENV{_etape}|>{1}|oui)
+				<input type="submit" class="submit" name="_retour_etape_[(#ENV{_etape}|moins{1})]" value="[(#ENV{_saisies/options/etapes_precedent, <:precedent|ucfirst:>})]" />
+			]
+			<input type="submit" class="submit" value="#GET{label_valider}" />
+		</p>
+	</div></form>
+	]
+	#ENV*{_saisies/options/inserer_fin}
+</div>
