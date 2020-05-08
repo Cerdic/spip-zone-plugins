@@ -12,23 +12,6 @@
 	<table data-identifiant="#IDENTIFIANT" id="formidable_tablesorter#ID_FORMULAIRE" class="tablesorter">
 		<caption>#TITRE</caption>
 		<thead>
-			<tr class="tablesorter-ignoreRow">
-				<th colspan="3">
-				</th>
-				[(#GET{cextras}|count|oui)
-					[<th colspan="(#GET{cextras}|count)"></th>]
-				]
-				<BOUCLE_entete_fieldsets(POUR) {tableau #GET{saisies}}{cle !== 'options'}>
-					[(#VALEUR{saisies}|non)
-						[(#VALEUR{saisie}|!={explication}|oui)
-						<th></th>
-						]
-					]
-					[(#VALEUR{saisies}|oui)
-					[<th colspan="(#VALEUR{saisies}|count|moins{#VALEUR{saisies}|saisies_lister_avec_type{explication}|count})">#VALEUR{options/label}</th>]
-					]
-				</BOUCLE_entete_fieldsets>
-			</tr>
 			<tr class="tablesorter-headerRow">
 				<th data-column-original-position="0">#</th>
 				<th data-column-original-position="1"><:info_numero_abbreviation:></th>
