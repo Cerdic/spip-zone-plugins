@@ -120,6 +120,19 @@ function saisies_formulaire_charger($flux) {
 	if ($saisies) {
 		// On ajoute au contexte les champs à déclarer
 		$contexte = saisies_lister_valeurs_defaut($saisies);
+		
+		// Si c'est un formulaire de config, on va chercher le contenu dans lire_config
+		if (
+			strpos($flux['args']['form'], 'configurer_') == 0
+			and include_spip('inc/config')
+			and $meta = str_replace('configurer_', '', $flux['args']['form'])
+			and $config = lire_config($meta)
+			and is_array($config)
+		) {
+			$contexte = array_merge($contexte, $config);
+		}
+		
+		// On rajoute ce contexte en défaut de ce qui existe déjà (qui est prioritaire)
 		$flux['data'] = array_merge($contexte, $flux['data']);
 
 		// On cherche si on gère des étapes
