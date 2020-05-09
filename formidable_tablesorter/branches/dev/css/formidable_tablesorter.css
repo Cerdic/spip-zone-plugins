@@ -19,6 +19,10 @@
 .formidable_tablesorter #columnSelectorButton{
 	display:inline-block;
 }
+.formidable_tablesorter #columnSelector {
+	display: grid;
+	grid-template-columns: max-content max-content;
+}
 .formidable_tablesorter #columnSelector label{
 	display:block;
 }
