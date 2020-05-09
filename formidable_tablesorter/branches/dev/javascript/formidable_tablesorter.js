@@ -45,6 +45,7 @@ $(function() {
 	$('.reset').click(function() {
 		formidable_ts.trigger('filterReset');
 	});
+	formidable_ts_init_sort();
 	formidable_ts_init_reorder();
 	formidable_ts_add_check_all_button();
 });
@@ -88,7 +89,16 @@ function formidable_ts_add_check_all_button() {
 $.tablesorter.defaults.textExtraction = function(node, table, cellIndex){
     return $(node).attr('data-sort-value') || $(node).text();
 }
-
+/**
+ * Si pas de tri enregistré, trier par id
+ * Permet de lancer un premier tri pour contourner un bug(?) de resizable
+**/
+function formidable_ts_init_sort() {
+	savesort = $.tablesorter.storage(formidable_ts, 'tablesorter-savesort');
+	if (!savesort) {
+		formidable_ts.find('th[data-column-original-position=1]').trigger('sort');
+	}
+}
 /** Fonctions d'export tableur **/
 function call_formidable_tablesorter_export(config, data, url) {
 	var form = $('<form></form>').attr('action', url_action_formidable_tablesorter_export).attr('method', 'post');
