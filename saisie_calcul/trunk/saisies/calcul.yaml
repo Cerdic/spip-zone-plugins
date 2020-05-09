@@ -21,6 +21,7 @@ options:
         options:
           nom: 'calcul'
           label: '<:saisie_calcul:option_calcul_label:>'
+          rows: 5,
       -
         saisie: 'input'
         options:
