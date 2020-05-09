@@ -14,6 +14,9 @@ function formidable_ts_affiche_gauche($flux) {
 		include_spip('inc/presentation');
 		if (isset($args['id_formulaire'])) {
 			$id_formulaire = $args['id_formulaire'];
+			if (!sql_countsel('spip_formulaires_reponses', "id_formulaire=$id_formulaire")) {
+				return $flux;
+			}
 		} else {
 			$id_formulaire = sql_getfetsel('id_formulaire','spip_formulaires_reponses','id_formulaires_reponse='.$args['id_formulaires_reponse']);
 		}
