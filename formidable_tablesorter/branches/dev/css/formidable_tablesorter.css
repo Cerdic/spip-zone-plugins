@@ -38,3 +38,6 @@
 .tablesorter tr > *{
 	border:1px black solid;
 }
+.tablesorter-sticky-wrapper caption {
+	margin: 0;
+}
