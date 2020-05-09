@@ -7,5 +7,5 @@
 ]
 #SET{attributs,#ENV*{attributs}|concat{ }}
 #SET{calcul,#ENV{calcul}|saisie_calcul_2_js}
-#SET{attributs,#GET{attributs}|concat{data-calcul="#GET{calcul}"}}
+#SET{attributs,#GET{attributs}|concat{data-calcul=}|concat{'"'}|concat{#GET{calcul}}|concat{'"'}}
 <INCLURE{fond=saisies/nombre,env,readonly=on,attributs=#GET{attributs}} />
