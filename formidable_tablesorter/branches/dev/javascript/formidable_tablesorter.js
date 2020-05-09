@@ -64,6 +64,7 @@ $(function() {
 	}
 	);
 });
+
 function formidable_ts_add_check_all_button() {
 	$('#columnSelector').prepend('<label id="columnSelectorCheckAll"><input type="checkbox" checked="checked" class="checked"><span>'+uncheckAll+'</span></label>');
 	$('#columnSelectorCheckAll').change(function() {
@@ -110,8 +111,15 @@ $.tablesorter.filter.types.start = function(config, data) {
 /** Reordonnnancement des colonnes **/
 
 // Après le réordonnancement, reinitialiser le column selecteur + sauver les infos sur l'état
+var formidable_ts_post_reorder_flag = false;
 function formidable_ts_post_reorder() {
-	$('#columnSelector').empty();
+	if (!formidable_ts_post_reorder_flag) {
+		$('#columnSelector label:not([id])').remove();
+		formidable_ts.trigger('refreshWidgets', ['columnSelector']);
+		formidable_ts_post_reorder_flag = true;
+	} else {
+		formidable_ts_post_reorder_flag = false;
+	}
 	headers = formidable_ts.find('.tablesorter-headerRow th');
 	positions = [];
 	headers.each(function () {
