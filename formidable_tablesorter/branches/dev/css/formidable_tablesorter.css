@@ -29,4 +29,12 @@
 .formidable_tablesorter #columnSelectorCheckAll {
 	grid-column-end: span 2;
 }
-
+.tablesorter-ignoreRow th {
+	text-align:center;
+	font-size:1.25em;
+	padding-top:1em;
+	padding-bottom:1em;
+}
+.tablesorter tr > *{
+	border:1px black solid;
+}
