@@ -26,5 +26,7 @@
 .formidable_tablesorter #columnSelector label{
 	display:block;
 }
-
+.formidable_tablesorter #columnSelectorCheckAll {
+	grid-column-end: span 2;
+}
 

@@ -9,6 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonnes' => 'Choix des colonnes',
+	'checkall' => 'Tout cocher',
+	'uncheckall' => 'Tout décocher',
 
 	// E
 	'exporter_ods' => 'Exporter au format ODS (LibreOffice)',

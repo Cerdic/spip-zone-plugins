@@ -45,6 +45,7 @@ $(function() {
 		formidable_ts.trigger('filterReset');
 	});
 	formidable_ts_init_reorder();
+	formidable_ts_add_check_all_button();
 });
 
 /** Réglage du column selector **/
@@ -62,6 +63,24 @@ $(function() {
 	}
 	);
 });
+function formidable_ts_add_check_all_button() {
+	$('#columnSelector').prepend('<label id="columnSelectorCheckAll"><input type="checkbox" checked="checked" class="checked"><span>'+uncheckAll+'</span></label>');
+	$('#columnSelectorCheckAll').change(function() {
+		input = $('input', this);
+		span = $('span', this);
+		if ($('input', this).is(':checked')) {
+			input.attr('class', 'checked');
+			span.text(uncheckAll);
+			$('#columnSelector input[data-column]').prop('checked',true);
+			formidable_ts.trigger('refreshColumnSelector');
+		} else {
+			input.attr('class');
+			span.text(checkAll);
+			$('#columnSelector input[data-column]').prop('checked',false);
+			formidable_ts.trigger('refreshColumnSelector');
+		}
+	});
+}
 
 /** Extraction de textes, notamment pour le tri **/
 $.tablesorter.defaults.textExtraction = function(node, table, cellIndex){
