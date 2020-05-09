@@ -10,5 +10,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'saisie_calcul_description' => 'Une saisie dont la valeur est le résultat d’un calcul depuis d’autres saisies',
 	'saisie_calcul_nom' => 'Saisie de calcul',
-	'saisies_slogan' => 'Une saisie pour les calculer toutes !'
+	'saisie_calcul_slogan' => 'Une saisie pour les calculer toutes !'
 );
