@@ -21,6 +21,7 @@ $(function() {
 			output_callback: function(config, data, url) {
 				return call_formidable_tablesorter_export(config, data, url);
 			},
+			reorder_delay: 10,
 			reorder_complete : function () {
 				formidable_ts_post_reorder();
 			},
