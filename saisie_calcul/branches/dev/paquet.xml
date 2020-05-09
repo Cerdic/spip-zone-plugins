@@ -1,8 +1,8 @@
 <paquet
 	prefix="saisie_calcul"
 	categorie="outil"
-	version="1.2.0"
-	etat="test"
+	version="2.0.0"
+	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	documentation="https://contrib.spip.net/5179"
 >
