@@ -14,7 +14,7 @@
 		<thead>
 			<tr class="tablesorter-ignoreRow">
 				[(#VAL{<th></th>}|str_repeat{3})]
-				[(#VAL{<th></th>}|str_repeat{#GET{cextras}|count})]
+				[(#VAL{<th><:formidable_ts:cextra:></th>}|str_repeat{#GET{cextras}|count})]
 				<BOUCLE_entete_fieldsets(POUR) {tableau #GET{saisies}}{cle !== 'options'}>
 					[(#VALEUR{saisies}|non)
 						[(#VALEUR{saisie}|!={explication}|oui)
