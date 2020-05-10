@@ -4,6 +4,7 @@ description: '<:saisie_calcul:saisie_calcul_explication:>'
 icone: 'images/saisies_input.png'
 heritage_supprimer_options:
   - 'placeholder'
+  - 'defaut'
 heritage_inserer_options:
       -
         chemin:
