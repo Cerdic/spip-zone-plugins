@@ -35,3 +35,9 @@ options:
     verifier:
       type: 'entier'
       min: 0
+  -
+    saisie: 'case'
+    options:
+      nom: 'normaliser'
+      label_case: '<:verifier:option_decimal_normaliser:>'
+      li_class: 'pleine_largeur'

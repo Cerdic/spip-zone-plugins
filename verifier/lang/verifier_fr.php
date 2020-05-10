@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_comparaison_champ_petit' => '< Plus petit',
 	'option_comparaison_champ_petit_egal' => '<= Plus petit ou égal',
 	'option_couleur_normaliser_label' => 'Normaliser le code couleur ?',
+	'option_decimal_normaliser' => 'Normaliser au format informatique',
 	'option_couleur_type_hexa' => 'Code couleur au format héxadécimal',
 	'option_couleur_type_label' => 'Type de vérification à effectuer',
 	'option_decimal_nb_decimales_label' => 'Nombre maximum de décimales après la virgule',
