@@ -74,13 +74,11 @@ function formidable_ts_add_check_all_button() {
 		if ($('input', this).is(':checked')) {
 			input.attr('class', 'checked');
 			span.text(uncheckAll);
-			$('#columnSelector input[data-column]').prop('checked',true);
-			formidable_ts.trigger('refreshColumnSelector');
+			$('#columnSelector input[data-column]').prop('checked',true).trigger('change');
 		} else {
 			input.attr('class');
 			span.text(checkAll);
-			$('#columnSelector input[data-column]').prop('checked',false);
-			formidable_ts.trigger('refreshColumnSelector');
+			$('#columnSelector input[data-column]').prop('checked',false).trigger('change');
 		}
 	});
 }
