@@ -12,11 +12,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_provider' => 'No provider',
 
+	// B
+	'bouton_lecture' => 'Play',
+
 	// E
 	'erreur_ajout_provider' => 'Error when adding the provider.',
 	'erreur_scheme_doublon' => 'This scheme is already in the list.',
 	'explication_scheme' => 'use * as wildcard',
-	'explication_upload_url' => 'Simply specify the URL of the page that contains the document for <a href="http://contrib.spip.net/4595">the most usual sites </a>.', # MODIF
+	'explication_upload_url' => 'Simply specify the URL of the page that contains the document for <a href="https://contrib.spip.net/4595">the most usual sites </a>.',
 
 	// I
 	'info_1_provider' => '1 provider',
@@ -26,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_detecter_lien' => 'Automatically detect providers (ignore the white list)?',
 	'label_embed_auto' => 'Automatically convert URLs inserted in the text?',
 	'label_endpoint' => 'Endpoint',
+	'label_inserer_head' => 'The site is itself provider oembed',
 	'label_maxheight' => 'Maximum height by default (px)',
 	'label_maxwidth' => 'Maximum width by default (px)',
 	'label_scheme' => 'Scheme',
