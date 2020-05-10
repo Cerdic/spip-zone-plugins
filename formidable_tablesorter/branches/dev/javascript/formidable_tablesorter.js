@@ -159,7 +159,9 @@ function formidable_ts_init_reorder() {
 			rows_original.each(function() {
 					row_copy = rows_copy.eq(row);
 					td_ou_th = row_copy.children()[original];
-					$(this).append(td_ou_th.outerHTML);
+					if (td_ou_th) {
+						$(this).append(td_ou_th.outerHTML);
+					}
 					row++;
 				}
 			);
