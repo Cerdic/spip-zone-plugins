@@ -384,16 +384,18 @@ function compositions_heriter($type, $id, $id_parent = null, $serveur = '') {
 			$select .= ', id_parent';
 		}
 		$row = sql_fetsel($select, $table_parent, $nom_id_table_parent.'='.intval($id_parent), '', '', '', '', $serveur);
-		if (strlen($row['composition']) and $row['composition']!='-') {
-			$compo_parent = $row['composition'];
-		} elseif (strlen($row['composition'])==0 and isset($heritages[$type_parent])) {
-			// Si le parent peut heriter, il faut verifier s'il y a heritage
-			$compo_parent = compositions_determiner($type_parent, $id_parent, $serveur = '');
+		if ($row) {
+			if (strlen($row['composition']) and $row['composition']!='-') {
+				$compo_parent = $row['composition'];
+			} elseif (strlen($row['composition'])==0 and isset($heritages[$type_parent])) {
+				// Si le parent peut heriter, il faut verifier s'il y a heritage
+				$compo_parent = compositions_determiner($type_parent, $id_parent, $serveur = '');
+			}
+			if (strlen($compo_parent) and is_null($infos)) {
+				$infos = compositions_lister_disponibles('');
+			}
 		}
 
-		if (strlen($compo_parent) and is_null($infos)) {
-			$infos = compositions_lister_disponibles('');
-		}
 	} while (
 		isset($row['id_parent'])
 		and $id_parent = $row['id_parent']
