@@ -5,6 +5,7 @@ icone: 'images/saisies_input.png'
 heritage_supprimer_options:
   - 'placeholder'
   - 'defaut'
+  - 'autocomplete'
 heritage_inserer_options:
       -
         chemin:
