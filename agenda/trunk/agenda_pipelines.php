@@ -312,8 +312,8 @@ function agenda_post_edition_lien($flux) {
 				$repetitions =  sql_allfetsel('id_evenement', 'spip_evenements',
 					array(
 						'modif_synchro_source=1',
-						'id_evenement_source='.$row['id_evenement_source'],
-						'id_evenement!='.$id_evenement
+						'id_evenement_source='.intval($row['id_evenement_source']),
+						'id_evenement!='.intval($id_evenement)
 					)
 				);
 				$repetitions = array_column($repetitions, 'id_evenement');
@@ -330,7 +330,7 @@ function agenda_post_edition_lien($flux) {
 			$repetitions =  sql_allfetsel('id_evenement', 'spip_evenements',
 				array(
 					'modif_synchro_source=1',
-					'id_evenement_source='.$id_evenement
+					'id_evenement_source='.intval($id_evenement)
 				)
 			);
 			$repetitions = array_column($repetitions, 'id_evenement');
