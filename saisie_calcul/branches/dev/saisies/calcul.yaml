@@ -1,7 +1,7 @@
 heritage: 'nombre'
 titre: '<:saisie_calcul:saisie_calcul_titre:>'
 description: '<:saisie_calcul:saisie_calcul_explication:>'
-icone: 'images/saisies_input.png'
+icone: 'images/saisies_calcul.png'
 heritage_supprimer_options:
   - 'placeholder'
   - 'defaut'
