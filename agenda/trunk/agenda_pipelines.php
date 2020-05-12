@@ -256,7 +256,7 @@ function agenda_post_edition_lien($flux) {
 		 c. Ajouter aussi l'évènement source
 		*/
 		 if ($row['id_evenement_source']) {
-			if (sql_getfetsel('modif_synchro_source', 'spip_evenements', 'id_evenement='.intval($row['id_evenement_source']))) {
+			if ($source = sql_fetsel('*', 'spip_evenements', 'id_evenement='.intval($row['id_evenement_source']))) {
 				$repetitions =  sql_allfetsel('id_evenement', 'spip_evenements',
 					array(
 						'modif_synchro_source=1',
@@ -264,8 +264,10 @@ function agenda_post_edition_lien($flux) {
 						'id_evenement!='.$id_evenement
 					)
 				);
-				$repetitions = array_map('reset', $repetitions);
-				$repetitions[] = $row['id_evenement_source'];// Ajouter l'évènement source lui même
+				$repetitions = array_column($repetitions, 'id_evenement');
+				if ($source['modif_synchro_source']) {
+					$repetitions[] = $row['id_evenement_source'];// Ajouter l'évènement source lui même si il est synchro aussi
+				}
 			}
 		} else {
 			/*
@@ -279,7 +281,7 @@ function agenda_post_edition_lien($flux) {
 					'id_evenement_source='.$id_evenement
 				)
 			);
-			$repetitions = array_map('reset', $repetitions);
+			$repetitions = array_column($repetitions, 'id_evenement');
 		}
 
 		include_spip('action/editer_liens');
