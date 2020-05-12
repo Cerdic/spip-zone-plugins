@@ -12,6 +12,9 @@
 .formidable_tablesorter .boutons{
 	text-align:left;
 }
+.formidable_tablesorter #tablesorter_boutons {
+	max-width:1024px;
+}
 .formidable_tablesorter .boutons label {
 	box-sizing:border-box;
 	padding:4px;
