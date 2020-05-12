@@ -16,7 +16,7 @@
 <script type="text/javascript">
 function update_agenda(link){
 	var date_debut = parametre_url(jQuery(link).attr('href'),'date_debut');
-	$("#liste_des_evenements").ajaxReload({args:{date_debut:date_debut,debut_liste_evt:""},history:true});
+	$("#liste_des_evenements").ajaxReload({args:{var_ajax_ancre:date_debut,debut_liste_evt:""},history:true});
 	jQuery(link).closest('.box').find('li.on').removeClass('on');
 	jQuery(link).closest('li').addClass('on');
 	return false;
