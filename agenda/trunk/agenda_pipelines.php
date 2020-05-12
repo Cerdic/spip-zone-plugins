@@ -221,41 +221,82 @@ function agenda_post_edition($flux) {
 	return $flux;
 }
 
-/*
- * Synchroniser les liaisons (mots, docs, gis, etc) de l'événement édité avec ses répétitions s'il en a
+/**
+ * Synchroniser les liaisons (mots, docs, gis, etc) de l'événement édité
+ * avec ses répétition sœurs/filles/mères
  * @param array $flux
- * @param array
- */
+ * @return flux
+**/
 function agenda_post_edition_lien($flux) {
 	// Si on est en train de lier ou délier quelque chose a un événement
-	if ($flux['args']['objet'] == 'evenement') {
-		// On cherche si cet événement a des répétitions
-		if ($id_evenement = $flux['args']['id_objet']
-			and $id_evenement > 0
-			and $repetitions = sql_allfetsel('id_evenement', 'spip_evenements', 'id_evenement_source = '.$id_evenement)
-			and is_array($repetitions)
-		) {
-			include_spip('action/editer_liens');
+	if ($flux['args']['objet'] == 'evenement'
+		and $id_evenement = $flux['args']['id_objet']
+		and $id_evenement > 0) {
+		$row = sql_fetsel('*', 'spip_evenements', 'id_evenement='.intval($id_evenement));
 
-			// On a la liste des ids des répétitions
-			$repetitions = array_map('reset', $repetitions);
-
-			// Si c'est un ajout de lien, on l'ajoute à toutes les répétitions
-			if ($flux['args']['action'] == 'insert') {
-				objet_associer(
-					array($flux['args']['objet_source'] => $flux['args']['id_objet_source']),
-					array('evenement' => $repetitions)
-				);
-			} elseif ($flux['args']['action'] == 'delete') {
-				// Si c'est une suppression de lien, on le supprime à toutes les répétitions
-				objet_dissocier(
-					array($flux['args']['objet_source'] => $flux['args']['id_objet_source']),
-					array('evenement' => $repetitions)
-				);
-			}
+		// Si on a désactivé la synchro, rien à faire
+		if ($row['modif_synchro_source'] == 0) {
+			return $flux;
 		}
-	}
 
+		// Comme objet_associer/dissocier appelle le pipeline
+		// il ne faut executer cela qu'au premier appel du pipeline
+		static $fait;
+		if ($fait) {
+			return $flux;
+		}
+
+		// Chercher les répetitions à modifier
+		$repetitions = array();
+		$where = array('modif_synchro_source=1');
+		/* Cas 1. L'évènement est une répetition
+		 a. Vérifier que l'évènement source est encore en mode synchronisation
+		 b. Chercher les évènement fille qui ont la synchro activé
+		 c. Ajouter aussi l'évènement source
+		*/
+		 if ($row['id_evenement_source']) {
+			if (sql_getfetsel('modif_synchro_source', 'spip_evenements', 'id_evenement='.intval($row['id_evenement_source']))) {
+				$repetitions =  sql_allfetsel('id_evenement', 'spip_evenements',
+					array(
+						'modif_synchro_source=1',
+						'id_evenement_source='.$row['id_evenement_source'],
+						'id_evenement!='.$id_evenement
+					)
+				);
+				$repetitions = array_map('reset', $repetitions);
+				$repetitions[] = $row['id_evenement_source'];// Ajouter l'évènement source lui même
+			}
+		} else {
+			/*
+			Cas 2, l'évènement est lui-même une source,
+			dans ce cas synchroniser tous les évènements fils qui sont synchro
+			(on a déjà vérifié que c'était le cas pour l'évènement lui-même)
+			*/
+			$repetitions =  sql_allfetsel('id_evenement', 'spip_evenements',
+				array(
+					'modif_synchro_source=1',
+					'id_evenement_source='.$id_evenement
+				)
+			);
+			$repetitions = array_map('reset', $repetitions);
+		}
+
+		include_spip('action/editer_liens');
+		// Si c'est un ajout de lien, on l'ajoute à toutes les répétitions
+		if ($flux['args']['action'] == 'insert') {
+			objet_associer(
+				array($flux['args']['objet_source'] => $flux['args']['id_objet_source']),
+				array('evenement' => $repetitions)
+			);
+		} elseif ($flux['args']['action'] == 'delete') {
+			// Si c'est une suppression de lien, on le supprime à toutes les répétitions
+			objet_dissocier(
+				array($flux['args']['objet_source'] => $flux['args']['id_objet_source']),
+				array('evenement' => $repetitions)
+			);
+		}
+		$fait = true;
+	}
 	return $flux;
 }
 
