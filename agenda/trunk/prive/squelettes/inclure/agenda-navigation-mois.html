@@ -1,4 +1,4 @@
-#SET{self,#ENV{self}|parametre_url{debut_mois,#EVAL{_request('debut_mois')}}}
+#SET{self,#ENV{self}|parametre_url{pagination,''}|parametre_url{debut_mois,#EVAL{_request('debut_mois')}}}
 <B_mois>
 [(#REM) navigation par mois]
 <ul class="liste-items mois">
