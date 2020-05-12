@@ -225,7 +225,7 @@ function agenda_post_edition($flux) {
  * Synchroniser les liaisons (mots, docs, gis, etc) de l'événement édité
  * avec ses répétition sœurs/filles/mères
  * @param array $flux
- * @return flux
+ * @return array flux
 **/
 function agenda_post_edition_lien($flux) {
 	// Si on est en train de lier ou délier quelque chose a un événement
@@ -240,15 +240,16 @@ function agenda_post_edition_lien($flux) {
 		}
 
 		// Comme objet_associer/dissocier appelle le pipeline
-		// il ne faut executer cela qu'au premier appel du pipeline
-		static $fait;
-		if ($fait) {
+		// il ne faut executer cela qu'au premier appel du pipeline pour le meme evenement source
+		$id_evenement_source = intval($row['id_evenement_source'] ? $row['id_evenement_source'] : $id_evenement);
+		static $deja = array();
+		if (isset($deja[$id_evenement_source])) {
 			return $flux;
 		}
+		$deja[$id_evenement_source] = true;
 
 		// Chercher les répetitions à modifier
 		$repetitions = array();
-		$where = array('modif_synchro_source=1');
 		/* Cas 1. L'évènement est une répetition
 		 a. Vérifier que l'évènement source est encore en mode synchronisation
 		 b. Chercher les évènement fille qui ont la synchro activé
@@ -295,7 +296,7 @@ function agenda_post_edition_lien($flux) {
 				array('evenement' => $repetitions)
 			);
 		}
-		$fait = true;
+		unset($deja[$id_evenement_source]);
 	}
 	return $flux;
 }
