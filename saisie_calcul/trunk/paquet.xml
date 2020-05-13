@@ -1,8 +1,9 @@
 <paquet
 	prefix="saisie_calcul"
 	categorie="outil"
-	version="1.1.2"
+	version="2.0.0"
 	etat="test"
+	logo="images/logo_saisie_calcul.png"
 	compatibilite="[3.2.0;3.2.*]"
 	documentation="https://contrib.spip.net/5179"
 >
@@ -11,5 +12,6 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="formulaire_fond" inclure="saisie_calcul_pipelines.php" />
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[3.38.0;]" />
+	<necessite nom="saisie_nombre" compatibilite="[1.0.0;]" />
 </paquet>

@@ -5,5 +5,7 @@
   - type : type de l'input (defaut: text)
   - class : classe(s) css ajoutes a l'input
 ]
-[(#SET{attributs,data-calcul="[(#ENV{calcul}|saisie_calcul_2_js)]"})]
-<INCLURE{fond=saisies/input,env,readonly=on,attributs=#GET{attributs}} />
+#SET{attributs,#ENV*{attributs}|concat{ }}
+#SET{calcul,#ENV{calcul}|saisie_calcul_2_js}
+#SET{attributs,#GET{attributs}|concat{data-calcul=}|concat{'"'}|concat{#GET{calcul}}|concat{'"'}}
+<INCLURE{fond=saisies/nombre,env,readonly=on,attributs=#GET{attributs}} />
