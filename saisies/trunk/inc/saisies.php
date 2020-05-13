@@ -172,6 +172,29 @@ function saisie_identifier($saisie, $regenerer = false) {
 	return $saisie;
 }
 
+
+/**
+ * Supprimer récursivement les identifiants d'un tableau de saisie
+ * Seul usage probable : pour les test uniaires
+ * pour la saisie donnee si elle n'en a pas
+ * (et pour ses sous saisies éventuels)
+ *
+ * @param Array $saisie Tableau d'une saisie
+ * @return Array Tableau de la saisie sans les identifiant
+**/
+function saisies_supprimer_identifiants($saisies) {
+	unset($saisies['identifiant']);
+	foreach ($saisies as $cle => $valeur) {
+		if (is_array($valeur)) {
+			$saisies[$cle] = saisies_supprimer_identifiants($valeur);
+		}
+	}
+	return $saisies;
+}
+
+
+
+
 /**
  * Vérifier tout un formulaire tel que décrit avec les Saisies
  *

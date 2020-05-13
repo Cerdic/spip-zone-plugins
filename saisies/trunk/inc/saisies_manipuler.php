@@ -62,7 +62,7 @@ function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
  * @param array $chemin
  *     Position complète où insérer la saisie.
  *     En absence, insère la saisie à la fin.
- *
+ * @param bool $identifier = true. Mettre à false pour ne pas identifier
  * @return array
  *     Tableau des saisies complété de la saisie insérée
  */
@@ -206,10 +206,10 @@ function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou) {
  * @param array        $saisies             Un tableau décrivant les saisies
  * @param unknown_type $id_ou_nom_ou_chemin L'identifiant unique ou le nom ou le chemin de la saisie à modifier
  * @param array        $modifs              Le tableau des modifications à apporter à la saisie
- *
+ * @param bool				 $fusion							True si on veut simplifier rajouter des choses, sans tout remplacer
  * @return Retourne le tableau décrivant les saisies, mais modifié
  */
-function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs) {
+function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs, $fusion = false) {
 	if ($chemin = saisies_chercher($saisies, $id_ou_nom_ou_chemin, true)) {
 		$position = array_pop($chemin);
 		$parent = &$saisies;
@@ -246,12 +246,12 @@ function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs) {
 			$modifs['saisie'] = $type;
 			unset($modifs['options']['nouveau_type_saisie']);
 		}
-
 		// On remplace tout
-		$parent[$position] = $modifs;
-
-		// Cette méthode ne marche pas trop
-		//$parent[$position] = array_replace_recursive($parent[$position], $modifs);
+		if (!$fusion) {
+			$parent[$position] = $modifs;
+		} else {
+			$parent[$position] = array_replace_recursive($parent[$position], $modifs);
+		}
 	}
 
 	return $saisies;

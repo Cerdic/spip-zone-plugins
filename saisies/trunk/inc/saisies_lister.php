@@ -431,8 +431,8 @@ function saisies_lister_disponibles($saisies_repertoire = 'saisies', $inclure_ob
 					)
 				) {
 					if (!isset($saisie['obsolete'])
-							or $saisie['obsolete'] == false
-							or $inclure_obsoletes
+						or $saisie['obsolete'] == false
+						or $inclure_obsoletes
 					) {
 						$saisies[$type_saisie] = $saisie;
 					}
@@ -502,6 +502,14 @@ function saisies_charger_infos($type_saisie, $saisies_repertoire = 'saisies') {
 		$saisie = yaml_decode_file($fichier);
 
 		if (is_array($saisie)) {
+
+			// En cas d'héritage, récuperer les paramètres de la saisie "mère"
+			// On peut avoir plusieurs saisies mère.
+			// Dans le cas, la dernière de la liste l'emporte sur les précédentes
+			if (isset($saisie['heritage'])) {
+				$type_mere = $saisie['heritage'];
+				$saisie = saisies_recuperer_heritage($saisie, $type_mere, $saisies_repertoire);
+			}
 			$saisie['titre'] = (isset($saisie['titre']) and $saisie['titre'])
 				? _T_ou_typo($saisie['titre']) : $type_saisie;
 			$saisie['description'] = (isset($saisie['description']) and $saisie['description'])
@@ -516,6 +524,44 @@ function saisies_charger_infos($type_saisie, $saisies_repertoire = 'saisies') {
 
 	return $saisie;
 }
+
+/**
+ * Permet à une saisie d'hériter des options et valeur par défaut d'une autre saisies
+ * @param string $saisie la saisie
+ * @param string $type_mere le type de la saisie dont on hérite
+ * @param string $saisies_repertoire = 'saisies'
+ * @return array
+ **/
+function saisies_recuperer_heritage($saisie, $type_mere, $saisies_repertoire = 'saisies') {
+	$mere = saisies_charger_infos($type_mere, $saisies_repertoire);
+	$options_mere = &$mere['options'];
+	unset($saisie['heritage']);
+	if (isset($saisie['heritage_supprimer_options'])) {
+		foreach($saisie['heritage_supprimer_options'] as $option) {
+			$options_mere = saisies_supprimer($options_mere, $option);
+		}
+		unset($saisie['heritage_supprimer_options']);
+	}
+	if (isset($saisie['heritage_modifier_options'])) {
+		foreach ($saisie['heritage_modifier_options'] as $c => $option) {
+			$nom_option = $option['options']['nom'];
+			$fusion = isset($option['fusion']) ? $option['fusion'] : false;
+			unset($option['fusion']);
+			$options_mere = saisies_modifier($options_mere, $nom_option, $option, $fusion);
+		}
+		unset($saisie['heritage_modifier_options']);
+	}
+	if (isset($saisie['heritage_inserer_options'])) {
+		foreach ($saisie['heritage_inserer_options'] as $option) {
+			$chemin = $option['chemin'];
+			unset($option['chemin']);
+			$options_mere = saisies_inserer($options_mere, $option, $chemin);
+		}
+		unset($saisie['heritage_inserer_options']);
+	}
+	return array_replace_recursive($mere,$saisie);
+}
+
 
 /**
  * Quelles sont les saisies qui se débrouillent toutes seules, sans le _base commun.
