@@ -309,6 +309,7 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_enregistrement_option_invalider_label' => 'Rafraîchir le cache',
 	'traiter_enregistrement_option_ip_label' => 'Enregistrer les IPs (masquées après un délai de garde)',
 	'traiter_enregistrement_option_moderation_label' => 'Modération',
+	'traiter_enregistrement_option_moderer_admins_explication' => 'Modérer également les réponses des administrateurs',
 	'traiter_enregistrement_option_modifiable_explication' => 'Modifiable : Les visiteurs peuvent modifier leurs réponses après coup.',
 	'traiter_enregistrement_option_modifiable_label' => 'Réponses modifiables',
 	'traiter_enregistrement_option_multiple_explication' => 'Multiple : Une même personne peut répondre plusieurs fois.',
@@ -320,7 +321,6 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_enregistrement_reglages_generaux' => 'Réglages généraux',
 	'traiter_enregistrement_titre' => 'Enregistrer les résultats',
 	'traiter_enregistrement_unicite_champ' => 'Unicité des réponses',
-	'traiter_enregistrement_option_moderer_admins_explication' => 'Modérer également les réponses des administrateurs',
 
 	// V
 	'voir_exporter' => 'Exporter le formulaire',
