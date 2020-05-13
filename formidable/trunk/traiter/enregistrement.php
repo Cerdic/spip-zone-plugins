@@ -47,15 +47,20 @@ function traiter_enregistrement_dist($args, $retours) {
 		$id_formulaires_reponse = formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_reponse, $options, true);
 	}
 
-	// Si la moderation est a posteriori ou que la personne est un boss, on publie direct
+	// Si la moderation est a posteriori
+	// ou que la personne est un·e boss, mais qu'on ne demande pas à modérer les boss,
+	// on publie direct
 	if ($options['moderation'] == 'posteriori'
-		or autoriser(
+		or (autoriser(
 			'instituer',
 			'formulairesreponse',
 			$id_formulaires_reponse,
 			null,
 			array('id_formulaire' => $id_formulaire, 'nouveau_statut' => 'publie')
-		)) {
+			)
+		and !(isset($options['moderer_admins']) and $options['moderer_admins']=='on')
+		)
+	) {
 		$statut='publie';
 	} else {
 		$statut = 'prop';
@@ -155,7 +160,7 @@ function traiter_enregistrement_dist($args, $retours) {
 	if (
 		isset($options['invalider'])
 		and $options['invalider']
-		and $options['moderation']=='posteriori'
+		and $statut == 'pub'
 	) {
 		include_spip('inc/invalideur');
 		suivre_invalideur("formulaires_reponse/$id_formulaires_reponse");

@@ -320,6 +320,7 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_enregistrement_reglages_generaux' => 'Réglages généraux',
 	'traiter_enregistrement_titre' => 'Enregistrer les résultats',
 	'traiter_enregistrement_unicite_champ' => 'Unicité des réponses',
+	'traiter_enregistrement_option_moderer_admins_explication' => 'Modérer également les réponses des administrateurs',
 
 	// V
 	'voir_exporter' => 'Exporter le formulaire',
