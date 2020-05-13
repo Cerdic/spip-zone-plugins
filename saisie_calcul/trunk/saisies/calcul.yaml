@@ -11,7 +11,7 @@ heritage_inserer_options:
         chemin:
           - 0
           - 'saisies'
-          - 2
+          - 1
         saisie: 'textarea'
         options:
           nom: 'calcul'

@@ -1,7 +1,7 @@
 <paquet
 	prefix="saisie_calcul"
 	categorie="outil"
-	version="2.0.0"
+	version="2.0.1"
 	etat="test"
 	logo="images/logo_saisie_calcul.png"
 	compatibilite="[3.2.0;3.2.*]"
