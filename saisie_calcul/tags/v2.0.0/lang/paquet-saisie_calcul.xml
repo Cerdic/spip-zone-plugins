@@ -1,0 +1,9 @@
+<traduction
+	module="paquet-saisie_calcul"
+	id="paquet-saisie_calcul--saisie_calcul-38fb4"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/saisie_calcul.git"
+	reference="fr">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-saisie_calcul?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+</traduction>
