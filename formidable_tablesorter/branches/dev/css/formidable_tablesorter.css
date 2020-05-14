@@ -6,6 +6,27 @@
 .formidable_tablesorter #conteneur, .formidable_tablesorter #contenu{
 	width:100%;
 }
+/** Eviter les debordement, inspirés de https://mottie.github.io/tablesorter/docs/example-widget-resizable.html **/
+.formidable_tablesorter-wrapper {
+	max-width:100%;
+	width:100%;
+	overflow-x:scroll;
+}
+.formidable_tablesorter-wrapper table {
+  width: auto;
+}
+.formidable_tablesorter-wrapper .tablesorter td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 10px;
+}
+.formidable_tablesorter-wrapper .tablesorter .tablesorter th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 10px;
+}
+
 .formidable_tablesorter #navigation {
 	display:none;
 }
