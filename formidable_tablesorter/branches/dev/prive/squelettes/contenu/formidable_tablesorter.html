@@ -9,6 +9,7 @@
 	<INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter-filtres}{env}/>
 	<B_reponses>
 	#INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter_boutons,total=#TOTAL_BOUCLE}
+	<div class="formidable_tablesorter-wrapper">
 	<table data-identifiant="#IDENTIFIANT" id="formidable_tablesorter#ID_FORMULAIRE" class="tablesorter">
 		<caption>#TITRE</caption>
 		<thead>
@@ -63,5 +64,6 @@
 		</BOUCLE_reponses>
 		</tbody>
 	</table>
+	</div>
 	</B_reponses>
 </BOUCLE_formulaire>
