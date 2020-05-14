@@ -81,7 +81,13 @@ function traiter_email_dist($args, $retours) {
 	}
 
 	$destinataires = pipeline('formidable_traiter_email_destinataires', array(
-		'args' => $args,
+		'args' => array_merge(
+			$args,
+			array(
+				'id_formulaires_reponse' => $retours['id_formulaires_reponse'],
+				'id_formulaire' => $args['formulaire']['id_formulaire']//Un peu redondant, mais ca aide
+			)
+		),
 		'data' => $destinataires)
 	);
 
