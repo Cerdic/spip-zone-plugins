@@ -5,7 +5,7 @@ formidable_ts = '';
 $(function() {
 	formidable_ts = $(".tablesorter");
 	formidable_ts.tablesorter({
-		widgets: ["zebra","stickyHeaders", "filter","print", "reorder", "columnSelector", "output", "resizable", "savesort"],
+		widgets: ["zebra","stickyHeaders", "filter","print", "columnSelector", "output", "resizable", "savesort"],
 		widgetOptions: {
 			columnSelector_container: $('#columnSelector'),
 			columnSelector_mediaquery: false,
@@ -20,10 +20,6 @@ $(function() {
 			output_saveFileName: 'toto.xlsx',
 			output_callback: function(config, data, url) {
 				return call_formidable_tablesorter_export(config, data, url);
-			},
-			reorder_delay: 10,
-			reorder_complete : function () {
-				formidable_ts_post_reorder();
 			},
 			resizable_addLastColumn: true
 		}
