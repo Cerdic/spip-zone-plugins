@@ -12,29 +12,29 @@
 	[<p class="explication"><span class="label"><:comments:label_nom:></span> <strong class="session_nom">(#SESSION{nom}|typo)</strong> <span class="details">&#91;<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>&#93;</span></p>]
 ]
 [(#SESSION{statut}|non)
-	<ul>
-		<li class='editer saisie_session_nom[ (#ENV**{erreurs}|table_valeur{session_nom}|oui)erreur]'>
+	<[(#DIV|sinon{ul})] class="editer-groupe">
+		<[(#DIV|sinon{li})] class='editer saisie_session_nom[ (#ENV**{erreurs}|table_valeur{session_nom}|oui)erreur]'>
 			<label for="session_nom"><:comments:label_nom:></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{session_nom})</span>
 			]<input type="text" class="text" name="session_nom" id="session_nom" value="[(#SESSION**{nom}|sinon{#SESSION**{session_nom}}|entites_html)]" size="40" />
 			[(#CONFIG{accepter_inscriptions}|=={oui}|oui)
 			<span class="details">&#91;<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow"><:lien_connecter:></a>&#93;</span>
 			]
-		</li>
-		<li class='editer saisie_session_email[ (#ENV**{erreurs}|table_valeur{session_email}|oui)erreur]'>
+		</[(#DIV|sinon{li})]>
+		<[(#DIV|sinon{li})] class='editer saisie_session_email[ (#ENV**{erreurs}|table_valeur{session_email}|oui)erreur]'>
 			<label for="session_email"><:comments:label_email:></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{session_email})</span>
 			]<input type="[(#HTML5|?{email,text})]" class="text email" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" />
-		</li>
+		</[(#DIV|sinon{li})]>
 		[(#ENV{url_site}|!={http://}|oui)#SET{url_site,#ENV{url_site}]
 [(#CONFIG{forums_urlref}|!={non}|?{
-		<li class='editer saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'>
+		<[(#DIV|sinon{li})] class='editer saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'>
 				<label for="url_site"><:comments:label_url:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
 				]<input type="[(#HTML5|?{url,text})]" class="text url" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" [(#HTML5|oui) [placeholder="(#ENV{url_site})"][ value="(#GET{url_site})"]][(#HTML5|non)value="#ENV{url_site}"]/>
-		</li>
+		</[(#DIV|sinon{li})]>
 })]
-	</ul>
+	</[(#DIV|sinon{ul})]>
 	[(#PLUGIN{gravatar}|oui)<p class="explication gravatar_info_forum"><:gravatar:gravatar_info_forum:></p>]
 ]
 </fieldset>
