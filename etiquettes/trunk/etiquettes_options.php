@@ -17,9 +17,8 @@ if (!defined('_SELECTEUR_GENERIQUE_ACTIVER_PUBLIC'))
 function etiquettes_produire_id($groupe, $type_objet='', $id_objet=''){
 
 	$elements = compact("groupe", "type_objet", "id_objet");
-	$operations = create_function(
-		'$e',
-		'return str_replace(
+	$operations = function($e) {
+		return str_replace(
 			" ",
 			"_",
 			preg_replace(
@@ -35,8 +34,8 @@ function etiquettes_produire_id($groupe, $type_objet='', $id_objet=''){
 					)
 				)
 			)
-		);'
-	);
+		);
+	};
 	
 	$elements = array_map($operations, $elements);
 	return trim(join('_', $elements), '_');
