@@ -38,8 +38,16 @@
 .tablesorter-ignoreRow th {
 	text-align:center;
 	font-size:1.25em;
-	padding-top:1em;
 	padding-bottom:1em;
+}
+.tablesorter .move-arrows {
+	display: flex;
+	justify-content: space-between;
+	margin-left:0.5em;
+	margin-right:0.5em;
+}
+.tablesorter .move-arrows.first{
+	justify-content:end;
 }
 .tablesorter tr > *{
 	border:1px black solid;

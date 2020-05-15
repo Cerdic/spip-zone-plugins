@@ -2,6 +2,7 @@
  * et lier les actions
 **/
 formidable_ts = '';
+formidable_ts_sticky= '';
 $(function() {
 	formidable_ts = $(".tablesorter");
 	formidable_ts.tablesorter({
@@ -28,7 +29,9 @@ $(function() {
 		filtres = $(this).find('tbody tr.filtered').length;
 		$('#total').text(total-filtres);
 		}
-	);
+	).on('columnUpdate', function() {
+		formidable_ts_add_reorder_add_arrows();
+	});;
   $('.print').click(function() {
     formidable_ts.trigger('printTable');
   });
@@ -41,6 +44,7 @@ $(function() {
 	$('.reset').click(function() {
 		formidable_ts.trigger('filterReset');
 	});
+	formidable_ts_sticky = $('#'+formidable_ts.attr('id')+'-sticky');
 	formidable_ts_init_sort();
 	formidable_ts_init_reorder();
 	formidable_ts_add_check_all_button();
@@ -136,8 +140,14 @@ function formidable_ts_post_reorder() {
 	$.tablesorter.storage(formidable_ts, 'tablesorter-reorder', positions, {});
 }
 
-// Au début du chargement, reordonnancer les colonnes
+// function appelé au tout début du chargement de formidable table_sorter
 function formidable_ts_init_reorder() {
+	formidable_ts_restore_reorder();
+	formidable_ts_add_reorder_add_arrows();
+}
+
+// Au début du chargement, reordonnancer les colonnes
+function formidable_ts_restore_reorder() {
 	positions = $.tablesorter.storage(formidable_ts, 'tablesorter-reorder');
 	// Et le remplir
 	if (positions) {
@@ -166,3 +176,24 @@ function formidable_ts_init_reorder() {
 		formidable_ts.trigger('resetToLoadState');
 	}
 }
+// Ajout des flèches au chargement
+function formidable_ts_add_reorder_add_arrows() {
+
+	$('.move-arrows').remove();
+	tables = [formidable_ts_sticky, formidable_ts];
+	for (table of tables) {
+		th = $('.tablesorter-ignoreRow th', table).not('.filtered');
+		th.each(function (index) {
+			$(this).prepend('<div class="move-arrows"></div>');
+			if (index == 0) {
+				$('.move-arrows', this).addClass('first');
+				$('.move-arrows', this).prepend('<a class="right">&#x27A1;</a>');
+			} else if (index != th.length -1) {
+				$('.move-arrows', this).prepend('<a class="left">&#x2B05;</a> <a class="right">&#x27A1;</a>');
+			} else {
+				$('.move-arrows', this).prepend('<a class="left">&#x2B05;</a>');
+			}
+		});
+	}
+}
+
