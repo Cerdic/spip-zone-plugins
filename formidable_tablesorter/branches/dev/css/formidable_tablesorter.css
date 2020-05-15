@@ -11,6 +11,7 @@
 	max-width:100%;
 	width:100%;
 	overflow-x:scroll;
+	overflow-y:scroll;
 }
 .formidable_tablesorter-wrapper table {
   width: auto;
