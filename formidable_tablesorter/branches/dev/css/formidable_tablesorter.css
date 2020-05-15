@@ -1,3 +1,4 @@
+/** Réglages généraux de la page **/
 .formidable_tablesorter .largeur {
 	width:auto;
 	margin-left:1em;
@@ -6,7 +7,13 @@
 .formidable_tablesorter #conteneur, .formidable_tablesorter #contenu{
 	width:100%;
 }
-/** Eviter les debordement, inspirés de https://mottie.github.io/tablesorter/docs/example-widget-resizable.html **/
+.formidable_tablesorter #navigation {
+	display:none;
+}
+/** Réglages de la table, v
+ * éviter les debordement,
+ * inspiré de https://mottie.github.io/tablesorter/docs/example-widget-resizable.html
+**/
 .formidable_tablesorter-wrapper {
 	max-width:100%;
 	width:100%;
@@ -27,10 +34,20 @@
   text-overflow: ellipsis;
   min-width: 10px;
 }
-
-.formidable_tablesorter #navigation {
-	display:none;
+/** Styles cellules et entetes divers **/
+.tablesorter-ignoreRow th {
+	text-align:center;
+	font-size:1.25em;
+	padding-top:1em;
+	padding-bottom:1em;
 }
+.tablesorter tr > *{
+	border:1px black solid;
+}
+.tablesorter-sticky-wrapper caption {
+	margin: 0;
+}
+/** Le bloc d'action **/
 .formidable_tablesorter .boutons{
 	text-align:left;
 }
@@ -53,16 +70,4 @@
 }
 .formidable_tablesorter #columnSelectorCheckAll {
 	grid-column-end: span 2;
-}
-.tablesorter-ignoreRow th {
-	text-align:center;
-	font-size:1.25em;
-	padding-top:1em;
-	padding-bottom:1em;
-}
-.tablesorter tr > *{
-	border:1px black solid;
-}
-.tablesorter-sticky-wrapper caption {
-	margin: 0;
 }
