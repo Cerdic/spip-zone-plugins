@@ -6,6 +6,24 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// A
+	'aide' => '{{Tri des colonnes}}
+
+	Appuyer sur le titre d\'une colonne pour la trier. Utiliser la touche <code>⇧</code> pour utiliser les autres colonnes comme tri secondaire.
+
+	{{Filtre}}
+
+	Dans le champ de filtre, vous pouvez :
+
+-* Saisir une série de caractère
+-* Utiliser des comparateurs mathématiques :
+-** <
+-** <=
+-** >
+-** >=
+-** =
+-** ==
+',
 
 	// C
 	'colonnes' => 'Choix des colonnes',

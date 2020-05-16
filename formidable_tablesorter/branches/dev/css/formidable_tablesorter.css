@@ -55,27 +55,33 @@
 .tablesorter-sticky-wrapper caption {
 	margin: 0;
 }
-/** Le bloc d'action **/
-.formidable_tablesorter .boutons{
+/** Le bloc d'action et d'aide**/
+.formidable_tablesorter-preambule {
+	display:flex;
+	justify-content:space-around;
+}
+.formidable_tablesorter-preambule > *{
+	width:45%;
+	max-width:1024px;
+	height:min-content;
+}
+.formidable_tablesorter-preambule .aide {
+	padding:1ex;
+}
+.formidable_tablesorter-preambule .boutons{
 	text-align:left;
 }
-.formidable_tablesorter #tablesorter_boutons {
-	max-width:1024px;
-}
-.formidable_tablesorter .boutons label {
-	box-sizing:border-box;
+.formidable_tablesorter-preambule .boutons label {
 	padding:4px;
 }
 .formidable_tablesorter #columnSelectorButton{
 	display:inline-block;
 }
 .formidable_tablesorter #columnSelector {
-	display: grid;
-	grid-template-columns: max-content max-content;
+	display: flex;
+	flex-wrap:wrap;
 }
-.formidable_tablesorter #columnSelector label{
-	display:block;
-}
-.formidable_tablesorter #columnSelectorCheckAll {
-	grid-column-end: span 2;
+.formidable_tablesorter #columnSelector label {
+	width:50%;
+	padding:0px;
 }
