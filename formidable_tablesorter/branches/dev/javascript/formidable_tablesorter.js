@@ -2,11 +2,17 @@
  * et lier les actions
 **/
 formidable_ts = '';
-formidable_ts_sticky= '';
 $(function() {
 	formidable_ts = $(".tablesorter");
 	formidable_ts.tablesorter({
-		widgets: ["zebra","stickyHeaders", "filter","print", "columnSelector", "output", "resizable", "savesort"],
+		widgets: ["zebra",
+			"stickyHeaders",
+			"filter",
+			"print",
+			"columnSelector",
+			"output",
+			"resizable",
+			"savesort"],
 		widgetOptions: {
 			columnSelector_container: $('#columnSelector'),
 			columnSelector_mediaquery: false,
@@ -30,7 +36,7 @@ $(function() {
 		$('#total').text(total-filtres);
 		}
 	).on('columnUpdate', function() {
-		formidable_ts_add_reorder_add_arrows();
+		formidable_ts_add_reorder_arrows();
 	});;
   $('.print').click(function() {
     formidable_ts.trigger('printTable');
@@ -44,7 +50,6 @@ $(function() {
 	$('.reset').click(function() {
 		formidable_ts.trigger('filterReset');
 	});
-	formidable_ts_sticky = $('#'+formidable_ts.attr('id')+'-sticky');
 	formidable_ts_init_sort();
 	formidable_ts_init_reorder();
 	formidable_ts_add_check_all_button();
@@ -138,12 +143,14 @@ function formidable_ts_post_reorder() {
 		}
 	);
 	$.tablesorter.storage(formidable_ts, 'tablesorter-reorder', positions, {});
+	formidable_ts.trigger('resetToLoadState');
+	formidable_ts_add_reorder_arrows();
 }
 
 // function appelé au tout début du chargement de formidable table_sorter
 function formidable_ts_init_reorder() {
 	formidable_ts_restore_reorder();
-	formidable_ts_add_reorder_add_arrows();
+	formidable_ts_add_reorder_arrows();
 }
 
 // Au début du chargement, reordonnancer les colonnes
@@ -174,12 +181,14 @@ function formidable_ts_restore_reorder() {
 		}
 		// Reinitialiser tout
 		formidable_ts.trigger('resetToLoadState');
+		formidable_ts_add_reorder_arrows();
 	}
 }
-// Ajout des flèches au chargement
-function formidable_ts_add_reorder_add_arrows() {
 
+// Ajout des flèches au chargement
+function formidable_ts_add_reorder_arrows() {
 	$('.move-arrows').remove();
+	formidable_ts_sticky = $('#'+formidable_ts.attr('id')+'-sticky');
 	tables = [formidable_ts_sticky, formidable_ts];
 	for (table of tables) {
 		th = $('.tablesorter-ignoreRow th', table).not('.filtered');
@@ -195,5 +204,33 @@ function formidable_ts_add_reorder_add_arrows() {
 			}
 		});
 	}
+	$('.move-arrows a').click(function() {
+		th = $(this).parent().parent();
+		tr = th.parent();
+		index = th.index();
+		if ($(this).hasClass('left')) {
+			prev = th.prevAll(':not(.filtered)').first();
+			index_inserting = prev.index();
+			inserting = 'before';
+		} else {
+			next = th.nextAll(':not(.filtered)').first();
+			index_inserting = next.index();
+			inserting = 'after';
+		}
+		formidable_ts_sticky = $('#'+formidable_ts.attr('id')+'-sticky');
+		tables = [formidable_ts_sticky, formidable_ts];
+		for (table of tables) {
+			$('tr', table).each(function(){
+				cells = $(this).children();
+				this_cell = cells.eq(index).clone();
+				cells.eq(index).remove();
+				if (inserting == 'after') {
+					cells.eq(index_inserting).after(this_cell);
+				} else {
+					cells.eq(index_inserting).before(this_cell);
+				}
+			});
+		}
+		formidable_ts_post_reorder();
+	});
 }
-
