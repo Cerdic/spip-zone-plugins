@@ -11,6 +11,8 @@ define('_ICON_SPRITE_SVG_FILE', "img/bi-all-symbols.svg");
 // 2 sprites : celui de base + celui avec les variantes fill
 define('_ICON_SPRITE_SVG_NOFILL_FILE', "img/bi-symbols.svg");
 define('_ICON_SPRITE_SVG_FILL_FILE', "img/bi-fill-symbols.svg");
+// 1 sprite mini : juste pour les icones de z/spipr
+define('_ICON_SPRITE_SVG_MIN_FILE', "img/bi-min-symbols.svg");
 
 define('_ICON_SPRITE_SVG_ID_PREFIX', "bi-");
 
@@ -23,10 +25,20 @@ function filtre_icone_href_class_from_name($name) {
 		if (!$name) {
 			return array(find_in_path(_ICON_SPRITE_SVG_FILE), '');
 		}
+		$icone_anchor_from_name = chercher_filtre("icone_anchor_from_name");
+		$anchor = $icone_anchor_from_name($name);
 
+		// on a un petit sprite dedie aux icones utilisees par defaut par Z-core et spipr-xx pour ne pas charger la mule
+		// c'est un sprite maintenu a la main, lister ici les icones qu'il contient
+		if (in_array($anchor,['bi-person','bi-calendar','bi-chevron-left','bi-chevron-right','bi-chat','bi-tag','bi-check-box','bi-skip-start','bi-skip-end'])) {
+			if (!isset($sprite_files['min'])){
+				$sprite_files['min'] = timestamp(find_in_path(_ICON_SPRITE_SVG_MIN_FILE));
+			}
+			$file = $sprite_files['min'];
+		}
 		// c'est le sprite par defaut avec un name qui correspond a l'ancre abregee
 		// et la gestion de quelques historiques de nommage/renommage
-		if (strpos($name, '-fill') !== false){
+		elseif (strpos($name, '-fill') !== false){
 			if (!isset($sprite_files['fill'])){
 				$sprite_files['fill'] = timestamp(find_in_path(_ICON_SPRITE_SVG_FILL_FILE));
 			}
@@ -44,8 +56,6 @@ function filtre_icone_href_class_from_name($name) {
 			$class .= " " . _ICON_SPRITE_SVG_ID_PREFIX . "icon";
 		}
 
-		$icone_anchor_from_name = chercher_filtre("icone_anchor_from_name");
-		$anchor = $icone_anchor_from_name($name);
 		return array($file . '#' . $anchor, $class);
 	}
 }
