@@ -1,0 +1,14 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#ENV{id}}{statut?}>
+<div class='infos'>
+<div class='numero'><:formidable:voir_numero:><p>#ID_FORMULAIRE</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{formulaire,#ID_FORMULAIRE})]
+
+[(#CONFIG{formidable/activer_pages}|et{#STATUT|=={publie}}|oui)
+	[(#VAL{redirect}
+		|generer_url_action{type=formulaire&id=#ID_FORMULAIRE}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+]
+</div>
+</BOUCLE_formulaire>
