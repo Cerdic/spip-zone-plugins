@@ -18,6 +18,7 @@ $(function() {
 		],
 		widgetOptions: {
 			columnSelector_container: $('#columnSelector'),
+			columnSelector_layout : '<label><input type="checkbox"><span>{name}</span></label>',
 			columnSelector_mediaquery: false,
       print_columns: 's',
       print_rows: 'f',
@@ -53,8 +54,8 @@ $(function() {
 	$('.reset').click(function() {
 		formidable_ts.trigger('filterReset');
 	});
-	formidable_ts_init_reorder();
 	formidable_ts_add_check_all_button();
+	formidable_ts_init_reorder();
 });
 
 /** Réglage du column selector **/
@@ -113,36 +114,92 @@ $.tablesorter.filter.types.start = function(config, data) {
 	return null;
 }
 
-/** Reordonnnancement des colonnes **/
+/** Reordonnnancement des colonnes
+ * Note sur le stockage en local storage :
+ * - les filtres sont notés selon l'ordre EFFECTIF des colonnes
+ * - les tri sont stockés selon l'attribut data-column effectif des colonnes MAIS par contre il faut les passer au triger sorton selon la position des colonnes <!>
+ * - NE SURTOUT PAS MODIFIER data-column
+ * **/
 
-// Après le réordonnancement, reinitialiser le column selecteur + sauver les infos sur l'état
-var formidable_ts_post_reorder_flag = false;
-function formidable_ts_post_reorder() {
-	if (!formidable_ts_post_reorder_flag) {
-		$('#columnSelector label:not([id])').remove();
-		formidable_ts.trigger('refreshWidgets', ['columnSelector']);
-		formidable_ts_post_reorder_flag = true;
-	} else {
-		formidable_ts_post_reorder_flag = false;
-	}
+function formidable_ts_post_reorder_refresh_view() {
+	// Mettre à jour tout les widgets
+	formidable_ts.trigger('updateAll');
+	formidable_ts.trigger('applyWidgets');
+	formidable_ts_post_reorder_set_columnSelector();
+	// 2 fois car le colonne selecteur peut avoir des impacts sur les css des autres widgets, mais il faut que les autres widgets soit rafraichi pour que le le refresh du CS fonction :(
+	formidable_ts.trigger('updateAll');
+	formidable_ts.trigger('applyWidgets');
+	formidable_ts_add_reorder_arrows();
+}
+
+// Stockage des positions
+function formidable_ts_post_reorder_storage() {
 	headers = formidable_ts.find('.tablesorter-headerRow th');
 	positions = [];
 	headers.each(function () {
+		index = $(this).index();
 		positions.push({
 			'original' : $(this).attr('data-column-original-position'),
-			'final' : $(this).attr('data-column')
+			'final' : index
 			});// Tableau position final  => position original
 		}
 	);
 	$.tablesorter.storage(formidable_ts, 'tablesorter-reorder', positions, {});
-	formidable_ts.trigger('resetToLoadState');
-	formidable_ts_add_reorder_arrows();
+}
+//Retrouver le tri
+function formidable_ts_post_reorder_set_sorting() {
+	// Retrouver le tri
+	sortList = $.tablesorter.storage(formidable_ts, 'tablesorter-savesort')['sortList'];
+	formidable_ts.trigger('sortReset');
+	sortList = formidable_tablesorter_reorder_sortList_update_position(sortList);
+	formidable_ts.trigger('sorton', [sortList]);
+
+}
+// Prend une sortList
+// La parcourt et la modifie de manière à donner le bon index suivant le nouvel ordre post-déplacement de colonne
+// Pour chaque entrée, trouve la bonne position avec nouveal indexation
+function formidable_tablesorter_reorder_sortList_update_position(sortList) {
+	$(sortList).each(function(key, value) {
+		console.log(value);
+		selector = '.tablesorter-ignoreRow th[data-column='+value[0]+']';
+		sort = value[1];
+		new_position = $(selector, formidable_ts).index();
+		value = [new_position, sort];
+		sortList[key] = value;
+	});
+	return sortList
 }
 
+// Mettre à jour le colonne selector
+function formidable_ts_post_reorder_set_columnSelector() {
+	th = $('.tablesorter-headerRow th', formidable_ts);
+	th.each(function() {
+		selector = '#columnSelector label[data-column='+$(this).attr('data-column')+'] span';
+		$(selector).text($(this).text());
+	});
+	formidable_ts.trigger('refreshColumnSelector', 'selectors');
+}
+
+function formidable_ts_post_reorder_set_filter(filter) {
+	// Reinitialisation des filtres
+	formidable_ts.trigger('filterResetSaved');
+	formidable_ts.trigger('filterReset');
+	console.log('Filter post reorder :');
+	console.log(filter);
+	$.tablesorter.setFilters(formidable_ts, filter, true);
+}
 // function appelé au tout début du chargement de formidable table_sorter
 function formidable_ts_init_reorder() {
+	$('[data-column]').each(function() {
+		$(this).attr('data-column-original-position',$(this).attr('data-column'));
+	});
+	// Avoir directement sur le label les infos de data-column-position
+	$('#columnSelector label:not(#columnSelectorCheckAll)').each(function() {
+		$(this).attr('data-column',$('input', this).attr('data-column'));
+	});
 	formidable_ts_restore_reorder();
-	formidable_ts_add_reorder_arrows();
+	formidable_ts_post_reorder_refresh_view();
+	formidable_ts_post_reorder_storage();
 }
 
 // Au début du chargement, reordonnancer les colonnes
@@ -171,11 +228,9 @@ function formidable_ts_restore_reorder() {
 				}
 			);
 		}
-		// Reinitialiser tout
-		formidable_ts.trigger('resetToLoadState');
-		formidable_ts_add_reorder_arrows();
 	}
 }
+
 reorder = 0
 // Ajout des flèches au chargement
 function formidable_ts_add_reorder_arrows() {
@@ -197,6 +252,7 @@ function formidable_ts_add_reorder_arrows() {
 		});
 	}
 	$('.move-arrows a').click(function() {
+		filter = [];
 		reorder++;
 		console.log('start reorder ' + reorder)
 		var v1 = performance.now();
@@ -226,10 +282,16 @@ function formidable_ts_add_reorder_arrows() {
 				}
 			});
 		}
+		$('.tablesorter-filter', formidable_ts).each(function() {
+			filter.push($(this).val());
+		});
 		var v2 = performance.now();
 		console.log("reorder time  taken = "+(v2-v1)+"milliseconds");
 		console.log('start post reorder ' + reorder)
-		formidable_ts_post_reorder();
+		formidable_ts_post_reorder_set_filter(filter);
+		formidable_ts_post_reorder_storage();
+		formidable_ts_post_reorder_set_sorting();
+		formidable_ts_post_reorder_refresh_view();
 		var v3 = performance.now();
 		console.log('end reorder ' + reorder)
 		console.log("post reorder time  taken = "+(v3-v2)+"milliseconds");
