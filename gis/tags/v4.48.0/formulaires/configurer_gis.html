@@ -1,0 +1,227 @@
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_gis">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<div id="map_config" class="carte_gis" style="width: 100%; height: 370px"></div>
+
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<[(#DIV|sinon{ul})] class="editer-groupe">
+		<[(#DIV|sinon{li})] class="rechercher_adresse editer editer_map_config">
+			<label for="champ_map_config_geocoder"><:gis:label_rechercher_address:></label>
+			<input type="text" class="text" name="champ_map_config_geocoder" id="champ_map_config_geocoder" value="" />
+			<a id="map_config_rechercher_geocodage"><:info_rechercher:></a>
+		</[(#DIV|sinon{li})]>
+		[(#SAISIE{input,lat,
+			label=<:gis:lat:>,
+			defaut=0,
+			size=40})]
+		[(#SAISIE{input,lon,
+			label=<:gis:lon:>,
+			defaut=0,
+			size=40})]
+		[(#SAISIE{input,zoom,
+			label=<:gis:zoom:>,
+			defaut=0,
+			size=2,
+			maxlength=2})]
+		
+		#SET{layers,#ARRAY}
+		<BOUCLE_layer(DATA){source table, #EVAL{$GLOBALS['gis_layers']}}>
+		#SET{layers,#GET{layers}|array_merge{#ARRAY{#CLE,#VALEUR|table_valeur{nom}}}}
+		</BOUCLE_layer>
+		
+		[(#SET{layer_defaut,openstreetmap_mapnik})]
+		[(#VAL{_GIS_LAYER_DEFAUT}|defined|oui)
+			[(#SET{layer_defaut,[(#EVAL{_GIS_LAYER_DEFAUT})]})]
+		]
+		[(#VAL{_GIS_LAYER_DEFAUT_FORCE}|defined|oui)
+			[(#SET{layer_readonly,readonly})]
+			[(#SET{layer_disable,disabled})]
+			[(#SET{layer_forcee,[(#EVAL{_GIS_LAYER_DEFAUT_FORCE})]})]
+			[(#SET{layer_explications,<:gis:explication_layer_forcee:>})]
+		]
+		[(#SAISIE{selection,layer_defaut,
+			label=<:gis:cfg_lbl_layer_defaut:>,
+			cacher_option_intro=oui,
+			defaut=#GET{layer_defaut},
+			valeur_forcee=#GET{layer_forcee},
+			readonly=#GET{layer_readonly},
+			disable=#GET{layer_disable},
+			explication=#GET{layer_explications},
+			datas=#GET{layers}})]
+		[(#SAISIE{selection_multiple,layers,
+			label=<:gis:cfg_lbl_layers:>,
+			cacher_option_intro=oui,
+			defaut=#GET{layer_defaut},
+			explication=[(#ENV*{layers,#LISTE}|count|singulier_ou_pluriel{gis:explication_layers_un,gis:explication_layers})],
+			datas=#GET{layers}})]
+		
+		[(#SAISIE{input,api_key_bing,
+			label=<:gis:cfg_lbl_api_key_bing:>,
+			explication=<:gis:cfg_inf_bing{url=https://www.bingmapsportal.com/}:>,
+			size=40})]
+			
+		[(#SAISIE{input,api_key_google,
+			label=<:gis:cfg_lbl_api_key_google:>,
+			explication=<:gis:cfg_inf_google{url=https://developers.google.com/maps/documentation/javascript/get-api-key}:>,
+			size=40})]
+	
+		[(#SAISIE{oui_non,geocoder,
+			defaut='',
+			label=<:gis:cfg_lbl_geocoder:>,
+			explication=<:gis:cfg_inf_geocoder:>})]
+		
+		[(#SAISIE{oui_non,adresse,
+			defaut='',
+			label=<:gis:cfg_lbl_adresse:>,
+			explication=<:gis:cfg_inf_adresse:>})]
+		
+		[(#PLUGIN{gisgeom}|oui)
+		[(#SAISIE{oui_non,styles,
+			defaut='',
+			label=<:gis:cfg_lbl_styles:>,
+			explication=<:gis:cfg_inf_styles:>})]
+		]
+		
+		[(#SAISIE{oui_non,geolocaliser_user_html5,
+			defaut='',
+			label=<:gis:cfg_lbl_geolocaliser_user_html5:>,
+			explication=<:gis:cfg_inf_geolocaliser_user_html5:>})]
+
+		[(#SAISIE{choisir_objets,gis_objets,
+			label=<:gis:cfg_lbl_activer_objets:>,
+			exclus=spip_gis})]
+
+		[(#SAISIE{selection_multiple,plugins_desactives,
+			cacher_option_intro=oui,
+			label=<:gis:cfg_lbl_plugins_desactives:>,
+			explication=<:gis:explication_plugins_desactives:>,
+			multiple=oui,
+			size=6,
+			datas=#ARRAY{
+				'KML.js','KML.js',
+				'GPX.js','GPX.js',
+				'TOPOJSON.js','TOPOJSON.js',
+				'Control.FullScreen.js','Control.FullScreen.js',
+				'Control.MiniMap.js','Control.MiniMap.js',
+				'leaflet.markercluster-src.js','leaflet.markercluster-src.js'
+			}})]
+	</[(#DIV|sinon{ul})]>
+
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+	</p>
+</div></form>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+
+(function($){
+	var map, map_container = 'map_config', geocoder, marker;
+	
+	var maj_inputs = function(map,pos,action) {
+		if(action == 'click'){
+			var zoom = map.getZoom();
+			$("#champ_lat").val(pos.lat);
+			$("#champ_lon").val(pos.lng);
+			$("#champ_zoom").val(zoom);
+			annuler_geocoder = 1;
+		}else if(annuler_geocoder != 1){
+			if(pos.point == 'undefined'){
+				$('#champ_#ENV{champ_lat,lat}').val(pos.lat);
+				$('#champ_#ENV{champ_lon,lon}').val(pos.lng);
+				map.panTo(pos);
+				marker.setLatLng(pos);
+			}else{
+				$('#champ_#ENV{champ_lat,lat}').val(pos.point.lat);
+				$('#champ_#ENV{champ_lon,lon}').val(pos.point.lng);
+				map.panTo(pos.point);
+				marker.setLatLng(pos.point);
+			}
+		}
+	}
+	
+	function geocode(query) {
+		if(!query.error)
+			maj_inputs(map,query,'geocoding');
+		else{
+			if(query.search == 'undefined'){
+				alert('<:gis:erreur_geocoder:>\n'+query.search);
+			}else{
+				alert('<:gis:erreur_geocoder:>');
+			}
+		}
+	}
+
+	var init_config = function() {
+		map = new L.Map(map_container);
+		
+		map.attributionControl.setPrefix('');
+		
+		//default layer
+		#SET{layer_defaut,#REM|gis_layer_defaut} #SET{layers,#EVAL{$GLOBALS['gis_layers']}}
+		var [(#GET{layer_defaut})] = [new (#GET{layers}|table_valeur{#GET{layer_defaut}/layer})];
+		map.addLayer([(#GET{layer_defaut})]);
+		
+		<B_layers>
+		var layers_control = new L.Control.Layers();
+		layers_control.addBaseLayer([(#GET{layer_defaut})],["(#GET{layers}|table_valeur{#GET{layer_defaut}/nom})"]);
+		<BOUCLE_layers(DATA){source table, #GET{layers}}{si #ENV{control_type,#ENV{controle_type}}|!={non}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|et{#CONFIG{gis/layers,#ARRAY}|count|>{1}|oui}|oui}>[
+		(#CLE|!={#GET{layer_defaut}}|oui|et{#CLE|in_array{#CONFIG{gis/layers,#ARRAY}}|oui}|oui)
+		layers_control.addBaseLayer([new (#VALEUR|table_valeur{layer})],"[(#VALEUR|table_valeur{nom})]");]
+		</BOUCLE_layers>
+		map.addControl(layers_control);
+		// classe noajax sur le layer_control pour éviter l'ajout de hidden par SPIP
+		$(layers_control._form).addClass('noajax');
+		</B_layers>
+
+		map.setView(new L.LatLng(#ENV{lat,0},#ENV{lon,0}),#ENV{zoom,0});
+
+		marker = new L.Marker(new L.LatLng(#ENV{lat,0},#ENV{lon,0}));
+		map.addLayer(marker);
+		
+		geocoder = new L.Geocoder(geocode,{acceptLanguage:'#ENV{lang}'});
+		
+		// mettre a jour les coordonnees quand on clique la carte
+		map.on('click', function(e) {
+			annuler_geocoder = 0;
+			marker.setLatLng(e.latlng);
+			map.panTo(e.latlng);
+			maj_inputs(map,e.latlng,'click');
+		});
+		
+		// geocoder si clic...
+		$('a#map_config_rechercher_geocodage').css("cursor","pointer").click(function(){
+			var address = $("#champ_map_config_geocoder").val();
+			annuler_geocoder = 0;
+			geocoder.geocode(address);
+		});
+		
+		// ne pas soumettre le formulaire si on presse Entree depuis le champ de recherche
+		$('#champ_map_config_geocoder').keypress(function(e){
+			if (e.which == 13) {
+				$('a#map_config_rechercher_geocodage').trigger("click");
+				return false;
+			}
+		});
+		
+		// mettre à jour le zoom quand on le modifie
+		map.on('zoomend', function(e) {
+			$("#champ_zoom").val(e.target._zoom);
+		});
+	}
+
+	$(function(){
+		jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js})]',function(){
+			init_config();
+		});
+		//onAjaxLoad(init_config);
+	});
+
+})(jQuery);
+/*]]>*/
+</script>
+</div>

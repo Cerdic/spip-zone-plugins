@@ -1,0 +1,45 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	id_gis,1
+}})
+]
+#SET{selection,#VAL{gis}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+<input type="hidden" name="debutgisl" value='#ENV{debutgisl,#EVAL{_request("debutgisl");}}' />
+<B_liste_gis>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies gis">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{gis:info_1_gis,gis:info_nb_gis}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='id_gis' scope='col'>[(#TRI{id_gis,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{multi titre,<:info_titre:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_gis(GIS){id_gis IN #GET{selection}}{where?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} gisl}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_GIS|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='picto'>[(#CHEMIN_IMAGE{gis-16.png}|balise_img)]</td>
+			<td class='id_gis'><a href="[(#URL_ECRIRE{gis_edit,id_gis=#ID_GIS})]"
+				title="<:gis:texte_voir_gis:>">#ID_GIS</a></td>
+			<td class='titre principale'>[(#LOGO_GIS|image_reduire{20,20})]<a href="[(#ID_GIS|generer_url_entite{gis})]"
+				title="<:gis:texte_voir_gis:>">[(#TITRE|sinon{<:ecrire:info_sans_titre:>})]</a></td>
+			<td class='action'>
+				[(#ENV{editable}|oui)
+				<button type="submit" class="button link delete" name="supprimer_lien\[gis-#ID_GIS-#ENV{objet}-#ENV{id_objet}\]" value="X"><:gis:info_supprimer_lien:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>]
+			</td>
+		</tr>
+	</BOUCLE_liste_gis>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien#EVAL{chr(91)}gis-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:gis:info_supprimer_liens:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></div>]
+[(#INCLURE{fond=modeles/carte_gis_preview,id_objet,objet})]
+</div>
+</B_liste_gis>
+<div class="liste-objets liste-objets-lies gis caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:gis:info_aucun_gis:>}) ]</strong>
+</div>
+<//B_liste_gis>
