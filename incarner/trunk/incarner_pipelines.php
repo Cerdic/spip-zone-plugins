@@ -59,16 +59,16 @@ function incarner_boite_infos($flux) {
 				}
 				else {
 					$url_action = "#";
-					$disabled = " class='disabled'";
+					$disabled = "disabled";
 				}
 
-				$flux['data'] .= '<span class="icone horizontale lien_incarner">';
-				$flux['data'] .= '<a href="' . $url_action . '"'.$disabled.'>';
-				$flux['data'] .= '<img src="' . find_in_path('images/logo_incarner_24.png') . '" width="24" height="24" /><b>';
-				$flux['data'] .= _T('incarner:incarner_login', array('login' => $login_aff));
-				$flux['data'] .= '</b></a>';
-				$flux['data'] .= '</span>';
-				$flux['data'] .= '<style type="text/css">.icone a.disabled {color:#888 !important;opacity:0.75;}.icone a.disabled b {color:inherit !important;}.icone a.disabled img {filter: grayscale(100%);background-color: transparent !important;}.icone a.disabled:hover,.icone a.disabled:focus,.icone a.disabled:active {color:#888 !important;cursor:default !important;}</style>';
+				$contexte = array(
+					'url'     => $url_action,
+					'texte'   => _T('incarner:incarner_login', array('login' => $login_aff)),
+					'disable' => $disabled,
+				);
+				$fond_previsu = recuperer_fond('prive/squelettes/inclure/inc-incarner_bouton', $contexte);
+				$flux['data'] .= $fond_previsu;
 			}
 		}
 	}
