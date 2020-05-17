@@ -51,8 +51,13 @@ $(function() {
 		formidable_ts.trigger('outputTable');
 		return false;
 	});
-	$('.reset').click(function() {
+	$('.resetFilter').click(function() {
 		formidable_ts.trigger('filterReset');
+	});
+	$('.resetAll').click(function() {
+		if (confirm(resetAllconfirm)) {
+			formidable_ts_restart();
+		}
 	});
 	formidable_ts_add_check_all_button();
 	formidable_ts_init_reorder();
@@ -297,4 +302,23 @@ function formidable_ts_add_reorder_arrows() {
 		console.log("post reorder time  taken = "+(v3-v2)+"milliseconds");
 		console.log("total time  taken = "+(v3-v1)+"milliseconds");
 	});
+}
+
+/**
+ * Réinitialisation de tout, aille, aille, aille
+**/
+function formidable_ts_restart() {
+	$([
+		'columnSelector',
+		'columnSelector-auto',
+		'filters',
+		'reorder',
+		'resizable',
+		'savesort',
+		'table-original-css-width',
+		'table-resized-width'
+	]).each(function(key, storage) {
+			$.tablesorter.storage(formidable_ts, 'tablesorter-'+storage, null);
+	});
+	location.reload();
 }

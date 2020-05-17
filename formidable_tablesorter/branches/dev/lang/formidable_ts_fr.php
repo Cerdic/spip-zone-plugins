@@ -44,8 +44,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_lignes' => 'Nombre de lignes affichées :',
 
 	// R
-	'reset' => 'Réinitialiser les fitlres',
-
+	'resetfilter' => 'Réinitialiser les filtres',
+	'resetall' => 'Réinitialiser tous les paramètres',
+	'resetallconfirm' => 'Voulez-vous vraiment réinitialiser tous les réglages d\'affichage du tableau ?',
 	// T
 	'tableau_reponses' => 'Tableau des réponses'
 );
