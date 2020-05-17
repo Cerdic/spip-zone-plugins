@@ -31,10 +31,6 @@ $gis_layers = array (
 		'nom' => 'OpenTopoMap',
 		'layer' => 'L.tileLayer.provider("OpenTopoMap")'
 	),
-	'openmapsurfer' => array(
-		'nom' => 'OpenMapSurfer',
-		'layer' => 'L.tileLayer.provider("OpenMapSurfer")'
-	),
 	'hydda' => array(
 		'nom' => 'Hydda',
 		'layer' => 'L.tileLayer.provider("Hydda")'
