@@ -176,7 +176,7 @@ function formidable_ts_restore_reorder() {
 		formidable_ts_add_reorder_arrows();
 	}
 }
-
+reorder = 0
 // Ajout des flèches au chargement
 function formidable_ts_add_reorder_arrows() {
 	$('.move-arrows').remove();
@@ -197,6 +197,9 @@ function formidable_ts_add_reorder_arrows() {
 		});
 	}
 	$('.move-arrows a').click(function() {
+		reorder++;
+		console.log('start reorder ' + reorder)
+		var v1 = performance.now();
 		th = $(this).parent().parent();
 		tr = th.parent();
 		index = th.index();
@@ -223,6 +226,13 @@ function formidable_ts_add_reorder_arrows() {
 				}
 			});
 		}
+		var v2 = performance.now();
+		console.log("reorder time  taken = "+(v2-v1)+"milliseconds");
+		console.log('start post reorder ' + reorder)
 		formidable_ts_post_reorder();
+		var v3 = performance.now();
+		console.log('end reorder ' + reorder)
+		console.log("post reorder time  taken = "+(v3-v2)+"milliseconds");
+		console.log("total time  taken = "+(v3-v1)+"milliseconds");
 	});
 }
