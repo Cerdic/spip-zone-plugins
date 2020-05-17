@@ -6,14 +6,16 @@ $(function() {
 	formidable_ts = $(".tablesorter");
 	formidable_ts.tablesorter({
 		theme: 'blue',
-		widgets: ["zebra",
+		widgets: [
+			"zebra",
 			"stickyHeaders",
 			"filter",
 			"print",
 			"columnSelector",
 			"output",
 			"resizable",
-			"savesort"],
+			"savesort"
+		],
 		widgetOptions: {
 			columnSelector_container: $('#columnSelector'),
 			columnSelector_mediaquery: false,
