@@ -587,7 +587,7 @@ function image_responsive_svg($img, $taille = -1, $lazy = 0, $vertical = 0) {
 }
 
 
-function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
+function background_responsive($src, $taille = 120, $lazy = 0, $align = "focus") {
 
 	if (preg_match("/^<img/i", $src)) {
 		$src = extraire_attribut($src, "src");

@@ -80,8 +80,6 @@ function charger_url_image_responsive(this_img) {
 			dpr = false;
 		}
 
-			//console.log ("Wapres: "+dim);
-		
 				
 		if (dim == 0) {
 		
@@ -93,13 +91,6 @@ function charger_url_image_responsive(this_img) {
 					else if (l < 1.5*dim) dPR = false;
 					// forcer à 2
 					else dPR = 2;
-
-					if (image_responsive_retina_hq && dPR) {
-						dim = dim * dPR;
-						if (taille_max > 0 & dim > taille_max) dim = taille_max;
-
-						dPR = false;
-					}
 				} else {
 					dPR = false;
 				}
@@ -110,7 +101,6 @@ function charger_url_image_responsive(this_img) {
 				else {				
 					if (htactif) {
 						racine = src.substr(0, src.length-4);
-						console.log(racine);
 						terminaison = src.substr(src.length-3, 3);
 						var url_img = racine+"-resp"+dim;
 						if (vertical) url_img = url_img + "v";
@@ -409,9 +399,12 @@ function _charger_image_responsive () {
 	});
 
 	// Remplacer les URL non lazy
-	$(".image_responsive:not('.lazy'):not('.avec_picturefill')").each(function() {
+	// Cacher l'ensemble puis tout réafficher, pour éviter un repaint pour chaque image
+	$(".image_responsive:not('.lazy'):not('.avec_picturefill')").hide().each(function() {
 		charger_url_image_responsive($(this));
 	});
+	$(".image_responsive:not('.lazy'):not('.avec_picturefill')").show();
+	
 	$(".image_responsive_svg:not('.lazy')").each(function() {
 		charger_url_image_responsive_svg($(this));
 	});
