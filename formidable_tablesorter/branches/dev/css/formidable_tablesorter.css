@@ -67,6 +67,10 @@
 .formidable_tablesorter-preambule .aide {
 	padding:1ex;
 }
+.formidable_tablesorter-preambule .aide p {
+	padding:0px;
+	margin:0px;
+}
 .formidable_tablesorter-preambule .boutons{
 	text-align:left;
 }

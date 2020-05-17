@@ -16,13 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Dans le champ de filtre, vous pouvez :
 
 -* Saisir une série de caractère
--* Utiliser des comparateurs mathématiques :
--** <
--** <=
--** >
--** >=
--** =
--** ==
+-* Utiliser des comparateurs mathématiques : < ; <= ; > ; >= ; = ;  ==
 ',
 
 	// C
