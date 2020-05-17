@@ -214,7 +214,7 @@ function formidable_ts_add_reorder_arrows() {
 		for (table of tables) {
 			$('tr', table).each(function(){
 				cells = $(this).children();
-				this_cell = cells.eq(index).clone();
+				this_cell = cells.eq(index).clone(true);
 				cells.eq(index).remove();
 				if (inserting == 'after') {
 					cells.eq(index_inserting).after(this_cell);
