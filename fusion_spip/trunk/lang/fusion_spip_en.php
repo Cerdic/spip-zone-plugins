@@ -26,11 +26,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_img_accessible' => 'Your IMG directory is not accessible. It is impossible either to write a file to the root, or to create a subdirectory.',
+	'erreur_source_inaccessible' => 'Error reading the source IMG directory ',
 	'erreur_traduction_document' => 'Your databases are in different languages, ticking the following box, you can translate the contents of duplicate documents using <multi> tags.',
+	'erreur_version_indeterminee' => 'undefined (key version_installee of table spip_meta not found) ', # RELIRE
 	'erreur_versions' => 'The host site and the source site are not in the same database version:
-		<br/>- host is in version @vhote@
-		<br/>- source is in version @vsource@',
-	'erreur_versions_impossible' => 'It is not possible to check the imported database (spip_meta table )',
+		<br/>- host is in version: @vhote@
+		<br/>- source is in version: @vsource@',
+	'erreur_versions_impossible' => 'Impossible to check the version of the imported database (table spip_meta not found) ',
 
 	// I
 	'img_dir' => 'Physical path of the documents',
