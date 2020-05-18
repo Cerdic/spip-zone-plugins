@@ -1,7 +1,7 @@
 <paquet
 	prefix="fusion_spip"
 	categorie="maintenance"
-	version="1.3.3"
+	version="1.3.4"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/fusion_spip-32.png"

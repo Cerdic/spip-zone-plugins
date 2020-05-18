@@ -31,6 +31,9 @@ function formulaires_fusion_spip_charger_dist() {
 		'stats' => '',
 		'referers' => '',
 		'versions' => '',
+		'confirm_version' => '',
+		'confirm_shema' => '',
+		'traduire_documents_doublons' => '',
 	);
 
 	return $valeurs;
@@ -65,6 +68,9 @@ function formulaires_fusion_spip_verifier_dist() {
 			} else {
 				$erreurs['img_dir'] = _T('fusion_spip:erreur_img_accessible');
 			}
+			if(!is_dir(_request('img_dir')) || !is_readable(_request('img_dir'))) {
+				$erreurs['img_dir'] = _T('fusion_spip:erreur_source_inaccessible');
+			}
 
 			if (!isset($erreurs['img_dir']) && !_request('traduire_documents_doublons') && sql_showtable('spip_meta', false, $connect)) {
 				include_spip('inc/config');
@@ -84,22 +90,27 @@ function formulaires_fusion_spip_verifier_dist() {
 		$auxiliaires = $lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers);
 
 		// vérifier la version de la base source
-		if (!sql_showtable('spip_meta', true, $connect)) {
-			$erreurs['versions_bases'] = _T('fusion_spip:erreur_versions_impossible');
-		} else {
-			$vsource = sql_fetsel('valeur', 'spip_meta', 'nom="version_installee"', '', '', '', '', $connect);
-			if ($spip_version_base != $vsource['valeur']) {
-				$erreurs['versions_bases'] = _T(
-					'fusion_spip:erreur_versions',
-					array(
-						'vhote'=>$spip_version_base,
-						'vsource'=>$vsource['valeur']
-					)
-				);
+		if(!_request('confirm_version')) {
+			if (!sql_showtable('spip_meta', true, $connect)) {
+				$erreurs['versions_bases'] = _T('fusion_spip:erreur_versions_impossible');
+			} else {
+				$vsource = sql_fetsel('valeur', 'spip_meta', 'nom="version_installee"', '', '', '', '', $connect);
+				if ($spip_version_base != $vsource['valeur']) {
+					if(!$vsource['valeur']) {
+						$vsource['valeur'] = _T('fusion_spip:erreur_version_indeterminee');
+					}
+					$erreurs['versions_bases'] = _T(
+						'fusion_spip:erreur_versions',
+						array(
+							'vhote'   => $spip_version_base,
+							'vsource' => $vsource['valeur']
+						)
+					);
+				}
 			}
 		}
 		// vérifier la conformité du shéma de la base source
-		if ((empty($erreurs) or (count($erreurs) == 1 && isset($erreurs['warning_traduction_document']))) && _request('confirme_warning') != 'on') {
+		if ((empty($erreurs) or (count($erreurs) == 1 && isset($erreurs['warning_traduction_document']))) && !_request('confirm_shema')) {
 			$comparer_shemas = charger_fonction('comparer_shemas', 'fusion_spip');
 			$erreurs_shema = $comparer_shemas($connect, $principales, $auxiliaires);
 			if (count($erreurs_shema)) {
