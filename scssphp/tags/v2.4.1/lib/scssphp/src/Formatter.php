@@ -2,7 +2,7 @@
 /**
  * SCSSPHP
  *
- * @copyright 2012-2019 Leaf Corcoran
+ * @copyright 2012-2020 Leaf Corcoran
  *
  * @license http://opensource.org/licenses/MIT MIT
  *
@@ -116,6 +116,22 @@ abstract class Formatter
     public function property($name, $value)
     {
         return rtrim($name) . $this->assignSeparator . $value . ';';
+    }
+
+    /**
+     * Return custom property assignment
+     * differs in that you have to keep spaces in the value as is
+     *
+     * @api
+     *
+     * @param string $name
+     * @param mixed  $value
+     *
+     * @return string
+     */
+    public function customProperty($name, $value)
+    {
+        return rtrim($name) . trim($this->assignSeparator) . $value . ';';
     }
 
     /**

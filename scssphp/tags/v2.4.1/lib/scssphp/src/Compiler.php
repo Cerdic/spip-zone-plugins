@@ -2,7 +2,7 @@
 /**
  * SCSSPHP
  *
- * @copyright 2012-2019 Leaf Corcoran
+ * @copyright 2012-2020 Leaf Corcoran
  *
  * @license http://opensource.org/licenses/MIT MIT
  *
@@ -101,6 +101,8 @@ class Compiler
 
     static public $true         = [Type::T_KEYWORD, 'true'];
     static public $false        = [Type::T_KEYWORD, 'false'];
+    static public $NaN          = [Type::T_KEYWORD, 'NaN'];
+    static public $Infinity     = [Type::T_KEYWORD, 'Infinity'];
     static public $null         = [Type::T_NULL];
     static public $nullString   = [Type::T_STRING, '', []];
     static public $defaultValue = [Type::T_KEYWORD, ''];
@@ -317,7 +319,16 @@ class Compiler
      */
     protected function parserFactory($path)
     {
-        $parser = new Parser($path, count($this->sourceNames), $this->encoding, $this->cache);
+        // https://sass-lang.com/documentation/at-rules/import
+        // CSS files imported by Sass don’t allow any special Sass features.
+        // In order to make sure authors don’t accidentally write Sass in their CSS,
+        // all Sass features that aren’t also valid CSS will produce errors.
+        // Otherwise, the CSS will be rendered as-is. It can even be extended!
+        $cssOnly = false;
+        if (substr($path, '-4') === '.css') {
+            $cssOnly = true;
+        }
+        $parser = new Parser($path, count($this->sourceNames), $this->encoding, $this->cache, $cssOnly);
 
         $this->sourceNames[] = $path;
         $this->addParsedFile($path);
@@ -2430,6 +2441,30 @@ class Compiler
                 }
                 break;
 
+            case Type::T_CUSTOM_PROPERTY:
+                list(, $name, $value) = $child;
+                $compiledName = $this->compileValue($name);
+
+                // if the value reduces to null from something else then
+                // the property should be discarded
+                if ($value[0] !== Type::T_NULL) {
+                    $value = $this->reduce($value);
+
+                    if ($value[0] === Type::T_NULL || $value === static::$nullString) {
+                        break;
+                    }
+                }
+
+                $compiledValue = $this->compileValue($value);
+
+                $line = $this->formatter->customProperty(
+                    $compiledName,
+                    $compiledValue
+                );
+
+                $this->appendOutputLine($out, Type::T_ASSIGN, $line);
+                break;
+
             case Type::T_ASSIGN:
                 list(, $name, $value) = $child;
 
@@ -2543,11 +2578,14 @@ class Compiler
 
                 $compiledValue = $this->compileValue($value);
 
-                $line = $this->formatter->property(
-                    $compiledName,
-                    $compiledValue
-                );
-                $this->appendOutputLine($out, Type::T_ASSIGN, $line);
+                // ignore empty value
+                if (strlen($compiledValue)) {
+                    $line = $this->formatter->property(
+                        $compiledName,
+                        $compiledValue
+                    );
+                    $this->appendOutputLine($out, Type::T_ASSIGN, $line);
+                }
                 break;
 
             case Type::T_COMMENT:
@@ -3045,7 +3083,9 @@ class Compiler
                                 $targetUnit = $left->unitless() ? $right[2] : $left[2];
                         }
 
-                        if (! $left->unitless() && ! $right->unitless()) {
+                        $baseUnitLeft = $left->isNormalizable();
+                        $baseUnitRight = $right->isNormalizable();
+                        if ($baseUnitLeft && $baseUnitRight && $baseUnitLeft === $baseUnitRight) {
                             $left = $left->normalize();
                             $right = $right->normalize();
                         }
@@ -3290,7 +3330,7 @@ class Compiler
     protected function opDivNumberNumber($left, $right)
     {
         if ($right[1] == 0) {
-            return [Type::T_STRING, '', [$left[1] . $left[2] . '/' . $right[1] . $right[2]]];
+            return ($left[1] == 0) ? static::$NaN : static::$Infinity;
         }
 
         return new Node\Number($left[1] / $right[1], $left[2]);
@@ -3306,6 +3346,10 @@ class Compiler
      */
     protected function opModNumberNumber($left, $right)
     {
+        if ($right[1] == 0) {
+            return static::$NaN;
+        }
+
         return new Node\Number($left[1] % $right[1], $left[2]);
     }
 
@@ -4585,7 +4629,7 @@ class Compiler
         $urls = [];
 
         // for "normal" scss imports (ignore vanilla css and external requests)
-        if (! preg_match('~\.css$|^https?://~', $url)) {
+        if (! preg_match('~\.css$|^https?://|^//~', $url)) {
             // try both normal and the _partial filename
             $urls = [$url, preg_replace('~[^/]+$~', '_\0', $url)];
         }
@@ -4603,10 +4647,16 @@ class Compiler
                     ) ? '/' : '';
                     $full = $dir . $separator . $full;
 
-                    if (is_file($file = $full . '.scss') ||
-                        ($hasExtension && is_file($file = $full))
-                    ) {
-                        return $file;
+                    if ($hasExtension) {
+                        if (is_file($file = $full)) {
+                            return $file;
+                        }
+                    } else {
+                        if (is_file($file = $full . '.scss') ||
+                            is_file($file = $full . '.css')
+                        ) {
+                            return $file;
+                        }
                     }
                 }
             } elseif (is_callable($dir)) {
@@ -4616,6 +4666,12 @@ class Compiler
                 if (! is_null($file)) {
                     return $file;
                 }
+            }
+        }
+
+        if ($urls) {
+            if (!$hasExtension or preg_match('/[.]scss$/', $url)) {
+                $this->throwError("`$url` file not found for @import");
             }
         }
 
@@ -4807,6 +4863,7 @@ class Compiler
     {
         // try a lib function
         $name = $this->normalizeName($name);
+        $libName = null;
 
         if (isset($this->userFunctions[$name])) {
             // see if we can find a user function
@@ -5265,6 +5322,10 @@ class Compiler
     protected function coerceList($item, $delim = ',')
     {
         if (isset($item) && $item[0] === Type::T_LIST) {
+            // remove trailing null from the list
+            while (end($item[2]) === static::$null) {
+                array_pop($item[2]);
+            }
             return $item;
         }
 
@@ -6331,13 +6392,13 @@ class Compiler
         return [Type::T_STRING, '"', [$value]];
     }
 
-    protected static $libPercentage = ['value'];
+    protected static $libPercentage = ['number'];
     protected function libPercentage($args)
     {
         return new Node\Number($this->coercePercent($args[0]) * 100, '%');
     }
 
-    protected static $libRound = ['value'];
+    protected static $libRound = ['number'];
     protected function libRound($args)
     {
         $num = $args[0];
@@ -6345,7 +6406,7 @@ class Compiler
         return new Node\Number(round($num[1]), $num[2]);
     }
 
-    protected static $libFloor = ['value'];
+    protected static $libFloor = ['number'];
     protected function libFloor($args)
     {
         $num = $args[0];
@@ -6353,7 +6414,7 @@ class Compiler
         return new Node\Number(floor($num[1]), $num[2]);
     }
 
-    protected static $libCeil = ['value'];
+    protected static $libCeil = ['number'];
     protected function libCeil($args)
     {
         $num = $args[0];
@@ -6361,7 +6422,7 @@ class Compiler
         return new Node\Number(ceil($num[1]), $num[2]);
     }
 
-    protected static $libAbs = ['value'];
+    protected static $libAbs = ['number'];
     protected function libAbs($args)
     {
         $num = $args[0];
@@ -6372,29 +6433,45 @@ class Compiler
     protected function libMin($args)
     {
         $numbers = $this->getNormalizedNumbers($args);
-        $min = null;
+        $minOriginal = null;
+        $minNormalized = null;
 
-        foreach ($numbers as $key => $number) {
-            if (is_null($min) || $number[1] <= $min[1]) {
-                $min = [$key, $number[1]];
+        foreach ($numbers as $key => $pair) {
+            list($original, $normalized) = $pair;
+            if (is_null($normalized) or is_null($minNormalized)) {
+                if (is_null($minOriginal) || $original[1] <= $minOriginal[1]) {
+                    $minOriginal = $original;
+                    $minNormalized = $normalized;
+                }
+            } elseif ($normalized[1] <= $minNormalized[1]) {
+                $minOriginal = $original;
+                $minNormalized = $normalized;
             }
         }
 
-        return $args[$min[0]];
+        return $minOriginal;
     }
 
     protected function libMax($args)
     {
         $numbers = $this->getNormalizedNumbers($args);
-        $max = null;
+        $maxOriginal = null;
+        $maxNormalized = null;
 
-        foreach ($numbers as $key => $number) {
-            if (is_null($max) || $number[1] >= $max[1]) {
-                $max = [$key, $number[1]];
+        foreach ($numbers as $key => $pair) {
+            list($original, $normalized) = $pair;
+            if (is_null($normalized) or is_null($maxNormalized)) {
+                if (is_null($maxOriginal) || $original[1] >= $maxOriginal[1]) {
+                    $maxOriginal = $original;
+                    $maxNormalized = $normalized;
+                }
+            } elseif ($normalized[1] >= $maxNormalized[1]) {
+                $maxOriginal = $original;
+                $maxNormalized = $normalized;
             }
         }
 
-        return $args[$max[0]];
+        return $maxOriginal;
     }
 
     /**
@@ -6418,15 +6495,15 @@ class Compiler
 
             $number = $item->normalize();
 
-            if (is_null($unit)) {
+            if (empty($unit)) {
                 $unit = $number[2];
                 $originalUnit = $item->unitStr();
-            } elseif ($number[1] && $unit !== $number[2]) {
+            } elseif ($number[1] && $unit !== $number[2] && !empty($number[2])) {
                 $this->throwError('Incompatible units: "%s" and "%s".', $originalUnit, $item->unitStr());
                 break;
             }
 
-            $numbers[$key] = $number;
+            $numbers[$key] = [$args[$key], empty($number[2]) ? null : $number];
         }
 
         return $numbers;
@@ -6949,19 +7026,24 @@ class Compiler
         return [Type::T_STRING, '', ['counter(' . implode(',', $list) . ')']];
     }
 
-    protected static $libRandom = ['limit'];
+    protected static $libRandom = ['limit:1'];
     protected function libRandom($args)
     {
         if (isset($args[0])) {
             $n = $this->assertNumber($args[0]);
 
             if ($n < 1) {
-                $this->throwError("limit must be greater than or equal to 1");
+                $this->throwError("\$limit must be greater than or equal to 1");
+
+                return null;
+            }
+            if ($n - intval($n) > 0) {
+                $this->throwError("Expected \$limit to be an integer but got $n for `random`");
 
                 return null;
             }
 
-            return new Node\Number(mt_rand(1, $n), '');
+            return new Node\Number(mt_rand(1, intval($n)), '');
         }
 
         return new Node\Number(mt_rand(1, mt_getrandmax()), '');
