@@ -4,12 +4,11 @@
  * Distribue sous licence MIT
  *
  */
-use ScssPhp\ScssPhp\Compiler;
+
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
 
 function scss_cache_dir() {
 	static $cache_dir;
@@ -31,7 +30,8 @@ function scss_cache_dir() {
  * @return string
  */
 function scss_compile($style, $contexte = array()) {
-	include_spip('lib/scssphp/scss.inc');
+	include_spip('inc/scssphp_compiler');
+
 	spip_timer('scss_compile');
 
 	$import_dirs = _chemin();
@@ -49,7 +49,7 @@ function scss_compile($style, $contexte = array()) {
 	}
 
 	// le compilateur ScssPhp\ScssPhp\Compiler compile le contenu
-	$scss = new Compiler($cache_options);
+	$scss = new SPIPScssPhpCompiler($cache_options);
 	$scss->setFormatter("ScssPhp\ScssPhp\Formatter\Expanded");
 
 	// lui transmettre le path qu'il utilise pour les @import
@@ -75,10 +75,10 @@ function scss_compile($style, $contexte = array()) {
 	$scss->setVariables($scss_vars);
 
 	// Inline source maps
-	// http://leafo.github.io/scssphp/docs/#source-maps
-	// https://github.com/leafo/scssphp/wiki/Source-Maps
+	// https://scssphp.github.io/scssphp/docs/#source-maps
+	// https://github.com/leafo/scssphp/wiki/Source-Maps (deprecated)
 	if (defined('_SCSS_SOURCE_MAP') and '_SCSS_SOURCE_MAP' == true) {
-		$scss->setSourceMap(Compiler::SOURCE_MAP_INLINE);
+		$scss->setSourceMap(ScssPhp\ScssPhp\Compiler::SOURCE_MAP_INLINE);
 		$scss->setSourceMapOptions(array(
 			// This value is prepended to the individual entries in the 'source' field.
 			'sourceRoot' => '',
