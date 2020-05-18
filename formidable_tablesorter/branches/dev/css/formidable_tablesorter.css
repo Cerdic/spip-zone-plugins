@@ -25,10 +25,9 @@
 .formidable_tablesorter-wrapper .tablesorter td {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   min-width: 10px;
 }
-.formidable_tablesorter-wrapper .tablesorter .tablesorter th {
+.formidable_tablesorter-wrapper  .tablesorter th {
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 10px;
