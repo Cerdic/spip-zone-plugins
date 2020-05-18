@@ -44,6 +44,12 @@
 	margin-left:0.5em;
 	margin-right:0.5em;
 }
+.tablesorter-blue .move-arrows a {
+	color:#646464;
+}
+.tablesorter-blue td a {
+	color:#184c82;
+}
 .tablesorter .move-arrows.first{
 	justify-content:end;
 }
