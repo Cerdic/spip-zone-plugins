@@ -19,8 +19,14 @@ class SPIPScssPhpCompiler extends ScssPhp\ScssPhp\Compiler {
 	protected static $libFindInPath = ['filepath'];
 	protected function libFindInPath($args){
 
-		$filepath = $this->reduce($args[0]);
-		$filepath = $this->compileValue($filepath);
+		$quote = '';
+		$str = $this->reduce($args[0]);
+		if ($str[0]===ScssPhp\ScssPhp\Type::T_STRING){
+			$quote = $str[1];
+			$str[1] = '';
+		}
+
+		$filepath = $this->compileValue($str);
 
 		if ($filepath) {
 			$filepath = find_in_path($filepath);
@@ -30,7 +36,7 @@ class SPIPScssPhpCompiler extends ScssPhp\ScssPhp\Compiler {
 		}
 
 		// rendre le chemin relatif au fichier scss principal compile
-		if ($this->sourceNames) {
+		if ($filepath and $this->sourceNames) {
 			$sourceFile = reset($this->sourceNames);
 			if ($sourceFile) {
 				$sourceFile = explode('/', dirname($sourceFile));
@@ -48,6 +54,6 @@ class SPIPScssPhpCompiler extends ScssPhp\ScssPhp\Compiler {
 			}
 		}
 
-	  return [ScssPhp\ScssPhp\Type::T_STRING, '', [$filepath ? $filepath : '']];
+	  return [ScssPhp\ScssPhp\Type::T_STRING, $quote, [$filepath ? $filepath : '']];
 	}
 }
