@@ -1,0 +1,20 @@
+<paquet
+	prefix="pp_loremipsum"
+	categorie="edition"
+	version="1.1.4"
+	etat="stable"
+	compatibilite="[2.0.0;3.3.*]"
+	logo="images/pp_loremipsum.png"
+>
+	<nom>Lorem Ipsum pour Porte Plume</nom>
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<copyright>2007</copyright>
+	<licence>GPL</licence>
+
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="pp_loremipsum_pipelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="pp_loremipsum_pipelines.php" />
+
+	<necessite nom="porte_plume" compatibilite="[0.18.0;]" />	
+
+</paquet>

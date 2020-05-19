@@ -4,7 +4,7 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>&#169; 2007 - GPL</licence>
 	<lien></lien>
-	<version>1.1.3</version>
+	<version>1.1.4</version>
 	<etat>stable</etat>
 	<description>
 	Cette extension ajoute des boutons pour cr&#233;er du texte factice dans la barre d'outil de SPIP.
@@ -19,7 +19,7 @@
 		<nom>porte_plume_lien_classe_vers_icone</nom>
 		<inclure>pp_loremipsum_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="spip" version="[2.0.0;3.2.99]" />
+	<necessite id="spip" version="[2.0.0;3.3.99]" />
 	<necessite id="porte_plume" />
 	<categorie>edition</categorie>
 </plugin>
