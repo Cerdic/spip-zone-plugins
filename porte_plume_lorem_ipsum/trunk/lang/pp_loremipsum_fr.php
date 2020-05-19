@@ -10,5 +10,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'outil_texte_lorem_ipsum_3' => "Insérer 3 paragraphes de faux texte latin",
 
 );
-
-?>
