@@ -411,7 +411,7 @@
 	var ihm_tableau = new ihm();
 	
 	function init(){
-		ancien_tableau = new selection(top.opener.zone_selection);
+		ancien_tableau = new selection(parent.zone_selection);
 	
 		if (ancien_tableau.existe() & ancien_tableau.avec_entete()) {
 			document.getElementById("titre_t").value = ancien_tableau.recup_caption() ;	//récupération du titre du tableau
@@ -467,16 +467,16 @@
 			if ((clientVer >= 4) && is_ie && is_win) {
 				top.opener.document.selection.createRange().text = construit_code_tableau();
 			} else {
-				top.opener.zone_selection.value = ancien_tableau.s1 + construit_code_tableau() + ancien_tableau.s3;
+				parent.zone_selection.value = ancien_tableau.s1 + construit_code_tableau() + ancien_tableau.s3;
 			}
 		} else { //insertion d'un nouveau tableau
-			if (top.opener.zone_selection.createTextRange && top.opener.zone_selection.caretPos) { //IE
-				var caretPos = top.opener.zone_selection.caretPos;
+			if (parent.zone_selection.createTextRange && top.opener.zone_selection.caretPos) { //IE
+				var caretPos = parent.zone_selection.caretPos;
 				caretPos.text = caretPos.text + construit_code_tableau();
-				top.opener.zone_selection.focus();
+				parent.zone_selection.focus();
 			} else {
-				top.opener.zone_selection.value = ancien_tableau.s1 + construit_code_tableau() + ancien_tableau.s3;
+				parent.zone_selection.value = ancien_tableau.s1 + construit_code_tableau() + ancien_tableau.s3;
 			}
 		}
-		window.close();		
+		parent.jQuery.modalboxclose();		
 	}

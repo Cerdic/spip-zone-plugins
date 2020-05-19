@@ -196,7 +196,10 @@ function typoenluminee_porte_plume_barre_pre_charger($barres) {
 		'id' => 'barre_tableau',
 		'name' => _T('enlumtypo:barre_tableau'),
 		'className' => 'outil_barre_tableau',
-		'replaceWith' => 'function(markitup) { zone_selection = markitup.textarea; window.open("?exec=tableau_edit", "","scrollbars=yes,resizable=yes,width=700,height=600") }',
+		'replaceWith' => "function(markitup) { zone_selection = markitup.textarea; jQuery.modalboxload('".url_absolue(generer_url_public(
+			'typoenluminee_tableau_edit',
+			"modalbox=oui"
+		))."',{minHeight: '90%', iframe: true});}",
 		'display' => true,
 		'selectionType' => 'line',
 	));
