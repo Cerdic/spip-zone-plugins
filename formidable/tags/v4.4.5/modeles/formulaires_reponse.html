@@ -1,0 +1,13 @@
+<BOUCLE_reponse(FORMULAIRES_REPONSES){tout}{id_formulaires_reponse}>
+
+<BOUCLE_formulaire(FORMULAIRES){tout}{id_formulaire}>
+#SET{saisies,#SAISIES|unserialize}
+</BOUCLE_formulaire>
+#SET{valeurs,#ARRAY}
+<BOUCLE_champs(FORMULAIRES_REPONSES_CHAMPS){id_formulaires_reponse}>
+#SET_MERGE{valeurs,#ARRAY{#NOM,#VALEUR|tenter_unserialize|formidable_ajouter_action_recuperer_fichier{#NOM,#GET{saisies},#ID_FORMULAIRE,#ID_FORMULAIRES_REPONSE}}
+</BOUCLE_champs>
+
+#VOIR_SAISIES{#GET{saisies}, #GET{valeurs}}
+
+</BOUCLE_reponse>
