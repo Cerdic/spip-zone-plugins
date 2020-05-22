@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_base' => 'Update of the database',
-	'manque_champs_source' => 'The fields "@diff@" are missing in the table "@table@" of the source database',
+	'manque_champs_source' => 'The fields "@diff@" are missing in the table "@table@" of the source database', # MODIF
 	'manque_table_source' => 'The table "@table@" is missing in the source database',
 	'message_img_dir_nok' => 'Please precise the path',
 	'message_import_nok' => 'Error during the merge',
