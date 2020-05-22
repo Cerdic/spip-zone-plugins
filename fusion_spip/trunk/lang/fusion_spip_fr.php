@@ -38,7 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_base' => 'Mise à jour de la base de données',
-	'manque_champs_source' => 'Les champs "@diff@" manquent dans la table "@table@" de la base source',
+	'manque_champs_source' => 'Les champs @diff@ manquent dans la table "@table@" de la base source',
+	'manque_champs_hote' => 'Les champs @diff@ manquent dans la table "@table@" de la base hote',
 	'manque_table_source' => 'La table "@table@" est absente dans la base source',
 	'message_img_dir_nok' => 'Merci de préciser le chemin',
 	'message_import_nok' => 'Erreur lors de la fusion',

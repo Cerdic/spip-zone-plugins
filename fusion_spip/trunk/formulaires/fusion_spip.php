@@ -84,11 +84,6 @@ function formulaires_fusion_spip_verifier_dist() {
 			supprimer_repertoire(_DIR_IMG.'test_fusion');
 		}
 
-		$lister_tables_principales = charger_fonction('lister_tables_principales', 'fusion_spip');
-		$principales = $lister_tables_principales($connect, false);
-		$lister_tables_auxiliaires = charger_fonction('lister_tables_auxiliaires', 'fusion_spip');
-		$auxiliaires = $lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers);
-
 		// vérifier la version de la base source
 		if(!_request('confirm_version')) {
 			if (!sql_showtable('spip_meta', true, $connect)) {
@@ -109,12 +104,12 @@ function formulaires_fusion_spip_verifier_dist() {
 				}
 			}
 		}
-		// vérifier la conformité du shéma de la base source
+		// comparer les shémas des bases source et hote
 		if ((empty($erreurs) or (count($erreurs) == 1 && isset($erreurs['warning_traduction_document']))) && !_request('confirm_shema')) {
 			$comparer_shemas = charger_fonction('comparer_shemas', 'fusion_spip');
-			$erreurs_shema = $comparer_shemas($connect, $principales, $auxiliaires);
+			$erreurs_shema = $comparer_shemas($connect, $traite_stats, $traite_referers);
 			if (count($erreurs_shema)) {
-				$erreurs['warning_shema'] = '- '.join('<br>- ', $erreurs_shema);
+				$erreurs['warning_shema'] = join('<hr>', $erreurs_shema).'<hr>';
 			}
 		}
 	}

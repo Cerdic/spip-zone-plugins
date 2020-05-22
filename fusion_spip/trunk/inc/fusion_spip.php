@@ -104,15 +104,24 @@ function fusion_spip_lister_cles_primaires_dist($tables) {
  * @param array $auxiliaires liste des tables auxiliaires
  * @return array liste des erreurs
  */
-function fusion_spip_comparer_shemas_dist($connect, $principales, $auxiliaires) {
-
+function fusion_spip_comparer_shemas_dist($connect, $traite_stats, $traite_referers) {
 	$erreurs = array();
+	$lister_tables_principales = charger_fonction('lister_tables_principales', 'fusion_spip');
+	$lister_tables_auxiliaires = charger_fonction('lister_tables_auxiliaires', 'fusion_spip');
+	
+	$principales = $lister_tables_principales($connect, false);
+	$auxiliaires = $lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers);
 	$tables = array_merge($principales, $auxiliaires);
+	
 	foreach ($tables as $nom_table => $shema_table) {
+
 		// ne pas utiliser 'trouver_table' pour ne pas utiliser le cache
 		if ($shema_source = sql_showtable($nom_table, true, $connect)) {
 			if ($diff_colonnes = array_diff(array_keys($shema_table['field']), array_keys($shema_source['field']))) {
-				$erreurs[] = _T('fusion_spip:manque_champs_source', array('table' => $nom_table, 'diff' => join(' - ', $diff_colonnes)));
+				$erreurs[] = _T('fusion_spip:manque_champs_source', array('table' => $nom_table, 'diff' => '<ul class="spip"><li>'.join('</li><li>', $diff_colonnes).'</li></ul>'));
+			}
+			if ($diff_colonnes = array_diff(array_keys($shema_source['field']), array_keys($shema_table['field']))) {
+				$erreurs[] = _T('fusion_spip:manque_champs_hote', array('table' => $nom_table, 'diff' => '<ul class="spip"><li>'.join('</li><li>', $diff_colonnes).'</li></ul>'));
 			}
 		} else {
 			$erreurs[] = _T('fusion_spip:manque_table_source', array('table' => $nom_table));
