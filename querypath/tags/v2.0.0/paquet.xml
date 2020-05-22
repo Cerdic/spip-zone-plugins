@@ -1,0 +1,16 @@
+<paquet
+	prefix="querypath"
+	categorie="outil"
+	version="2.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/querypath-64.png"
+	documentation="https://contrib.spip.net/?article4197"
+>
+
+	<nom>Query Path</nom>
+
+	<auteur lien='http://www.magraine.net/'>Marcillaud Matthieu</auteur>
+	<credit lien="http://querypath.org">Matt Butcher (QueryPath lib)</credit>
+	<licence>GNU/GPL</licence>
+</paquet>
