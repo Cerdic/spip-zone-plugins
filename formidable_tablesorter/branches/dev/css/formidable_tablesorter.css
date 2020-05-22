@@ -1,15 +1,3 @@
-/** Réglages généraux de la page **/
-.formidable_tablesorter .largeur {
-	width:auto;
-	margin-left:1em;
-	margin-right:1em;
-}
-.formidable_tablesorter #conteneur, .formidable_tablesorter #contenu{
-	width:100%;
-}
-.formidable_tablesorter #navigation {
-	display:none;
-}
 /** Réglages de la table,
  * éviter les debordement,
  * inspiré de https://mottie.github.io/tablesorter/docs/example-widget-resizable.html
@@ -58,38 +46,4 @@
 }
 .tablesorter-sticky-wrapper caption {
 	margin: 0;
-}
-/** Le bloc d'action et d'aide**/
-.formidable_tablesorter-preambule {
-	display:flex;
-	justify-content:space-around;
-}
-.formidable_tablesorter-preambule > *{
-	width:45%;
-	max-width:1024px;
-	height:min-content;
-}
-.formidable_tablesorter-preambule .aide {
-	padding:1ex;
-}
-.formidable_tablesorter-preambule .aide p {
-	padding:0px;
-	margin:0px;
-}
-.formidable_tablesorter-preambule .boutons{
-	text-align:left;
-}
-.formidable_tablesorter-preambule .boutons label {
-	padding:4px;
-}
-.formidable_tablesorter #columnSelectorButton{
-	display:inline-block;
-}
-.formidable_tablesorter #columnSelector {
-	display: flex;
-	flex-wrap:wrap;
-}
-.formidable_tablesorter #columnSelector label {
-	width:50%;
-	padding:0px;
 }

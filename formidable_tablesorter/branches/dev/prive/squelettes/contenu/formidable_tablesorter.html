@@ -1,69 +1,7 @@
 [(#AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}|sinon_interdire_acces)]
-#INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter_entete, env}
 <BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}{si #AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}}>
-	<h1>#TITRE</h1>
-	#SET{saisies,#SAISIES|unserialize}
-	#SET{saisies_finales,#GET{saisies}|saisies_lister_finales}
-	#SET{cextras,#VAL{spip_formulaires_reponses}|appliquer_filtre{champs_extras_objet}|sinon{#LISTE}}
 
-	<INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter-filtres}{env}/>
-	<B_reponses>
-	#INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter_preambule,total=#TOTAL_BOUCLE}
-	<div class="formidable_tablesorter-wrapper">
-	<table data-identifiant="#IDENTIFIANT" id="formidable_tablesorter#ID_FORMULAIRE" class="tablesorter">
-		<caption>#TITRE</caption>
-		<thead>
-			<tr class="tablesorter-ignoreRow">
-				[(#VAL{<th></th>}|str_repeat{3})]
-				[(#VAL{<th><:formidable_ts:cextra:></th>}|str_repeat{#GET{cextras}|count})]
-				<BOUCLE_entete_fieldsets(POUR) {tableau #GET{saisies}}{cle !== 'options'}>
-					[(#VALEUR{saisies}|non)
-						[(#VALEUR{saisie}|!={explication}|oui)
-						<th></th>
-						]
-					]
-					[(#VALEUR{saisies}|oui)
-						#SET{nb, #VALEUR{saisies}|count|moins{#VALEUR{saisies}|saisies_lister_avec_type{explication}|count}}
-					[(#VAL{<th>#VALEUR{options/label}</th>}|str_repeat{#GET{nb}})</th>]
-					]
-				</BOUCLE_entete_fieldsets>
-			</tr>
-			<tr class="tablesorter-headerRow">
-				<th data-column-original-position="0">#</th>
-				<th data-column-original-position="1"><:info_numero_abbreviation:></th>
-				<th data-column-original-position="2"><:date:></th>
-				#SET{original_position,2}
-				<BOUCLE_entete_cextras(POUR){tableau #GET{cextras}}>
-					#SET{original_position,#GET{original_position}|plus{1}}
-					[(#VALEUR{saisie}|!={explication}|oui)
-					[<th data-column-original-position="#GET{original_position}">(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
-					]
-				</BOUCLE_entete_cextras>
-				<BOUCLE_entete(POUR) {tableau #GET{saisies_finales}}>
-				#SET{original_position,#GET{original_position}|plus{1}}
-				[(#VALEUR{saisie}|!={explication}|oui)
-				[<th data-column-original-position="#GET{original_position}">(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
-				]
-				</BOUCLE_entete>
-			</tr>
-		</thead>
-		</B_entete>
-		<tbody>
-			<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}{statut==#ENV{statut,'.*'}}>
-		<tr>
-			<td>[(#STATUT|puce_statut{formulaires_reponse,#ID_FORMULAIRES_REPONSE})]</td>
-			<td><a href="#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE}">#ID_FORMULAIRES_REPONSE</a></td>
-			<td data-sort-value="#DATE">[(#DATE|affdate_heure)]</td>
-			[(#GET{cextras}|cextras2td{#ID_FORMULAIRES_REPONSE})]
-			<BOUCLE_champ(POUR){tableau #GET{saisies_finales}}>
-			[(#VALEUR{saisie}|!={explication}|oui)
-			<td[ class="(#VOIR_REPONSE{#VALEUR{options/nom},edit})"][ data-sort-value="(#VOIR_REPONSE{#VALEUR{options/nom},brut}|formidable_ts_data_sort_value{#VALEUR})"]>[(#VOIR_REPONSE{#VALEUR{options/nom},valeur_uniquement}|html2unicode)]</td>
-			]
-			</BOUCLE_champ>
-		</tr>
-		</BOUCLE_reponses>
-		</tbody>
-	</table>
-	</div>
-	</B_reponses>
+	<h1>#TITRE</h1>
+
+	<INCLURE{fond=modeles/formidable_tablesorter, choix_statut=oui, css_prive_layout_page=oui, css_prive_bloc_entete=oui, env} />
 </BOUCLE_formulaire>
