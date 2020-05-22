@@ -13,7 +13,7 @@
 		switch ($_POST['cvt']) {
 			case 'spip2html':
 				$result = ckeditor_spip2html($_POST['text_area']) ;
-				if (!$_POST['fix'] && preg_match("~\s*<p>.*?</p>\s*~s", $result, $m) && ($m[0] == $result)) {
+				if (isset($_POST['fix']) && !$_POST['fix'] && preg_match("~\s*<p>.*?</p>\s*~s", $result, $m) && ($m[0] == $result)) {
 					echo preg_replace("~^\s*<p>(.*?)</p>\s*$~s", "$1", $result) ;
 				} else {
 					echo $result ;
