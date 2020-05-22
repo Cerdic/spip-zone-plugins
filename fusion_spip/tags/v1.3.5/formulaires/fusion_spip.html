@@ -1,0 +1,96 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<[(#DIV|sinon{ul})] class="editer-groupe">
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{base}}
+			#SET{versions_bases,#ENV**{erreurs}|table_valeur{versions_bases}}
+			<[(#DIV|sinon{li})] class="editer editer_base obligatoire[(#GET{erreurs}|oui)erreur][(#GET{versions_bases}|oui)erreur]">
+				<label for="base"><:fusion_spip:base:></label>
+				[<span class='erreur_message'>(#GET{versions_bases})</span>]
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class="explication"><:fusion_spip:base_desc:></p>
+				<select name="base" id="base">
+					<option value=""></option>
+					<BOUCLE_bases(DATA){source tableau,#ENV{bases}}>
+					<option value="[(#CLE|plus{1})]" [(#ENV{base}|=={[(#CLE|plus{1})]}|oui)selected="selected"] >#VALEUR</option>
+					</BOUCLE_bases>
+				</select>
+			</[(#DIV|sinon{li})]>
+			[(#GET{versions_bases}|oui)
+			<[(#DIV|sinon{li})] class="editer editer_confirme_warning [ (#GET{versions_bases}|oui)erreur]">
+				<div class="choix">
+					<input type="checkbox" name="confirm_version" id="confirm_version" [(#ENV{confirm_version}|oui)checked="checked"] />
+					<label for="confirm_version"><:fusion_spip:confirme_warning:></label>
+				</div>
+			</[(#DIV|sinon{li})]>
+			]
+			[(#GET{versions_bases}|non)
+			<input type="hidden" name="confirm_version" value="[(#ENV{confirm_version})]" />
+			]
+			#SET{warning_shema,#ENV**{erreurs}|table_valeur{warning_shema}}
+			[<[(#DIV|sinon{li})] class="editer editer_confirme_warning [ (#GET{warning_shema}|oui)erreur]">
+				<span class='erreur_message'>(#GET{warning_shema})</span>
+				<div class="choix">
+					<input type="checkbox" name="confirm_shema" id="confirm_shema" [(#ENV{confirm_shema}|oui)checked="checked"] />
+					<label for="confirm_shema"><:fusion_spip:confirme_warning:></label>
+				</div>
+			</[(#DIV|sinon{li})]>]
+			[(#GET{warning_shema}|non)
+			<input type="hidden" name="confirm_shema" value="[(#ENV{confirm_shema})]" />
+			]
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{img_dir}}
+			<[(#DIV|sinon{li})] class="editer editer_img_dir [ (#GET{erreurs}|oui)erreur]">
+				<label for="img_dir"><:fusion_spip:img_dir:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class="explication"><:fusion_spip:img_dir_desc:></p>
+				<input type="text" name="img_dir" class="text" id="img_dir" value="#ENV{img_dir}" />
+			</[(#DIV|sinon{li})]>
+			#SET{warning_traduction_document,#ENV**{erreurs}|table_valeur{warning_traduction_document}}
+			[<[(#DIV|sinon{li})] class="editer editer_confirme_warning [ (#GET{warning_traduction_document}|oui)erreur]">
+				<span class='erreur_message'>(#GET{warning_traduction_document})</span>
+				<label><:fusion_spip:confirme_traduire_documents_doublons:></label>
+				<div class="choix">
+					<input type="radio" name="traduire_documents_doublons" value="on" id="traduire_documents_doublons_on" [(#ENV{traduire_documents_doublons}|=={on}|oui)checked="checked"] />
+					<label for="traduire_documents_doublons_on"><:item_oui:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="traduire_documents_doublons" value="off" id="traduire_documents_doublons_off" [(#ENV{traduire_documents_doublons}|=={on}|oui)checked="checked"] />
+					<label for="traduire_documents_doublons_off"><:item_non:></label>
+				</div>
+			</[(#DIV|sinon{li})]>]
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{secteur}}
+			<[(#DIV|sinon{li})] class="editer editer_secteur [ (#GET{erreurs}|oui)erreur]">
+				<label for="secteur"><:fusion_spip:secteur:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class="explication"><:fusion_spip:secteur_desc:></p>
+				<select name="secteur" id="secteur">
+					<option value=""></option>
+					<BOUCLE_secteurs(RUBRIQUES){racine} {par titre} {tout}>
+					<option value="#ID_RUBRIQUE" [(#ENV{secteur}|=={#ID_RUBRIQUE}|oui)selected="selected"] >#TITRE</option>
+					</BOUCLE_secteurs>
+				</select>
+			</[(#DIV|sinon{li})]>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{stats}}
+			<[(#DIV|sinon{li})] class="editer editer_stats [ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<div class="choix">
+					<input type="checkbox" name="stats" id="stats" [(#ENV{stats}|=={on}|oui) checked="checked" ] />
+					<label for="stats"><:fusion_spip:stats:></label>
+				</div>
+			</[(#DIV|sinon{li})]>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{referers}}
+			<[(#DIV|sinon{li})] class="editer editer_referers [ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<div class="choix">
+					<input type="checkbox" name="referers" id="referers" [(#ENV{referers}|=={on}|oui) checked="checked" ] />
+					<label for="referers"><:fusion_spip:referers:></label>
+				</div>
+			</[(#DIV|sinon{li})]>
+		</[(#DIV|sinon{ul})]>
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:fusion_spip:bouton_importer:>' />
+		</p>
+	</div></form>
+</div>
