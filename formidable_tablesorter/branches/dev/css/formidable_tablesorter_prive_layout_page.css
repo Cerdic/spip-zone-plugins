@@ -1,4 +1,7 @@
 /** Réglages généraux de la page **/
+body {
+	x-overflow:hidden;
+}
 .formidable_tablesorter .largeur {
 	width:auto;
 	margin-left:1em;
