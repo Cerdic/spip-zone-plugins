@@ -1,0 +1,59 @@
+/** Réglages de la table,
+ * éviter les debordement,
+ * inspiré de https://mottie.github.io/tablesorter/docs/example-widget-resizable.html
+**/
+.formidable_tablesorter-wrapper {
+	max-width:100%;
+	width:100%;
+	overflow-x:scroll;
+}
+.formidable_tablesorter-wrapper::-webkit-scrollbar {
+	display:none;
+}
+
+.formidable_tablesorter thead {
+	position:-webkit-sticky;
+	position:sticky;
+	top:0px;
+	z-index:10;
+}
+.formidable_tablesorter-wrapper table {
+  width: auto;
+}
+.formidable_tablesorter-wrapper .tablesorter td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 10px;
+}
+.formidable_tablesorter-wrapper  .tablesorter th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 10px;
+}
+/** Styles cellules et entetes divers **/
+.tablesorter-ignoreRow th {
+	text-align:center;
+	font-size:1.25em;
+	padding-bottom:1em;
+}
+.tablesorter .move-arrows {
+	display: flex;
+	justify-content: space-between;
+	margin-left:0.5em;
+	margin-right:0.5em;
+}
+.tablesorter-blue .move-arrows a {
+	color:#646464;
+}
+.tablesorter-blue td a {
+	color:#184c82;
+}
+.tablesorter .move-arrows.first{
+	justify-content:end;
+}
+.tablesorter tr > *{
+	border:1px black solid;
+}
+.tablesorter-sticky-wrapper caption {
+	margin: 0;
+}

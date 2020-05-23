@@ -1,0 +1,26 @@
+<script type="text/javascript">
+	url_action_formidable_tablesorter_export = "[(#URL_ACTION_AUTEUR{formidable_tablesorter_export,generer=true}|replace{'&amp;',&})]";
+	filter_filterLabel = '<:formidable_ts:filtrer_colonne:>';
+	filter_placeholder = '<:formidable_ts:filtre:>';
+	type_export = 'csv'
+	filename = 'nom';
+	checkAll = '<:formidable_ts:checkall:>';
+	uncheckAll = '<:formidable_ts:uncheckall:>';
+	resetAllconfirm = "<:formidable_ts:resetallconfirm:>";
+</script>
+[<link rel="stylesheet" href="(#CHEMIN{css/tablesorter.theme.blue.min.css}|timestamp)" />]
+
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.tablesorter.min.js}|timestamp)"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.tablesorter.widgets.min.js}|timestamp)"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/widget-stickyHeaders.min.js}|timestamp)"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/widget-columnSelector.min.js}|timestamp)"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/widget-print.min.js}|timestamp)"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/widget-output.min.js}|timestamp)"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/widget-resizable.min.js}|timestamp)"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/widget-saveSort.min.js}|timestamp)"></script>]
+[<link rel="stylesheet" href="(#CHEMIN{css/formidable_tablesorter.css}|timestamp)" />]
+
+
+[<script type="text/javascript" src="(#CHEMIN{javascript/formidable_tablesorter.js}|timestamp)"></script>]
+[(#ENV{css_prive_layout_page}|=={oui}|oui)[<link rel="stylesheet" href="(#CHEMIN{css/formidable_tablesorter_prive_layout_page.css}|timestamp)" />]]
+[(#ENV{css_prive_bloc_entete}|=={oui}|oui)[<link rel="stylesheet" href="(#CHEMIN{css/formidable_tablesorter_prive_bloc_entete.css}|timestamp)" />]]

@@ -1,0 +1,17 @@
+/** Réglages généraux de la page **/
+body {
+	x-overflow:hidden;
+}
+.formidable_tablesorter .largeur {
+	width:auto;
+	margin-left:1em;
+	margin-right:1em;
+}
+.formidable_tablesorter #conteneur, .formidable_tablesorter #contenu{
+	width:100%;
+}
+.formidable_tablesorter #navigation {
+	display:none;
+}
+
+
