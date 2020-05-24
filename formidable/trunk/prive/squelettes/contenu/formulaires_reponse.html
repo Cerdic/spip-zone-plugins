@@ -34,4 +34,18 @@
 [(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,formulaires_reponse,objet,formulaires_reponse,id_objet,#ID_FORMULAIRES_REPONSE},data,#GET{enfants}})]})]
 
 </BOUCLE_autoriser>
+[(#EVAL{defined('_SAISIES_AFFICHAGE_COMPACT')}|oui)
+<style type='text/css'>
+#wysiwyg .afficher .label, #wysiwyg .afficher .label + div {
+  display: inline;
+}
+#wysiwyg .afficher .label {
+	font-weight: bold;
+}
+#wysiwyg .afficher .label:not(.colonincluded):after {
+	content: " :";
+	font-weight: normal;
+}
+</style>
+]
 </BOUCLE_formulaires_reponse>
