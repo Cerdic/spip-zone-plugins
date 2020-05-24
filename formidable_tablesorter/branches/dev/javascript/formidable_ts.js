@@ -31,7 +31,7 @@ $(function() {
 			output_callback: function(config, data, url) {
 				return call_formidable_ts_export(config, data, url);
 			},
-			size: 50,//Nombre de ligne par page
+			pager_size: 25,//Nombre de lignes par page
 			// css class names that are added
 			pager_css: {
 				container   : 'tablesorter-pager',    // class added to make included pager.css file work
@@ -48,7 +48,12 @@ $(function() {
 				pageDisplay : '.pagedisplay', // location of where the "output" is displayed
 				pageSize    : '.pagesize'     // page size selector - select dropdown that sets the "size" option
 			},
-			savePages: true,
+			pager_savePages: true,
+      pager_ajaxUrl : pager_ajaxUrl,
+      pager_ajaxObject: {
+        type: 'GET', // default setting
+        dataType: 'json'
+      },
 			resizable_addLastColumn: true
 		}
 	}).on('columnUpdate', function() {

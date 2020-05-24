@@ -55,17 +55,6 @@
 		</B_entete>
 		<tbody>
 			<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}{statut==#ENV{statut,'.*'}}>
-		<tr>
-			<td>[(#STATUT|puce_statut{formulaires_reponse,#ID_FORMULAIRES_REPONSE})]</td>
-			<td><a href="#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE}">#ID_FORMULAIRES_REPONSE</a></td>
-			<td data-sort-value="#DATE">[(#DATE|affdate_heure)]</td>
-			[(#GET{cextras}|cextras2td{#ID_FORMULAIRES_REPONSE})]
-			<BOUCLE_champ(POUR){tableau #GET{saisies_finales}}>
-			[(#VALEUR{saisie}|!={explication}|oui)
-			<td[ class="(#VOIR_REPONSE{#VALEUR{options/nom},edit})"][ data-sort-value="(#VOIR_REPONSE{#VALEUR{options/nom},brut}|formidable_ts_data_sort_value{#VALEUR})"]>[(#VOIR_REPONSE{#VALEUR{options/nom},valeur_uniquement}|html2unicode)]</td>
-			]
-			</BOUCLE_champ>
-		</tr>
 		</BOUCLE_reponses>
 		</tbody>
 	</table>
