@@ -2,20 +2,20 @@
  * éviter les debordement,
  * inspiré de https://mottie.github.io/tablesorter/docs/example-widget-resizable.html
 **/
-.formidable_tablesorter-wrapper {
+.formidable_ts-wrapper {
 	max-width:100%;
 	width:100%;
 	overflow-x:scroll;
 }
-.formidable_tablesorter-wrapper table {
+.formidable_ts-wrapper table {
   width: auto;
 }
-.formidable_tablesorter-wrapper .tablesorter td {
+.formidable_ts-wrapper .tablesorter td {
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 10px;
 }
-.formidable_tablesorter-wrapper  .tablesorter th {
+.formidable_ts-wrapper  .tablesorter th {
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 10px;

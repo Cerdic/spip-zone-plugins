@@ -21,7 +21,7 @@ function formidable_ts_affiche_gauche($flux) {
 			$id_formulaire = sql_getfetsel('id_formulaire','spip_formulaires_reponses','id_formulaires_reponse='.$args['id_formulaires_reponse']);
 		}
 		$boite_fermer = boite_fermer();
-		$url = parametre_url(generer_url_ecrire('formidable_tablesorter'),'id_formulaire',$id_formulaire);
+		$url = parametre_url(generer_url_ecrire('formidable_ts'),'id_formulaire',$id_formulaire);
 		$url = parametre_url($url, 'statut', 'publie');
 		$lien = icone_horizontale(_T('formidable_ts:tableau_reponses'), $url, 'formulaire-reponses-24');
 		$flux['data'] = str_replace($boite_fermer,"$lien\n\r$boite_fermer", $flux['data']);

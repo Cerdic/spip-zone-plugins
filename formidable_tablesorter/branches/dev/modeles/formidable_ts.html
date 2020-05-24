@@ -3,19 +3,19 @@
 	#SET{statut,publie}
 })]
 <BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}{si #AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}|ou{#ENV{public}|=={oui}}}>
-	<INCLURE{fond=inclure/formidable_tablesorter_entete, env} />
+	<INCLURE{fond=inclure/formidable_ts_entete, env} />
 
 	#SET{saisies,#SAISIES|unserialize}
 	#SET{saisies_finales,#GET{saisies}|saisies_lister_finales}
 	#SET{cextras,#VAL{spip_formulaires_reponses}|appliquer_filtre{champs_extras_objet}|sinon{#LISTE}}
 
 	[(#ENV{choix_statut}|=={oui}|oui)
-	<INCLURE{fond=inclure/formidable_tablesorter-filtres, env}/>
+	<INCLURE{fond=inclure/formidable_ts_filtres, env}/>
 	]
 	<B_reponses>
-	<INCLURE{fond=inclure/formidable_tablesorter_preambule,total=#TOTAL_BOUCLE} >
-	<div class="formidable_tablesorter-wrapper">
-	<table data-identifiant="#IDENTIFIANT" id="formidable_tablesorter#ID_FORMULAIRE" class="tablesorter">
+	<INCLURE{fond=inclure/formidable_ts_preambule,total=#TOTAL_BOUCLE} >
+	<div class="formidable_ts-wrapper">
+	<table data-identifiant="#IDENTIFIANT" id="formidable_ts#ID_FORMULAIRE" class="tablesorter">
 		<caption>#TITRE</caption>
 		<thead>
 			<tr class="tablesorter-ignoreRow">

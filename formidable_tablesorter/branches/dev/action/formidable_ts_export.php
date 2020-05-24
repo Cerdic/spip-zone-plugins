@@ -8,7 +8,7 @@ use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 use Box\Spout\Common\Entity\Style\Color;
 
-function action_formidable_tablesorter_export() {
+function action_formidable_ts_export() {
 	$data = json_decode(_request('data'));
 	$type_export = _request('type_export');
 	$filename = _request('filename');

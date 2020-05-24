@@ -26,9 +26,9 @@ $(function() {
       filter_saveFilters : true,
 			output_separator: 'array',
 			output_delivery: 'download',
-			stickyHeaders_xScroll : '.formidable_tablesorter-wrapper',
+			stickyHeaders_xScroll : '.formidable_ts-wrapper',
 			output_callback: function(config, data, url) {
-				return call_formidable_tablesorter_export(config, data, url);
+				return call_formidable_ts_export(config, data, url);
 			},
 			resizable_addLastColumn: true
 		}
@@ -99,8 +99,8 @@ $.tablesorter.defaults.textExtraction = function(node, table, cellIndex){
     return $(node).attr('data-sort-value') || $(node).text();
 }
 /** Fonctions d'export tableur **/
-function call_formidable_tablesorter_export(config, data, url) {
-	var form = $('<form></form>').attr('action', url_action_formidable_tablesorter_export).attr('method', 'post');
+function call_formidable_ts_export(config, data, url) {
+	var form = $('<form></form>').attr('action', url_action_formidable_ts_export).attr('method', 'post');
 	form.append($("<input></input>").attr('type', 'hidden').attr('name', 'data').attr('value', data));
 	form.append($("<input></input>").attr('type', 'hidden').attr('name', 'type_export').attr('value', type_export));
 	form.append($("<input></input>").attr('type', 'hidden').attr('name', 'filename').attr('value', filename));
@@ -154,14 +154,14 @@ function formidable_ts_post_reorder_set_sorting() {
 	// Retrouver le tri
 	sortList = $.tablesorter.storage(formidable_ts, 'tablesorter-savesort')['sortList'];
 	formidable_ts.trigger('sortReset');
-	sortList = formidable_tablesorter_reorder_sortList_update_position(sortList);
+	sortList = formidable_ts_reorder_sortList_update_position(sortList);
 	formidable_ts.trigger('sorton', [sortList]);
 
 }
 // Prend une sortList
 // La parcourt et la modifie de manière à donner le bon index suivant le nouvel ordre post-déplacement de colonne
 // Pour chaque entrée, trouve la bonne position avec nouveal indexation
-function formidable_tablesorter_reorder_sortList_update_position(sortList) {
+function formidable_ts_reorder_sortList_update_position(sortList) {
 	$(sortList).each(function(key, value) {
 		console.log(value);
 		selector = '.tablesorter-ignoreRow th[data-column='+value[0]+']';

@@ -2,15 +2,15 @@
 body {
 	x-overflow:hidden;
 }
-.formidable_tablesorter .largeur {
+.formidable_ts .largeur {
 	width:auto;
 	margin-left:1em;
 	margin-right:1em;
 }
-.formidable_tablesorter #conteneur, .formidable_tablesorter #contenu{
+.formidable_ts #conteneur, .formidable_ts #contenu{
 	width:100%;
 }
-.formidable_tablesorter #navigation {
+.formidable_ts #navigation {
 	display:none;
 }
 

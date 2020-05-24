@@ -42,9 +42,9 @@ function formidable_ts_configurer_crayons() {
 	ecrire_config('crayons/espaceprive', 'on');
 	$exec_autorise = lire_config('crayons/exec_autorise');
 	if (!$exec_autorise) {
-		ecrire_config('crayons/exec_autorise', 'formidable_tablesorter');
-	}	elseif ($exec_autorise !== '*' and strpos($exec_autorise, 'formidable_tablesorter') === false) {
-		ecrire_config('crayons/exec_autorise', $exec_autorise.',formidable_tablesorter');
+		ecrire_config('crayons/exec_autorise', 'formidable_ts');
+	}	elseif ($exec_autorise !== '*' and strpos($exec_autorise, 'formidable_ts') === false) {
+		ecrire_config('crayons/exec_autorise', $exec_autorise.',formidable_ts');
 	}
 }
 
