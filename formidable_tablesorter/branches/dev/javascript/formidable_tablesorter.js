@@ -58,8 +58,8 @@ $(function() {
 			formidable_ts_restart();
 		}
 	});
-	formidable_ts_add_check_all_button();
 	formidable_ts_init_reorder();
+	formidable_ts_add_check_all_button();
 });
 
 /** Réglage du column selector **/
