@@ -62,3 +62,7 @@
 .tablesorter-sticky-wrapper caption {
 	margin: 0;
 }
+
+.filtered {
+	display:none;
+}
