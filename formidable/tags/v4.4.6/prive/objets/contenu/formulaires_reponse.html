@@ -1,0 +1,39 @@
+<BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){tout}{id_formulaires_reponse}>
+<div class="champ afficher contenu_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
+	<b><:auteur:></b> :
+	<span dir='#LANG_DIR'>
+		[(#ID_AUTEUR|>{0}|oui)
+			<a href="[(#INFO_URL{auteur,#ID_AUTEUR})]">[(#INFO_TITRE{auteur,#ID_AUTEUR})]</a>
+		]
+		[(#ID_AUTEUR|>{0}|non)
+			<:formidable:reponses_anonyme:>
+		]
+	</span>
+</div>
+<div class="champ afficher contenu_ip[ (#IP*|strlen|?{'',vide})]">
+	<b><:formidable:reponses_ip:></b> :
+	<span dir='#LANG_DIR'>
+		#IP
+	</span>
+</div>
+<div class="champ afficher contenu_formulaire[ (#ID_FORMULAIRE*|strlen|?{'',vide})]">
+	<b><:formulaire:titre_formulaire:></b> :
+	<span dir='#LANG_DIR'>
+		<a href="[(#URL_ECRIRE{formulaire,id_formulaire=#ID_FORMULAIRE})]">
+			[(#INFO_TITRE{formulaire,#ID_FORMULAIRE})]
+		</a>
+	</span>
+</div>
+<div class="champ afficher contenu_date[ (#DATE*|strlen|?{'',vide})]">
+	<b><:date:></b> :
+	<span dir='#LANG_DIR'>
+		[(#DATE|affdate_jourcourt|concat{#DATE|affdate{", H:i"}})]
+	</span>
+</div>
+<div class="champ afficher contenu_maj[ (#MAJ*|strlen|?{'',vide})]">
+	<b><:formidable:reponse_maj:></b> :
+	<span dir='#LANG_DIR'>
+		[(#MAJ|affdate_jourcourt|concat{#MAJ|affdate{", H:i"}})]
+	</span>
+</div>
+</BOUCLE_formulaires_reponse>
