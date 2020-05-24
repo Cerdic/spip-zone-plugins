@@ -5,7 +5,6 @@ formidable_ts = '';
 $(function() {
 	formidable_ts = $(".tablesorter");
 	formidable_ts.tablesorter({
-		theme: 'blue',
 		widgets: [
 			"zebra",
 			"stickyHeaders",

@@ -21,6 +21,27 @@
   min-width: 10px;
 }
 /** Styles cellules et entetes divers **/
+.tablesorter-header {
+	cursor:pointer;
+}
+.tablesorter-header-inner {
+	display:inline;
+}
+.tablesorter-header::after {
+	float:right
+}
+.tablesorter-headerUnSorted::after {
+	content: "⬆️⬇️"
+}
+.tablesorter-headerAsc::after {
+	content: "⬆️"
+}
+.tablesorter-headerDesc::after {
+	content: "⬇️"
+}
+.tablesorter-filter-row {
+	background:white;
+}
 .tablesorter-ignoreRow th {
 	text-align:center;
 	font-size:1.25em;
@@ -31,12 +52,6 @@
 	justify-content: space-between;
 	margin-left:0.5em;
 	margin-right:0.5em;
-}
-.tablesorter-blue .move-arrows a {
-	color:#646464;
-}
-.tablesorter-blue td a {
-	color:#184c82;
 }
 .tablesorter .move-arrows.first{
 	justify-content:end;
