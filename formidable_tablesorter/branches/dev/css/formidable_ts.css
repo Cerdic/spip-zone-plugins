@@ -21,6 +21,10 @@
   min-width: 10px;
 }
 /** Styles cellules et entetes divers **/
+.formidable_ts caption {
+	text-align:left;
+}
+
 .tablesorter-header {
 	cursor:pointer;
 }

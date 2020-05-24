@@ -6,6 +6,7 @@ $(function() {
 	formidable_ts = $(".tablesorter");
 	formidable_ts.tablesorter({
 		widgets: [
+			"pager",
 			"stickyHeaders",
 			"filter",
 			"print",
@@ -30,14 +31,27 @@ $(function() {
 			output_callback: function(config, data, url) {
 				return call_formidable_ts_export(config, data, url);
 			},
+			size: 50,//Nombre de ligne par page
+			// css class names that are added
+			pager_css: {
+				container   : 'tablesorter-pager',    // class added to make included pager.css file work
+				errorRow    : 'tablesorter-errorRow', // error information row (don't include period at beginning); styled in theme file
+				disabled    : 'disabled'              // class added to arrows @ extremes (i.e. prev/first arrows "disabled" on first page)
+			},
+			pager_selectors: {
+				container   : '.pager',       // target the pager markup (wrapper)
+				first       : '.first',       // go to first page arrow
+				prev        : '.prev',        // previous page arrow
+				next        : '.next',        // next page arrow
+				last        : '.last',        // go to last page arrow
+				gotoPage    : '.gotoPage',    // go to page selector - select dropdown that sets the current page
+				pageDisplay : '.pagedisplay', // location of where the "output" is displayed
+				pageSize    : '.pagesize'     // page size selector - select dropdown that sets the "size" option
+			},
+			savePages: true,
 			resizable_addLastColumn: true
 		}
-	}).bind('filterEnd', function(event, config) {
-		total = $(this).find('tbody tr').length;
-		filtres = $(this).find('tbody tr.filtered').length;
-		$('#total').text(total-filtres);
-		}
-	).on('columnUpdate', function() {
+	}).on('columnUpdate', function() {
 		formidable_ts_add_reorder_arrows();
 	});;
   $('.print').click(function() {
