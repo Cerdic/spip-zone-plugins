@@ -6,7 +6,6 @@ $(function() {
 	formidable_ts = $(".tablesorter");
 	formidable_ts.tablesorter({
 		widgets: [
-			"zebra",
 			"stickyHeaders",
 			"filter",
 			"print",
