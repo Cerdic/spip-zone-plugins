@@ -20,11 +20,13 @@
   text-overflow: ellipsis;
   min-width: 10px;
 }
-/** Styles cellules et entetes divers **/
 .formidable_ts caption {
 	text-align:left;
 }
-
+.formidable_ts .tablesorter-filter {
+	width:100%;
+	min-width:1em;
+}
 .tablesorter-header {
 	cursor:pointer;
 }

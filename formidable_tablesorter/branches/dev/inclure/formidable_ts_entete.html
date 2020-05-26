@@ -24,5 +24,7 @@
 
 [<link rel="stylesheet" href="(#CHEMIN{css/formidable_ts.css}|timestamp)" />]
 [<script type="text/javascript" src="(#CHEMIN{javascript/formidable_ts.js}|timestamp)"></script>]
+[(#ENV{css_prive_layout_page}|=={oui}|oui)[<link rel="stylesheet" href="(#CHEMIN{css/formidable_ts.css}|timestamp)" />]]
+[(#ENV{css_prive_layout_page}|=={oui}|oui)[<link rel="stylesheet" href="(#CHEMIN{css/formidable_ts_prive_layout_page.css}|timestamp)" />]]
 [(#ENV{css_prive_layout_page}|=={oui}|oui)[<link rel="stylesheet" href="(#CHEMIN{css/formidable_ts_prive_layout_page.css}|timestamp)" />]]
 [(#ENV{css_prive_bloc_entete}|=={oui}|oui)[<link rel="stylesheet" href="(#CHEMIN{css/formidable_ts_prive_bloc_entete.css}|timestamp)" />]]
