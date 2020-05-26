@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<head>
+	<title><:chartjs:demo_titre:></title>
+	#INSERT_HEAD
+	#INSERT_HEAD_CSS
+	<script src="https://cdn.jsdelivr.net/prism/1.6.0/prism.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/4.0.0-alpha.6/css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/g/prism@1.6.0(themes/prism.css+themes/prism-okaidia.css)">
+	<style>
+		body { margin: 3rem; font-family: sans; }
+		h1, h2, h3 { text-align: center; }
+		pre.code-chart { font-size: 0.9em }
+		code.type {display:inline-block; margin-left:1em; background:#eee; borde-radius:3px; padding: 0.2em; color: #0270ff}
+		hr {border: 1px solid #ddd; border-width: 1px 0 0; margin: 2rem 0;}
+	</style>
+</head>
+	
+<body>
+
+	<h1><:chartjs:demo_titre:></h1>
+
+	<hr>
+	<h2>Types de graphiques</h2>
+
+	<div class="row">
+
+		<!-- bar -->
+		<div class="col-md-6 col-lg-4">
+			<h3 id="bar"><:chartjs:demo_bar:> <code class="type"><:chartjs:demo_type{type=bar}:></code></h3>
+			#SET{data,"40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22"}
+			#SET{labels,"Salé,Sucré,Amer,Acide"}
+			#SET{datalabels,"poire,pomme,courgette,citron"}
+			[(#MODELE{chart}{id=barre,type=bar,datasets=#GET{data},labels=#GET{labels},dataLabels=#GET{datalabels},width=500,height=500})]
+			<pre class="code-chart"><code class="language-html">&lt;chart
+  |id=barre
+  |type=bar
+  |datasets=40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22
+  |labels=Salé,Sucré,Amer,Acide
+  |dataLabels=poire,pomme,courgette,citron
+  |width=500
+  |height=500&gt;
+			</code></pre>
+		</div>
+
+		<!-- line -->
+		<div class="col-md-6 col-lg-4">
+			<h3 id="ligne"><:chartjs:demo_line:> <code class="type"><:chartjs:demo_type{type=line}:></code></h3>
+			#SET{data,"40,43,61,50 next 33,15,40,22"}
+			#SET{labels,"Janvier, Février, Mars, Avril"}
+			#SET{datalabels,"patates,poireaux"}
+			[(#MODELE{chart}{id=ligne,type=line,datasets=#GET{data},labels=#GET{labels},dataLabels=#GET{datalabels},width=500,height=500})]
+			<pre class="code-chart"><code class="language-html">&lt;chart
+  |id=ligne
+  |type=line
+  |datasets=40,43,61,50 next 33,15,40,22
+  |labels=Janvier, Février, Mars, Avril0
+  |dataLabels=patates,poireaux
+  |width=500
+  |height=500&gt;
+			</code></pre>
+		</div>
+
+		<!-- pie -->
+		<div class="col-md-6 col-lg-4">
+			<h3 id="pie"><:chartjs:demo_pie:> <code class="type"><:chartjs:demo_type{type=pie}:></code></h3>
+			#SET{data,"10,32,50,25,5"}
+			#SET{labels,"Tôkyô - 東京,Kyoto, Osaka,Chiba,Hiroshima"}
+			[(#MODELE{chart}{id=camembert1,type=pie,data=#GET{data},labels=#GET{labels}})]
+			</code><pre class="code-chart"><code class="language-html">&lt;chart
+  |id=camembert1
+  |type=pie
+  |labels=Tôkyô - 東京,Kyoto, Osaka,Chiba,Hiroshima
+  |data=10,32,50,25,5&gt;
+			</code></pre>
+		</div>
+
+		<!-- Doughnut -->
+		<div class="col-md-6 col-lg-4">
+			<h3 id="doughnut"><:chartjs:demo_doughnut:> <code class="type"><:chartjs:demo_type{type=doughnut}:></code></h3>
+			#SET{data,"30,10,55,25,15,8"}
+			#SET{colors,"#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264"}
+			[(#MODELE{chart}{id=anneau,type=doughnut,align=right,data=#GET{data},colors=#GET{colors},labels=#GET{labels}})]
+			<pre class="code-chart"><code class="language-html">&lt;chart
+  |id=anneau
+  |type=doughnut
+  |align=right
+  |data=30,10,55,25,15,8
+  |labels=Tôkyô - 東京,Kyoto, Osaka,Chiba,Hiroshima
+  |colors=#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264&gt;
+			</code></pre>
+		</div>
+
+		<!-- polarArea -->
+		<div class="col-md-6 col-lg-4">
+			<h3 id="polararea"><:chartjs:demo_polaire:> <code class="type"><:chartjs:demo_type{type=polarArea}:></code></h3>
+			#SET{data,"40,32,5,25,50,45"}
+			#SET{labels,"Noix,Amandes,Raisins,Autres sucreries,Salés,Six"}
+			[(#MODELE{chart}{id=polaire,type=polarArea,data=#GET{data},labels=#GET{labels}})]
+			<pre class="code-chart"><code class="language-html">&lt;chart
+  |id=polaire
+  |type=polarArea
+  |data=40,32,5,25,50,45
+  |labels=Noix,Amandes,Raisins,Autres sucreries,Salés,Six&gt;
+			</code></pre>
+		</div>
+
+		<!-- radar -->
+		<div class="col-md-6 col-lg-4">
+			<h3 id="radar"><:chartjs:demo_radar:> <code class="type"><:chartjs:demo_type{type=radar}:></code></h3>
+			#SET{data,"20,22,40,25,55 next 15,20,30,40,35"}
+			#SET{labels,"Précis, Rapide, Joli, Complet, かわい"}
+			#SET{colors,"#CEBC17,#CE4264"}
+			[(#MODELE{chart}{id=radar,type=radar,datasets=#GET{data},labels=#GET{labels},colors=#GET{colors}})]
+			<pre class="code-chart"><code class="language-html">&lt;chart
+  |id=radar45
+  |type=radar
+  |datasets=40,43,61,50 next 33,15,40,22
+  |labels=Précis, Rapide, Joli, Complet, かわい
+  |colors=#CEBC17,#CE4264&gt;
+			</code></pre>
+		</div>
+
+		<!-- bubble -->
+		<div class="col-md-6 col-lg-4">
+			<h3 id="bubble"><:chartjs:demo_bubble:> <code class="type"><:chartjs:demo_type{type=bubble}:></code></h3>
+			#SET{data,"2,5,10, 10,7,5 next 15,20,5, 10,12,15"}
+			#SET{datalabels,"poireaux, patates"}
+			[(#MODELE{chart}{id=bubble,type=bubble,datasets=#GET{data},dataLabels=#GET{datalabels}})]
+			<pre class="code-chart"><code class="language-html">&lt;chart
+  |id=bubble
+  |type=bubble
+  |datasets=2,5,10 10,7,5 next 15,20,5 ,10,12,15
+  |dataLabels=poireaux,patates&gt;
+			</code></pre>
+		</div>
+
+		<!-- scatter -->
+		<div class="col-md-6 col-lg-4">
+			<h3 id="scatter"><:chartjs:demo_scatter:> <code class="type"><:chartjs:demo_type{type=scatter}:></code></h3>
+			#SET{data,"5,10, 10,0, 15,10 next 5,20, 6,25, 7,20 next 13,20, 14,25, 15,20"}
+			#SET{datalabels,"poireaux, patates, piments"}
+			[(#MODELE{chart}{id=scatter,type=scatter,datasets=#GET{data},dataLabels=#GET{datalabels}})]
+			<pre class="code-chart"><code class="language-html">&lt;chart
+  |id=scatter
+  |type=scatter
+  |datasets=5,10, 10,0, 15,10 next 5,20, 6,25, 7,20 next 13,20, 14,25, 15,20
+  |dataLabels=poireaux,patates,piments&gt;
+			</code></pre>
+		</div>
+
+	</div>
+
+	<hr>
+	<h2>Exemples avancés</h2>
+
+	<div class="row">
+
+		<!-- spip -->
+		<div class="col-md-6">
+			<h3><:chartjs:demo_spip_data:></h3>
+			#SET{nb_article,0}
+			<BOUCLE_articles(ARTICLES)> </BOUCLE_articles>#SET{nb_article,#TOTAL_BOUCLE} </B_articles>
+			#SET{nb_auteur,0}
+			<BOUCLE_auteurs(AUTEURS)> </BOUCLE_auteurs>#SET{nb_auteur,#TOTAL_BOUCLE} </B_auteurs>
+			#SET{data,#GET{nb_article}|concat{",",#GET{nb_auteur}}} 
+			#SET{labels,"Articles, Auteurs"}
+			[(#MODELE{chart}{id=barrespip,type=bar,datasets=#GET{data},labels=#GET{labels}})]
+			<pre class="code-chart"><code class="language-html">&#35;SET{nb_article,0}
+&lt;BOUCLE_articles(ARTICLES)&gt; &lt;/BOUCLE_articles&gt;&#35;SET{nb_article,&#35;TOTAL_BOUCLE} &lt;/B_articles&gt;
+&#35;SET{nb_auteur,0}
+&lt;BOUCLE_auteurs(AUTEURS)&gt; &lt;/BOUCLE_auteurs&gt;&#35;SET{nb_auteur,&#35;TOTAL_BOUCLE} &lt;/B_auteurs&gt;
+&#35;SET{data,&#35;GET{nb_article}|concat{",",&#35;GET{nb_auteur}}} 
+&#35;SET{labels,"Articles, Auteurs"}
+[(&#35;MODELE{chart}{id=barrespip,type=bar,datasets=&#35;GET{data},labels=&#35;GET{labels}})]
+			</code></pre>
+		</div>
+
+		<!-- spip data -->
+		<B_cours>
+		<div class="col-md-6">
+			<h3><:chartjs:demo_spip_bigdata:></h3>
+			#SET{data,''}
+			#SET{labels,''}
+			<BOUCLE_cours(DATA){source simplexml,http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml?#ENV{date}}{datapath root/children/cube/0/children/cube}{0,30}{si #GET{display}}>
+			#SET{labels, #GET{labels}|concat{",",#VALEUR{attributes/time}|affdate{d/m/y}}} 
+			<BOUCLE_yen(DATA){source tableau,#VALEUR{children/cube}}>[
+			(#VALEUR{attributes/currency}|=={JPY}|oui)
+			 #SET{data,#GET{data}|concat{",",#VALEUR{attributes/rate}}
+			]</BOUCLE_yen> 
+			</BOUCLE_cours>
+			#SET{data,#GET{data}|substr{1}}
+			#SET{labels,#GET{labels}|substr{1}} 
+			[(#MODELE{chart}{id=coursduyen,type=line,datasets=#GET{data},labels=#GET{labels}})]
+			<strong><:chartjs:demo_spip_legend:></strong>
+			<pre class="code-chart"><code class="language-html">&#35;SET{data,''}
+&#35;SET{labels,''}
+&lt;BOUCLE_cours(DATA){source simplexml,http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml?&#35;ENV{date}}{datapath root/children/cube/0/children/cube}{0,30}&gt;
+&#35;SET{labels, &#35;GET{labels}|concat{",",&#35;VALEUR{attributes/time}|affdate{d/m/y}}} 
+&lt;BOUCLE_yen(DATA){source tableau,&#35;VALEUR{children/cube}}&gt;[
+(&#35;VALEUR{attributes/currency}|=={JPY}|oui)
+ &#35;SET{data,&#35;GET{data}|concat{",",&#35;VALEUR{attributes/rate}}
+]&lt;/BOUCLE_yen&gt; 
+&lt;/BOUCLE_cours&gt;
+&#35;SET{data,&#35;GET{data}|substr{1}}
+&#35;SET{labels,&#35;GET{labels}|substr{1}} 
+[(&#35;MODELE{chart}{id=coursduyen,type=line,width=auto,height=auto,datasets=&#35;GET{data},labels=&#35;GET{labels}})]
+			</code></pre>
+		</div>
+	</B_cours>
+
+</body>
+</html>
+
