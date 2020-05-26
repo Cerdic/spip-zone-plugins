@@ -308,7 +308,7 @@ function notation_generer_info($id_objet,$objet,$info){
 		  "objet=".sql_quote($objet)." AND id_objet=".intval($id_objet)
 	  );
   }
-  return $infos[$objet][$id_objet][$info];
+  return isset($infos[$objet][$id_objet][$info]) ? $infos[$objet][$id_objet][$info] : '';
 }
 
 
