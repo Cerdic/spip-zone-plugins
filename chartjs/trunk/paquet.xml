@@ -1,9 +1,9 @@
 <paquet
 	prefix="chartjs"
 	categorie="multimedia"
-	version="2.0.3"
+	version="3.0.0"
 	etat="dev"
-	compatibilite="[3.0.17;3.2.*]"
+	compatibilite="[3.2.17;3.3.*]"
 	logo="prive/themes/spip/images/chartjs-64.png"
 	documentation="https://contrib.spip.net/4562"
 >
@@ -13,8 +13,6 @@
 	<licence>MIT license</licence>
 
 	<necessite nom="saisies" compatibilite="[3.23.2;]" />
-
-	<lib nom="chartjs" lien="https://github.com/chartjs/Chart.js/releases/download/v2.6.0/Chart.js.zip" />
 
 	<pipeline nom="insert_head_css" inclure="chartjs_pipelines.php" />
 	<pipeline nom="insert_head" inclure="chartjs_pipelines.php" />
