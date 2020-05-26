@@ -1,5 +1,14 @@
 ## Changelog
 
+
+# V3.0
+
+Passage de la librairie en v3.0.0-alpha
+
+
+# V2.x
+
+
 # V1.1
 
 Passage de la librairie en v2.6.

@@ -233,16 +233,16 @@
 #SET{options, #ENV{options}}
 </BOUCLE_options_completes>
 #SET{scales, #ARRAY{
-	xAxes, #LISTE{#ARRAY{
+	x, #ARRAY{
 		display, #GET{axeX},
 		stacked, #GET{stacked},
 		scaleLabel, #ARRAY{display,#GET{labelX}|?{true}, labelString,#GET{labelX}},
-	}},
-	yAxes, #LISTE{#ARRAY{
+	},
+	y, #ARRAY{
 		display, #GET{axeY},
 		stacked, #GET{stacked},
 		scaleLabel, #ARRAY{display,#GET{labelY}|?{true}, labelString,#GET{labelY}},
-	}}
+	}
 }}
 #SET{legend, #ARRAY{
 	labels, #ARRAY{
