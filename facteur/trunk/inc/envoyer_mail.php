@@ -12,6 +12,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!defined('_LOG_FACTEUR')) {
 	define('_LOG_FACTEUR',_LOG_INFO);
 }
+if (!defined('_EMAIL_AUTO_CONVERT_TEXT_TO_HTML')) {
+	define('_EMAIL_AUTO_CONVERT_TEXT_TO_HTML', true);
+}
 
 include_spip('classes/facteur');
 // inclure le fichier natif de SPIP, pour les fonctions annexes
@@ -95,7 +98,8 @@ function inc_envoyer_mail($destinataire, $sujet, $message, $from = "", $headers 
 	// si $message est un tableau -> fonctionnalites etendues
 	// avec entrees possible : html, texte, pieces_jointes, nom_envoyeur, ...
 	if (is_array($message)) {
-		$message_html   = isset($message['html']) ? $message['html'] : "";
+		// si on fournit un $message['html'] deliberemment vide, c'est qu'on n'en veut pas, et donc on restera au format texte
+		$message_html   = isset($message['html']) ? ($message['html'] ? $message['html'] : ' ') : "";
 		$message_texte  = isset($message['texte']) ? nettoyer_caracteres_mail($message['texte']) : "";
 		$pieces_jointes = isset($message['pieces_jointes']) ? $message['pieces_jointes'] : array();
 		$nom_envoyeur   = isset($message['nom_envoyeur']) ? $message['nom_envoyeur'] : "";
@@ -145,9 +149,11 @@ function inc_envoyer_mail($destinataire, $sujet, $message, $from = "", $headers 
 
 	// si le mail est en texte brut, on l'encapsule dans un modele surchargeable
 	// pour garder le texte brut, il suffit de faire un modele qui renvoie uniquement #ENV*{texte}
-	if ($message_texte AND ! $message_html){
+	if ($message_texte AND ! $message_html AND _EMAIL_AUTO_CONVERT_TEXT_TO_HTML){
 		$message_html = recuperer_fond("emails/texte",array('texte'=>$message_texte,'sujet'=>$sujet));
 	}
+	$message_html = trim($message_html);
+
 	// si le mail est en HTML sans alternative, la generer
 	if ($message_html AND !$message_texte){
 		$message_texte = facteur_mail_html2text($message_html);
