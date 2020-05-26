@@ -50,6 +50,9 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
     $import_mot_evt = lire_config('spip2spip/import_mot_evnt') ? true : false;
     $import_mot_groupe_creer = lire_config('spip2spip/import_mot_groupe_creer') ? true : false;
     $id_import_mot_groupe = lire_config('spip2spip/import_mot_groupe_creer', -1);
+	if (!defined('_SPIP2SPIP_RECUPERER_INTRODUCTION')) {
+		define('_SPIP2SPIP_RECUPERER_INTRODUCTION', true);
+	}
 	if (!defined('_SPIP2SPIP_RECUPERER_CONTENU')) {
 		define('_SPIP2SPIP_RECUPERER_CONTENU', true);
 	}
@@ -184,11 +187,13 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 $_titre = $article['titre'];
 								$_s2s_url_site_distant = $article['s2s_url_site_distant'];
 								$_s2s_id_article_distant = $article['s2s_id_article_distant'];
+								if (_SPIP2SPIP_RECUPERER_INTRODUCTION) {
+									$_descriptif = spip2spip_convert_extra($article['descriptif'], $documents_current_article, $version_flux);
+									$_chapo = spip2spip_convert_extra($article['chapo'], $documents_current_article, $version_flux);
+								}
 								if (_SPIP2SPIP_RECUPERER_CONTENU) {
 									$_surtitre = $article['surtitre'];
 									$_soustitre = $article['soustitre'];
-									$_descriptif = spip2spip_convert_extra($article['descriptif'], $documents_current_article, $version_flux);
-									$_chapo = spip2spip_convert_extra($article['chapo'], $documents_current_article, $version_flux);
 									$_texte = spip2spip_convert_extra($article['texte'], $documents_current_article, $version_flux);
 									$_ps = spip2spip_convert_extra($article['ps'], $documents_current_article, $version_flux);
 								} else {
