@@ -1,0 +1,7 @@
+[(#AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}|sinon_interdire_acces)]
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}{si #AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}}>
+
+	<h1>#TITRE</h1>
+
+	<INCLURE{fond=modeles/formidable_ts, choix_statut=oui, css_prive_layout_page=oui, css_prive_bloc_entete=oui, env} />
+</BOUCLE_formulaire>

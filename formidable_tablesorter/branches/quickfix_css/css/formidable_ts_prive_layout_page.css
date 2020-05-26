@@ -1,0 +1,17 @@
+/** Réglages généraux de la page **/
+body {
+	x-overflow:hidden;
+}
+.formidable_ts .largeur {
+	width:auto;
+	margin-left:1em;
+	margin-right:1em;
+}
+.formidable_ts #conteneur, .formidable_ts #contenu{
+	width:100%;
+}
+.formidable_ts #navigation {
+	display:none;
+}
+
+
