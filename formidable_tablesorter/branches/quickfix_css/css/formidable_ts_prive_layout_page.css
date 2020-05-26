@@ -4,8 +4,8 @@ body {
 }
 .formidable_ts .largeur {
 	width:auto;
-	margin-left:1em;
-	margin-right:1em;
+	margin-left:5em;
+	margin-right:5em;
 }
 .formidable_ts #conteneur, .formidable_ts #contenu{
 	width:100%;
