@@ -1,0 +1,24 @@
+<div id="tablesorter_boutons" class="formulaire_spip">
+	<div class="boutons">
+		<div class="print">
+			<button class="print submit button"><:formidable_ts:imprimer:></button>
+		</div>
+		<div class="columnSelectorWrapper">
+			<input id="colSelect1" type="checkbox" class="invisible">
+			<label class="submit" id="columnSelectorButton" for="colSelect1"><:formidable_ts:colonnes:></label>
+			<div id="columnSelector"></div>
+		</div>
+		<div class="output">
+			<button class="submit button output" value="csv"><:formidable_ts:exporter_csv:></button>
+			<button class="submit button output" value="ods"><:formidable_ts:exporter_ods:></button>
+			<button class="submit button output" value="xlsx"><:formidable_ts:exporter_xlsx:></button>
+		</div>
+		<div class="filtres">
+			<span class="totalWrapper"><:formidable_ts:nb_lignes:>&nbsp;<span id="total">#ENV{total}</span></span>
+			<button class="submit button resetFilter"><:formidable_ts:resetFilter:></button>
+		</div>
+		<div class="reset">
+			<button class="submit button resetAll"><:formidable_ts:resetAll:></button>
+		</div>
+	</div>
+</div>
