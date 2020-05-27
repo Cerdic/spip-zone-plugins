@@ -439,7 +439,7 @@ function pages_styliser($flux) {
 		and $id_article = intval($contexte['id_article'])
 		and $page = sql_getfetsel('page', 'spip_articles', 'id_article = ' . $id_article)
 		and $ext = $flux['args']['ext']
-		and $f = find_in_path($bloc_principal."article-$page.$ext")
+		and $f = find_in_path($bloc_principal."article=$page.$ext")
 	) {
 		$flux['data'] = substr($f, 0, - strlen(".$ext"));
 	}
