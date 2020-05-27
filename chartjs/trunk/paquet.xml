@@ -14,6 +14,8 @@
 
 	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
-	<pipeline nom="insert_head_css" inclure="chartjs_pipelines.php" />
 	<pipeline nom="insert_head" inclure="chartjs_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="chartjs_pipelines.php" />
+	<pipeline nom="header_prive" inclure="chartjs_pipelines.php" />
+	<pipeline nom="header_prive_css" inclure="chartjs_pipelines.php" />
 </paquet>
