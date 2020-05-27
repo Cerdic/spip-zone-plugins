@@ -65,7 +65,7 @@ function multilang_init_parametres() {
 
 	// forms = formulaires à prendre en compte
 	// On exclut les forms d'upload (pour les vignettes de docs, logos...)
-	$params['forms'] = array('form[class!="form_upload"][class!="form_upload_icon"]');
+	$params['forms'] = array('form:not([class~="form_upload"]):not([class~="form_upload_icon"]):not([class~="nomulti"])');
 
 	// Permettre aux plugins d'ajouter ou modifier des choses.
 	$params = pipeline('multilang_parametres', array(
