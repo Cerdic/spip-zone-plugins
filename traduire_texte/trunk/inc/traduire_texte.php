@@ -279,6 +279,11 @@ function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array())
 	$traductions = array_column($parts, 'trad');
 	unset($parts);
 
+	if (!empty($options['format']) and $options['format']=='text'){
+		$traductions = implode("\n", $traductions);
+		return $traductions;
+	}
+
 	$traductions = implode(" ", $traductions);
 	$ltr = lang_dir($destLang, 'ltr', 'rtl');
 	return "<div dir='$ltr' lang='$destLang'>$traductions</div>";
