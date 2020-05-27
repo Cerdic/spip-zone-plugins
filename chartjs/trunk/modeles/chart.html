@@ -277,17 +277,39 @@
 </div>
 
 <script>
-$(document).ready(function(){
-	var conteneur[_(#GET{id})] = $("[#(#GET{id})]");
-	var spipChart[_(#GET{id})] = new Chart(conteneur[_(#GET{id})], {
-		type: ['(#GET{type})'], // Type de graphe
-		data: {
-			labels:   [(#GET{labels}|json_encode)], // Labels en abscisse
-			datasets: [(#GET{datasets}|chartjs_array_typecaster|json_encode)], // Jeux de données et leurs options
-		},
-		options: [(#GET{options}|chartjs_array_typecaster|json_encode)] // Options générales
-	});
-});
+var jQChartjsLoader;
+(function () {
+	function draw_this_chartjs() {
+		jQuery(function($){
+			var conteneur[_(#GET{id})] = $("[#(#GET{id})]");
+			var spipChart[_(#GET{id})] = new Chart(conteneur[_(#GET{id})], {
+				type: ['(#GET{type})'], // Type de graphe
+					data: {
+					labels:   [(#GET{labels}|json_encode)], // Labels en abscisse
+					datasets: [(#GET{datasets}|chartjs_array_typecaster|json_encode)], // Jeux de données et leurs options
+				},
+				options: [(#GET{options}|chartjs_array_typecaster|json_encode)] // Options générales
+			});
+		});
+	}
+	if (typeof jQuery.ajax === "undefined") {
+		jQuery(init_chartjs);
+	} else {
+		init_chartjs();
+	}
+	function init_chartjs() {
+		// Charger le javascript une seule fois si plusieurs graphiques
+		if (typeof Chart === "undefined") {
+			if (typeof jQChartjsLoader === "undefined") {
+				jQChartjsLoader = jQuery.ajax({url: '[(#CHEMIN{lib/chartjs/Chart.js})]', dataType: 'script', cache: true});
+			}
+			jQChartjsLoader.done(draw_this_chartjs);
+		} else {
+			draw_this_chartjs();
+		}
+	}
+})();
+
 </script>
 
 #FILTRE{compacte}
