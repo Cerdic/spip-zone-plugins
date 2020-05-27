@@ -26,6 +26,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
     include_spip("inc/config");
     include_spip('inc/rubriques');
 	include_spip('action/editer_objet');
+	include_spip('action/editer_logo');
 
     $log_html = "";
     $log_email = "";
@@ -271,11 +272,6 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
 
                                 $log_email.= $article['titre'] . "\n" . _T('spip2spip:imported_view') . ": " . generer_url_ecrire('article', "id_article=$id_nouvel_article", true, false) . "\n\n";
 
-                                // Au besoin, changer le statut de rubrique concernee
-                                if ($_statut == "publie")
-                            	   calculer_rubriques_if($_id_rubrique, array('statut' => $_statut));
-
-
 
                                 // ----------
                                 // gestion lien traduction
@@ -336,8 +332,9 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 if ($_logo) {
                                     $logo_local = _DIR_RACINE . copie_locale($_logo);
                                     if ($logo_local) {
-                                        $logo_local_dest = _DIR_IMG . "arton$id_nouvel_article." . substr($logo_local, -3);
-                                        @rename($logo_local, $logo_local_dest);
+										logo_modifier('article', $id_nouvel_article, 'on', $logo_local);
+                                        //$logo_local_dest = _DIR_IMG . "arton$id_nouvel_article." . substr($logo_local, -3);
+                                        //@rename($logo_local, $logo_local_dest);
                                     }
                                 }
 
@@ -347,8 +344,9 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 if ($_logosurvol) {
                                     $logosurvol_local = _DIR_RACINE . copie_locale($_logosurvol);
                                     if ($logosurvol_local) {
-                                        $logosurvol_local_dest = _DIR_IMG . "artoff$id_nouvel_article." . substr($logosurvol_local, -3);
-                                        @rename($logosurvol_local, $logosurvol_local_dest);
+										logo_modifier('article', $id_nouvel_article, 'off', $logosurvol_local);
+                                        //$logosurvol_local_dest = _DIR_IMG . "artoff$id_nouvel_article." . substr($logosurvol_local, -3);
+                                        //@rename($logosurvol_local, $logosurvol_local_dest);
                                     }
                                 }
 
