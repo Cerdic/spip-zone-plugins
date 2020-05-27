@@ -7,3 +7,9 @@ options:
     options:
       nom: 'modele'
       label: '<:verifier:option_regex_modele_label:>'
+      explication: '<:verifier:option_regex_modele_explication:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'message_erreur'
+      label: '<:verifier:options_regex_message_erreur_label:>'

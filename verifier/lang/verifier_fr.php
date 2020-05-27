@@ -116,6 +116,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_fichiers_type_mime_label' => 'Cocher les types MIME autorisés',
 	'option_id_objet_objet_label' => 'Nom de l’objet (au singulier)',
 	'option_regex_modele_label' => 'La valeur doit correspondre au masque suivant',
+	'option_regex_modele_explication' => 'Masque complet, y compris les caractères encadrants et les options. Pour l’utilisation des masques, reportez-vous à <a href="http://fr2.php.net/manual/fr/reference.pcre.pattern.syntax.php" class="spip_out" target="_blank" rel="noopener noreferrer">l’aide en ligne de PHP</a>.',
+	'options_regex_message_erreur_label' => 'Message d\'erreur si la vérification échoue.',
 	'option_siren_siret_mode_label' => 'Que voulez-vous vérifier ?',
 	'option_siren_siret_mode_siren' => 'le SIREN',
 	'option_siren_siret_mode_siret' => 'le SIRET',
