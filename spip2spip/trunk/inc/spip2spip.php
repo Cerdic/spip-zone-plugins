@@ -25,6 +25,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
     include_spip("inc/ajouter_documents");
     include_spip("inc/config");
     include_spip('inc/rubriques');
+	include_spip('action/editer_objet');
 
     $log_html = "";
     $log_email = "";
@@ -137,12 +138,6 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
 								}
                                 $documents_current_article = array();
                                 if ($_documents != "") {
-                                    $_documents = preg_replace_callback('!s:(\d+):"(.*?)";!', 
-									function ($matches) {
-										return strtolower("'s:'.strlen($matches[1]).':\".$matches[1].\";'");
-										}
-										,
-										$_documents);
                                     $_documents = unserialize($_documents);
                                     foreach ($_documents as $_document) {
                                         $id_distant = $_document['id'];
@@ -187,6 +182,13 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 $_titre = $article['titre'];
 								$_s2s_url_site_distant = $article['s2s_url_site_distant'];
 								$_s2s_id_article_distant = $article['s2s_id_article_distant'];
+								$_surtitre = '';
+								$_soustitre = '';
+								$_descriptif = '';
+								$_chapo = '';
+								$_texte = '';
+								$_ps = '';									
+
 								if (_SPIP2SPIP_RECUPERER_INTRODUCTION) {
 									$_descriptif = spip2spip_convert_extra($article['descriptif'], $documents_current_article, $version_flux);
 									$_chapo = spip2spip_convert_extra($article['chapo'], $documents_current_article, $version_flux);
@@ -196,13 +198,6 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
 									$_soustitre = $article['soustitre'];
 									$_texte = spip2spip_convert_extra($article['texte'], $documents_current_article, $version_flux);
 									$_ps = spip2spip_convert_extra($article['ps'], $documents_current_article, $version_flux);
-								} else {
-									$_surtitre = '';
-									$_soustitre = '';
-									$_descriptif = '';
-									$_chapo = '';
-									$_texte = '';
-									$_ps = '';									
 								}
 
                                 // ----------
@@ -222,7 +217,6 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 $_logo = $article['logo'];
                                 $_logosurvol = $article['logosurvol'];
                                 $_id_rubrique = $target;
-                                $_id_secteur = spip2spip_get_id_secteur($target);
                                 $_statut = ($import_statut == 'identique') ? $article['statut'] : $import_statut;
                                 $_id_auteur = $article['auteur'];
                                 $_link = $article['link'];
@@ -244,29 +238,35 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 // ----------
                                 // ....dans la table articles
                                 // ----------
-                                $id_nouvel_article = sql_insertq("spip_articles", array(
+								autoriser_exception('publierdans', 'rubrique', $_id_rubrique);
+                                $id_nouvel_article = objet_inserer('article', $_id_rubrique, array(
                                     'lang' => $_lang,
                                     'surtitre' => $_surtitre,
                                     'titre' => $_titre,
                                     'soustitre' => $_soustitre,
-                                    'id_rubrique' => $_id_rubrique,
-                                    'id_secteur' => $_id_secteur,
                                     'descriptif' => $_descriptif,
                                     'chapo' => $_chapo,
                                     'texte' => $_texte,
                                     'ps' => $_ps,
-                                    'statut' => $_statut,
                                     'nom_site' => $_nom_site,
                                     'url_site' => $_url_site,
                                     'accepter_forum' => 'non',
-                                    'date' => $_date,
-                                    'date_redac' => $_date_redac,
-                                    'date_modif' => $_date_modif,
                                     's2s_url' => $_link,
                                     's2s_url_trad' => $_trad,
 									's2s_url_site_distant' => $_s2s_url_site_distant,
-									's2s_id_article_distant' => $_s2s_id_article_distant,
+									's2s_id_article_distant' => $_s2s_id_article_distant
                                 ));
+								autoriser_exception('modifier', 'article', $id_nouvel_article);
+								autoriser_exception('instituer', 'article', $id_nouvel_article);
+                                objet_modifier('article', $id_nouvel_article, array(
+                                    'statut' => $_statut,
+                                    'date' => $_date,
+                                    'date_redac' => $_date_redac,
+                                    'date_modif' => $_date_modif
+                                ));
+								autoriser_exception('instituer', 'article', $id_nouvel_article, false);
+								autoriser_exception('modifier', 'article', $id_nouvel_article, false);
+								autoriser_exception('publierdans', 'rubrique', $_id_rubrique, false);
                                 $log_html.= "<br/>\n" . "<strong>" . _T('spip2spip:label_thematique') . ':</strong> ' . $article['keyword'] . "<br/>\n<a href='" . generer_url_ecrire('article', "id_article=$id_nouvel_article") . "'>" . _T('spip2spip:imported_view') . "</a>\n";
 
                                 $log_email.= $article['titre'] . "\n" . _T('spip2spip:imported_view') . ": " . generer_url_ecrire('article', "id_article=$id_nouvel_article", true, false) . "\n\n";
