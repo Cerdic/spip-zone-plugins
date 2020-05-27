@@ -411,3 +411,38 @@ function pages_pre_boucle($boucle) {
 
 	return $boucle;
 }
+
+/**
+ * On cherche s'il existe un squelette article-NOMDELAPAGE pour l'utiliser en priorité
+ *
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte modifié
+ */
+function pages_styliser($flux) {
+	$bloc_principal = '';
+	
+	// Quand il y a Z, on cherche le bloc principal
+	if (defined('_DIR_PLUGIN_ZCORE')) {
+		if (!function_exists("z_blocs")) {
+			$styliser_par_z = charger_fonction('styliser_par_z', 'public');
+		}
+		$z_blocs = z_blocs(test_espace_prive());
+		$bloc_principal = reset($z_blocs) . '/';
+	}
+	
+	// Si c'est un article de type page et qu'il existe un squelette du bon nom
+	if (
+		$flux['args']['fond'] == $bloc_principal . 'article'
+		and $contexte = isset($flux['args']['contexte'])?$flux['args']['contexte']:$GLOBALS['contexte']
+		and $id_article = intval($contexte['id_article'])
+		and $page = sql_getfetsel('page', 'spip_articles', 'id_article = ' . $id_article)
+		and $ext = $flux['args']['ext']
+		and $f = find_in_path($bloc_principal."article-$page.$ext")
+	) {
+		$flux['data'] = substr($f, 0, - strlen(".$ext"));
+	}
+	
+	return $flux;
+}
