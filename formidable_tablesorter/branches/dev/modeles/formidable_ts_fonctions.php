@@ -25,7 +25,8 @@ function cextras2td($cextras, $id_formulaires_reponse) {
 				$opt = array(
 					'saisie' => $champ,
 					'type' => 'formulaires_reponse',
-					'champ' => $champ['options']['nom']
+					'champ' => $champ['options']['nom'],
+					'table' => table_objet_sql('formulaires_reponse'),
 				);
 				if (autoriser('modifierextra', 'formulaires_reponse', $id_formulaires_reponse, '', $opt)) {
 					$attributs = ' class="'.classe_boucle_crayon('formulaires_reponse', $champ['options']['nom'], $id_formulaires_reponse).'"';
