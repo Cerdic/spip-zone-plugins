@@ -133,13 +133,16 @@ class TT_Traducteur_DeepL extends TT_Traducteur {
 		try {
 			$deepl   = new BabyMarkt\DeepL\DeepL($this->apikey, $this->apiVersion);
 			$tagHandling = [];
+			$ignoreTags = [];
 			foreach (is_array($texte)?$texte:[$texte] as $t) {
 				if (strpos($t, "</") !== false and preg_match(",</\w+>,ms", $t)) {
 					$tagHandling = ['xml'];
+					// on peut encapsuler dans un <x>..</x> le contenu qu'on veut conserver intact
+					$ignoreTags = ['x'];
 					break;
 				}
 			}
-			$traduction = $deepl->translate($texte, $srcLang, $destLang, $tagHandling);
+			$traduction = $deepl->translate($texte, $srcLang, $destLang, $tagHandling, $ignoreTags);
 			if (is_array($texte)) {
 				if (count($texte) == 1 and is_string($traduction)) {
 					$traduction = array_combine(array_keys($texte), [$traduction]);
