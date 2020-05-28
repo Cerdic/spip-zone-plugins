@@ -107,7 +107,9 @@ function champs_extras_saisies_inserer_classe_crayons($saisies, $type, $id) {
 			$opt = array(
 				'saisie' => $saisie,
 				'type' => $type,
-				'champ' => $saisie['options']['nom']
+				'champ' => $saisie['options']['nom'],
+				'table' => table_objet_sql($type),
+				'id_objet' => $id,
 			);
 			if (!autoriser('modifierextra', $type, $id, '', $opt)) {
 				continue;
