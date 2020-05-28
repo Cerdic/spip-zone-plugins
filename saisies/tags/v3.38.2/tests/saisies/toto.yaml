@@ -1,0 +1,47 @@
+heritage: 'input'
+titre: 'toto'
+description: 'toto_description'
+heritage_supprimer_options:
+  - 'placeholder'
+  - 'type'
+heritage_modifier_options:
+      -
+        options:
+          nouveau_type_saisie: 'toto'
+          nom: 'defaut'
+          label: 'toto'
+          size: 50
+        verifier:
+          type: 'toto_verifier'
+          options:
+            normaliser: true
+heritage_inserer_options:
+      -
+        chemin:
+          - 0
+          - 'saisies'
+          - 1200
+        saisie: 'input'
+        options:
+          nom: 'une_option_en_plus_dans_la_description_tout_a_la_fin'
+          label: 'une_option_en_plus'
+          size: 50
+      -
+        chemin:
+          - 0
+          - 'saisies'
+          - 0
+        saisie: 'input'
+        options:
+          nom: 'une_option_en_plus_dans_la_description_tout_au_debut'
+          label: 'une_option_en_plus'
+          size: 50
+defaut:
+  options:
+    readonly: 'on'
+    label: 'toto'
+    sql: 'BIGINT (255)',
+  verifier:
+    type: 'toto'
+    options:
+      normaliser: true
