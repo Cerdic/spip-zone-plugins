@@ -68,7 +68,17 @@ function TT_decouper_texte($texte, $maxlen = 0, $html = true){
 	}
 
 	$prep = html2unicode($texte);
-	$prep = preg_split(",(<p\b[^>]*>),i", $prep, -1, PREG_SPLIT_DELIM_CAPTURE);
+	$shouldtrim = true;
+	// si c'est du texte html, on split sur les <p>, sinon sur les doubles saut de ligne
+	if (strpos($prep,'</p>') !== false) {
+		$prep = preg_split(",(<p\b[^>]*>),i", $prep, -1, PREG_SPLIT_DELIM_CAPTURE);
+	}
+	else {
+		$prep = str_replace("\r\n", "\n", $prep);
+		$prep = str_replace("\r", "\n", $prep);
+		$prep = preg_split(",(\n\n+),i", $prep, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$shouldtrim = false;
+	}
 	// 0, 2, 4, 6... : le texte
 	// 1, 3, 5, 7... : les separateurs <p..>
 
@@ -102,15 +112,17 @@ function TT_decouper_texte($texte, $maxlen = 0, $html = true){
 					if ($point===false){
 						$point = 0;
 					}
-					$a[] = trim($debut . mb_substr($suite, 0, 1+$point));
+					$a[] = $debut . mb_substr($suite, 0, 1+$point);
 					$line = mb_substr($line, $len+1+$point);
 				}
 				foreach ($a as $l){
-					$liste[] = array('hash' => md5($l), 'texte' => $l);
+					$liste[] = array('hash' => md5($l), 'texte' => $shouldtrim ? trim($l) : $l);
 				}
 			}
 
-			$line = trim($line);
+			if ($shouldtrim) {
+				$line = trim($line);
+			}
 			$liste[] = array('hash' => md5($line), 'texte' => $line);
 		}
 	}
