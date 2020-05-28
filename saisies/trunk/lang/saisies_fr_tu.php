@@ -53,6 +53,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_syntaxe_afficher_si' => 'Syntaxe incorrecte du test',
 	'erreur_valeur_inacceptable' => 'Valeur postée non acceptable.',
 
+	// F
+	'fichier_erreur_explication_renvoi_alternative' => 'Tu peux renvoyer un nouveau fichier, ou bien soumettre le formulaire tel quel, l’ancien fichier n’est pas conservé.',
+	'fichier_erreur_explication_renvoi_pas_alternative' => 'Tu dois envoyer un autre fichier.',
+
 	// I
 	'info_configurer_saisies' => 'Page de test des Saisies',
 
@@ -73,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Affichage multilingue',
 	'option_afficher_si_explication' => 'Indique les conditions pour afficher le champ en fonction de la valeur des autres champs. L’identifiant des autres champs doit être mis entre <code>@</code>. <br />Exemple <code>@selection_1@=="Toto"</code> conditionne l’affichage du champ à ce que le champ <code>selection_1</code> ait pour valeur <code>Toto</code>. <br />
 Il est possible d’utiliser les opérateurs booléens <code>||</code> (ou) et  <code>&&</code> (et). <br />
-Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank">documentation complète de la syntaxe sur contrib.spip</a>.', # MODIF
+Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank"  rel="noopener noreferrer">documentation complète de la syntaxe sur contrib.spip</a>.',
 	'option_afficher_si_label' => 'Affichage conditionnel',
 	'option_afficher_si_remplissage_uniquement_explication' => 'En cochant cette case, l’affichage conditionnel s’appliquera uniquement lors du remplissage du formulaire, pas lors de l’affichage des résultats.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Uniquement lors du remplissage',
@@ -234,6 +238,7 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank">document
 	'saisie_selection_titre' => 'Liste déroulante',
 	'saisie_textarea_explication' => 'Un champ de texte sur plusieurs lignes.',
 	'saisie_textarea_titre' => 'Bloc de texte',
+	'saisies_aplatir_tableau_montrer_groupe' => '@groupe@ : @valeur@',
 
 	// T
 	'titre_page_saisies_doc' => 'Documentation des saisies',
@@ -241,7 +246,7 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank">document
 	'tout_selectionner' => 'Tout (dé)sélectionner',
 
 	// V
-	'verifier_valeurs_acceptables_explication' => 'Vérifier que la valeur postée se trouve parmis celles autorisées lors de la définition des champs. Ne pas utiliser cette options si tu remplis dynamiquement des champs dans tes squelettes ou les remplis grâce à javascript.', # MODIF
+	'verifier_valeurs_acceptables_explication' => 'Vérifier que la valeur postée se trouve parmi celles autorisées lors de la définition des champs. Ne pas utiliser cette option si tu remplis dynamiquement des champs dans tes squelettes ou les remplis grâce à javascript.',
 	'verifier_valeurs_acceptables_label' => 'Vérifier les valeurs acceptables',
 	'vue_sans_reponse' => '<i>Sans réponse</i>',
 
