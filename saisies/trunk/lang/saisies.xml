@@ -35,7 +35,7 @@
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
 	<langue code="it" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=it" total="212" traduits="138" relire="0" modifs="4" nouveaux="70" pourcent="65.09" />
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=nl" total="212" traduits="211" relire="0" modifs="1" nouveaux="0" pourcent="99.53">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=nl" total="212" traduits="212" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="maieul" lien="https://trad.spip.net/auteur/maieul" />
 		<traducteur nom="mpossoz" lien="https://trad.spip.net/auteur/mpossoz" />
