@@ -4,10 +4,10 @@
 
 [(#FORMULAIRE_INSTITUER_OBJET{formulaires_reponse,#ID_FORMULAIRES_REPONSE})]
 
-<BOUCLE_Precedent(FORMULAIRES_REPONSES){id_formulaire}{id_formulaires_reponse<#ID_FORMULAIRES_REPONSE}{!par id_formulaires_reponse}{0,1}>
+<BOUCLE_Precedent(FORMULAIRES_REPONSES){id_formulaire}{id_formulaires_reponse<#ID_FORMULAIRES_REPONSE}{!par id_formulaires_reponse}{0,1}{tout}>
 <div class='numero'><a href="[(#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE})]"><:precedent:></a>#SET{ouvert,1}
 </BOUCLE_Precedent>
-<BOUCLE_Suivant(FORMULAIRES_REPONSES){id_formulaire}{id_formulaires_reponse>#ID_FORMULAIRES_REPONSE}{par id_formulaires_reponse}{0,1}>
+<BOUCLE_Suivant(FORMULAIRES_REPONSES){id_formulaire}{id_formulaires_reponse>#ID_FORMULAIRES_REPONSE}{par id_formulaires_reponse}{0,1}{tout}>
 [(#GET{ouvert}|?{' | ',<div class='numero'>})]<a href="[(#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE})]"><:suivant:></a>#SET{ouvert,1}
 </BOUCLE_Suivant>
 [(#GET{ouvert}|?{</div>})]
