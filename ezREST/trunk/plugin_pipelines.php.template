@@ -1,0 +1,130 @@
+<?php
+/**
+ * Le fichier contient l'ensemble des pipelines pouvant être utilisés dans le cadre de l'utilisation
+ * du plugin Rest Factory.
+ * - le pipeline liste_ezcollection qui déclare les collections : obligatoire
+ * - le pipeline post_ezcollection qui permet de compléter les données d'une collection : facultatif
+ * - le pipeline post_ezressource qui permet de compléter les données d'une ressource : facultatif
+ *
+ * Pour utiliser ce fichier d'exemple remplacer le préfixe 'prefixe' dans le nom des fonctions par le préfixe
+ * du plugin utilisateur.
+ */
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+/**
+ * Déclare de nouvelles collections et/ou met à jour les collections
+ * existantes déjà déclarées.
+ *
+ * Cette fonction est obligatoire pour un plugin utilisateur.
+ *
+ * @pipeline liste_ezcollection
+ *
+ * @param array $collections Configuration des collections déjà déclarées.
+ *
+ * @return array Collections complétées.
+ */
+function prefixe_liste_ezcollection($collections) {
+
+	// Un exemple complet : la collection 'cccc'.
+	// - remplacer les valeurs 'cccc', 'prefixe', 'xxxx' et 'rrrr'.
+	// - supprimer les index facultatifs non utilisés
+	// - adapter les valeurs à vos besoins
+	$collections['cccc'] = array(
+		'module'    => 'prefixe',				// préfixe du plugin utilisateur (obligatoire)
+		'cache'     => array(					// définition du cache (obligatoire)
+			'type'  => 'ezrest',				// - type de cache utilisé 'ezrest' (PHP) ou 'spip' (HTML)
+			'duree' => 3600 * 24    			// - durée du cache en secondes
+		),
+		'filtres'   => array(					// filtres utilisables pour la collection (facultatif)
+			array(
+				'critere'         => 'xxxx',	// - nom du critère que l'on retrouve dans l'URL (&xxx=)
+				'est_obligatoire' => true		// - indique si le critère est obligatoire dans l'URL ou pas
+			),
+		),
+		'sans_condition' => true,				// indicateur de calcul des conditions (facultatif)
+		'ressource' => 'rrrr'					// nom du champ utilisé pour identifier la ressource (faculatif);
+												// si 'ressource' n'est pas défini c'est que seule la collection
+												// est accessible.
+	);
+
+	// Un exemple d'ajout de filtre dans une collection existante nommée 'kkkk'.
+	if (isset($collections['kkkk'])) {
+		$collections['kkkk']['filtres'][] = array(
+			'critere'         => 'yyyy',
+			'module'          => 'prefixe',
+			'est_obligatoire' => false
+		);
+	}
+
+	return $collections;
+}
+
+/**
+ * Complète la collection après son calcul standard.
+ *
+ * Cette fonction est facultative pour un plugin utilisateur.
+ *
+ * @pipeline post_ezcollection
+ *
+ * @param array $flux Données du pipeline
+ *
+ * @return array Données du pipeline complétées
+**/
+function prefixe_post_ezcollection($flux) {
+
+	// Extraction des informations sur la collection.
+	// La collection et la configuration existent toujours.
+	$collection = $flux['args']['collection'];
+
+	// Seule la collection plugins nécessite des compléments, à savoir, les typologies.
+	if ($collection == 'cccc') {
+		// Le pipeline contient les éléments suivants :
+
+		// dans $flux['args'] :
+		// -- ['plugin']        : le préfixe du plulgin
+		// -- ['collection']    : le nom de la collection
+		// -- ['filtres']       : les filtres de la requête sous le format [critere] = valeur
+		// -- ['configuration'] : la configuration de la collection
+
+		// dans $flux['data'] :
+		// -- le tableau des données déjà récupérées par le traitement standard.
+	}
+
+	return $flux;
+}
+
+/**
+ * Complète la ressource après son calcul standard.
+ *
+ * Cette fonction est facultative pour un plugin utilisateur.
+ *
+ * @pipeline post_ezcollection
+ *
+ * @param array $flux Données du pipeline
+ *
+ * @return array Données du pipeline complétées
+**/
+function prefixe_post_ezressource($flux) {
+
+	// Extraction des informations sur la collection.
+	// La collection et la configuration existent toujours.
+	$collection = $flux['args']['collection'];
+
+	// Seule la collection plugins nécessite des compléments, à savoir, les typologies.
+	if ($collection == 'cccc') {
+		// Le pipeline contient les éléments suivants :
+
+		// dans $flux['args'] :
+		// -- ['plugin']        : le préfixe du plulgin
+		// -- ['collection']    : le nom de la collection
+		// -- ['ressource']     : la valeur de la ressource
+		// -- ['configuration'] : la configuration de la collection
+
+		// dans $flux['data'] :
+		// -- le tableau des données déjà récupérées par le traitement standard.
+	}
+
+	return $flux;
+}
