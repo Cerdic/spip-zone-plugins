@@ -111,8 +111,8 @@ function ezrest_cache_formulaire_charger($plugin, $options, $configuration) {
 
 		// Si il existe des caches pour le service on stocke les informations recueillies
 		if ($caches) {
-			$valeurs['_caches'][$_type]['titre_type'] = _T('ezrest:type_requete_' . $_type . '_titre');
-			$valeurs['_caches'][$_type]['caches'] = $caches;
+			$valeurs['_caches'][$_type]['titre'] = _T('ezrest:type_requete_' . $_type . '_titre');
+			$valeurs['_caches'][$_type]['liste'] = $caches;
 		}
 	}
 
