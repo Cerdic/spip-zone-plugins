@@ -9,7 +9,7 @@
 <article class="hentry" itemscope itemtype="http://schema.org/Article">
 ]
 
-<section id="article#ID_ARTICLE" class="[(#REMPLIR_VERTICAL|=={oui}|oui) remplir_vertical ][(#REMPLIR_VERTICAL|=={img}|oui) proportions_image ][(#FOND_COULEUR|oui)[avec_fond  avec_fond_(#FOND_COULEUR|couleur_extreme|choixsiegal{'ffffff','clair', 'fonce'})]][ (#FOND_BAS|oui)avec_fond_bas][ (#FOND_HAUT|oui)avec_fond_haut]"[ style="background-color:#(#FOND_COULEUR);"]>
+<section id="article#ID_ARTICLE" class="[(#REMPLIR_VERTICAL|=={oui}|oui) remplir_vertical ][(#REMPLIR_VERTICAL|=={fix}|oui) remplir_vertical remplir_vertical_fixe][(#REMPLIR_VERTICAL|=={img}|oui) proportions_image ][(#FOND_COULEUR|oui)[avec_fond  avec_fond_(#FOND_COULEUR|couleur_extreme|choixsiegal{'ffffff','clair', 'fonce'})]][ (#FOND_BAS|oui)avec_fond_bas][ (#FOND_HAUT|oui)avec_fond_haut]"[ style="background-color:#(#FOND_COULEUR);"]>
 	[<div class="fonds_img_haut">(#IMG_HAUT|image_responsive{0/480/960/1440/1920, #GET{lazy}, 0, (max-width: 480px)/(min-width:481px) and (max-width: 960px)/(min-width:961px) and (max-width:1440px)/, 71%x0/83%x0/0x0/0x0})</div>]
 	<div class="interieur"[(#REMPLIR_VERTICAL|=={img}|non)[(#IMG_FOND|match{svg}|non)[(#IMG_FOND|background_responsive{0/480/800/1280/1920, #GET{lazy}})]]]>
 		[(#IMG_FOND|match{svg$}|oui)
