@@ -17,7 +17,7 @@
 				</label>
 			</div>
 		</BOUCLE_caches>
-		<div class="action-checkbox">
+		<div class="action-cocher">
 			<a href="#" id="tout_#CLE"><:cache:cache_vider_cocher_tout:></a><span class="sep"> | </span>
 			<a href="#" id="rien_#CLE"><:cache:cache_vider_cocher_rien:></a>
 		</div>
@@ -32,7 +32,7 @@
 <script type="text/javascript">
 //<![CDATA[
 	(function($){
-		jQuery(".action-checkbox a").click(function(){
+		jQuery(".action-cocher a").click(function(){
 			var id = $(this).attr('id').split('_');
 			var action = id[0];
 			var service = id[1];
