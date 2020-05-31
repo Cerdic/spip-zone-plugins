@@ -1,5 +1,7 @@
 <?php
 /**
+ * Fichier d'exemple : prefixe_pipelines.php.template
+ *
  * Le fichier contient l'ensemble des pipelines pouvant être utilisés dans le cadre de l'utilisation
  * du plugin Rest Factory.
  * - le pipeline liste_ezcollection qui déclare les collections : obligatoire
@@ -8,6 +10,8 @@
  *
  * Pour utiliser ce fichier d'exemple remplacer le préfixe 'prefixe' dans le nom des fonctions par le préfixe
  * du plugin utilisateur.
+ * Le nom du fichier lui-même est à adapter avec le préfixe du plugin utilisateur.
+ *
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;

@@ -1,8 +1,8 @@
 <paquet
 	prefix="ezrest"
 	categorie="outil"
-	version="0.5.0"
-	etat="test"
+	version="0.5.1"
+	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="ezrest_logo-64.png"
 	documentation="https://contrib.spip.net/?article5202"
