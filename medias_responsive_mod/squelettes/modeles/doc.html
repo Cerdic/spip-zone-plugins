@@ -44,6 +44,7 @@
 		class="(#ENV{lien_class})"] [ title="(#TITRE|supprimer_numero|supprimer_tags|texte_backend)"][
 		(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]
 			[(#GET{fichier}|image_responsive{320/640/1280/1920})]
+
 	[(#GET{url}|?{</a>})]
 	[(#ENV{legende}|=={non}|non)
 	[(#TITRE|sinon{#DESCRIPTIF}|sinon{#CREDITS}|oui)
@@ -51,6 +52,7 @@
 		[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE|propre|PtoBR)</strong></div>]
 		[<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
 		[<div class='spip_doc_credits  #EDIT{credits}'>(#CREDITS|propre|PtoBR)</div>]
+		<a class="telecharger" href="#FICHIER"><:bouton_download:> [((#TAILLE|taille_en_octets))]</a>
 	</figcaption>
 	]]
 </figure>
