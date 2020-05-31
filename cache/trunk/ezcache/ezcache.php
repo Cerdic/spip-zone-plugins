@@ -36,6 +36,7 @@ function ezcache_cache_configurer($plugin) {
 	$configuration_defaut = array(
 		'racine'          => '_DIR_CACHE', // Emplacement de base du répertoire des caches. Attention c'est la chaine de la constante SPIP
 		'sous_dossier'    => false,        // Indicateur d'utilisation d'un sous-dossier
+		'nom_prefixe'     => '',           // Préfixe du nom du cache : si nom vide devient le premier composant obligatoire.
 		'nom_obligatoire' => array('nom'), // Composants obligatoires ordonnés de gauche à droite.
 		'nom_facultatif'  => array(),      // Composants facultatifs
 		'separateur'      => '',           // Caractère de séparation des composants du nom '_' ou '-' ou '' si un seul composant est utilisé
@@ -99,6 +100,15 @@ function ezcache_cache_configurer($plugin) {
 
 	// Construction du tableau des composants du nom : dans l'ordre on a toujours les composants obligatoires
 	// suivis des composants facultatifs.
+	// -- Traitement du préfixe: si il existe on le positionne comme premier composant obligatoire
+	if ($configuration['nom_prefixe']) {
+		$configuration['nom_obligatoire'] = array_merge(array('_prefixe'), $configuration['nom_obligatoire']);
+		// Eviter une erreur si le séparateur est vide : on le force à '_'
+		if (!$configuration['separateur']) {
+			$configuration['separateur'] = '_';
+		}
+	}
+	// -- Calcul du nom complet
 	$configuration['nom'] = array_merge($configuration['nom_obligatoire'], $configuration['nom_facultatif']);
 
 	// Si le nom ne comporte qu'un seul composant forcer le séparateur à '' pour ne pas interdire d'utiliser les
@@ -130,6 +140,12 @@ function ezcache_cache_configurer($plugin) {
  * @return string
  */
 function ezcache_cache_composer($plugin, $cache, $configuration) {
+
+	// Cache avec préfixe: si il existe on le rajoute dans le tableau $cache pour assurer un
+	// traitement standard.
+	if ($configuration['nom_prefixe']) {
+		$cache['_prefixe'] = $configuration['nom_prefixe'];
+	}
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
@@ -228,6 +244,8 @@ function ezcache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 			$cache[$configuration['nom'][0]] = $nom_cache;
 		} else {
 			// Le nom est composé de plus d'un composant.
+			// - si un préfixe est configuré est renvoyé comme un autre composant car il a été accolé dans l'index
+			//   'nom' lors de la configuration.
 			foreach (explode($configuration['separateur'], $nom_cache) as $_cle => $_composant) {
 				$cache[$configuration['nom'][$_cle]] = $_composant;
 			}
