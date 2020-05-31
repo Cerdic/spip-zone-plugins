@@ -519,7 +519,7 @@ function css_imbriques ($css) {
 
 
 	// virer les fausses url absolues que l'on a mis dans les import
-	if (count($src_faux_abs))
+	if ($src_faux_abs && count($src_faux_abs))
 		$contenu = str_replace(array_keys($src_faux_abs),$src_faux_abs,$contenu);
 
 	ecrire_fichier ("$f.gz", $contenu, true);

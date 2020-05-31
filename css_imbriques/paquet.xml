@@ -1,10 +1,10 @@
 <paquet
 	prefix="css_imbriques"
 	categorie="outil"
-	version="3.4.0"
+	version="3.4.1"
 	documentation="http://www.paris-beyrouth.org/Plugin-SPIP-CSS-imbriques"
 	etat="stable"
-	compatibilite="[1.9.0;3.2.*]"
+	compatibilite="[1.9.0;3.3.*]"
 >
 	<nom>CSS imbriqu&#233;s</nom>
 
