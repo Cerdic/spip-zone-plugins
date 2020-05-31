@@ -253,8 +253,10 @@ function accesrestreint_forums_accessibles_where($primary, $_publique = '') {
 	$where = "array('OR',$where,"
 		."array('AND','zzzf.objet=\'breve\'',".accesrestreint_breves_accessibles_where('zzzf.id_objet', $_publique).")"
 		.")";
-	$where = "array('OR',$where,sql_in('zzzf.objet',array('rubrique','article','breve'),'NOT',\$connect))";
-
+	if(!defined('ACCES_RESTREINT_OBJET_LIEN_STRICT')) {
+		$where = "array('OR',$where,sql_in('zzzf.objet',array('rubrique','article','breve'),'NOT',\$connect))";
+	}
+	
 	// Permettre aux plugins de modifier la condition
 	$where = pipeline('accesrestreint_objets_accessibles_where',
 		array(
@@ -286,7 +288,9 @@ function accesrestreint_documents_accessibles_where($primary, $_publique = '') {
 	$where = "array('OR',$where,array('AND','zzzd.objet=\'article\'',".accesrestreint_articles_accessibles_where('zzzd.id_objet', $_publique)."))";
 	$where = "array('OR',$where,array('AND','zzzd.objet=\'breve\'',".accesrestreint_breves_accessibles_where('zzzd.id_objet', $_publique)."))";
 	$where = "array('OR',$where,array('AND','zzzd.objet=\'forum\'',".accesrestreint_forums_accessibles_where('zzzd.id_objet', $_publique)."))";
-	$where = "array('OR',$where,sql_in('zzzd.objet',array('rubrique','article','breve','forum'),'NOT',\$connect))";
+	if(!defined('ACCES_RESTREINT_OBJET_LIEN_STRICT')) {
+		$where = "array('OR',$where,sql_in('zzzd.objet',array('rubrique','article','breve','forum'),'NOT',\$connect))";
+	}
 
 	$where = "array('OR',
 	array('IN','$primary','(SELECT * FROM('.sql_get_select('zzzd.id_document','spip_documents_liens as zzzd',array($where),'','','','',\$connect).') AS subquery)'),
