@@ -400,10 +400,12 @@ function _charger_image_responsive () {
 
 	// Remplacer les URL non lazy
 	// Cacher l'ensemble puis tout réafficher, pour éviter un repaint pour chaque image
-	$(".image_responsive:not('.lazy'):not('.avec_picturefill')").hide().each(function() {
+	var t = $(".image_responsive:not('.lazy'):not('.avec_picturefill')");
+	if (t.length > 20) t.hide();
+	t.each(function() {
 		charger_url_image_responsive($(this));
 	});
-	$(".image_responsive:not('.lazy'):not('.avec_picturefill')").show();
+	if (t.length > 20) t.show();
 	
 	$(".image_responsive_svg:not('.lazy')").each(function() {
 		charger_url_image_responsive_svg($(this));
