@@ -184,6 +184,9 @@ ul.portfolio_ligne li.forcer_centrer, ul.portfolio_ligne li.forcer_centrer + li 
 	margin: 0;
 	clear: both;
 }
+.spip_documents_ligne.rond .fond {
+	border-radius: 50%;
+}
 * + ul.portfolio_ligne {
 	margin-top: 2em;
 }

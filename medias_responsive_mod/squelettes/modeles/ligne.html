@@ -2,10 +2,11 @@
 [(#SET{a,span})]
 [(#LARGEUR|>{800}|oui)[(#SET{a,a})]]
 [(#HAUTEUR|>{800}|oui)[(#SET{a,a})]]
+[(#ENV{class}|=={rond}|oui)#SET{rond,1}]
 
 <ul class="portfolio_ligne">
 	<li data-width="#LARGEUR" data-height="#HAUTEUR" style="width:[(#LARGEUR|div{#HAUTEUR}|mult{300})px]">
-		<figure class="spip_documents spip_documents_ligne">
+		<figure class="spip_documents spip_documents_ligne[ (#GET{rond}|oui)rond]">
 			<[(#GET{a})] href="#FICHIER" [(#FICHIER|background_responsive{160/320/640/1280/1920,0})][ title="(#TITRE|supprimer_numero|supprimer_tags|texte_backend)"] class="fond mediabox" type="#MIME_TYPE" data-photo-w="#LARGEUR" data-photo-h="#HAUTEUR" ></#GET{a}>
 			[(#EVAL{defined('_MEDIAS_RESPONSIVE_MASQUER_LEGENDE')}|non|ou{#ENV{legende}|=={oui}|oui})
 			[(#ENV{legende}|=={non}|non)
