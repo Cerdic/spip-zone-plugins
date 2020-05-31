@@ -16,7 +16,7 @@ html, body, .hentry, #skrollr-body, .remplir_vertical,  .remplir_vertical .inter
 	overflow: auto;
    display: flex;
    align-items: center;
-	position: absolute;
+	position: absolute !important;
     top: 0;
     height: 100%;
     width: 100%;   
