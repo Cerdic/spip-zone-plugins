@@ -20,7 +20,7 @@ function _findSharp($intOrig, $intFinal) {
 }
 
 
-function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_format="auto") {
+function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_format=false) {
 	// ordre de preference des formats graphiques pour creer les vignettes
 	// le premier format disponible, selon la methode demandee, est utilise
 
@@ -43,14 +43,12 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 	elseif ($taille == 0 AND $taille_y == 0)
 		return '';
 
-	$valeurs = _image_valeurs_trans($source, "reduire_net-{$taille}-{$taille_y}-{$dpr}", false);
+	$valeurs = _image_valeurs_trans($source, "reduire_net-{$taille}-{$taille_y}-{$dpr}", $forcer_format);
 	$image = $valeurs['fichier'];
 	$format = $valeurs['format_source'];
 
 	$destdir = dirname($valeurs['fichier_dest']);
 	$destfile = basename($valeurs['fichier_dest'],".".$valeurs["format_dest"]);
-
-
 	
 	$format_sortie = $valeurs['format_dest'];
 	
@@ -61,17 +59,12 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 
 	// si le doc n'est pas une image, refuser
 	if (!$force AND !$img) return;
-	$destination = "$destdir/$destfile";
+	$destination = $valeurs['fichier_dest'];
 
 
 	// chercher un cache
-	$vignette = '';
-	if ($test_cache_only AND !$vignette) return;
-
 	// utiliser le cache ?
-	if (!$test_cache_only)
-	if ($force OR !$vignette OR (@filemtime($vignette) < @filemtime($image))) {
-
+	if ($force OR (@filemtime($destination) < @filemtime($image))) {	
 		$creation = true;
 		// calculer la taille
 		if (($srcWidth=$valeurs['largeur']) && ($srcHeight=$valeurs['hauteur'])){
@@ -171,13 +164,13 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 			$valeurs['format_dest'] = $format = $destFormat;
 			
 			if ($forcer_format == "webp") {
-				$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat.webp";
+//				$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat.webp";
 				if ($destFormat == "png") { 
 					// Conserver la transparence 
 					@imagealphablending($destImage, false); 
 					@imagesavealpha($destImage,true); 
 				}
-				imagewebp ($destImage, $vignette);
+				imagewebp ($destImage, $destination);
 				if (version_compare(phpversion(), '7', '<')) {
 					if (filesize($vignette) % 2 == 1) {	
   					  file_put_contents($vignette, "\0", FILE_APPEND);
@@ -202,7 +195,7 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 	
 	$largeur = $size[0];
 	$hauteur = $size[1];
-	$date = @filemtime($vignette);
+	$date = @filemtime($destination);
 	
 
 	// dans l'espace prive mettre un timestamp sur l'adresse 
@@ -213,7 +206,7 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 
 	return _image_ecrire_tag(
 		$valeurs,
-		array('src'=>"$vignette",
+		array('src'=>"$destination",
 		'width'=>$largeur,
 		'height'=>$hauteur)
 	);
