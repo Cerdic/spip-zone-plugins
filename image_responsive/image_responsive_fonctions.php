@@ -4,6 +4,28 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+
+function image_webp($image) {
+	if (_IMAGE_WEBP && file_exists($image)) {
+		$dest = $image.".webp";
+		
+		if (file_exists($dest) && filemtime($dest) > filemtime($image)) return $dest;
+		
+		$type = getimagesize($image)[2];
+		if ($type == 1) $img = imagecreatefromgif($image);
+		else if ($type == 2) $img = imagecreatefromjpeg($image);
+		else if ($type == 3) $img = imagecreatefrompng($image);
+		else return;
+		
+		imagepalettetotruecolor($img);
+		imagealphablending($img, true);
+		imagesavealpha($img, true);
+		imagewebp($img, $dest,80);
+		imagedestroy($img);
+		return $dest;
+	}
+}
+
 function image_responsive_insert_head_css($flux) {
 	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path("image_responsive.css") . "'>\n";
 	return $flux;
