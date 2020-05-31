@@ -184,6 +184,17 @@ ul.portfolio_ligne li.forcer_centrer, ul.portfolio_ligne li.forcer_centrer + li 
 	margin: 0;
 	clear: both;
 }
+.spip_documents_ligne .fond {
+	overflow: hidden;
+}
+.spip_documents_ligne .fond picture {
+	padding-bottom: 0!important;
+	height: 100%!important;
+}
+.spip_documents_ligne .fond img {
+	object-fit: cover;
+	height: 100%!important;
+}
 .spip_documents_ligne.rond .fond {
 	border-radius: 50%;
 }
