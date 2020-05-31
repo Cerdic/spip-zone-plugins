@@ -534,7 +534,7 @@ function ezrest_indexer($collections) {
  *
  * @return array
  */
-function ezrest_contextualiser($plugin, $collection, $complement, $configuration) {
+function ezrest_contextualiser($plugin, $collection, $filtres, $configuration) {
 
 	// Initialisation minimale du contexte : le préfixe du plugin est passé sous le terme plugin_prefixe
 	// pour éviter une collision avec des balises #PREFIXE ou #PLUGIN.
@@ -546,12 +546,12 @@ function ezrest_contextualiser($plugin, $collection, $complement, $configuration
 
 	// Détermination de la fonction de service permettant de récupérer la collection spécifiée
 	// filtrée sur les critères éventuellement fournis.
-	if ($complement) {
-		if (is_array($complement)) {
+	if ($filtres) {
+		if (is_array($filtres)) {
 			// On est en présence d'une collection avec des filtres :
 			// -- extraire la configuration des critères pour construire le contexte induit par les filtres
 			$criteres = array_column($configuration['filtres'], null, 'critere');
-			foreach ($complement as $_critere => $_valeur) {
+			foreach ($filtres as $_critere => $_valeur) {
 				$nom_champ = !empty($criteres[$_critere]['champ_nom'])
 					? $criteres[$_critere]['champ_nom']
 					: $_critere;
@@ -560,7 +560,7 @@ function ezrest_contextualiser($plugin, $collection, $complement, $configuration
 		} else {
 			// On est en présence d'une ressource :
 			// -- on rajoute le champ de la ressource valorisé dans le contexte pour limiter la boucle à cet élément
-			$contexte[$configuration['ressource']] = $complement;
+			$contexte[$configuration['ressource']] = $filtres;
 		}
 	}
 
@@ -752,9 +752,9 @@ function ezrest_ressourcer($plugin, $collection, $ressource) {
  * @param string $fonction
  *        Nom de la fonction de service à chercher.
  * @param string $prefixe
- *        Nom de la fonction de service à chercher.
+ *        Préfixe à accoler au nom de la fonction (incompatible avec le préfixe du plugin).
  * @param string $suffixe
- *        Nom de la fonction de service à chercher.
+ *        Suffixe à accoler au nom de la fonction (incompatible avec le préfixe du plugin).
  *
  * @return string
  *        Nom complet de la fonction si trouvée ou chaine vide sinon.
@@ -766,7 +766,9 @@ function ezrest_service_chercher($plugin, $fonction, $prefixe = '', $suffixe = '
 	// Eviter la réentrance si on demande explicitement le plugin ezrest.
 	if ($plugin != 'ezrest') {
 		include_spip("ezrest/${plugin}");
-		$fonction_trouvee = $prefixe ? ($suffixe ? "${prefixe}_${fonction}_${suffixe}" : "${prefixe}_${fonction}") : "${plugin}_${fonction}";
+		$fonction_trouvee = $prefixe
+			? ($suffixe ? "${prefixe}_${fonction}_${suffixe}" : "${prefixe}_${fonction}")
+			: "${plugin}_${fonction}";
 		if (!function_exists($fonction_trouvee)) {
 			$fonction_trouvee = '';
 		}
