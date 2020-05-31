@@ -132,12 +132,14 @@ function calculer_portfolio_ligne () {
 					} else {
 						total_ligne += h + portfolio_ligne_marge;
 					}
+					console.log(total_ligne);
 										
 					if (i ==  num_deb && !rapport) {
-						t.css(m_left,  ( l_max - total_ligne)/2 );
+						t.addClass("forcer_centrer");
+						t.css(m_left,  "" );
 						t.css("clear", "both");
 					} else {
-						t.css(m_left, "");
+						t.removeClass("forcer_centrer").css(m_left, "");
 					}
 
 					t.width(h);

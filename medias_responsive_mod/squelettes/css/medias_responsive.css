@@ -27,10 +27,6 @@
 	float: none !important;
 	margin: 1em auto !important;
 }
-.spip_documents_center_forcer .spip_doc_intitules {
-	margin-left: 0 !important;
-	margin-right: 0 !important;
-}
 .spip_documents_center_forcer .spip_doc_intitules_shape {
 	text-align: center;
 	margin-left: 0 !important;
@@ -174,6 +170,15 @@
 
 ul.portfolio_ligne {
 	margin-bottom: 2em;
+	text-align: center;
+}
+ul.portfolio_ligne li {
+	text-align: left;
+}
+ul.portfolio_ligne li.forcer_centrer, ul.portfolio_ligne li.forcer_centrer + li {
+	float: none;
+	display: inline-block;
+	vertical-align: top;
 }
 .spip_documents_ligne {
 	margin: 0;
