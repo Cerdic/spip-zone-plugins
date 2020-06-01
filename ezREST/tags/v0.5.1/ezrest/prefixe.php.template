@@ -1,0 +1,256 @@
+<?php
+/**
+ * Ce fichier contient l'ensemble des services personnalisables de gestion des requêtes, des réponses et de traitement
+ * des données des collections et des ressources.
+ * Certains services sont facultatifs, d'autres obligatoires à partir du moment où une collection est définie.
+ *
+ * Pour utiliser ce fichier d'exemple remplacer dans le nom des fonctions utilisées:
+ * - la chaine 'prefixe' par le préfixe du plugin utilisateur
+ * - la chaine 'collection' par l'identifiant de la collection concernée
+ * - et la chaine 'ffff' par le nom du filtre ou 'rrrr' par le nom de la ressource
+ * Les fonctions inutiles doitvent être supprimées.
+ *
+ * Le nom du fichier lui-même est à adapter avec le préfixe du plugin utilisateur.
+ */
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+
+// -----------------------------------------------------------------------
+// --------------- SERVICES DE GESTION DU CONTEXTE SERVEUR ---------------
+// -----------------------------------------------------------------------
+
+/**
+ * Détermine si le serveur est capable de répondre aux requêtes.
+ * Par défaut, l'API ezREST ne fait aucune vérification. C'est donc au plugin utilisateur de fournir, si besoin,
+ * un service spécifique si une vérification globale doit être effectuée afin d'assurer le fonctionnement de
+ * l'API.
+ *
+ * Si une erreur est détectée, le plugin utilisateur renvoie le type, l'élément et la valeur qui provoque l'erreur
+ * sachant que c'est le service par défaut qui positionne le code.
+ *
+ * Ce service est facultatif (rare).
+ *
+ * @param &array $erreur Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
+ *
+ * @return bool `true` si la valeur est valide, `false` sinon.
+ */
+function prefixe_api_verifier_contexte(&$erreur) {
+
+	// Initialise le retour à true par défaut.
+	$est_valide = true;
+
+	// Traitement de vérification de la capacité du serveur à répondre.
+	// - si erreur, alors renvoyer false dans $est_valide et remplir le bloc d'erreur.
+	//
+	// Pour un exemple voir le plugin SVP API.
+
+
+	return $est_valide;
+}
+
+
+// -----------------------------------------------------------------------
+// ------------------ SERVICES DE GESTION DES REPONSES -------------------
+// -----------------------------------------------------------------------
+
+/**
+ * Complète l'initialisation du contenu d'une réponse avec des informations sur le plugin utilisateur.
+ * REST Factory remplit de façon standard un nouvel index `plugin` du contenu et permet ensuite au plugin
+ * utilisateur de personnaliser encore le contenu initialisé, si besoin.
+ *
+ * Ce service est facultatif (rare).
+ *
+ * @param array $contenu Contenu de la requête déjà initialisé avec tous les blocs dont le bloc 'fournisseur'.
+ *
+ * @return array Contenu mis à jour
+ */
+function prefixe_reponse_informer_plugin($contenu) {
+
+	// Le contenu est initialisé avec l'ensemble des blocs.
+	// - un des blocs est l'index 'fournisseur' qu'il est possible de mettre à jour.
+	//   La fonction renvoie le contenu mis à jour.
+	//
+	// Pour un exemple voir le plugin SVP API.
+
+
+	return $contenu;
+}
+
+
+/**
+ * Complète ou modifie le bloc d'erreur.
+ * Il n'est pas conseillé d'utiliser ce service sauf dans des cas très spécifiques.
+ *
+ * Ce service est facultatif (rare voir déconseillé).
+ *
+ * @param array  $erreur Tableau initialisé avec les éléments de base de l'erreur.
+ *
+ * @return array Tableau de l'erreur complété ou modifié.
+ */
+function prefixe_reponse_expliquer_erreur($erreur) {
+
+	// Le bloc d'erreur est déjà complètement rempli quand cette fonction est appelée.
+	// Le bloc est constitué des index suivant:
+	// - statut : code standard de la réponse HTTP
+	// - type   : identifiant de l'erreur
+	// - element: libellé de l'élément concerné
+	// - valeur : valeur de l'élément concerné
+	// - titre  : titre court de l'erreur
+	// - detail : texte complémentaite sur l'erreur
+
+	return $erreur;
+}
+
+
+// -----------------------------------------------------------------------
+// ------------------ SERVICES DE GESTION DES REQUETES -------------------
+// -----------------------------------------------------------------------
+
+/**
+ * Détermine si la collection demandée est valide. Par défaut, REST Factory vérifie que la collection est bien
+ * déclarée dans la liste des collections. Si c'est le cas, la fonction permet ensuite au plugin utilisateur de
+ * compléter la vérification, si besoin.
+ *
+ * Ce service est facultatif (rare).
+ *
+ * @param &array $erreur Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
+ *
+ * @return bool `true` si la collection est valide, `false` sinon.
+ */
+function collection_verifier(&$erreur) {
+
+	// Initialise le retour à false par défaut.
+	$est_valide = false;
+
+	// Traitement de vérification de la collection.
+	// - si erreur, alors renvoyer false dans $est_valide et remplir le bloc d'erreur.
+
+	return $est_valide;
+}
+
+
+/**
+ * Détermine si la valeur d'un critère de filtre d'une collection est valide.
+ *
+ * Ce service est facultatif (conseillé pour éviter de traiter des filtres incohérents).
+ *
+ * @param mixed  $valeur Valeur du filtre ffff.
+ * @param &array $erreur Tableau initialisé avec les index identifiant l'erreur.
+ *
+ * @return bool `true` si la valeur est valide, `false` sinon.
+ */
+function collection_verifier_filtre_ffff($valeur, &$erreur) {
+
+	// Initialise le retour à true par défaut.
+	$est_valide = true;
+
+	// Traitement de vérification de la valeur fournie pour le critère de filtre 'ffff'.
+	// - si erreur, alors renvoyer false dans $est_valide et remplir le bloc d'erreur.
+	//
+	// Pour un exemple voir le plugin SVP API.
+
+	return $est_valide;
+}
+
+
+/**
+ * Détermine si la valeur d'une ressource est valide.
+ *
+ * Ce service est facultatif (conseillé pour éviter de traiter des ressources incohérentes).
+ *
+ * @param string $valeur La valeur de la ressource demandée. La ressource appartient à une collection.
+ * @param &array $erreur Tableau initialisé avec les index identifiant l'erreur.
+ *
+ * @return bool `true` si la valeur est valide, `false` sinon.
+ */
+function collection_verifier_ressource_rrrr($valeur, &$erreur) {
+
+	// Initialise le retour à true par défaut.
+	$est_valide = true;
+
+	// Traitement de vérification de la valeur fournie pour la ressource 'rrrr'.
+	// - si erreur, alors renvoyer false dans $est_valide et remplir le bloc d'erreur.
+	//
+	// Pour un exemple voir le plugin SVP API.
+
+	return $est_valide;
+}
+
+
+// -----------------------------------------------------------------------
+// ------------------ SERVICES DE GESTION DES DONNEES --------------------
+// -----------------------------------------------------------------------
+
+/**
+ * Elabore la condition SQL correspondant au filtre ffff et à la valeur fournie.
+ * Cette fonction est utile si la condition ne correspond pas à une égalité simple qui elle est construite
+ * par le service REST Factory lui-même.
+ *
+ * Ce service est facultatif (plutôt rare).
+ *
+ * @param mixed  $valeur Valeur du filtre ffff.
+ *
+ * @return string Condition calculée
+ */
+function collection_conditionner_ffff($valeur) {
+
+	// Initialisation de la condition
+	$conditions = '';
+
+	// Traitement du filtre pour élabore la condition SQL.
+	//
+	// Pour un exemple voir le plugin SVP API.
+
+	return $conditions;
+}
+
+/**
+ * Récupère les données de la collection demandée éventuellement filtrés par les critères
+ * additionnels positionnés dans la requête.
+ *
+ * Ce service est obligatoire pour une collection.
+ *
+ * @param array $conditions    Tableau des conditions SQL à appliquer au select et correspondant aux filtres
+ *                             passés dans la requête.
+ * @param array $filtres       Tableau des critères de filtrage additionnels à appliquer au select.
+ * @param array $configuration Configuration de la collection.
+ *
+ * @return array Tableau des données de la collection.
+ */
+function collection_collectionner($conditions, $filtres, $configuration) {
+
+	// Initialisation des données de la collection à retourner
+	$contenu = array();
+
+	// Récupération des données de la collection conformément aux filtres éventuellement fournis.
+	// Il est possible d'utiliser les conditions SQL calculées ou directement les filtres.
+	// Dans ce cas, il est conseillée de positionner l'indicateur 'sans_condition' à true pour éviter de calculer
+	// les conditions pour rien.
+	//
+	// Pour un exemple voir le plugin SVP API.
+
+	return $contenu;
+}
+
+/**
+ * Retourne la description complète d'une ressource de la collection concernée.
+ *
+ * Ce service n'est obligatoire que pour une collection qui propose un accès à ses ressources (voir configuration).
+ *
+ * @param string $ressource La valeur de la ressource.
+ *
+ * @return array Le tableau descriptif de la ressource.
+ */
+function collection_ressourcer($ressource) {
+
+	// Initialisation des données de la ressource à retourner
+	$contenu = array();
+
+	// Récupération des données de la ressource spécifiée.
+	//
+	// Pour un exemple voir le plugin SVP API.
+
+	return $contenu;
+}
