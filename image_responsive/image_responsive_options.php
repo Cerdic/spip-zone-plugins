@@ -64,7 +64,7 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 
 	// chercher un cache
 	// utiliser le cache ?
-	if ($force OR (@filemtime($destination) < @filemtime($image))) {	
+	if (!file_exists($destination) OR @filemtime($destination) < @filemtime($image)) {	
 		$creation = true;
 		// calculer la taille
 		if (($srcWidth=$valeurs['largeur']) && ($srcHeight=$valeurs['hauteur'])){
@@ -160,8 +160,8 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 			
 			
 			// Sauvegarde de l'image destination
-			$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat";
-			$valeurs['format_dest'] = $format = $destFormat;
+//			$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat";
+//			$valeurs['format_dest'] = $format = $destFormat;
 			
 			if ($forcer_format == "webp") {
 //				$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat.webp";
@@ -215,7 +215,7 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 
 
 
-function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http", $format="auto"){
+function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http", $format=false){
 	if (!preg_match(',\.(gif|jpe?g|png)$,i', $img)
 	OR !preg_match(',^\d+v?$,', $taille)
 	OR !preg_match(',^[\d\.]*$,', $dpr)
