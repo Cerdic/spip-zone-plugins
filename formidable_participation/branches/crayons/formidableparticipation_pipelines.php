@@ -65,9 +65,9 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 						sql_insertq("spip_evenements_participants", $champs);
 					}
 				}
-		}
-		if (_FORMIDABLE_PARTICIPATION_ACTUALISE_MAJ) {
-			sql_update('spip_evenements',array('maj'=>'NOW()'),"id_evenement=$id_evenement");
+		   if (_FORMIDABLE_PARTICIPATION_ACTUALISE_MAJ) {
+			   sql_update('spip_evenements',array('maj'=>'NOW()'),"id_evenement=$id_evenement");
+		   }
 		}
 		spip_log("pipeline evenement $id_evenement pour $email et id_auteur=$id_auteur et id_formulaires_reponse=$id_formulaires_reponse et reponse=$reponse ($nb_inscriptions fois)","formidable_participation");
 	}
