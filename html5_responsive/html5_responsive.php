@@ -1,8 +1,16 @@
 <?php
 
+if (!defined("_HTML5_RESPONSIVE_ACCESSIBLE")) define("_HTML5_RESPONSIVE_ACCESSIBLE", true);
+
+
+
 function html5_responsive_insert_head($flux) {
+
+	if (_HTML5_RESPONSIVE_ACCESSIBLE) $viewport ="width=device-width,viewport-fit=cover"; 
+	else $viewport = "user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover";
+
 	$flux = "<meta charset='".lire_meta("charset")."'>
-	<meta name='viewport' content='user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover'>
+	<meta name='viewport' content='$viewport'>
 	<meta name='format-detection' content='telephone=no'>
 	<meta http-equiv='x-ua-compatible' content='ie=edge'>
 	<meta name='apple-mobile-web-app-capable' content='yes'>
