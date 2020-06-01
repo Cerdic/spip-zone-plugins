@@ -43,7 +43,7 @@ function alerte_urgence_affichage_final($flux) {
 			$flux = str_replace('<!-- inserer_alerte_urgence -->', $alerte, $flux);
 		}
 		// Sinon on la met au début du body
-		else {
+		elseif (!$config['desactiver_placement_auto']) {
 			$flux = preg_replace(
 				'|<body[^>]*>|is',
 				'$0'.$alerte,
