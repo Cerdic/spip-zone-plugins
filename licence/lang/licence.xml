@@ -24,9 +24,10 @@
 		<traducteur nom="otalazt" lien="https://trad.spip.net/auteur/otalazt" />
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/licence?lang_cible=fr" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/licence?lang_cible=fr_tu" total="52" traduits="39" relire="0" modifs="10" nouveaux="3" pourcent="75.00">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/licence?lang_cible=fr_tu" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
+		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
 	<langue code="it" url="https://trad.spip.net/tradlang_module/licence?lang_cible=it" total="52" traduits="14" relire="0" modifs="18" nouveaux="20" pourcent="26.92" />
 	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/licence?lang_cible=pt_br" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
