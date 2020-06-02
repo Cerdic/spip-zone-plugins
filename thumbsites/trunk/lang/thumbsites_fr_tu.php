@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_rafraichir' => 'Rafraichir la vignette',
 
 	// C
-	'cfg_descriptif' => 'Cette page te permet de configurer le plugin Thumbsites, et, en particulier, de choisir le serveur de vignettes. Pour en savoir plus, consultez la <a href="http://contrib.spip.net/?article2584">documentation sur contrib</a>', # MODIF
+	'cfg_descriptif' => 'Cette page te permet de configurer le plugin Thumbsites, et, en particulier, de choisir le serveur de vignettes. Pour en savoir plus, consulte la <a href="http://contrib.spip.net/?article2584">documentation sur contrib</a>',
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d’identification.',
 	'cfg_inf_choix_serveur' => 'Choisis le serveur qui fournira les vignettes de tes sites référencés et compléter éventuellement son paramétrage.',
 	'cfg_inf_miwim_presentation' => 'Pour utiliser ce service tu dois mettre un lien vers le site <a href="http://thumbs.miwim.fr">Miwim</a>. La présence de ce lien est vérifié périodiquement par un script.',
