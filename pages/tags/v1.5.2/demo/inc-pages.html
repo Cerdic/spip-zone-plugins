@@ -1,0 +1,11 @@
+<B_articles>
+    Parametre type_de_page = #ENV{type_de_page}<br />
+<ul>
+<BOUCLE_articles(ARTICLES) {page=#ENV{type_de_page}}{statut?}>
+	<li>=> #ID_ARTICLE - #TITRE \(#STATUT\)</li>
+</BOUCLE_articles>
+</ul>
+</B_articles>
+	<p>Aucun article</p>
+<//B_articles>
+<br />

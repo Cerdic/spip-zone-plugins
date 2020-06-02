@@ -1,0 +1,40 @@
+<div class="formulaire_spip formulaire_dater formulaire_#FORM formulaire_#FORM-#ENV{objet}-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	]
+		<ul class="editer-groupe">
+			#SET{name,champ_page} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}} #SET{obli,''}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="champ_#GET{name}"><:pages:label_champ_page:></label>
+				[<span class="erreur_message">(#GET{erreurs})</span>]
+				<span[ (#ENV{#GET{name}}|oui)class="affiche"][(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
+					[(#ENV{#GET{name}}|sinon{<em><:pagesbis:info_aucun_champ_page:></em>})]
+				</span>
+	[(#ENV{editable})
+				<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
+					&#91;<a href="#"
+						onclick="var f=jQuery(this).parents('form').eq(0);f.find('li .input').show('fast').siblings('span').hide('fast');f.find('.boutons').show('fast');f.find('input.page').eq(0).focus();return false;"><:bouton_changer:></a>&#93;
+				</span>
+				<span class="input"[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
+					<input type="text" class="text page" name="#GET{name}" id="champ_#GET{name}" value="#ENV{#GET{name}}" size="40"/>
+				</span>
+	]
+			</li>
+		</ul>
+	[(#ENV{editable})
+	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	<!--extra-->
+	<p class='boutons'[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
+			<span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='over' name='changer' value='<:bouton_changer:>' />
+			<input type='submit' class='submit' name='annuler' value='<:bouton_annuler:>' />
+			<input type='submit' class='submit' name='changer' value='<:bouton_changer:>' />
+		</p>
+	</div></form>
+	]
+</div>
