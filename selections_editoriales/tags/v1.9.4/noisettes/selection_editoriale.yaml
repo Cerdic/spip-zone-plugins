@@ -1,0 +1,16 @@
+nom: 'Sélection éditoriale'
+description: 'Afficher une liste de selections'
+icon: 'selection-24.png'
+parametres:
+  -
+    saisie: 'selections_editoriales'
+    options:
+      nom: 'id_selection'
+      label: 'Identifiant'
+      cacher_option_intro: 'oui'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_titre_selection'
+      label: 'Afficher le titre'
+      defaut: 'on'

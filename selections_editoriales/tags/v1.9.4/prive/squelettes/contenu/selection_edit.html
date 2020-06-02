@@ -1,0 +1,35 @@
+[(#ID_SELECTION|oui)
+	[(#AUTORISER{modifier,selection,#ID_SELECTION}|sinon_interdire_acces)]
+][(#ID_SELECTION|non)
+	[(#AUTORISER{creer,selection,#ID_SELECTION,'','',#ARRAY{associer_objet,#ENV{associer_objet}}}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect,#ENV{id_selection}|?{#URL_ECRIRE{selection,id_selection=#ID_SELECTION},#URL_ECRIRE{selection_tous}}}}
+
+#SET{objet, #ENV{objet, ''}}
+#SET{id_objet, #ENV{id_objet, 0}}
+[(#ENV{associer_objet}|oui)
+	[(#SET{array_objet, #ENV{associer_objet}|explode{'|'}})]
+	#SET{objet, #GET{array_objet}|table_valeur{0}}
+	#SET{id_objet, #GET{array_objet}|table_valeur{1}}
+]
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_SELECTION|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,selection,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_SELECTION|?{<:selection:icone_modifier_selection:>,<:selection:icone_creer_selection:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{selection,#ID_SELECTION}|sinon{<:selection:titre_nouvelle_selection:>}})</h1>
+	]
+</div>
+#SET{redirect,#ENV{redirect,#ID_SELECTION|generer_url_entite{selection}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+	[(#FORMULAIRE_EDITER_SELECTION{#ENV{id_selection,oui},#GET{redirect},#ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</div>

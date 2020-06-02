@@ -1,0 +1,31 @@
+<BOUCLE_selection(SELECTIONS){id_selection}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class="label"><:selection:champ_titre_label:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{titre} titre'>(#TITRE)</div>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+    <div class="label"><:selection:champ_descriptif_label:> : </div>
+    <div dir='#LANG_DIR' class='span #EDIT{descriptif} descriptif'>(#DESCRIPTIF)</div>
+</div>]
+
+[<div class="champ contenu_identifiant[ (#IDENTIFIANT*|strlen|?{'',vide})]">
+    <div class="label"><:selection:champ_identifiant_label:> : </div>
+    <div dir='#LANG_DIR' class='span #EDIT{identifiant} identifiant'>(#IDENTIFIANT)</div>
+</div>]
+
+[<div class="champ contenu_css[ (#CHAMP_SQL{css}|strlen|?{'',vide})]">
+    <div class="label"><:selection:champ_css_label:> : </div>
+    <div dir='#LANG_DIR' class='span #EDIT{css} css'><code>(#CHAMP_SQL{css})</code></div>
+</div>]
+
+[<div class="champ contenu_limite[ (#LIMITE*|strlen|?{'',vide})]">
+    <div class="label"><:selection:champ_limite_label:> : </div>
+    <div dir='#LANG_DIR' class='span #EDIT{limite} limite'>(#LIMITE)</div>
+</div>]
+
+<INCLURE{fond=prive/squelettes/inclure/selection_autonome,id_selection,env,ajax}>
+
+
+</BOUCLE_selection>

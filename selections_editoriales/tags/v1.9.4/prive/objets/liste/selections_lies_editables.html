@@ -1,0 +1,18 @@
+<B_selections>
+<h2 class="titrem"><:selection:titre_selections:></h2>
+<div class="selections_liees">
+	<BOUCLE_selections(SELECTIONS){objet}{id_objet}{par num titre,titre}>
+	<INCLURE{fond=prive/squelettes/inclure/editer_selections_contenus,
+		id_selection,
+		editer_selection=oui,
+		objet,
+		id_objet,
+		vu=#VU,
+		env}
+	>
+	</BOUCLE_selections>
+</div>
+<script type="text/javascript">
+	jQuery(".selections_liees .append").animateAppend();
+</script>
+</B_selections>

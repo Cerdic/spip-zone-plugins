@@ -1,0 +1,4 @@
+<BOUCLE_selection_editoriale(SELECTIONS){id_selection}>
+	<a href="[(#ID_SELECTION|generer_url_entite{selection})]">#TITRE</a> :
+	<BOUCLE_contenus(SELECTIONS_CONTENUS) {id_selection} {par rang} {", "}><a href="[(#URL|sinon{#ID_OBJET|generer_url_entite{#OBJET}})]">#TITRE</a></BOUCLE_contenus>
+</BOUCLE_selection_editoriale>

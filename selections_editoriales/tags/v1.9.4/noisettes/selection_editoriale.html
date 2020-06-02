@@ -1,0 +1,18 @@
+<BOUCLE_selection_editoriale(SELECTIONS){id_selection}>
+	<div class="selection_editoriale">
+		[(#ENV{afficher_titre_selection}|oui)[<h2 class="h2 tag p-category">(#TITRE|typo)</h2>]]
+        
+        <BOUCLE_contenu(SELECTIONS_CONTENUS){id_selection}{par num titre, titre}>
+        <article class="entry contenu hentry">
+            <strong class="entry-title"><a href="#URL" rel="bookmark">[(#LOGO_SELECTIONS_CONTENU|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}})]<span class="#EDIT{titre}">#TITRE</span></a></strong>
+            [(#ENV{coupe}|oui)
+            [<div class="#EDIT{descriptif} descriptif entry-content">(#DESCRIPTIF|couper{#ENV{coupe}, #ENV{suite, "&nbsp;(...)"}})</div>]
+            ]
+            [(#ENV{coupe}|non)
+            <div class="#EDIT{descriptif} descriptif entry-content">#DESCRIPTIF</div>
+            ]
+        </article>
+        </BOUCLE_contenu>
+
+	</div>
+</BOUCLE_selection_editoriale>

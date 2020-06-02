@@ -1,0 +1,35 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_liens  formulaire_#FORM[ (#ENV{editable}|non)non_editable]">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<h3 class="titrem"><:selection:texte_ajouter_selection:></h3>
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE
+
+		<div class="creer clearfix">
+			<p><:selection:texte_ajouter_selection_explication:></p>
+			<button type="submit" class="button submit clearfix" name="creer_selection" value="creer"><:selection:texte_creer_associer_selection:> [(#CHEMIN_IMAGE{selection-new-24.png}|balise_img{'+'})]</button>
+		</div>
+
+		<div class="selecteur[ (#ENV{recherche}|oui)filtre]">
+			<INCLURE{fond=prive/objets/liste/#ENV{_vue_ajout},action='',env,ajax}>
+		</div>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+
+		<p class="boutons">
+		[(#ENV{url_fermer}|?{
+			<a href="[(#ENV*{url_fermer})]" role="button" class="ajax preload button submit"><:bouton_fermer:></a>,
+			<input type="submit" class="submit" name="fermer" value="<:bouton_fermer:>" />
+		})]
+		</p>
+	</div></form>
+	]
+
+</div>
