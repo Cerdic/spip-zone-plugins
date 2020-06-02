@@ -1,0 +1,58 @@
+[(#REM)
+
+	Gestion des albums liés à un objet.
+
+	Appelé par le pipeline « afficher_complement_objet »
+
+	Utilise :
+		- prive/objets/liste/albums_lies_box.html
+		- prive/squelettes/inclure/ajouter_album.html
+		- javascript/albums_edit.js
+		- javascript/medias_edit.js
+		- javascript/jquery.multifile.js
+
+	Paramètres :
+		*obligatoire
+
+		- *objet    : type d'objet lié
+		- *id_objet : identifiant de l'objet
+
+]
+<div class="nettoyeur"></div>
+<div id="albums" class="albums albums_objet">
+
+	[(#REM) Liste des albums liés ]
+	<INCLURE{fond=prive/objets/liste/albums_lies_box,
+		affichage=albums-lies,
+		sinon='',
+		objet,
+		id_objet,
+		ajouter,
+		ajax=albums_liste,
+	}>
+
+	[(#REM) Formulaire d'ajout ]
+	<INCLURE{fond=prive/squelettes/inclure/ajouter_albums,
+		objet,
+		id_objet,
+		ajouter,
+		lier_trad,
+		ajax=albums_ajouter,
+	}>
+
+</div>
+
+<script type='text/javascript'>/*<![CDATA[*/
+	/* Gestion de l'édition des albums */
+	[(#INCLURE{fond=javascript/modes_affichages_albums.js}|compacte{js})]
+	[(#AUTORISER{joindredocument,#ENV{objet},#ENV{id_objet}}|non)
+		/* Gestion de la modale */
+		[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+		/* Gestion du tri des documents et des rechargements ajax */
+		[(#INCLURE{fond=javascript/gestion_listes_documents.js}|compacte{js})]
+		/* Gestion upload multiple (déprécié depuis bigup) */
+		[(#PLUGIN{bigup}|non)
+			var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+		]
+	]
+/*]]>*/</script>

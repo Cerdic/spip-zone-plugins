@@ -1,0 +1,144 @@
+#HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
+[(#REM)<script>]
+/**
+ * Gestion des albums dans l'espace privé.
+ */
+
+/**
+ * Choix du mode affichage des documents (grand, en case, en liste courte)
+ *
+ * Refacto du script du plugin Médias : on utilise des attributs data pour cibler la liste à changer.
+ *
+ * - affichage-portfolios
+ * - affichage-documents
+ * - affichage-illustrations
+ * - affichage-albums-lies
+ * - affichage-albumotheque
+
+$('.barre-boutons').choix_affichages(options);
+options :
+ - identifiant du cookie
+ - cible
+ - boutons
+
+ affichage-albums
+   - lies
+   - albumotheque
+
+affichage
+  documents (data-affichage-type)
+	  portfolios (data-affichage-identifiant)
+		illustrations
+		documents
+		albums
+		albumotheque
+
+ * - affichage
+ *   - portfolios
+ *   - documents
+ *   - illustrations
+ *   - albums-lies
+ *   - albumotheque
+ *   - albumN
+ *
+ * @see gestion_listes_documents.js.html
+ */
+function choix_affichages_documents_albums() {
+
+	// Mode d'affichage des albums
+	$('[data-cookie-affichage][data-cible-affichage]:not(:has(.affichages))').each(function () {
+		var
+			$base       = $(this),
+			$cible      = $($base.data('cible-affichage')),
+			identifiant = $base.data('cookie-affichage'),
+			boutons     = {
+				grand: {
+					classe: '',
+					label:  '<:medias:affichage_documents_en_grand|attribut_html:>',
+				},
+				cases: {
+					classe: 'documents_cases',
+					label:  '<:medias:affichage_documents_en_cases|attribut_html:>',
+				},
+				liste: {
+					classe: 'documents_liste',
+					label:  '<:medias:affichage_documents_en_liste|attribut_html:>',
+				}
+			};
+
+		// La fonction qui change le mode d'affichage
+		var changer_affichage_documents = function (me, bouton, classe) {
+			var
+				$bouton = $(me),
+				$cible  = $($bouton.parents('[data-cible-affichage]').data('cible-affichage')),
+				classes = [];
+
+			// Classe sur le bouton actif
+			$bouton.parent().find('.icone').removeClass('on').end().end().addClass('on');
+			// Classe sur les listes ciblées
+			$bouton.parent().children('[data-classe]').each(function () {
+				if ($(this).data('classe')) {
+					classes.push($(this).data('classe'));
+				}
+			});
+			$cible.removeClass(classes).addClass(classe);
+			// Poser le cookie
+			if (identifiant) {
+				Cookies.set('affichage-' + identifiant, bouton);
+			}
+			// Déclencher un évènement
+			$cible.trigger('affichage.documents.change', {
+				'liste': $cible,
+				'icone': me,
+				'bouton': bouton,
+				'classe': classe,
+				'identifiant': identifiant
+			});
+
+		};
+
+		// Ajout des boutons
+		$base.append(
+			"<div class='affichages'>"
+			+ "<span class='icone grand on' data-bouton='grand' data-classe='' title='<:medias:affichage_documents_en_grand|attribut_html:>'></span>"
+			+ "<span class='icone cases' data-bouton='cases' data-classe='documents_cases' title='<:medias:affichage_documents_en_cases|attribut_html:>'></span>"
+			+ "<span class='icone liste' data-bouton='liste' data-classe='documents_liste' title='<:medias:affichage_documents_en_liste_compacte|attribut_html:>'></span>"
+			+ "</div>"
+		);
+
+		// Changer le mode d'affichage au clic sur les boutons et stocker le cookie
+		$base.find('.affichages > .icone').click(function () {
+			var
+				bouton = $(this).data('bouton'),
+				classe = $(this).data('classe');
+
+			changer_affichage_documents(this, bouton, classe);
+		});
+
+		// Changer le mode d'affichage au chargement en fonction du cookie
+		if (identifiant) {
+			var defaut = Cookies.get('affichage-' + identifiant);
+			if (defaut) {
+				$base.find('.affichages > .' + defaut).trigger('click');
+			}
+			$base.trigger('affichage.documents.charge', {
+				'liste': $cible,
+				'identifiant': identifiant,
+				'defaut': defaut
+			});
+		}
+
+	});
+
+}
+
+/* Initialisation et relance en cas de chargement ajax */
+if (window.jQuery) {
+	jQuery(function($){
+		if (!$.js_albums_charge) {
+			$.js_albums_charge = true;
+			choix_affichages_documents_albums();
+			onAjaxLoad(choix_affichages_documents_albums);
+		}
+	});
+}

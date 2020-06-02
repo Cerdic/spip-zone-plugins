@@ -1,27 +1,24 @@
 [(#REM)
 
-	Bloc d'un album : titre, descriptif, documents, et boutons d'actions.
-	Prévu pour la colonne latérale lors de l'édition d'un objet.
-
-][(#REM)
+	Boîte d'un album pour la colonne latérale en mode édition.
 
 	Inclus dans :
-		prive/objets/liste/albums_lies_colonne.html
+		- prive/objets/liste/albums_lies_colonne.html
 	Utilise :
-		prive/squelettes/inclure/documents_album_colonne.html
+		- prive/squelettes/inclure/documents_album_colonne.html
 
-][(#REM)
+	Paramètres :
+	*obligatoire
 
-	Paramètres (*obligatoire):
-		*id_album    identifiant de l'album
-		editable     «non» pour ne pas afficher les outils d'édition
+		- *id_album : identifiant de l'album
+		- editable  : « non » pour ne pas afficher les outils d'édition
 
 ]
-<BOUCLE_album(ALBUMS){id_album}{tout}>
-<BOUCLE_vu(albums_liens){id_album}{objet}{id_objet}>#SET{vu,#VU}</BOUCLE_vu>
-#SET{self,         #SELF|parametre_url{albums|id_album|album|ajouter,''}|ancre_url{#VAL{album}|concat{#ID_ALBUM}}}
-#SET{editable,     #ENV{editable}|!={non}|et{#AUTORISER{modifier,album,#ID_ALBUM}}|?{1}}
-#SET{actionner,    #AUTORISER{modifier,album,#ID_ALBUM}|ou{#AUTORISER{dissocier,album,#ID_ALBUM,'',#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}}|?{1}}
+<BOUCLE_album(ALBUMS) {id_album} {tout}>
+<BOUCLE_vu(albums_liens) {id_album} {objet} {id_objet}>#SET{vu,#VU}</BOUCLE_vu>
+#SET{self,      #SELF|parametre_url{albums|id_album|album|ajouter,''}|ancre_url{#VAL{album}|concat{#ID_ALBUM}}}
+#SET{editable,  #ENV{editable}|!={non}|et{#AUTORISER{modifier,album,#ID_ALBUM}}|?{1}}
+#SET{actionner, #AUTORISER{modifier,album,#ID_ALBUM}|ou{#AUTORISER{dissocier,album,#ID_ALBUM,'',#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}}|?{1}}
 
 [(#BOITE_OUVRIR{'',#VAL{boite-album simple colonne}|concat{#GET{editable}|?{' editable'}}}
 	|inserer_attribut{id,album#ID_ALBUM}

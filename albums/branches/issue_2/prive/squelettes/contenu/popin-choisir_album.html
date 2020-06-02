@@ -3,7 +3,7 @@
 	Popup : liste d'albums à choisir.
 
 	Utilisé par :
-		formulaires/ajouter_album.html
+		- formulaires/ajouter_album.html
 
 	Paramètres (*obligatoire):
 		objet       type d'un objet pour exclure ses albums liés de la liste
@@ -11,4 +11,4 @@
 
 ]
 #SET{exclus, #VAL{album}|lister_objets_lies{#ENV{objet},#ENV{id_objet},album}}
-<INCLURE{fond=prive/objets/liste/albums_choisir, exclus=#GET{exclus}, nb=15, env, ajax}>
+<INCLURE{fond=prive/objets/liste/albums_associer, exclus=#GET{exclus}, nb=15, env, ajax}>

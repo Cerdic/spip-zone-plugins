@@ -1,0 +1,43 @@
+[(#REM)
+
+	Liste des documents sur la page d'un album.
+
+	Remplace le squelette prive/squelettes/portfolio-documents.
+
+]
+[(#SET{boutons,#ARRAY{
+	grand,#ARRAY{classe,documents_grand,label,<:medias:affichage_documents_en_grand:>},
+	liste,#ARRAY{classe,documents_liste,label,<:medias:affichage_documents_en_liste:>},
+	cases,#ARRAY{classe,documents_cases,label,<:medias:affichage_documents_en_cases:>},
+	mini,#ARRAY{classe,documents_mini,label,<:medias:affichage_documents_en_cases:>}
+}|json_encode})]
+
+<h2
+	class="titrem titrem_albums"
+	data-affichage
+	data-affichage-type="documents"
+	data-affichage-identifiant="album"
+	data-affichage-cible="\[data-documents^=album\]"
+	data-affichage-boutons="[(#GET{boutons}|attribut_html)]"
+><:medias:info_documents:></h2>
+
+[(#BOITE_OUVRIR{'', box_album portfolios})]
+
+	<INCLURE{fond=prive/squelettes/inclure/documents_album, env}>
+
+#BOITE_FERMER
+
+<script type='text/javascript'>/*<![CDATA[*/
+	/* Gestion de l'édition des albums */
+	[(#INCLURE{fond=javascript/modes_affichages_albums.js}|compacte{js})]
+	[(#AUTORISER{joindredocument,#ENV{objet},#ENV{id_objet}}|non)
+		/* Gestion de la modale */
+		[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+		/* Gestion du tri des documents et des rechargements ajax */
+		[(#INCLURE{fond=javascript/gestion_listes_documents.js}|compacte{js})]
+		/* Gestion upload multiple (déprécié depuis bigup) */
+		[(#PLUGIN{bigup}|non)
+			var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+		]
+	]
+/*]]>*/</script>

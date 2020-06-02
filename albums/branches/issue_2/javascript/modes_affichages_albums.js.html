@@ -1,0 +1,211 @@
+#HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
+[(#REM)<script>]
+/**
+ * Choix du mode affichage pour une cible
+ *
+ * $('.barre-boutons').modes_affichages(options);
+ *
+ * @param object options
+ * - enregistrer (bool) : true pour poser un cookie
+ * - type (string) : type d'élément ciblé : documents, articles, etc. (pas forcément un objet spip)
+ * - identifiant (string) : identifiant pour le stockage
+ * - cible (string) : sélecteur jQuery pour la cible sur laquelle appliquer les classes
+ * - boutons (object) : déclaration des boutons avec les classes
+ */
+$.modes_affichages = function(el, options) {
+
+	var me = this;
+
+	// Initialisation
+	// @return void
+	this.init = function () {
+
+		// Options : enlever le namespace
+		me.options = $.extend({}, $.modes_affichages.defaultOptions, $(el).data(), options);
+		$.each(me.options, function (k, v) {
+			var cle = k.replace('affichage', '').toLowerCase();
+			delete me.options[k];
+			if (cle) { me.options[cle] = v; }
+		});
+
+		// Garder les infos sous la main
+		me.$controleur = $(el);                  // élément conteneur des boutons
+		me.$cible      = $(me.options.cible);    // élément ciblé
+		me.identifiant = me.options.identifiant; // identifiant pour le stockage
+		me.type        = me.options.type;        // type d'élément ciblé (documents, articles, etc.)
+
+		// Préparer les boutons
+		me.preparer_boutons();
+
+		// À ce stade vérifier qu'on a toutes les infos
+		if (!me.boutons || !me.options.cible || $(me.options.cible).length === 0 || !me.options.identifiant) {
+			return;
+		}
+
+		// Appliquer l'affichage enregistré dans le cookie
+		me.charger_affichage();
+	}
+
+	// Préparer les boutons : ajout du HTML si nécessaire et écouteurs d'évènements
+	// @return object Définition des boutons
+	this.preparer_boutons = function() {
+		var
+			boutons     = {}, // déclaration
+			$boutons    = {}, // html
+			$affichages = me.$controleur.find('.affichages');
+
+		// Soit les boutons sont déjà présents dans le HTML : on les recense
+		if ($affichages.length > 0) {
+			$affichages.show();
+			$boutons = $affichages.children();
+			$.each($boutons, function () {
+				var
+					bouton = $(this).data('bouton'),
+					classe = $(this).data('classe'),
+					label  = $(this).attr('title');
+				boutons[bouton] = {
+					classe: classe,
+					label: label
+				}
+			});
+			boutons = me.options.boutons;
+		// Soit ils sont déclarés dans les options : on ajoute le HTML
+		} else if (typeof(me.options.boutons) === 'object' && me.options.boutons) {
+			boutons     = me.options.boutons;
+			me.boutons  = boutons;
+			$affichages = me.ajouter_boutons();
+			$boutons    = $affichages.children();
+		}
+
+		// Actionner
+		if (boutons) {
+			me.$boutons = $boutons;
+			$boutons.click(function () {
+				me.changer_affichage(this);
+			});
+		}
+
+		return boutons;
+	}
+
+	// Ajoute le HTML des boutons
+	// @return object HTML des boutons
+	this.ajouter_boutons = function () {
+		var $affichages = $('<div class="affichages"></div>');
+		$.each(me.boutons, function (bouton, infos) {
+			var $bouton = $('<span class="icone" role="button" tabindex="0"></span>')
+				.data('bouton', bouton)
+				.data('classe', infos.classe)
+				.addClass(bouton)
+				.attr('title', infos.label)
+				.attr('aria-pressed', false);
+			$affichages.append($bouton);
+		});
+		$affichages.children().first().addClass('on');
+		me.$controleur.append($affichages);
+		return $affichages;
+	}
+
+	// Change le mode d'affichage
+	// @param object el Bouton cliqué
+	// @return void
+	this.changer_affichage = function (el) {
+		var
+			bouton    = $(el).data('bouton'),
+			classe    = $(el).data('classe'),
+			classes   = me.lister_classes(),
+			evenement = 'affichage.' + me.type + '.change';
+
+		// Classe sur le bouton actif
+		$(el)
+			.addClass('on').attr('aria-pressed', true)
+			.siblings().removeClass('on').attr('aria-pressed', false);
+
+		// Classe sur la cible
+		// En jquery 3.3 on pourra passer un array à removeClass
+		$.each(classes, function (i, c) {
+			me.$cible.removeClass(c);
+		});
+		me.$cible.addClass(classe);
+
+		// Poser le cookie
+		if (me.options.enregistrer === true && bouton) {
+			var affichages = JSON.parse(Cookies.get('affichage') || '{}');
+			affichages[me.identifiant] = bouton;
+			affichages = JSON.stringify(affichages);
+			Cookies.set('affichage', affichages);
+		}
+
+		// Déclencher un évènement
+		me.$cible.trigger(evenement, {
+			'cible':       me.$cible,
+			'element':     el,
+			'bouton':      bouton,
+			'classe':      classe,
+			'identifiant': me.identifiant
+		});
+
+	}
+
+	// Applique le mode d'affichage au chargement en fonction du cookie
+	// @return void
+	this.charger_affichage = function () {
+		var
+			evenement     = 'affichage.' + me.type + '.charge',
+			affichage     = JSON.parse(Cookies.get('affichage') || '{}');
+
+		if (me.identifiant in affichage) {
+			var bouton_defaut = affichage[me.identifiant];
+			var $bouton = me.$boutons.filter(function () { return $(this).data('bouton') === bouton_defaut });
+			$bouton.trigger('click');
+		}
+		me.$cible.trigger(evenement, {
+			'cible':       me.$cible,
+			'identifiant': me.identifiant,
+			'defaut':      bouton_defaut
+		});
+	}
+
+	// Liste les classes possibles
+	// @return array
+	this.lister_classes = function () {
+		var classes = [];
+		$.each(me.boutons, function (bouton, infos) {
+			if (infos.classe) {
+				classes.push(infos.classe);
+			}
+		});
+		return classes;
+	}
+
+	// Go go go
+	this.init();
+};
+$.modes_affichages.defaultOptions = {
+	type: '',
+	identifiant: '',
+	cible: '',
+	enregistrer: true,
+	boutons: {},
+};
+$.fn.modes_affichages = function(options) {
+	return this.each(function() {
+		if (!this.modes_affichages_charge) {
+			this.modes_affichages_charge = true;
+			(new $.modes_affichages(this, options));
+		}
+	});
+};
+
+/* Lancer la onction sur tous les éléments avec les bons attributs */
+function spip_modes_affichages() {
+	$('[data-affichage]').modes_affichages();
+}
+
+/* Initialisation et relance en cas de chargement ajax */
+if (window.jQuery) {
+	jQuery(function($){
+		spip_modes_affichages();
+		onAjaxLoad(spip_modes_affichages);
+	});
+}

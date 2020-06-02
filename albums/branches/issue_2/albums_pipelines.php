@@ -19,13 +19,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Ajout de contenu aux fiches des objets.
  *
  * - Albums liés aux objets activés dans la configuration du plugin
- * - Documents liés aux albums en cas d'absence du portfolio (cf. note)
- *
- * @note
- * Les portfolios ne sont affichés que pour les objets qu'on a le droit d'éditer
- * (cf. `autoriser_joindredocument_dist`).
- * Mais pour les albums, les documents doivent être visibles dans tous les cas.
- * Si nécessaire, on affiche donc les documents via notre squelette maison.
  *
  * @uses marquer_doublons_album()
  * @pipeline afficher_complement_objet
@@ -36,40 +29,33 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function albums_afficher_complement_objet($flux) {
 
 	$texte = '';
-	$e     = trouver_objet_exec($flux['args']['type']);
+	$exec  = trouver_objet_exec($flux['args']['type']);
 	$id    = intval($flux['args']['id']);
 
 	// Fiches des objets activés : albums liés
 	if (
-		$e !== false // page d'un objet éditorial
-		and $e['edition'] === false // pas en mode édition
-		and $type = $e['type']
+		$exec !== false // page d'un objet éditorial
+		and $exec['edition'] === false // pas en mode édition
+		and $type = $exec['type']
 		and autoriser('ajouteralbum', $type, $id)
 	) {
 		// on vérifie d'abord que les albums vus sont bien liés
 		$table_objet_sql = table_objet_sql($type);
 		$table_objet     = table_objet($type);
-		$id_table_objet  = id_table_objet($type);
-		$champs          = sql_fetsel('*', $table_objet_sql, addslashes($id_table_objet).'='.intval($id));
+		$cle_objet       = id_table_objet($type);
+		$champs          = sql_fetsel('*', $table_objet_sql, addslashes($cle_objet).'='.intval($id));
 		$marquer_doublons_album = charger_fonction('marquer_doublons_album', 'inc');
-		$marquer_doublons_album($champs, $id, $type, $id_table_objet, $table_objet, $table_objet_sql);
+		$marquer_doublons_album($champs, $id, $type, $cle_objet, $table_objet, $table_objet_sql);
 		// puis on récupère le squelette
-		$texte .= recuperer_fond('prive/squelettes/contenu/portfolio_albums', array(
-				'objet' => $type,
-				'id_objet' => $id,
-			), array('ajax'=>'albums'));
-	}
-
-	// Fiches des albums : documents liés quand les documents «classiques» ne sont pas affichés
-	if (
-		$e !== false // page d'un objet éditorial
-		and $e['edition'] === false // pas en mode édition
-		and ($type=$e['type']) == 'album'
-		and !autoriser('joindredocument', $type, $id)
-	) {
 		$texte .= recuperer_fond(
-			'prive/squelettes/inclure/documents_album',
-			array('id_album' => $id, 'pagination_documents'=>30)
+			'prive/squelettes/inclure/albums_objet',
+			array(
+				'objet'    => $type,
+				'id_objet' => $id,
+			),
+			array(
+				'ajax' => 'albums',
+			)
 		);
 	}
 
@@ -170,9 +156,9 @@ function albums_affiche_gauche($flux) {
 		$e !== false // page d'un objet éditorial
 		and $e['edition'] !== false // mode édition uniquement
 		and $type = $e['type']
-		and $id_table_objet = $e['id_table_objet']
+		and $cle_objet = $e['id_table_objet']
 		and (
-			(isset($flux['args'][$id_table_objet]) and $id = intval($flux['args'][$id_table_objet]))
+			(isset($flux['args'][$cle_objet]) and $id = intval($flux['args'][$cle_objet]))
 			// id non défini pour les nouveaux objets : on met un identifiant negatif
 			or ($id = 0-$GLOBALS['visiteur_session']['id_auteur'])
 		)
@@ -259,14 +245,14 @@ function albums_post_edition($flux) {
 		$serveur         = (isset($flux['args']['serveur']) ? $flux['args']['serveur'] : '');
 		$type            = isset($flux['args']['type']) ? $flux['args']['type'] : objet_type($table_objet_sql);
 		$id_objet        = $flux['args']['id_objet'];
-		$id_table_objet  = id_table_objet($type, $serveur);
+		$cle_objet  = id_table_objet($type, $serveur);
 		$table_objet     = isset($flux['args']['table_objet']) ?
 			$flux['args']['table_objet'] : table_objet($table_objet_sql, $serveur);
 
 		include_spip('inc/autoriser');
 		if (autoriser('autoassocieralbum', $type, $id_objet)) {
 			$marquer_doublons_album = charger_fonction('marquer_doublons_album', 'inc');
-			$marquer_doublons_album($flux['data'], $id_objet, $type, $id_table_objet, $table_objet, $table_objet_sql, '', $serveur);
+			$marquer_doublons_album($flux['data'], $id_objet, $type, $cle_objet, $table_objet, $table_objet_sql, '', $serveur);
 		}
 	}
 
@@ -673,7 +659,7 @@ function albums_album_boutons_actions($flux) {
 			'positions' => array('footer'),
 			'liaison' => '',
 			'autoriser' => autoriser('modifier', 'album', $id_album),
-			'html' => '<a href="#" class="bouton remplir" role="button" tabindex="0">'._T('medias:bouton_ajouter_document').'</a>'
+			'html' => '<a href="'.parametre_url(self(), 'ajouter', 'album'.$id_album).'" class="bouton remplir ajax" role="button" tabindex="0">'._T('medias:bouton_ajouter_document').'</a>'
 		),
 	);
 
@@ -697,10 +683,14 @@ function albums_album_boutons_actions($flux) {
 /**
  * Modifier le résultat du calcul d'un squelette
  *
- * - Squelette «inc-upload_documents» : si utilisé pour un album,
- * ajout d'un suffixe unique à l'id du conteneur principal (et à ses références dans le js et cie),
+ * - inc-upload_documents :
+ * si utilisé pour un album, ajout d'un suffixe unique à l'id du conteneur principal
+ * (et à ses références dans le js et cie),
  * afin de pouvoir utiliser le formulaire plusieurs fois sur une même page.
- * Quand utilisé dans le formulaire d'ajout d'album, on change le texte des boutons.
+ * Dans le formulaire d'ajout d'album, on change aussi le texte des boutons.
+ *
+ * - portfolio_document :
+ * remplacer par un autre squelette pour les albums.
  *
  * @pipeline recuperer_fond
  *
@@ -709,30 +699,31 @@ function albums_album_boutons_actions($flux) {
  */
 function albums_recuperer_fond($flux) {
 
-	if (isset($flux['args']['fond'])
-		and $fond = $flux['args']['fond']
-		and $fond == 'formulaires/inc-upload_document'
-		and isset($flux['args']['contexte']['objet'])
-		and $flux['args']['contexte']['objet'] == 'album'
+	$fond     = (isset($flux['args']['fond']) ? $flux['args']['fond'] : '');
+	$objet    = (isset($flux['args']['contexte']['objet']) ? $flux['args']['contexte']['objet'] : '');
+	$id_objet = (isset($flux['args']['contexte']['id']) ? $flux['args']['contexte']['id'] : '');
+
+	// Marabouter upload document
+	if (
+		$fond === 'formulaires/inc-upload_document'
+		and $objet === 'album'
 		//and isset($flux['args']['contexte']['form'])
 		//and in_array($flux['args']['contexte']['form'], array('joindre_document', 'ajouter_album'))
 	) {
-		// Changer l'identifiant du conteneur
-		// Définition de l'identifiant dans le squelette : _#ENV{mode}|concat{'_',#ENV{id,new}}
-		$texte = $flux['data']['texte'];
-		$mode = isset($flux['args']['contexte']['mode']) ?
-			$flux['args']['contexte']['mode'] :
-			'';
-		$id = (isset($flux['args']['contexte']['id']) and intval($flux['args']['contexte']['id']) > 0) ?
-			$flux['args']['contexte']['id'] :
-			'new';
-		$domid = '_' . $mode . '_' . $id;
+
+		// Rendre unique l'identifiant du conteneur
+		// Définition dans le squelette : _#ENV{mode}|concat{'_',#ENV{id,new}}
+		$texte      = $flux['data']['texte'];
+		$mode       = (isset($flux['args']['contexte']['mode']) ? $flux['args']['contexte']['mode'] : '');
+		$id         = (intval($id_objet) ? intval($id_objet) : 'new');
+		$domid      = "_${mode}_${id}";
 		$dom_uniqid = $domid . uniqid('_');
 		$flux['data']['texte'] = str_replace($domid, $dom_uniqid, $texte);
 
 		// Remplacer le texte des boutons dans le formulaire « ajouter_album »
-		if (isset($flux['args']['contexte']['form'])
-			and $flux['args']['contexte']['form'] == 'ajouter_album'
+		if (
+			isset($flux['args']['contexte']['form'])
+			and $flux['args']['contexte']['form'] === 'ajouter_album'
 		) {
 			$enregistrer = _T('bouton_enregistrer');
 			$cherche = array(
@@ -742,6 +733,23 @@ function albums_recuperer_fond($flux) {
 			);
 			$flux['data']['texte'] = str_replace($cherche, $enregistrer, $texte);
 		}
+	}
+
+	// Pas de portfolio sur les albums
+	if (
+		$fond === 'prive/squelettes/inclure/portfolio-documents'
+		and $objet === 'album'
+	) {
+		$flux['data']['texte'] = recuperer_fond(
+			'prive/squelettes/inclure/portfolio-documents_album',
+			array(
+				'id_album' => $flux['args']['contexte']['id_album'],
+				'boite'    => 'oui',
+			),
+			array(
+				'ajax' => 'documents',
+			)
+		);
 	}
 
 	return $flux;

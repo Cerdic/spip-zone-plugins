@@ -1,0 +1,89 @@
+[(#REM)
+
+	Liste des albums, affichés sous forme de boîtes.
+
+	Paramètres :
+
+	- objet : type d'objet lié
+	- id_objet : n° d'un objet lié
+	- vu : oui | non
+	- id_document
+	- media : image | file | audio | video
+	- extension
+	- orphelins : oui
+	- titre : titre personnalisé ou '' pour le masquer
+	- sinon : message alternatif personnalisé ou '' pour le masquer
+	- affichage : identifiant pour activer les boutons d'affichages
+	- variante : classe ajoutée de façon normée
+	- class : classe(s) ajoutées telles quelles
+
+]
+#SET{defaut_tri,#ARRAY{
+	num titre,   1,
+	multi titre, 1,
+	id_album,    1,
+	date,       -1,
+}}
+[(#SET{boutons,#ARRAY{
+	grand,#ARRAY{classe,documents_grand,label,<:medias:affichage_documents_en_grand:>},
+	liste,#ARRAY{classe,documents_liste,label,<:medias:affichage_documents_en_liste:>},
+	cases,#ARRAY{classe,documents_cases,label,<:medias:affichage_documents_en_cases:>},
+	mini,#ARRAY{classe,documents_mini,label,<:medias:affichage_documents_en_cases:>}
+}|json_encode})]
+<B_liste_albums>
+<div class="liste-objets liste-objets_albums liste-objets_albums_box portfolios[ liste-objets_albums_(#ENV{variante}|attribut_html)][ (#ENV{class}|attribut_html)]">
+
+	[<h2 class="liste__titre">
+		(#ENV*{titre}|is_null|?{#GRAND_TOTAL|singulier_ou_pluriel{album:info_1_album,album:info_nb_albums},#ENV*{titre}})
+	</h2>]
+
+	<div
+		class="liste__tri tri tri_album"
+		[(#ENV{affichage}|oui)
+			data-affichage
+			data-affichage-type="documents"
+			data-affichage-identifiant="[(#ENV{affichage}|attribut_html)]"
+			data-affichage-cible="\[data-documents^=album\]"
+			data-affichage-boutons="[(#GET{boutons}|attribut_html)]"
+		]
+	>
+		[(#TRI{'>', <span class="sens sens_asc">&uarr;</span>, ajax})]
+		[(#TRI{'<', <span class="sens sens_desc">&darr;</span>, ajax})]
+		[(#TRI{id_album, <:info_numero_abbreviation:>, ajax})]
+		[(#TRI{date, <:medias:par_date:>, ajax})]
+		[(#TRI{num titre, <:medias:par_titre:>, ajax})]
+	</div>
+
+	<BOUCLE_liste_albums(ALBUMS documents)
+		{albums_liens.objet?} {albums_liens.id_objet?} {albums_liens.vu?}
+		{documents.id_document?} {documents.media?} {documents.extension?}
+		{recherche?}
+		{orphelins?}
+		{statut?}
+		{tri #ENV{par, num titre}, #GET{defaut_tri}}
+		{pagination #ENV{nb,10}}
+	>
+		<INCLURE{fond=prive/squelettes/inclure/album,
+			id_album,
+			objet,
+			id_objet,
+			ajouter,
+			ajax=album#ID_ALBUM,
+		}>
+	</BOUCLE_liste_albums>
+
+	[<p class="pagination">(#PAGINATION{prive})</p>]
+
+	[(#GRAND_TOTAL|>{1}|oui)
+	<div class="action">
+		[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_album,tous/#ENV{objet}/#ENV{id_objet},#SELF},'ajax dissocier'})]
+	</div>
+	]
+
+</div>
+
+</B_liste_albums>
+[<div class="liste-objets liste-objets_albums caption-wrap">
+	<strong class="caption">(#ENV{sinon}|is_null|?{<:album:info_aucun_album:>,#ENV*{sinon}})</strong>
+</div>]
+<//B_liste_albums>

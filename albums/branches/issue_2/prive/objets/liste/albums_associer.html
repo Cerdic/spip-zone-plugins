@@ -2,22 +2,20 @@
 
 	Liste des albums associables à un objet.
 
-][(#REM)
-
 	Inclus dans :
-		prive/squelettes/contenu/popin-choisir_album.html
+		- prive/squelettes/contenu/popin-choisir_album.html
 
-][(#REM)
+	Paramètres :
+	*obligatoire
 
-	Paramètres (*obligatoire):
-		nb           nombre pour pagination
-		statut       prepa | publie | poubelle, défaut : «publie»
-		media        pour filtrer les albums contenant un type de document
+		- nb           nombre pour pagination
+		- statut       prepa | publie | poubelle, défaut : «publie»
+		- media        pour filtrer les albums contenant un type de document
 		             audio | image | video | file
-		exclus       liste d'albums à ne pas afficher (array ou liste d'ids séparés par des virgules)
-		recherche    pour filtrer les albums correspondants à un terme de recherche
-		sinon        texte affiché si aucun résultat
-		titre        texte affiché à la place du nombre de résultats
+		- exclus       liste d'albums à ne pas afficher (array ou liste d'ids séparés par des virgules)
+		- recherche    pour filtrer les albums correspondants à un terme de recherche
+		- sinon        texte affiché si aucun résultat
+		- titre        texte affiché à la place du nombre de résultats
 
 ]
 #SET{defaut_tri,#ARRAY{

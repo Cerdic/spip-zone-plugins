@@ -6,99 +6,194 @@
 
 
 /*
-    BLOC ALBUM
-    ==========
+  ======================
+  BOITE COMPLEMENT OBJET
+  ======================
 */
-.liste-albums.lies .boite-album         { margin: 10px 0; }
-.boite-album .bd,
-#contenu .boite-album .bd               { padding: 0; }
+.albums_lies .formulaire_ajouter_album  { margin-bottom: 0; }
+.formulaire_ajouter_album input.identifiants { width: 50%; }
+.formulaire_ajouter_album .documents    { margin-bottom: 0; padding-bottom: 0; }
+
+
+/*
+  ======
+  LISTES
+  ======
+*/
+
+.liste-objets_albums {
+	border: 0;
+}
+.tri_album {
+	display: flex;
+	align-items: center;
+	padding: 0;
+	border: 0;
+	border-radius: 3px;
+	background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
+}
+.tri.tri_album > * {
+	padding: 0.25em;
+}
+.tri_album .on {
+	background-color: #GET{foncee};
+}
+.tri_album .sens {
+	font-family: sans;
+}
+
+/* Choisir */
+.liste-albums.choisir .header           { padding: 5px; }
+.liste-albums.choisir .titre            { margin: 0; }
+.liste-albums.choisir .formulaire_recherche,
+.liste-albums.choisir .filtres          { margin: 0; }
+.liste-albums.choisir .filtres          { display: block; margin-bottom: 5px; }
+.liste-albums.choisir .filtres li       { display: inline-block; margin-right: .25em; }
+.liste-albums.choisir .filtres li img   { vertical-align: middle; }
+
+
+/*
+  ===========
+  DIVERS
+  ===========
+*/
+.titrem.titrem_albums {
+	display: flex;
+	align-items: center;
+	margin: 0;
+	background-color: #GET{foncee} !important;
+	padding: 7px 10px;
+	color: white;
+	border-radius: 5px 5px 0 0;
+}
+.titrem_albums .affichages {
+	display: inline-flex;
+	align-items: center;
+	margin-left: auto;
+}
+.affichages .icone.mini {
+	background-image: url(#CHEMIN_IMAGE{documents-mini-16.png});
+}
+
+
+/*
+  ===========
+  BOITE ALBUM
+  ===========
+*/
+.box_album {
+	margin: 1em 0;
+}
+.box_album .inner {
+	border: 0;
+	border-radius: inherit;
+	background: #f0f0f0;
+	transition: background 0.2s;
+}
+.box_album:hover .inner,
+.box_album:focus-within .inner {
+	background: #[(#GET{claire}|couleur_eclaircir{0.66})];
+	box-shadow: none;
+}
 /* header */
-.header-album                           { padding: 10px; }
-.header-album > .id                     { float: #ENV{left}; width: 70px; }
-.header-album > .boutons-edition        { float: #ENV{right}; }
-.header-album > .contenu                { overflow: auto; }
-.header-album .titre                    { font-weight: bold; }
-.header-album .texte img                { vertical-align: middle; }
-.header-album .formulaire_editer_album,
-.header-album .formulaire_editer_album ul,
-.header-album .formulaire_editer_album .boutons { margin: 0; padding: 0; border: 0 none; background: transparent; }
-.header-album .formulaire_editer_album li { padding: 0; }
-.header-album .formulaire_editer_album label { margin: 0; }
-/* documents */
-.documents-album                        { margin: 0; border-top-width: 0px; }
-.documents-album .item                  { padding: 10px 10px 10px 80px; border-style: dotted; clear: both; overflow: visible;}
-.documents-album .item .tourner         { float: #ENV{right}; display: block; }
-.documents-album .item > a              { float: #ENV{left}; width: 60px; margin-#ENV{left}: -70px; text-align: center; }
-.documents-album .item .titrem,
-.documents-album .item .infos           { font-size: .9em; line-height: 1.5; }
-.documents-album .item .titrem          { margin: 0; }
-.documents-album .item .titrem > span   { display: block; }
-.documents-album .item .titrem .sanstitre {opacity:0.3;}
-.documents-album .item .fichier         { word-break: break-all; font-weight: normal; }
-.documents-album .item .infos           { float: #ENV{left}; display: block;  }
-.documents-album .item .infos,
-.documents-album .item:not(.sans-titre) .fichier { color: #777; }
-.documents-album .item .sep             { color: #bbb; margin: 0 .33em; }
-.documents-album .item .extension       { text-transform: uppercase; }
-.documents-album .item .actions         { float: #ENV{right}; clear: #ENV{right}; display: block; position: relative; }
-.documents-album .item .actions a.editbox { font-weight: bold; }
-.documents-album .item .tourner button  { padding: 0; border-width: 0px; background-color: transparent; }
-.documents-album .pagination            { margin: 0;}
-
+.box_album .hd {
+	background-color: transparent !important;
+}
+.box_album .hd a {
+	color: inherit;
+}
+.box_album .liste_items.documents {
+	border-top: 0;
+}
+.box_album .liste_items.documents:not(.documents_cases) .item:last-child {
+	border-bottom: 0;
+}
 /* footer */
-.footer-album .bouton.remplir           { font-weight: bold; }
-.boite-album .formulaire_joindre_document { margin: 0; text-align: #ENV{left}; }
-/* boutons */
-.documents-album .item .actions,
-.documents-album .item .actions button,
-.footer-album .bouton,
-.footer-album button                    { font-size: x-small; }
-.boite-album .bouton:hover ,
-.boite-album button:hover               { cursor: pointer; }
-/* reveal */
-.documents-album .item .actions > *:not(.editbox),
-.documents-album .item .tourner,
-.boite-album .reveal                    { opacity: .1; }
-.documents-album .item:hover .actions > *,
-.documents-album .item:hover .tourner,
-.header-album:hover .reveal,
-.footer-album:hover .reveal,
-.boite-album .reveal:focus              { opacity: 1; }
-/* header + document + footer */
-.boite-album.editable .header-album.hover,
-.boite-album.editable .header-album:hover,
-.boite-album.editable .item.hover       { background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
-.boite-album:not(.editable) .liste_items .item:hover,
-.documents-album:not(.editable) .item:hover { background-color: transparent; }
+.box_album__pied {
+	background-color: transparent !important;
+	border-top: 0;
+}
+.box_album__pied .bouton.remplir {
+	font-weight: bold;
+}
+.box_album__pied .bouton.fermer {
+	display: inline-flex;
+	align-items: center;
+	margin-left: auto;
+}
+.box_album .formulaire_joindre_document {
+	margin: 0 -11px -11px;
+	text-align: #ENV{left};
+}
+.box_album .liste_items.documents.documents_cases .item {
+	background-color: white;
+}
 
+/* affichage mini */
+.liste_items.documents.documents_mini .sortable {
+	/* display: flex; */
+	/* flex-flow: row wrap; */
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 6em);
+	grid-gap: 0.33em;
+}
+.liste_items.documents.documents_mini .item {
+	background-color: white;
+	border: 0;
+}
+.liste_items.documents.documents_mini .item {
+	/* border: 1px solid #eee; */
+	border-radius: 5px;
+	/* flex: 0 1 5em; */
+	display: flex;
+	flex-flow: column;
+	padding: 0.25em;
+	margin: 0;
+}
+.liste_items.documents.documents_mini .item .vignette {
+	width: auto;
+	min-width: auto;
+}
+.liste_items.documents.documents_mini img {
+	max-width: 100%;
+	height: auto;
+}
+.liste_items.documents.documents_mini .item .presentation {
+	display: flex;
+	flex-flow: column;
+}
+.liste_items.documents.documents_mini .item .descriptions {
+	display: none;
+	margin: 0;
+	padding: 0;
+}
+.liste_items.documents.documents_mini .actions {
+	margin: auto 0 0;
+	padding: 0.5em 0 0;
+}
+.liste_items.documents.documents_mini .deplacer-modifier {
+	display: flex;
+	font-size: 0.8em;
+}
+.liste_items.documents.documents_mini .actions > :not(.deplacer-modifier) {
+	display: none;
+}
 
 /*
-    ALBUMOTHEQUE
-    ============
+  ============
+  ALBUMOTHEQUE
+  ============
 */
-.albums #navigation,
-.albumotheque                           { margin-top: 2.0775em; } /* = marging-top de li.sous_navigation */
-.albumotheque .liste-albums .boite-album:first-child { margin-top: 1em; }
-/* pagination et tri : classe «simple» */
-.albums .pagination.simple,
-.albums .tri.simple                     { background-color: transparent; border-width: 0; margin: 0; }
-.albums .pagination.simple              { border-top-width: 1px; }
-.albums .pagination.simple,
-.albums .pagination.simple .on,
-.albums .tri.simple,
-.albums .tri.simple .on                 { font-weight: normal; background-color: transparent; }
-.albums .pagination.simple .on,
-.albums .tri.simple .on                 { color: #000; }
-.albums .pagination.simple .sep,
-.albums .tri.simple .sep                { color: #bbb; }
+
 
 
 /*
-    FILTRES
-    =======
-    les listes ul.liste-items sont plutôt prévues pour des menus,
-    mais là il s'agit de filtres : il faut donc adapter un peu.
-    on rajoute la classe .filtres aux ul.liste-items pour cibler nos modifs
+  =======
+  FILTRES
+  =======
+  les listes ul.liste-items sont plutôt prévues pour des menus,
+  mais là il s'agit de filtres : il faut donc adapter un peu.
+  on rajoute la classe .filtres aux ul.liste-items pour cibler nos modifs
 */
 .navigation-albums .titre-liste         { margin-bottom: .25em; }
 .navigation-albums .titre-liste img     { vertical-align: middle; }
@@ -125,17 +220,9 @@
 
 
 /*
-    BOITE COMPLEMENT OBJET
-    ======================
-*/
-.albums-lies .formulaire_ajouter_album  { margin-bottom: 0; }
-.formulaire_ajouter_album input.identifiants { width: 50%; }
-.formulaire_ajouter_album .documents    { margin-bottom: 0; padding-bottom: 0; }
-
-
-/*
-    FICHE D'UN ALBUM
-    ================
+  ================
+  FICHE D'UN ALBUM
+  ================
 */
 /* navigation latérale : utilisations */
 .utilisations-albums .dissocier         { float: #ENV{right}; }
@@ -145,15 +232,16 @@
 
 
 /*
-    EDITION
-    =======
+  =======
+  EDITION
+  =======
 */
 .menu-edition-albums                    { margin-top: 2.0775em; } /* = marging-top de li.sous_navigation */
 .menu-edition-albums img                { vertical-align: middle; }
 .menu-edition-albums .sep               { margin: 0 .33em; }
 .documents-album.colonne .item,
-.boite-album.colonne .header-album,
-.boite-album.colonne .footer-album      { padding: 10px 5px; }
+.box_album.colonne .header-album,
+.box_album.colonne .box_album__pied     { padding: 10px 5px; }
 .documents-album.colonne .item:first-child { border-top-width: 1px; border-top-color: inherit; }
 .documents-album.colonne .tourner form  { float: #ENV{right}; clear: both; }
 .documents-album.colonne .item > a,
@@ -169,33 +257,20 @@
 .balise-album .code-balise:hover        { cursor: pointer; }
 .balise-album .saisie_oui_non .choix    { display: inline-block; }
 .balise-album .boutons input.personnaliser { display: block; margin: 0 auto; font-size: smaller; font-weight: bold; font-family: unset; color:[#(#GET{claire}|couleur_foncer)]; }
-.boite-album .balise-album,
-.boite-album .balise-album .boutons     { margin: 0; background-color: transparent; border-width: 0; }
-.boite-album .balise-album              { padding: 10px 5px; }
-.boite-album .balise-album.edition      { background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
-
-
-/*
-    LISTE CHOISIR
-    =============
-*/
-.liste-albums.choisir .header           { padding: 5px; }
-.liste-albums.choisir .titre            { margin: 0; }
-.liste-albums.choisir .formulaire_recherche,
-.liste-albums.choisir .filtres          { margin: 0; }
-.liste-albums.choisir .filtres          { display: block; margin-bottom: 5px; }
-.liste-albums.choisir .filtres li       { display: inline-block; margin-right: .25em; }
-.liste-albums.choisir .filtres li img   { vertical-align: middle; }
-
+.box_album .balise-album,
+.box_album .balise-album .boutons     { margin: 0; background-color: transparent; border-width: 0; }
+.box_album .balise-album              { padding: 10px 5px; }
+.box_album .balise-album.edition      { background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 
 /*
-    MODELE
-    ======
+  ======
+  MODELE
+  ======
 */
 
 [(#INCLURE{#CHEMIN{css/albums.css}|direction_css})]
 /* pour l'espace privé */
-.album.right                         { float: #ENV{right}; }
-.album.left                          { float: #ENV{left}; }
-.album.center                        { margin-left: auto; margin-right: auto; }
-#wysiwyg .album.vignettes .label     { display: inline; color: inherit; }
+.album.right                     { float: #ENV{right}; }
+.album.left                      { float: #ENV{left}; }
+.album.center                    { margin-left: auto; margin-right: auto; }
+#wysiwyg .album.vignettes .label { display: inline; color: inherit; }
