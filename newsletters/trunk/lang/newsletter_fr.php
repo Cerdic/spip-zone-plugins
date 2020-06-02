@@ -41,8 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_test_sujet' => 'TEST',
 
 	// L
-	'label_a_lire_sur' => 'A lire sur @site@',
-	'label_baked_1' => 'Edition avancée de l’infolettre',
+	'label_a_lire_sur' => 'À lire sur @site@',
+	'label_baked_1' => 'Édition avancée de l’infolettre',
 	'label_chapo' => 'Chapeau',
 	'label_date_redac' => 'Date de rédaction',
 	'label_html_email' => 'Version HTML',
@@ -51,9 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_masquer_fond' => 'Masquer les modèles d’infolettre :',
 	'label_patron' => 'Modèle',
 	'label_publie' => 'Publié le :',
-	'label_selection_articles' => 'Selection d’articles',
-	'label_selection_edito' => 'Selection éditoriale (articles&rubriques)',
-	'label_selection_rubriques' => 'Selection de rubriques',
+	'label_selection_articles' => 'Sélection d’articles',
+	'label_selection_edito' => 'Sélection éditoriale (articles&rubriques)',
+	'label_selection_rubriques' => 'Sélection de rubriques',
 	'label_texte' => 'Texte',
 	'label_texte_email' => 'Version Texte',
 	'label_titre' => 'Titre',
