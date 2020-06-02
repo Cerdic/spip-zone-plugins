@@ -24,7 +24,7 @@
 		<traducteur nom="Ixab" lien="https://trad.spip.net/auteur/ixab" />
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/newsletter-newsletters?lang_cible=fr" total="55" traduits="55" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/newsletter-newsletters?lang_cible=fr_tu" total="55" traduits="50" relire="0" modifs="5" nouveaux="0" pourcent="90.91">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/newsletter-newsletters?lang_cible=fr_tu" total="55" traduits="55" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
