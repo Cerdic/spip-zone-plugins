@@ -86,7 +86,8 @@
 	extension,#ENV{sens,1},
 	num titre,#ENV{sens,1},
 	id_document,#ENV{sens,1},
-	points,#ENV{sens,1}
+	points,#ENV{sens,1},
+	rang_lien,#ENV{sens,1},
 }})][
 
 
@@ -95,7 +96,7 @@
 
 ][
 (#REM) «id_album»
-]<BOUCLE_album(ALBUMS){id_album}><BOUCLE_docs(DOCUMENTS){id_album}{tri #ENV{par,media}, #GET{defaut_tri}}{par titre}{tout}{media?}{si #GET{source_docs}|=={album}}
+]<BOUCLE_album(ALBUMS){id_album}><BOUCLE_docs(DOCUMENTS){id_album}{tri #ENV{par,rang_lien}, #GET{defaut_tri}}{par sinum titre}{tout}{media?}{si #GET{source_docs}|=={album}}
 >#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_docs></BOUCLE_album>[
 (#REM) sinon «id_article»
 ]<BOUCLE_article(DOCUMENTS){id_article}{tri #ENV{par,media}, #GET{defaut_tri}}{par titre}{tout}{media?}{si #GET{source_docs}|=={article}}
