@@ -45,11 +45,31 @@ $(document).ready(function(){
 		}
 	}
 	
+	
 	// surcharge des events play/pause/finish : https://stackoverflow.com/questions/10127009/soundmanager2-onplay-event-configuration-does-not-work
 	var onplay360 = threeSixtyPlayer.events.play;
+
 	var myOnplay = function(){
-		//console.log("play");
+		
+		// décaler de départ du son qui joue si on a un timecode &f=30s&t=40s.
+		// console.log(Object.values(soundManager.sounds)) ;
+		// forcer les properties to et from ne semble pas marcher, on se limite à changer from avec setPosition.
+		
+		var son = Object.values(soundManager.sounds)[0] ;
+		var from = (window.location.href).match(/f=(\d+)/);
+		if(typeof from !== "undefined" && from){
+			son.from = parseInt(from[1]) ;
+			// la valeur de from ci dessus n'est pas prise en compte, alors in décale le son
+			son.setPosition(from[1]);
+		}
+		// la valeur de to ci dessous n'est pas pris en compte
+		var to = (window.location.href).match(/t=(\d+)/);
+		if(typeof to !== "undefined" && to){
+			son.to = parseInt(to[1]) ;
+		}
+		
 		maj_bouton_play_pause();
+		
 		onplay360.apply(this); // forces the scope to 'this' = the sound object
 	};
 	threeSixtyPlayer.events.play = myOnplay;
@@ -78,6 +98,7 @@ $(document).ready(function(){
 	};
 	threeSixtyPlayer.events.finish = myOnfinish;
 
+/*
 	// y'a t'il un son ?
 	if($(".ui360").size() > 0){
 		$("button.play_pause").click(function(){
@@ -89,5 +110,6 @@ $(document).ready(function(){
 			}
 		});
 	}
+*/
 
 });
