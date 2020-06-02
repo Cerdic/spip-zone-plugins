@@ -10,7 +10,7 @@
 		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-trad_rub?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/paquet-trad_rub?lang_cible=fr_tu" total="3" traduits="2" relire="0" modifs="1" nouveaux="0" pourcent="66.67">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/paquet-trad_rub?lang_cible=fr_tu" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
