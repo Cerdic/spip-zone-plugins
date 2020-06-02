@@ -1,0 +1,38 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+#CACHE{0}
+[(#REM)
+
+	Noisette fournissant une liste d'objets au format JSON,
+	utilisable comme source dans un script Jquery UI Autocomplete.
+	La liste retournée est de la forme : {"id":x, "value":titre de l'objet},{...}
+	On cherche des objets en fonction d'un terme de recherche (donné automatiquement par jQuery UI), 
+	et en fonction de liaisons avec un autre type d'objet.
+
+	Exemples de paramètres :
+	- Chercher des albums :
+	  objet=album
+	- Chercher des mot clés liés aux albums :
+	  objet=mot, objet_lie=album
+	- Chercher des auteurs liés aux albums en fonction de leur email
+	  objet=auteur, objet_lie=album, champ=email
+	- Chercher des articles ayant des albums liés : 
+	  objet=article, objet_lie=album, pivot_lie=true
+
+][(#REM)
+
+	Utilisé par :
+		prive/squelettes/navigation/inc-albums_filtres_xxx.html
+
+][(#REM)
+
+	paramètres (*obligatoire) :
+		term         Terme de la recherche (donné automatiquement par Jquery UI).
+		*objet       Type d'objet recherché : album, auteur, mot, article...
+		objet_lie    Type d'objet lié si on veut restreindre la sélection en fonction des liaisons.
+		pivot_lie    'oui' Pour choisir comme pivot la table de liens de $objet_lie,
+		             au lieu de celle de $objet par défaut.
+		champ        champ spécial à utiliser pour la recherche.
+		             Par défaut, on cherche dans la clé primaire et dans le champ servant de titre.
+		nb           Nombre maximal de résultats (défaut 20)
+
+]<B_objets>[<BOUCLE_objets(DATA){source table, #ENV{objet}|albums_autocomplete{#ENV{objet_lie},#ENV{pivot_lie},#ENV{term},#ENV{champ},#ENV{nb}}}{","}>{"id":[(#VALEUR{id})],"value":[(#VAL{info_numero_abbreviation}|_T|concat{#VALEUR{id},' - ',#VALEUR{titre}}|json_encode)]}</BOUCLE_objets>]</B_objets>

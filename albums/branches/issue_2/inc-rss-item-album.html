@@ -1,0 +1,49 @@
+<BOUCLE_un_album(ALBUM){id_album}>
+	<item[ xml:lang="(#LANG)"]>
+		<title>[(#TITRE|supprimer_tags|texte_backend)]</title>
+		<link>[(#URL_ALBUM|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_ALBUM|url_absolue)</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
+
+[(#REM)
+	Le bloc qui suit diffuse les mots-cles a la mode RSS
+
+]<BOUCLE_mots_rss(MOTS){id_album}>
+		[<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
+
+		<description>[(#DESCRIPTIF|couper{300}|texte_backend)]
+
+[(#REM)
+	Le bloc qui suit diffuse la rubrique et les mots-cles
+	sous forme de "microformats"
+
+]<BOUCLE_mots_mf(MOTS){id_album}{", "}>
+[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|texte_backend)&lt;/a&gt;]</BOUCLE_mots_mf>
+
+		</description>
+
+[(#REM)
+	Le bloc qui suit diffuse aussi le texte integral de l'album,
+	ce qui permet une syndication plus riche (mais plus "lourde").
+	Fonction desactivable depuis les reglages du site.
+][
+(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_ALBUM{right}|image_reduire{150,150}|texte_backend)
+		][&lt;div class='rss_descriptif'&gt;(#DESCRIPTIF|texte_backend)&lt;/div&gt;
+		][&lt;hr /&gt;
+		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;
+		]
+		</content:encoded>
+]
+
+[(#REM)
+	Le bloc qui suit diffuse l'adresse des documents associes aux albums ;
+	ajouter par ex. {extension=mp3} pour limiter a un certain type de document.
+]		<BOUCLE_documents(DOCUMENTS){id_album}{doublons}>[
+		<enclosure url="(#URL_DOCUMENT|url_absolue|unique{#ID_ALBUM})"[ length="(#TAILLE)"][ type="(#MIME_TYPE)"] />]
+		</BOUCLE_documents>
+
+	</item>
+</BOUCLE_un_album>
