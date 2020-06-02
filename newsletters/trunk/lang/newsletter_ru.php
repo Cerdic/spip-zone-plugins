@@ -38,16 +38,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_test_sujet' => 'ТЕСТ',
 
 	// L
-	'label_baked_1' => 'Доп. настройки для рассылки',
+	'label_baked_1' => 'Доп. настройки для рассылки', # MODIF
 	'label_chapo' => 'Вступление',
 	'label_date_redac' => 'Опубликовано',
 	'label_html_email' => 'HTML версия',
 	'label_html_page' => 'HTML версия в браузере',
 	'label_masquer_fond' => 'Спрятать шаблоны рассылки :',
 	'label_patron' => 'Шаблон',
-	'label_selection_articles' => 'Выбрать статью',
-	'label_selection_edito' => 'Выбрать статью или раздел',
-	'label_selection_rubriques' => 'Выбрать раздел',
+	'label_selection_articles' => 'Выбрать статью', # MODIF
+	'label_selection_edito' => 'Выбрать статью или раздел', # MODIF
+	'label_selection_rubriques' => 'Выбрать раздел', # MODIF
 	'label_texte' => 'Текст',
 	'label_texte_email' => 'Текстовая версия',
 	'lien_lire_en_ligne' => 'Предпросмотр',

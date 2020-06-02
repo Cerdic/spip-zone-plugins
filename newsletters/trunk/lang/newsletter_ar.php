@@ -43,8 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_test_sujet' => 'تجربة', # RELIRE
 
 	// L
-	'label_a_lire_sur' => 'إقرأوا في @site@', # RELIRE
-	'label_baked_1' => 'تحرير متطور للنشرة', # RELIRE
+	'label_a_lire_sur' => 'إقرأوا في @site@', # MODIF
+	'label_baked_1' => 'تحرير متطور للنشرة', # MODIF
 	'label_chapo' => 'المقدمة', # RELIRE
 	'label_date_redac' => 'تاريخ التحرير', # RELIRE
 	'label_html_email' => 'نسخة HTML', # RELIRE
@@ -53,9 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_masquer_fond' => 'حجب نماذج النشرات:', # RELIRE
 	'label_patron' => 'النموذج', # RELIRE
 	'label_publie' => 'نُشر في:', # RELIRE
-	'label_selection_articles' => 'اختيار المقالات', # RELIRE
-	'label_selection_edito' => 'اختيار المواد التحريرية (مقالات وأقسام)', # RELIRE
-	'label_selection_rubriques' => 'اختيار الأقسام', # RELIRE
+	'label_selection_articles' => 'اختيار المقالات', # MODIF
+	'label_selection_edito' => 'اختيار المواد التحريرية (مقالات وأقسام)', # MODIF
+	'label_selection_rubriques' => 'اختيار الأقسام', # MODIF
 	'label_texte' => 'النص',
 	'label_texte_email' => 'نسخة نصية', # RELIRE
 	'label_titre' => 'Titre', # RELIRE

@@ -39,8 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_test_sujet' => 'PROBA',
 
 	// L
-	'label_a_lire_sur' => '@site@ webgunean irakurri',
-	'label_baked_1' => 'Berripaperaren edizio aurreratua',
+	'label_a_lire_sur' => '@site@ webgunean irakurri', # MODIF
+	'label_baked_1' => 'Berripaperaren edizio aurreratua', # MODIF
 	'label_date_redac' => 'Argitalpen data',
 	'label_html_email' => 'HTML bertsioa',
 	'label_html_page' => 'Nabigatzailean agertzen den HTML bertsioa',
@@ -48,9 +48,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_masquer_fond' => 'Berripaper modeloak ezkutatu:',
 	'label_patron' => 'Modeloa',
 	'label_publie' => 'Argitaratze data:',
-	'label_selection_articles' => 'Hautatutako artikuluak',
-	'label_selection_edito' => 'Argitalpenen hautaketa (artikulu & atal)',
-	'label_selection_rubriques' => 'Atalen hautaketa',
+	'label_selection_articles' => 'Hautatutako artikuluak', # MODIF
+	'label_selection_edito' => 'Argitalpenen hautaketa (artikulu & atal)', # MODIF
+	'label_selection_rubriques' => 'Atalen hautaketa', # MODIF
 	'label_texte_email' => 'Testu bertsioa',
 	'lien_lire_en_ligne' => 'Sarean irakurri',
 

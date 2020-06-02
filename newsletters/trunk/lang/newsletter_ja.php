@@ -43,8 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_test_sujet' => '試し',
 
 	// L
-	'label_a_lire_sur' => '@site@に移って読む',
-	'label_baked_1' => 'ニュースレターの高度な編集',
+	'label_a_lire_sur' => '@site@に移って読む', # MODIF
+	'label_baked_1' => 'ニュースレターの高度な編集', # MODIF
 	'label_chapo' => '飾り',
 	'label_date_redac' => '公開日',
 	'label_html_email' => 'HTML 版',
@@ -53,9 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_masquer_fond' => 'ニュースレターテンプレートを非表示：',
 	'label_patron' => 'テンプレート',
 	'label_publie' => '公開日：',
-	'label_selection_articles' => '記事の選抜',
-	'label_selection_edito' => 'エディトリアル選抜（記事・セクション）',
-	'label_selection_rubriques' => 'セクションの選抜',
+	'label_selection_articles' => '記事の選抜', # MODIF
+	'label_selection_edito' => 'エディトリアル選抜（記事・セクション）', # MODIF
+	'label_selection_rubriques' => 'セクションの選抜', # MODIF
 	'label_texte' => 'テキスト',
 	'label_texte_email' => 'テキスト版',
 	'legend_configuration_adresse_envoi' => 'このニュースレターの宛先Ｅメールアドレス',

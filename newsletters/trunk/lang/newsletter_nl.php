@@ -43,8 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_test_sujet' => 'TEST',
 
 	// L
-	'label_a_lire_sur' => 'Nieuwsbrief @site@',
-	'label_baked_1' => 'Geavanceerde editie van de nieuwsbrief',
+	'label_a_lire_sur' => 'Nieuwsbrief @site@', # MODIF
+	'label_baked_1' => 'Geavanceerde editie van de nieuwsbrief', # MODIF
 	'label_chapo' => 'Introductie',
 	'label_date_redac' => 'Uitgegeven op',
 	'label_html_email' => 'HTML-versie',
@@ -53,9 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_masquer_fond' => 'Verberg modellen van de nieuwsbrief:',
 	'label_patron' => 'Model',
 	'label_publie' => 'Gepubliceerd op:',
-	'label_selection_articles' => 'Selectie van artikelen',
-	'label_selection_edito' => 'Redactionele selectie (artikelen & rubrieken)',
-	'label_selection_rubriques' => 'Selectie van rubrieken',
+	'label_selection_articles' => 'Selectie van artikelen', # MODIF
+	'label_selection_edito' => 'Redactionele selectie (artikelen & rubrieken)', # MODIF
+	'label_selection_rubriques' => 'Selectie van rubrieken', # MODIF
 	'label_texte' => 'Tekst',
 	'label_texte_email' => 'Tekst versie',
 	'label_titre' => 'Titel',

@@ -43,8 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_test_sujet' => 'TEST',
 
 	// L
-	'label_a_lire_sur' => 'Hier zu lesen: @site@',
-	'label_baked_1' => 'Erweiterte Bearbeitung des Newsletters',
+	'label_a_lire_sur' => 'Hier zu lesen: @site@', # MODIF
+	'label_baked_1' => 'Erweiterte Bearbeitung des Newsletters', # MODIF
 	'label_chapo' => 'Kopf',
 	'label_date_redac' => 'Bearbeitungsdatum',
 	'label_html_email' => 'HTML-Version',
@@ -53,9 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_masquer_fond' => 'Newsletter-Vorlagen verbergen:',
 	'label_patron' => 'Vorlage',
 	'label_publie' => 'Veröffentlicht am:',
-	'label_selection_articles' => 'Artikel-Auswahl',
-	'label_selection_edito' => 'Redaktionelle Bearbeitung (Artikel & Rubriken)',
-	'label_selection_rubriques' => 'Rubrik-Auswahl',
+	'label_selection_articles' => 'Artikel-Auswahl', # MODIF
+	'label_selection_edito' => 'Redaktionelle Bearbeitung (Artikel & Rubriken)', # MODIF
+	'label_selection_rubriques' => 'Rubrik-Auswahl', # MODIF
 	'label_texte' => 'Text',
 	'label_texte_email' => 'Textversion',
 	'label_titre' => 'Titel',

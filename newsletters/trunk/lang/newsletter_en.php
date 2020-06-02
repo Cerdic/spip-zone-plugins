@@ -43,8 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_test_sujet' => 'TEST',
 
 	// L
-	'label_a_lire_sur' => 'To read on @site@',
-	'label_baked_1' => 'Advanced Edition of the newsletter',
+	'label_a_lire_sur' => 'To read on @site@', # MODIF
+	'label_baked_1' => 'Advanced Edition of the newsletter', # MODIF
 	'label_chapo' => 'Introduction',
 	'label_date_redac' => 'Published on',
 	'label_html_email' => 'HTML Version',
@@ -53,9 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_masquer_fond' => 'Hide newsletter templates :',
 	'label_patron' => 'Template',
 	'label_publie' => 'Published on:',
-	'label_selection_articles' => 'Selection of articles',
-	'label_selection_edito' => 'Editorial selection (articles & sections)',
-	'label_selection_rubriques' => 'Selection of sections',
+	'label_selection_articles' => 'Selection of articles', # MODIF
+	'label_selection_edito' => 'Editorial selection (articles & sections)', # MODIF
+	'label_selection_rubriques' => 'Selection of sections', # MODIF
 	'label_texte' => 'Text',
 	'label_texte_email' => 'Text Version',
 	'label_titre' => 'Title',
