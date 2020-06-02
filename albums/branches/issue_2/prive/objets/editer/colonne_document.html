@@ -70,11 +70,5 @@
 		#FORMULAIRE_AJOUTER_ALBUM{#ENV{objet},#ENV{id_objet},'',#ENV{lier_trad}}
 	</div>
 	<INCLURE{fond=prive/squelettes/inclure/portfolio_albums_colonne, objet, id_objet, ajax=liste_albums}>
-	[(#REM) formulaire pour déplacer les documents par glisser-déposer ]
-	[(#AUTORISER{deplacerdocumentsalbums,#ENV{objet},#ENV{objet}}|oui)
-	<div class='ajax'>
-		#FORMULAIRE_ALBUMS_DEPLACER_DOCUMENTS
-	</div>
-	]
 </div><!-- #albums -->
 ]

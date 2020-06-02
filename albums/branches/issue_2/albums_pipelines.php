@@ -286,9 +286,6 @@ function albums_jqueryui_plugins($plugins) {
 	if (test_espace_prive()) {
 		include_spip('inc/config');
 		$plugins[] = 'jquery.ui.autocomplete';
-		if (lire_config('albums/deplacer_documents')) {
-			$plugins[] = 'jquery.ui.sortable';
-		}
 	}
 	return $plugins;
 }

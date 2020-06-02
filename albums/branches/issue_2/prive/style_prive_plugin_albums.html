@@ -134,40 +134,6 @@
 
 
 /*
-    GLISSER-DEPOSER
-    ===============
-*/
-#portfolios.cible-album,
-.boite-album.cible-album ,               { position: relative; } /* pour .cible-album */
-.cible-album:after                       {
-                                         position: absolute; top: 1px; right: 1px; bottom: 1px; left: 1px; content: " ";
-                                         outline: 2px dashed #GET{foncee};
-                                         }
-.placeholder-album                       { height: 1em; background-color:#GET{claire}; }
-#portfolios .liste_items.temp            { border: 0 none; }
-.cible-album .liste_items.temp           { height: 1.5em; }
-#albums .item.drag,
-#portfolios .item.drag                   { opacity: .66; }
-#albums .ui-sortable .item:hover,
-#portfolios .ui-sortable .item:hover     { cursor: move; /*grab*/ }
-#albums .ui-sortable .item:active,
-#portfolios .ui-sortable .item:active    { cursor: move; }
-/* documents déplacés */
-#albums .item.deplace .mode,
-#albums .item.deplace .actions,
-#albums .item.deplace .tourner,
-#albums .item.deplace .sanstitre,
-#portfolios .item.deplace .mode,
-#portfolios .item.deplace .actions,
-#portfolios .item.deplace .tourner       { display: none; }
-.formulaire_albums_deplacer_documents .fermer { float: #ENV{right}; }
-.formulaire_albums_deplacer_documents .fermer:hover { cursor: pointer; }
-.formulaire_albums_deplacer_documents .titrounet,
-.formulaire_albums_deplacer_documents .titrounet img { float: #ENV{left}; }
-.formulaire_albums_deplacer_documents .titrounet img { margin-#ENV{right}: 5px; }
-
-
-/*
     FICHE D'UN ALBUM
     ================
 */
