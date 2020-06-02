@@ -110,3 +110,10 @@ Valeurs par defaut :
 	margin-left: auto;
 	margin-right: auto;
 }
+
+[(#REM) Si activé sur les infolettres, masquer le truc propre qui fait que article ]
+[(#VAL{spip_newsletters}|in_array{#CONFIG{selections_editoriales/objets,#ARRAY}}|oui)
+.formulaire_editer_newsletter .editer_selection_edito {
+	display: none;
+}
+]
