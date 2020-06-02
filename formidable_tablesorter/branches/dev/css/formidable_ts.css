@@ -7,6 +7,9 @@
 	width:100%;
 	overflow-x:scroll;
 }
+.formidable_ts-wrapper.puce_statut {
+	overflow-x:visible;
+}
 .formidable_ts-wrapper table {
   width: auto;
 }
@@ -14,6 +17,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 10px;
+}
+.formidable_ts-wrapper td.puce_statut {
+	overflow:visible;
 }
 .formidable_ts-wrapper  .tablesorter th {
   overflow: hidden;

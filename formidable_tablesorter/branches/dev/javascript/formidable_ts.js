@@ -79,10 +79,9 @@ $(function() {
 	formidable_ts_init_reorder();
 	formidable_ts_add_check_all_button();
 	$('.puce_objet', formidable_ts).hover(function() {
-		$('.formidable_ts-wrapper, td').css('overflow-x','visible');
+		$('.formidable_ts-wrapper, .formidable_ts-wrapper td').addClass('puce_statut');
 	},function() {
-		$('td').css('overflow-x','hidden');
-		$('.formidable_ts-wrapper').css('overflow-x','scroll');
+		$('.formidable_ts-wrapper, .formidable_ts-wrapper td').removeClass('puce_statut');
 	});
 });
 
