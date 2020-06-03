@@ -203,7 +203,9 @@ function ckeditor_insert_head($flux) {
 		} else // on essaie quand même de déterminer le contexte d'édition :
 		if (!empty($GLOBALS['page']) && is_array($GLOBALS['page']) && is_array($GLOBALS['page']['contexte']) && isset($GLOBALS['page']['contexte']['type']))  {
 			$type=$GLOBALS['page']['contexte']['type'] ;
-			$id=$GLOBALS['page']['contexte']['id_'.$type];
+			include_spip('base/objets');
+			$cle_objet = id_table_objet($type);
+			$id=$GLOBALS['page']['contexte'][$cle_objet];
 			if ($id) {
 				$config['type']=$type;
 				$config['id']=$id;
