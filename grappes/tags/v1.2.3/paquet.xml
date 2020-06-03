@@ -1,0 +1,33 @@
+<paquet
+	prefix="grappes"
+	categorie="divers"
+	version="1.2.3"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/grappe-32.png"
+	schema="0.2.5"
+	documentation="https://contrib.spip.net/4282"
+>
+
+	<nom>Grappes</nom>
+	<!-- Regrouper des objets Spip dans un même univers -->
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>b_b</auteur>
+	<auteur>Arnaud B. (Mist. GraphX)</auteur>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/grappes.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/grappes.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/grappes.php" />
+	<pipeline nom="autoriser" inclure="grappes_autoriser.php" />
+	<pipeline nom="insert_head" action="inserer_javascript" inclure="grappes_pipelines.php" />
+	<pipeline nom="header_prive" action="inserer_javascript" inclure="grappes_pipelines.php" />
+	<pipeline nom="afficher_contenu_objet" inclure="grappes_pipelines.php" />
+	<pipeline nom="grappes_objets_lies" inclure="grappes_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="grappes_pipelines.php" action="jqueryui_forcer" />
+	<pipeline nom="ieconfig" inclure="grappes_ieconfig.php" />
+
+	<necessite nom="SelecteurGenerique" compatibilite="[0.8.3;[" />
+
+	<menu nom="grappes" titre="grappes:titre_page_grappes" parent="menu_edition" icone="images/grappe-16.png" />
+</paquet>

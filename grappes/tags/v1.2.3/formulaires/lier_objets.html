@@ -1,0 +1,47 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_liens formulaire_lier_objets ajax" id="#ENV{identifiant}">
+	[(#REM) Les liens actifs ]
+	[(#INCLURE{fond=prive/objets/liste/grappes-[(#OBJET)]_lies,env,ajax,editable})]
+
+	[(#REM) Recherche pour ajouter de nouvelles liaisons ]
+	[(#ENV{editable})
+	<div class="formulaire_ajouter_objet">
+	<form action="#SELF" method="post" id='selecteur_#ENV{identifiant}'>
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#SELF}
+		<ul>
+			<li class="nom_objet [ (#ENV**{erreurs}|table_valeur{nom_objet}|oui)erreur]">
+				<label for="nom_objet"><:grappes:bouton_chercher:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_objet})</span>]
+				<input type='text' class='text' name='nom_objet' value="#ENV{nom_objet}" data-selecteur="[(#VAL{grappes_#OBJET}|parametre_url{#SOURCE,#ID_SOURCE,&})]" data-select-callback="lier_objets_#ENV{identifiant}" />
+				<input type="hidden" class="pid_objet" name="pid_objet" value="" />
+				<input type='submit' class='submit' value='<:grappes:bouton_ajouter:>' />
+			</li>
+		</ul>
+	</form>
+	</div>]
+	<script type="text/javascript">
+		var lier_objets_#ENV{identifiant} = function(event,ui){
+			if (typeof(ui) != 'undefined' && (typeof(ui.item.value) == 'string')) {
+				$('[#(#ENV{identifiant}) ].pid_objet').val(ui.item.id);
+				this.value = ui.item.value;
+				$('[#(#ENV{identifiant}) ]input[type="submit"]').focus();
+				event.preventDefault();
+			}
+			else if (typeof(ui) != 'undefined'){
+				$('[#(#ENV{identifiant}) ].pid_objet').val('');
+				this.value = ui.item.value;
+			}
+			return false;
+		}
+		
+		$("#selecteur_#ENV{identifiant}").on("submit", function(){
+			$('.formulaire_lier_objets').ajaxReload({
+				args:{},
+				history:false
+			});
+		});
+	</script>
+</div>
