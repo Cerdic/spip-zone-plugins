@@ -1,11 +1,11 @@
 <paquet
 	prefix="grappes"
 	categorie="divers"
-	version="1.2.3"
+	version="2.0.0"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/grappe-32.png"
-	schema="0.2.5"
+	schema="0.2.6"
 	documentation="https://contrib.spip.net/4282"
 >
 
@@ -15,6 +15,7 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<auteur>b_b</auteur>
 	<auteur>Arnaud B. (Mist. GraphX)</auteur>
+	<auteur>RealET</auteur>
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/grappes.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/grappes.php" />

@@ -5,11 +5,11 @@
 	<table class="spip liste" id="sort-breves">
 		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{breves:info_1_breve,breves:info_nb_breves}})</strong></caption>]
 		<tbody>
-		<BOUCLE_liste(BREVES spip_grappes_liens){par spip_grappes_liens.rang}{id_breve IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
+		<BOUCLE_liste(BREVES spip_grappes_liens){par spip_grappes_liens.rang_lien}{id_breve IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
 			<tr id="#ID_BREVE" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td class="statut">[(#STATUT|puce_statut{breve,#ID_BREVE,#ID_RUBRIQUE})]</td>
 				<td class="titre principale"><a href="[(#ID_BREVE|generer_url_entite{breve})]">
-					<BOUCLE_affRang(spip_grappes_liens){objet=breve}{id_objet=#ID_BREVE}{id_grappe}>#RANG. </BOUCLE_affRang><strong>#TITRE</strong></a></td>
+					<BOUCLE_affRang(spip_grappes_liens){objet=breve}{id_objet=#ID_BREVE}{id_grappe}>#RANG_LIEN. </BOUCLE_affRang><strong>#TITRE</strong></a></td>
 				<td class="logo">[(#LOGO_BREVE|image_reduire{70,*})]</td>
 				<td class='date secondaire'>[<span title="[(#DATE|heures_minutes)]">(#DATE|affdate_jourcourt)</span>]</td>
 				[(#ENV{editable})

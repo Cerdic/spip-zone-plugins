@@ -55,13 +55,15 @@ function grappe_inserer($id_parent = null, $champs = array()) {
 		)
 	);
 
-	if (is_array($champs['liaisons'])) {
+	if (!empty($champs['liaisons']) && is_array($champs['liaisons'])) {
 		$champs['liaisons'] = implode(',', $champs['liaisons']);
 	}
 
 	if (isset($champs['acces'])) {
 		$opt['acces'] = $champs['acces'];
 		unset($champs['acces']);
+	} else {
+		$opt = '';
 	}
 
 	$champs['options'] = serialize($opt);

@@ -5,10 +5,10 @@
 	<table class="spip liste" id="sort-documents">
 		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{medias:un_document,medias:des_documents}})</strong></caption>]
 		<tbody>
-		<BOUCLE_liste(DOCUMENTS spip_grappes_liens){par spip_grappes_liens.rang}{id_document IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
+		<BOUCLE_liste(DOCUMENTS spip_grappes_liens){par spip_grappes_liens.rang_lien}{id_document IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
 			<tr id="#ID_DOCUMENT" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td class="statut">[(#CHEMIN_IMAGE{document-16.png}|balise_img)]</td>
-				<BOUCLE_affRang(spip_grappes_liens){objet=document}{id_objet=#ID_DOCUMENT}{id_grappe}>#SET{valRang,#RANG. }</BOUCLE_affRang>
+				<BOUCLE_affRang(spip_grappes_liens){objet=document}{id_objet=#ID_DOCUMENT}{id_grappe}>#SET{valRang,#RANG_LIEN. }</BOUCLE_affRang>
 				<td class="titre principale"><a href="[(#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT})]">#GET{valRang}<strong>[(#TITRE|sinon{[(#FICHIER|basename)]})]</strong></a></td>
 				<td class="logo">[(#LOGO_DOCUMENT|image_reduire{70,*})]</td>
 				<td class="extenSion">#EXTENSION</td>

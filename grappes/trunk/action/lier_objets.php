@@ -47,10 +47,10 @@ function lier_objets($source, $id_source, $cible, $id_cible) {
 	// si la source n'est pas une grappe on inverse le sens de la liaison pour matcher l'autorisation grappe_associer
 	if ($source != 'grappe') {
 		$rang = definir_rang($id_cible, $source);
-		objet_associer(array($cible => $id_cible), array($source => $id_source), array('rang' => $rang));
+		objet_associer(array($cible => $id_cible), array($source => $id_source), array('rang_lien' => $rang));
 	} else {
 		$rang = definir_rang($id_source, $cible);
-		objet_associer(array($source => $id_source), array($cible => $id_cible), array('rang' => $rang));
+		objet_associer(array($source => $id_source), array($cible => $id_cible), array('rang_lien' => $rang));
 	}
 }
 

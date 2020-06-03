@@ -5,13 +5,13 @@
 	<table class="spip liste" id="sort-articles">
 		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_article,info_nb_articles}})</strong></caption>]
 		<tbody>
-		<BOUCLE_liste(ARTICLES spip_grappes_liens){par spip_grappes_liens.rang}{id_article IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
+		<BOUCLE_liste(ARTICLES spip_grappes_liens){par spip_grappes_liens.rang_lien}{id_article IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
 			<tr id="#ID_ARTICLE" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td class="statut">[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
 				<td class="titre principale"[ (#LOGO_ARTICLE_NORMAL|non)colspan="2"]><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
 					[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 					title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">
-					<BOUCLE_affRang(spip_grappes_liens){objet=article}{id_objet=#ID_ARTICLE}{id_grappe}>#RANG. </BOUCLE_affRang><strong>#TITRE</strong>
+					<BOUCLE_affRang(spip_grappes_liens){objet=article}{id_objet=#ID_ARTICLE}{id_grappe}>#RANG_LIEN. </BOUCLE_affRang><strong>#TITRE</strong>
 					[<span class="soustitre">(#SOUSTITRE)</span>]</a></td>
 				[<td class="logo">(#LOGO_ARTICLE|image_reduire{70,*})</td>]
 				<td class='auteur'><div class="inner"><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></div></td>

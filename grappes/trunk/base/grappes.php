@@ -104,7 +104,7 @@ function grappes_declarer_tables_auxiliaires($tables_auxiliaires){
 		"id_grappe" 	=> "bigint(21) NOT NULL",
 		"objet" 	=> "VARCHAR (25) DEFAULT '' NOT NULL",
 		"id_objet" 	=> "bigint(21) NOT NULL",
-		"rang" => "bigint(21) NOT NULL"
+		"rang_lien" => "bigint(21) NOT NULL"
 	);
 
 	$spip_grappes_liens_key = array(

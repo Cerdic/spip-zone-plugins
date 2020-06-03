@@ -5,11 +5,11 @@
 	<table class="spip liste" id="sort-auteurs">
 		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}})</strong></caption>]
 		<tbody>
-		<BOUCLE_liste(AUTEURS spip_grappes_liens){par spip_grappes_liens.rang}{id_auteur IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
+		<BOUCLE_liste(AUTEURS spip_grappes_liens){par spip_grappes_liens.rang_lien}{id_auteur IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
 			<tr id="#ID_AUTEUR" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td class="statut">[(#STATUT|puce_statut{auteur})]</td>
 				<td class="titre principale"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">
-					<BOUCLE_affRang(spip_grappes_liens){objet=auteur}{id_objet=#ID_AUTEUR}{id_grappe}>#RANG. </BOUCLE_affRang><strong>#NOM[ <small>((#LOGIN))</small>]</strong></a></td>
+					<BOUCLE_affRang(spip_grappes_liens){objet=auteur}{id_objet=#ID_AUTEUR}{id_grappe}>#RANG_LIEN. </BOUCLE_affRang><strong>#NOM[ <small>((#LOGIN))</small>]</strong></a></td>
 				<td class="logo">[(#LOGO_AUTEUR|image_reduire{70,*})]</td>
 				[(#ENV{editable})
 				<td class="action">[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/auteur/#ID_AUTEUR,#SELF},ajax})]</td>

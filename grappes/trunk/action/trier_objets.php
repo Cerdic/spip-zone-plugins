@@ -14,9 +14,9 @@ function action_trier_objets_dist() {
 	$objet = _request('objet');
 	$sort = explode(',', _request('sort'));
 
-	//$classement = sql_allfetsel('*', 'spip_grappes_liens', 'id_grappe=' . intval($id_grappe),'','rang');
+	//$classement = sql_allfetsel('*', 'spip_grappes_liens', 'id_grappe=' . intval($id_grappe),'','rang_lien');
 	foreach ($sort as $cle => $valeur) {
-		sql_updateq('spip_grappes_liens', array('rang' => $cle+1 ), 'id_grappe = ' . intval($id_grappe) . ' AND objet = ' . sql_quote($objet) . ' AND id_objet='.intval($valeur));
+		sql_updateq('spip_grappes_liens', array('rang_lien' => $cle+1 ), 'id_grappe = ' . intval($id_grappe) . ' AND objet = ' . sql_quote($objet) . ' AND id_objet='.intval($valeur));
 	}
 
 	if ($redirect = _request('redirect')) {
