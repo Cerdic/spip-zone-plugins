@@ -1,0 +1,12 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+#CACHE{0}
+#SET{resultats, #LISTE}
+<BOUCLE_s(DOCUMENTS){tout}{titre LIKE (#ENV{q})%}{0,20}{par titre}>
+[(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#TITRE|textebrut) - ][(#FICHIER|basename|textebrut)],value,[(#TITRE|sinon{[(#FICHIER|basename)]}|textebrut)],id,#ID_DOCUMENT})]})]})]
+</BOUCLE_s>
+	<BOUCLE_s1(DOCUMENTS){tout}{fichier LIKE %(#ENV{q})%}{0,20}{par titre}>
+	[(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#TITRE|textebrut) - ][(#FICHIER|basename|textebrut)],value,[(#TITRE|sinon{[(#FICHIER|basename)]}|textebrut)],id,#ID_DOCUMENT})]})]})]
+	</BOUCLE_s1>
+<//B_s>
+[(#GET{resultats}|json_encode)]
+#FILTRE{trim}

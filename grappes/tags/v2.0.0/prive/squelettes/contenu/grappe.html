@@ -1,0 +1,88 @@
+<BOUCLE_grappe(GRAPPES){id_grappe}{si #ENV{exec}|=={grappe}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,grappe,#ID_GRAPPE})
+		[(#ID_GRAPPE|afficher_qui_edite{grappe}|non)
+			[(#URL_ECRIRE{grappe_edit,id_grappe=#ID_GRAPPE}|icone_verticale{<:grappes:icone_modifier_grappe:>,grappe,edit,right ajax preload})]
+		]
+		[(#ID_GRAPPE|afficher_qui_edite{grappe}|oui)
+			[(#URL_ECRIRE{grappe_edit,id_grappe=#ID_GRAPPE}|icone_verticale{#ID_GRAPPE|afficher_qui_edite{grappe},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{grappe-24.png}|balise_img{grappe,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{grappe,#ID_GRAPPE}
+</div>
+
+<B_liste_aut>
+<div class="liste-objets auteurs">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}}) #AIDER{artauteurs}</strong></caption>]
+	<tbody>
+	<BOUCLE_liste_aut(AUTEURS){tout}{id_auteur=#ID_ADMIN}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="statut">[(#STATUT|puce_statut{auteur})]</td>
+			<td class="nom[ (#NOM|non)vide]"[(#LOGO_AUTEUR|non)colspan="2"]><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
+			[<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]" style="background-image:url\((#LOGO_AUTEUR|image_passe_partout{40,40}|extraire_attribut{src}))"></a></td>]
+			<td class="email">[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
+			<td class="nombre">&nbsp;</td>
+			<td class="action">&nbsp;</td>
+		</tr>
+	</BOUCLE_liste_aut>
+	</tbody>
+</table>
+</div>
+</B_liste_aut>
+
+<!--affiche_milieu-->
+
+<div id="wys" class="liste">
+	<INCLURE{fond=prive/objets/contenu/grappe,
+		id=#ID_GRAPPE,
+		id_grappe=#ID_GRAPPE,
+		virtuel=oui,
+		ajax=wys,
+		wys=1} />
+</div>
+
+#SET{tables_liees,#LIAISONS|explode{','}|sinon{#ARRAY}|array_filter}
+#SET{tables_liees,#VAL{objet_type}|array_map{#GET{tables_liees}}}
+<BOUCLE_types(GRAPPES_LIENS){id_grappe}>
+[(#OBJET|objet_type|in_array{#GET{tables_liees}}|non)
+	[(#SET{tables_liees,#GET{tables_liees}|push{#OBJET|objet_type}})]
+]
+</BOUCLE_types>
+<BOUCLE_lies(DATA){source table, #GET{tables_liees}}>
+<div class="ajax">
+	#SET{objet,#VALEUR|table_objet}
+	<INCLURE{fond=prive/squelettes/inclure/grappes_lister_objets,
+		objet=#GET{objet},
+		source=grappe,
+		id_source=#ID_GRAPPE,
+		id_table_source=id_grappe} />
+</div>
+</BOUCLE_lies>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,grappe,#ID_GRAPPE})
+	[(#ID_GRAPPE|afficher_qui_edite{grappe}|non)
+		[(#URL_ECRIRE{grappe_edit,id_grappe=#ID_GRAPPE}|icone_verticale{<:grappes:icone_modifier_grappe:>,grappe,edit,right ajax preload})]
+	]
+	[(#ID_GRAPPE|afficher_qui_edite{grappe}|oui)
+		[(#URL_ECRIRE{grappe_edit,id_grappe=#ID_GRAPPE}|icone_verticale{#ID_GRAPPE|afficher_qui_edite{grappe},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,grappe,id,#ID_GRAPPE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_grappe>
+[(#ENV**{exec}|=={grappe_edit}|?{#INCLURE{fond=prive/squelettes/contenu/grappe_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_grappe>

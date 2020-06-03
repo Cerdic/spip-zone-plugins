@@ -1,0 +1,12 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+#CACHE{0}
+#SET{resultats, #LISTE}
+<BOUCLE_s(SYNDIC){statut==.}{nom_site LIKE %(#ENV{q})%}{0,20}{par multi nom_site}>
+[(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#NOM_SITE|textebrut)][ (#URL_SITE|couper{25,''}|textebrut)],value,[(#NOM_SITE|textebrut)],id,#ID_SYNDIC})]})]})]
+</BOUCLE_s>
+	<BOUCLE_s1(SYNDIC){statut==.}{url_site LIKE %(#ENV{q})%}{0,20}{par multi nom_site}>
+	[(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#NOM_SITE|textebrut)][ (#URL_SITE|couper{25,''}|textebrut)],value,[(#NOM_SITE|textebrut)],id,#ID_SYNDIC})]})]})]
+	</BOUCLE_s1>
+<//B_s>
+[(#GET{resultats}|json_encode)]
+#FILTRE{trim}

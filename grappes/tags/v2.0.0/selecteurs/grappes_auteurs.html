@@ -1,0 +1,12 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+#CACHE{0}
+#SET{resultats, #LISTE}
+<BOUCLE_s(AUTEURS){tout}{nom LIKE (#ENV{q})%}{0,20}{par nom}>
+[(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#NOM|textebrut)][ - (#LOGIN|textebrut)],value,[(#NOM|textebrut)],id,#ID_AUTEUR})]})]})]
+</BOUCLE_s>
+	<BOUCLE_s1(AUTEURS){tout}{login LIKE (#ENV{q})%}{0,20}{par nom}>
+	[(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#NOM|textebrut)][ - (#LOGIN|textebrut)],value,[(#NOM|textebrut)],id,#ID_AUTEUR})]})]})]
+	</BOUCLE_s1>
+<//B_s>
+[(#GET{resultats}|json_encode)]
+#FILTRE{trim}
