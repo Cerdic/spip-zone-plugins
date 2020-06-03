@@ -1,0 +1,17 @@
+body{background-color:#FFF;margin:0;padding:0;}
+h1{text-align:center;font-size:15px;height:22px;margin:0;padding:4px 0 0;}
+#fichiers{width:672px;height:430px;overflow:auto;background-color:#eee;margin:0;padding:5px;}
+.repertoire,.fichier{float:left;font-size:12px;width:100px;overflow:hidden;white-space:nowrap;margin:1px;padding:3px;}
+.fichier,.repertoire{border:2px solid #000;border-radius:10px;-moz-border-radius:10px;background-color:#ddd;height:68px;}
+.fichier-apercu,.rep-apercu{line-height:50px;height:50px;width:50px;text-align:center;margin:auto;}
+.fichier-nom,.rep-nom{text-align:center;width:100%;}
+.repertoire a,.fichier a{text-decoration:none;padding-top:3px;display:block;width:100%;height:100%;}
+.repertoire a img,.fichier a img{border:none;}
+.repertoire:hover,.fichier:hover{background-color:#dca;}
+.action{color:red;}
+.clear{clear:both;}
+.centre{margin-left:auto;margin-right:auto;width:450px;padding:5px;}
+#upload{position:fixed;display:table-cell;width:150px;height:16px;font-size:12px;top:2px;left:5px;text-align:left;}
+.ckbutton { margin: 2px 0 2px 0 ; border: 1px solid #888; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding: 0 5px 0 5px ; text-decoration: none ; background-color : #ddd; }
+.ckbutton:hover { border-color: black ; background-color: #eee; } 
+
