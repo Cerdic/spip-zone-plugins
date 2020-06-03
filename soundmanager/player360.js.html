@@ -33,10 +33,19 @@ if (threeSixtyPlayer.config.useWaveformData || threeSixtyPlayer.flash9Options.us
   soundManager.preferFlash = true;
 }
 
-
-
 $(document).ready(function(){
-
+	
+	// scroller vers le player si timecode dans l'url d'arrivée #t10000
+	var tc = window.location.hash.match(/^#t(\d+)$/);
+	if(typeof tc !== "undefined" && tc){
+		tc = parseInt(tc[1]);
+		var archives = 0 ;
+		var arch = $(".lesarchives").height();
+		if(arch > 0)
+			archives = arch + 150 ;
+		$('body, html').animate({scrollTop: $("#podcast_player").offset().top - 40 - archives }, 500);
+	}
+	
 	function maj_bouton_play_pause(){
 		if($("button.play_pause").text() === "pause"){
 			$("button.play_pause").removeClass("bouton_playing").html("play").attr("title", $("button.play_pause").attr("data-lecture"));
@@ -45,29 +54,77 @@ $(document).ready(function(){
 		}
 	}
 	
+	// sur quel son clique t'on ?
+	$(".ui360").on("click",function(){
+		$(this).addClass("playing");
+	});
+	
+	// classe audio sur les liens avec time code.
+	$("a").each(function(){
+		var timecode = $(this)[0].href.match(/t(\d+)/) ;
+		if(typeof timecode !== "undefined" && timecode){
+			$(this).addClass("audio");
+		}
+	});
+	// clic sur un lien avec timecode #t10000 ?
+	$("a").on("click",function(){
+		var timecode = $(this)[0].href.match(/t(\d+)/) ;
+		if(typeof timecode !== "undefined" && timecode){
+			timecode = timecode[1];
+		}
+		
+		// si pas de son ?
+		if(Object.values(soundManager.sounds).length == 0 && typeof timecode !== "undefined" && timecode){
+			var offset = $(this).offset().top ;
+			$(".sm2-360btn").eq(0).click();
+		}
+		// le dernier son ajouté par clic
+		var son = Object.values(soundManager.sounds)[Object.values(soundManager.sounds).length - 1] ;
+		if(typeof timecode !== "undefined" && timecode && Object.values(soundManager.sounds).length > 0){
+			son.from = timecode ;
+			// la valeur de from ci dessus n'est pas prise en compte, alors in décale le son
+			son.setPosition(timecode);
+		}
+	});
+	
+	soundManager.onready(function() {
+		$('.ui360').each( function(){
+			var urlogo = $(this).find('.logo').attr('data-url');
+			var couleur = $(this).find('.logo').attr('data-couleur');
+			$(this).find('.sm2-360ui').css('background', '#'+couleur+' url("'+urlogo+'")');
+			$(this).find('.logo').css('display', 'none');
+		});
+		
+	});
 	
 	// surcharge des events play/pause/finish : https://stackoverflow.com/questions/10127009/soundmanager2-onplay-event-configuration-does-not-work
 	var onplay360 = threeSixtyPlayer.events.play;
-
 	var myOnplay = function(){
-		
 		// décaler de départ du son qui joue si on a un timecode &f=30s&t=40s.
-		// console.log(Object.values(soundManager.sounds)) ;
 		// forcer les properties to et from ne semble pas marcher, on se limite à changer from avec setPosition.
-		
-		var son = Object.values(soundManager.sounds)[0] ;
-		var from = (window.location.href).match(/f=(\d+)/);
+		// le dernier son ajouté par clic
+		var son = Object.values(soundManager.sounds)[Object.values(soundManager.sounds).length - 1] ;
+		var from = (window.location.href).match(/f=(\d+)/) || (window.location.hash).match(/t(\d+)/) ;
 		if(typeof from !== "undefined" && from){
 			son.from = parseInt(from[1]) ;
 			// la valeur de from ci dessus n'est pas prise en compte, alors in décale le son
 			son.setPosition(from[1]);
+			//console.log(from);
+		}else{
+			var from = parseInt($(".playing").attr("data-from")) ;
+			if(typeof from !== "undefined" && from){
+				son.from = from ;
+				// la valeur de from ci dessus n'est pas prise en compte, alors in décale le son
+				son.setPosition(from);
+				console.log(from);
+			}
 		}
 		// la valeur de to ci dessous n'est pas pris en compte
 		var to = (window.location.href).match(/t=(\d+)/);
 		if(typeof to !== "undefined" && to){
 			son.to = parseInt(to[1]) ;
 		}
-		
+		$(".playing").removeClass("playing");
 		maj_bouton_play_pause();
 		
 		onplay360.apply(this); // forces the scope to 'this' = the sound object
@@ -97,19 +154,25 @@ $(document).ready(function(){
 		onfinish360.apply(this); // forces the scope to 'this' = the sound object
 	};
 	threeSixtyPlayer.events.finish = myOnfinish;
-
-/*
-	// y'a t'il un son ?
-	if($(".ui360").size() > 0){
-		$("button.play_pause").click(function(){
-			// son déjà chargé ?
-			if(typeof soundManager.getSoundById("ui360Sound0") == "undefined"){
-				$(".sm2-360btn").eq(0).click();
-			}else{
-				soundManager.togglePause("ui360Sound0");
-			}
-		});
-	}
-*/
-
+	
+	var whileloading360 = threeSixtyPlayer.events.whileloading;
+	var mywhileloading = function(){
+		//console.log(this.id + ': loading ' + this.bytesLoaded + ' / ' + this.bytesTotal);
+		whileloading360.apply(this); // forces the scope to 'this' = the sound object
+	};
+	threeSixtyPlayer.events.whileloading = mywhileloading;
+	
+	var onload360 = threeSixtyPlayer.events.onload;
+	var myonload = function(){
+		//console.log(this.id + ': loaded ' + this.bytesLoaded + ' / ' + this.bytesTotal);
+		onload360.apply(this); // forces the scope to 'this' = the sound object
+	};
+	threeSixtyPlayer.events.onload = myonload;
+	
+	var whileplaying360 = threeSixtyPlayer.events.whileplaying;
+	var mywhileplaying = function(){
+		$(".id3").attr("title", Math.round(this.position));
+		whileplaying360.apply(this); // forces the scope to 'this' = the sound object
+	};
+	threeSixtyPlayer.events.whileplaying = mywhileplaying;
 });
