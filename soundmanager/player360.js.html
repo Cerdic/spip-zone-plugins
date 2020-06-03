@@ -46,14 +46,6 @@ $(document).ready(function(){
 		$('body, html').animate({scrollTop: $("#podcast_player").offset().top - 40 - archives }, 500);
 	}
 	
-	function maj_bouton_play_pause(){
-		if($("button.play_pause").text() === "pause"){
-			$("button.play_pause").removeClass("bouton_playing").html("play").attr("title", $("button.play_pause").attr("data-lecture"));
-		}else{
-			$("button.play_pause").addClass("bouton_playing").html("pause").attr("title", $("button.play_pause").attr("data-pause"));
-		}
-	}
-	
 	// sur quel son clique t'on ?
 	$(".ui360").on("click",function(){
 		$(this).addClass("playing");
@@ -97,6 +89,28 @@ $(document).ready(function(){
 		
 	});
 	
+	// bouton play / pause annexe ?
+	if($(".ui360").length > 0){
+		$("button.play_pause").click(function(){
+			// son déjà chargé ?
+			if(Object.values(soundManager.sounds).length == 0){
+				$(".sm2-360btn").eq(0).click();
+			}else{
+				var son = Object.values(soundManager.sounds)[Object.values(soundManager.sounds).length - 1] ;
+				if(typeof son !== "undefined" && Object.values(soundManager.sounds).length > 0){
+					soundManager.togglePause(son.id);
+				}
+			}
+		});
+	}
+	
+	function maj_bouton_play_pause(){
+		if($("button.play_pause").text() === "pause"){
+			$("button.play_pause").removeClass("bouton_playing").html("play").attr("title", $("button.play_pause").attr("data-lecture"));
+		}else{
+			$("button.play_pause").addClass("bouton_playing").html("pause").attr("title", $("button.play_pause").attr("data-pause"));
+		}
+	}
 	// surcharge des events play/pause/finish : https://stackoverflow.com/questions/10127009/soundmanager2-onplay-event-configuration-does-not-work
 	var onplay360 = threeSixtyPlayer.events.play;
 	var myOnplay = function(){
