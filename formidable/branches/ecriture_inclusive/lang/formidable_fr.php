@@ -10,8 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'activer_pages_explication' => 'Par défaut, les pages publiques des formulaires ne sont pas autorisées',
 	'activer_pages_label' => 'Activer les pages publiques des formulaires',
-	'admin_reponses_auteur' => 'Autoriser les auteurs et autrices des formulaires à modifier les réponses',
-	'admin_reponses_auteur_explication' => 'Seul·e·s les administrateurs et administratices peuvent normalement modifier les réponses apportées à un formulaire (à la poubelle, publiée, proposé à l’évaluation). Cette option permet à l\'auteur·trice d’un formulaire d’en modifier le statut (au risque de fausser d’éventuelles statistiques).',
+	'admin_reponses_auteur' => 'Autoriser les auteur·trices  des formulaires à modifier les réponses',
+	'admin_reponses_auteur_explication' => 'Seul·e·s les administrateur·trices  peuvent normalement modifier les réponses apportées à un formulaire (à la poubelle, publiée, proposé à l’évaluation). Cette option permet à l\'auteur·trice d’un formulaire d’en modifier le statut (au risque de fausser d’éventuelles statistiques).',
 	'analyse_avec_reponse' => 'Réponses non-vide',
 	'analyse_exclure_champs_explication' => 'Mettre le nom des champs à exclure dans l’analyse, séparés par des <code>|</code>. Ne pas mettre les <code>@</code>.',
 	'analyse_exclure_champs_label' => 'Champs à exclure de l’analyse',
@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.',
 	'analyse_zero_reponse_total' => 'Personne n’a répondu à ce formulaire.',
 	'aucun_traitement' => 'Aucun traitement',
-	'autoriser_admin_restreint' => 'Autoriser les administrateur·trice·s restreints à créer et modifier les formulaires',
+	'autoriser_admin_restreint' => 'Autoriser les administrateur·trice·s restreint·e·s à créer et modifier les formulaires',
 	'autoriser_admin_restreint_explication' => 'Par défaut, seul·e·s les administrateurs et administratrices ont accès à la création et modification des formulaires',
 
 	// B
@@ -309,7 +309,7 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_enregistrement_option_invalider_label' => 'Rafraîchir le cache',
 	'traiter_enregistrement_option_ip_label' => 'Enregistrer les IPs (masquées après un délai de garde)',
 	'traiter_enregistrement_option_moderation_label' => 'Modération',
-	'traiter_enregistrement_option_moderer_admins_explication' => 'Modérer également les réponses des administrateurs et administratrices',
+	'traiter_enregistrement_option_moderer_admins_explication' => 'Modérer également les réponses des administrateur·trices',
 	'traiter_enregistrement_option_modifiable_explication' => 'Modifiable : les visiteur·euse·s peuvent modifier leurs réponses après coup.',
 	'traiter_enregistrement_option_modifiable_label' => 'Réponses modifiables',
 	'traiter_enregistrement_option_multiple_explication' => 'Multiple : Une même personne peut répondre plusieurs fois.',
