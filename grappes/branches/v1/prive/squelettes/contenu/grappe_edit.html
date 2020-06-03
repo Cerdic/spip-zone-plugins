@@ -1,0 +1,29 @@
+[(#ID_GRAPPE|oui)
+	[(#AUTORISER{modifier,grappe,#ID_GRAPPE}|sinon_interdire_acces)]
+][(#ID_GRAPPE|non)
+	[(#AUTORISER{creer,grappe}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect,#ENV{id_grappe}|?{#URL_ECRIRE{grappe,id_grappe=#ID_GRAPPE},#URL_ECRIRE{grappes}}}}
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_GRAPPE|oui)
+	[(#GET{redirect}|icone_verticale{[(#VAL{grappe}|objet_info{texte_retour}|_T)],#VAL{grappe}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#VAL{grappe}|objet_info{#ID_GRAPPE|?{texte_modifier,texte_creer}}|_T)]
+		<h1>(#ENV{titre,#INFO_TITRE{grappe,#ID_GRAPPE}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_GRAPPE|generer_url_entite{grappe}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_GRAPPE{#ENV{id_grappe,oui},#GET{redirect}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation');/*\]\]>*/</script>
+]
+</div>
