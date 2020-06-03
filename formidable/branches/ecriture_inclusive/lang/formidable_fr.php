@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_objets_label' => 'Lier les formulaires aux contenus',
 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable',
 	'champs' => 'Champs',
-	'changer_statut' => 'Ce formulaire est :',
+	'changer_statut' => 'Ce formulaire est',
 	'creer_dossier_formulaire_erreur_impossible_creer' => 'Impossible de créer le dossier @dossier@,  nécessaire pour stocker les fichiers. Vérifier les droits d’accès.',
 	'creer_dossier_formulaire_erreur_impossible_ecrire' => 'Impossible d’écrire dans le  @dossier@,  nécessaire pour stocker les fichiers. Vérifier les droits d’accès.',
 	'creer_dossier_formulaire_erreur_possible_lire_exterieur' => 'Il est possible de lire à distance le contenu du dossier  @dossier@. Ceci est problématique en terme de confidentialité des données.',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_rien' => 'Rien du tout',
 	'editer_apres_choix_stats' => 'Les statistiques des réponses',
 	'editer_apres_choix_valeurs' => 'Les valeurs saisies',
-	'editer_apres_explication' => 'Après validation, afficher à la place du formulaire :',
+	'editer_apres_explication' => 'Après validation, afficher à la place du formulaire',
 	'editer_apres_label' => 'Afficher ensuite',
 	'editer_css' => 'Classes CSS',
 	'editer_descriptif' => 'Descriptif',
@@ -142,7 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_formulaire' => 'Aucun formulaire',
 	'info_aucune_reponse' => 'Aucune réponse',
 	'info_formulaire_refuse' => 'Archivé',
-	'info_formulaire_utilise_par' => 'Formulaire utilisé par :',
+	'info_formulaire_utilise_par' => 'Formulaire utilisé par',
 	'info_nb_formulaires' => '@nb@ formulaires',
 	'info_nb_reponses' => '@nb@ réponses',
 	'info_reponse_proposee' => 'À modérer',
@@ -154,8 +154,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_supprimee' => 'À la corbeille',
 	'info_reponse_supprimees' => 'À la corbeille',
 	'info_reponse_toutes' => 'Toutes',
-	'info_utilise_1_formulaire' => 'Formulaire utilisé :',
-	'info_utilise_nb_formulaires' => 'Formulaires utilisés :',
+	'info_utilise_1_formulaire' => 'Formulaire utilisé',
+	'info_utilise_nb_formulaires' => 'Formulaires utilisés',
 
 	// J
 	'jours_heures_minutes_secondes' => '@j@j @h@h @m@min @s@s',
@@ -175,7 +175,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_titre_formulaire' => 'Afficher le titre du formulaire ?',
-	'noisette_label_identifiant' => 'Formulaire à afficher :',
+	'noisette_label_identifiant' => 'Formulaire à afficher ',
 	'noisette_nom_noisette_formulaire' => 'Formulaire',
 
 	// P
@@ -185,8 +185,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_aucune' => 'Aucune réponse',
 	'reponse_intro' => '@auteur@ a répondu au formulaire @formulaire@',
 	'reponse_maj' => 'Dernière modification',
-	'reponse_numero' => 'Réponse numéro :',
-	'reponse_statut' => 'Cette réponse est :',
+	'reponse_numero' => 'Réponse numéro',
+	'reponse_statut' => 'Cette réponse est',
 	'reponse_supprimer' => 'Supprimer cette réponse',
 	'reponse_supprimer_confirmation' => 'Êtes-vous sûr de vouloir supprimer cette réponse ?',
 	'reponse_une' => '1 réponse',
