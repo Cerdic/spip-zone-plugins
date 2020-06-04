@@ -10,7 +10,7 @@ function action_image_responsive() {
 	$dpr = _request("dpr");
 	$xsendfile = _request("xsendfile");
 	$format = _request("format");
-	if (!$format) $format = "auto";
+	if (!$format) $format = false;
 
 	// Gérer le plugin mutualisation
 	#if (defined('_DIR_SITE'))
