@@ -1,0 +1,19 @@
+<paquet
+	prefix="noie"
+	categorie="performance"
+	version="2.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="noie.png"
+	documentation="https://contrib.spip.net/Changez-de-navigateur"
+>
+
+	<nom>Changez de navigateur !</nom>
+
+	<auteur>Fil</auteur>
+	<auteur lien='http://spip.tetue.net'>Tetue</auteur>
+	<licence>GPL</licence>
+	
+	<pipeline nom="affichage_final" inclure="noie_pipelines.php" />
+
+</paquet>
