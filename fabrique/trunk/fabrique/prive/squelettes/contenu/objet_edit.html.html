@@ -40,11 +40,11 @@
 <div class="cadre-formulaire-editer">
 <div class="entete-formulaire">
 	\[(\##MID_OBJET|oui)
-	\[(\#GET{redirect}|icone_verticale{\<:icone_retour:>,#TYPE,'',left retour\[(\#ENV{retourajax,''}|oui)ajax preload\]})\]
+	\[(\#GET{redirect}|icone_verticale{\<:icone_retour:/>,#TYPE,'',left retour\[(\#ENV{retourajax,''}|oui)ajax preload\]})\]
 	\]
 	\[
-		\[(\##MID_OBJET|?{\<:#TYPE:icone_modifier_#TYPE:>,\<:#TYPE:icone_creer_#TYPE:>})]
-		<h1>(\#ENV{titre,\#INFO_#GET{mtitre}{#TYPE,\##MID_OBJET}|sinon{\<:info_sans_titre:>}})</h1>
+		\[(\##MID_OBJET|?{\<:#TYPE:icone_modifier_#TYPE:/>,\<:#TYPE:icone_creer_#TYPE:/>})]
+		<h1>(\#ENV{titre,\#INFO_#GET{mtitre}{#TYPE,\##MID_OBJET}|sinon{\<:info_sans_titre:/>}})</h1>
 	\]
 </div>
 

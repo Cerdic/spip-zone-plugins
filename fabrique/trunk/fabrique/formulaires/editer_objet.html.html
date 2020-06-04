@@ -18,8 +18,8 @@
 	{si #ENV{objet/champ_titre}}>#SET{titre,' '}</BOUCLE_un_titre>
 <BOUCLE_saisies(DATA){source tableau,#ENV{objet/champs}}{saisie != ''}>[(#VALEUR|champ_option_presente{editable}|oui)
 			\[(\#SAISIE{#VALEUR{saisie}, #CHAMP,[(#VALEUR|champ_option_presente{obligatoire}|oui)obligatoire=oui,]
-				label=\<:#TYPE:[champ_(#CHAMP)_label]:>[,
-				explication=\<:#TYPE:[champ_(#CHAMP)_explication]:>(#EXPLICATION|oui)][,
+				label=\<:#TYPE:[champ_(#CHAMP)_label]:/>[,
+				explication=\<:#TYPE:[champ_(#CHAMP)_explication]:/>(#EXPLICATION|oui)][,
 				(#SAISIE_OPTIONS|trim)]})\]][
 
 (#REM) On teste donc s'il faut placer le formulaire de parentée ici
@@ -28,7 +28,7 @@
 ]<BOUCLE_si_rubrique(CONDITION){si #OBJET|champ_present{id_rubrique}}>
 
 			\[<div class="editer editer_rubrique\[ (\#ENV**{erreurs/id_parent}|oui)erreur\]">
-					<label for="id_parent">\<:titre_cadre_interieur_rubrique:></label>\[
+					<label for="id_parent">\<:titre_cadre_interieur_rubrique:/></label>\[
 					<span class="erreur_message">(\#ENV**{erreurs/id_parent})</span>
 					\]
 					(\#VAL|chercher_rubrique{\#ENV{#ID_OBJET},\#ENV{id_parent},'#TYPE',\#ENV{id_secteur},'',0,form_simple})
@@ -40,14 +40,14 @@
 ]
 
 			\[(\#SAISIE{[(#ENV{parent/objet})], [(#ENV{parent/id_objet})], obligatoire=oui,
-				label=\<:[(#ENV{parent/type})]:titre_[(#ENV{parent/type})]:>})\]
+				label=\<:[(#ENV{parent/type})]:titre_[(#ENV{parent/type})]:/>})\]
 </BOUCLE_si_liaison_directe>[(#REM)
 ]</BOUCLE_si_parent>
 </BOUCLE_saisies>
 		</div>
 		[(\#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class="boutons"><input type="submit" class="submit" value="\<:bouton_enregistrer:>" /></p>
+		<p class="boutons"><input type="submit" class="submit" value="\<:bouton_enregistrer|attribut_html:/>" /></p>
 	</div></form>
 	]
 </div>

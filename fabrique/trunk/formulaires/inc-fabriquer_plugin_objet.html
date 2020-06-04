@@ -13,7 +13,7 @@
 		explication=<:fabrique:label_charger_depuis_table_sql_explication:>,
 		attention=<:fabrique:label_charger_depuis_table_sql_attention:>})]
 	</div>
-	<input type='submit' name='f_action[renseigner_objet][#CLE]' class='submit right action' value='<:fabrique:bouton_renseigner_objet:>' />
+	<input type='submit' name='f_action[renseigner_objet][#CLE]' class='submit right action' value='<:fabrique:bouton_renseigner_objet|attribut_html:/>' />
 </div>
 
 
@@ -55,7 +55,7 @@
 	[(#ENV{objets/#CLE/logo/0/fichier}|oui)
 		<div class='center'>
 			[(#ENV{objets/#CLE/logo/0/fichier}|fabrique_miniature_image{128})]
-			<input type='submit' name='f_action\[supprimer_logo\]\[objets/#CLE/logo/0\]' class='submit del right action' value='<:fabrique:bouton_supprimer_logo:>' />
+			<input type='submit' name='f_action\[supprimer_logo\]\[objets/#CLE/logo/0\]' class='submit del right action' value='<:fabrique:bouton_supprimer_logo|attribut_html:/>' />
 		</div>
 	]
 
@@ -69,7 +69,7 @@
 			[(#ENV{[objets/#_objet:CLE/logo/(#VALEUR)/fichier]}|oui)
 				<div class='center'>
 				[(#ENV{[objets/#_objet:CLE/logo/(#VALEUR)/fichier]}|fabrique_miniature_image{#VALEUR})]
-					<input type='submit' name='f_action\[supprimer_logo\]\[objets/#_objet:CLE/logo/#VALEUR\]' class='submit del right action' value='<:fabrique:bouton_supprimer_logo:>' />
+					<input type='submit' name='f_action\[supprimer_logo\]\[objets/#_objet:CLE/logo/#VALEUR\]' class='submit del right action' value='<:fabrique:bouton_supprimer_logo|attribut_html:/>' />
 				</div>
 			]
 		</BOUCLE_logos>
@@ -204,13 +204,13 @@
 					</div>
 				</fieldset>
 				
-				<input type='submit' name='f_action[supprimer_champ][#_objet:CLE][#CLE]' class='submit del left action' value='<:fabrique:bouton_supprimer_champ:>' />
+				<input type='submit' name='f_action[supprimer_champ][#_objet:CLE][#CLE]' class='submit del left action' value='<:fabrique:bouton_supprimer_champ|attribut_html:/>' />
 			</div>
 		</div>
 	</BOUCLE_champs>
 	</div>
 	</B_champs>
-	<input type='submit' name='f_action[ajouter_champ][#CLE]' class='submit add left action' value='<:fabrique:bouton_ajouter_champ:>' />
+	<input type='submit' name='f_action[ajouter_champ][#CLE]' class='submit add left action' value='<:fabrique:bouton_ajouter_champ|attribut_html:/>' />
 </div>
 
 
@@ -319,7 +319,7 @@
 	</BOUCLE_chaines>
 	</div>
 	<div class='clear'>
-		<input type='submit' name='f_action[reinitialiser_chaines][#CLE]' class='submit del left action' value='<:fabrique:bouton_reinitialiser_chaines:>' />
+		<input type='submit' name='f_action[reinitialiser_chaines][#CLE]' class='submit del left action' value='<:fabrique:bouton_reinitialiser_chaines|attribut_html:/>' />
 	</div>
 	</B_chaines>
 	<p class='notice'><:fabrique:valider_nom_objet_avant:></p>
@@ -519,7 +519,7 @@
 	</BOUCLE_autorisations>
 	</div>
 	<div class='clear'>
-		<input type='submit' name='f_action[reinitialiser_autorisations][#CLE]' class='submit del left action' value='<:fabrique:bouton_reinitialiser_autorisations:>' />
+		<input type='submit' name='f_action[reinitialiser_autorisations][#CLE]' class='submit del left action' value='<:fabrique:bouton_reinitialiser_autorisations|attribut_html:/>' />
 	</div>
 	</B_autorisations>
 	<p class='notice'><:fabrique:valider_nom_objet_avant:></p>
@@ -558,7 +558,7 @@
 
 <h3><a href="#suppression"><:fabrique:legend_suppression:></a></h3>
 <div>
-	<input type='submit' name='f_action[supprimer_objet][#CLE]' class='submit del left action' value='<:fabrique:bouton_supprimer_objet:>' />
+	<input type='submit' name='f_action[supprimer_objet][#CLE]' class='submit del left action' value='<:fabrique:bouton_supprimer_objet|attribut_html:/>' />
 </div>
 
 </BOUCLE_objet>

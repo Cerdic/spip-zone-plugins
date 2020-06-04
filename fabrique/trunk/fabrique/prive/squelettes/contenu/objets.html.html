@@ -4,13 +4,13 @@
 
 
 ]\[(\#AUTORISER{voir,_#LOBJET}|sinon_interdire_acces)\]
-<h1 class="grostitre"><:#TYPE:titre_page_#LOBJET:></h1>
+<h1 class="grostitre"><:#TYPE:titre_page_#LOBJET:/></h1>
 
 \#FORMULAIRE_RECHERCHE_ECRIRE{\#SELF,ajax}
 <div class="nettoyeur"></div>
 
-\<INCLURE{fond=prive/objets/liste/#LOBJET, env, ajax, sinon=<:#TYPE:info_aucun_#TYPE:>}>
+\<INCLURE{fond=prive/objets/liste/#LOBJET, env, ajax, sinon=<:#TYPE:info_aucun_#TYPE:/>}>
 
 \[(\#AUTORISER{creer,#TYPE})
-	\[(\#URL_ECRIRE{[(#TYPE)]_edit,new=oui}|icone_verticale{\<:#TYPE:icone_creer_#TYPE:>,#TYPE,new,right})\]
+	\[(\#URL_ECRIRE{[(#TYPE)]_edit,new=oui}|icone_verticale{\<:#TYPE:icone_creer_#TYPE:/>,#TYPE,new,right})\]
 \]

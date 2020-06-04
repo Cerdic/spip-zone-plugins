@@ -2,12 +2,12 @@
 <BOUCLE_champs(DATA){source tableau, #ENV{objet/champs}}>[(#REM)
 ]<BOUCLE_date(CONDITION){si #VALEUR{saisie}|=={date}}>[(#REM)
 ]\[<div class="champ contenu_#CHAMP\[ (#[(#MCHAMP)]*|!={0000-00-00 00:00:00}|?{'',vide})\]">
-	<div class="label">\<:#TYPE:[champ_(#CHAMP)_label]:> : </div>
+	<div class="label">\<:#TYPE:[champ_(#CHAMP)_label]:/> : </div>
 	<span dir="\#LANG_DIR" class="\#EDIT{#CHAMP} #CHAMP">(##MCHAMP|=={0000-00-00 00:00:00}|?{'',[(##MCHAMP|affdate)]})</span>
 </div>\]
 </BOUCLE_date>[(#REM)
 ]\[<div class="champ contenu_#CHAMP\[ (#[(#MCHAMP)]*|strlen|?{'',vide})\]">
-	<div class="label">\<:#TYPE:[champ_(#CHAMP)_label]:> : </div>
+	<div class="label">\<:#TYPE:[champ_(#CHAMP)_label]:/> : </div>
 	<span dir="\#LANG_DIR" class="\#EDIT{#CHAMP} #CHAMP">(##MCHAMP)</span>
 </div>\]
 <//B_date>

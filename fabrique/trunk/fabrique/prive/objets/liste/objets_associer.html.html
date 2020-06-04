@@ -31,9 +31,9 @@ a mis a jour la valeur avec la page reelle\]
 <table class="spip liste">
 \[<caption><span class="caption"><strong>(\#ENV*{titre,\#GRAND_TOTAL|singulier_ou_pluriel{#TYPE:info_1_#TYPE,#TYPE:info_nb_#LOBJET}})</strong>
 <span class="recherche">
-	<label for="recherche-\#ENV{id}">\<:info_rechercher_02:></label>
+	<label for="recherche-\#ENV{id}">\<:info_rechercher_02:/></label>
 	<input type="text" class="recherche" name="recherche" id="recherche-\#ENV{id}" value="\#ENV{recherche}" />
-	<input type="submit" class="tout_voir" name="tout_voir" value="\<:info_tout_afficher:>" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="\<:info_tout_afficher|attribut_html:/>" />
 </span>
 </span>
 </caption>\]
@@ -54,8 +54,8 @@ a mis a jour la valeur avec la page reelle\]
 		\[<tr><td colspan="3"><p class="pagination">(\#GET{p})</p></td></tr>\]
 	
 		<tr class="first_row">[
-			<th class="statut" scope="col">\[(\#TRI{statut,<span title="\<:lien_trier_statut|attribut_html:>">#</span>,ajax\})\]</th>(#OBJET|champ_present{statut})]
-			<th class="#GET{titre}" scope="col">\[(\#TRI{multi #GET{titre},\<:#TYPE:champ_#GET{titre}_label:>,ajax})\]</th>
+			<th class="statut" scope="col">\[(\#TRI{statut,<span title="\<:lien_trier_statut|attribut_html:/>">#</span>,ajax\})\]</th>(#OBJET|champ_present{statut})]
+			<th class="#GET{titre}" scope="col">\[(\#TRI{multi #GET{titre},\<:#TYPE:champ_#GET{titre}_label:/>,ajax})\]</th>
 			<th class="action" scope="col"></th>
 		</tr>
 	</thead>
@@ -66,7 +66,7 @@ a mis a jour la valeur avec la page reelle\]
 			<td class="statut">\[(\#STATUT|puce_statut\{#TYPE\})\]</td>(#OBJET|champ_present{statut})]
 			<td class="#GET{titre}">\[(\#LOGO_#MTYPE|image_reduire{20,20})\]<a href="\[(\##MID_OBJET|generer_url_entite{#TYPE})\]">\##GET{mtitre}</a></td>
 			<td class="action">
-				<button type="submit" class="button link add" name="ajouter_lien\\[#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET\\]" value="+">\<:#TYPE:ajouter_lien_#TYPE:> \[(\#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})\]</button>
+				<button type="submit" class="button link add" name="ajouter_lien\\[#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET\\]" value="+">\<:#TYPE:ajouter_lien_#TYPE:/> \[(\#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})\]</button>
 			</td>
 		</tr>
 	\</BOUCLE_liste_#LOBJET>
@@ -78,9 +78,9 @@ a mis a jour la valeur avec la page reelle\]
 <div class="liste-objets liste-objets-associer #LOBJET caption-wrap">
 <span class="caption"><strong>\[(\#VAL{info_recherche_auteur_zero}|_T{\#ARRAY{cherche_auteur,\#ENV{recherche}}})\]</strong>
 <span class="recherche">
-	<label for="recherche-\#ENV{id}">\<:info_rechercher_02:></label>
+	<label for="recherche-\#ENV{id}">\<:info_rechercher_02:/></label>
 	<input type="text" class="recherche" name="recherche" id="recherche-\#ENV{id}" value="\#ENV{recherche}" />
-	<input type="submit" class="tout_voir" name="tout_voir" value="\<:info_tout_afficher:>" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="\<:info_tout_afficher|attribut_html:/>" />
 </span>
 </span>
 </div>

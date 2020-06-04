@@ -18,9 +18,9 @@ Construire la liste des chaines a inserer
 Chaines en plus si configuration
 
 ][(#ENV{paquet/formulaire_config}|oui)[(#SET{chaines,[(#GET{chaines}|array_merge{[(#ARRAY{
-	cfg_exemple,<:fabrique:config_exemple:>,
-	cfg_exemple_explication,<:fabrique:config_exemple_explication:>,
-	cfg_titre_parametrages,<:fabrique:config_titre_parametrages:>,
+	cfg_exemple,<:fabrique:config_exemple:/>,
+	cfg_exemple_explication,<:fabrique:config_exemple_explication:/>,
+	cfg_titre_parametrages,<:fabrique:config_titre_parametrages:/>,
 	titre_page_configurer_#PREFIXE,#ENV{paquet/formulaire_config_titre,#ENV{paquet/nom}}})]})]})]][
 
 

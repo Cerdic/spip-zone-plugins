@@ -27,7 +27,7 @@
 
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		#ACTION_FORMULAIRE
-		<input type='submit' name='creer' class='submit invisible' value='<:fabrique:bouton_creer:>' />
+		<input type='submit' name='creer' class='submit invisible' value='<:fabrique:bouton_creer|attribut_html:/>' />
 		<input type='hidden' name='open_tab' value='#ENV{open_tab}' id="open_tab" />
 		<BOUCLE_tab_open_accordion(DATA){enum 0,(#OBJETS|count|plus{1})}>
 		<input type='hidden' name='open_accordion[#CLE]' value='#ENV{open_accordion/#CLE,0}' id="open_accordion_#CLE" />
@@ -66,8 +66,8 @@
 		</div>
 
 		<p class="boutons">
-			<input type='submit' name='f_action[ajouter_objet]' class='submit add left' value='<:fabrique:bouton_ajouter_objet:>' />
-			<input type='submit' name='creer' class='submit' value='<:fabrique:bouton_creer:>' />
+			<input type='submit' name='f_action[ajouter_objet]' class='submit add left' value='<:fabrique:bouton_ajouter_objet|attribut_html:/>' />
+			<input type='submit' name='creer' class='submit' value='<:fabrique:bouton_creer|attribut_html:/>' />
 		</p>
 
 		<datalist id="licences">

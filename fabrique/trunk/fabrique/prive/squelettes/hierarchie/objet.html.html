@@ -1,5 +1,5 @@
 <!-- hierarchie -->
-<a href="\#URL_ECRIRE{#LOBJET}">\<:#TYPE:titre_[(#LOBJET)]:></a>
+<a href="\#URL_ECRIRE{#LOBJET}">\<:#TYPE:titre_[(#LOBJET)]:/></a>
 \<BOUCLE_hierarchie(#MOBJET){#ID_OBJET}[(#OBJET|champ_present{statut}|?{"{statut?}"})]>
 &gt; \[(\#URL_ECRIRE{#ENV{parent/type},#ENV{parent/id_objet}=\##ENV{parent/mid_objet}}|lien_ou_expose{\#INFO_TITRE{#ENV{parent/objet},\##ENV{parent/mid_objet}},''})\]
 &gt; <strong class="on">[\#(#ENV{objet/champ_titre}|strtoupper)]</strong>
@@ -8,6 +8,6 @@
 	&gt; \[(\#URL_ECRIRE{#ENV{parent/type},#ENV{parent/id_objet}=\##ENV{parent/mid_objet}}|lien_ou_expose{\#INFO_TITRE{#ENV{parent/objet},\##ENV{parent/mid_objet}},''})\]
 \][(#REM)
 
-]&gt; <strong class="on">\<:ecrire:info_sans_titre:></strong>
+]&gt; <strong class="on">\<:ecrire:info_sans_titre:/></strong>
 \<//B_hierarchie>
 

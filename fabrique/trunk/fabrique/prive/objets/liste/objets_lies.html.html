@@ -47,8 +47,8 @@ a mis a jour la valeur avec la page reelle\]
 		\[<tr><td colspan="4"><p class="pagination">(\#GET{p})</p></td></tr>\]
 
 		<tr class="first_row">[
-			<th class="statut" scope="col">\[(\#TRI{statut,<span title="\<:lien_trier_statut|attribut_html:>">#</span>,ajax\})\]</th>(#OBJET|champ_present{statut})]
-			<th class="#GET{titre}" scope="col">\[(\#TRI{multi #GET{titre},\<:#TYPE:champ_#GET{titre}_label:>,ajax})\]</th>
+			<th class="statut" scope="col">\[(\#TRI{statut,<span title="\<:lien_trier_statut|attribut_html:/>">#</span>,ajax\})\]</th>(#OBJET|champ_present{statut})]
+			<th class="#GET{titre}" scope="col">\[(\#TRI{multi #GET{titre},\<:#TYPE:champ_#GET{titre}_label:/>,ajax})\]</th>
 			<th class="action" scope="col"></th>
 		</tr>
 	</thead>
@@ -61,7 +61,7 @@ a mis a jour la valeur avec la page reelle\]
 
 			<td class="action">
 				\[(\#ENV{editable}|oui)
-					<button type="submit" class="button link delete" name="supprimer_lien\\[#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET\\]" value="X">\<:#TYPE:retirer_lien_#TYPE:> \[(\#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})\]</button>
+					<button type="submit" class="button link delete" name="supprimer_lien\\[#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET\\]" value="X">\<:#TYPE:retirer_lien_#TYPE:/> \[(\#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})\]</button>
 				\]
 			</td>
 		</tr>
@@ -69,10 +69,10 @@ a mis a jour la valeur avec la page reelle\]
 	</tbody>
 </table>
 \[<p class="pagination">(\#PAGINATION{prive})</p>\]
-\[(\#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\\[#TYPE-*-\#OBJET-\#ID_OBJET\\]" value="X">\<:#TYPE:retirer_tous_liens_#LOBJET:> \[(\#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})\]</button></div>\]
+\[(\#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\\[#TYPE-*-\#OBJET-\#ID_OBJET\\]" value="X">\<:#TYPE:retirer_tous_liens_#LOBJET:/> \[(\#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})\]</button></div>\]
 </div>
 \</B_liste_#LOBJET>
 <div class="liste-objets liste-objets-lies #LOBJET caption-wrap">
-	<strong class="caption">\[(\#ENV*{titre,\<:#TYPE:info_aucun_#TYPE:>})\]</strong>
+	<strong class="caption">\[(\#ENV*{titre,\<:#TYPE:info_aucun_#TYPE:/>})\]</strong>
 </div>
 \<//B_liste_#LOBJET>

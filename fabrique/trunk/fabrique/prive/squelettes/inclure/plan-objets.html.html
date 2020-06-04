@@ -27,7 +27,7 @@
 						\[hreflang="(\#ENV{lang}|=={\#LANG}|non|?{\#LANG})"\]
 						title="\[(\#VAL{#TYPE}|objet_info{texte_objet}|_T) \##MID_OBJET\]">
 						[(#OBJET|champ_present{statut}|oui)\[(\#STATUT|puce_statut{#TYPE}) \]][(#REM)
-						]\[(\#[(#ENV{objet/champ_titre}|strtoupper)]|couper{80}|sinon{\<:info_sans_titre:>})\]
+						]\[(\#[(#ENV{objet/champ_titre}|strtoupper)]|couper{80}|sinon{\<:info_sans_titre:/>})\]
 					</a>
 				</li>
 			\</BOUCLE_items>
