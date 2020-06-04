@@ -1,0 +1,12 @@
+<traduction
+	module="paquet-scssphp"
+	id="paquet-scssphp--scssphp-11de2"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/scssphp.git"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-scssphp?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-scssphp?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+</traduction>

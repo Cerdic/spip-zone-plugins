@@ -1,0 +1,27 @@
+<paquet
+	prefix="scssphp"
+	categorie="outil"
+	version="2.4.4"
+	etat="stable"
+	compatibilite="[3.1.0;3.3.*]"
+	logo="scssphp-64.png"
+	documentation="https://contrib.spip.net/ScssPhp"
+>
+	<nom>SCSS PHP</nom>
+
+	<auteur lien="http://elastick.net">Anne-lise Martenot, elastick.net</auteur>
+	<credit>Jean-Baptiste Bourgoin</credit>
+	<credit lien="https://github.com/scssphp/scssphp">scssphp/scssphp</credit>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<!-- Injecter des variables depuis un plugin -->
+	<pipeline nom="scss_variables" action=''/>
+
+	<pipeline nom="insert_head" />
+	<pipeline nom="formulaire_admin" />
+
+	<procure nom="scssphp" version="1.1.0" />
+
+	<necessite nom="php" compatibilite="[5.6.0;[" />
+</paquet>
