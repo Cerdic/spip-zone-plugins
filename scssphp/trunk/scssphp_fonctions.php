@@ -177,12 +177,17 @@ function scss_css($source) {
 			$chemin = _chemin();
 			$chemin = md5(serialize($chemin));
 		}
+		// le contenu final depend potentiellement de l'url absolue de la source si on a des chemin relatif vers les images
+		// il seront transformes par urls_absolues_css()
+		// on differencie donc le hash selon l'url avec laquelle on construit le css
+		$url_source = url_absolue($source);
+		$hash = substr(md5("$source:scss:$chemin:$url_source"), 0, 7);
 
 		$f = basename($source, $r[0]);
 		$f = sous_repertoire(_DIR_VAR, 'cache-scss')
 		. preg_replace(
 			',(.*?)(_rtl|_ltr)?$,',
-			"\\1-cssify-" . substr(md5("$source-scss-$chemin"), 0, 7) . "\\2",
+			"\\1-cssify-" . $hash . "\\2",
 			$f,
 			1
 		)
