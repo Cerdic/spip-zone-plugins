@@ -82,37 +82,17 @@ function saisies_afficher_si_js_champ($champ, $total, $operateur, $valeur, $vale
 		spip_log("Afficher_si incorrect. Champ $champ inexistant", "saisies"._LOG_CRITIQUE);
 		return '';
 	}
-	$saisie = $saisies_form[$champ]['saisie'];
 
+	$saisie = pipeline('saisies_afficher_si_js_type', array('args' => array('saisie' => $saisies_form[$champ])));
 	// Cas d'une valeur numérique : pour le test js, cela ne change rien, on la passe comme valeur
 	if (strlen($valeur_numerique) and !$valeur) {
 		$valeur = $valeur_numerique;
 	}
 
-	// cas checkbox
-	if ($saisie == 'checkbox') {
-		return saisies_afficher_si_js_checkbox($champ, $total, $operateur, $valeur, $negation);
+	if (!$f = charger_fonction("saisies_afficher_si_js_$saisie", 'inc', true)) {
+		return "$negation\$(form).find('[name=\"$champ\"]').val() $operateur $guillemet$valeur$guillemet";
 	}
-	// cas fichier
-	if ($saisie == 'fichiers') {
-		$nb_fichiers = $saisies_form[$champ]['options']['nb_fichiers'];
-		if (!$nb_fichiers) {
-			$nb_fichiers = 1;
-		} else {
-			$nb_fichiers = intval($nb_fichiers);
-		}
-		return saisies_afficher_si_js_fichiers($champ, $total, $operateur, $valeur, $negation, $nb_fichiers);
-	}
-	// cas case
-	if ($saisie == 'case') {// case
-		return saisies_afficher_si_js_case($champ, $total, $operateur, $valeur, $guillemet, $negation);
-	}
-	// cas radio
-	if ($saisie == 'radio' or $saisie == 'oui_non' or $saisie == 'true_false') {// radio et assimilés
-		return saisies_afficher_si_js_radio($champ, $total, $operateur, $valeur, $guillemet, $negation);
-	}
-	// sinon cas par défaut
-	return "$negation\$(form).find('[name=\"$champ\"]').val() $operateur $guillemet$valeur$guillemet";
+	return $f($champ, $total, $operateur, $valeur, $guillemet, $negation, $saisies_form[$champ]);
 }
 
 
@@ -124,8 +104,9 @@ function saisies_afficher_si_js_champ($champ, $total, $operateur, $valeur, $vale
  * @param string $valeur
  * @param string $guillemet
  * @param string $negation
+ * @param array $saisie
 **/
-function saisies_afficher_si_js_case($champ, $total, $operateur, $valeur, $guillemet, $negation) {
+function inc_saisies_afficher_si_js_case($champ, $total, $operateur, $valeur, $guillemet, $negation, $saisie) {
 	if ($valeur  and $operateur) {
 		return "$negation($(form).find(\".checkbox[name='$champ']\").is(':checked') ? $(form).find(\".checkbox[name='$champ']\").val() : '') $operateur $guillemet$valeur$guillemet";
 	} else {
@@ -141,8 +122,9 @@ function saisies_afficher_si_js_case($champ, $total, $operateur, $valeur, $guill
  * @param string $valeur
  * @param string $guillemet
  * @param string $negation
+ * @param array $saisie;
 **/
-function saisies_afficher_si_js_radio($champ, $total, $operateur, $valeur, $guillemet, $negation) {
+function inc_saisies_afficher_si_js_radio($champ, $total, $operateur, $valeur, $guillemet, $negation, $saisie) {
 	return "$negation$(form).find(\"[name='$champ']:checked\").val() $operateur $guillemet$valeur$guillemet";
 }
 
@@ -153,10 +135,17 @@ function saisies_afficher_si_js_radio($champ, $total, $operateur, $valeur, $guil
  * @param string $total
  * @param string $operateur
  * @param string $valeur
+ * @param string $guillemet
  * @param string $negation
- * @param int $nb_fichiers
+ * @param array $saisie
 **/
-function saisies_afficher_si_js_fichiers($champ, $total, $operateur, $valeur, $negation, $nb_fichiers) {
+function inc_saisies_afficher_si_js_fichiers($champ, $total, $operateur, $valeur, $guillemet, $negation, $saisie) {
+	$nb_fichiers = $saisie['options']['nb_fichiers'];
+	if (!$nb_fichiers) {
+		$nb_fichiers = 1;
+	} else {
+		$nb_fichiers = intval($nb_fichiers);
+	}
 	$total = "$(form).find(\"[name^='cvtupload_fichiers_precedents[$champ]']\").length";
 	$i = 0;
 	while ($i < $nb_fichiers) {
@@ -174,9 +163,11 @@ function saisies_afficher_si_js_fichiers($champ, $total, $operateur, $valeur, $n
  * @param string $total
  * @param string $operateur
  * @param string $valeur
+ * @param string $guillemet
  * @param string $negation
+ * @param array $saisie
 **/
-function saisies_afficher_si_js_checkbox($champ, $total, $operateur, $valeur, $negation) {
+function inc_saisies_afficher_si_js_checkbox($champ, $total, $operateur, $valeur, $guillemet,  $negation, $saisie) {
 	if ($total) {// Cas 1 : on cherche juste à savoir le nombre total de case coché
 		$result = "$negation$(form).find(\"[name^='$champ']:checked\").length $operateur $valeur";
 		return $result;

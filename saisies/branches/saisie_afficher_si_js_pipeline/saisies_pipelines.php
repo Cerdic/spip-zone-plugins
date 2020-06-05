@@ -239,3 +239,17 @@ function saisies_formulaire_verifier_etape($flux) {
 
 	return $flux;
 }
+
+/**
+ * Détermine le type de saisie d'un point de vue javascript
+ * afin de générer correctement les bon test
+**/
+function saisies_saisies_afficher_si_js_type($flux) {
+	$saisie = $flux['args']['saisie']['saisie'];
+	spip_log('pipelinetest', 'test');
+	if ($saisie == 'radio' or $saisie == 'oui_non' or $saisie == 'true_false') {
+		$saisie = 'radio';
+	}
+	$flux ['data'] = $saisie;
+	return $flux;
+}
