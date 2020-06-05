@@ -6,7 +6,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_spip('inc/rechercher');
 
-function verifier_conversion($table) {
+/**
+ * Liste des engines qui acceptent fulltext.
+ * @return string[]
+ */
+function fulltext_accepted_engines() {
+	return array(
+		'myisam' => 'MyISAM',
+		'innodb' => 'InnoDB',
+	);
+}
+
+function fulltext_verifier_conversion($table) {
 	$charset = strtolower(str_replace('-', '', $GLOBALS['meta']['charset']));
 	$necessite_conversion = false;
 
@@ -23,7 +34,7 @@ function verifier_conversion($table) {
 	}
 }
 
-function compter_elements($table) {
+function fulltext_compter_elements($table) {
 	$nb = sql_countsel(table_objet_sql($table));
 	return $nb;
 }
@@ -34,6 +45,7 @@ function fulltext_liste_des_tables() {
 	$champs_interdits = array(
 		'auteur'=>array('login')
 	);
+	$engines = array_keys(fulltext_accepted_engines());
 
 	foreach ($champs as $table => $fields) {
 		$tables[$table] = array(
@@ -42,8 +54,8 @@ function fulltext_liste_des_tables() {
 			'keys' => array(),
 			'index_prop' => array(),
 		);
-
-		if (strtolower($tables[$table]['engine'])=='myisam') {
+		$engine = strtolower($tables[$table]['engine']);
+		if (in_array($engine, $engines)) {
 			if ($keys = fulltext_keys($table)) {
 				$tables[$table]['keys'] = $keys;
 			}

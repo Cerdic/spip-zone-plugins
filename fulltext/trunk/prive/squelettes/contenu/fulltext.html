@@ -1,34 +1,82 @@
-[(#AUTORISER{configurer,fulltext}|sinon_interdire_acces)]
+[(#AUTORISER{configurer,_fulltext}|sinon_interdire_acces)]
+
+<style type="text/css">
+	.fulltext-message ul {
+		margin:0 !important;
+	}
+	.fulltext-message li {
+		margin-left: 1em !important;
+	}
+	.fulltext-engine {
+		display:flex; flex-grow: 1;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid #eee;
+		margin-bottom: .5em;
+	}
+	.fulltext-engine-actuel { margin-bottom: .5em; }
+	.fulltext-engine-convertir { text-align: right; }
+</style>
 
 <h1 class="grostitre"><:fulltext:titre_page_fulltext_index:></h1>
-[<div class="success">(#ENV*{ok})</div>]
-[<div class="error">(#ENV*{erreur})</div>]
+#SET{ok,#ENV{ok}|is_array|?{#ENV*{ok},#LISTE{#ENV*{ok}}|array_filter}}
+#SET{erreur,#ENV{erreur}|is_array|?{#ENV*{erreur},#LISTE{#ENV*{erreur}}|array_filter}}
+<B_oks>
+<div class="fulltext-message success">
+	<ul class="spip">
+	<BOUCLE_oks(DATA){source tableau, #GET{ok}}>
+		<li>#VALEUR</li>
+	</BOUCLE_oks>
+	</ul>
+</div>
+</B_oks>
+<B_errors>
+<div class="fulltext-message error">
+	<ul class="spip">
+	<BOUCLE_errors(DATA){source tableau, #GET{erreur}}>
+		<li>#VALEUR</li>
+	</BOUCLE_errors>
+	</ul>
+</div>
+</B_errors>
+
 
 #SET{tables,#REM|fulltext_liste_des_tables}
+#SET{engines,#REM|fulltext_accepted_engines}
+#SET{engines_show,#GET{engines}|implode{', '}}
+#SET{engines_convertibles,#LISTE}
 #SET{nombre,0}
-#SET{myisam_nombre,0}
 
 <BOUCLE_tables(DATA){source table, #GET{tables}}{par cle}>
 	#SET{table,#CLE}
-	[(#BOITE_OUVRIR{[(#GET{table})][ ((#GET{table}|compter_elements))],box simple})]
-	#SET{ok,non}
-	[(#SET{engine,#VALEUR{engine}})]
-	[(#GET{engine}|=={''}|ou{[(#GET{engine}|strtolower|!={myisam})]}|oui)
-		[(#GET{ok}|!={ok}|et{#GET{engine}|!={''}}|oui)
-			#SET{ok,ok}
-			#SET{myisam_nombre,#GET{myisam_nombre}|plus{1}}
-			<div class="notice"><:fulltext:table_format:> #GET{engine}; <:fulltext:il_faut_myisam:>
-				[(#BOUTON_ACTION{<:fulltext:convertir_myisam:>,[(#URL_ACTION_AUTEUR{fulltext_convert_myisam,#CLE,#URL_ECRIRE{fulltext}})]})]
+	[(#SET{engine_ok,#ENGINE|oui|et{#ENGINE|strtolower|in_any{#GET{engines}|array_keys}}})]
+	[(#BOITE_OUVRIR{[(#GET{table})][ ((#GET{table}|fulltext_compter_elements))],box simple})]
+
+	<BOUCLE_si_engine(CONDITION){si #ENGINE}>
+		<div class="fulltext-engine">
+			<p class="fulltext-engine-actuel"><:fulltext:table_format_engine{engine=#ENGINE}:></p>
+			<div class="fulltext-engine-convertir">
+			<BOUCLE_engines(DATA){source tableau, #GET{engines}}{cle != #ENGINE|strtolower}>
+				[(#SET{engines_convertibles,#GET{engines_convertibles}|push{#CLE}|array_unique})]
+				[(#BOUTON_ACTION{
+					<:fulltext:convertir_vers_engine{engine=#VALEUR}:>,
+					[(#URL_ACTION_AUTEUR{fulltext_convert_#CLE,#GET{table},#URL_ECRIRE{fulltext}})],
+					right
+				})]
+			</BOUCLE_engines>
 			</div>
+		</div>
+		[(#GET{engine_ok}|non)
+			<div class="notice"><:fulltext:table_formats_acceptes{engines=#GET{engines_show}}:></div>
 		]
-		[(#GET{ok}|!={ok}|oui)
-			<div class="error"><:fulltext:table_non_reconnue:></div>
-		]
-	]
-	[<div class="warning">(#GET{table}|verifier_conversion)</div>]
+	</BOUCLE_si_engine>
+		<div class="error"><:fulltext:table_non_reconnue:></div>
+	<//B_si_engine>
+
+	[<div class="warning">(#GET{table}|fulltext_verifier_conversion)</div>]
 
 	#SET{regexp,^[a-z_0-9]+$}
-	<BOUCLE_siok(CONDITION){si #GET{engine}|=={''}|ou{#GET{engine}|strtolower|!={myisam}}|non}>
+	<BOUCLE_siok(CONDITION){si #GET{engine_ok}}>
 		[(#ENV{reinitialise}|=={#GET{table}}|ou{#ENV{reinitialise}|=={tous}}|oui)
 			[(#REM|fulltext_reinitialiser_document)]
 		]
@@ -39,7 +87,8 @@
 			[(#REM|fulltext_reinitialiser_document_ptg)]
 		]
 
-		#SET{cles,#VALEUR{keys}}
+		#SET{cles,#KEYS}
+
 		<BOUCLE_sicles(CONDITION){si #GET{cles}|count|>{0}}>
 			<dl>
 				<BOUCLE_liste_cles(DATA){source table,#GET{cles}}>
@@ -58,7 +107,7 @@
 
 		<B_indexprop>
 		<div class="info">
-		<BOUCLE_indexprop(POUR){tableau #VALEUR{index_prop}}>
+		<BOUCLE_indexprop(DATA){source tableau, #INDEX_PROP}>
 			[(#GET{table}|fulltext_lien_creer_index{#VALEUR, #CLE})]
 			#SET{nombre,#GET{nombre}|plus{1}}
 		</BOUCLE_indexprop>
@@ -73,8 +122,12 @@
 	[(#BOUTON_ACTION{<:fulltext:creer_tous:>,[(#URL_ACTION_AUTEUR{fulltext_creer_index,all,#URL_ECRIRE{fulltext}})]})]
 ]
 
-[(#GET{myisam_nombre}|>{1}|oui)
-	[(#BOUTON_ACTION{<:fulltext:convertir_toutes:>,[(#URL_ACTION_AUTEUR{fulltext_convert_myisam,all,#URL_ECRIRE{fulltext}})]})]
-]
+<BOUCLE_tout_convertir_engines(DATA){source tableau, #GET{engines}}{cle IN #GET{engines_convertibles}}>
+	[(#BOUTON_ACTION{
+		<:fulltext:convertir_toutes_vers_engine{engine=#VALEUR}:>,
+		[(#URL_ACTION_AUTEUR{fulltext_convert_#CLE,all,#URL_ECRIRE{fulltext}})],
+		right
+	})]
+</BOUCLE_tout_convertir_engines>
 
 #BOITE_FERMER
