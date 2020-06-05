@@ -202,7 +202,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 						$_id_join = id_table_objet($table_liee);
 						$table_join = table_objet($table_liee);
 
-						$subscore = 'MATCH(' . implode($mkeys, ',').") AGAINST ($p".($boolean ? ' IN BOOLEAN MODE':'') . ')';
+						$subscore = 'MATCH(' . implode(',', $mkeys).") AGAINST ($p".($boolean ? ' IN BOOLEAN MODE':'') . ')';
 						// on peut definir une fonction de recherche jointe pour regler les cas particuliers
 						$cle_arrivee = id_table_objet($table_liee);
 						$table_arrivee = table_objet($table_liee, $serveur);
@@ -358,7 +358,9 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		if ($fulltext) {
 			$pts = $t['score'];
 
-			if (isset($t['popularite'])
+			if (
+				isset($t['popularite'])
+				and isset($GLOBALS['meta']['popularite_max'])
 				and $mpop = $GLOBALS['meta']['popularite_max']) {
 				$pts *= (1+$t['popularite']/$mpop);
 			}
