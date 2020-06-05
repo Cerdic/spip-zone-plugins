@@ -8,8 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function fulltext_taches_generales_cron($taches_generales) {
-	$fulltext = @unserialize($GLOBALS['meta']['fulltext']);
-	if ($fulltext['intervalle_cron']) {
+	include_spip('inc/config');
+	$fulltext = lire_config('fulltext/', array());
+	if (!empty($fulltext['intervalle_cron'])) {
 		$taches_generales['fulltext_index_document'] = $fulltext['intervalle_cron'];
 	} else {
 		@define('_FULLTEXT_INTERVALLE_CRON', 600);
