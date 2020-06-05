@@ -1,0 +1,7 @@
+#SET{description,#ARRAY}
+<BOUCLE_evenements(EVENEMENTS) {par date_debut} {id_evenement IN #ENV{valeur}}>
+	[(#SET{texte,#INCLURE{fond=saisies/inc-evenement,env,places_dispo_texte=#GET{places_dispo_texte},id_evenement}|trim})]
+	[(#SET{description,#GET{description}|array_merge{#ARRAY{#GET{texte},#ID_EVENEMENT}}})]
+</BOUCLE_evenements>
+#SET{description,#GET{description}|array_flip}
+#INCLURE{fond=saisies-vues/#ENV{type_choix,radio},data=#GET{description},env}
