@@ -140,7 +140,7 @@ function inc_saisies_afficher_si_js_radio($champ, $total, $operateur, $valeur, $
  * @param array $saisie
 **/
 function inc_saisies_afficher_si_js_fichiers($champ, $total, $operateur, $valeur, $guillemet, $negation, $saisie) {
-	$nb_fichiers = $saisie['options']['nb_fichiers'];
+	$nb_fichiers = isset($saisie['options']['nb_fichiers']) ? $saisie['options']['nb_fichiers'] : 0;
 	if (!$nb_fichiers) {
 		$nb_fichiers = 1;
 	} else {
