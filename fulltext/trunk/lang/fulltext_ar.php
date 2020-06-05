@@ -126,7 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'table_convertie' => 'تم تحويل الجدول الى MyISAM',
 	'table_format' => 'تنسيق هذا الجدول هو',
-	'table_non_reconnue' => 'جدول غير معروف',
+	'table_non_reconnue' => 'جدول غير معروف', # MODIF
 	'textes_premier' => 'ولكن يعرض أولاً النصوص التي تحتوي',
 	'titre_page_fulltext_index' => 'إعداد فهارس البحث',
 

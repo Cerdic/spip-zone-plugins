@@ -128,7 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'table_convertie' => 'جدول به ماي ايسام تبديل شد',
 	'table_format' => 'اين جدول به اين فرمت است: ',
-	'table_non_reconnue' => 'جدول شناخته نشده',
+	'table_non_reconnue' => 'جدول شناخته نشده', # MODIF
 	'textes_premier' => 'اما اول تكست‌ها را با محتوا نشان مي‌دهد',
 	'titre_page_fulltext_index' => 'پيكربندي نمايه‌هاي جستجو',
 

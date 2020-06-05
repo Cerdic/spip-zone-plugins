@@ -95,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'table_convertie' => 'tabula pārveidota uz MyISAM',
 	'table_format' => 'Šīs tabulas formāts ir',
-	'table_non_reconnue' => 'neatpazīta tabula',
+	'table_non_reconnue' => 'neatpazīta tabula', # MODIF
 	'textes_premier' => 'bet rāda tos tekstus pirmos, kas sevī ietver',
 
 	// U

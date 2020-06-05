@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'table_convertie' => 'вікно перемінити на MyISAM',
 	'table_format' => 'Формат цього вікна -',
-	'table_non_reconnue' => 'нерозпізнане вікно',
+	'table_non_reconnue' => 'нерозпізнане вікно', # MODIF
 	'textes_premier' => 'але спершу показує тексти, які містять',
 
 	// U

@@ -126,7 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'table_convertie' => 'table convertie en MyISAM',
 	'table_format' => 'Cette table est au format',
-	'table_non_reconnue' => 'table non reconnue',
+	'table_non_reconnue' => 'table non reconnue', # MODIF
 	'textes_premier' => 'mais présente en premier les textes qui contiennent',
 	'titre_page_fulltext_index' => 'Configuration des index de recherche',
 

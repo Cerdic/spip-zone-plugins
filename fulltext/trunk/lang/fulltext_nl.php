@@ -126,7 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'table_convertie' => 'tekstveld geconverteerd naar MyISAM',
 	'table_format' => 'Het formaat van dit tekstveld is',
-	'table_non_reconnue' => 'onherkenbaar tekstveld',
+	'table_non_reconnue' => 'onherkenbaar tekstveld', # MODIF
 	'textes_premier' => 'maar toont eerst tekst die het volgende bevat',
 	'titre_page_fulltext_index' => 'Configuratie van de zoekindexen',
 

@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'table_convertie' => 'tablica przekonwertowana na MyISAM',
 	'table_format' => 'Ta tablica jest w formacie',
-	'table_non_reconnue' => 'nierozpoznana tablica',
+	'table_non_reconnue' => 'nierozpoznana tablica', # MODIF
 	'textes_premier' => 'ale pokazuje pierwszy tekst zawierający',
 
 	// U

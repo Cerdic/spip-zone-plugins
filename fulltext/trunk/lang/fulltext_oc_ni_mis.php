@@ -126,7 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'table_convertie' => 'taula counvertida en MyISAM',
 	'table_format' => 'Aquela taula es au fourmat',
-	'table_non_reconnue' => 'taula noun recounouissuda',
+	'table_non_reconnue' => 'taula noun recounouissuda', # MODIF
 	'textes_premier' => 'mà presenta en premié lu tèstou que countenon',
 	'titre_page_fulltext_index' => 'Counfiguracioun des ìndice de recercà',
 

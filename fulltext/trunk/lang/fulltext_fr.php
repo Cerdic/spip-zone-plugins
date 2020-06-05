@@ -18,11 +18,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'casse_indifferente' => 'La casse (minuscule/majuscule) des mots recherchés est indifférente.',
 	'configuration_indexation_document' => 'Configuration de l’indexation des documents',
 	'configurer_egalement_doc' => 'Vous pouvez également configurer l’indexation des documents :',
-	'convertir_myisam' => 'Convertir en MyISAM', // deprecated
-	'convertir_vers_engine' => 'Convertir en <strong>@engine@</strong>',
-	'convertir_toutes' => 'Convertir toutes les tables en MyISAM', // deprecated
+	'convertir_myisam' => 'Convertir en MyISAM',
+	'convertir_toutes' => 'Convertir toutes les tables en MyISAM',
 	'convertir_toutes_vers_engine' => 'Convertir toutes les tables en <strong>@engine@</strong>',
 	'convertir_utf8' => 'convertir en UTF-8 pour restaurer la cohérence',
+	'convertir_vers_engine' => 'Convertir en <strong>@engine@</strong>',
 	'creer_tous' => 'Créer tous les index FULLTEXT suggérés',
 
 	// D
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'id' => 'ID',
-	'il_faut_myisam' => 'il faut MyISAM', // deprecated
+	'il_faut_myisam' => 'il faut MyISAM',
 	'incoherence_charset' => 'Une incohérence entre le charset de votre site et celui des tables de votre base de données risque de fausser les recherches avec caractères accentués :',
 	'index_regenere' => 'index de la table régénérés',
 	'index_reinitialise' => 'Les documents en erreur ont été réinitialisés',
@@ -124,9 +124,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer' => 'Supprimer',
 
 	// T
-	'table_convertie' => 'table convertie en MyISAM', // deprecated
+	'table_convertie' => 'table convertie en MyISAM',
 	'table_convertie_engine' => 'Table convertie en @engine@.',
-	'table_format' => 'Cette table est au format', // deprecated
+	'table_format' => 'Cette table est au format',
 	'table_format_engine' => 'Cette table est au format <strong>@engine@</strong>.',
 	'table_formats_acceptes' => 'Formats acceptés : @engines@',
 	'table_non_reconnue' => 'Table non reconnue.',
