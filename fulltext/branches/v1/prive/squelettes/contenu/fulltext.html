@@ -1,0 +1,80 @@
+[(#AUTORISER{configurer,fulltext}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:fulltext:titre_page_fulltext_index:></h1>
+[<div class="success">(#ENV*{ok})</div>]
+[<div class="error">(#ENV*{erreur})</div>]
+
+#SET{tables,#REM|fulltext_liste_des_tables}
+#SET{nombre,0}
+#SET{myisam_nombre,0}
+
+<BOUCLE_tables(DATA){source table, #GET{tables}}{par cle}>
+	#SET{table,#CLE}
+	[(#BOITE_OUVRIR{[(#GET{table})][ ((#GET{table}|compter_elements))],box simple})]
+	#SET{ok,non}
+	[(#SET{engine,#VALEUR{engine}})]
+	[(#GET{engine}|=={''}|ou{[(#GET{engine}|strtolower|!={myisam})]}|oui)
+		[(#GET{ok}|!={ok}|et{#GET{engine}|!={''}}|oui)
+			#SET{ok,ok}
+			#SET{myisam_nombre,#GET{myisam_nombre}|plus{1}}
+			<div class="notice"><:fulltext:table_format:> #GET{engine}; <:fulltext:il_faut_myisam:>
+				[(#BOUTON_ACTION{<:fulltext:convertir_myisam:>,[(#URL_ACTION_AUTEUR{fulltext_convert_myisam,#CLE,#URL_ECRIRE{fulltext}})]})]
+			</div>
+		]
+		[(#GET{ok}|!={ok}|oui)
+			<div class="error"><:fulltext:table_non_reconnue:></div>
+		]
+	]
+	[<div class="warning">(#GET{table}|verifier_conversion)</div>]
+
+	#SET{regexp,^[a-z_0-9]+$}
+	<BOUCLE_siok(CONDITION){si #GET{engine}|=={''}|ou{#GET{engine}|strtolower|!={myisam}}|non}>
+		[(#ENV{reinitialise}|=={#GET{table}}|ou{#ENV{reinitialise}|=={tous}}|oui)
+			[(#REM|fulltext_reinitialiser_document)]
+		]
+		[(#ENV{reinitialise}|=={document_tout}|oui)
+			[(#REM|fulltext_reinitialiser_totalement_document)]
+		]
+		[(#ENV{reinitialise}|=={document_ptg}|oui)
+			[(#REM|fulltext_reinitialiser_document_ptg)]
+		]
+
+		#SET{cles,#VALEUR{keys}}
+		<BOUCLE_sicles(CONDITION){si #GET{cles}|count|>{0}}>
+			<dl>
+				<BOUCLE_liste_cles(DATA){source table,#GET{cles}}>
+				<dt>
+					#CLE [(#BOUTON_ACTION{[(#CHEMIN{images/croix-rouge.gif}|balise_img{<:fulltext:supprimer:>})],[(#URL_ACTION_AUTEUR{fulltext_supprimer_index,#GET{table}/#CLE,#URL_ECRIRE{fulltext}})],'',<:fulltext:supprimer:>,<:fulltext:supprimer:>})]
+				</dt>
+				<dd>#VALEUR</dd>
+				</BOUCLE_liste_cles>
+			</dl>
+		</BOUCLE_sicles>
+		</B_sicles>
+			[(#ENV{creer}|=={tous}|oui)
+				<p><:fulltext:pas_index:></p
+			]
+		<//B_sicles>
+
+		<B_indexprop>
+		<div class="info">
+		<BOUCLE_indexprop(POUR){tableau #VALEUR{index_prop}}>
+			[(#GET{table}|fulltext_lien_creer_index{#VALEUR, #CLE})]
+			#SET{nombre,#GET{nombre}|plus{1}}
+		</BOUCLE_indexprop>
+		</div>
+		</B_indexprop>
+
+	</BOUCLE_siok>
+	#BOITE_FERMER
+</BOUCLE_tables>
+
+[(#GET{nombre}|>{1}|oui)
+	[(#BOUTON_ACTION{<:fulltext:creer_tous:>,[(#URL_ACTION_AUTEUR{fulltext_creer_index,all,#URL_ECRIRE{fulltext}})]})]
+]
+
+[(#GET{myisam_nombre}|>{1}|oui)
+	[(#BOUTON_ACTION{<:fulltext:convertir_toutes:>,[(#URL_ACTION_AUTEUR{fulltext_convert_myisam,all,#URL_ECRIRE{fulltext}})]})]
+]
+
+#BOITE_FERMER
