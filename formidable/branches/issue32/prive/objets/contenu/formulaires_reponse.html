@@ -30,6 +30,12 @@
 		[(#DATE|affdate_jourcourt|concat{#DATE|affdate{", H:i"}})]
 	</div>
 </div>
+<div class="champ afficher contenu_date_soumission[ (#DATE_SOUMISSION*|strlen|?{'',vide})]">
+	<div class='label'><:formidable:date_soumission:></div>
+	<div dir='#LANG_DIR'>
+		[(#DATE_SOUMISSION|affdate_jourcourt|concat{#DATE_SOUMISSION|affdate{", H:i"}})]
+	</div>
+</div>
 <div class="champ afficher contenu_maj[ (#MAJ*|strlen|?{'',vide})]">
 	<div class='label'><:formidable:reponse_maj:></div>
 	<div dir='#LANG_DIR'>

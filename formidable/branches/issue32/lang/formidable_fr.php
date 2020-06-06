@@ -43,6 +43,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_dossier_formulaire_erreur_impossible_ecrire' => 'Impossible d’écrire dans le  @dossier@,  nécessaire pour stocker les fichiers. Vérifier les droits d’accès.',
 	'creer_dossier_formulaire_erreur_possible_lire_exterieur' => 'Il est possible de lire à distance le contenu du dossier  @dossier@. Ceci est problématique en terme de confidentialité des données.',
 
+	// D
+	'date_soumission' => 'Date de soumission',
+
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
 	'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
