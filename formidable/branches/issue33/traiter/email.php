@@ -158,6 +158,11 @@ function traiter_email_dist($args, $retours) {
 		if (!isset($sujet) or !$sujet) {
 			$sujet = _T('formidable:traiter_email_sujet', array('nom'=>$nom_envoyeur));
 		}
+
+		if (isset($options['champ_sujet_modif_reponse']) and $options['champ_sujet_modif_reponse'] and $retours['modification_reponse']) {
+			$sujet = $sujet.' '._T('formidable:traitement_email_sujet_courriel_modif_reponse');
+		}
+
 		$sujet = filtrer_entites($sujet);
 
 		// Mais quel va donc être le fond ?
