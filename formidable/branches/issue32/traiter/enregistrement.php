@@ -77,6 +77,7 @@ function traiter_enregistrement_dist($args, $retours) {
 				'variable_php' => $variable_php,
 				'ip' => $args['options']['ip'] == 'on' ? $GLOBALS['ip'] : '',
 				'date' => 'NOW()',
+				'date_soumission' => 'NOW()',
 				'statut' => $statut
 			)
 		);
@@ -92,7 +93,10 @@ function traiter_enregistrement_dist($args, $retours) {
 		// simple mise à jour du champ maj de la table spip_formulaires_reponses
 		sql_updateq(
 			'spip_formulaires_reponses',
-			array('maj' => 'NOW()'),
+			array(
+				'maj' => 'NOW()',
+				'date_soumission' => 'NOW()',
+			),
 			"id_formulaires_reponse = $id_formulaires_reponse"
 		);
 		//effacer les fichiers existant
