@@ -77,7 +77,7 @@
 	function hide_fieldset($field, $speed){
 		$($field).hide($speed);
 		$($field+' input').each(function() {
-						$(this).removeAttr('required');
+			$(this).removeAttr('required');
 		});
 	}
 
