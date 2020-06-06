@@ -1,7 +1,7 @@
 <paquet
 	prefix="configs"
 	categorie="maintenance"
-	version="1.0.2"
+	version="1.0.3"
 	etat="dev"
 	compatibilite="[3.1.6;3.3.*]"
 	documentation=""
@@ -9,15 +9,15 @@
 	schema="1.0.0"
 >
 
-	<nom>SPIP Variables </nom>
+	<nom>SPIP Variables</nom>
 
-	<auteur lien='http://gamuza.fr'>tofulm</auteur>
+	<auteur lien='https://gamuza.fr'>tofulm</auteur>
 
 	<licence>GNU/GPL</licence>
-
+	
 	<pipeline nom="autoriser" inclure="configs_autorisations.php" />
-
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/configs.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/configs.php" />
-
+	
+	<menu nom="configurer_configs" titre="configs:configuration_configs" parent="menu_configuration" icone="images/configs-16.png" />
 </paquet>

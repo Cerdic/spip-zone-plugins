@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_exemple' => 'Exemple',
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
+	'configuration_configs' => 'SPIP configs',
 	
 	// H
 	'howto_edition' => 'Pour permettre l\'édition des configs il faut activer le plugin Crayons 
