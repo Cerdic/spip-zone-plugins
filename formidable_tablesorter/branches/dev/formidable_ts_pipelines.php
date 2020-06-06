@@ -42,21 +42,6 @@ function formidable_ts_affiche_gauche($flux) {
  *  - les cxextras date date => $date brut
  *  - les cextras int/float => $valeur brut
 **/
-function formidable_ts_formidable_ts_data_sort_value($flux) {
-	$saisie = $flux['args']['saisie'];
-	if ($saisie['saisie'] === 'evenements' and $flux['args']['valeur']) {
-		$flux['data'] = sql_getfetsel('date_debut', 'spip_evenements', 'id_evenement='.$flux['args']['valeur']);
-	}
-	if ($flux['args']['type'] === 'extra') {
-		if (strpos($saisie['options']['sql'], 'INT') !== false
-			or
-			strpos($saisie['options']['sql'], 'FLOAT') !== false
-			or
-			strpos($saisie['options']['sql'], 'DATE') !== false
-		)  {
-			$flux['data'] = $flux['args']['valeur'];
-		}
-	}
-
+function formidable_ts_formidable_ts_sort_value($flux) {
 	return $flux;
 }

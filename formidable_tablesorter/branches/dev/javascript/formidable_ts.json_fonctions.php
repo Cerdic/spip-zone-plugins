@@ -3,7 +3,6 @@ namespace formidable_ts;
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
 include_spip('inc/sql');
 include_spip('inc/saisies');
 include_spip('inc/cextras');
@@ -17,7 +16,11 @@ class table {
 	private $id_formulaire;
 	private $filter;
 	private $column;
-	private $data;
+	private $raws;
+	private $headers;
+	private $saisies;
+	private $saisies_finales;
+	private $cextras;
 	private $statut;
 
 	/**
@@ -30,18 +33,63 @@ class table {
 		$this->column = $env['column'] ?? null;
 		$env['statut'] = $env['statut'] ?? null;
 		$this->statut = \sql_quote($env['statut'] ? $env['statut'] : '.*');
+		$saisies = \unserialize(sql_getfetsel('saisies', 'spip_formulaires', "id_formulaire=$this->id_formulaire"));
+		$saisies = \saisies_identifier($saisies);// Au cas où
+		$this->saisies = $saisies;
+		$this->saisies_finales  = \saisies_lister_finales($saisies);
+		if (\test_plugin_actif('cextras')) {
+			include_spip('cextras_pipelines');
+			$this->cextras = \champs_extras_objet('spip_formulaires_reponses');
+		}
+		if (!$this->cextras) {
+			$this->cextras = array();
+		}
+		$this->raws = array();
+		$this->headers = array();
 	}
 
-
 	/**
-	 * Peupler l'objet à partir de la base SQL
+	 * Peupler headers et raws
 	**/
 	public function setData() {
-		$this->data = array();
-		$saisies = \unserialize(sql_getfetsel('saisies', 'spip_formulaires', "id_formulaire=$this->id_formulaire"));
-		$saisie  = \saisies_lister_finales($saisies);
-		$cextras = appliquer_filtre('spip_formulaires_reponses', 'champs_extras_objet');
+		$this->setRaws();
+		$this->setHeaders();
+	}
 
+	/**
+	 * Peupler les headers à partir de la base SQL
+	**/
+	public function setHeaders() {
+		$headers = &$this->headers;
+		$headers[] = '#';
+		$headers[] = _T('info_numero_abbreviation');
+		$headers[] = _T('public:date');
+		foreach ($this->cextras as $extra) {
+			$headers[] = $extra['options']['label'] ?? $extra['options']['label_case'] ?? $extra['options']['nom'];
+		}
+		foreach ($this->saisies_finales as $saisie) {
+			if ($saisie['saisie'] == 'explication') {
+continue;
+			}
+			$chemin = \saisies_chercher($this->saisies, $saisie['identifiant'], true);
+			if (count($chemin) > 1) {
+				$fieldset = $this->saisies[$chemin[0]];
+				$fieldset = $fieldset['options']['label'];
+			} else {
+				$fieldset = '';
+			}
+			$label =  $saisie['options']['label'] ?? $saisie['options']['label_case'] ?? $saisie['options']['nom'];
+			if ($fieldset) {
+				$label .= " <span class='fieldset_label'>($fieldset)</span>";
+			}
+			$headers[] = $label;
+		}
+	}
+	/**
+	 * Peupler les lignes à partir de la base SQL
+	**/
+	private function setRaws() {
+		$saisies = &$this->saisies;
 		$res_reponse = \sql_select('*',
 			'spip_formulaires_reponses',
 			array(
@@ -51,12 +99,17 @@ class table {
 			'',
 			'DATE DESC'
 		);
-		while ($raw_reponse = \sql_fetch($res_reponse)) {
-			$raw_ts = [];
 
+
+		while ($raw_reponse = \sql_fetch($res_reponse)) {
+			$id_formulaires_reponse = $raw_reponse['id_formulaires_reponse'];
+			$raw_ts = [];
 			// Cell 0 : statut
 			$value = \liens_absolus(\appliquer_filtre($raw_reponse['statut'], 'puce_statut', 'formulaires_reponse', $raw_reponse['id_formulaires_reponse'], true));
 			$raw_ts[] = new cell(
+				$this->id_formulaire,
+				$id_formulaires_reponse,
+				'statut',
 				$value,
 				$raw_reponse['statut'],
 				false,
@@ -65,6 +118,9 @@ class table {
 			// Cell 1 : id
 			$value = '<a href="'.\generer_url_ecrire('formulaires_reponse', 'id_formulaires_reponse='.$raw_reponse['id_formulaires_reponse']).'">'.$raw_reponse['id_formulaires_reponse'].'</a>';
 			$raw_ts[] = new cell(
+				$this->id_formulaire,
+				$id_formulaires_reponse,
+				'id_formulaires_reponse',
 				$value,
 				$raw_reponse['id_formulaires_reponse'],
 				false,
@@ -73,13 +129,66 @@ class table {
 			// Cell 2 : date
 			$value = \affdate_heure($raw_reponse['date']);
 			$raw_ts[] = new cell(
+				$this->id_formulaire,
+				$id_formulaires_reponse,
+				'date',
 				$value,
 				$raw_reponse['date'],
 				false,
 				'natif');
 
+			// Cells suivantes : champs extras
+			foreach ($this->cextras as $champ) {
+				$crayons = $false;
+				$nom = $champ['options']['nom'];
+				if (test_plugin_actif('crayons')) {
+					$opt = array(
+						'saisie' => $champ,
+						'type' => 'formulaires_reponse',
+						'champ' => $nom,
+						'table' => table_objet_sql('formulaires_reponse'),
+					);
+					if (autoriser('modifierextra', 'formulaires_reponse', $id_formulaires_reponse, '', $opt)) {
+						$crayons = true;
+					}
+				}
+
+				if (isset($champ['options']['traitements'])) {
+					$value = \appliquer_traitement_champ($raw_reponse[$nom], $nom, 'formulaires_reponse');
+				} else {
+					$value = implode(\calculer_balise_LISTER_VALEURS('formulaires_reponses', $nom, $raw_reponse[$nom]), ', ');
+				}
+				$raw_ts[] = new cell(
+					$this->id_formulaire,
+					$id_formulaires_reponse,
+					$nom,
+					$value,
+					data_sort_value($value, $champ, 'extra'),
+					$crayons,
+					'extra'
+				);
+			}
+
+			// Derniers cells : la réponse de l'internaute
+			foreach ($this->saisies_finales as $saisie) {
+				if ($saisie['saisie'] == 'explication') {
+					continue;
+				}
+				$nom = $saisie['options']['nom'];
+				$value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'valeur_uniquement');
+				$raw_value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'brut');
+				$raw_ts[] = new cell(
+					$this->id_formulaire,
+					$id_formulaires_reponse,
+					$nom,
+					$value,
+					data_sort_value($value, $champ, 'champ'),
+					true,
+					'champ'
+				);
+			}
 			// Stocker tout
-			$this->data[] = $raw_ts;
+			$this->raws[] = $raw_ts;
 		}
 	}
 
@@ -88,25 +197,42 @@ class table {
 	 * @return string
 	**/
 	public function getJson() {
-		$json = [\count($this->data),$this->data];
+		$json = [\count($this->raws),$this->raws, $this->headers];
 		return \json_encode($json);
 	}
+	/**
+	 * Compte le nombre d'entetes
+	 * @return int
+	 **/
+	public function countHeaders() {
+		return count($this->headers);
+	}
+
 }
 
 /**
  * Classe représentant une cellule
+ * @var str|int $id_formulaire
+ * @var str|int $id_formulaires_reponse
+ * @var str|int $nom
  * @var str $value valeur de la cellule,
  * @var str $sort_value valeur de la cellule, pour le tri
  * @var bool $crayons est-ce crayonnable?
  * @var string $type natif|extra|champ
 **/
 class cell implements \JsonSerializable{
+	private $id_formulaire;
+	private $id_formulaires_reponse;
+	private $nom;
 	private $value;
 	private $sort_value;
 	private $crayons;
 	private $type;
 
-	public function __construct($value, $sort_value, $crayons, $type) {
+	public function __construct($id_formulaire, $id_formulaires_reponse, $nom, $value, $sort_value, $crayons, $type) {
+		$this->id_formulaire = $id_formulaire;
+		$this->id_formulaires_reponse = $id_formulaires_reponse;
+		$this->nom = $nom;
 		$this->value = $value;
 		$this->sort_value = $sort_value;
 		$this->crayons= $crayons;
@@ -117,7 +243,15 @@ class cell implements \JsonSerializable{
 	 * Returne la valeur string, avec le span englobant, pour les crayons
 	**/
 	public function jsonSerialize() {
-		return $this->value;
+		if ($this->crayons) {
+			if ($this->type == 'extra') {
+				return '<div class="'.classe_boucle_crayon('formulaires_reponse', $this->nom, $this->id_formulaires_reponse).'">'.$this->value.'</div>';
+			} elseif ($this->type == 'champ') {
+				return  '<div class="'.\calculer_voir_reponse($this->id_formulaires_reponse, $this->id_formulaire, $this->nom, '', 'edit').'">'.$this->value.'</div>';
+			}
+		} else {
+			return $this->value;
+		}
 	}
 }
 /**
@@ -130,4 +264,38 @@ function formidable_ts_json($env) {
 	$formidable_ts = new table($env);
 	$formidable_ts->setData();
 	return $formidable_ts->getJson();
+}
+
+
+/**
+ * Appelle le pipeline formidable_ts_sort_value
+ * Pour trouver le type de tri
+ * @param str|int $valeur valeur brute du champ de formulaire
+ * @param array $saisie decrit la saisie
+ * @param string $type='champ' ou bien 'extra'
+ * @return string valeur du data-sort-attribut
+ **/
+function data_sort_value($valeur, $saisie, $type = 'champ') {
+	if ($saisie['saisie'] === 'evenements' and $valeur) {
+		$data = \sql_getfetsel('date_debut', 'spip_evenements', 'id_evenement='.$flux['args']['valeur']);
+	}
+	if ($type  === 'extra') {
+		if (strpos($saisie['options']['sql'], 'INT') !== false
+			or
+			strpos($saisie['options']['sql'], 'FLOAT') !== false
+			or
+			strpos($saisie['options']['sql'], 'DATE') !== false
+		)  {
+			$data = $valeur;
+		}
+	}
+
+	return pipeline ('formidable_ts_sort_value', array(
+		'args' => array(
+			'valeur' => $valeur,
+			'saisie' => $saisie,
+			'type' => $type
+		),
+		'data' => $data
+	));
 }

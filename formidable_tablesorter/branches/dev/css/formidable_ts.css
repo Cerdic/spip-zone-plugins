@@ -26,6 +26,11 @@
   text-overflow: ellipsis;
   min-width: 10px;
 }
+.tablesorter .fieldset_label {
+	font-size:0.8em;
+	font-style:italic;
+	font-weight:normal;
+}
 .formidable_ts caption {
 	text-align:left;
 }
@@ -53,11 +58,6 @@
 }
 .tablesorter-filter-row {
 	background:white;
-}
-.tablesorter-ignoreRow th {
-	text-align:center;
-	font-size:1.25em;
-	padding-bottom:1em;
 }
 .tablesorter .move-arrows {
 	display: flex;

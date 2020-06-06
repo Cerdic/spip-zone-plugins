@@ -14,7 +14,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	<pipeline nom="affiche_gauche" inclure="formidable_ts_pipelines.php" />
-	<pipeline nom="formidable_ts_data_sort_value" inclure="formidable_ts_pipelines.php" />
+	<pipeline nom="formidable_ts_sort_value" action="" />
 	<necessite nom="formidable" compatibilite="[4.3.0;[" />
 	<necessite nom="spout" compatibilite="[1.2.2;[" />
 	<necessite nom="tablesorter" compatibilite="[2.1.0;[" />

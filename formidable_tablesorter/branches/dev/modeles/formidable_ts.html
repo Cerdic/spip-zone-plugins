@@ -5,9 +5,6 @@
 <BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}{si #AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}|ou{#ENV{public}|=={oui}}}>
 	<INCLURE{fond=inclure/formidable_ts_entete, env} />
 
-	#SET{saisies,#SAISIES|unserialize}
-	#SET{saisies_finales,#GET{saisies}|saisies_lister_finales}
-	#SET{cextras,#VAL{spip_formulaires_reponses}|appliquer_filtre{champs_extras_objet}|sinon{#LISTE}}
 
 	[(#ENV{choix_statut}|=={oui}|oui)
 	<INCLURE{fond=inclure/formidable_ts_filtres, env}/>
@@ -18,44 +15,14 @@
 	<table data-identifiant="#IDENTIFIANT" id="formidable_ts#ID_FORMULAIRE" class="tablesorter">
 		<caption>#TITRE</caption>
 		<thead>
-			<tr class="tablesorter-ignoreRow">
-				[(#VAL{<th></th>}|str_repeat{3})]
-				[(#VAL{<th><:formidable_ts:cextra:></th>}|str_repeat{#GET{cextras}|count})]
-				<BOUCLE_entete_fieldsets(POUR) {tableau #GET{saisies}}{cle !== 'options'}>
-					[(#VALEUR{saisies}|non)
-						[(#VALEUR{saisie}|!={explication}|oui)
-						<th></th>
-						]
-					]
-					[(#VALEUR{saisies}|oui)
-						#SET{nb, #VALEUR{saisies}|count|moins{#VALEUR{saisies}|saisies_lister_avec_type{explication}|count}}
-					[(#VAL{<th>#VALEUR{options/label}</th>}|str_repeat{#GET{nb}})</th>]
-					]
-				</BOUCLE_entete_fieldsets>
-			</tr>
-			<tr class="tablesorter-headerRow">
-				<th data-column-original-position="0">#</th>
-				<th data-column-original-position="1"><:info_numero_abbreviation:></th>
-				<th data-column-original-position="2"><:date:></th>
-				#SET{original_position,2}
-				<BOUCLE_entete_cextras(POUR){tableau #GET{cextras}}>
-					#SET{original_position,#GET{original_position}|plus{1}}
-					[(#VALEUR{saisie}|!={explication}|oui)
-					[<th data-column-original-position="#GET{original_position}">(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
-					]
-				</BOUCLE_entete_cextras>
-				<BOUCLE_entete(POUR) {tableau #GET{saisies_finales}}>
-				#SET{original_position,#GET{original_position}|plus{1}}
-				[(#VALEUR{saisie}|!={explication}|oui)
-				[<th data-column-original-position="#GET{original_position}">(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
-				]
-				</BOUCLE_entete>
+			<tr>
+				[(#ID_FORMULAIRE|formidable_ts_insert_th)]
 			</tr>
 		</thead>
 		</B_entete>
 		<tbody>
 			<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}{statut==#ENV{statut,'.*'}}>
-		</BOUCLE_reponses>
+			</BOUCLE_reponses>
 		</tbody>
 	</table>
 	</div>
