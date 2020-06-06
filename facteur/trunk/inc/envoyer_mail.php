@@ -58,7 +58,9 @@ function facteur_extraire_sujet($message_html, $message_texte = '') {
 
 
 /**
- * @param string $destinataire
+ * @param array|string $destinataire
+ *   si array : un tableau de mails
+     si string : un mail ou une liste de mails séparés par des virgules
  * @param string $sujet
  * @param string|array $message
  *   au format string, c'est un corps d'email au format texte, comme supporte nativement par le core
