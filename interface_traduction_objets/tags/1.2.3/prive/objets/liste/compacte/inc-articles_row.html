@@ -1,0 +1,38 @@
+<tr[(#ENV{activer_rang}|oui) data-id_objet="#ID_ARTICLE"] class="#ENV{class}">
+<BOUCLE_art(ARTICLES){id_article}{statut?}>#SET{id_trad,#ID_TRAD}#SET{id_article,#ID_ARTICLE}
+	[(#ENV{activer_rang}|oui)
+		[(#ENV{id_rubrique}|oui)<td class="picto">[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>]
+	]
+	<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+	[(#ENV{activer_rang}|oui)<td class='rang'>[(#RANG).]</td>]
+	<td class='titre principale'>[(#LOGO_ARTICLE||image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+	<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+	<td class='date'>[(#DATE|affdate_jourcourt)]</td>
+	<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
+		<a href="[(#ENV{mode}|=={edition_seule}|?{[(#ID_ARTICLE|generer_url_entite{article})],[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]})]">#ID_ARTICLE</a>,
+		#ID_ARTICLE
+		})]</td>
+	<td class="trad">
+	<BOUCLE_art_trads(ARTICLES){traduction}{id_mot?}{id_auteur?}{statut IN prepa,publie,prop}{id_article!=#ID_ARTICLE}>
+		[(#SET{voir,[article_(#ID_TRAD)]})]
+		[(#ENV{voir}|!={#GET{voir}}|?{
+			<span>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]&nbsp;[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
+				<a href="[(#ID_ARTICLE|generer_url_entite{article})]" title="#TITRE / <:info_numero_abbreviation:>#ID_ARTICLE">#LANG</a>,
+				#LANG
+				})]
+			</span>,
+			&nbsp;
+			})]
+	</BOUCLE_art_trads>
+		<div>
+		[(#ENV{voir}|=={#GET{voir}}|?{<a class="ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:interface_traduction_objets:fermer:>"><img src="[(#CHEMIN{prive/images/deplierbas.gif})]" alt="replier"/></a>,<a class="ajax" href="[(#SELF|parametre_url{voir,#GET{voir}})]" title="<:interface_traduction_objets:voir_traductions:>"><img src="[(#CHEMIN{prive/images/deplierhaut.gif})]" alt="deplier"/></a>})]
+		</div>
+	</td>
+	</B_art_trads>
+</BOUCLE_art>
+</tr>
+[(#ENV{voir}|=={#GET{voir}}|oui)
+	<INCLURE{fond=prive/objets/liste/compacte/inc-articles_trads_row}{id_trad=#GET{id_trad}}{id_article=#GET{id_article}}{env}/>
+	]
+
+

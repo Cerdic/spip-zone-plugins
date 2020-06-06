@@ -1,0 +1,30 @@
+[(#SET{req,[select [(#ENV{id_table_objet})] as id from (#ENV{table_objet_sql}) [where id_trad=(#ENV{id_trad}) AND [(#ENV{id_table_objet})] != [(#ENV{id})]] order by [(#ENV{id_table_objet})] desc]})]
+<BOUCLE_objets(DATA){source sql,#GET{req}}>
+	#SET{lang,#INFO_LANG{#ENV{objet},#VALEUR{id}}}[(#GET{lang}|changer_typo)]
+	#SET{titre,#INFO_TITRE{#ENV{objet},#VALEUR{id}}}
+<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+	[(#ENV{activer_rang}|oui)<td></td>]
+	[(#ENV{champs}|table_valeur{statut}|oui)
+	<td class='statut'>[(#ID|puce_changement_statut{#INFO_STATUT{#ENV{objet},#ID},#ENV{id_rubrique},#ENV{objet}})]</td>
+	]
+	<td class='picto'>#ENV**{picto}</td>
+	<td class='titre principale'><a
+		href="[(#VALEUR{id}|generer_url_entite{#ENV{objet}})]"
+		[hreflang="(#ENV{lang}|=={#GET{lang}}|non|?{#GET{lang}})"]
+		title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[(#RANG). ][(#GET{titre}|sinon{<:info_sans_titre:>})]</a>
+	</td>
+	[(#ENV{champ_auteur}|oui)
+		<td class='date'><INCLURE{fond=prive/objets/liste/inc-objets_compacte_auteurs,id,objet} /></td>
+	]
+	[(#ENV{champ_date}|oui)
+	<td class='date'>[(#DATE|affdate_court)]</td>
+	]
+	<td class='id'>[(#AUTORISER{modifier,#ENV{objet},#VALEUR{id}}|?{
+		[<a href="[(#VALEUR{id}|generer_url_ecrire_entite_edit{#ENV{objet}})]">(#VALEUR{id})</a>],
+		[(#VALEUR{id})]
+	})]</td>
+	<td>
+		-
+	</td>
+</tr>
+</BOUCLE_objets>
