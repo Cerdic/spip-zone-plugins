@@ -83,7 +83,16 @@ function saisies_afficher_si_js_champ($champ, $total, $operateur, $valeur, $vale
 		return '';
 	}
 
-	$saisie = pipeline('saisies_afficher_si_js_type', array('args' => array('saisie' => $saisies_form[$champ])));
+	$saisie = $saisies_form[$champ]['saisie'];
+	if ($saisie == 'radio' or $saisie == 'oui_non' or $saisie == 'true_false') {
+		$saisie = 'radio';
+	}
+	$saisie = pipeline('saisies_afficher_si_js_type', array(
+		'args' => array('saisie' => $saisies_form[$champ]),
+		'data' => $saisie
+		)
+	);
+
 	// Cas d'une valeur numérique : pour le test js, cela ne change rien, on la passe comme valeur
 	if (strlen($valeur_numerique) and !$valeur) {
 		$valeur = $valeur_numerique;

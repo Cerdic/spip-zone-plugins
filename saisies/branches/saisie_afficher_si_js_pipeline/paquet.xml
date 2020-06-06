@@ -21,13 +21,13 @@
 	<pipeline nom="affichage_final" inclure="saisies_pipelines.php" />
 	<pipeline nom="saisies_autonomes" action="" />
 	<pipeline nom="saisie_est_tabulaire" action="" />
+	<pipeline nom="saisies_afficher_si_js_type" />
 	<pipeline nom="saisies_lister_disponibles" action="" />
 	<pipeline nom="saisies_construire_formulaire_config" action="" />
 	<pipeline nom="formulaire_saisies" action="" />
 	<pipeline nom="saisies_verifier" action="" />
 	<pipeline nom="saisies_afficher_si_js_saisies_form" action="" />
 	<pipeline nom="formulaire_charger" inclure="saisies_pipelines.php" />
-	<pipeline nom="saisies_afficher_si_js_type" inclure="saisies_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="saisies_pipelines.php" />
 	<pipeline nom="formulaire_verifier_etape" inclure="saisies_pipelines.php" />
 	<pipeline nom="styliser" inclure="saisies_pipelines.php" />
