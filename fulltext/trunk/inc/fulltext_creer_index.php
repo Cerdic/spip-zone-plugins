@@ -12,26 +12,26 @@ function fulltext_liste_creer_index($arg = null) {
 
 	list($table, $nom) = array_pad(explode('/', $arg), 2, null);
 
-	$ok = $erreur = '';
+	$oks = $erreurs = array();
 
 	$tables = fulltext_liste_des_tables();
 	if ($table and isset($tables[$table]) and isset($tables[$table]['index_prop'][$nom])) {
 		list($ok, $erreur) = fulltext_creer_index($table, $nom, $tables[$table]['index_prop'][$nom]);
-	} elseif ($table == 'all') {
+		$oks[] = $ok;
+		$erreurs[] = $erreur;
+	} elseif ($table === 'all') {
 		foreach ($tables as $table => $desc) {
 			foreach ($desc['index_prop'] as $nom => $champs) {
-				list($ok1, $erreur1) = fulltext_creer_index($table, $nom, $champs);
-				if ($ok1) {
-					$ok .= $ok1 . '<br />';
-				}
-				if ($erreur1) {
-					$erreur .= $erreur1 . '<br />';
-				}
+				list($ok, $erreur) = fulltext_creer_index($table, $nom, $champs);
+				$oks[] = $ok;
+				$erreurs[] = $erreur;
 			}
 		}
 	}
 
-	return array($ok, $erreur);
+	$oks = array_filter($oks);
+	$erreurs = array_filter($erreurs);
+	return array($oks, $erreurs);
 }
 
 
