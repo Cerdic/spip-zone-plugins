@@ -172,7 +172,7 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank" rel="n
 	'option_tagfield_explication' => 'Balise pour le label du groupe. Pour des raisons d’accessibilité, il est vivement recommandé de laisser la valeur par défaut (balise legend).',
 	'option_tagfield_label' => 'Balise pour le label du groupe',
 	'option_type_choix_plusieurs' => 'Permettre à l’utilisateur de choisir <strong>plusieurs</strong> destinataires.',
-	'option_type_choix_tous' => 'Mettre <strong>tous</strong> ces auteurs en destinataires. L’utilisateur n’aura aucun choix.',
+	'option_type_choix_tous' => 'Mettre <strong>tout·es</strong> ces auteur·trices en destinataires. L’internaute n’aura aucun choix.',
 	'option_type_choix_un' => 'Permettre à l’internaute de choisir <strong>un seul</strong> destinataire (sous forme de liste déroulante).',
 	'option_type_choix_un_radio' => 'Permettre à l’internaute de choisir <strong>un seul</strong> destinataire (sous forme de liste à puce).',
 	'option_type_explication' => 'En mode "masqué", le contenu du champ ne sera pas visible.',
@@ -186,8 +186,8 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank" rel="n
 	'plugin_yaml_inactif' => 'Le plugin YAML est inactif. Vous devez l’activer pour que cette page soit fonctionnelle.',
 
 	// S
-	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs',
-	'saisie_auteurs_titre' => 'Auteurs',
+	'saisie_auteurs_explication' => 'Permet de sélectionner un·e ou plusieurs auteur·trices',
+	'saisie_auteurs_titre' => 'Auteur·trices',
 	'saisie_case_explication' => 'Permet d’activer ou de désactiver quelque chose.',
 	'saisie_case_titre' => 'Case unique',
 	'saisie_checkbox_explication' => 'Permet de choisir plusieurs options avec des cases.',
