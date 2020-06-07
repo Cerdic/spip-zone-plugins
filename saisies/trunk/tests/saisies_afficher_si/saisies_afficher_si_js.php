@@ -40,7 +40,19 @@
 			'label_case' => _T('profil:champ_config_activer_organisation_label_case'),
 		),
 	);
-
+	$saisies_form[] = array(
+		'saisie' => 'fichiers',
+		'options' => array(
+			'nb_fichiers' => 2,
+			'nom' => 'fichiers'
+		),
+	);
+	$saisies_form[] = array(
+		'saisie' => 'fichiers',
+		'options' => array(
+			'nom' => 'fichiers_bis'
+		),
+	);
 	$groupe_contact = array(
 			'saisie' => 'fieldset',
 			'options' => array(
@@ -278,6 +290,16 @@
 				0 => 'true',
 				1 => '!@plugin:tartempion_de_test@' // en espérant que personne ne nomme un plugin tartempion_de_test
 			),
+			'fichiers'=> array(
+				'0' => ' ($(form).find(&quot;[name^=\'cvtupload_fichiers_precedents[fichiers]\']&quot;).length + $(form).find(&quot;[name^=\'fichiers\']&quot;)[0].files.length + $(form).find(&quot;[name^=\'fichiers\']&quot;)[1].files.length) > 2',
+				'1' => '@fichiers@ > 2',
+				'2' => $saisies_form
+			),
+			'fichiers_bis'=> array(
+				'0' => ' ($(form).find(&quot;[name^=\'cvtupload_fichiers_precedents[fichiers_bis]\']&quot;).length + $(form).find(&quot;[name^=\'fichiers_bis\']&quot;)[0].files.length) > 2',
+				'1' => '@fichiers_bis@ > 2',
+				'2' => $saisies_form
+			)
 		);
 		return $essais;
 	}
