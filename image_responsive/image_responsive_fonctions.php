@@ -454,6 +454,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 
 
 function image_responsive($texte, $taille = -1, $lazy = 0, $vertical = 0, $medias = '', $proportions = '') {
+	$texte = supprimer_timestamp($texte);
 	if (!preg_match("/^<img/i", $texte)) {
 		if (strlen($texte) < 256 && file_exists($texte)) $texte = "<img src='$texte'>";
 		else return $texte;
