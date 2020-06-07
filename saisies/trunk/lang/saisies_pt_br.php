@@ -52,11 +52,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mois' => 'Mês',
 
 	// O
-	'option_aff_art_interface_explication' => 'Exibir somente as matérias do idioma do usuário',
+	'option_aff_art_interface_explication' => 'Exibir somente as matérias do idioma do usuário', # MODIF
 	'option_aff_art_interface_label' => 'Exibição multilíngue',
 	'option_aff_langue_explication' => 'Exibe o idioma da matéria ou da seção selecionada antes do titulo',
 	'option_aff_langue_label' => 'Exibir o idioma',
-	'option_aff_rub_interface_explication' => 'Exibir apenas as seções do idioma do usuário',
+	'option_aff_rub_interface_explication' => 'Exibir apenas as seções do idioma do usuário', # MODIF
 	'option_aff_rub_interface_label' => 'Exibição multilíngue',
 	'option_afficher_si_explication' => 'Informe as condições para exibir o campo, em função do valor de outros campos. O identificador dos outros campos deve ser inserido entre <code>@</code>.<br />
 Exemplo: code>@selection_1@=="Toto"</code> condiciona a exibição do campo a que o campo  <code>selection_1</code> tenha o valor <code>Toto</code>.<br />
@@ -76,7 +76,7 @@ Pode-se usar operadores boleanos <code>||</code> (ou) e  <code>&&</code> (e)', #
 	'option_choix_alternatif_label' => 'Permitir a proposição de opção alternativa',
 	'option_choix_alternatif_label_defaut' => 'Outra opção',
 	'option_choix_alternatif_label_label' => 'Rótulo desta outra opção',
-	'option_choix_destinataires_explication' => 'Um ou mais autores que o usuário possa escolher. Se nada for selecionado, será selecionado o autor que instalou o site.',
+	'option_choix_destinataires_explication' => 'Um ou mais autores que o usuário possa escolher. Se nada for selecionado, será selecionado o autor que instalou o site.', # MODIF
 	'option_choix_destinataires_label' => 'Destinatários possíveis',
 	'option_class_label' => 'Classes CSS adicionais',
 	'option_cols_explication' => 'Largura do bloco (em números de caracteres). Este opção não é sempre aplicável, já que os estilos CSS do seu site podem se sobrepor.',
@@ -118,9 +118,9 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'option_label_oui_label' => 'Label se o checkbox estiver marcado',
 	'option_limite_branche_explication' => 'Limita a escolha a um ramo específico do site',
 	'option_limite_branche_label' => 'Limitar a um ramo',
-	'option_maxlength_explication' => 'O usuário não poderá digitar mais do que esse número de caracteres.',
+	'option_maxlength_explication' => 'O usuário não poderá digitar mais do que esse número de caracteres.', # MODIF
 	'option_maxlength_label' => 'Número máximo de caracteres.',
-	'option_multiple_explication' => 'O usuário poderá selecionar vários valores.',
+	'option_multiple_explication' => 'O usuário poderá selecionar vários valores.', # MODIF
 	'option_multiple_label' => 'Seleção múltipla',
 	'option_nom_explication' => 'Um nome que identificará o campo.  Só pode conter letras minúsculas, números e o caracter "_".',
 	'option_nom_label' => 'Nome do campo',
@@ -142,10 +142,10 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'option_size_explication' => 'Largura do campo em número de caractéres. Esta opção não é sempre aplicável, já que os estilos CSS do seu site poderão sobrepor-se.',
 	'option_size_label' => 'Tamanho do campo',
 	'option_statut_label' => 'Status particular(es)',
-	'option_type_choix_plusieurs' => 'Permitir que o usuário escolha <strong>diversos</strong> destinatários.',
-	'option_type_choix_tous' => 'Incluir <strong>todos</strong> estes autores como destinatários. O usuário não terá nenhuma escolha.',
-	'option_type_choix_un' => 'Permitir ao usuário escolher <strong>um único</strong> destinatário (no formato de lista).',
-	'option_type_choix_un_radio' => 'Permite ao usuário escolher <strong>um único</strong> destinatário (no formato de checkboxes).',
+	'option_type_choix_plusieurs' => 'Permitir que o usuário escolha <strong>diversos</strong> destinatários.', # MODIF
+	'option_type_choix_tous' => 'Incluir <strong>todos</strong> estes autores como destinatários. O usuário não terá nenhuma escolha.', # MODIF
+	'option_type_choix_un' => 'Permitir ao usuário escolher <strong>um único</strong> destinatário (no formato de lista).', # MODIF
+	'option_type_choix_un_radio' => 'Permite ao usuário escolher <strong>um único</strong> destinatário (no formato de checkboxes).', # MODIF
 	'option_type_explication' => 'Em modo "mascarado", o conteúdo do campo não será mostrado.',
 	'option_type_label' => 'Tipo do campo',
 	'option_type_password' => 'Texto mascarado durante o preenchimento (ex: senha).',
@@ -157,15 +157,15 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'plugin_yaml_inactif' => 'O plugin YAML está desativado. Você precisa ativá-lo para que esta página fique funcional.',
 
 	// S
-	'saisie_auteurs_explication' => 'Permite selecionar um ou mais autores',
-	'saisie_auteurs_titre' => 'Autores',
+	'saisie_auteurs_explication' => 'Permite selecionar um ou mais autores', # MODIF
+	'saisie_auteurs_titre' => 'Autores', # MODIF
 	'saisie_case_explication' => 'Permite ativar ou desativar algo.',
 	'saisie_case_titre' => 'Checkbox único',
 	'saisie_checkbox_explication' => 'Permite escolher varias opções com checkboxes.',
 	'saisie_checkbox_titre' => 'Checkboxes',
-	'saisie_date_explication' => 'Permite informar uma data com a ajuda do calendário.',
+	'saisie_date_explication' => 'Permite informar uma data com a ajuda do calendário.', # MODIF
 	'saisie_date_titre' => 'Data',
-	'saisie_destinataires_explication' => 'Permite escolher um ou mais destinatários entre autores pré-selecionados.',
+	'saisie_destinataires_explication' => 'Permite escolher um ou mais destinatários entre autores pré-selecionados.', # MODIF
 	'saisie_destinataires_titre' => 'Destinatários',
 	'saisie_email_explication' => 'Permite ter um campos do tipo e-mail em HTML5.',
 	'saisie_email_titre' => 'Endereço de e-mail',
@@ -175,18 +175,18 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'saisie_fieldset_titre' => 'Grupo de campos',
 	'saisie_file_explication' => 'Envio de um arquivo',
 	'saisie_file_titre' => 'Arquivo',
-	'saisie_hidden_explication' => 'Um campo preenchido previamente, que o usuário não poderá ver.',
+	'saisie_hidden_explication' => 'Um campo preenchido previamente, que o usuário não poderá ver.', # MODIF
 	'saisie_hidden_titre' => 'Campo invisível',
 	'saisie_input_explication' => 'Uma simples linha de texto podendo ser visível ou mascarada (senha).',
 	'saisie_input_titre' => 'Linha de texto',
-	'saisie_mot_explication' => 'Uma ou mais palavras-chave de um grupo de palavras',
+	'saisie_mot_explication' => 'Uma ou mais palavras-chave de um grupo de palavras', # MODIF
 	'saisie_mot_titre' => 'Palavra-chave',
 	'saisie_oui_non_explication' => 'Sim ou não, está claro? ;)',
 	'saisie_oui_non_titre' => 'Sim ou não',
 	'saisie_radio_defaut_choix1' => 'Um',
 	'saisie_radio_defaut_choix2' => 'Dois',
 	'saisie_radio_defaut_choix3' => 'Três',
-	'saisie_radio_explication' => 'Permite escolher uma opção entre várias disponíveis.',
+	'saisie_radio_explication' => 'Permite escolher uma opção entre várias disponíveis.', # MODIF
 	'saisie_radio_titre' => 'Botões rádio',
 	'saisie_selecteur_article' => 'Exibe um navegador de seleção de matéria',
 	'saisie_selecteur_article_titre' => 'Seletor de matéria',

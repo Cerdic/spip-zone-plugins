@@ -69,11 +69,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'masquer' => 'Verbergen',
 
 	// O
-	'option_aff_art_interface_explication' => 'Toon uitsluitend artikelen in de gebruikerstaal',
+	'option_aff_art_interface_explication' => 'Toon uitsluitend artikelen in de gebruikerstaal', # MODIF
 	'option_aff_art_interface_label' => 'Meertalige display',
 	'option_aff_langue_explication' => 'Toon de gekozen taal voor de titel van het artikel of de rubriek',
 	'option_aff_langue_label' => 'Toon de taal',
-	'option_aff_rub_interface_explication' => 'Toon alleen rubrieken in de gebruikerstaal',
+	'option_aff_rub_interface_explication' => 'Toon alleen rubrieken in de gebruikerstaal', # MODIF
 	'option_aff_rub_interface_label' => 'Meertalige display',
 	'option_afficher_si_explication' => 'Geef de voorwaarde op voor het vertonen van het veld in functie van de waarde van andere velden. De identificatie van de andere velden moet tussen <code>@</code> worden geplaatst. <br />Bijvoorbeeld <code>@selection_1@=="Toto"</code> geeft de voorwaarde aan dat het veld moet worden getoond wanneer veld <code>selection_1</code> de waarde <code>Toto</code> heeft.<br/>Je kunt daarbij de booleaanse operators <code>||</code> (of) en <code>&&</code> (en) gebruiken.<br />
 Je vindt <a href="https://contrib.spip.net/5080" target="_blank"  rel="noopener noreferrer">volledige documentatie van de syntax op spip-contrib</a>.',
@@ -95,7 +95,7 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank"  rel="noopener 
 	'option_choix_alternatif_label' => 'Toelaten een andere keuze voor te stellen',
 	'option_choix_alternatif_label_defaut' => 'Andere keuze',
 	'option_choix_alternatif_label_label' => 'Label voor deze alternatieve keuze',
-	'option_choix_destinataires_explication' => 'Een of meer auteurs waaruit de gebruiker kan kiezen. Standaard wordt de auteur die de site maakte gekozen.',
+	'option_choix_destinataires_explication' => 'Een of meer auteurs waaruit de gebruiker kan kiezen. Standaard wordt de auteur die de site maakte gekozen.', # MODIF
 	'option_choix_destinataires_label' => 'Mogelijke ontvangers',
 	'option_class_label' => 'Extra CSS Classes',
 	'option_cols_explication' => 'Veldbreedte in tekens. Deze optie kan door CSS overschreven worden.',
@@ -144,9 +144,9 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank"  rel="noopener 
 	'option_limite_branche_label' => 'Tot één tak (hoofdrubriek) beperken',
 	'option_maximum_choix_explication' => 'Maximum aantal keuzes?',
 	'option_maximum_choix_label' => 'Begrens het aantal keuzes',
-	'option_maxlength_explication' => 'De gebruikers kan niet meer tekens invoeren dan dit aantal.',
+	'option_maxlength_explication' => 'De gebruikers kan niet meer tekens invoeren dan dit aantal.', # MODIF
 	'option_maxlength_label' => 'Maximum aantal tekens',
-	'option_multiple_explication' => 'De gebruiker kan meerdere waardes kiezen',
+	'option_multiple_explication' => 'De gebruiker kan meerdere waardes kiezen', # MODIF
 	'option_multiple_label' => 'Meerdere keuzes',
 	'option_nom_explication' => 'Een ID-naam dat het veld identificeert. Het mag bestaan uit kleine letters of een underscore teken "_".',
 	'option_nom_label' => 'Veldnaam',
@@ -172,10 +172,10 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank"  rel="noopener 
 	'option_statut_label' => 'Specifieke status(sen)',
 	'option_tagfield_explication' => 'Baken voor het groepslabel. Voor een betere toegankelijkheid wordt sterk aanbevolen de standaardwaarde (baken legend) aan te houden.',
 	'option_tagfield_label' => 'Baken voor het groepslabel',
-	'option_type_choix_plusieurs' => 'Laat de gebruiker <strong>meerdere</ strong> ontvangers kiezen.',
-	'option_type_choix_tous' => 'Maak <strong>alle</strong> auteurs ontvanger. De gebruiker kan niet kiezen.',
-	'option_type_choix_un' => 'Laat de gebruiker <strong>een enkele</strong> ontvanger kiezen.',
-	'option_type_choix_un_radio' => 'Sta de gebruiker toe <strong>een enkele</strong> geadresseerde te kiezen (door middel van een lijst).',
+	'option_type_choix_plusieurs' => 'Laat de gebruiker <strong>meerdere</ strong> ontvangers kiezen.', # MODIF
+	'option_type_choix_tous' => 'Maak <strong>alle</strong> auteurs ontvanger. De gebruiker kan niet kiezen.', # MODIF
+	'option_type_choix_un' => 'Laat de gebruiker <strong>een enkele</strong> ontvanger kiezen.', # MODIF
+	'option_type_choix_un_radio' => 'Sta de gebruiker toe <strong>een enkele</strong> geadresseerde te kiezen (door middel van een lijst).', # MODIF
 	'option_type_explication' => 'In "discrete" modus wordt de inhoud door sterretjes vervangen.',
 	'option_type_label' => 'Veldtype',
 	'option_type_password' => 'Verborgen tekst tijdens invoer (bv: wachtwoord)',
@@ -187,17 +187,17 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank"  rel="noopener 
 	'plugin_yaml_inactif' => 'Plugin YAML is inactief. Je moet hem activeren om deze pagina te kunnen laten functioneren.',
 
 	// S
-	'saisie_auteurs_explication' => 'Laat je een of meer auteurs kiezen',
-	'saisie_auteurs_titre' => 'Auteurs',
+	'saisie_auteurs_explication' => 'Laat je een of meer auteurs kiezen', # MODIF
+	'saisie_auteurs_titre' => 'Auteurs', # MODIF
 	'saisie_case_explication' => 'Activeer of disactiveer een bepaalde optie.',
 	'saisie_case_titre' => 'Enkele checkbox',
 	'saisie_checkbox_explication' => 'Voor het kiezen van verschillende opties met checkboxes.',
 	'saisie_checkbox_titre' => 'Checkboxes',
 	'saisie_choix_grille_explication' => 'Maakt het mogelijk een serie multiple choice vragen te stellen op een standaard manier in de vorm van een raster',
 	'saisie_choix_grille_titre' => 'Vragenraster',
-	'saisie_date_explication' => 'Datuminvoer via een kalender-tool',
+	'saisie_date_explication' => 'Datuminvoer via een kalender-tool', # MODIF
 	'saisie_date_titre' => 'Datum',
-	'saisie_destinataires_explication' => 'Voor het kiezen van een of meer ontvangers uit voorgeselecteerde auteurs.',
+	'saisie_destinataires_explication' => 'Voor het kiezen van een of meer ontvangers uit voorgeselecteerde auteurs.', # MODIF
 	'saisie_destinataires_titre' => 'Ontvangers',
 	'saisie_email_explication' => 'Laat een veld van het type email toe in HTML5.',
 	'saisie_email_titre' => 'Email-adres',
@@ -210,18 +210,18 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank"  rel="noopener 
 	'saisie_fieldset_titre' => 'Fieldset',
 	'saisie_file_explication' => 'Zend een bestand',
 	'saisie_file_titre' => 'Bestand',
-	'saisie_hidden_explication' => 'Een vooraf ingevuld veld dat de gebruiker niet ziet.',
+	'saisie_hidden_explication' => 'Een vooraf ingevuld veld dat de gebruiker niet ziet.', # MODIF
 	'saisie_hidden_titre' => 'Verborgen veld',
 	'saisie_input_explication' => 'Een enkele tekstregel die zichtbaar of verborgen (wachtwoord) kan zijn.',
 	'saisie_input_titre' => 'Tekstveld',
-	'saisie_mot_explication' => 'Een of meer trefwoorden uit een groep',
+	'saisie_mot_explication' => 'Een of meer trefwoorden uit een groep', # MODIF
 	'saisie_mot_titre' => 'Trefwoord',
 	'saisie_oui_non_explication' => 'Ja of nee antwoord',
 	'saisie_oui_non_titre' => 'Ja of Nee',
 	'saisie_radio_defaut_choix1' => 'Een',
 	'saisie_radio_defaut_choix2' => 'Twee',
 	'saisie_radio_defaut_choix3' => 'Drie',
-	'saisie_radio_explication' => 'Voor het kiezen van een enkele optie uit meerder mogelijkheden.',
+	'saisie_radio_explication' => 'Voor het kiezen van een enkele optie uit meerder mogelijkheden.', # MODIF
 	'saisie_radio_titre' => 'Radio knop',
 	'saisie_selecteur_article' => 'Toon een artikelkeuze',
 	'saisie_selecteur_article_titre' => 'Artikelkeuze',

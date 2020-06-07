@@ -69,11 +69,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'masquer' => 'Masquer',
 
 	// O
-	'option_aff_art_interface_explication' => 'Afficher uniquement les articles de la langue de l’utilisateur',
+	'option_aff_art_interface_explication' => 'Afficher uniquement les articles de la langue de l’utilisateur', # MODIF
 	'option_aff_art_interface_label' => 'Affichage multilingue',
 	'option_aff_langue_explication' => 'Affiche la langue de l’article ou rubrique sélectionné devant le titre',
 	'option_aff_langue_label' => 'Afficher la langue',
-	'option_aff_rub_interface_explication' => 'Afficher uniquement les rubriques de la langue de l’utilisateur',
+	'option_aff_rub_interface_explication' => 'Afficher uniquement les rubriques de la langue de l’utilisateur', # MODIF
 	'option_aff_rub_interface_label' => 'Affichage multilingue',
 	'option_afficher_si_explication' => 'Indique les conditions pour afficher le champ en fonction de la valeur des autres champs. L’identifiant des autres champs doit être mis entre <code>@</code>. <br />Exemple <code>@selection_1@=="Toto"</code> conditionne l’affichage du champ à ce que le champ <code>selection_1</code> ait pour valeur <code>Toto</code>. <br />
 Il est possible d’utiliser les opérateurs booléens <code>||</code> (ou) et  <code>&&</code> (et). <br />
@@ -96,7 +96,7 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank"  rel="no
 	'option_choix_alternatif_label' => 'Permettre de proposer un choix alternatif',
 	'option_choix_alternatif_label_defaut' => 'Autre choix',
 	'option_choix_alternatif_label_label' => 'Label de ce choix alternatif',
-	'option_choix_destinataires_explication' => 'Un ou plusieurs auteurs parmis lesquels l’utilisateur pourra faire son choix. Si rien n’est sélectionné, c’est l’auteur qui a installé le site qui sera choisi.',
+	'option_choix_destinataires_explication' => 'Un ou plusieurs auteurs parmis lesquels l’utilisateur pourra faire son choix. Si rien n’est sélectionné, c’est l’auteur qui a installé le site qui sera choisi.', # MODIF
 	'option_choix_destinataires_label' => 'Destinataires possibles',
 	'option_class_label' => 'Classes CSS supplémentaires',
 	'option_cols_explication' => 'Largeur du bloc en nombre de caractères. Cette option n’est pas toujours appliquée car les styles CSS de ton site peuvent l’annuler.',
@@ -145,9 +145,9 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank"  rel="no
 	'option_limite_branche_label' => 'Limiter à une branche',
 	'option_maximum_choix_explication' => 'Nombre de choix maximum ?',
 	'option_maximum_choix_label' => 'Limiter le nombre de choix',
-	'option_maxlength_explication' => 'L’utilisateur ne pourra pas taper plus de caractères que ce nombre.',
+	'option_maxlength_explication' => 'L’utilisateur ne pourra pas taper plus de caractères que ce nombre.', # MODIF
 	'option_maxlength_label' => 'Nombre de caractères maximum',
-	'option_multiple_explication' => 'L’utilisateur pourra sélectionner plusieurs valeurs',
+	'option_multiple_explication' => 'L’utilisateur pourra sélectionner plusieurs valeurs', # MODIF
 	'option_multiple_label' => 'Sélection multiple',
 	'option_nom_explication' => 'Un nom informatique qui identifiera le champ. Il ne doit contenir que des caractères alpha-numériques minuscules ou le caractère "_".',
 	'option_nom_label' => 'Nom du champ',
@@ -173,10 +173,10 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank"  rel="no
 	'option_statut_label' => 'Statut(s) particulier(s)',
 	'option_tagfield_explication' => 'Balise pour le label du groupe. Pour des raisons d’accessibilité, il est vivement recommandé de laisser la valeur par défaut (balise legend).',
 	'option_tagfield_label' => 'Balise pour le label du groupe',
-	'option_type_choix_plusieurs' => 'Permettre à l’utilisateur de choisir <strong>plusieurs</strong> destinataires.',
-	'option_type_choix_tous' => 'Mettre <strong>tous</strong> ces auteurs en destinataires. L’utilisateur n’aura aucun choix.',
-	'option_type_choix_un' => 'Permettre à l’utilisateur de choisir <strong>un seul</strong> destinataire.Permettre à l’utilisateur de choisir <strong>un seul</strong> destinataire (sous forme de liste déroulante).',
-	'option_type_choix_un_radio' => 'Permettre à l’utilisateur de choisir <strong>un seul</strong> destinataire (sous forme de liste à puce).',
+	'option_type_choix_plusieurs' => 'Permettre à l’utilisateur de choisir <strong>plusieurs</strong> destinataires.', # MODIF
+	'option_type_choix_tous' => 'Mettre <strong>tous</strong> ces auteurs en destinataires. L’utilisateur n’aura aucun choix.', # MODIF
+	'option_type_choix_un' => 'Permettre à l’utilisateur de choisir <strong>un seul</strong> destinataire.Permettre à l’utilisateur de choisir <strong>un seul</strong> destinataire (sous forme de liste déroulante).', # MODIF
+	'option_type_choix_un_radio' => 'Permettre à l’utilisateur de choisir <strong>un seul</strong> destinataire (sous forme de liste à puce).', # MODIF
 	'option_type_explication' => 'En mode "masqué", le contenu du champ ne sera pas visible.',
 	'option_type_label' => 'Type du champ',
 	'option_type_password' => 'Texte masqué lors de la saisie (ex : mot de passe)',
@@ -188,17 +188,17 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank"  rel="no
 	'plugin_yaml_inactif' => 'Le plugin YAML est inactif. Tu dois l’activer pour que cette page soit fonctionnelle.',
 
 	// S
-	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs',
-	'saisie_auteurs_titre' => 'Auteurs',
+	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # MODIF
+	'saisie_auteurs_titre' => 'Auteurs', # MODIF
 	'saisie_case_explication' => 'Permet d’activer ou de désactiver quelque chose.',
 	'saisie_case_titre' => 'Case unique',
 	'saisie_checkbox_explication' => 'Permet de choisir plusieurs options avec des cases.',
 	'saisie_checkbox_titre' => 'Cases à cocher',
 	'saisie_choix_grille_explication' => 'Permet de poser une série de questions à choix multiple d’une manière uniformisé et sous forme de grille',
 	'saisie_choix_grille_titre' => 'Grille de questions',
-	'saisie_date_explication' => 'Permet de saisir une date ? l’aide d’un calendrier',
+	'saisie_date_explication' => 'Permet de saisir une date ? l’aide d’un calendrier', # MODIF
 	'saisie_date_titre' => 'Date',
-	'saisie_destinataires_explication' => 'Permet de choisir un ou plusieurs destinataires parmis des auteurs pré-sélectionné.',
+	'saisie_destinataires_explication' => 'Permet de choisir un ou plusieurs destinataires parmis des auteurs pré-sélectionné.', # MODIF
 	'saisie_destinataires_titre' => 'Destinataires',
 	'saisie_email_explication' => 'Permet d’avoir un champ de type email en HTML5.',
 	'saisie_email_titre' => 'Adresse email',
@@ -211,18 +211,18 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank"  rel="no
 	'saisie_fieldset_titre' => 'Groupe de champs',
 	'saisie_file_explication' => 'Envoi d’un fichier',
 	'saisie_file_titre' => 'Fichier',
-	'saisie_hidden_explication' => 'Un champ pré-rempli que l’utilisateur ne pourra pas voir.',
+	'saisie_hidden_explication' => 'Un champ pré-rempli que l’utilisateur ne pourra pas voir.', # MODIF
 	'saisie_hidden_titre' => 'Champ caché',
 	'saisie_input_explication' => 'Une simple ligne de texte, pouvant être visible ou masquée (mot de passe).',
 	'saisie_input_titre' => 'Ligne de texte',
-	'saisie_mot_explication' => 'Un ou plusieurs mots-clés d’un groupe de mot',
+	'saisie_mot_explication' => 'Un ou plusieurs mots-clés d’un groupe de mot', # MODIF
 	'saisie_mot_titre' => 'Mot-clé',
 	'saisie_oui_non_explication' => 'Oui ou non, c’est clair ? :)',
 	'saisie_oui_non_titre' => 'Oui ou non',
 	'saisie_radio_defaut_choix1' => 'Un',
 	'saisie_radio_defaut_choix2' => 'Deux',
 	'saisie_radio_defaut_choix3' => 'Trois',
-	'saisie_radio_explication' => 'Permet de choisir une option parmis plusieurs disponibles.',
+	'saisie_radio_explication' => 'Permet de choisir une option parmis plusieurs disponibles.', # MODIF
 	'saisie_radio_titre' => 'Boutons radios',
 	'saisie_selecteur_article' => 'Affiche un navigateur de sélection d’article',
 	'saisie_selecteur_article_titre' => 'Sélecteur d’article',

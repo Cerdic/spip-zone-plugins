@@ -69,11 +69,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'masquer' => 'Hide',
 
 	// O
-	'option_aff_art_interface_explication' => 'Display only the articles in the user’s language',
+	'option_aff_art_interface_explication' => 'Display only the articles in the user’s language', # MODIF
 	'option_aff_art_interface_label' => 'Multilingual display',
 	'option_aff_langue_explication' => 'Display the selected language of the article or section before the title',
 	'option_aff_langue_label' => 'Display the language',
-	'option_aff_rub_interface_explication' => 'Display only the sections in the user’s language',
+	'option_aff_rub_interface_explication' => 'Display only the sections in the user’s language', # MODIF
 	'option_aff_rub_interface_label' => 'Multilingual display',
 	'option_afficher_si_explication' => 'Specify the conditions to display the field based on the value of the other fields. The identifier of the other fields has to be entered between <code>@</code>. <br />Example <code>@selection_1@=="Toto"</code> conditions the display of the field only when field <code>selection_1</code> has a value of <code>Toto</code>.<br />
 It is possible to use Boolean operators <code> || </code> (or) and <code> && </code> (and).<br/>
@@ -96,7 +96,7 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank" rel="noope
 	'option_choix_alternatif_label' => 'Allow to propose an alternative choice',
 	'option_choix_alternatif_label_defaut' => 'Other choice',
 	'option_choix_alternatif_label_label' => 'Label for this alternative choice',
-	'option_choix_destinataires_explication' => 'One or several authors among which the user can make his choice. If nothing selected, it will be the author who installed the site to be chosen.',
+	'option_choix_destinataires_explication' => 'One or several authors among which the user can make his choice. If nothing selected, it will be the author who installed the site to be chosen.', # MODIF
 	'option_choix_destinataires_label' => 'Possible recipients',
 	'option_class_label' => 'Additional CSS Classes',
 	'option_cols_explication' => 'Field width in characters. This option is not always applied/used because the CSS styles of your site may override it.',
@@ -145,9 +145,9 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank" rel="noope
 	'option_limite_branche_label' => 'Limit to one branch',
 	'option_maximum_choix_explication' => 'Maximum number of choices?',
 	'option_maximum_choix_label' => 'Limit the number of choices',
-	'option_maxlength_explication' => 'The user can not type more characters than this number.',
+	'option_maxlength_explication' => 'The user can not type more characters than this number.', # MODIF
 	'option_maxlength_label' => 'Maximum number of characters',
-	'option_multiple_explication' => 'The user will be able to select several values',
+	'option_multiple_explication' => 'The user will be able to select several values', # MODIF
 	'option_multiple_label' => 'Multiple selection',
 	'option_nom_explication' => 'A computer ID name that identifies the field. It may only contain lowercase alphanumeric characters or the underscore character "_".',
 	'option_nom_label' => 'Field name',
@@ -173,10 +173,10 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank" rel="noope
 	'option_statut_label' => 'Specific status',
 	'option_tagfield_explication' => 'Tag for the group label. For accessibility reasons it is strongly recommended to leave the default value (legend tag).',
 	'option_tagfield_label' => 'Tag for the group label',
-	'option_type_choix_plusieurs' => 'Allow the user to choose <strong>several</ strong> message recipients.',
-	'option_type_choix_tous' => 'Make <strong>all</ strong> these authors as recipients. The user will not have choice.',
-	'option_type_choix_un' => 'Allow the user to choose <strong>only one</strong> message recipient (as a dropdown list).',
-	'option_type_choix_un_radio' => 'Allow the user to select <strong>one single</strong> addressee (in checklist format).',
+	'option_type_choix_plusieurs' => 'Allow the user to choose <strong>several</ strong> message recipients.', # MODIF
+	'option_type_choix_tous' => 'Make <strong>all</ strong> these authors as recipients. The user will not have choice.', # MODIF
+	'option_type_choix_un' => 'Allow the user to choose <strong>only one</strong> message recipient (as a dropdown list).', # MODIF
+	'option_type_choix_un_radio' => 'Allow the user to select <strong>one single</strong> addressee (in checklist format).', # MODIF
 	'option_type_explication' => 'In "disguised" mode, the field contents as typed will be replaced with asterisks.',
 	'option_type_label' => 'Field type',
 	'option_type_password' => 'Text, hidden during input (eg. password)',
@@ -188,17 +188,17 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank" rel="noope
 	'plugin_yaml_inactif' => 'The YAML plugin is inactive. You must enable it for this page to be functional.',
 
 	// S
-	'saisie_auteurs_explication' => 'Allows you to select one or more authors',
-	'saisie_auteurs_titre' => 'Authors',
+	'saisie_auteurs_explication' => 'Allows you to select one or more authors', # MODIF
+	'saisie_auteurs_titre' => 'Authors', # MODIF
 	'saisie_case_explication' => 'Used to activate or deactivate a particular option.',
 	'saisie_case_titre' => 'Single check box',
 	'saisie_checkbox_explication' => 'Used to select several options using check boxes.',
 	'saisie_checkbox_titre' => 'Check boxes',
 	'saisie_choix_grille_explication' => 'Allows a series of multiple-choice questions to be asked in a standardized manner and in a grid format',
 	'saisie_choix_grille_titre' => 'Question grid',
-	'saisie_date_explication' => 'Used to enter a date using a calendar tool',
+	'saisie_date_explication' => 'Used to enter a date using a calendar tool', # MODIF
 	'saisie_date_titre' => 'Date',
-	'saisie_destinataires_explication' => 'Used to select one or more recipients from among the pre-selected authors.',
+	'saisie_destinataires_explication' => 'Used to select one or more recipients from among the pre-selected authors.', # MODIF
 	'saisie_destinataires_titre' => 'Recipients',
 	'saisie_email_explication' => 'Allows to have an email type field in HTML5.',
 	'saisie_email_titre' => 'E-mail adress',
@@ -211,18 +211,18 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank" rel="noope
 	'saisie_fieldset_titre' => 'Fieldset',
 	'saisie_file_explication' => 'Send a file',
 	'saisie_file_titre' => 'File',
-	'saisie_hidden_explication' => 'A pre-filled field that the user will never see.',
+	'saisie_hidden_explication' => 'A pre-filled field that the user will never see.', # MODIF
 	'saisie_hidden_titre' => 'Hidden field',
 	'saisie_input_explication' => 'A simple line of text that can be visible or hidden (password).',
 	'saisie_input_titre' => 'Textfield',
-	'saisie_mot_explication' => 'One or more keywords of a group',
+	'saisie_mot_explication' => 'One or more keywords of a group', # MODIF
 	'saisie_mot_titre' => 'Keyword',
 	'saisie_oui_non_explication' => 'Either a Yes or No response',
 	'saisie_oui_non_titre' => 'Yes or No',
 	'saisie_radio_defaut_choix1' => 'One',
 	'saisie_radio_defaut_choix2' => 'Two',
 	'saisie_radio_defaut_choix3' => 'Three',
-	'saisie_radio_explication' => 'Used to select one single option from several possibilities.',
+	'saisie_radio_explication' => 'Used to select one single option from several possibilities.', # MODIF
 	'saisie_radio_titre' => 'Radio buttons',
 	'saisie_selecteur_article' => 'Display an article selection browser',
 	'saisie_selecteur_article_titre' => 'Article selector',
