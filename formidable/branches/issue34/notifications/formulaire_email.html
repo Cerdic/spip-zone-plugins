@@ -2,12 +2,12 @@
 <p>
 	#SET{date, #VAL{d/m/Y}|date}
 	#SET{heure, #VAL{H:i:s}|date}
-	[(#ENV{soumission_precedente}|non)
+	[(#ENV{envoi_precedent}|non)
 		<:formidable:traiter_email_horodatage{formulaire=#ENV*{titre}, date=#GET{date}, heure=#GET{heure}}:>
 		]
-	[(#ENV{soumission_precedente}|oui)
-		#SET{heure_precedente,#ENV{soumission_precedente}|affdate{H:i:s}}
-		#SET{jour_precedente,#ENV{jour_precedente}|affdate{H:i:s}}
+	[(#ENV{envoi_precedent}|oui)
+		#SET{heure_precedente,#ENV{envoi_precedent}|affdate{H:i:s}}
+		#SET{jour_precedente,#ENV{envoi_precedent}|affdate{H:i:s}}
 		<:formidable:traiter_email_horodatage_modif_reponse{formulaire=#ENV*{titre}, date=#GET{date}, heure=#GET{heure}, heure_precedente=#GET{heure_precedente}, date_precedente=#GET{date_precedente}}:>
 	]
 	<br/>

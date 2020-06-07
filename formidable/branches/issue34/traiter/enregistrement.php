@@ -77,7 +77,7 @@ function traiter_enregistrement_dist($args, $retours) {
 				'variable_php' => $variable_php,
 				'ip' => $args['options']['ip'] == 'on' ? $GLOBALS['ip'] : '',
 				'date' => 'NOW()',
-				'date_soumission' => 'NOW()',
+				'date_envoi' => 'NOW()',
 				'statut' => $statut
 			)
 		);
@@ -91,18 +91,18 @@ function traiter_enregistrement_dist($args, $retours) {
 		$retours['modification_reponse'] = false;// signaler aux traitements qu'il s'agit d'une nouvelle réponse
 	} else { // si c'est une modif de réponse existante
 		// simple mise à jour du champ maj de la table spip_formulaires_reponses
-		$soumission_precedente = sql_getfetsel('date_soumission','spip_formulaires_reponses', "id_formulaires_reponse = $id_formulaires_reponse");
+		$envoi_precedent = sql_getfetsel('date_envoi','spip_formulaires_reponses', "id_formulaires_reponse = $id_formulaires_reponse");
 		sql_updateq(
 			'spip_formulaires_reponses',
 			array(
 				'maj' => 'NOW()',
-				'date_soumission' => 'NOW()',
+				'date_envoi' => 'NOW()',
 			),
 			"id_formulaires_reponse = $id_formulaires_reponse"
 		);
 		//effacer les fichiers existant
 		formidable_effacer_fichiers_reponse($id_formulaire, $id_formulaires_reponse);
-		$retours['soumission_precedente'] = $soumission_precedente;
+		$retours['envoi_precedent'] = $envoi_precedent;
 		$retours['modification_reponse'] = true;// signaler aux traitements qui viendraient après qu'il s'agit d'une modif
 	}
 	// Si l'id n'a pas été créé correctement alors erreur

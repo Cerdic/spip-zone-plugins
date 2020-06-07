@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_dossier_formulaire_erreur_possible_lire_exterieur' => 'Il est possible de lire à distance le contenu du dossier  @dossier@. Ceci est problématique en terme de confidentialité des données.',
 
 	// D
-	'date_soumission' => 'Date de soumission',
+	'date_envoi' => 'Date d\'envoi',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
