@@ -12,15 +12,15 @@
  * Reçoit une condition
  * la parse pour trouver champs/opérateurs/valeurs etc.
  * @param string $condition
- * @param bool=true $no_arobase, permet de ne pas parser le arobase
+ * @param null|string $no_arobase, permet de ne pas parser le arobase
  * @return array tableau d'analyse (resultat d'un preg_match_all) montrant sous condition par sous condition l'analyse en champ/opérateur/valeur etc.
 **/
-function saisies_parser_condition_afficher_si($condition, $no_arobase=false) {
+function saisies_parser_condition_afficher_si($condition, $no_arobase=null) {
 	static $cache = array(
 		'no_arobase' => array(),
 		'arobase' => array()
 	);
-	if ($no_arobase) {
+	if ($no_arobase !== null) {
 		$cache_ici = &$cache['no_arobase'];
 		$no_arobase = '?';
 	} else {

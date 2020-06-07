@@ -156,9 +156,10 @@ function saisies_afficher_si_get_valeur_champ($champ, $env, $saisies) {
  *   Tableau d'environnement transmis dans inclure/voir_saisies.html,
  *   NULL si on doit rechercher dans _request (pour saisies_verifier()).
  * @param  array $saisies
+ * @param string|null $no_arobase une valeur à tester là où il devrait y avoir un @@
  * @return string $condition
 **/
-function saisies_transformer_condition_afficher_si($condition, $env = null, $saisies = array(), $no_arobase=false) {
+function saisies_transformer_condition_afficher_si($condition, $env = null, $saisies = array(), $no_arobase=null) {
 	if ($tests = saisies_parser_condition_afficher_si($condition, $no_arobase)) {
 		if (!saisies_afficher_si_verifier_syntaxe($condition, $tests)) {
 			spip_log("Afficher_si incorrect. $condition syntaxe_incorrecte", "saisies"._LOG_CRITIQUE);
@@ -203,9 +204,10 @@ function saisies_transformer_condition_afficher_si($condition, $env = null, $sai
  *   Tableau d'environnement transmis dans inclure/voir_saisies.html,
  *   NULL si on doit rechercher dans _request (pour saisies_verifier()).
  * @param array $saisies
+ * @param string|null $no_arobase une valeur à tester là où il devrait y avoir un @@
  * @return bool le résultat du test
 **/
-function saisies_evaluer_afficher_si($condition, $env = null, $saisies=array(), $no_arobase=false) {
+function saisies_evaluer_afficher_si($condition, $env = null, $saisies=array(), $no_arobase=null) {
 	$condition = saisies_transformer_condition_afficher_si($condition, $env, $saisies, $no_arobase);
 	if ($condition) {
 		eval('$ok = '.$condition.';');
