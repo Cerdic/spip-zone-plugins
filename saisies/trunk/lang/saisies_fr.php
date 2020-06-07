@@ -94,7 +94,7 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank" rel="n
 	'option_choix_alternatif_label' => 'Permettre de proposer un choix alternatif',
 	'option_choix_alternatif_label_defaut' => 'Autre choix',
 	'option_choix_alternatif_label_label' => 'Label de ce choix alternatif',
-	'option_choix_destinataires_explication' => 'Liste d\'auteur·trices pour une sélecttion de destinataires par  l\'internaute, à défaut ce sera la personne qui a installé le site.',
+	'option_choix_destinataires_explication' => 'Liste d\'auteur·trices pour une sélection de destinataires par  l\'internaute, à défaut ce sera la personne qui a installé le site.',
 	'option_choix_destinataires_label' => 'Destinataires possibles',
 	'option_class_label' => 'Classes CSS supplémentaires',
 	'option_cols_explication' => 'Largeur du bloc en nombre de caractères. Cette option n’est pas toujours appliquée car les styles CSS de votre site peuvent l’annuler.',
