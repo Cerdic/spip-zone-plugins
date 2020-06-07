@@ -12,16 +12,27 @@
  * Reçoit une condition
  * la parse pour trouver champs/opérateurs/valeurs etc.
  * @param string $condition
+ * @param bool=true $no_arobase, permet de ne pas parser le arobase
  * @return array tableau d'analyse (resultat d'un preg_match_all) montrant sous condition par sous condition l'analyse en champ/opérateur/valeur etc.
 **/
-function saisies_parser_condition_afficher_si($condition) {
-	static $cache = array();
-	if (isset($cache[$condition])) {
-		return $cache[$condition];
+function saisies_parser_condition_afficher_si($condition, $no_arobase=false) {
+	static $cache = array(
+		'no_arobase' => array(),
+		'arobase' => array()
+	);
+	if ($no_arobase) {
+		$cache_ici = &$cache['no_arobase'];
+		$no_arobase = '?';
+	} else {
+		$no_arobase = '';
+		$cache_ici = &$cache['arobase'];
+	}
+	if (isset($cache_ici[$condition])) {
+		return $cache_ici[$condition];
 	}
 	$regexp =
 	  '(?<negation>!?)' // négation éventuelle
-		. '(?:@(?<champ>.+?)@)' // @champ_@
+		. "((?:(?<arobase>@)(?<champ>.+?)(\k<arobase>)))$no_arobase" // @champ_@, optionnel (formidable_ts)
 		. '(?<total>:TOTAL)?' // TOTAL éventuel (pour les champs de type case à cocher)
 		. '(' // partie operateur + valeur (optionnelle) : debut
 		. '(?:\s*?)' // espaces éventuels après
@@ -31,8 +42,9 @@ function saisies_parser_condition_afficher_si($condition) {
 		. ')?' // partie operateur + valeur (optionnelle) : fin
 		. '|(?<booleen>false|true)';//accepter false/true brut
 	$regexp = "#$regexp#";
+
 	preg_match_all($regexp, $condition, $tests, PREG_SET_ORDER);
-	$cache[$condition] = $tests;
+	$cache_ici[$condition] = $tests;
 	return $tests;
 }
 
