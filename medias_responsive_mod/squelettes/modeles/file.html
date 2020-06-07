@@ -1,0 +1,60 @@
+<BOUCLE_file (DOCUMENTS) {id_document=#ENV{id,#ENV{id_document}}} {tout}>
+[<!--(#REM)
+
+	Modele pour <doc> en dl/dt/dd
+	cf. http://pompage.net/pompe/listesdefinitions/
+
+	La largeur de la legende est egale a la largeur de l'image
+	avec un minimum de 120px, et un maximum de 350px.
+
+	Dans le cas d'une simple image (mode=image), on affiche
+	le document lui-meme, sans lien de telechargement
+-->]
+[(#ENV{mode_force,#MODE}|=={image}|oui)
+	#SET{fichier,#URL_DOCUMENT}
+	#SET{width,#LARGEUR}
+	#SET{height,#HAUTEUR}
+	#SET{url,#ENV{lien}}
+]
+[(#ENV{mode_force,#MODE}|=={image}|non)
+	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
+	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
+	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
+	#SET{url,#ENV{lien,#URL_DOCUMENT}}
+][<!--(#REM)
+
+
+	Si largeur ou hauteur fournit en parametre, redimensionner
+
+-->][
+(#ENV{largeur,0}|ou{#ENV{hauteur,0}})
+	#SET{fichier,#GET{fichier}|image_reduire{#ENV{largeur,0},#ENV{hauteur,0}}}
+	#SET{width,#GET{fichier}|largeur}
+	#SET{height,#GET{fichier}|hauteur}
+	#SET{fichier,#GET{fichier}|extraire_attribut{src}}
+]
+[(#ENV{shape}|oui)
+	[(#SET{polygon,[(#FICHIER|image_detourer_polygon)]})]
+]
+
+
+<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align}|sinon{center})][ (#ENV{class})] spip_lien_ok'
+	style="[width:(#GET{width})px;]"[ data-w="(#GET{width})"]>
+	[<a href="(#GET{url})"[
+		class="(#ENV{lien_class})"] [ title="(#TITRE|supprimer_numero|supprimer_tags|texte_backend)"][
+		(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]
+			[(#GET{fichier}|image_responsive{320/640/1280/1920})]
+
+	[(#GET{url}|?{</a>})]
+	[(#ENV{legende}|=={non}|non)
+	[(#TITRE|sinon{#DESCRIPTIF}|sinon{#CREDITS}|oui)
+	<figcaption class='spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})]'>
+		[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE|propre|PtoBR)</strong></div>]
+		[<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
+		[<div class='spip_doc_credits  #EDIT{credits}'>(#CREDITS|propre|PtoBR)</div>]
+		<a class="telecharger" href="#FICHIER"><:bouton_download:> [((#TAILLE|taille_en_octets))]</a>
+	</figcaption>
+	]]
+</figure>
+</BOUCLE_file>
+#FILTRE{trim}
