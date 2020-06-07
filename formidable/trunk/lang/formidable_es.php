@@ -10,8 +10,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'admin_reponses_auteur' => 'Autorizar a l@s autores de los formularios a modificar las respuestas',
-	'admin_reponses_auteur_explication' => 'Solo l@s administradores pueden normalmente modificar las respuestas a un formulario (a la papelera, publicada, propuesta para evaluación). Esta opción permite a un·a autor·a de formulario modificar el estatus (con el riesgo de distorsionar eventuales estadísticas).',
+	'admin_reponses_auteur' => 'Autorizar a l@s autores de los formularios a modificar las respuestas', # MODIF
+	'admin_reponses_auteur_explication' => 'Solo l@s administradores pueden normalmente modificar las respuestas a un formulario (a la papelera, publicada, propuesta para evaluación). Esta opción permite a un·a autor·a de formulario modificar el estatus (con el riesgo de distorsionar eventuales estadísticas).', # MODIF
 	'analyse_avec_reponse' => 'Respuestas no vacías',
 	'analyse_exclure_champs_explication' => 'Ingresar el nombre de los campos a excluir del análisis, separados por unos <code>|</code>. No poner los <code>@</code>.', # MODIF
 	'analyse_exclure_champs_label' => 'Campos a excluir', # MODIF
@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_nb_reponses_total' => '@nb@ personas han respondido a este formulario. ',
 	'analyse_sans_reponse' => 'Sin respuesta',
 	'analyse_une_reponse_total' => 'Una persona ha respondido a este formulario. ',
-	'analyse_zero_reponse_total' => 'Nadie ha respondido a este formulario.',
+	'analyse_zero_reponse_total' => 'Nadie ha respondido a este formulario.', # MODIF
 	'aucun_traitement' => 'Ningún tratamiento',
 
 	// B
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_analyse_classe_label' => 'Clase CSS de la barra de progreso',
 	'cfg_titre_page_configurer_formidable' => 'Configurar Formidable',
 	'champs' => 'Campos',
-	'changer_statut' => 'Este formulario es:',
+	'changer_statut' => 'Este formulario es:', # MODIF
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_rien' => 'Nada',
 	'editer_apres_choix_stats' => 'Estadísticas de respuesta',
 	'editer_apres_choix_valeurs' => 'Los valores ingresados',
-	'editer_apres_explication' => 'Después de la validación, mostrar en lugar del formulario:',
+	'editer_apres_explication' => 'Después de la validación, mostrar en lugar del formulario:', # MODIF
 	'editer_apres_label' => 'Mostrar a continuación',
 	'editer_descriptif' => 'Descripción',
 	'editer_descriptif_explication' => 'Una explicación del formulario para la zona privada.',
@@ -95,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_formulaire' => 'Ningún formulario',
 	'info_aucune_reponse' => 'Ninguna respuesta',
 	'info_formulaire_refuse' => 'Archivado',
-	'info_formulaire_utilise_par' => 'Formulario utilizado por:',
+	'info_formulaire_utilise_par' => 'Formulario utilizado por:', # MODIF
 	'info_nb_formulaires' => '@nb@ formularios',
 	'info_nb_reponses' => '@nb@ respuestas',
 	'info_reponse_proposee' => 'A moderar',
@@ -105,8 +105,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_supprimee' => 'Borrada', # MODIF
 	'info_reponse_supprimees' => 'Borradas', # MODIF
 	'info_reponse_toutes' => 'Todas',
-	'info_utilise_1_formulaire' => 'Formulario utilizado:',
-	'info_utilise_nb_formulaires' => 'Formularios utilizados:',
+	'info_utilise_1_formulaire' => 'Formulario utilizado:', # MODIF
+	'info_utilise_nb_formulaires' => 'Formularios utilizados:', # MODIF
 
 	// M
 	'modele_label_formulaire_formidable' => '¿Cuál formulario?',
@@ -114,14 +114,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_titre_formulaire' => '¿Mostrar el título del formulario? ',
-	'noisette_label_identifiant' => 'Formulario a mostrar:',
+	'noisette_label_identifiant' => 'Formulario a mostrar:', # MODIF
 	'noisette_nom_noisette_formulaire' => 'Formulario',
 
 	// R
 	'reponse_aucune' => 'Ninguna respuesta',
 	'reponse_intro' => '@auteur@ respondió el formulario @formulaire@',
-	'reponse_numero' => 'Respuesta numéro:',
-	'reponse_statut' => 'Esta respuesta es:',
+	'reponse_numero' => 'Respuesta numéro:', # MODIF
+	'reponse_statut' => 'Esta respuesta es:', # MODIF
 	'reponse_supprimer' => 'Eliminar esta respuesta',
 	'reponse_supprimer_confirmation' => '¿Estás seguro de que deseas eliminar esta respuesta?',
 	'reponse_une' => '1 respuesta',
@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_horodatage' => 'Formulario "@formulaire@" publicado el @date@ a las @heure@.',
 	'traiter_email_message_erreur' => 'Se ha producido un error al enviar el correo electrónico. ',
 	'traiter_email_message_ok' => 'Tu mensaje ha sido enviado por correo electrónico.',
-	'traiter_email_option_activer_accuse_label_case' => 'También enviar un correo electrónico al remitente con un mensaje de confirmación.',
+	'traiter_email_option_activer_accuse_label_case' => 'También enviar un correo electrónico al remitente con un mensaje de confirmación.', # MODIF
 	'traiter_email_option_destinataires_champ_form_explication' => 'Si uno de sus campos es una dirección de correo electrónico y si desea mandar el formulario a esta dirección, seleccione el campo.',
 	'traiter_email_option_destinataires_champ_form_label' => 'Destinatario presente en uno de los campos de los formularios',
 	'traiter_email_option_destinataires_explication' => 'Elige el campo que corresponde a los destinatarios del mensaje.', # MODIF
@@ -169,7 +169,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_destinataires_plus_explication' => 'Una lista de direcciones separadas por coma',
 	'traiter_email_option_destinataires_plus_label' => 'Destinatarios extra',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Selecciona el campo que contendrá la dirección de correo electrónico del remitente.',
-	'traiter_email_option_envoyeur_courriel_label' => 'Enviar email',
+	'traiter_email_option_envoyeur_courriel_label' => 'Enviar email', # MODIF
 	'traiter_email_option_envoyeur_nom_explication' => 'Construye este nombre usando los @raccourcis@ (usa la ayuda memoria). Si lo dejas en blanco se usará el nombre del sitio. ',
 	'traiter_email_option_envoyeur_nom_label' => 'Nombre del remitente',
 	'traiter_email_option_sujet_accuse_label' => 'Asunto del acuse de recibo. ',
@@ -189,13 +189,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La respuesta a editar no puso ser encontrada. ',
 	'traiter_enregistrement_message_ok' => 'Gracias. Sus respuestas fueron grabadas.', # MODIF
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonimizar el formulario', # MODIF
-	'traiter_enregistrement_option_auteur' => 'Utilizar l@s autor@s para los formularios',
-	'traiter_enregistrement_option_auteur_explication' => 'Atribuir un@ o vari@s autor@s a un formulario. Si esta opción esta activada, solo l@s autor@s de un formulario podrán acceder a sus datos.',
+	'traiter_enregistrement_option_auteur' => 'Utilizar l@s autor@s para los formularios', # MODIF
+	'traiter_enregistrement_option_auteur_explication' => 'Atribuir un@ o vari@s autor@s a un formulario. Si esta opción esta activada, solo l@s autor@s de un formulario podrán acceder a sus datos.', # MODIF
 	'traiter_enregistrement_option_identification_explication' => '¿Si las respuestas se pueden modificar, cuál es el método para usar en primer lugar para conocer la respuesta a modificar?', # MODIF
 	'traiter_enregistrement_option_identification_label' => 'Identificación', # MODIF
 	'traiter_enregistrement_option_ip_label' => 'Grabar las IPs (ocultadas después de un tiempo de guardia)',
 	'traiter_enregistrement_option_moderation_label' => 'Moderación',
-	'traiter_enregistrement_option_modifiable_explication' => 'Modificable: Los visitantes pueden cambiar sus respuestas con posterioridad.',
+	'traiter_enregistrement_option_modifiable_explication' => 'Modificable: Los visitantes pueden cambiar sus respuestas con posterioridad.', # MODIF
 	'traiter_enregistrement_option_modifiable_label' => 'Respuestas modificables',
 	'traiter_enregistrement_option_multiple_explication' => 'Multiple: Una misma persona puede responder varias veces el formulario.',
 	'traiter_enregistrement_option_multiple_label' => 'Respuestas múltiples',

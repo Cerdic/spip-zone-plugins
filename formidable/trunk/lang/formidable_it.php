@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_redirige' => 'Redirigi verso un nuovo indirizzo',
 	'editer_apres_choix_rien' => 'Assolutamente niente',
 	'editer_apres_choix_valeurs' => 'I valori immessi',
-	'editer_apres_explication' => 'Dopo la validazione, mostra al posto del modulo:',
+	'editer_apres_explication' => 'Dopo la validazione, mostra al posto del modulo:', # MODIF
 	'editer_apres_label' => 'Mostra di seguito',
 	'editer_descriptif' => 'Descrizione',
 	'editer_descriptif_explication' => 'Una spiegazione del modulo destinata allo spazio redazionale.',
@@ -78,13 +78,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_titre_formulaire' => 'Mostro il titolo del modulo?',
-	'noisette_label_identifiant' => 'Modulo da mostrare:',
+	'noisette_label_identifiant' => 'Modulo da mostrare:', # MODIF
 	'noisette_nom_noisette_formulaire' => 'Modulo',
 
 	// R
 	'reponse_intro' => '@auteur@ ha risposto al modulo @formulaire@',
-	'reponse_numero' => 'Risposta numero:',
-	'reponse_statut' => 'Questa risposta è:',
+	'reponse_numero' => 'Risposta numero:', # MODIF
+	'reponse_statut' => 'Questa risposta è:', # MODIF
 	'reponse_supprimer' => 'Elimina questa risposta',
 	'reponse_supprimer_confirmation' => 'Sei sicuro di voler eliminare questa risposta?',
 	'reponses_analyse' => 'Analisi delle risposte',
@@ -110,13 +110,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_horodatage' => 'Modulo "@formulaire@" inviato il @date@ alle @heure@.',
 	'traiter_email_message_erreur' => 'Si è verificato un errore all’atto dell’invio dell’email.',
 	'traiter_email_message_ok' => 'Il tuo messaggio è stato inviato per posta elettronica.',
-	'traiter_email_option_activer_accuse_label_case' => 'Invia anche una email all’indirizzo del mittente con un messaggio di conferma.',
+	'traiter_email_option_activer_accuse_label_case' => 'Invia anche una email all’indirizzo del mittente con un messaggio di conferma.', # MODIF
 	'traiter_email_option_destinataires_explication' => 'Scegli il campo che corrisponde al destinatario del messaggio.', # MODIF
 	'traiter_email_option_destinataires_label' => 'Destinatari',
 	'traiter_email_option_destinataires_plus_explication' => 'Un elenco di indirizzi separati da virgole.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinatari supplementari',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Scegli il campo che contiene l’indirizzo dell’utente.',
-	'traiter_email_option_envoyeur_courriel_label' => 'Indirizzo del mittente',
+	'traiter_email_option_envoyeur_courriel_label' => 'Indirizzo del mittente', # MODIF
 	'traiter_email_option_envoyeur_nom_explication' => 'Costruisci questo nome grazie all’aiuto dei @segnaposto@ (vedi il promemoria). Se non inserisci nulla, verrà inserito il nome del sito.',
 	'traiter_email_option_envoyeur_nom_label' => 'Nome del mittente',
 	'traiter_email_option_sujet_accuse_label' => 'Oggetto della conferma di ricezione',

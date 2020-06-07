@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_nb_reponses_total' => '@nb@ ľudia odpovedali na tento formulár.',
 	'analyse_sans_reponse' => 'Nevyplnené',
 	'analyse_une_reponse_total' => 'Na tento formulár odpovedal jeden človek.',
-	'analyse_zero_reponse_total' => 'Na tento formulár neodpovedal žiaden človek.',
+	'analyse_zero_reponse_total' => 'Na tento formulár neodpovedal žiaden človek.', # MODIF
 	'aucun_traitement' => 'Žiadne spracovanie',
 
 	// B
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_rien' => 'Vôbec nič',
 	'editer_apres_choix_stats' => 'Štatistiky odpovedí',
 	'editer_apres_choix_valeurs' => 'Zadané hodnoty',
-	'editer_apres_explication' => 'Po potvrdení namiesto formulára zobraziť:',
+	'editer_apres_explication' => 'Po potvrdení namiesto formulára zobraziť:', # MODIF
 	'editer_apres_label' => 'Zobraziť potom',
 	'editer_descriptif' => 'Opis',
 	'editer_descriptif_explication' => 'Vysvetlivka formulára pre súkromnú zónu.',
@@ -89,14 +89,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_titre_formulaire' => 'Zobraziť nadpis formulára?',
-	'noisette_label_identifiant' => 'Formulár, ktorý sa má zobraziť:',
+	'noisette_label_identifiant' => 'Formulár, ktorý sa má zobraziť:', # MODIF
 	'noisette_nom_noisette_formulaire' => 'Formulár',
 
 	// R
 	'reponse_aucune' => 'Žiadna odpoveď',
 	'reponse_intro' => '@auteur@ vyplnil(a) formulár @formulaire@',
-	'reponse_numero' => 'Odpoveď číslo:',
-	'reponse_statut' => 'Táto odpoveď je:',
+	'reponse_numero' => 'Odpoveď číslo:', # MODIF
+	'reponse_statut' => 'Táto odpoveď je:', # MODIF
 	'reponse_supprimer' => 'Odstrániť túto odpoveď',
 	'reponse_supprimer_confirmation' => 'Určite chcete vymazať túto odpoveď?',
 	'reponse_une' => '1 odpoveď',
@@ -126,13 +126,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_horodatage' => 'Formulár "@formulaire@" odoslaný @date@ o @heure@.',
 	'traiter_email_message_erreur' => 'Pri odosielaní e-mailu sa vyskytla chyba.',
 	'traiter_email_message_ok' => 'Vaša správa bola odoslaná.',
-	'traiter_email_option_activer_accuse_label_case' => 'Poslať e-mail aj na adresu odosielateľa so žiadosťou o potvrdenie.',
+	'traiter_email_option_activer_accuse_label_case' => 'Poslať e-mail aj na adresu odosielateľa so žiadosťou o potvrdenie.', # MODIF
 	'traiter_email_option_destinataires_explication' => 'Vyberte si pole, v ktorom budú príjemcovia správy.', # MODIF
 	'traiter_email_option_destinataires_label' => 'Príjemcovia',
 	'traiter_email_option_destinataires_plus_explication' => 'Zoznam adries oddelený čiarkami.',
 	'traiter_email_option_destinataires_plus_label' => 'Ďalší príjemcovia',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Vyberte si pole, ktoré bude obsahovať e-mailovú adresu odosielateľa.',
-	'traiter_email_option_envoyeur_courriel_label' => 'E-mail odosielateľa',
+	'traiter_email_option_envoyeur_courriel_label' => 'E-mail odosielateľa', # MODIF
 	'traiter_email_option_envoyeur_nom_explication' => 'Vytvorte názov pomocou @raccourcis@ (prečítajte si pomocníka). Ak neurobíte nič, bude tým názvom názov stránky.',
 	'traiter_email_option_envoyeur_nom_label' => 'Meno odosielateľa',
 	'traiter_email_option_sujet_accuse_label' => 'Predmet potvrdenia o prijatí',
@@ -151,8 +151,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_deja_repondu' => 'Tento formulár ste už vyplnili.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'Odpoveď, ktorú chcete upraviť, sa nedá nájsť.',
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonymizované podobe', # MODIF
-	'traiter_enregistrement_option_auteur' => 'Použiť mená autorov vo formulároch',
-	'traiter_enregistrement_option_auteur_explication' => 'K formuláru priradiť jedného autora alebo viacerých. Ak aktivujete túto možnosť, k údajom formulára budú mať prístup len autori formulára.',
+	'traiter_enregistrement_option_auteur' => 'Použiť mená autorov vo formulároch', # MODIF
+	'traiter_enregistrement_option_auteur_explication' => 'K formuláru priradiť jedného autora alebo viacerých. Ak aktivujete túto možnosť, k údajom formulára budú mať prístup len autori formulára.', # MODIF
 	'traiter_enregistrement_option_identification_explication' => 'Ak sa odpovede dajú upraviť, aký spôsob sa použije ako prvý, aby sa zistilo, či sa odpoveď menila?', # MODIF
 	'traiter_enregistrement_option_identification_label' => 'Identifikácia', # MODIF
 	'traiter_enregistrement_option_moderation_label' => 'Kontrola',

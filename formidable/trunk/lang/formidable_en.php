@@ -12,9 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'activer_pages_explication' => 'By default, public pages of the forms are not allowed',
 	'activer_pages_label' => 'Activate creation of public pages for the forms.',
-	'admin_reponses_auteur' => 'Allow forms author to modify the answers',
+	'admin_reponses_auteur' => 'Allow forms author to modify the answers', # MODIF
 	'admin_reponses_auteur_explication' => 'Only administrators can normally modify the answers filled in a form (to the bin, published, proposed to evaluation). This option allows the author of a form to modify the status (with the risk to alterate potentiall statistics)
-',
+', # MODIF
 	'analyse_avec_reponse' => 'Non-empty answers',
 	'analyse_exclure_champs_explication' => 'Insert the name of the fields to exclude, separated by <code>|</code>. Do not insert <code>@</code>.
 
@@ -25,10 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_nb_reponses_total' => '@nb@ people responded to this form.',
 	'analyse_sans_reponse' => 'Stayed unanswered',
 	'analyse_une_reponse_total' => 'One person responded to this form.',
-	'analyse_zero_reponse_total' => 'No one responded to this form.',
+	'analyse_zero_reponse_total' => 'No one responded to this form.', # MODIF
 	'aucun_traitement' => 'No treatment',
-	'autoriser_admin_restreint' => 'Allow restricted administrators to create and modify forms',
-	'autoriser_admin_restreint_explication' => 'By default, only administrators have access to the creation and modification of forms',
+	'autoriser_admin_restreint' => 'Allow restricted administrators to create and modify forms', # MODIF
+	'autoriser_admin_restreint_explication' => 'By default, only administrators have access to the creation and modification of forms', # MODIF
 
 	// B
 	'bouton_formulaires' => 'Forms',
@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_objets_label' => 'Link forms to content',
 	'cfg_titre_page_configurer_formidable' => 'Configure Formidable',
 	'champs' => 'Fields',
-	'changer_statut' => 'This form is:',
+	'changer_statut' => 'This form is:', # MODIF
 	'creer_dossier_formulaire_erreur_impossible_creer' => 'Impossible to create @dossier@ folder, needed to store files. Check access rights.',
 	'creer_dossier_formulaire_erreur_impossible_ecrire' => 'Impossible to create @dossier@ folder, needed to store files. Check access rights.',
 	'creer_dossier_formulaire_erreur_possible_lire_exterieur' => 'It is possible to remotely read the contents of the folder @dossier@. This is problematic in terms of data confidentiality.',
@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_rien' => 'Nothing',
 	'editer_apres_choix_stats' => 'Answers statistics',
 	'editer_apres_choix_valeurs' => 'The entered values',
-	'editer_apres_explication' => 'After validation, display instead of the form:',
+	'editer_apres_explication' => 'After validation, display instead of the form:', # MODIF
 	'editer_apres_label' => 'Display then',
 	'editer_css' => 'CSS Classes ',
 	'editer_descriptif' => 'Description',
@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_message_erreur_unicite_explication' => 'If you leave this field empty, the Formidable default error message will be shown',
 	'editer_message_erreur_unicite_label' => 'Error message when a field is not unique',
 	'editer_message_ok' => 'Return message',
-	'editer_message_ok_explication' => 'You can customize the message that will be displayed to the user after submitting a valid form. It is possible to display the value of some submitted fields using @raccourci@.',
+	'editer_message_ok_explication' => 'You can customize the message that will be displayed to the user after submitting a valid form. It is possible to display the value of some submitted fields using @raccourci@.', # MODIF
 	'editer_modifier_formulaire' => 'Modify the form',
 	'editer_nouveau' => 'New form',
 	'editer_redirige_url' => 'Forwarding address after validation',
@@ -137,7 +137,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_formulaire' => 'No form',
 	'info_aucune_reponse' => 'No answer',
 	'info_formulaire_refuse' => 'Archived',
-	'info_formulaire_utilise_par' => 'Form used by:',
+	'info_formulaire_utilise_par' => 'Form used by:', # MODIF
 	'info_nb_formulaires' => '@nb@ forms',
 	'info_nb_reponses' => '@nb@ answers',
 	'info_reponse_proposee' => 'To moderate',
@@ -149,8 +149,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_supprimee' => 'Deleted',
 	'info_reponse_supprimees' => 'Deleted',
 	'info_reponse_toutes' => 'All',
-	'info_utilise_1_formulaire' => 'Form used:',
-	'info_utilise_nb_formulaires' => 'Forms used:',
+	'info_utilise_1_formulaire' => 'Form used:', # MODIF
+	'info_utilise_nb_formulaires' => 'Forms used:', # MODIF
 
 	// J
 	'jours_heures_minutes_secondes' => '@j@j @h@h @m@min @s@s',
@@ -170,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_titre_formulaire' => 'Dispaly the title of the form ?',
-	'noisette_label_identifiant' => 'Form to display :',
+	'noisette_label_identifiant' => 'Form to display :', # MODIF
 	'noisette_nom_noisette_formulaire' => 'Form',
 
 	// P
@@ -180,8 +180,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_aucune' => 'No answer',
 	'reponse_intro' => '@auteur@ answered to the form @formulaire@',
 	'reponse_maj' => 'Last update',
-	'reponse_numero' => 'Answer number :',
-	'reponse_statut' => 'This answer is :',
+	'reponse_numero' => 'Answer number :', # MODIF
+	'reponse_statut' => 'This answer is :', # MODIF
 	'reponse_supprimer' => 'Delete this reply',
 	'reponse_supprimer_confirmation' => 'Do you really wish to delete this reply?',
 	'reponse_une' => '1 reply',
@@ -228,19 +228,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_contenu_courriel_label' => 'Content of the email',
 	'traiter_email_description' => 'Post by email the result of the form to a list of recipients.', # MODIF
 	'traiter_email_destinataires_courriel_label' => 'Recipients of the email',
-	'traiter_email_envoyeur_courriel_label' => 'Email sender',
+	'traiter_email_envoyeur_courriel_label' => 'Email sender', # MODIF
 	'traiter_email_horodatage' => 'Form "@formulaire@" sent on @date@ at @heure@.',
 	'traiter_email_message_erreur' => 'An error occurred when sending the email.',
 	'traiter_email_message_ok' => 'Your message has been successfully sent by email.',
-	'traiter_email_option_activer_accuse_label_case' => 'Also send an email to the sender with a confirmation message.',
-	'traiter_email_option_activer_ip_label_case' => 'Send the IP address of the sender to the recipients.',
+	'traiter_email_option_activer_accuse_label_case' => 'Also send an email to the sender with a confirmation message.', # MODIF
+	'traiter_email_option_activer_ip_label_case' => 'Send the IP address of the sender to the recipients.', # MODIF
 	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Specify the email used to send the acknowledgment. If you do not put anything, it will be the email address of the webmaster.',
-	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Sender’s email of the acknowledgment',
+	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Sender’s email of the acknowledgment', # MODIF
 	'traiter_email_option_destinataires_champ_form_attention' => 'This option is deprecated because it is a call to SPAM.
 <br /> - To send to an author of the site, use the option "Recipient" (above).
 <br /> - To send to the person filling out the form, configure the acknowledgment of receipt (lower).
 <br />
-This option is only retained for backward compatibility. It does not appear on the new forms.',
+This option is only retained for backward compatibility. It does not appear on the new forms.', # MODIF
 	'traiter_email_option_destinataires_champ_form_explication' => 'If one of the fields is an email address and you want to send the form to this address, select the field.',
 	'traiter_email_option_destinataires_champ_form_label' => 'The recipient is in one of the fields of the forms',
 	'traiter_email_option_destinataires_explication' => 'Choose the field that corresponds to the message recipients. <br />
@@ -249,10 +249,10 @@ This is a "Recipients" or "Hidden Field" , including the numeric identifier of a
 	'traiter_email_option_destinataires_plus_explication' => 'A list of addresses separated by commas.',
 	'traiter_email_option_destinataires_plus_label' => 'Extra recipients',
 	'traiter_email_option_destinataires_selon_champ_explication' => 'Allows you to specify one or more recipients based on the value of a field.
-Indicate the field, its value, and the concerned email(s) (separated by a comma) according to this format, such as: "@selection_1@/choix1 : mail@example.tld". You can specify multiple tests, returning to the line between each test.',
+Indicate the field, its value, and the concerned email(s) (separated by a comma) according to this format, such as: "@selection_1@/choix1 : mail@example.tld". You can specify multiple tests, returning to the line between each test.', # MODIF
 	'traiter_email_option_destinataires_selon_champ_label' => 'Recipients according to a field',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Select the field that will contain the email address of the sender.',
-	'traiter_email_option_envoyeur_courriel_label' => 'Sender Email',
+	'traiter_email_option_envoyeur_courriel_label' => 'Sender Email', # MODIF
 	'traiter_email_option_envoyeur_nom_explication' => 'Build this name using the @raccourcis@ (see the notes). If you enter nothing, it will be the name of the site.',
 	'traiter_email_option_envoyeur_nom_label' => 'Name of sender',
 	'traiter_email_option_exclure_champs_email_explication' => 'If you do not want certain fields to appear in sent emails (for example hidden fields), just define them here, separated by a comma.',
@@ -260,8 +260,8 @@ Indicate the field, its value, and the concerned email(s) (separated by a comma)
 	'traiter_email_option_masquer_champs_vide_label_case' => 'Hide empty fields',
 	'traiter_email_option_masquer_liens_label_case' => 'Hide administration links in the email.',
 	'traiter_email_option_masquer_valeurs_accuse_label_case' => 'Do not send the response values in the acknowledgement of receipt',
-	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Specify the name of the sender used to send the acknowledgment. If you do not put anything, it will be the name of the site.',
-	'traiter_email_option_nom_envoyeur_accuse_label' => 'Name of the sender of the acknowledgment',
+	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Specify the name of the sender used to send the acknowledgment. If you do not put anything, it will be the name of the site.', # MODIF
+	'traiter_email_option_nom_envoyeur_accuse_label' => 'Name of the sender of the acknowledgment', # MODIF
 	'traiter_email_option_pj_explication' => 'If the documents posted weigh less than _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constant modifiable by the webmaster).', # MODIF
 	'traiter_email_option_pj_label' => 'Join the files in the email',
 	'traiter_email_option_sujet_accuse_label' => 'Subject of the acknowledgement of receipt',
@@ -288,8 +288,8 @@ Indicate the field, its value, and the concerned email(s) (separated by a comma)
 	'traiter_enregistrement_identification_reponses' => 'Identification of responses',
 	'traiter_enregistrement_message_ok' => 'Thanks. Your answers have been correctly saved.',
 	'traiter_enregistrement_option_anonymiser_label' => 'Do not keep the ID of the connected person.',
-	'traiter_enregistrement_option_auteur' => 'Link authors to the forms',
-	'traiter_enregistrement_option_auteur_explication' => 'Bind one or more authors to a form. If activated, this option prevents anyone except the author(s) to access form’s configuration or results.',
+	'traiter_enregistrement_option_auteur' => 'Link authors to the forms', # MODIF
+	'traiter_enregistrement_option_auteur_explication' => 'Bind one or more authors to a form. If activated, this option prevents anyone except the author(s) to access form’s configuration or results.', # MODIF
 	'traiter_enregistrement_option_effacement_delai_label' => 'Number of days before deletion',
 	'traiter_enregistrement_option_effacement_label' => 'Regularly clear  the oldest results',
 	'traiter_enregistrement_option_identification_explication' => 'Which process should be used first to find out the answer previously provided by the user? ',
@@ -299,7 +299,7 @@ Indicate the field, its value, and the concerned email(s) (separated by a comma)
 	'traiter_enregistrement_option_invalider_label' => 'Refresh the cache',
 	'traiter_enregistrement_option_ip_label' => 'Record IPs (hidden after a period of retention)',
 	'traiter_enregistrement_option_moderation_label' => 'Moderation',
-	'traiter_enregistrement_option_modifiable_explication' => 'Editable: Visitors can change their answers afterwards.',
+	'traiter_enregistrement_option_modifiable_explication' => 'Editable: Visitors can change their answers afterwards.', # MODIF
 	'traiter_enregistrement_option_modifiable_label' => 'Answers can be modified',
 	'traiter_enregistrement_option_multiple_explication' => 'Multiple: A single person may answer several times.',
 	'traiter_enregistrement_option_multiple_label' => 'Multiple answers',

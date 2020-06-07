@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_nb_reponses_total' => '@nb@ человек(а) заполнило форму.',
 	'analyse_sans_reponse' => 'Не ответили',
 	'analyse_une_reponse_total' => 'Человек заполнил форму.',
-	'analyse_zero_reponse_total' => 'Никто еще не заполнял форму.',
+	'analyse_zero_reponse_total' => 'Никто еще не заполнял форму.', # MODIF
 	'aucun_traitement' => 'Нет обраточиков',
 
 	// B
@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_titre_page_configurer_formidable' => 'Настройки Formidable',
 	'champs' => 'Поля',
-	'changer_statut' => 'Статус формы:',
+	'changer_statut' => 'Статус формы:', # MODIF
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_rien' => 'Ничего не делать',
 	'editer_apres_choix_stats' => 'Показать статистику ответов',
 	'editer_apres_choix_valeurs' => 'Показать введенные значения',
-	'editer_apres_explication' => 'После обработки, показывать на месте формы:',
+	'editer_apres_explication' => 'После обработки, показывать на месте формы:', # MODIF
 	'editer_apres_label' => 'Действие после обработки:',
 	'editer_descriptif' => 'Описание',
 	'editer_descriptif_explication' => 'Описание формы а административной части.',
@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_formulaire' => 'Форм нет',
 	'info_aucune_reponse' => 'Нет ответов',
 	'info_formulaire_refuse' => 'Архив',
-	'info_formulaire_utilise_par' => 'Форма используется:',
+	'info_formulaire_utilise_par' => 'Форма используется:', # MODIF
 	'info_nb_formulaires' => '@nb@ форм(ы)',
 	'info_nb_reponses' => '@nb@ ответов',
 	'info_reponse_proposee' => 'На проверке',
@@ -104,8 +104,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_supprimee' => 'Удаленные', # MODIF
 	'info_reponse_supprimees' => 'Удаленные', # MODIF
 	'info_reponse_toutes' => 'Все',
-	'info_utilise_1_formulaire' => 'Форма использует:',
-	'info_utilise_nb_formulaires' => 'Формы используют:',
+	'info_utilise_1_formulaire' => 'Форма использует:', # MODIF
+	'info_utilise_nb_formulaires' => 'Формы используют:', # MODIF
 
 	// M
 	'modele_label_formulaire_formidable' => 'Какая форма ?',
@@ -113,14 +113,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_titre_formulaire' => 'Показывать название формы?',
-	'noisette_label_identifiant' => 'Форма для отображения:', # RELIRE
+	'noisette_label_identifiant' => 'Форма для отображения:', # MODIF
 	'noisette_nom_noisette_formulaire' => 'Форма',
 
 	// R
 	'reponse_aucune' => 'Нет ответов',
 	'reponse_intro' => '@auteur@ ответил на форму @formulaire@',
-	'reponse_numero' => 'Ответ номер:',
-	'reponse_statut' => 'Статус ответа:',
+	'reponse_numero' => 'Ответ номер:', # MODIF
+	'reponse_statut' => 'Статус ответа:', # MODIF
 	'reponse_supprimer' => 'Удалить ответ',
 	'reponse_supprimer_confirmation' => 'Вы действительно хотите удалить этот ответ ?',
 	'reponse_une' => '1 ответ',
@@ -164,7 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_horodatage' => 'Форма "@formulaire@" отправлена @date@ @heure@.',
 	'traiter_email_message_erreur' => 'Произошла ошибка при отправке электронной почты.',
 	'traiter_email_message_ok' => 'Ваше сообщение было отправлено.',
-	'traiter_email_option_activer_accuse_label_case' => 'Кроме указанных получателей, отправить отправителю сообщение с подтверждением.',
+	'traiter_email_option_activer_accuse_label_case' => 'Кроме указанных получателей, отправить отправителю сообщение с подтверждением.', # MODIF
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Уведомление электронной почтой', # MODIF
 	'traiter_email_option_destinataires_champ_form_label' => 'Емейл получатель указывается в одном из полей формы',
 	'traiter_email_option_destinataires_explication' => 'Выберите поле, которое соответствует получателям сообщения.', # MODIF
@@ -172,7 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_destinataires_plus_explication' => 'Список адресов, разделенных запятыми.',
 	'traiter_email_option_destinataires_plus_label' => 'Дополнительные получатели',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Выберите поле, которое будет содержать электронный адрес отправителя.',
-	'traiter_email_option_envoyeur_courriel_label' => 'Адрес отправителя',
+	'traiter_email_option_envoyeur_courriel_label' => 'Адрес отправителя', # MODIF
 	'traiter_email_option_envoyeur_nom_explication' => 'Можно создать имя отправителя с использованием @ярлыков@ (см. памятку помощи). Если оставить пустым, это будет название сайта.',
 	'traiter_email_option_envoyeur_nom_label' => 'Имя отправителя',
 	'traiter_email_option_sujet_accuse_label' => 'Тема подтверждающего сообщения',
@@ -191,13 +191,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'Ответ для редактирования не найден.', # RELIRE
 	'traiter_enregistrement_message_ok' => 'Спасибо. Ваш ответ был сохранен', # MODIF
 	'traiter_enregistrement_option_anonymiser_label' => 'Анонимизировать форму', # MODIF
-	'traiter_enregistrement_option_auteur' => 'Использовать авторов в форме',
-	'traiter_enregistrement_option_auteur_explication' => 'Назначить одного или нескольких авторов форме. Если эта настройка включена, то только назначенные автора будут иметь к ней доступ',
+	'traiter_enregistrement_option_auteur' => 'Использовать авторов в форме', # MODIF
+	'traiter_enregistrement_option_auteur_explication' => 'Назначить одного или нескольких авторов форме. Если эта настройка включена, то только назначенные автора будут иметь к ней доступ', # MODIF
 	'traiter_enregistrement_option_identification_explication' => 'Если можно изменять ответы, выберите метод аутентификации пользователя', # MODIF
 	'traiter_enregistrement_option_identification_label' => 'ID', # MODIF
 	'traiter_enregistrement_option_ip_label' => 'Сохранять IP ',
 	'traiter_enregistrement_option_moderation_label' => 'Модерация',
-	'traiter_enregistrement_option_modifiable_explication' => 'Посетители могут изменять свои ответы после заполнения формы',
+	'traiter_enregistrement_option_modifiable_explication' => 'Посетители могут изменять свои ответы после заполнения формы', # MODIF
 	'traiter_enregistrement_option_modifiable_label' => 'Ответы можно изменить',
 	'traiter_enregistrement_option_multiple_explication' => 'Пользователь может ответить (заполнить) форму несколько раз.',
 	'traiter_enregistrement_option_multiple_label' => 'Несколько ответов',

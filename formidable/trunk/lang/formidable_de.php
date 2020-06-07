@@ -64,8 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'reponse_intro' => '@auteur@ hat auf das Formular geantwortet @formulaire@',
-	'reponse_numero' => 'Antwort Nummer:',
-	'reponse_statut' => 'Diese Antwort ist:',
+	'reponse_numero' => 'Antwort Nummer:', # MODIF
+	'reponse_statut' => 'Diese Antwort ist:', # MODIF
 	'reponse_supprimer' => 'Diese Antwort löschen',
 	'reponse_supprimer_confirmation' => 'Wollen sie diese Antwor wirklich löschen?',
 	'reponses_analyse' => 'Analyse der Antworten',
@@ -91,13 +91,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_horodatage' => 'Formular "@formulaire@" am @date@ um @heure@ gesendet.',
 	'traiter_email_message_erreur' => 'Beim Versenden des Formulars ist ein Fehler aufgetreten.',
 	'traiter_email_message_ok' => 'Ihre Nachricht wurde per Mail gesendet.',
-	'traiter_email_option_activer_accuse_label_case' => 'Ebenfalls eine Empfangsbestätigung an Absender senden.',
+	'traiter_email_option_activer_accuse_label_case' => 'Ebenfalls eine Empfangsbestätigung an Absender senden.', # MODIF
 	'traiter_email_option_destinataires_explication' => 'Legen sie das Feld fest, das die Empfängeradresse enthält.', # MODIF
 	'traiter_email_option_destinataires_label' => 'Empfänger',
 	'traiter_email_option_destinataires_plus_explication' => 'Eine kommagetrennte Empfängerliste.',
 	'traiter_email_option_destinataires_plus_label' => 'Weitere Empfänger',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Legen sie das Feld fest, das die Absenderadresse enthält.',
-	'traiter_email_option_envoyeur_courriel_label' => 'Absenderadresse',
+	'traiter_email_option_envoyeur_courriel_label' => 'Absenderadresse', # MODIF
 	'traiter_email_option_envoyeur_nom_explication' => 'Definieren sie den Namen mit Hilf der @raccourcis@ (siehe Merkzettel). Wenn sie nichts eintragen, wird der Name der Website verwendet.',
 	'traiter_email_option_envoyeur_nom_label' => 'Name des Absenders',
 	'traiter_email_option_sujet_accuse_label' => 'Betreff der Empfangsbestätigung',

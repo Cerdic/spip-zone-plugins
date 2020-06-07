@@ -12,8 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'activer_pages_explication' => 'Por padrão, as páginas públicas dos formulários não são autorizadas',
 	'activer_pages_label' => 'Ativar as páginas publicas dos formulários',
-	'admin_reponses_auteur' => 'Autorizar os autores dos formulários a alterar as respostas',
-	'admin_reponses_auteur_explication' => 'Apenas os administradores podem alterar as respostas enviadas por um formulário (Na lixeira, publicado, proposto para avaliação). Essa opção permite que o autor de um formulário modifique o status (com risco de distorcer eventuais dados estatísticos).',
+	'admin_reponses_auteur' => 'Autorizar os autores dos formulários a alterar as respostas', # MODIF
+	'admin_reponses_auteur_explication' => 'Apenas os administradores podem alterar as respostas enviadas por um formulário (Na lixeira, publicado, proposto para avaliação). Essa opção permite que o autor de um formulário modifique o status (com risco de distorcer eventuais dados estatísticos).', # MODIF
 	'analyse_avec_reponse' => 'Respostas não vazias',
 	'analyse_exclure_champs_explication' => 'Informe o nome dos campos a excluir da análise, separados por <code>|</code>. Não inserir as <code>@</code>.',
 	'analyse_exclure_champs_label' => 'Campos a excluir da análise',
@@ -22,10 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_nb_reponses_total' => '@nb@ pessoas responderam a este formulário.',
 	'analyse_sans_reponse' => 'Deixados em branco',
 	'analyse_une_reponse_total' => 'Uma pessoa respondeu a este formulário.',
-	'analyse_zero_reponse_total' => 'Ninguém respondeu a este formulário.',
+	'analyse_zero_reponse_total' => 'Ninguém respondeu a este formulário.', # MODIF
 	'aucun_traitement' => 'Nenhum tratamento',
-	'autoriser_admin_restreint' => 'Autorizar administradores restritos a criar e alterar os formulários',
-	'autoriser_admin_restreint_explication' => 'Por padrão, somente administradores têm acesso à criação e alteração dos formulários',
+	'autoriser_admin_restreint' => 'Autorizar administradores restritos a criar e alterar os formulários', # MODIF
+	'autoriser_admin_restreint_explication' => 'Por padrão, somente administradores têm acesso à criação e alteração dos formulários', # MODIF
 
 	// B
 	'bouton_formulaires' => 'Formulários',
@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_objets_label' => 'Vincular os formulários aos conteúdos',
 	'cfg_titre_page_configurer_formidable' => 'Configurar Formidable',
 	'champs' => 'Campos',
-	'changer_statut' => 'Este formulário está:',
+	'changer_statut' => 'Este formulário está:', # MODIF
 	'creer_dossier_formulaire_erreur_impossible_creer' => 'Não foi possível criar a pasta @dossier@,  necessária para armazenar os arquivos. Verifique os direitos de acesso.',
 	'creer_dossier_formulaire_erreur_impossible_ecrire' => 'Não foi possível escrever na pasta  @dossier@, necessária para armazenar os arquivos. Verifique os direitos de acesso.',
 	'creer_dossier_formulaire_erreur_possible_lire_exterieur' => 'É possível acessar remotamente o conteúdo da pasta @dossier@. Isto é um problema, em termos de confidencialidade dos dados.',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_rien' => 'Nada',
 	'editer_apres_choix_stats' => 'Estatísticas de respostas',
 	'editer_apres_choix_valeurs' => 'Valores informados',
-	'editer_apres_explication' => 'Após validação, exibir no lugar do formulário:',
+	'editer_apres_explication' => 'Após validação, exibir no lugar do formulário:', # MODIF
 	'editer_apres_label' => 'Exibir em seguida',
 	'editer_css' => 'Classes CSS',
 	'editer_descriptif' => 'Descrição',
@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_message_erreur_unicite_explication' => 'Se você deixar o campo em branco, a mensagem de erro padrão do Formidable será exibida',
 	'editer_message_erreur_unicite_label' => 'Mensagem de erro quando um campo não é único',
 	'editer_message_ok' => 'Mensagem de retorno',
-	'editer_message_ok_explication' => 'Você pode personalizar a mensagem que será exibida ao usuário após o envio de um formulário válido. É possível exibir o valor de certos campos submetidos usando @raccourci@',
+	'editer_message_ok_explication' => 'Você pode personalizar a mensagem que será exibida ao usuário após o envio de um formulário válido. É possível exibir o valor de certos campos submetidos usando @raccourci@', # MODIF
 	'editer_modifier_formulaire' => 'Modificar formulário',
 	'editer_nouveau' => 'Novo formulário',
 	'editer_redirige_url' => 'Endereço de redirecionamento após validação',
@@ -139,7 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_formulaire' => 'Nenhum formulário',
 	'info_aucune_reponse' => 'Nenhuma resposta',
 	'info_formulaire_refuse' => 'Arquivado',
-	'info_formulaire_utilise_par' => 'Formulário utilizado por:',
+	'info_formulaire_utilise_par' => 'Formulário utilizado por:', # MODIF
 	'info_nb_formulaires' => '@nb@ formulários',
 	'info_nb_reponses' => '@nb@ respostas',
 	'info_reponse_proposee' => 'A moderar',
@@ -151,8 +151,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_supprimee' => 'Na lixeira',
 	'info_reponse_supprimees' => 'Na lixeira',
 	'info_reponse_toutes' => 'Todas',
-	'info_utilise_1_formulaire' => 'Formulário utilizado:',
-	'info_utilise_nb_formulaires' => 'Formulários utilizados:',
+	'info_utilise_1_formulaire' => 'Formulário utilizado:', # MODIF
+	'info_utilise_nb_formulaires' => 'Formulários utilizados:', # MODIF
 
 	// J
 	'jours_heures_minutes_secondes' => '@j@d @h@h @m@min @s@s',
@@ -172,7 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_titre_formulaire' => 'Exibir título do formulário?',
-	'noisette_label_identifiant' => 'Formulário a exibir:',
+	'noisette_label_identifiant' => 'Formulário a exibir:', # MODIF
 	'noisette_nom_noisette_formulaire' => 'Formulário',
 
 	// P
@@ -182,8 +182,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_aucune' => 'Nenhuma resposta',
 	'reponse_intro' => '@auteur@ respondeu ao formulário @formulaire@',
 	'reponse_maj' => 'Última alteração',
-	'reponse_numero' => 'Resposta número:',
-	'reponse_statut' => 'Esta resposta está:',
+	'reponse_numero' => 'Resposta número:', # MODIF
+	'reponse_statut' => 'Esta resposta está:', # MODIF
 	'reponse_supprimer' => 'Excluir esta resposta',
 	'reponse_supprimer_confirmation' => 'Você quer realmente excluir esta resposta?',
 	'reponse_une' => '1 resposta',
@@ -231,19 +231,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_contenu_courriel_label' => 'Conteúdo do e-mail',
 	'traiter_email_description' => 'Enviar por e-mail o resultado do formulário para uma lista de destinatários',
 	'traiter_email_destinataires_courriel_label' => 'Destinatários do e-mail',
-	'traiter_email_envoyeur_courriel_label' => 'Remetente do e-mail',
+	'traiter_email_envoyeur_courriel_label' => 'Remetente do e-mail', # MODIF
 	'traiter_email_horodatage' => 'Formulário "@formulaire@" postado em @date@ às @heure@.',
 	'traiter_email_message_erreur' => 'Aconteceu um erro ao enviar o e-mail.',
 	'traiter_email_message_ok' => 'Sua mensagem foi enviada corretamente por e-mail.',
-	'traiter_email_option_activer_accuse_label_case' => 'Enviar também um e-mail para o remetente com uma mensagem de confirmação.',
-	'traiter_email_option_activer_ip_label_case' => 'Enviar o endereço IP do remetente aos destinatários.',
+	'traiter_email_option_activer_accuse_label_case' => 'Enviar também um e-mail para o remetente com uma mensagem de confirmação.', # MODIF
+	'traiter_email_option_activer_ip_label_case' => 'Enviar o endereço IP do remetente aos destinatários.', # MODIF
 	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Informe o e-mail utilizado para enviar o aviso de recebimento. Se nada for informado, o e-mail do webmaster será o usado.',
-	'traiter_email_option_courriel_envoyeur_accuse_label' => 'E-mail do remetente do aviso de recebimento',
+	'traiter_email_option_courriel_envoyeur_accuse_label' => 'E-mail do remetente do aviso de recebimento', # MODIF
 	'traiter_email_option_destinataires_champ_form_attention' => 'Esta opção é desaconselhada, por contituir um apelo ao SPAM.<br />
 - Para enviar para um autor do site, use a opção «Destinatário» (mais acima).<br />
 - Para enviar para a pessoa que preencheu o formulário, configurar o aviso de recebimento (mais abaixo).<br />
 Esta opção só é conservada por questões de compatibilidade ascendente. Ela não é exibida nos novos formulários.
-',
+', # MODIF
 	'traiter_email_option_destinataires_champ_form_explication' => 'Se um dos campos é um endereço de email ao qual você queira enviar o formulário, selecione o campo.',
 	'traiter_email_option_destinataires_champ_form_label' => 'Destinatário presente em um dos campos dos formulários',
 	'traiter_email_option_destinataires_explication' => 'Escolha o campo que corresponderá aos destinatários da mensagem.<br />
@@ -251,10 +251,10 @@ Deve ser um campo de tipo «Destinatários» ou «Invisível», contendo o ident
 	'traiter_email_option_destinataires_label' => 'Destinatários',
 	'traiter_email_option_destinataires_plus_explication' => 'Uma lista de e-mails separados por vírgulas.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinatários suplementares',
-	'traiter_email_option_destinataires_selon_champ_explication' => 'Permite indicar um ou mais destinatários em função do valor de um campo. Indique o campo, o seu valor, e o(s) respectivo(s) endereço(s) de e-mail (separados por uma vírgula), de acordo com o formato a seguir: "@selection_1@/choix1 : mail@exemplo.tld". Você pode indicar diversos testes, quebrando uma linha entre cada teste.',
+	'traiter_email_option_destinataires_selon_champ_explication' => 'Permite indicar um ou mais destinatários em função do valor de um campo. Indique o campo, o seu valor, e o(s) respectivo(s) endereço(s) de e-mail (separados por uma vírgula), de acordo com o formato a seguir: "@selection_1@/choix1 : mail@exemplo.tld". Você pode indicar diversos testes, quebrando uma linha entre cada teste.', # MODIF
 	'traiter_email_option_destinataires_selon_champ_label' => 'Destinatários em função de um campo',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Escolha o campo que conterá o e-mail do remetente.',
-	'traiter_email_option_envoyeur_courriel_label' => 'E-mail do remetente',
+	'traiter_email_option_envoyeur_courriel_label' => 'E-mail do remetente', # MODIF
 	'traiter_email_option_envoyeur_nom_explication' => 'Construa o nome com ajuda dos @raccourcis@ (ver atalhos). Se for deixado em branco, será o nome do site.',
 	'traiter_email_option_envoyeur_nom_label' => 'Nome do remetente',
 	'traiter_email_option_exclure_champs_email_explication' => 'Se desejar que certos campos não sejam exibidos nas mensagens enviadas (por exemplo, campos escondidos), basta declará-los aqui, separados por vírgula.',
@@ -263,8 +263,8 @@ Deve ser um campo de tipo «Destinatários» ou «Invisível», contendo o ident
 	'traiter_email_option_masquer_liens_label_case' => 'Ocultar os links de administração na mensagem.',
 	'traiter_email_option_masquer_valeurs_accuse_label_case' => 'Não enviar os valores da resposta no aviso de recebimento',
 	'traiter_email_option_modification_reponse_label_case' => 'Não enviar e-mail no caso de alteração de uma resposta já submetida.',
-	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Indique o nome do remetente utilizado para enviar o aviso de recebimento. Se nada for informado, será usado o nome do site.',
-	'traiter_email_option_nom_envoyeur_accuse_label' => 'Nome do remetente do aviso de recebimento',
+	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Indique o nome do remetente utilizado para enviar o aviso de recebimento. Se nada for informado, será usado o nome do site.', # MODIF
+	'traiter_email_option_nom_envoyeur_accuse_label' => 'Nome do remetente do aviso de recebimento', # MODIF
 	'traiter_email_option_pj_explication' => 'Se os documentos postados pesarem menos de _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constante modificável pelo webmaster).', # MODIF
 	'traiter_email_option_pj_label' => 'Anexar os arquivos na mensagem',
 	'traiter_email_option_sujet_accuse_label' => 'Assunto do aviso de recebimento',
@@ -292,8 +292,8 @@ Deve ser um campo de tipo «Destinatários» ou «Invisível», contendo o ident
 	'traiter_enregistrement_identification_reponses' => 'Identificação das respostas',
 	'traiter_enregistrement_message_ok' => 'Obrigado. Suas respostas foram registradas corretamente',
 	'traiter_enregistrement_option_anonymiser_label' => 'Não manter o identificador da pessoa conectada.',
-	'traiter_enregistrement_option_auteur' => 'Utilizar autores para os formulários',
-	'traiter_enregistrement_option_auteur_explication' => 'Atribuir um ou vários autores a um formulário. Se esta opção estiver ativada, somente os autores do formulário podem acessar esses dados.',
+	'traiter_enregistrement_option_auteur' => 'Utilizar autores para os formulários', # MODIF
+	'traiter_enregistrement_option_auteur_explication' => 'Atribuir um ou vários autores a um formulário. Se esta opção estiver ativada, somente os autores do formulário podem acessar esses dados.', # MODIF
 	'traiter_enregistrement_option_effacement_delai_label' => 'Número de dias antes de apagar',
 	'traiter_enregistrement_option_effacement_label' => 'Excluir regularmente os resultados mais antigos',
 	'traiter_enregistrement_option_identification_explication' => 'Que procedimento usar preferencialmente para conhecer a resposta dada anteriormente pelo(a) usuário(a)?',
@@ -304,7 +304,7 @@ Deve ser um campo de tipo «Destinatários» ou «Invisível», contendo o ident
 	'traiter_enregistrement_option_invalider_label' => 'Atualizar o cache',
 	'traiter_enregistrement_option_ip_label' => 'Gravar os IPs (mascarados após um intervalo de segurança)',
 	'traiter_enregistrement_option_moderation_label' => 'Moderação',
-	'traiter_enregistrement_option_modifiable_explication' => 'Alterável: os visitantes podem modificar as suas respostas posteriormente.',
+	'traiter_enregistrement_option_modifiable_explication' => 'Alterável: os visitantes podem modificar as suas respostas posteriormente.', # MODIF
 	'traiter_enregistrement_option_modifiable_label' => 'Respostas alteráveis',
 	'traiter_enregistrement_option_multiple_explication' => 'Múltiplas: Uma mesma pessoa pode responder várias vezes.',
 	'traiter_enregistrement_option_multiple_label' => 'Respostas múltiplas',

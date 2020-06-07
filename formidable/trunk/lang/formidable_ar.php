@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'activer_pages_explication' => 'افتراضياً صفحات الاستمارات العمومية غير مسموح بها',
 	'activer_pages_label' => 'السماح بإنشاء صفحات عمومية للاستمارات', # MODIF
-	'admin_reponses_auteur' => 'السماح لواضعي الاستمارات بتعديل إجاباتهم',
+	'admin_reponses_auteur' => 'السماح لواضعي الاستمارات بتعديل إجاباتهم', # MODIF
 	'analyse_avec_reponse' => 'أجابات غير فارغة',
 	'analyse_exclure_champs_label' => 'الحقول المطلوب استبعادها', # MODIF
 	'analyse_exporter' => 'تصدير التحليل',
@@ -20,10 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_nb_reponses_total' => '@nb@ شخص أجابوا على الاستمارة.',
 	'analyse_sans_reponse' => 'بدون جواب',
 	'analyse_une_reponse_total' => 'شخص واحد أجاب على هذه الاستمارة',
-	'analyse_zero_reponse_total' => 'لم يجب أحد على هذه الاستمارة.',
+	'analyse_zero_reponse_total' => 'لم يجب أحد على هذه الاستمارة.', # MODIF
 	'aucun_traitement' => 'لا يوجد اي معالجة',
-	'autoriser_admin_restreint' => 'السماح للمدراء المحدودين بإنشاء الاستمارات وتعديلها',
-	'autoriser_admin_restreint_explication' => 'افتراضياً، لا يحق الا للمدراء الوصول الي الاستمارات وإنشائها وتعديلها',
+	'autoriser_admin_restreint' => 'السماح للمدراء المحدودين بإنشاء الاستمارات وتعديلها', # MODIF
+	'autoriser_admin_restreint_explication' => 'افتراضياً، لا يحق الا للمدراء الوصول الي الاستمارات وإنشائها وتعديلها', # MODIF
 
 	// B
 	'bouton_formulaires' => 'الاستمارات',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_titre_page_configurer_formidable' => 'إعداد ملحق الاستمارات',
 	'champs' => 'الحقول',
-	'changer_statut' => 'هذه الاستمارة:',
+	'changer_statut' => 'هذه الاستمارة:', # MODIF
 
 	// E
 	'editer_apres_choix_formulaire' => 'الاستمارة من جديد',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_rien' => 'لا شيء',
 	'editer_apres_choix_stats' => 'إحصاءات الإجابات',
 	'editer_apres_choix_valeurs' => 'القيم المدخلة',
-	'editer_apres_explication' => 'بعد التصديق، عرض مكان الاستمارة:',
+	'editer_apres_explication' => 'بعد التصديق، عرض مكان الاستمارة:', # MODIF
 	'editer_apres_label' => 'عرض بعد ذلك',
 	'editer_descriptif' => 'الوصف',
 	'editer_descriptif_explication' => 'وصف للاستمارة مخصص للمجال الخاص.',
@@ -101,8 +101,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'reponse_aucune' => 'لا توجد إجابات',
-	'reponse_numero' => 'إجابة رقم:',
-	'reponse_statut' => 'هذه الإجابة:',
+	'reponse_numero' => 'إجابة رقم:', # MODIF
+	'reponse_statut' => 'هذه الإجابة:', # MODIF
 	'reponse_supprimer' => 'حذف هذه الإجابة',
 	'reponse_une' => 'إجابة واحدة',
 	'reponses_analyse' => 'تحليل الإجابات',
@@ -133,13 +133,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_reponses' => 'إجابات',
 	'traitements_aide_memoire' => 'مفكرة:',
 	'traiter_email_description' => 'يرسل نتيجة الاستمارة بالبريد الإلكتروني الى لائحة من المتلقين.', # MODIF
-	'traiter_email_option_activer_accuse_label_case' => 'أيضاً إرسال بريد الى عنوان المرسِل يحتوي على رسالة تأكيد الاستلام.',
+	'traiter_email_option_activer_accuse_label_case' => 'أيضاً إرسال بريد الى عنوان المرسِل يحتوي على رسالة تأكيد الاستلام.', # MODIF
 	'traiter_email_option_destinataires_explication' => 'اختيار الحقل المناسب للمرسَل اليهم.', # MODIF
 	'traiter_email_option_destinataires_label' => 'المرسَل اليهم',
 	'traiter_email_option_destinataires_plus_explication' => 'لائحة عناوين بريد تفصل بينها فواصل.',
 	'traiter_email_option_destinataires_plus_label' => 'المرسل اليهم الإضافيون',
 	'traiter_email_option_envoyeur_courriel_explication' => 'اختيار الحقل الذي سيحتوي على عنوان بريد المرسِل.',
-	'traiter_email_option_envoyeur_courriel_label' => 'بريد المرسِل',
+	'traiter_email_option_envoyeur_courriel_label' => 'بريد المرسِل', # MODIF
 	'traiter_email_option_envoyeur_nom_explication' => 'تكوين هذا الاسم بواسطة الاختصارات @raccourcis@ (أنظر المفكرة). اذا ترك فارغاً سيتم استخدام اسم الموقع.',
 	'traiter_email_option_envoyeur_nom_label' => 'اسم المرسِل',
 	'traiter_email_option_sujet_accuse_label' => 'موضوع الإقرار بالاستلام',
@@ -149,13 +149,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_titre' => 'إرسال بالبريد الإلكتروني',
 	'traiter_enregistrement_description' => 'يسجل نتائج الاستمارة في قاعدة البيانات.', # MODIF
 	'traiter_enregistrement_option_anonymiser_label' => 'جعل الاستمارة مغفّلة', # MODIF
-	'traiter_enregistrement_option_auteur' => 'استخدام المؤلفين للاستمارات',
-	'traiter_enregistrement_option_auteur_explication' => 'تخصيص مؤلف او اكثر لايتمارة. اذا تم تفعيل هذا الخيار، مؤلفو الاستمارة وحدهم يمكنهم الوصول الى بياناتهم.',
+	'traiter_enregistrement_option_auteur' => 'استخدام المؤلفين للاستمارات', # MODIF
+	'traiter_enregistrement_option_auteur_explication' => 'تخصيص مؤلف او اكثر لايتمارة. اذا تم تفعيل هذا الخيار، مؤلفو الاستمارة وحدهم يمكنهم الوصول الى بياناتهم.', # MODIF
 	'traiter_enregistrement_option_identification_explication' => 'اذا كانت الإجابات قابلة للتعديل، اي اسلوب مفضل استخدامه لمعرفة اي جواب يجب تعديله؟ ', # MODIF
 	'traiter_enregistrement_option_identification_label' => 'تعريف', # MODIF
 	'traiter_enregistrement_option_ip_label' => 'تسجيل عناوين IP (تحجب بعد فترة محددة)',
 	'traiter_enregistrement_option_moderation_label' => 'مراقبة',
-	'traiter_enregistrement_option_modifiable_explication' => 'قابل للتعديل: يمكن للزوار تعديل إجاباتهم بعد حين.',
+	'traiter_enregistrement_option_modifiable_explication' => 'قابل للتعديل: يمكن للزوار تعديل إجاباتهم بعد حين.', # MODIF
 	'traiter_enregistrement_option_modifiable_label' => 'إجابات يمكن تعديلها',
 	'traiter_enregistrement_option_multiple_explication' => 'متعدد: الشخص نفسه يمكنه الإجابة عدة مرات.',
 	'traiter_enregistrement_option_multiple_label' => 'إجابات متعددة',
