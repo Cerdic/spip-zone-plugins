@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/sql');
 include_spip('inc/saisies');
 include_spip('inc/cextras');
-
+include_spip('saisies/afficher_si_php');
 /*
  * La classe principale
  * qui cherche les données en base
@@ -29,7 +29,20 @@ class table {
 	**/
 	public function __construct($env) {
 		$this->id_formulaire = sql_quote($env['id_formulaire'] ?? null);
-		$this->filter = $env['filter'] ?? null;
+
+		// Transformer les filtres en pseudo afficher_si
+		$this->filter = $env['filter'] ?? array();
+		if (!$this->filter) {// Peut être ''
+			$this->filter = array();
+		}
+		$this->filter = array_map(function($a)  {
+			if (!preg_match('#(=|>|<)#', $a)) {
+				$a = " == '$a'";
+			}
+			return $a;
+		},
+			$this->filter
+		);
 		$this->sort = $env['sort'] ?? array();
 		$env['statut'] = $env['statut'] ?? null;
 		$this->statut = \sql_quote($env['statut'] ? $env['statut'] : '.*');
@@ -112,6 +125,7 @@ continue;
 				'statut',
 				$value,
 				$raw_reponse['statut'],
+				$raw_reponse['statut'],
 				false,
 				'natif');
 
@@ -122,6 +136,7 @@ continue;
 				$id_formulaires_reponse,
 				'id_formulaires_reponse',
 				$value,
+				$raw_reponse['id_formulaires_reponse'],
 				$raw_reponse['id_formulaires_reponse'],
 				false,
 				'natif');
@@ -134,6 +149,7 @@ continue;
 				'date',
 				$value,
 				$raw_reponse['date'],
+				$value,
 				false,
 				'natif');
 
@@ -164,6 +180,7 @@ continue;
 					$nom,
 					$value,
 					data_sort_value($value, $champ, 'extra'),
+					null,
 					$crayons,
 					'extra'
 				);
@@ -183,14 +200,37 @@ continue;
 					$nom,
 					$value,
 					data_sort_value($value, $champ, 'champ'),
+					null,
 					true,
 					'champ'
 				);
 			}
-			// Stocker tout
-			$this->raws[] = $raw_ts;
+			// Vérifier si cela passe le filtres:
+			if ($this->checkFilter($raw_ts)) {
+				$this->raws[] = $raw_ts;
+			}
 		}
 		$this->sortRaws();
+	}
+
+	/**
+	 * Vérifier si une ligne passe les tests de filtre
+	 * @param array $raw
+	 * @return bool
+	 **/
+	private function checkFilter($raw) {
+		foreach ($this->filter as $col=>$filter) {
+			$result = saisies_evaluer_afficher_si(
+				$filter,
+				array(),
+				array(),
+				$raw[$col]->filter_value
+			);
+			if ($result == false) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -231,7 +271,6 @@ continue;
 	}
 
 }
-
 /**
  * Classe représentant une cellule
  * @var str|int $id_formulaire
@@ -248,15 +287,17 @@ class cell implements \JsonSerializable{
 	private $nom;
 	private $value;
 	private $sort_value;
+	private $filter_value;
 	private $crayons;
 	private $type;
 
-	public function __construct($id_formulaire, $id_formulaires_reponse, $nom, $value, $sort_value, $crayons, $type) {
+	public function __construct($id_formulaire, $id_formulaires_reponse, $nom, $value, $sort_value, $filter_value, $crayons, $type) {
 		$this->id_formulaire = $id_formulaire;
 		$this->id_formulaires_reponse = $id_formulaires_reponse;
 		$this->nom = $nom;
 		$this->value = $value;
 		$this->sort_value = $sort_value ?? \textebrut($value);
+		$this->filter_value = $filter_value ?? \textebrut($value);
 		$this->crayons= $crayons;
 		$this->type = $type;
 	}
