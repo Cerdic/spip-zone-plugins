@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'changer_statut' => 'This form response is:',
+	'changer_statut' => 'This form response is:', # MODIF
 
 	// F
 	'formulaires_reponse_numero' => 'Form response no @nb@',
@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_formulaire' => 'Edit this form response',
 
 	// R
-	'reponses_donnees' => 'Answers given:',
+	'reponses_donnees' => 'Answers given:', # MODIF
 
 	// T
 	'titre_formulaires_reponse' => 'Form response',
