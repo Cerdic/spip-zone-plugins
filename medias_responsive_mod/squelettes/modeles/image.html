@@ -1,73 +1,88 @@
-<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}>[
+<BOUCLE_document (DOCUMENTS types_documents) {id_document=#ID} {tout}>
+[(#REM)
 
-(#REM) Cas <imageXX>	: equivalent a <imgXX> pour une image en mode image
+	Modele pour <img>
 
-][(#INCLUS|=={image}|et{#ENV{emb,''}|non}|oui)
-<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align}|sinon{center})][ (#ENV{class})] spip_lien_ok'[
-	 style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>[
-	<a href="(#ENV{lien})"[
-		class="(#ENV{lien_class})"]>][(#LOGO_DOCUMENT|image_responsive{0/320/640/1280/1920})][(#ENV{lien}|?{</a>})]</figure>
-][
-
-(#REM) Cas <embXX> : on est appele ici avec emb=' ' : on veut la legende
-equivalent a un <docXX> pour une image en mode image
-
-][(#INCLUS|=={image}|et{#ENV{emb,''}|oui}|oui)
-#SET{fichier,#URL_DOCUMENT}
-#SET{width,#LARGEUR}
-#SET{height,#HAUTEUR}
-#SET{url,#ENV{lien}}
-
-[(#ENV{kenburns}|oui)#SET{kenburns,oui}]
-[(#ENV{class}|=={kenburns}|oui)#SET{kenburns,oui}]
-
-<figure class='spip_document_#ID_DOCUMENT spip_documents[(#ENV{large}|oui)large][(#ENV{kenburns}|oui)kenburns][ spip_documents_(#ENV{align}|sinon{center})][ (#ENV{class})] spip_lien_ok'[
-			style="max-width:(#GET{width})px;"][ data-w="(#GET{width})"]>
-	[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]>][(#FICHIER|image_responsive{160/320/560/1200/1920})][(#GET{url}|?{</a>})]
-	[(#GET{kenburns}|=={oui}|oui)
-	<style>
-		.spip_document_#ID_DOCUMENT.kenburns picture img {
-			-webkit-transform-origin: [(#FICHIER|centre_image_x|mult{100})]% [(#FICHIER|centre_image_y|mult{100})]%;
-			transform-origin: [(#FICHIER|centre_image_x|mult{100})]% [(#FICHIER|centre_image_y|mult{100})]%;
-		}
-	</style>
+]
+[(#SET{
+	image,
+		#ENV{mode_force,#MODE}|match{'image|vignette'}
+		|sinon{#ENV{embed}}
+		|oui
+})]
+[(#ENV{kenburns}|oui)
+	#SET{kenburns,2}
+	[(#ENV{kenburns}|=={kenburns}|non)
+		#SET{kenburns,#ENV{kenburns}}
 	]
+]
+[(#ENV{class}|=={kenburns}|oui)#SET{kenburns,2}]
+
+[(#ENV{class}|=={flip}|oui)#SET{flip,flip}]
+[(#ENV{flip}|oui)#SET{flip,flip}]
+
+[(#ENV{class}|=={max}|oui)#SET{max,max}]
+
+[(#ENV{shape}|oui)
+	[(#SET{polygon,[(#FICHIER|image_detourer_polygon)]})]
+]
+
+[(#SET{a,span})]
+[(#LARGEUR|>={800}|oui)[(#SET{a,a})]]
+[(#HAUTEUR|>={800}|oui)[(#SET{a,a})]]
+<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align}|sinon{center})][ spip_documents_(#GET{flip})][ spip_documents_(#ENV{shape})][(#ENV{rond}|oui)rond][(#ENV{large}|oui)large][(#GET{max}|oui)large max][(#ENV{kenburns}|oui)kenburns][ (#ENV{class})] spip_lien_ok'
+ style="[max-width:(#ENV{largeur}|sinon{#FICHIER|largeur})px;]"[ data-w="(#ENV{largeur}|sinon{#FICHIER|largeur})"][ data-zoom-responsive="(#GET{kenburns})"]>
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]
+[(#ENV{lien}|non)
+<[(#GET{a})][(#GET{a}|=={a}|oui) href="#FICHIER"[ title="(#TITRE|supprimer_numero|supprimer_tags|texte_backend)"][ style="shape-outside: content-box (#GET{polygon});"] class="fond mediabox" type="#MIME_TYPE" data-photo-w="#LARGEUR" data-photo-h="#HAUTEUR"] >
+]
+	[(#ENV{largeur}|non)
+		[(#FICHIER|image_responsive{160/320/640/1280/1920})]
+	]
+	[(#ENV{largeur}|oui)
+		[(#GET{kenburns}|oui)
+			[(#FICHIER|image_responsive{[(#ENV{largeur}|mult{#GET{kenburns}})]})]
+		]
+		[(#GET{kenburns}|non)
+			[(#FICHIER|image_responsive{#ENV{largeur}})]
+		]
+	]
+
+[(#ENV{lien}|?{</a>,</[(#GET{a})]>})]
+[(#GET{kenburns}|oui)
+<style><!--
+	.spip_document_#ID_DOCUMENT.kenburns picture img {
+		-webkit-transform-origin: [(#FICHIER|centre_image_x|mult{100})]% [(#FICHIER|centre_image_y|mult{100})]%;
+		transform-origin: [(#FICHIER|centre_image_x|mult{100})]% [(#FICHIER|centre_image_y|mult{100})]%;
+	}
+	
+		.spip_document_#ID_DOCUMENT.kenburns_actif picture img {
+			-webkit-transform: scale([(#GET{kenburns})]);
+			-webkit-animation-name: kenburns#ID_DOCUMENT;
+			transform: scale([(#GET{kenburns})]);
+			animation-name: kenburns#ID_DOCUMENT;	
+		}
+		@-webkit-keyframes kenburns#ID_DOCUMENT {
+			from {-webkit-transform: scale(1);}
+			to {-webkit-transform: scale([(#GET{kenburns})]);}
+		}
+		@keyframes kenburns#ID_DOCUMENT {
+			from {transform: scale(1);}
+			to {transform: scale([(#GET{kenburns})]);}
+		}
+--></style>
+]
+
+
 	[(#EVAL{defined('_MEDIAS_RESPONSIVE_MASQUER_LEGENDE')}|non|ou{#ENV{legende}|=={oui}|oui})
 	[(#ENV{legende}|=={non}|non)
 	[(#TITRE|sinon{#DESCRIPTIF}|sinon{#CREDITS}|oui)
-	<figcaption class='spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})]'>
-		[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE)</strong></div>]
+	<figcaption class='spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})][ spip_doc_intitules_(#ENV{shape})]'>
+		[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE|propre|ptobr)</strong></div>]
 		[<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
-		[<div class='spip_doc_credits #EDIT{credits}'>(#CREDITS|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
+		[<div class='spip_doc_credits  #EDIT{credits}'>(#CREDITS|propre|PtoBR)</div>]
 	</figcaption>
 	]]]
 </figure>
-][
-
-(#REM) Cas des images qu'il faut embed (svg)
-][
-(#INCLUS|=={embed}|oui)
-<div class='spip_document_#ID_DOCUMENT spip_documents[(#ENV{large}|oui)spip_documents_large][ spip_documents_(#ENV{align}|sinon{center})]'[
-style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>
-	<object	data='#URL_DOCUMENT' 
-		type='#MIME_TYPE'[
-		width='(#ENV{largeur}?{'', #LARGEUR})'][
-		height='(#ENV{hauteur}?{'', #HAUTEUR})']
-		[(#ENV*|env_to_attributs)] >
-		<param name='src' value='#URL_DOCUMENT' />
-		[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
-	</object>
-	[(#EVAL{defined('_MEDIAS_RESPONSIVE_MASQUER_LEGENDE')}|non|ou{#ENV{legende}|=={oui}|oui})
-	[(#ENV{legende}|=={non}|non)
-	[(#TITRE|sinon{#DESCRIPTIF}|oui)
-	<div class="spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})]">
-		[
-		<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>
-		][
-		<div class='spip_doc_descriptif'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>
-		]
-	</div>
-	]]]
-</div>]
-</BOUCLE_tous>
+</BOUCLE_document>
 #FILTRE{mini_html}
