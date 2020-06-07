@@ -87,17 +87,23 @@ function centre_image_densite($fichier) {
 	static $spip_centre_image = array();
 
 	$fichier = centre_image_preparer_fichier($fichier);
-
 	// on mémorise le résultat -> don
 	if (isset($spip_centre_image[$fichier])) {
 		return $spip_centre_image[$fichier];
 	}
 
 	if (file_exists($fichier)) {
+		$fichier_old_logo = false;
+		if (preg_match(",logo/(art|rub|aut|mot)(on|off),", $fichier)){
+			$fichier_old_logo = str_replace("logo/", "", $fichier);
+		}
+		
 
 		$md5 = $fichier;
+		$md5_old = $fichier_old_logo;
 		if (test_espace_prive()) {
 			$md5 = preg_replace(",^\.\.\/,", "", $md5);
+			$md5_old = preg_replace(",^\.\.\/,", "", $md5_old);
 		}
 		$md5 = md5($md5);
 		$l1 = substr($md5, 0, 1 );
@@ -107,16 +113,28 @@ function centre_image_densite($fichier) {
 		$cache = sous_repertoire($cache, $l1);
 		$cache = sous_repertoire($cache, $l2);
 
+
+		$md5_old = md5($md5_old);
+		$l1 = substr($md5_old, 0, 1 );
+		$l2 = substr($md5_old, 1, 1);
+		$cache_old = sous_repertoire(_DIR_VAR, "cache-centre-image");
+		$cache_old = sous_repertoire($cache_old, $l1);
+		$cache_old = sous_repertoire($cache_old, $l2);
+
+
 		$forcer = sous_repertoire(_DIR_IMG, "cache-centre-image");
 
 		$fichier_json = "$cache$md5.json";
 		$fichier_forcer = "$forcer$md5.json";
+		$fichier_forcer_old = "$forcer$md5_old.json";
 
 		// éviter plusieurs accès successifs
 		$mtime_source = filemtime($fichier);
 
 		if (file_exists($fichier_forcer) and filemtime($fichier_forcer) >= $mtime_source) {
 			$res = json_decode(file_get_contents($fichier_forcer), TRUE);
+		} else if (file_exists($fichier_forcer_old) and filemtime($fichier_forcer_old) >= $mtime_source) {
+			$res = json_decode(file_get_contents($fichier_forcer_old), TRUE);
 		} elseif (file_exists($fichier_json) and filemtime($fichier_json) > $mtime_source) {
 			$res = json_decode(file_get_contents($fichier_json), TRUE);
 		} else {
