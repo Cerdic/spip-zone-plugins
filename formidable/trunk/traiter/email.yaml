@@ -24,6 +24,12 @@ options:
       -
         saisie: 'case'
         options:
+          nom: 'champ_sujet_modif_reponse'
+          label: '<:formidable:traiter_email_option_sujet_modif_reponse_label:>'
+          label_case: '<:formidable:traiter_email_option_sujet_modif_reponse_label_case:>'
+      -
+        saisie: 'case'
+        options:
           nom: 'champ_sujet_valeurs_brutes'
           label : '<:formidable:traiter_email_option_sujet_valeurs_brutes_label:>'
           label_case : '<:formidable:traiter_email_option_sujet_valeurs_brutes_label_case:>'

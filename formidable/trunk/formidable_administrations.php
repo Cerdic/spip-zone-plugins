@@ -104,6 +104,10 @@ function formidable_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.17.1'] = array(
 		array('sql_alter','TABLE spip_formulaires_reponses CHANGE variable_php variable_php VARCHAR(255) NOT NULL default ""')
 	);
+	$maj['0.20.0'] = array(
+		array('sql_alter','TABLE spip_formulaires_reponses ADD column `date_envoi` datetime NOT NULL default "0000-00-00 00:00:00" AFTER `date`'),
+		array('sql_update', 'spip_formulaires_reponses', array('date_envoi' => 'date')),
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

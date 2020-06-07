@@ -43,6 +43,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_dossier_formulaire_erreur_impossible_ecrire' => 'Impossible d’écrire dans le  @dossier@,  nécessaire pour stocker les fichiers. Vérifier les droits d’accès.',
 	'creer_dossier_formulaire_erreur_possible_lire_exterieur' => 'Il est possible de lire à distance le contenu du dossier  @dossier@. Ceci est problématique en terme de confidentialité des données.',
 
+	// D
+	'date_envoi' => 'Date d\'envoi',
+
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
 	'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
@@ -236,6 +239,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_destinataires_courriel_label' => 'Destinataires du courriel',
 	'traiter_email_envoyeur_courriel_label' => 'Expéditeur·trice du courriel',
 	'traiter_email_horodatage' => 'Formulaire "@formulaire@" posté le @date@ à @heure@.',
+	'traiter_email_horodatage_modif_reponse' => 'Formulaire "@formulaire@" posté le @date@ à @heure@ (modifiant la réponse envoyée le @date_precedente@ à @heure_precedente@).',
 	'traiter_email_message_erreur' => 'Une erreur est survenue lors de l’envoi du courriel.',
 	'traiter_email_message_ok' => 'Votre message a bien été envoyé par courriel.',
 	'traiter_email_option_activer_accuse_label_case' => 'Envoyer aussi un courriel à l’adresse de l’expediteur·trice avec un message de confirmation.',
@@ -275,6 +279,8 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_email_option_sujet_accuse_label' => 'Sujet de l’accusé de réception',
 	'traiter_email_option_sujet_explication' => 'Construisez le sujet à l’aide des @raccourcis@. Si vous ne mettez rien, le sujet sera construit automatiquement.',
 	'traiter_email_option_sujet_label' => 'Sujet du courriel',
+	'traiter_email_option_sujet_modif_reponse_label_case' => 'Lorsqu\'une réponse a été modifiée, l\'indiquer en suffixe du sujet',
+	'traiter_email_option_sujet_modif_reponse_label' => 'Modification de réponse',
 	'traiter_email_option_sujet_valeurs_brutes_label' => 'Valeurs brutes',
 	'traiter_email_option_sujet_valeurs_brutes_label_case' => 'Le courriel est destiné à un robot et non pas à un·e humain·e. Dans le sujet du message, mettre les valeurs brutes (compréhensibles par des robots) des champs et non pas les valeurs interprétées (compréhensible par des humain·e·s).',
 	'traiter_email_option_texte_accuse_explication' => 'Construisez le texte à l’aide des @raccourcis@. Si vous ne mettez rien, c’est le message de retour du formulaire qui sera utilisé.',
@@ -285,6 +291,7 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_email_sujet' => '@nom@ vous a écrit.',
 	'traiter_email_sujet_accuse' => 'Merci de votre réponse.',
 	'traiter_email_sujet_courriel_label' => 'Sujet du courriel',
+	'traitement_email_sujet_courriel_modif_reponse' => '[Modification d\'une réponse]',
 	'traiter_email_titre' => 'Envoyer par courriel',
 	'traiter_email_url_enregistrement' => 'Vous pouvez gérer l’ensemble des réponses <a href="@url@">sur cette page</a>.',
 	'traiter_email_url_enregistrement_precis' => 'Vous pouvez voir cette réponse <a href="@url@">sur cette page</a>.',
