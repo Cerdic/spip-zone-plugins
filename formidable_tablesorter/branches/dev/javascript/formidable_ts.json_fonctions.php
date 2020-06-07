@@ -15,7 +15,7 @@ include_spip('inc/cextras');
 class table {
 	private $id_formulaire;
 	private $filter;
-	private $column;
+	private $sort;
 	private $raws;
 	private $headers;
 	private $saisies;
@@ -30,7 +30,7 @@ class table {
 	public function __construct($env) {
 		$this->id_formulaire = sql_quote($env['id_formulaire'] ?? null);
 		$this->filter = $env['filter'] ?? null;
-		$this->column = $env['column'] ?? null;
+		$this->sort = $env['sort'] ?? array();
 		$env['statut'] = $env['statut'] ?? null;
 		$this->statut = \sql_quote($env['statut'] ? $env['statut'] : '.*');
 		$saisies = \unserialize(sql_getfetsel('saisies', 'spip_formulaires', "id_formulaire=$this->id_formulaire"));
@@ -190,8 +190,30 @@ continue;
 			// Stocker tout
 			$this->raws[] = $raw_ts;
 		}
+		$this->sortRaws();
 	}
 
+	/**
+	 * Tri les lignes selon les paramètres passée en option
+	**/
+	private function sortRaws() {
+		usort($this->raws, function ($a, $b) {
+			// Trouver les cellules sur lesquelles trier
+			foreach ($this->sort as $column => $sort) {
+				$sort = intval($sort);
+				$a_sort = $a[$column]->sort_value;
+				$b_sort = $b[$column]->sort_value;
+				if ($a_sort == $b_sort) {
+					continue;
+				} elseif ($sort) {
+					return $a_sort < $b_sort;
+				} else {
+					return $a_sort > $b_sort;
+				}
+			}
+			return 0;// Si tous les tests échoue à comparaison, c'est que nos deux lignes sont identiques, en ce qui concerne les critères de tri
+		});
+	}
 	/**
 	 * Retourne le json final
 	 * @return string
@@ -234,7 +256,7 @@ class cell implements \JsonSerializable{
 		$this->id_formulaires_reponse = $id_formulaires_reponse;
 		$this->nom = $nom;
 		$this->value = $value;
-		$this->sort_value = $sort_value;
+		$this->sort_value = $sort_value ?? \textebrut($value);
 		$this->crayons= $crayons;
 		$this->type = $type;
 	}
@@ -252,6 +274,13 @@ class cell implements \JsonSerializable{
 		} else {
 			return $this->value;
 		}
+	}
+	/**
+	 * Return la propriété, permet d'y accéder mais pas de la modifier
+	 * @param string $prop
+	**/
+	public function __get($prop) {
+		return $this->$prop;
 	}
 }
 /**
