@@ -1,0 +1,60 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	identifiant,1,
+	id_menu,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutmenl,#EVAL{_request("debutmenl");}}}
+<B_liste_menus>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutmenl,#EVAL{_request("debutmenl");}}}
+#SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies menus">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{menus:info_1_menu,menus:info_nb_menus}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(MENUS){tout}{id_menu IN #GET{selection}}{id_menus_entree?}{where?}
+			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_menu==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#TITRE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutmenl,@#ID_MENU}|ancre_url{paginationmenl}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
+
+		<tr class="first_row">
+			<th class="titre" scope="col">[(#TRI{multi titre,<:menus:formulaire_titre:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_menus(MENUS){id_menu IN #GET{selection}}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} menl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_MENU|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class="titre">[(#LOGO_MENU|image_reduire{20,20})]<a href="[(#URL_ECRIRE{menu_edit,id_menu=#ID_MENU})]">#TITRE</a></td>
+			<td class="action">
+				[(#ENV{editable}|oui)
+					<button type="submit" class="button link delete" name="supprimer_lien\[menu-#ID_MENU-#OBJET-#ID_OBJET\]" value="X"><:menus:retirer_lien_menu:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_menus>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[menu-*-#OBJET-#ID_OBJET\]" value="X"><:menus:retirer_tous_liens_menus:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_menus>
+<div class="liste-objets liste-objets-lies menus caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:menus:info_aucun_menu:>})]</strong>
+</div>
+<//B_liste_menus>

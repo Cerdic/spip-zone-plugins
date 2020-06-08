@@ -1,0 +1,23 @@
+
+<ul class="editer-groupe">
+	<li class="editer pleine_largeur editer_type[(#ENV{type}|oui)erreur]">
+		<label><:menus:entree_choisir:></label>
+		[<span class='erreur_message'>(#ENV{type})</span>]
+		<BOUCLE_types_entrees(POUR){tableau #ENV{entrees}}{par rang}>
+		<div class="choix menu_#CLE" id="choix_menu_#CLE" style="padding:3px;border-bottom:1px solid #eee;">
+			[(#VALEUR|table_valeur{icone}|image_reduire{24})]
+			<input type="radio" class="radio" name="type_entree" id="#CLE" value="#CLE" style="vertical-align:top;" />
+			<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
+		</div>
+		</BOUCLE_types_entrees>
+		<span class='erreur_message'><:menus:erreur_aucun_type:></span>
+		<//B_types_entrees>
+	</li>
+</ul>
+
+<p class='boutons'>
+	<span class='image_loading'></span>
+	<input type="hidden" name="demander_nouvelle_entree" value="#ENV{id_menu_nouvelle_entree}" />
+	<input type="submit" class="submit link" name="demander_nouvelle_entree" value="<:icone_retour:>" />
+	<input type="submit" class="submit" name="suivant" value="<:bouton_suivant:>" />
+</p>

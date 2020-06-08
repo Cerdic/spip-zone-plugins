@@ -1,0 +1,41 @@
+[(#ENV{id_menu,0}|intval|oui)
+[(#BOITE_OUVRIR{'','info'})]
+	<div class="infos">
+		<div class="numero">
+			<:menus:info_numero_menu:>
+			<p>[(#ENV{id_menu})]</p>
+		</div>
+		[(#VAL{redirect}
+			|generer_url_action{type=menu&id=#ENV{id_menu}}
+			|parametre_url{var_mode,calcul}
+			|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+
+		[(#PLUGIN{yaml}|oui)
+			[(#URL_ACTION_AUTEUR{exporter_menu,#ENV{id_menu}}
+				|icone_horizontale{<:menus:editer_menus_exporter:>,menu-export-24.png})]
+		]
+
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{menu-del-24}|balise_img) ]<:menus:formulaire_supprimer_menu:>,
+			#URL_ACTION_AUTEUR{supprimer_menu,#ENV{id_menu},#ENV{redirect,#URL_ECRIRE{menus}}},
+			link icone horizontale danger,
+			<:menus:confirmer_supprimer_menu:>
+		})]
+
+	</div>
+#BOITE_FERMER
+]
+
+<B_liens>
+[(#BOITE_OUVRIR{[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})], 'menu utilisations simple'})]
+	<ul class='liste_items'>
+		<BOUCLE_liens(menus_liens){id_menu}>
+		<li class='item #OBJET'>[(#CHEMIN_IMAGE{#OBJET|objet_info{icone_objet}|concat{-16.png}}|balise_img) ][(#ID_OBJET|generer_lien_entite{#OBJET})]
+		[(#AUTORISER{dissociermenus,#OBJET,#ID_OBJET}|oui)
+			[(#BOUTON_ACTION{<:menus:retirer_lien_objet:>,[(#URL_ACTION_AUTEUR{dissocier_menu,#ID_MENU-#OBJET-#ID_OBJET,#SELF})],ajax,'',''})]
+		]
+		</li>
+		</BOUCLE_liens>
+	</ul>
+#BOITE_FERMER
+</B_liens>
