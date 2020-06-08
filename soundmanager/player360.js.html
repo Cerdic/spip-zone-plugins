@@ -34,31 +34,6 @@ if (threeSixtyPlayer.config.useWaveformData || threeSixtyPlayer.flash9Options.us
 }
 
 $(document).ready(function(){
-	
-	// scroller vers le player si timecode dans l'url d'arrivée #t10000
-	var tc = window.location.hash.match(/^#t(\d+)$/);
-	if(typeof tc !== "undefined" && tc){
-		tc = parseInt(tc[1]);
-		var archives = 0 ;
-		var arch = $(".lesarchives").height();
-		if(arch > 0)
-			archives = arch + 150 ;
-		$('body, html').animate({scrollTop: $("#podcast_player").offset().top - 40 - archives }, 500);
-	}
-	
-	// sur quel son clique t'on ?
-	$(".ui360").on("click",function(){
-		// tuer tous les sons actifs
-		var s = Object.values(soundManager.sounds)[Object.values(soundManager.sounds).length - 1] ;
-		if(typeof s !== "undefined"){
-			var son = Object.values(soundManager.sounds)[Object.values(soundManager.sounds).length - 1].id ;
-			//var sound = soundManager.getSoundById('chinaCymbal');
-			// console.log("clic sur", son);
-		}
-		// console.log("clic 360");
-		$(this).addClass("playing");
-	});
-	
 	// classe audio sur les liens avec time code.
 	$("a").each(function(){
 		var timecode = $(this)[0].href.match(/t(\d+)/) ;
@@ -66,7 +41,6 @@ $(document).ready(function(){
 			$(this).addClass("audio");
 		}
 	});
-	
 	// clic sur un lien avec timecode #t10000 ?
 	$("a.audio").on("click",function(){
 		// stopper un eventuel son en pause
@@ -77,8 +51,7 @@ $(document).ready(function(){
 		if(typeof timecode !== "undefined" && timecode){
 			timecode = timecode[1];
 		}
-		
-		// démarrer le son
+		// démarrer le son du premier player
 		if(typeof timecode !== "undefined" && timecode){
 			$(".sm2-360btn").eq(0).click();
 		}
@@ -90,41 +63,18 @@ $(document).ready(function(){
 			son.setPosition(timecode);
 		}
 	});
-	
-	soundManager.onready(function() {
-		$('.ui360').each( function(){
-			var urlogo = $(this).find('.logo').attr('data-url');
-			var couleur = $(this).find('.logo').attr('data-couleur');
-			$(this).find('.sm2-360ui').css('background', '#'+couleur+' url("'+urlogo+'")');
-			$(this).find('.logo').css('display', 'none');
-		});
-		
-	});
-	
-	// bouton play / pause annexe ?
-	if($(".ui360").length > 0){
-		$("button.play_pause").click(function(){
-			// son déjà chargé ?
-			if(Object.values(soundManager.sounds).length == 0){
-				$(".sm2-360btn").eq(0).click();
-			}else{
-				var son = Object.values(soundManager.sounds)[Object.values(soundManager.sounds).length - 1] ;
-				if(typeof son !== "undefined" && Object.values(soundManager.sounds).length > 0){
-					soundManager.togglePause(son.id);
-				}
-			}
-		});
+	// scroller vers le player si timecode dans l'url d'arrivée #t10000
+	var tc = window.location.hash.match(/^#t(\d+)$/);
+	if(typeof tc !== "undefined" && tc){
+		tc = parseInt(tc[1]);
+		var archives = 0 ;
+		var arch = $(".lesarchives").height();
+		if(arch > 0)
+			archives = arch + 150 ;
+		$('body, html').animate({scrollTop: $("#podcast_player").offset().top - 40 - archives }, 500);
 	}
 	
-	function maj_bouton_play_pause(){
-		// console.log("toggle");
-		if($("button.play_pause").text() === "pause"){
-			$("button.play_pause").removeClass("bouton_playing").html("play").attr("title", $("button.play_pause").attr("data-lecture"));
-		}else{
-			$("button.play_pause").addClass("bouton_playing").html("pause").attr("title", $("button.play_pause").attr("data-pause"));
-		}
-	}
-	// surcharge des events play/pause/finish : https://stackoverflow.com/questions/10127009/soundmanager2-onplay-event-configuration-does-not-work
+	// surcharge des events play/pause etc : https://stackoverflow.com/questions/10127009/soundmanager2-onplay-event-configuration-does-not-work
 	var onplay360 = threeSixtyPlayer.events.play;
 	var myOnplay = function(){
 		// le dernier son ajouté par clic
@@ -153,9 +103,6 @@ $(document).ready(function(){
 		if(typeof to !== "undefined" && to){
 			// son.to = parseInt(to[1]) ;
 		}
-		
-		$(".playing").removeClass("playing");
-		maj_bouton_play_pause();
 		onplay360.apply(this); // forces the scope to 'this' = the sound object
 	};
 	threeSixtyPlayer.events.play = myOnplay;
@@ -163,7 +110,6 @@ $(document).ready(function(){
 	var onpause360 = threeSixtyPlayer.events.pause;
 	var myOnpause = function(){
 		// console.log("pause de " + this.id);
-		maj_bouton_play_pause();
 		onpause360.apply(this); // forces the scope to 'this' = the sound object
 	};
 	threeSixtyPlayer.events.pause = myOnpause;
@@ -171,7 +117,6 @@ $(document).ready(function(){
 	var onresume360 = threeSixtyPlayer.events.resume;
 	var myOnresume = function(){
 		// console.log("resume de " + this.id);
-		maj_bouton_play_pause();
 		onresume360.apply(this); // forces the scope to 'this' = the sound object
 	};
 	threeSixtyPlayer.events.resume = myOnresume;
@@ -179,7 +124,6 @@ $(document).ready(function(){
 	var onfinish360 = threeSixtyPlayer.events.finish;
 	var myOnfinish = function(){
 		// console.log("finish de " + this.id);
-		maj_bouton_play_pause();
 		onfinish360.apply(this); // forces the scope to 'this' = the sound object
 	};
 	threeSixtyPlayer.events.finish = myOnfinish;
@@ -187,7 +131,6 @@ $(document).ready(function(){
 	var onstop360 = threeSixtyPlayer.events.stop;
 	var myStop = function(){
 		// console.log("arret de " + this.id);
-		maj_bouton_play_pause();
 		onstop360.apply(this); // forces the scope to 'this' = the sound object
 	};
 	threeSixtyPlayer.events.stop = myStop;
@@ -208,7 +151,7 @@ $(document).ready(function(){
 	
 	var whileplaying360 = threeSixtyPlayer.events.whileplaying;
 	var mywhileplaying = function(){
-		$(".id3").attr("title", Math.round(this.position));
+		//console.log(this.id + ': loaded ' + this.position);
 		whileplaying360.apply(this); // forces the scope to 'this' = the sound object
 	};
 	threeSixtyPlayer.events.whileplaying = mywhileplaying;
