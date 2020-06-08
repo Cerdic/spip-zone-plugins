@@ -12,7 +12,8 @@
 	- ne_lat = lat + 10°            latitude du nord-est de la bounding box
 	- ne_lon = lon + 10°            longitude du nord-est de la bounding box
 	- largeur = 100%
-	- hauteur = 350px
+	- hauteur = 50vh
+	- hauteur_min = 350px
 
 ]
 
@@ -32,7 +33,7 @@
 
 <[(#DIV|sinon{li})] class="pleine_largeur editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"][ data-afficher_si="(#ENV*{afficher_si}|saisies_afficher_si_js{#ENV{_saisies}})"] >
 #ENV*{inserer_debut}
-<div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: #ENV{largeur,100%}; height: #ENV{hauteur,350px}"></div>
+<div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: #ENV{largeur,100%}; height: #ENV{hauteur,50vh; min-height: #ENV{hauteur_min,350px};}"></div>
 <script type="text/javascript">
 /*<![CDATA[*/
 var form_map,
