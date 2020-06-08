@@ -55,8 +55,12 @@ $(document).ready(function(){
 		if(typeof timecode !== "undefined" && timecode){
 			$(".sm2-360btn").eq(0).click();
 		}
-		// décaler le dernier son ajouté par clic avec timecode
-		var son = Object.values(soundManager.sounds)[Object.values(soundManager.sounds).length - 1] ;
+		// décaler le en cours de timecode
+		var son = [] ;
+		Object.values(soundManager.sounds).forEach(function(e){
+			if(e.playState)
+				son = e ;
+		});
 		if(typeof timecode !== "undefined" && timecode && Object.values(soundManager.sounds).length > 0){
 			// son.from = timecode ;
 			// la valeur de from ci dessus n'est pas prise en compte, alors in décale le son
@@ -77,32 +81,7 @@ $(document).ready(function(){
 	// surcharge des events play/pause etc : https://stackoverflow.com/questions/10127009/soundmanager2-onplay-event-configuration-does-not-work
 	var onplay360 = threeSixtyPlayer.events.play;
 	var myOnplay = function(){
-		// le dernier son ajouté par clic
-		var son = Object.values(soundManager.sounds)[Object.values(soundManager.sounds).length - 1] ;
-		
-		// décaler le départ du son qui joue si on a un timecode &f=30000 ou #t30000 dans l'url.
-		// forcer les properties to et from ne semble pas marcher dans le player 360, on se limite à changer décaler la lecture avec setPosition.
-		var from = (window.location.href).match(/f=(\d+)/) || (window.location.hash).match(/t(\d+)/) ;
-		if(typeof from !== "undefined" && from){
-			// son.from = parseInt(from[1]) ;
-			// la valeur de from ci dessus n'est pas prise en compte, alors in décale le son
-			son.setPosition(from[1]);
-			//console.log(from);
-		}else{
-			var from = parseInt($(".playing").attr("data-from")) ;
-			if(typeof from !== "undefined" && from){
-				son.from = from ;
-				// la valeur de from ci dessus n'est pas prise en compte, alors on décale le son
-				son.setPosition(from);
-				// console.log(from);
-			}
-		}
-		
-		// la valeur de to ci dessous n'est pas pris en compte
-		var to = (window.location.href).match(/t=(\d+)/);
-		if(typeof to !== "undefined" && to){
-			// son.to = parseInt(to[1]) ;
-		}
+		// console.log("play de " + this.id);
 		onplay360.apply(this); // forces the scope to 'this' = the sound object
 	};
 	threeSixtyPlayer.events.play = myOnplay;
