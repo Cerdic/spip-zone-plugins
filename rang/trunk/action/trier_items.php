@@ -40,8 +40,9 @@ function action_trier_items_dist() {
 	$id_objet	= id_table_objet($objet);
 	$objet_type = objet_type($objet);
 	if ($id_parent != 'rien') {
-	 	$parent	= type_objet_info_parent($objet_type);
-		$parent_champ = $parent['champ'];
+		$parent = type_objet_info_parent($objet_type);
+		// on peut avoir plusieurs parents dans certains cas, mais on prent le premier par défaut
+		$champ_parent = $parent['0']['champ'];
 	}
 
 	spip_log("\nobjet : ".$objet."\nid_parent : ".$id_parent."\nparent : ".$champ_parent."\ntrier :\n".print_r($tab,1), 'rang.' . _LOG_DEBUG);
@@ -50,11 +51,10 @@ function action_trier_items_dist() {
 	foreach ($tab as $key => $value) {
 		$rang	= $page + $key + 1; // le classement commence à 1, pas à 0
 		$id		= intval($value);
-		if (!$id_parent || $id_parent == 'rien') {
+		if ($champ_parent) {
+			$where = "$id_objet=$id AND $champ_parent=$id_parent";
+		} else {
 			$where = "$id_objet=$id";
-		}
-		else {
-			$where = "$id_objet=$id AND $parent_champ=$id_parent";
 		}
 		$res = sql_updateq($table, array('rang' => $rang), $where);
 		spip_log($where.' : '.$res, 'rang.' . _LOG_DEBUG);
