@@ -67,17 +67,6 @@ $(document).ready(function(){
 			son.setPosition(timecode);
 		}
 	});
-	// scroller vers le player si timecode dans l'url d'arrivée #t10000
-	var tc = window.location.hash.match(/^#t(\d+)$/);
-	if(typeof tc !== "undefined" && tc){
-		tc = parseInt(tc[1]);
-		var archives = 0 ;
-		var arch = $(".lesarchives").height();
-		if(arch > 0)
-			archives = arch + 150 ;
-		$('body, html').animate({scrollTop: $("#podcast_player").offset().top - 40 - archives }, 500);
-	}
-	
 	// surcharge des events play/pause etc : https://stackoverflow.com/questions/10127009/soundmanager2-onplay-event-configuration-does-not-work
 	var onplay360 = threeSixtyPlayer.events.play;
 	var myOnplay = function(){
