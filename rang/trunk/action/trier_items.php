@@ -44,7 +44,7 @@ function action_trier_items_dist() {
 		$parent_champ = $parent['champ'];
 	}
 
-	spip_log("\nobjet : ".$objet."\nid_parent : ".$id_parent."\nparent : ".$parent_champ."\ntrier".print_r($tab,1), 'rang.' . _LOG_DEBUG);
+	spip_log("\nobjet : ".$objet."\nid_parent : ".$id_parent."\nparent : ".$champ_parent."\ntrier :\n".print_r($tab,1), 'rang.' . _LOG_DEBUG);
 
 	// reclassement !
 	foreach ($tab as $key => $value) {
@@ -57,7 +57,7 @@ function action_trier_items_dist() {
 			$where = "$id_objet=$id AND $parent_champ=$id_parent";
 		}
 		$res = sql_updateq($table, array('rang' => $rang), $where);
-		spip_log($res, 'rang.' . _LOG_DEBUG);
+		spip_log($where.' : '.$res, 'rang.' . _LOG_DEBUG);
 	}
 
 	include_spip('inc/invalideur');
