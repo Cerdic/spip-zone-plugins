@@ -1,0 +1,27 @@
+<h1 class="grostitre"><:menus:editer_menus_titre:></h1>
+<p><:menus:editer_menus_explication:></p>
+
+<INCLURE{fond=prive/objets/liste/menus, id_menus_entree=0, env} />
+
+[(#URL_ECRIRE{menu_edit}|parametre_url{new,oui}|icone_verticale{<:menus:editer_menus_nouveau:>,menus-24.png,new,right})]
+
+<div class="nettoyeur"></div>
+
+<B_menus_utiles>
+<h2><:menus:utiles_titre:></h2>
+<p class="explication"><:menus:utiles_explication:></p>
+<ul>
+	<BOUCLE_menus_utiles(DATA){source table,#VAL|menus_utiles}>
+	<li>
+		[(#BOUTON_ACTION{<:menus:utiles_generer_menu{titre=#VALEUR,identifiant=#CLE}:>, #URL_ACTION_AUTEUR{generer_menus, #CLE, #SELF}})]
+	</li>
+	</BOUCLE_menus_utiles>
+	[(#TOTAL_BOUCLE|>{1}|oui)
+	<li class="tous">
+		[(#BOUTON_ACTION{<:menus:utiles_generer_menus:>, #URL_ACTION_AUTEUR{generer_menus, #VAL, #SELF}})]
+	</li>
+	]
+</ul>
+</B_menus_utiles>
+
+<div class="nettoyeur"></div>

@@ -1,0 +1,10 @@
+<entree>
+	<nom><:menus:nom_menu_lien:></nom>
+	<rang>11</rang>
+	<description><:menus:description_menu_lien:></description>
+	<icone>images/menus_lien.png</icone>
+	<parametre nom="titre" class="multilang" label="menus:entree_titre" obligatoire="oui" />
+	<parametre nom="url" label="menus:entree_url" obligatoire="oui" />
+	<parametre nom="css" label="menus:entree_css" />
+	<parametre nom="css_lien" label="menus:entree_css_lien" />
+</entree>

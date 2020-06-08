@@ -1,0 +1,20 @@
+[(#REM)
+
+	Noisette intégrant un menu
+
+	Paramètres :
+		**obligatoire
+		*conseillé
+
+		- **identifiant : identifiant du menu
+		- afficher_titre_menu : pour afficher le titre du menu
+		- class_menu : classe ajoutée directement sur le menu
+		- class_conteneur : classe ajoutée au conteneur
+
+]
+<BOUCLE_menu(MENUS) {identifiant}>
+<nav class="menu menu_#IDENTIFIANT[ (#ENV{class_conteneur}|attribut_html)]">
+	[(#ENV{afficher_titre_menu}|oui)[<h2 class="h2">(#TITRE|typo)</h2>]]
+	<INCLURE{fond=inclure/menu, class=#ENV{class_menu}, env, identifiant}>
+</nav>
+</BOUCLE_menu>
