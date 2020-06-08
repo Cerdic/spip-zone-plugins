@@ -1,0 +1,46 @@
+heritage: 'input'
+titre: 'tata'
+description: 'tata_description'
+heritage_supprimer_options:
+  - 'placeholder'
+  - 'type'
+heritage_modifier_options:
+      -
+        fusion: true
+        options:
+          nom: 'defaut'
+          nouveau_type_saisie: 'tata'
+        verifier:
+          type: 'tata'
+          options:
+            normaliser: true
+heritage_inserer_options:
+      -
+        chemin:
+          - 0
+          - 'saisies'
+          - 1200
+        saisie: 'input'
+        options:
+          nom: 'une_option_en_plus_dans_la_description_tout_a_la_fin'
+          label: 'une_option_en_plus'
+          size: 50
+      -
+        chemin:
+          - 0
+          - 'saisies'
+          - 0
+        saisie: 'input'
+        options:
+          nom: 'une_option_en_plus_dans_la_description_tout_au_debut'
+          label: 'une_option_en_plus'
+          size: 50
+defaut:
+  options:
+    readonly: 'on'
+    label: 'tata'
+    sql: 'BIGINT (255)',
+  verifier:
+    type: 'tata'
+    options:
+      normaliser: true
