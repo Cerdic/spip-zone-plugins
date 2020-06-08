@@ -69,24 +69,24 @@ $(document).ready(function(){
 	
 	// clic sur un lien avec timecode #t10000 ?
 	$("a.audio").on("click",function(){
+		// stopper un eventuel son en pause
+		if(Object.values(soundManager.sounds).length > 0){
+			soundManager.stopAll();
+		}
 		var timecode = $(this)[0].href.match(/t(\d+)/) ;
 		if(typeof timecode !== "undefined" && timecode){
 			timecode = timecode[1];
 		}
 		
-		// si pas de son ?
-		if(Object.values(soundManager.sounds).length == 0 && typeof timecode !== "undefined" && timecode){
-			var offset = $(this).offset().top ;
+		// démarrer le son
+		if(typeof timecode !== "undefined" && timecode){
 			$(".sm2-360btn").eq(0).click();
 		}
-		// le dernier son ajouté par clic
+		// décaler le dernier son ajouté par clic avec timecode
 		var son = Object.values(soundManager.sounds)[Object.values(soundManager.sounds).length - 1] ;
 		if(typeof timecode !== "undefined" && timecode && Object.values(soundManager.sounds).length > 0){
 			// son.from = timecode ;
 			// la valeur de from ci dessus n'est pas prise en compte, alors in décale le son
-			// stopper un eventuel son en pause si un nouveau demarre
-			// est-ce un nouveau qui s'ajoute ?
-			// console.log(Object.values(soundManager.sounds));
 			son.setPosition(timecode);
 		}
 	});
