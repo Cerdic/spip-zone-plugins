@@ -82,6 +82,15 @@ $(document).ready(function(){
 	var onplay360 = threeSixtyPlayer.events.play;
 	var myOnplay = function(){
 		// console.log("play de " + this.id);
+		// cas d'un clic utilisateur sur le player avec un #timecode dans l'url
+		if(Object.values(soundManager.sounds).length == 1){
+			var from = (window.location.hash).match(/t(\d+)/) ;
+			var son = Object.values(soundManager.sounds)[0] ;
+			if(typeof from !== "undefined" && from){
+				// on décale le son
+				son.setPosition(from[1]);
+			}
+		}
 		onplay360.apply(this); // forces the scope to 'this' = the sound object
 	};
 	threeSixtyPlayer.events.play = myOnplay;
