@@ -83,6 +83,9 @@ $.fn.opencrayon = function(evt, percent) {
 	if (evt && evt.stopPropagation) {
 		evt.stopPropagation();
 	}
+  	if (evt) {
+		evt.preventDefault();
+	}
 	return this
 	.each(function(){
 		var $me = $(this);
