@@ -39,8 +39,6 @@ $(document).ready(function(){
 		var timecode = $(this)[0].href.match(/t(\d+)/) ;
 		if(typeof timecode !== "undefined" && timecode){
 			$(this).addClass("audio");
-			if($(this).parent("h3").length > 0)
-				$(this).parent("h3").addClass("conteneur_audio");
 		}
 	});
 	// clic sur un lien avec timecode #t10000 ?
