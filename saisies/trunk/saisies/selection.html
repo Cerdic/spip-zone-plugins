@@ -48,9 +48,10 @@
 <BOUCLE_selection(POUR){tableau #GET{data}}>
 	<B_cond>
 	<optgroup label="#CLE">
-	<BOUCLE_cond(CONDITION){si #VALEUR|is_array}><BOUCLE_optgroup(POUR){tableau #VALEUR}>
-	<option value="#CLE"[(#CLE|=={#GET{valeur}}|oui)[(#GET{valeur}|strlen|oui)selected="selected"]][(#CLE|in_any{#GET{disabled}}|oui) disabled="disabled"]>#VALEUR</option>
-	</BOUCLE_optgroup></BOUCLE_cond>
+	<BOUCLE_cond(CONDITION){si #VALEUR|is_array}>
+		#SET{data,#VALEUR}
+		<BOUCLE_recursive(BOUCLE_selection) />
+	</BOUCLE_cond>
 	</optgroup>
 	</B_cond>
 	<option value="#CLE"[(#CLE|=={#GET{valeur}}|oui)[(#GET{valeur}|strlen|oui)selected="selected"]][(#CLE|in_any{#GET{disabled}}|oui) disabled="disabled"]>#VALEUR</option>
