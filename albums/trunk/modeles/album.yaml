@@ -53,13 +53,11 @@ parametres:
         date: <:album:label_modele_tri_date:>
         media: <:album:label_modele_tri_media:>
   -
-    saisie: 'radio'
+    saisie: 'case'
     options:
       nom: 'sens'
-      label: <:album:label_modele_sens_tri:>
-      datas:
-        direct: <:album:label_modele_sens_tri_direct:>
-        inverse: <:album:label_modele_sens_tri_inverse:>
+      label_case: <:album:label_modele_sens_tri_inverser:>
+      valeur_oui: '-1'
   -
     saisie: 'selection'
     options:

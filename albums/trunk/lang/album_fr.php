@@ -104,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_sens_tri' => 'Sens du tri',
 	'label_modele_sens_tri_direct' => 'Direct',
 	'label_modele_sens_tri_inverse' => 'Inverse',
+	'label_modele_sens_tri_inverser' => 'Inverser le sens du tri',
 	'label_modele_titre' => 'Afficher le titre',
 	'label_modele_titre_perso' => 'Titre personnalisé',
 	'label_modele_tri_date' => 'Date',
