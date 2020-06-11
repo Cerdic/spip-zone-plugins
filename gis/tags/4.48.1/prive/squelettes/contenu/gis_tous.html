@@ -1,0 +1,37 @@
+<div class="onglets_simple clearfix">
+	<ul>
+		[<li>(#URL_ECRIRE{gis_tous}|parametre_url{afficher,carte}|lien_ou_expose{<:gis:onglet_carte:>,#ENV{afficher,carte}|=={carte},ajax})</li>]
+		[<li>(#URL_ECRIRE{gis_tous}|parametre_url{afficher,liste}|lien_ou_expose{<:gis:onglet_liste:>,#ENV{afficher,carte}|=={liste},ajax})</li>]
+	</ul>
+	[(#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax})]
+</div>
+
+<BOUCLE_si_carte(CONDITION){si #ENV{afficher,carte}|=={liste}|non}>
+	#SET{cluster, non}
+	<BOUCLE_limite(GIS){recherche ?}> </BOUCLE_limite>
+	[(#TOTAL_BOUCLE|>{#ENV{limite,500}}|oui)
+		[(#SET{titre,[(#VAL{gis:titre_limite_atteinte}|_T{#ARRAY{limite,#ENV{limite,500}}})]})]
+		[(#BOITE_OUVRIR{[(#GET{titre})],'notice'})]
+		<p>
+			[(#SET{nouvelle_limite,[(#TOTAL_BOUCLE|plus{100})]})]
+			[(#SET{url,[(#SELF|parametre_url{limite,#GET{nouvelle_limite}})]})]
+			<:gis:message_limite_atteinte{url=#GET{url}}:>
+		</p>
+		[(#BOITE_FERMER)]
+	]
+	[(#TOTAL_BOUCLE|>{500}|et{#ENV{limite,500}|>{500}}|?{#SET{cluster,oui},''})]</B_limite>
+	[(#INCLURE{fond=modeles/carte_gis,
+		id_carte_gis=_all,
+		objets=tous_avec_liens_espace_prive,
+		recherche,
+		cluster=#GET{cluster},
+		limite}
+	)]
+</BOUCLE_si_carte>
+</B_si_carte>
+[(#INCLURE{fond=prive/objets/liste/gis,env})]
+<//B_si_carte>
+
+[(#AUTORISER{creer,gis})
+	[(#URL_ECRIRE{gis_edit,new=oui}|parametre_url{redirect,#URL_ECRIRE{gis_tous}}|icone_verticale{<:gis:editer_gis_nouveau:>,gis,new,right})]
+]

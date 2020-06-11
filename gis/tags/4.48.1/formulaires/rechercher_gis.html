@@ -1,0 +1,36 @@
+#CACHE{0}
+<BOUCLE_exclure(GIS){objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{doublons objet}> </BOUCLE_exclure>
+<BOUCLE_si_recherche(CONDITION){si #ENV{recherche_gis}}>
+<B_recherche>
+	<ul class="liste_items">
+	<BOUCLE_recherche(GIS){recherche #ENV{recherche_gis}}{doublons objet}>#SET{id_gis,#ID_GIS}
+	#SET{ou, #LISTE{#VILLE, #PAYS}|array_filter|join{", "}}
+	[<li class="item">(#TITRE)[ ((#GET{ou}))]
+		<div class="actions">
+			[(#BOUTON_ACTION{<:gis:bouton_lier:>,[(#URL_ACTION_AUTEUR{editer_lien_gis,lier/#GET{id_gis}/#ENV{objet}/#ENV{id_objet},#SELF})],ajax})]
+		</div>
+	</li>]
+	</BOUCLE_recherche>
+	</ul>
+</B_recherche>
+<p class="reponse_formulaire reponse_formulaire_erreur"><:gis:erreur_recherche_pas_resultats:></p>
+<//B_recherche>
+</BOUCLE_si_recherche>
+<div class="formulaire_spip formulaire_rechercher formulaire_rechercher_gis">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_si_editable(CONDITION){si #ENV{editable}}>
+	<form method='post' action='#ENV{action}' name='formulaire_rechercher_gis' id='formulaire_rechercher_gis'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<[(#DIV|sinon{ul})] class="editer-groupe">
+			[(#SAISIE{input,recherche_gis,
+				label=<:gis:label_rechercher_point:>})]
+		</[(#DIV|sinon{ul})]>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'>
+			<input class='submit' type='submit' name='enregistrer' value='<:info_rechercher:>' />
+		</p>
+	</div></form>
+	</BOUCLE_si_editable>
+</div>

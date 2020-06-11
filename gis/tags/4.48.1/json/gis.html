@@ -1,0 +1,10 @@
+		<BOUCLE_gis(GIS){id_gis ?}{objet ?}{id_objet ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{recherche ?}{0, #ENV{limit}}{","}>
+		{"type": "Feature",
+		["geometry": (#GEOMETRY|appliquer_filtre{wkt_to_json}|sinon{{"type": "Point", "coordinates": \[#LON, #LAT\]}}),]
+		"id":"#ID_GIS",
+		"properties": {
+			"title":[(#TITRE*|extraire_multi|supprimer_numero|json_encode)],
+			"description":[(#DESCRIPTIF|json_encode)][
+			(#LOGO_GIS|gis_icon_properties)][,
+			"styles": (#GEOMETRY_STYLES|appliquer_filtre{geometry_styles_to_json})]
+		}}</BOUCLE_gis>

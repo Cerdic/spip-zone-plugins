@@ -1,0 +1,13 @@
+#HTTP_HEADER{Content-Type: application/vnd.google-earth.kml+xml;charset=#CHARSET}[(#ENV**{dl}
+|?{#HTTP_HEADER{Content-Disposition: attachment; filename=#CONFIG{gis/nom_fichier_kml}|sinon{gis}|concat{.kml}},''})]<?xml 
+version="1.0" encoding="#CHARSET" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2"
+	xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+[<name>(#NOM_SITE_SPIP|texte_backend)</name>]
+[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
+<BOUCLE_gis(GIS gis_liens){id_gis ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{recherche ?}{0, #ENV{limit,500}}>
+	[(#INCLURE{fond=inclure/kml-item,id_gis,objet,id_objet})]
+</BOUCLE_gis>
+</Document>
+</kml>

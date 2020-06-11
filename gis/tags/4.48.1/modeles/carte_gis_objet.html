@@ -1,0 +1,27 @@
+[(#REM)
+	S'il y a au moins un point GIS *ou* au moins un fichier de tracé, on affiche une carte.
+	Celle-ci contiendra tous les points liés à l'objet demandé, et tous les tracés joints quelque soit leur format.
+]
+
+#SET{carte,''}
+#SET{point,non}
+<BOUCLE_gis(GIS){objet}{id_objet}{0,1}>
+#SET{carte,oui}
+#SET{point,oui}
+</BOUCLE_gis>
+#SET{kml,#LISTE} #SET{gpx,#LISTE} #SET{json,#LISTE}
+<BOUCLE_trace(DOCUMENTS){objet}{id_objet}{extension IN gpx,kml,json}>
+#SET{#EXTENSION, #GET{#EXTENSION}|push{#ID_DOCUMENT}}
+#SET{carte,oui}
+</BOUCLE_trace>
+
+[(#GET{carte}|oui)
+	[(#INCLURE{fond=modeles/carte_gis,
+		env,
+		objet=#ENV{objet},
+		id_objet=#ENV{id_objet},
+		point=#GET{point},
+		geojson=#GET{json},
+		gpx=#GET{gpx},
+		kml=#GET{kml}})]
+]

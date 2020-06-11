@@ -1,0 +1,101 @@
+<paquet
+	prefix="gis"
+	categorie="divers"
+	version="4.48.1"
+	schema="2.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="images/gis.png"
+	documentation="https://contrib.spip.net/4189"
+>
+
+	<nom>GIS</nom>
+	<!-- Système d'information géographique -->
+
+	<auteur>b_b</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<credit lien="http://leafletjs.com/">Leaflet</credit>
+	<credit lien="https://github.com/shramov/leaflet-plugins">Leaflet plugins</credit>
+	<credit lien="https://gitlab.com/IvanSanchez/Leaflet.GridLayer.GoogleMutant">Leaflet.GridLayer.GoogleMutant</credit>
+	<credit lien="https://github.com/leaflet-extras/leaflet-providers">Leaflet providers</credit>
+	<credit lien="https://github.com/brunob/leaflet.fullscreen">Leaflet fullscreen</credit>
+	<credit lien="https://github.com/Norkart/Leaflet-MiniMap">Leaflet minimap</credit>
+	<credit lien="http://wiki.openstreetmap.org/wiki/Nominatim">Nominatim</credit>
+	<credit lien="https://photon.komoot.de/">Photon</credit>
+	<credit lien="http://mattrich.deviantart.com/art/Picnic-101256405">Icône de mattrich sous licence CC BY-NC-SA</credit>
+	<copyright>2011-2017</copyright>
+	<licence>GPL v3</licence>
+
+	<traduire module="gis" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-gis" reference="fr" gestionnaire="salvatore" />
+
+	<utilise nom="selecteurgenerique" compatibilite="[0.8.6;]" />
+	<necessite nom="saisies" compatibilite="[3.27.5;]" />
+
+	<pipeline
+		nom="gis_modele_parametres_autorises"
+	/>
+	<pipeline
+		nom="declarer_tables_interfaces"
+		inclure="base/gis.php"
+	/>
+	<pipeline
+		nom="declarer_tables_objets_sql"
+		inclure="base/gis.php"
+	/>
+	<pipeline
+		nom="declarer_tables_auxiliaires"
+		inclure="base/gis.php"
+	/>
+	<pipeline
+		nom="insert_head"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="header_prive"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="insert_head_css"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="afficher_contenu_objet"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="post_edition"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="optimiser_base_disparus"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="autoriser"
+		inclure="gis_autoriser.php"
+	/>
+	<pipeline
+		nom="saisies_autonomes"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="xmlrpc_methodes"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="xmlrpc_server_class"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="formulaire_traiter"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="libeller_logo"
+		inclure="gis_pipelines.php"
+	/>
+	<menu nom="gis_tous" titre="gis:icone_gis_tous" parent="menu_edition" icone="images/gis-16.png" />
+	<menu nom="gis_nouveau" titre="gis:editer_gis_nouveau" parent="outils_rapides" icone="images/gis-new-16.png" action="gis_edit" parametres="new=oui" />
+</paquet>
