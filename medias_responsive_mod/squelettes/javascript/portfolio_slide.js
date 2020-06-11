@@ -28,7 +28,7 @@ function calculer_portfolio_slide() {
 
 function activer_porfolio_slide() {
 
-	$(".portfolio_slide").on("touchstart MSPointerDown pointerdown", function(e) {
+	$(".portfolio_slide").on("touchstart MSPointerDown ", function(e) {
 		var event = e.originalEvent;
 		if (event.pointerType && (event.pointerType == event.MSPOINTER_TYPE_MOUSE || event.pointerType == "mouse" )) return;
 
@@ -37,7 +37,7 @@ function activer_porfolio_slide() {
 		$(this).addClass("notrans");
 		this.margin_left_init = _getComputedTranslateX(this);		
 		
-	}).on("touchmove MSPointerMove pointermove", function(e) {
+	}).on("touchmove MSPointerMove ", function(e) {
 		var event = e.originalEvent;
 		if (event.pointerType && (event.pointerType == event.MSPOINTER_TYPE_MOUSE || event.pointerType == "mouse" )) return;
 		//event.preventDefault();
@@ -53,7 +53,7 @@ function activer_porfolio_slide() {
 		
 			$(this).css("transform", "translate3d("+ decal +"px, 0,0)");
 		
-	}).on("touchend MSPointerUp pointerup", function(e) {
+	}).on("touchend MSPointerUp ", function(e) {
 		var event = e.originalEvent;
 		if (event.pointerType && (event.pointerType == event.MSPOINTER_TYPE_MOUSE || event.pointerType == "mouse" )) return;
 
