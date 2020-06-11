@@ -1,0 +1,88 @@
+.crayon-icones span,
+.crayon-icones em {display:none;}
+
+.crayon-searching { float: right;padding:0;text-align: right;z-index: 3}
+.crayon-boutons { position:absolute; right:0; bottom:-0.25em;}
+.crayon-boutons button { border:1px solid; cursor: pointer;display:inline-block; padding:0.25rem 0.4rem;}
+.crayon-boutons .crayon-submit { background: #e6efc2 url(images/crayon-ok.svg) 0.15rem center no-repeat; background-size:1.3rem; color: #264409; border-color: #c6d880;float:right;margin-left:0.5rem;padding-left:1.5rem;}
+.crayon-boutons .crayon-cancel { background: #fbe3e4 url(images/crayon-cancel.svg) center center no-repeat; background-size:1.3rem;color: #8a1f11; border-color: #fbc2c4;width: 2.5rem; text-indent: -3000em;}
+.crayon-boutons .crayon-submit:hover,.crayon-boutons .crayon-submit:active,.crayon-boutons .crayon-submit:focus {background-color: #dee7ba;}
+.crayon-boutons .crayon-cancel:hover,.crayon-boutons .crayon-cancel:active,.crayon-boutons .crayon-cancel:focus {background-color: #f3dbdc;}
+.small .crayon-boutons {float:none;}
+.small .crayon-boutons .crayon-submit {text-indent: -3000em;background-position: center;width: 2.5rem;padding-left: 0.5rem;}
+.small .crayon-boutons .crayon-cancel {float:left;}
+
+/*.crayon-init { position: relative; }*/
+.crayon-init .crayon-icones {display: none;float:right;text-align: right; align-self: flex-end; position: relative; top:0; left:0;width:1.5rem;max-width:2rem;min-width:1rem;height:0;z-index:4999;}
+.crayon-icones>span {position: absolute;top:0;right: 0;left: auto;width: 100%;height: 0;padding-bottom: 100%;}
+.crayon-icones>em { position:absolute; left:0; }
+
+.crayon-hover>.crayon-icones { display: block;}
+.crayon-hover>.crayon-icones span,.crayon-hover>.crayon-icones em.crayon-crayon {display: block !important;}
+.crayon-changed>.crayon-icones,.crayon-changed>.crayon-icones span,.crayon-changed>.crayon-icones em.crayon-img-changed {display: block !important;}
+.crayon-changed.crayon-hover>.crayon-icones em.crayon-img-changed {background-color:#fff; filter:grayscale(100%)}
+.crayon-changed.crayon-hover>.crayon-icones em.crayon-crayon {z-index:2;background-color: rgba(255,255,255,0.5);}
+
+.crayon-loading>.crayon-icones, .crayon-loading>.crayon-icones span,.crayon-loading>.crayon-icones em.crayon-searching {display: block !important;}
+.crayon-loading>.crayon-icones em.crayon-crayon {display: none !important;}
+
+
+em.crayon-edit,
+em.crayon-crayon,
+em.crayon-img-changed { cursor: pointer; border:0; }
+
+/* definition des icones */
+.crayon-icones .crayon-crayon,
+.crayon-icones .crayon-img-changed,
+.crayon-icones .crayon-searching,
+.crayon-icones .crayon-edit { position:absolute;left:0;top:0;width: 100%; height:100%; border-radius: 25%; border:1px solid #ddd; background-size: 90% !important;}
+.crayon-icones .crayon-crayon {background: #fff url(images/crayon.svg) no-repeat center;cursor: pointer;}
+.crayon-icones .crayon-img-changed {background: transparent url(images/crayon-changed.svg) no-repeat center;border:0;}
+
+.crayon-icones em.crayon-searching { background: url(images/searching.gif) no-repeat; border-color:transparent }
+
+/* deprecated? je ne trouve aucun bout de code js qui pose crayon-edit */
+.crayon-icones em.crayon-edit { background: url(images/edit.png) no-repeat;}
+
+.formulaire_crayon .crayon-active { font: inherit; display:block;border: 1px solid #ddd;padding:0.25em;}
+
+
+
+.crayon-html .formulaire_spip { max-width: 44rem; padding: 0;margin: 0;border: 0;background: none;min-width: 10rem;}
+.crayon-html .formulaire_spip .formulaire_crayon { padding-bottom: 2em;}
+.crayon-html .formulaire_spip:before {content:'';display: block;position: absolute;top:-1rem;left:-1rem;right:-1rem;bottom: -1rem;background: #f4f4f4;opacity:0.95;z-index: -1;}
+.crayon-html textarea { overflow: auto; font: inherit; }
+.crayon-html { z-index:1000; }
+.crayon-html .small .crayon-boutons {position: relative;}
+
+.crayon.crayon-loading { opacity: 0.7;text-shadow: 0 0 50px red;filter:grayscale(50%);}
+.crayon-html.crayon-loading {filter:grayscale(70%) blur(3px);}
+
+.crayon-invalide { display: block; background-color: #ff8888; border: 1px dashed #ff0000; }
+.crayon-invalide p { margin:0; padding: 1%; font-style: italic; font-size: 80%; }
+/* resizer */
+.resizehandle { background:transparent url("images/resizer.svg") center no-repeat;background-size: contain; cursor:ns-resize; font-size:0.1em; width: auto !important;height:1rem !important;margin-bottom:-1rem;margin-right: 10rem;opacity: 0.5;}
+.small .resizehandle {margin-right: 0;}
+.resizehandle_boutons { margin-top: -16px; }
+
+
+.crayon-fade.crayon-hover:not(.crayon-loading){
+	-webkit-animation-name: crayon-fade-highlight;
+	-webkit-animation-duration: 1s;
+	animation-name: crayon-fade-highlight;
+  animation-duration: 1s;
+}
+.crayon-fade.crayon-hover.crayon-loading{
+	-webkit-animation-name:none;
+	animation-name:none;
+}
+@-webkit-keyframes crayon-fade-highlight {
+    0%   {background-color: initial;}
+    50%  {background-color: #FFFFB4;}
+    100% {background-color: initial;}
+}
+@keyframes crayon-fade-highlight {
+    0%   {background-color: initial;}
+    50%  {background-color: #FFFFB4;}
+    100% {background-color: initial;}
+}

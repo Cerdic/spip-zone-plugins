@@ -1,0 +1,41 @@
+[(#REM)
+
+	Controleur pour le crayon 'rubrique_introduction' php+html
+	
+	(les balises écrites ci-dessous sont volontairement avec un espace pour ne pas être
+	compilée)
+	
+	Appelé via # EDIT{introduction} dans une boucle rubrique
+	
+	Affiche les deux champs :
+	- descriptif (si rempli, il sera le rendu de # INTRODUCTION)
+	- texte
+	
+	Si aucun descriptif, le rendu de # INTRODUCTION est par défaut les 600 premiers caractères de
+	# # TEXTE
+
+]
+#CACHE{0}
+<BOUCLE_a(RUBRIQUES){id_rubrique}{statut==.}>
+<fieldset style="width:#ENV{largeur}px;#ENV{style};background-color:inherit;">
+	<h3 class="legend"><:crayons:legend_introduction_rubrique:></h3>
+	<ul class="editer-groupe">
+		<li class="editer_descriptif">
+			<label for="descriptif"><:texte_descriptif_rapide:></label>
+			<textarea class="crayon-active maxheight150"
+				name="#ENV{name_descriptif}"
+				id="descriptif"
+				style="width:100%;
+				height:#ENV{h_descriptif}px;">[(#DESCRIPTIF**|entites_html)]</textarea>
+		</li>
+		<li class="editer_texte">
+			<label for="text_area"><:info_texte:></label>
+			<textarea class="crayon-active"
+				name="#ENV{name_texte}"
+				id="text_area"
+				style="width:100%;
+				height:#ENV{h_texte}px;">[(#TEXTE**|entites_html)]</textarea>
+		</li>
+	</ul>
+</fieldset>
+</BOUCLE_a>
