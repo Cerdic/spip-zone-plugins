@@ -133,7 +133,7 @@ class Videopian {
         $headers = @recuperer_url($url, array('taille_max' => 0));
         if(!$headers['status']) throw new Videopian_Exception(Videopian_Exception::INFO_FILE_UNAVAILABLE);
         $http_status_code = $headers['status'];
-        if($http_status_code > 300) throw new Videopian_Exception(Videopian_Exception::INFO_FILE_UNAVAILABLE . " ($http_status)");
+        if($http_status_code > 300) throw new Videopian_Exception(Videopian_Exception::INFO_FILE_UNAVAILABLE . " ($http_status_code)");
         return true;
     }
 
