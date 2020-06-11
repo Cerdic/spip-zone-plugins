@@ -99,7 +99,18 @@ function saisies_afficher_si_js_champ($champ, $total, $operateur, $valeur, $vale
 	}
 
 	if (!$f = charger_fonction("saisies_afficher_si_js_$saisie", 'inc', true)) {
-		return "$negation\$(form).find('[name=\"$champ\"]').val() $operateur $guillemet$valeur$guillemet";
+		if ($operateur === 'MATCH' or $operateur === '!MATCH') {
+			if ($operateur === '!MATCH') {//Si double negation, on simplifie
+				$negation = $negation? '' : '!';
+			}
+			$cond = "$valeur.test(\$(form).find('[name=\"$champ\"]').val())";
+			if ($negation) {
+				$cond = "!($cond)";
+			}
+			return $cond;
+		} else {
+			return "$negation\$(form).find('[name=\"$champ\"]').val() $operateur $guillemet$valeur$guillemet";
+		}
 	}
 	return $f($champ, $total, $operateur, $valeur, $guillemet, $negation, $saisies_form[$champ]);
 }

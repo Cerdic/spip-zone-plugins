@@ -106,6 +106,10 @@
 			array(
 				0 => true,
 				1 => '@checkbox_1@:TOTAL > 1'
+			),
+			array(
+				0 => true,
+				1 => '@input_1@  MATCH \'/domaine.ext\''
 			)
 		);
 		foreach ($essais as $nom=>$param) {

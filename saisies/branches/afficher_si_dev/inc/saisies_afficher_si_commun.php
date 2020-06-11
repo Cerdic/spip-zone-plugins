@@ -36,7 +36,7 @@ function saisies_parser_condition_afficher_si($condition, $no_arobase=null) {
 		. '(?<total>:TOTAL)?' // TOTAL éventuel (pour les champs de type case à cocher)
 		. '(' // partie operateur + valeur (optionnelle) : debut
 		. '(?:\s*?)' // espaces éventuels après
-		. '(?<operateur>==|!=|IN|!IN|>=|>|<=|<)' // opérateur
+		. '(?<operateur>==|!=|IN|!IN|>=|>|<=|<|MATCH|!MATCH)' // opérateur
 		. '(?:\s*?)' // espaces éventuels après
 		. '((?<guillemet>"|\')(?<valeur>.*?)(\k<guillemet>)|(?<valeur_numerique>\d+))' // valeur (string) ou valeur_numérique (int)
 		. ')?' // partie operateur + valeur (optionnelle) : fin
@@ -197,7 +197,7 @@ function saisies_afficher_si_secure($condition, $tests=array()) {
 	}
 	$condition = trim($condition);
 	if ($condition) {// il reste quelque chose > c'est le mal
-		spip_log("Afficher_si incorrect. $condition_original non sécurisée", "saisies"._LOG_CRITIQUE);
+		spip_log("Afficher_si incorrect. $condition_original non sécurisée; reste $condition", "saisies"._LOG_CRITIQUE);
 		return false;
 	} else {
 		return true;

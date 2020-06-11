@@ -299,6 +299,26 @@
 				'0' => ' ($(form).find(&quot;[name^=\'cvtupload_fichiers_precedents[fichiers_bis]\']&quot;).length + $(form).find(&quot;[name^=\'fichiers_bis\']&quot;)[0].files.length) > 2',
 				'1' => '@fichiers_bis@ > 2',
 				'2' => $saisies_form
+			),
+			'match' => array(
+				'0' => '/domaine.ext$/.test($(form).find(\'[name=&quot;input_1&quot;]\').val())',
+				'1' => '@input_1@ MATCH \'/domaine.ext$/\'',
+				'2' => $saisies_form
+			),
+			'match_negation' => array(
+				'0' => '!(/domaine.ext$/.test($(form).find(\'[name=&quot;input_1&quot;]\').val()))',
+				'1' => '!@input_1@ MATCH \'/domaine.ext$/\'',
+				'2' => $saisies_form
+			),
+			'not_match' => array(
+				'0' => '!(/domaine.ext$/.test($(form).find(\'[name=&quot;input_1&quot;]\').val()))',
+				'1' => '@input_1@ !MATCH \'/domaine.ext$/\'',
+				'2' => $saisies_form
+			),
+			'not_match_negation' => array(
+				'0' => '/domaine.ext$/.test($(form).find(\'[name=&quot;input_1&quot;]\').val())',
+				'1' => '!@input_1@ !MATCH \'/domaine.ext$/\'',
+				'2' => $saisies_form
 			)
 		);
 		return $essais;
