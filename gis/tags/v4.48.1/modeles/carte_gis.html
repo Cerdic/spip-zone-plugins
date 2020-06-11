@@ -1,0 +1,165 @@
+[(#REM)
+
+Modele carte_gis
+----------------
+
+Parametres possibles :
+
+- id_map|id_carte_gis = 1          id de la carte
+- lat|latit|latitude = 48.3        latitude du centre de la carte
+- lon|lonxit|longitude = -4.7      longitude du centre de la carte
+- zoom = 5                         zoom de la carte
+- maxZoom = 13                     zoom maximum autorisé
+- minZoom = 13                     zoom minimum autorisé
+
+- default_layer = acetate                   nom de la couche affichée par défaut, "none" si on ne souhaite pas affiche de couche spécifique
+- affiche_layers = openmapsurfer/acetate    noms des couches proposées séparés par des /
+
+- sw_lat = lat - 10°               latitude du sud-ouest de la bounding box
+- sw_lon = lon - 10°               longitude du sud-ouest de la bounding box
+- ne_lat = lat + 10°               latitude du nord-est de la bounding box
+- ne_lon = lon + 10°               longitude du nord-est de la bounding box
+
+- width|largeur = 100%             largeur de la carte, 100% par defaut
+- height|hauteur = 400px           hauteur de la carte, 400px par defaut
+- style = non                      ne pas styler la carte
+
+- fullscreen = oui                     afficher un bouton pour passer la carte en plein écran
+- zoom_molette|zoom_wheel = non        désactiver le zoom avec la molette de la souris, actif par defaut
+- control_type|controle_type = non     ne pas afficher le contrôle de changement de couche
+- control_type_collapsed = non         afficher le contrôle de changement de couche replié (oui par défaut)
+- no_control|aucun_controle = oui      ne pas afficher les contrôles de la carte
+- scale = oui                          afficher l'échelle de la carte
+- overview = oui                       afficher une mini carte de situation
+
+- autocenterandzoom|centrer_auto = oui        centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
+- localize_visitor|localiser_visiteur = oui   centrer la carte sur la position du visiteur (API geolocation HTML5)
+- localize_visitor_zoom = 12                  niveau de zoom sur la position du visiteur (par défaut la valeur de zoom de la carte) 
+- id_a_ouvrir                                 id_gis de l'infobulle à afficher au chargement(marqueur uniquement)
+
+- objets = gis                     type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
+- limit|limite = 500               nombre max de marqueurs à afficher, 500 par defaut
+- langue = null                    langue des objets à récupérer (utile pour les multis notamment)
+- tooltip = oui                    affiche un tooltip sur les points
+- kml = 12                         kml à superposer à la carte (id_document ou url ou liste d'url)
+- gpx = 12                         gpx à superposer à la carte (id_document ou url ou liste d'url)
+- geojson = 12                     geojson à superposer à la carte (id_document ou url ou liste d'url)
+- topojson = 12                    topojson à superposer à la carte (id_document ou url ou liste d'url)
+- centrer_fichier = non            permet de ne pas centrer la carte automatiquement sur les fichiers kml/gpx surperposés
+- point = non                      si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
+
+- media = non                      permet de passer le critère 'media' (pour les documents)
+- mots = #LISTE{1,4,7}             plugin critere {mots} https://contrib.spip.net/Critere-mots
+- path_styles=#ARRAY{color,#fff}   options de style des éléments de la couche GeoJSON (voir http://leafletjs.com/reference.html#path-options)
+- options=#ARRAY{option1,valeur1}  options ajoutées à la carte (qui peuvent être récupérées dans la fonction de callback par exemple par la suite)
+
+Uniquement si objets = point_libre :
+- icone = chemin/vers/image        image utilisée pour le marker
+- titre                            titre du point
+- description                      description du point
+
+Clustering (regroupement de points proches) :
+- cluster = oui                      Active le clustering
+- clusterMaxZoom = 11                Regroupe les points jusque à ce zoom, mais pas au delà
+- clusterShowCoverageOnHover = oui   Affiche au survol du cluster le contour de la zone couverte par les points regroupés
+- maxClusterRadius = 80              Le rayon maximal (en pixels) qu'un cluster couvrira (80 pixels par defaut)
+- clusterSpiderfyOnMaxZoom = oui     Active l'effet d'éclatement pour afficher les points qui se chevauchent
+- singleMarkerMode = oui             Utilise les icones de cluster pour tous les points (même ceux qui ne sont pas dans un cluster)
+]
+
+[(#SET{width,#ENV{width,#ENV{largeur,100%}}})]
+[(#SET{height,#ENV{height,#ENV{hauteur,400px}}})]
+[(#SET{id,#ENV{id_carte_gis,#ENV{id_map,#ENV{id,1}}}})]
+[(#REM) -- compat gis v1 -- ]
+[(#SET{lat,#ENV{lat,#ENV{latit,#ENV{latitude,#CONFIG{gis/lat,0}}}}})]
+[(#SET{lon,#ENV{lon,#ENV{lonxit,#ENV{longitude,#CONFIG{gis/lon,0}}}}})]
+[(#REM) On utilise la bounding box seulement si le centre n'a pas été donné et si les quatre valeurs de la bounding box sont renseignées
+    les valeurs par defaut sont "centre +/- 10°", ce qui est naze, mais c'est un cas normalement impossible
+]
+#SET{utiliser_bb, ''}
+[(#ENV{lat}|ou{#ENV{lon}}|non|et{#ENV{sw_lat}}|et{#ENV{sw_lon}}|et{#ENV{ne_lat}}|et{#ENV{ne_lon}})
+	#SET{utiliser_bb, oui}
+	#SET{sw_lat,#ENV{sw_lat,#GET{lat}|moins{10}}}
+	#SET{sw_lon,#ENV{sw_lon,#GET{lon}|moins{10}}}
+	#SET{ne_lat,#ENV{ne_lat,#GET{lat}|plus{10}}}
+	#SET{ne_lon,#ENV{ne_lon,#GET{lon}|plus{10}}}
+]
+
+<div id="map[(#GET{id})]" class="carte_gis"[(#ENV{style}|!={'non'}|?{' '})style="[width:(#GET{width});][ height:(#GET{height});]"]></div>
+
+<script type="text/javascript">/*<!\[CDATA\[*/
+var map[(#GET{id})];
+var jQgisloader;
+(function (){
+	if (typeof jQuery.ajax == "undefined"){jQuery(init_gis);}else {init_gis();}
+	function init_gis(){
+		// Charger le javascript de GIS une seule fois si plusieurs carte
+		if (typeof jQgisloader=="undefined"){
+			jQgisloader = jQuery.ajax({url: '[(#PRODUIRE{fond=javascript/gis.js})]', dataType: 'script', cache: true});
+		}
+		// et initialiser la carte (des que js GIS charge et des que DOM ready)
+		jQgisloader.done(function(){
+			jQuery(function(){
+				map[(#GET{id})] = new L.Map.Gis('map[(#GET{id})]',{
+					mapId: '[(#GET{id})]',
+					callback: (typeof(callback_map[(#GET{id})]) === "function") ? callback_map[(#GET{id})] : false,
+					center: [#GET{lat},#GET{lon}],
+					zoom: [(#ENV{zoom,#CONFIG{gis/zoom,0}}|trim)][,
+					maxZoom: (#ENV{maxZoom}|trim)][,
+					minZoom: (#ENV{minZoom}|trim)][,
+					default_layer: '(#ENV{default_layer}|trim)'][,
+					affiche_layers: (#ENV{affiche_layers}|trim|?{[(#ENV{affiche_layers}|trim|explode{/}|json_encode)],''})],
+					scrollWheelZoom: [(#ENV{zoom_molette,#ENV{zoom_wheel}}|trim|=={non}|?{false,true})],
+					zoomControl: [(#ENV{no_control,#ENV{aucun_controle}}|trim|!={oui}|?{true,false})],
+					fullscreenControl: [(#ENV{fullscreen}|trim|=={oui}|?{true,false})],
+					scaleControl: [(#ENV{scale}|trim|=={oui}|?{true,false})],
+					overviewControl:[(#ENV{overview}|trim|=={oui}|?{true,false})],
+					layersControl: [(#ENV{control_type,#ENV{controle_type}}|trim|=={non}|?{false,true})],
+					layersControlOptions: {
+						collapsed: [(#ENV{control_type_collapsed,#ENV{control_type_collapsed}}|trim|=={non}|?{false,true})]
+					},
+					noControl: [(#ENV{no_control,#ENV{aucun_controle}}|trim|=={oui}|?{true,false})],
+					utiliser_bb: [(#GET{utiliser_bb}|?{true,false})][,
+					sw_lat: (#GET{sw_lat})][,
+					ne_lat: (#GET{ne_lat})][,
+					sw_lon: (#GET{sw_lon})][,
+					ne_lon: (#GET{ne_lon})],
+					affiche_points: [(#ENV{point,''}|=={non}|?{false,true})][,
+					langue:'(#ENV{langue})'],
+					json_points:{
+						url: '[(#URL_PAGE{gis_json}|parametre_url{lang,#ENV{langue},&}|url_absolue)]'[,
+						objets: '(#ENV{objets,#ENV{class}}|trim)'],
+						limit: [(#ENV{limit,#ENV{limite,500}}|trim)],
+						env: [(#ENV*{args,#ENV*}|gis_modele_url_json_env|json_encode)][,
+						titre: (#ENV{titre}|?{#ENV{titre},''}|trim|json_encode)][,
+						description: (#ENV{description}|?{#ENV{description},''}|trim|json_encode)][,
+						icone: (#ENV{icone}|?{#ENV{icone},''}|trim|json_encode)]
+					},
+					tooltip: [(#ENV{tooltip}|=={oui}|?{true,false})],
+					cluster: [(#ENV{cluster}|=={oui}|?{true,false})],
+					clusterOptions: {
+						disableClusteringAtZoom: [(#ENV{clusterMaxZoom,null})],
+						showCoverageOnHover: [(#ENV{clusterShowCoverageOnHover}|?{true,false})],
+						spiderfyOnMaxZoom: [(#ENV{clusterSpiderfyOnMaxZoom}|?{true,false})],
+						maxClusterRadius: [(#ENV{maxClusterRadius,80})],
+						singleMarkerMode: [(#ENV{singleMarkerMode}|?{true,false})]
+					},
+					pathStyles: [(#ENV*{path_styles}|json_encode)],
+					autocenterandzoom: [(#ENV{autocenterandzoom,#ENV{centrer_auto,non}}|trim|=={non}|?{false,true})],
+					openId: [(#ENV{id_a_ouvrir,false})],
+					localize_visitor: [(#ENV{localize_visitor,#ENV{localiser_visiteur}}|trim|?{true,false})],
+					localize_visitor_zoom: [(#ENV{localize_visitor_zoom,#ENV{zoom,#CONFIG{gis/zoom,0}}}|trim)],
+					centrer_fichier: [(#ENV{centrer_fichier,oui}|trim|=={oui}|?{true,false})],
+					kml: [(#ENV{kml,''}|?{[(#ENV{kml}|gis_param_to_array|gis_kml_to_urls|json_encode)],false})],
+					gpx: [(#ENV{gpx,''}|?{[(#ENV{gpx}|gis_param_to_array|gis_kml_to_urls|json_encode)],false})],
+					geojson: [(#ENV{geojson,''}|?{[(#ENV{geojson}|gis_param_to_array|gis_kml_to_urls|json_encode)],false})],
+					topojson: [(#ENV{topojson,''}|?{[(#ENV{topojson}|gis_param_to_array|gis_kml_to_urls|json_encode)],false})],
+					options: [(#ENV*{options,#ARRAY}|json_encode)]
+				});
+			});
+		});
+	}
+
+})()
+/*\]\]>*/
+</script>

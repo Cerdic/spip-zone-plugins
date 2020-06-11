@@ -1,0 +1,122 @@
+[(#REM)
+
+Modele carte_gis
+----------------
+
+Parametres possibles :
+- id_gis (optionnel)
+- id_objet (optionnel)
+- objet (optionnel)
+- width|largeur = 100%             largeur de la carte, 100% par defaut
+- height|hauteur = 150px           hauteur de la carte, 150px par defaut
+]
+
+[(#SET{width,#ENV{width,#ENV{largeur,100%}}})]
+[(#SET{height,#ENV{height,#ENV{hauteur,150px}}})]
+
+<BOUCLE_gis(GIS){objet ?}{id_objet ?}{id_gis ?}{0,1}>
+<div id="map_preview" class="carte_gis" style="[width: (#GET{width});] [height: (#GET{height});]"></div>
+#SET{autocenter,''}
+<script type="text/javascript">
+/*<![CDATA[*/
+var jQgisloader;
+(function (){
+	if (typeof jQuery.ajax == "undefined"){ jQuery(init_gis); } else { init_gis(); }
+	function init_gis(){
+		// Charger le javascript de GIS une seule fois si plusieurs carte
+		if (typeof jQgisloader=="undefined"){
+			jQgisloader = jQuery.ajax({url: '[(#PRODUIRE{fond=javascript/gis.js})]', dataType: 'script', cache: true});
+		}
+		// et initialiser la carte (des que js GIS charge et des que DOM ready)
+		jQgisloader.done(function(){
+			jQuery(function(){
+				var map_preview;
+				var map_preview_container = 'map_preview';
+				var marker;
+
+				map_preview = new L.Map(map_preview_container);
+
+				map_preview.attributionControl.setPrefix('');
+
+				var base_layer = [(#ENV{layer_defaut}|=={none}|?{"'none'",[new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#ENV{layer_defaut,[(#REM|gis_layer_defaut)]})]/layer})]})];
+				if(base_layer != 'none'){
+					map_preview.addLayer(base_layer);
+				}
+
+				map_preview.setView(new L.LatLng([(#LAT)],[(#LON)]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
+
+				[(#REM) On ajoute les points ou le point unique suivant les params ]
+				<B_points>
+				var data = {
+					"type": "FeatureCollection",
+					"features": [
+				<BOUCLE_points(GIS){id_objet}{objet}{","}>
+						{"type": "Feature",
+							"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+							"id":"#ID_GIS",
+							"properties": {
+								"title":[(#TITRE|supprimer_numero|json_encode)],
+								"description":[(#DESCRIPTIF|json_encode)][
+								(#LOGO_GIS|gis_icon_properties)]
+							}
+						}
+				</BOUCLE_points>
+					]
+				};
+				[(#TOTAL_BOUCLE|>{1}|oui) #SET{autocenter,oui} ]
+				</B_points>
+				<BOUCLE_point(GIS){id_gis}>
+				var data = {
+					"type": "FeatureCollection",
+					"features": [
+						{"type": "Feature",
+							"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+							"id":"#ID_GIS",
+							"properties": {
+								"title":[(#TITRE|supprimer_numero|json_encode)],
+								"description":[(#DESCRIPTIF|json_encode)][
+								(#LOGO_GIS|gis_icon_properties)]
+							}
+						}]
+				};
+				</BOUCLE_point>
+				<//B_points>
+				if (data) {
+					var geojson = new L.geoJson('', {
+						onEachFeature: function (feature, layer) {
+							if (feature.properties && feature.properties.icon){
+								layer.setIcon(new L.Icon({
+									iconUrl: feature.properties.icon,
+									iconSize: new L.Point( feature.properties.icon_size\[0\], feature.properties.icon_size\[1\] ),
+									iconAnchor: new L.Point( feature.properties.icon_anchor\[0\], feature.properties.icon_anchor\[1\] ),
+									popupAnchor: new L.Point( feature.properties.popup_anchor\[0\], feature.properties.popup_anchor\[1\] )
+								}));
+							}
+							if (feature.properties && feature.properties.title){
+								var popupContent = '<strong>' + feature.properties.title + '</strong>';
+								if (feature.properties.description)
+									popupContent = popupContent + feature.properties.description;
+								layer.bindPopup(popupContent);
+							}
+						}
+					}).addTo(map_preview);
+					geojson.addData(data);
+					[(#GET{autocenter}|oui)
+					if(data.features.length > 1)
+						map_preview.fitBounds(geojson.getBounds());]
+				}
+				[(#REM) On ajoute les KML attachés à l'objet ]
+				<BOUCLE_kml(DOCUMENTS){tous}{objet}{id_objet}{extension=kml}>
+				map_preview.addLayer(new L.KML('[(#URL_DOCUMENT|url_absolue)]', {async: true}));
+				</BOUCLE_kml>
+				[(#REM) On ajoute les GPX attachés à l'objet ]
+				<BOUCLE_gpx(DOCUMENTS){tous}{objet}{id_objet}{extension=gpx}>
+				map_preview.addLayer(new L.GPX('[(#URL_DOCUMENT|url_absolue)]', {async: true}));
+				</BOUCLE_gpx>
+			});
+		});
+	}
+})()
+/*]]>*/
+</script>
+</BOUCLE_gis>
