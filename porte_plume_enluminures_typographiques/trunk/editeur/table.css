@@ -42,7 +42,7 @@ input{
   padding: 0;
   margin: 0;
   width: auto;
-  height: 10px;
+  min-height: 10px;
   text-align:center
 }
 #ihm td td{border:none}
