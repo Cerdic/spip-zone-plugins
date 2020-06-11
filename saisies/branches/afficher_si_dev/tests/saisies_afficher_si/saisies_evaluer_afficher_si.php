@@ -22,6 +22,7 @@
 
 
 	// Preparer les requests
+	set_request("input_1", "toto@domaine.ext");
 	set_request("case_1", "oui");
 	set_request("case_2", "");
 	set_request("a", "a");
@@ -228,6 +229,22 @@
 			'total_tableau_inf' => array(
 				0 => false,
 				1 => '@tableau_1@:TOTAL < 2'
+			),
+			'match' => array(
+				'0' => true,
+				'1' => '@input_1@ MATCH \'/domaine.ext$/\'',
+			),
+			'match_negation' => array(
+				'0' => false,
+				'1' => '!@input_1@ MATCH \'/domaine.ext$/\'',
+			),
+			'not_match' => array(
+				'0' => false,
+				'1' => '@input_1@ !MATCH \'/domaine.ext$/\'',
+			),
+			'not_match_negation' => array(
+				'0' =>  true,
+				'1' => '!@input_1@ !MATCH \'/domaine.ext$/\'',
 			)
 		);
 		return $essais;

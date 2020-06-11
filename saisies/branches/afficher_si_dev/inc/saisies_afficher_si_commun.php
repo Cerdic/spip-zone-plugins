@@ -139,6 +139,10 @@ function saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur
 		return $champ > $valeur;
 	} elseif ($operateur == '>=') {
 		return $champ >= $valeur;
+	} elseif ($operateur == 'MATCH') {
+		return preg_match($valeur, $champ);
+	} elseif ($operateur == '!MATCH') {
+		return !preg_match($valeur, $champ);
 	} else {//Si mauvaise operateur -> on annule
 		return false;
 	}
