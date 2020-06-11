@@ -155,14 +155,15 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet) {
 				$champsVignette['media'] = 'image';
 			}
 
-
 			// Recuperer les tailles
 			$champsVignette['taille'] = @intval(filesize($fichier));
 			$size_image = @getimagesize($fichier);
-			$champsVignette['largeur'] = intval($size_image[0]);
-			$champsVignette['hauteur'] = intval($size_image[1]);
-			// $infos['type_image'] = decoder_type_image($size_image[2]);
-			if ($champsVignette['largeur'] == 0) {              // en cas d'echec, recuperer les infos videopian
+			if (!empty($size_image[0])) {
+				$champsVignette['largeur'] = intval($size_image[0]);
+				$champsVignette['hauteur'] = intval($size_image[1]);
+			} else {
+				// $infos['type_image'] = decoder_type_image($size_image[2]);
+				 // en cas d'echec, recuperer les infos videopian
 				$champsVignette['largeur'] = $logoDocument_width;
 				$champsVignette['hauteur'] = $logoDocument_height;
 				if (isset($logoDocument_weight)) {
