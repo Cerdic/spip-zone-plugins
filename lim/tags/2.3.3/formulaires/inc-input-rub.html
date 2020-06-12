@@ -1,0 +1,4 @@
+<div class="check #NAME[ (#SECTEUR|=={oui}|oui)rub_secteur]">
+	<label for="[(#NAME|concat{_rub#ID_RUBRIQUE})]">[(#ID_RUBRIQUE|in_any{#ENV{#NAME}}?{<span class="lim_icon icon-off"></span>,<span class="lim_icon icon-on"></span>})]</label>
+	<input type="checkbox" name="#NAME\[\]" class='lim_hidden' value="#ID_RUBRIQUE" id='[(#NAME|concat{_rub#ID_RUBRIQUE})]' [(#ID_RUBRIQUE|in_any{#ENV{#NAME}}) checked='checked']>
+</div>
