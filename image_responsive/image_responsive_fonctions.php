@@ -865,8 +865,8 @@ function image_proportions($img, $largeur = 16, $hauteur = 9, $align = "center",
 
 	// Second passage si $zoom (on verra plus tard si c'est intéressant de le traiter en amont)
 	if ($zoom > 1 && $mode != "focus" && $mode != "focus-center") {
-		$l_img = largeur($img) / 2;
-		$h_img = hauteur($img) / 2;
+		$l_img = largeur($img) / $zoom;
+		$h_img = hauteur($img) / $zoom;
 
 		$img = image_recadre($img, $l_img, $h_img);
 
