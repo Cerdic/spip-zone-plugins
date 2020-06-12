@@ -175,7 +175,7 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank"  rel="no
 	'option_tagfield_label' => 'Balise pour le label du groupe',
 	'option_type_choix_plusieurs' => 'Permettre à l’internaute de choisir <strong>plusieurs</strong> destinataires.',
 	'option_type_choix_tous' => 'Mettre <strong>tout·es</strong> ces auteur·trices en destinataires. L’internaute n’aura aucun choix.',
-	'option_type_choix_un' => 'Permettre à l’internaute de choisir <strong>un·e unique </strong> destinataire (sous forme de liste déroulante).', # MODIF
+	'option_type_choix_un' => 'Permettre à l’internaute de choisir <strong>un·e unique</strong> destinataire (sous forme de liste déroulante).',
 	'option_type_choix_un_radio' => 'Permettre à l’internaute de choisir <strong>un·e unique</strong> destinataire (sous forme de liste à puce).',
 	'option_type_explication' => 'En mode "masqué", le contenu du champ ne sera pas visible.',
 	'option_type_label' => 'Type du champ',
