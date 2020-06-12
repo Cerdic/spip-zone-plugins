@@ -141,7 +141,8 @@ function lim_formulaire_verifier($flux) {
 			}
 
 			// si c'est un déplacement vers une autre rubrique, on vérifie
-			if (isset($id_rub_en_cours) and $id_rub_en_cours !=_request('id_parent')) {
+			$id_parent = _request('id_parent');
+			if (isset($id_rub_en_cours) and $id_parent != '0' and $id_rub_en_cours != $id_parent ) {
 				if (!autoriser($faire, 'rubrique', _request('id_parent'))) {
 					$flux['data']['id_parent'] = _T('lim:info_deplacer_dans_rubrique_non_autorise');
 				}
