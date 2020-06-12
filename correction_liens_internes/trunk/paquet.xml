@@ -1,7 +1,7 @@
 <paquet
 	prefix="correction_liens_internes"
 	categorie="edition"
-	version="1.5.3"
+	version="1.5.4"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="correction_liens_internes.png"
@@ -19,6 +19,5 @@
 
 	<pipeline nom="pre_edition" inclure="correction_liens_internes_pipelines.php" />
 
-	<necessite nom="PHP" compatibilite="[5.4.0;[" />
 	<utilise nom="multidomaines" compatibilite="[2.0.0;]" />
 </paquet>

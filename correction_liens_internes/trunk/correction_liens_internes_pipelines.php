@@ -94,6 +94,9 @@ function correction_liens_internes_correction($texte, $raccourci_spip = true){
 	// C'est un tableeau sérialisé en PHP ? on le sérialize en json pour éviter les ennuis
 	$serialize_php = false;
 	if ($tmp = @unserialize($texte)) {
+		if (!defined('JSON_UNESCAPED_SLASHES')) {//On traite pas ce cas pour les version de php < 5.4
+			return $texte;
+		}
 		$texte = json_encode($tmp, JSON_UNESCAPED_SLASHES);
 		$serialize_php =  true;
 	}
