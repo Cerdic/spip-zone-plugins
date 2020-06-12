@@ -91,7 +91,7 @@ function correction_liens_internes_correction($texte, $raccourci_spip = true){
 		return $texte;
 	}
 
-	// C'est un tableeau sérialisé en PHP ? on le séralize en json pour éviter les ennuis
+	// C'est un tableeau sérialisé en PHP ? on le sérialize en json pour éviter les ennuis
 	$serialize_php = false;
 	if ($tmp = @unserialize($texte)) {
 		$texte = json_encode($tmp, JSON_UNESCAPED_SLASHES);
