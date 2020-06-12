@@ -1,0 +1,20 @@
+#BOITE_OUVRIR{#CHEMIN_IMAGE{simplog-24.png}|balise_img{'',cadre-icone}, info}
+    <:simplog:description_simplog:>
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{<:simplog:liste_fic:>, simple, titrem})]
+	<ul class="liste-items">
+        <BOUCLE_logs(DATA){source glob, #EVAL{_DIR_LOG}|concat{*.log*}}{par valeur}{valeur != ''}>
+		[<li class="item">
+			(#URL_ECRIRE{#ENV{exec}}|parametre_url{log, #VALEUR|basename}|parametre_url{senstri, #ENV{senstri,0}}
+				|lien_ou_expose{
+					[(#VALEUR|basename)],
+					[(#ENV{log}|=={#VALEUR})]})
+		</li>]
+        </BOUCLE_logs>
+    </ul>
+#BOITE_PIED
+    <a href="[(#SELF|parametre_url{hasard,[(#VAL{1}|rand{10000000})]})]" class="ajax">
+		<:simplog:actualiser:>
+	</a>
+#BOITE_FERMER
