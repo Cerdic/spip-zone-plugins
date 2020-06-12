@@ -91,6 +91,14 @@ function correction_liens_internes_correction($texte, $raccourci_spip = true){
 		return $texte;
 	}
 
+	// C'est un tableeau sérialisé en PHP ? on le séralize en json pour éviter les ennuis
+	$serialize_php = false;
+	if ($tmp = @unserialize($texte)) {
+		$texte = json_encode($tmp, JSON_UNESCAPED_SLASHES);
+		spip_log($texte, 's');
+		$serialize_php =  true;
+	}
+
 
 	// traiter d'autre domaines ?
 	if ($domaines = correction_liens_internes_autres_domaines()) {
@@ -126,6 +134,9 @@ function correction_liens_internes_correction($texte, $raccourci_spip = true){
 			spip_log(self() . (_request('self')?' / '._request('self'):'')  //pour crayons notamment...
 			. " : $mauvais_raccourci => $bon_raccourci", 'liens_internes.' . _LOG_AVERTISSEMENT);
 		}
+	}
+	if($serialize_php) {
+		$texte = serialize(json_decode($texte, true));
 	}
 	return $texte;
 }
