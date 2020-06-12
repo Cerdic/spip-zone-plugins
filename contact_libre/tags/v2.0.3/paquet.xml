@@ -1,0 +1,18 @@
+<paquet
+	prefix="contact_libre"
+	categorie="communication"
+	version="2.0.3"
+	etat="stable"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/contact_libre-48.png"
+	documentation="https://contrib.spip.net/Formulaire-de-contact-libre"
+>
+	<nom>Contact libre</nom>
+
+	<auteur>b_b</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[3.31.3;[" />
+	<utilise nom="nospam" compatibilite="[2.1.6;[" />
+</paquet>
