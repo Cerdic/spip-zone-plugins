@@ -34,11 +34,12 @@ function objet_trouver_parent($objet, $id_objet) {
 		// On teste chacun méthode dans l'ordre, et dès qu'on a trouvé un parent on s'arrête
 		foreach ($parent_methodes as $parent_methode) {
 			$where = array("$cle_objet = $id_objet");
-			
+
+			// Détermination d'une condition sur la détection du parent
 			if (isset($parent_methode['condition'])) {
 				$where[] = $parent_methode['condition'];
 			}
-			
+
 			$select = array();
 			if (isset($parent_methode['champ'])) {
 				$select[] = $parent_methode['champ'];
@@ -52,19 +53,23 @@ function objet_trouver_parent($objet, $id_objet) {
 				
 				// Si le type est fixe
 				if (isset($parent_methode['type'])) {
-					return array(
+					$parent = array(
 						'objet' 	=> $parent_methode['type'],
 						'id_objet'	=> intval($ligne[$parent_methode['champ']]),
 						'champ' 	=> $parent_methode['champ'],
 					);
 				}
 				elseif (isset($parent_methode['champ_type'])) {
-					return array(
+					$parent = array(
 						'objet' 	 => $ligne[$parent_methode['champ_type']],
 						'id_objet' 	 => intval($ligne[$parent_methode['champ']]),
 						'champ' 	 => $parent_methode['champ'],
 						'champ_type' => $parent_methode['champ_type'],
 					);
+				}
+
+				if ($parent) {
+					break;
 				}
 			}
 		}
