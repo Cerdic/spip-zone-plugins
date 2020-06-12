@@ -95,7 +95,6 @@ function correction_liens_internes_correction($texte, $raccourci_spip = true){
 	$serialize_php = false;
 	if ($tmp = @unserialize($texte)) {
 		$texte = json_encode($tmp, JSON_UNESCAPED_SLASHES);
-		spip_log($texte, 's');
 		$serialize_php =  true;
 	}
 
