@@ -123,7 +123,6 @@ function lim_formulaire_verifier($flux) {
 
 	if (in_array($nom_table, $tableau_tables_lim)) {
 		include_spip('inc/autoriser');
-		$faire = 'creer'.$objet.'dans';
 
 		$id_objet = $flux['args']['args'][0];
 		if (is_numeric($id_objet)) { 	// c'est donc une modification,
@@ -138,7 +137,9 @@ function lim_formulaire_verifier($flux) {
 			}
 
 			// si c'est un déplacement vers une autre rubrique, on vérifie
-			if (isset($id_rub_en_cours) and $id_rub_en_cours !=_request('id_parent')) {
+			$faire = 'creer'.$objet.'dans';
+			$id_parent = _request('id_parent');
+			if (isset($id_rub_en_cours) and $id_parent != '0' and $id_rub_en_cours != $id_parent ) {
 				if (!autoriser($faire, 'rubrique', _request('id_parent'))) {
 					$flux['data']['id_parent'] = _T('lim:info_deplacer_dans_rubrique_non_autorise');
 				}
