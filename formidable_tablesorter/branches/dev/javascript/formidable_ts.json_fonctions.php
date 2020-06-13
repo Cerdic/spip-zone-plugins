@@ -127,39 +127,42 @@ continue;
 			$this->totalRows++;
 			// Cell 0 : statut
 			$value = \liens_absolus(\appliquer_filtre($row_reponse['statut'], 'puce_statut', 'formulaires_reponse', $row_reponse['id_formulaires_reponse'], true));
-			$row_ts[] = new cell(
-				$this->id_formulaire,
-				$id_formulaires_reponse,
-				'statut',
-				$value,
-				$row_reponse['statut'],
-				$row_reponse['statut'],
-				false,
-				'natif');
+			$row_ts[] = new cell([
+				'id_formulaire' => $this->id_formulaire,
+				'id_formulaires_reponse' => $id_formulaires_reponse,
+				'nom' => 'statut',
+				'value' => $value,
+				'sort_value' => $row_reponse['statut'],
+				'filter_value' => $row_reponse['statut'],
+				'crayons' => false,
+				'type' => 'natif'
+			]);
 
 			// Cell 1 : id
 			$value = '<a href="'.\generer_url_ecrire('formulaires_reponse', 'id_formulaires_reponse='.$row_reponse['id_formulaires_reponse']).'">'.$row_reponse['id_formulaires_reponse'].'</a>';
-			$row_ts[] = new cell(
-				$this->id_formulaire,
-				$id_formulaires_reponse,
-				'id_formulaires_reponse',
-				$value,
-				$row_reponse['id_formulaires_reponse'],
-				$row_reponse['id_formulaires_reponse'],
-				false,
-				'natif');
+			$row_ts[] = new cell([
+				'id_formulaire' => $this->id_formulaire,
+				'id_formulaires_reponse' => $id_formulaires_reponse,
+				'nom' => 'id_formulaires_reponse',
+				'value' => $value,
+				'sort_value' => $row_reponse['id_formulaires_reponse'],
+				'filter_value' => $row_reponse['id_formulaires_reponse'],
+				'crayons' => false,
+				'type' => 'natif'
+			]);
 
 			// Cell 2 : date
 			$value = \affdate_heure($row_reponse['date_envoi']);
-			$row_ts[] = new cell(
-				$this->id_formulaire,
-				$id_formulaires_reponse,
-				'date_envoi',
-				$value,
-				$row_reponse['date_envoi'],
-				$value,
-				false,
-				'natif');
+			$row_ts[] = new cell([
+				'id_formulaire' => $this->id_formulaire,
+				'id_formulaires_reponse' => $id_formulaires_reponse,
+				'nom' => 'date_envoi',
+				'value' => $value,
+				'sort_value' => \strtotime($row_reponse['date_envoi']),
+				'filter_value'  => $value,
+				'crayons' => false,
+				'type' =>'natif'
+			]);
 
 			// Cells suivantes : champs extras
 			foreach ($this->cextras as $champ) {
@@ -171,52 +174,56 @@ continue;
 						'type' => 'formulaires_reponse',
 						'champ' => $nom,
 						'table' => table_objet_sql('formulaires_reponse'),
-					);
+			);
 					if (autoriser('modifierextra', 'formulaires_reponse', $id_formulaires_reponse, '', $opt)) {
 						$crayons = true;
-					}
-				}
+		}
+		}
 
-				if (isset($champ['options']['traitements'])) {
-					$value = \appliquer_traitement_champ($row_reponse[$nom], $nom, 'formulaires_reponse');
-				} else {
-					$value = implode(\calculer_balise_LISTER_VALEURS('formulaires_reponses', $nom, $row_reponse[$nom]), ', ');
-				}
-				$row_ts[] = new cell(
-					$this->id_formulaire,
-					$id_formulaires_reponse,
-					$nom,
-					$value,
-					data_sort_value($value, $champ, 'extra'),
-					null,
-					$crayons,
-					'extra'
-				);
-			}
+		if (isset($champ['options']['traitements'])) {
+			$value = \appliquer_traitement_champ($row_reponse[$nom], $nom, 'formulaires_reponse');
+		} else {
+			$value = implode(\calculer_balise_LISTER_VALEURS('formulaires_reponses', $nom, $row_reponse[$nom]), ', ');
+		}
+		$row_ts[] = new cell(
+			[
+				'id_formulaire' => $this->id_formulaire,
+				'id_formulaires_reponse' => $id_formulaires_reponse,
+				'nom' => $nom,
+				'value' => $value,
+				'sort_value' => sort_value($value, $champ, 'extra'),
+				'filter_value' => null,
+				'crayons' => $crayons,
+				'type' => 'extra'
+			]
+			);
+		}
 
-			// Derniers cells : la réponse de l'internaute
-			foreach ($this->saisies_finales as $saisie) {
-				if ($saisie['saisie'] == 'explication') {
-					continue;
-				}
-				$nom = $saisie['options']['nom'];
-				$value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'valeur_uniquement');
-				$row_value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'brut');
-				$row_ts[] = new cell(
-					$this->id_formulaire,
-					$id_formulaires_reponse,
-					$nom,
-					$value,
-					data_sort_value($value, $champ, 'champ'),
-					null,
-					true,
-					'champ'
-				);
+		// Derniers cells : la réponse de l'internaute
+		foreach ($this->saisies_finales as $saisie) {
+			if ($saisie['saisie'] == 'explication') {
+				continue;
 			}
-			// Vérifier si cela passe le filtres:
-			if ($this->checkFilter($row_ts)) {
-				$this->rows[] = $row_ts;
-			}
+			$nom = $saisie['options']['nom'];
+			$value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'valeur_uniquement');
+			$row_value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'brut');
+			$row_ts[] = new cell(
+				[
+					'id_formulaire' => $this->id_formulaire,
+					'id_formulaires_reponse' => $id_formulaires_reponse,
+					'nom' => $nom,
+					'value' => $value,
+					'sort_value' => sort_value($value, $champ, 'champ'),
+					'filter_value' => null,
+					'crayons' => true,
+					'type' => 'champ'
+				]
+			);
+		}
+		// Vérifier si cela passe le filtres:
+		if ($this->checkFilter($row_ts)) {
+			$this->rows[] = $row_ts;
+		}
 		}
 		$this->sortRows();
 	}
@@ -243,7 +250,7 @@ continue;
 
 	/**
 	 * Tri les lignes selon les paramètres passée en option
-	**/
+	 **/
 	private function sortRows() {
 		usort($this->rows, function ($a, $b) {
 			// Trouver les cellules sur lesquelles trier
@@ -265,7 +272,7 @@ continue;
 	/**
 	 * Retourne le json final
 	 * @return string
-	**/
+	 **/
 	public function getJson() {
 		$json = array(
 			'filteredRows' => \count($this->rows),
@@ -293,7 +300,7 @@ continue;
  * @var str $sort_value valeur de la cellule, pour le tri
  * @var bool $crayons est-ce crayonnable?
  * @var string $type natif|extra|champ
-**/
+ **/
 class cell implements \JsonSerializable{
 	private $id_formulaire;
 	private $id_formulaires_reponse;
@@ -304,15 +311,15 @@ class cell implements \JsonSerializable{
 	private $crayons;
 	private $type;
 
-	public function __construct($id_formulaire, $id_formulaires_reponse, $nom, $value, $sort_value, $filter_value, $crayons, $type) {
-		$this->id_formulaire = $id_formulaire;
-		$this->id_formulaires_reponse = $id_formulaires_reponse;
-		$this->nom = $nom;
-		$this->value = $value;
-		$this->sort_value = $sort_value ?? \textebrut($value);
-		$this->filter_value = $filter_value ?? \textebrut($value);
-		$this->crayons= $crayons;
-		$this->type = $type;
+	public function __construct($param = array()) {
+		$this->id_formulaire = $param['id_formulaire'] ?? false;
+		$this->id_formulaires_reponse = $param['id_formulaires_reponse'] ?? false;
+		$this->nom = $param['nom'];
+		$this->value = $param['value'];
+		$this->sort_value = $param['sort_value'] ?? \textebrut($this->value);
+		$this->filter_value = $param['filter_value'] ?? \textebrut($this->value);
+		$this->crayons= $param['crayons'] ?? false;
+		$this->type = $param['type'] ?? 'champ';
 	}
 
 	/**
@@ -358,7 +365,7 @@ function formidable_ts_json($env) {
  * @param string $type='champ' ou bien 'extra'
  * @return string valeur du data-sort-attribut
  **/
-function data_sort_value($valeur, $saisie, $type = 'champ') {
+function sort_value($valeur, $saisie, $type = 'champ') {
 	if ($saisie['saisie'] === 'evenements' and $valeur) {
 		$data = \sql_getfetsel('date_debut', 'spip_evenements', 'id_evenement='.$flux['args']['valeur']);
 	}
