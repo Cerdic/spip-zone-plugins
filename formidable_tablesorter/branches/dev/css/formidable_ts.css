@@ -24,7 +24,7 @@
 .formidable_ts-wrapper  .tablesorter th {
   overflow: hidden;
   text-overflow: ellipsis;
-  min-width: 10px;
+  min-width: 2em;
 }
 .tablesorter .fieldset_label {
 	font-size:0.8em;
