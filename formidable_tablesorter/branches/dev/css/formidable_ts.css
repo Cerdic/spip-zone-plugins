@@ -74,6 +74,12 @@
 .tablesorter-sticky-wrapper caption {
 	margin: 0;
 }
+.tablesorter .pager {
+	font-weight:normal;
+}
+.tablesorter input {
+	font-size:100%;
+}
 
 .filtered {
 	display:none;

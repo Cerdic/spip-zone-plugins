@@ -22,14 +22,14 @@ class table {
 	private $saisies_finales;
 	private $cextras;
 	private $statut;
-
+	private $totalRows;
 	/**
 	 * @param array $env
 	 * L'env du squelette
 	**/
 	public function __construct($env) {
 		$this->id_formulaire = sql_quote($env['id_formulaire'] ?? null);
-
+		$this->totalRows=0;
 		// Transformer les filtres en pseudo afficher_si
 		$this->filter = $env['filter'] ?? array();
 		if (!$this->filter) {// Peut être ''
@@ -117,6 +117,7 @@ continue;
 		while ($row_reponse = \sql_fetch($res_reponse)) {
 			$id_formulaires_reponse = $row_reponse['id_formulaires_reponse'];
 			$row_ts = [];
+			$this->totalRows++;
 			// Cell 0 : statut
 			$value = \liens_absolus(\appliquer_filtre($row_reponse['statut'], 'puce_statut', 'formulaires_reponse', $row_reponse['id_formulaires_reponse'], true));
 			$row_ts[] = new cell(
@@ -259,7 +260,12 @@ continue;
 	 * @return string
 	**/
 	public function getJson() {
-		$json = [\count($this->rows),$this->rows, $this->headers];
+		$json = array(
+			'filteredRows' => \count($this->rows),
+			'rows' => $this->rows,
+			'headers' => $this->headers,
+			'total' => $this->totalRows,
+		);
 		return \json_encode($json);
 	}
 	/**

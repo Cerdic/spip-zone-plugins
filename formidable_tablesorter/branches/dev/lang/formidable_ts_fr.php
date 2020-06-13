@@ -38,7 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_lignes' => 'Nombre de lignes affichées :',
 
 	//
-	'data_pager_output_filtered' => '{startRow:input} &ndash; {endRow} / sur {filteredRows} réponses ({totalRows} sans les filtres)',
+	'data_pager_output_filtered' => 'De {startRow:input} à {endRow} sur {filteredRows} réponses ({totalRows} sans les filtres)',
+	'data_pager_output' => 'De {startRow:input} à {endRow} sur {filteredRows} réponses',
 	// R
 	'resetfilter' => 'Réinitialiser les filtres',
 	'resetall' => 'Réinitialiser tous les paramètres',
