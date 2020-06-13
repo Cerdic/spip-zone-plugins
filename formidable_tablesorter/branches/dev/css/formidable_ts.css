@@ -62,8 +62,6 @@
 .tablesorter .move-arrows {
 	display: flex;
 	justify-content: space-between;
-	margin-left:0.5em;
-	margin-right:0.5em;
 }
 .tablesorter .move-arrows.first{
 	justify-content:end;
