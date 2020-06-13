@@ -1099,7 +1099,31 @@ EOB;
 		</tr>
 EOB;
 		
-		echo graphics_avail() ? '<tr>' . "<td class=td-0><img alt='' $size src='{$IMG_BASE}&IMG=1&$time'></td>" . "<td class=td-1><img alt='' $size src='{$IMG_BASE}&IMG=2&$time'></td></tr>\n" : "", '<tr>', '<td class=td-0><span class="green box">&nbsp;</span>Free: ', bsize($mem_avail) . sprintf(" (%.1f%%)", $mem_avail * 100 / $mem_size), "</td>\n", '<td class=td-1><span class="green box">&nbsp;</span>Hits: ', $cache['num_hits'] . @sprintf(" (%.1f%%)", $cache['num_hits'] * 100 / ($cache['num_hits'] + $cache['num_misses'])), "</td>\n", '</tr>', '<tr>', '<td class=td-0><span class="red box">&nbsp;</span>Used: ', bsize($mem_used) . sprintf(" (%.1f%%)", $mem_used * 100 / $mem_size), "</td>\n", '<td class=td-1><span class="red box">&nbsp;</span>Misses: ', $cache['num_misses'] . @sprintf(" (%.1f%%)", $cache['num_misses'] * 100 / ($cache['num_hits'] + $cache['num_misses'])), "</td>\n";
+		$n = $cache['num_hits'] + $cache['num_misses'];
+		echo graphics_avail() ?
+			'<tr>'
+			. "<td class=td-0><img alt='' $size src='{$IMG_BASE}&IMG=1&$time'></td>"
+			. "<td class=td-1><img alt='' $size src='{$IMG_BASE}&IMG=2&$time'></td>
+			  </tr>\n"
+			: "",
+
+		'<tr>',
+		'<td class=td-0><span class="green box">&nbsp;</span>Free: ',
+			bsize($mem_avail) . ($mem_size ? sprintf(" (%.1f%%)", $mem_avail * 100 / $mem_size) : ''),
+		"</td>\n",
+		'<td class=td-1><span class="green box">&nbsp;</span>
+					Hits: ', $cache['num_hits'] . ($n ? sprintf(" (%.1f%%)", $cache['num_hits']*100/$n) : ''),
+		"</td>\n",
+		'</tr>',
+		'<tr>',
+		'<td class=td-0><span class="red box">&nbsp;</span>
+					Used: ', bsize($mem_used) . ($mem_size ? sprintf(" (%.1f%%)", $mem_used * 100 / $mem_size) : ''),
+		"</td>\n",
+		'<td class=td-1><span class="red box">&nbsp;</span>
+					Misses: ', $cache['num_misses'] . ($n ? sprintf(" (%.1f%%)", $cache['num_misses']*100/$n):''),
+		"</td>\n
+			</tr>";
+    
 		echo <<< EOB
 		</tr>
 		</tbody></table>
