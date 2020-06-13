@@ -151,6 +151,7 @@ function formidable_ts_restart() {
 		'columnSelector',
 		'columnSelector-auto',
 		'filters',
+		'pager',
 		'resizable',
 		'savesort',
 		'table-original-css-width',
