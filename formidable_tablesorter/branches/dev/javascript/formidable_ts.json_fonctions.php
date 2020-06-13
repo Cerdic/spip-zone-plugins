@@ -43,7 +43,10 @@ class table {
 		},
 			$this->filter
 		);
-		$this->sort = $env['sort'] ?? array();
+		$this->sort = $env['sort'];
+		if (!$this->sort){
+			$this->sort = array();
+		}
 		$env['statut'] = $env['statut'] ?? null;
 		$this->statut = \sql_quote($env['statut'] ? $env['statut'] : '.*');
 		$saisies = \unserialize(sql_getfetsel('saisies', 'spip_formulaires', "id_formulaire=$this->id_formulaire"));
