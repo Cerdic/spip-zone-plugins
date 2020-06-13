@@ -13,6 +13,8 @@ include_spip('saisies/afficher_si_php');
  * et retourne un tableau json si besoin
 */
 class table {
+	private $size;
+	private $page;
 	private $id_formulaire;
 	private $filter;
 	private $sort;
@@ -62,6 +64,8 @@ class table {
 		}
 		$this->rows = array();
 		$this->headers = array();
+		$this->page = $env['page_ts'];
+		$this->size = $env['size'];
 	}
 
 	/**
@@ -265,7 +269,7 @@ continue;
 	public function getJson() {
 		$json = array(
 			'filteredRows' => \count($this->rows),
-			'rows' => $this->rows,
+			'rows' => array_slice($this->rows, $this->page*$this->size, $this->size),
 			'headers' => $this->headers,
 			'total' => $this->totalRows,
 		);
