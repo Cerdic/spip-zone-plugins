@@ -18,7 +18,7 @@
 	<necessite nom="formidable" compatibilite="[4.3.0;[" />
 	<necessite nom="spout" compatibilite="[1.2.2;[" />
 	<necessite nom="tablesorter" compatibilite="[2.1.0;[" />
-	<necessite nom="saisies" compatibilite="[3.29.0;[" />
+	<necessite nom="saisies" compatibilite="[3.41.0;[" />
 	<necessite nom="crayons" compatibilite="[2.0.9;[" />
 	<utilise nom="prive_fluide" compatibilite="[1.2.3;[" />
 	<utilise nom="cextras" compatibilite="[3.12.6;[" />
