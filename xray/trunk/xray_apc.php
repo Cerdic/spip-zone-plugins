@@ -399,7 +399,7 @@ $self_pour_lien =
 	"http" . (!empty($_SERVER['HTTPS']) ? "s" : "") . "://" 
 	. $_SERVER['SERVER_NAME']
 	// parametre_url fait un urlencode bienvenu pour les regexp qui peuvent contenir des ?
-	. parametre_url($_SERVER['REQUEST_URI'], 'SEARCH', @$_REQUEST['SEARCH']);
+	. parametre_url($_SERVER['REQUEST_URI'], 'SEARCH', $_REQUEST['SEARCH'] ?? '');
 
 global $IMG_BASE;
 $IMG_BASE = "$PHP_SELF" . "?exec=" . $MYREQUEST['exec'];
