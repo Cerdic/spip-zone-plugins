@@ -81,11 +81,32 @@ class table {
 	**/
 	public function setHeaders() {
 		$headers = &$this->headers;
-		$headers[] = '#';
-		$headers[] = _T('info_numero_abbreviation');
-		$headers[] = _T('formidable:date_envoi');
+		$headers[] = new header([
+			'table' => $this,
+			'type' => 'natif',
+			'nom' => 'statut',
+			'value' => '#'
+		]);
+		$headers[] = new header([
+			'table' => $this,
+			'type' => 'natif',
+			'nom' => 'id_formulaires_reponse',
+			'value' => _T('info_numero_abbreviation')
+		]);
+		$headers[] = new header ([
+			'table' => $this,
+			'type' => 'natif',
+			'nom' => 'date_envoi',
+			'value' => _T('formidable:date_envoi')
+		]);
 		foreach ($this->cextras as $extra) {
-			$headers[] = $extra['options']['label'] ?? $extra['options']['label_case'] ?? $extra['options']['nom'];
+			$label = $extra['options']['label'] ?? $extra['options']['label_case'] ?? $extra['options']['nom'];
+			$headers[] = new header ([
+				'table' => $this,
+				'type' => 'extra',
+				'nom' => $extra['options']['nom'],
+				'value' => $label
+			]);
 		}
 		foreach ($this->saisies_finales as $saisie) {
 			if ($saisie['saisie'] == 'explication') {
@@ -102,7 +123,12 @@ continue;
 			if ($fieldset) {
 				$label .= " <span class='fieldset_label'>($fieldset)</span>";
 			}
-			$headers[] = $label;
+			$headers[] = new header ([
+				'table' => $this,
+				'type' => 'champ',
+				'nom' => $saisie['options']['nom'],
+				'value' => $label
+			]);
 		}
 	}
 	/**
@@ -350,6 +376,22 @@ class cell implements \JsonSerializable{
 	**/
 	public function __get($prop) {
 		return $this->$prop;
+	}
+}
+
+/**
+ * Classe implémentant un entete
+ * C'est comme une cellule, mais ca donne en plus les flèches de déplacement + des datas attributs sur le nom
+ **/
+class header extends cell {
+
+	/**
+	 * Returne la valeur string, avec le span englobant, pour les crayons
+	**/
+	public function jsonSerialize() {
+		$arrows = '<div class="move-arrows"><a class="left">&#x2B05;</a> <a class="right">&#x27A1;</a></div>';
+		$data_col = "$this->type-$this->nom";
+		return "$arrows\n\r<div data-col='$data_col'>$this->value</div>";
 	}
 }
 /**
