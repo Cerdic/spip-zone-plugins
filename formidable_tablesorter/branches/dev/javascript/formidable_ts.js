@@ -57,7 +57,11 @@ $(function() {
       },
 			resizable_addLastColumn: true
 		}
-	})
+	}).bind('pagerComplete', function(event, options) {
+		formidable_ts_setColumnSelector();
+	});
+
+	;
   $('.print').click(function() {
     formidable_ts.trigger('printTable');
   });
@@ -98,6 +102,20 @@ $(function() {
 	}
 	);
 });
+
+/**
+ * Après chargement des entetes en ajax, remplir correctement le column selector
+**/
+function formidable_ts_setColumnSelector() {
+	labels = $('#columnSelector label:not(#columnSelectorCheckAll) span');
+	title = $('.header-title', formidable_ts);
+	i = 0;
+	title.each(function() {
+		text = $(this).text();
+		labels.eq(i).text(text);
+		i++;
+	});
+}
 
 function formidable_ts_add_check_all_button() {
 	$('#columnSelector').prepend('<label id="columnSelectorCheckAll"><input type="checkbox" checked="checked" class="checked"><span>'+uncheckAll+'</span></label>');
