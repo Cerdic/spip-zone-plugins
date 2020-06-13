@@ -16,7 +16,7 @@ class table {
 	private $id_formulaire;
 	private $filter;
 	private $sort;
-	private $raws;
+	private $rows;
 	private $headers;
 	private $saisies;
 	private $saisies_finales;
@@ -57,15 +57,15 @@ class table {
 		if (!$this->cextras) {
 			$this->cextras = array();
 		}
-		$this->raws = array();
+		$this->rows = array();
 		$this->headers = array();
 	}
 
 	/**
-	 * Peupler headers et raws
+	 * Peupler headers et rows
 	**/
 	public function setData() {
-		$this->setRaws();
+		$this->setRows();
 		$this->setHeaders();
 	}
 
@@ -101,7 +101,7 @@ continue;
 	/**
 	 * Peupler les lignes à partir de la base SQL
 	**/
-	private function setRaws() {
+	private function setRows() {
 		$saisies = &$this->saisies;
 		$res_reponse = \sql_select('*',
 			'spip_formulaires_reponses',
@@ -114,41 +114,41 @@ continue;
 		);
 
 
-		while ($raw_reponse = \sql_fetch($res_reponse)) {
-			$id_formulaires_reponse = $raw_reponse['id_formulaires_reponse'];
-			$raw_ts = [];
+		while ($row_reponse = \sql_fetch($res_reponse)) {
+			$id_formulaires_reponse = $row_reponse['id_formulaires_reponse'];
+			$row_ts = [];
 			// Cell 0 : statut
-			$value = \liens_absolus(\appliquer_filtre($raw_reponse['statut'], 'puce_statut', 'formulaires_reponse', $raw_reponse['id_formulaires_reponse'], true));
-			$raw_ts[] = new cell(
+			$value = \liens_absolus(\appliquer_filtre($row_reponse['statut'], 'puce_statut', 'formulaires_reponse', $row_reponse['id_formulaires_reponse'], true));
+			$row_ts[] = new cell(
 				$this->id_formulaire,
 				$id_formulaires_reponse,
 				'statut',
 				$value,
-				$raw_reponse['statut'],
-				$raw_reponse['statut'],
+				$row_reponse['statut'],
+				$row_reponse['statut'],
 				false,
 				'natif');
 
 			// Cell 1 : id
-			$value = '<a href="'.\generer_url_ecrire('formulaires_reponse', 'id_formulaires_reponse='.$raw_reponse['id_formulaires_reponse']).'">'.$raw_reponse['id_formulaires_reponse'].'</a>';
-			$raw_ts[] = new cell(
+			$value = '<a href="'.\generer_url_ecrire('formulaires_reponse', 'id_formulaires_reponse='.$row_reponse['id_formulaires_reponse']).'">'.$row_reponse['id_formulaires_reponse'].'</a>';
+			$row_ts[] = new cell(
 				$this->id_formulaire,
 				$id_formulaires_reponse,
 				'id_formulaires_reponse',
 				$value,
-				$raw_reponse['id_formulaires_reponse'],
-				$raw_reponse['id_formulaires_reponse'],
+				$row_reponse['id_formulaires_reponse'],
+				$row_reponse['id_formulaires_reponse'],
 				false,
 				'natif');
 
 			// Cell 2 : date
-			$value = \affdate_heure($raw_reponse['date_envoi']);
-			$raw_ts[] = new cell(
+			$value = \affdate_heure($row_reponse['date_envoi']);
+			$row_ts[] = new cell(
 				$this->id_formulaire,
 				$id_formulaires_reponse,
 				'date_envoi',
 				$value,
-				$raw_reponse['date_envoi'],
+				$row_reponse['date_envoi'],
 				$value,
 				false,
 				'natif');
@@ -170,11 +170,11 @@ continue;
 				}
 
 				if (isset($champ['options']['traitements'])) {
-					$value = \appliquer_traitement_champ($raw_reponse[$nom], $nom, 'formulaires_reponse');
+					$value = \appliquer_traitement_champ($row_reponse[$nom], $nom, 'formulaires_reponse');
 				} else {
-					$value = implode(\calculer_balise_LISTER_VALEURS('formulaires_reponses', $nom, $raw_reponse[$nom]), ', ');
+					$value = implode(\calculer_balise_LISTER_VALEURS('formulaires_reponses', $nom, $row_reponse[$nom]), ', ');
 				}
-				$raw_ts[] = new cell(
+				$row_ts[] = new cell(
 					$this->id_formulaire,
 					$id_formulaires_reponse,
 					$nom,
@@ -193,8 +193,8 @@ continue;
 				}
 				$nom = $saisie['options']['nom'];
 				$value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'valeur_uniquement');
-				$raw_value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'brut');
-				$raw_ts[] = new cell(
+				$row_value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'brut');
+				$row_ts[] = new cell(
 					$this->id_formulaire,
 					$id_formulaires_reponse,
 					$nom,
@@ -206,25 +206,25 @@ continue;
 				);
 			}
 			// Vérifier si cela passe le filtres:
-			if ($this->checkFilter($raw_ts)) {
-				$this->raws[] = $raw_ts;
+			if ($this->checkFilter($row_ts)) {
+				$this->rows[] = $row_ts;
 			}
 		}
-		$this->sortRaws();
+		$this->sortRows();
 	}
 
 	/**
 	 * Vérifier si une ligne passe les tests de filtre
-	 * @param array $raw
+	 * @param array $row
 	 * @return bool
 	 **/
-	private function checkFilter($raw) {
+	private function checkFilter($row) {
 		foreach ($this->filter as $col=>$filter) {
 			$result = saisies_evaluer_afficher_si(
 				$filter,
 				array(),
 				array(),
-				$raw[$col]->filter_value
+				$row[$col]->filter_value
 			);
 			if ($result == false) {
 				return false;
@@ -236,8 +236,8 @@ continue;
 	/**
 	 * Tri les lignes selon les paramètres passée en option
 	**/
-	private function sortRaws() {
-		usort($this->raws, function ($a, $b) {
+	private function sortRows() {
+		usort($this->rows, function ($a, $b) {
 			// Trouver les cellules sur lesquelles trier
 			foreach ($this->sort as $column => $sort) {
 				$sort = intval($sort);
@@ -259,7 +259,7 @@ continue;
 	 * @return string
 	**/
 	public function getJson() {
-		$json = [\count($this->raws),$this->raws, $this->headers];
+		$json = [\count($this->rows),$this->rows, $this->headers];
 		return \json_encode($json);
 	}
 	/**
