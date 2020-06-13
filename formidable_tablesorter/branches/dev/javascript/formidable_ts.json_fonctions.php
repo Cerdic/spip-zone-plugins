@@ -20,11 +20,13 @@ class table {
 	private $sort;
 	private $rows;
 	private $headers;
-	private $saisies;
-	private $saisies_finales;
+	private $champs;
+	private $champs_finaux;
 	private $cextras;
+	private $cextras_finaux;
 	private $statut;
 	private $totalRows;
+	private $columns;
 	/**
 	 * @param array $env
 	 * L'env du squelette
@@ -51,13 +53,13 @@ class table {
 		}
 		$env['statut'] = $env['statut'] ?? null;
 		$this->statut = \sql_quote($env['statut'] ? $env['statut'] : '.*');
-		$saisies = \unserialize(sql_getfetsel('saisies', 'spip_formulaires', "id_formulaire=$this->id_formulaire"));
-		$saisies = \saisies_identifier($saisies);// Au cas où
-		$this->saisies = $saisies;
-		$this->saisies_finales  = \saisies_lister_finales($saisies);
+		$champs = \unserialize(sql_getfetsel('saisies', 'spip_formulaires', "id_formulaire=$this->id_formulaire"));
+		$this->champs = $champs;
+		$this->champs_finaux  = \saisies_lister_finales($this->champs);
 		if (\test_plugin_actif('cextras')) {
 			include_spip('cextras_pipelines');
 			$this->cextras = \champs_extras_objet('spip_formulaires_reponses');
+			$this->cextras_finaux = \saisies_lister_finales($this->cextras);
 		}
 		if (!$this->cextras) {
 			$this->cextras = array();
@@ -66,6 +68,34 @@ class table {
 		$this->headers = array();
 		$this->page = $env['page_ts'];
 		$this->size = $env['size'];
+		$this->setColumns($env['order'] ?? array());
+	}
+
+	/**
+	 * Définir les colonnes et leur ordre
+	 * @param array $order ordre des colonnes envoyé;
+	 * @return array
+	 **/
+	function setColumns($order = array()) {
+		$columns = array();
+		$columns[] = 'natif-statut';
+		$columns[] = 'natif-id_formulaires_reponse';
+		$columns[] = 'natif-date_envoi';
+		foreach ($this->cextras_finaux as $extra) {
+			if ($extra['saisie'] == 'explication') {
+continue;
+			}
+			$columns[] =  'extra-'.$extra['options']['nom'];
+		}
+		foreach ($this->champs_finaux as $champ) {
+			if ($champ['saisie'] == 'explication') {
+continue;
+			}
+			$columns[] = 'champ-'.$champ['options']['nom'];
+		}
+		// Ajouter les nouvelles colonnes à la fin
+		$diff = array_diff($columns, $order);
+		$this->columns = array_merge($order, $diff);
 	}
 
 	/**
@@ -81,61 +111,63 @@ class table {
 	**/
 	public function setHeaders() {
 		$headers = &$this->headers;
-		$headers[] = new header([
-			'table' => $this,
-			'type' => 'natif',
-			'nom' => 'statut',
-			'value' => '#'
-		]);
-		$headers[] = new header([
-			'table' => $this,
-			'type' => 'natif',
-			'nom' => 'id_formulaires_reponse',
-			'value' => _T('info_numero_abbreviation')
-		]);
-		$headers[] = new header ([
-			'table' => $this,
-			'type' => 'natif',
-			'nom' => 'date_envoi',
-			'value' => _T('formidable:date_envoi')
-		]);
-		foreach ($this->cextras as $extra) {
-			$label = $extra['options']['label'] ?? $extra['options']['label_case'] ?? $extra['options']['nom'];
-			$headers[] = new header ([
-				'table' => $this,
-				'type' => 'extra',
-				'nom' => $extra['options']['nom'],
-				'value' => $label
-			]);
-		}
-		foreach ($this->saisies_finales as $saisie) {
-			if ($saisie['saisie'] == 'explication') {
-continue;
-			}
-			$chemin = \saisies_chercher($this->saisies, $saisie['identifiant'], true);
-			if (count($chemin) > 1) {
-				$fieldset = $this->saisies[$chemin[0]];
-				$fieldset = $fieldset['options']['label'];
+		foreach ($this->columns as $column) {
+			list($type, $nom) = explode('-', $column);
+			if ($type === 'natif') {
+				if ($nom === 'statut') {
+					$headers[] = new header([
+						'table' => $this,
+						'type' => 'natif',
+						'nom' => 'statut',
+						'value' => '#'
+					]);
+				} elseif ($nom === 'id_formulaires_reponse') {
+					$headers[] = new header([
+						'table' => $this,
+						'type' => 'natif',
+						'nom' => 'id_formulaires_reponse',
+						'value' => _T('info_numero_abbreviation')
+					]);
+				} elseif ($nom === 'date_envoi') {
+					$headers[] = new header ([
+						'table' => $this,
+						'type' => 'natif',
+						'nom' => 'date_envoi',
+						'value' => _T('formidable:date_envoi')
+					]);
+				}
 			} else {
-				$fieldset = '';
+				if ($type === 'extra') {
+					$saisies = $this->cextras;
+				} else {
+					$saisies = $this->champs;
+				}
+				$saisie = \saisies_chercher($saisies, $nom);
+				$chemin = \saisies_chercher($saisies, $nom, true);
+				if (count($chemin) > 1) {
+					$fieldset = $this->saisies[$chemin[0]];
+					$fieldset = $fieldset['options']['label'];
+				} else {
+					$fieldset = '';
+				}
+				$label =  $saisie['options']['label'] ?? $saisie['options']['label_case'] ?? $saisie['options']['nom'];
+				if ($fieldset) {
+					$label .= " <span class='fieldset_label'>($fieldset)</span>";
+				}
+				$headers[] = new header ([
+					'table' => $this,
+					'type' => $type,
+					'nom' => $saisie['options']['nom'],
+					'value' => $label
+				]);
 			}
-			$label =  $saisie['options']['label'] ?? $saisie['options']['label_case'] ?? $saisie['options']['nom'];
-			if ($fieldset) {
-				$label .= " <span class='fieldset_label'>($fieldset)</span>";
-			}
-			$headers[] = new header ([
-				'table' => $this,
-				'type' => 'champ',
-				'nom' => $saisie['options']['nom'],
-				'value' => $label
-			]);
 		}
 	}
+
 	/**
 	 * Peupler les lignes à partir de la base SQL
 	**/
 	private function setRows() {
-		$saisies = &$this->saisies;
 		$res_reponse = \sql_select('*',
 			'spip_formulaires_reponses',
 			array(
@@ -151,105 +183,101 @@ continue;
 			$id_formulaires_reponse = $row_reponse['id_formulaires_reponse'];
 			$row_ts = [];
 			$this->totalRows++;
-			// Cell 0 : statut
-			$value = \liens_absolus(\appliquer_filtre($row_reponse['statut'], 'puce_statut', 'formulaires_reponse', $row_reponse['id_formulaires_reponse'], true));
-			$row_ts[] = new cell([
-				'table' => $this,
-				'id_formulaires_reponse' => $id_formulaires_reponse,
-				'nom' => 'statut',
-				'value' => $value,
-				'sort_value' => $row_reponse['statut'],
-				'filter_value' => $row_reponse['statut'],
-				'crayons' => false,
-				'type' => 'natif'
-			]);
-
-			// Cell 1 : id
-			$value = '<a href="'.\generer_url_ecrire('formulaires_reponse', 'id_formulaires_reponse='.$row_reponse['id_formulaires_reponse']).'">'.$row_reponse['id_formulaires_reponse'].'</a>';
-			$row_ts[] = new cell([
-				'table' => $this,
-				'id_formulaires_reponse' => $id_formulaires_reponse,
-				'nom' => 'id_formulaires_reponse',
-				'value' => $value,
-				'sort_value' => $row_reponse['id_formulaires_reponse'],
-				'filter_value' => $row_reponse['id_formulaires_reponse'],
-				'crayons' => false,
-				'type' => 'natif'
-			]);
-
-			// Cell 2 : date
-			$value = \affdate_heure($row_reponse['date_envoi']);
-			$row_ts[] = new cell([
-				'table' => $this,
-				'id_formulaires_reponse' => $id_formulaires_reponse,
-				'nom' => 'date_envoi',
-				'value' => $value,
-				'sort_value' => \strtotime($row_reponse['date_envoi']),
-				'filter_value'  => $value,
-				'crayons' => false,
-				'type' =>'natif'
-			]);
-
-			// Cells suivantes : champs extras
-			foreach ($this->cextras as $champ) {
-				$crayons = $false;
-				$nom = $champ['options']['nom'];
-				if (test_plugin_actif('crayons')) {
-					$opt = array(
-						'saisie' => $champ,
-						'type' => 'formulaires_reponse',
-						'champ' => $nom,
-						'table' => table_objet_sql('formulaires_reponse'),
-			);
-					if (autoriser('modifierextra', 'formulaires_reponse', $id_formulaires_reponse, '', $opt)) {
-						$crayons = true;
-		}
-		}
-
-		if (isset($champ['options']['traitements'])) {
-			$value = \appliquer_traitement_champ($row_reponse[$nom], $nom, 'formulaires_reponse');
-		} else {
-			$value = implode(\calculer_balise_LISTER_VALEURS('formulaires_reponses', $nom, $row_reponse[$nom]), ', ');
-		}
-		$row_ts[] = new cell(
-			[
-				'table' => $this,
-				'id_formulaires_reponse' => $id_formulaires_reponse,
-				'nom' => $nom,
-				'value' => $value,
-				'sort_value' => sort_value($value, $champ, 'extra'),
-				'filter_value' => null,
-				'crayons' => $crayons,
-				'type' => 'extra'
-			]
-			);
-		}
-
-		// Derniers cells : la réponse de l'internaute
-		foreach ($this->saisies_finales as $saisie) {
-			if ($saisie['saisie'] == 'explication') {
-				continue;
+			foreach ($this->columns as $column) {
+				list($type, $nom) = explode('-', $column);
+				if ($type === 'natif') {
+					if ($nom === 'statut') {
+						$value = \liens_absolus(\appliquer_filtre($row_reponse['statut'], 'puce_statut', 'formulaires_reponse', $row_reponse['id_formulaires_reponse'], true));
+						$row_ts[] = new cell([
+							'table' => $this,
+							'id_formulaires_reponse' => $id_formulaires_reponse,
+							'nom' => 'statut',
+							'value' => $value,
+							'sort_value' => $row_reponse['statut'],
+							'filter_value' => $row_reponse['statut'],
+							'crayons' => false,
+							'type' => 'natif'
+						]);
+					} elseif ($nom === 'id_formulaires_reponse') {
+						$value = '<a href="'.\generer_url_ecrire('formulaires_reponse', 'id_formulaires_reponse='.$row_reponse['id_formulaires_reponse']).'">'.$row_reponse['id_formulaires_reponse'].'</a>';
+						$row_ts[] = new cell([
+							'table' => $this,
+							'id_formulaires_reponse' => $id_formulaires_reponse,
+							'nom' => 'id_formulaires_reponse',
+							'value' => $value,
+							'sort_value' => $row_reponse['id_formulaires_reponse'],
+							'filter_value' => $row_reponse['id_formulaires_reponse'],
+							'crayons' => false,
+							'type' => 'natif'
+						]);
+					} elseif ($nom === 'date_envoi') {
+						$value = \affdate_heure($row_reponse['date_envoi']);
+						$row_ts[] = new cell([
+							'table' => $this,
+							'id_formulaires_reponse' => $id_formulaires_reponse,
+							'nom' => 'date_envoi',
+							'value' => $value,
+							'sort_value' => \strtotime($row_reponse['date_envoi']),
+							'filter_value'  => $value,
+							'crayons' => false,
+							'type' =>'natif'
+						]);
+					}
+				} else {
+					if ($type === 'extra') {
+						$champ = \saisies_chercher($this->cextras, $nom);
+						$crayons = $false;
+						$nom = $champ['options']['nom'];
+						if (test_plugin_actif('crayons')) {
+							$opt = array(
+								'saisie' => $champ,
+								'type' => 'formulaires_reponse',
+								'champ' => $nom,
+								'table' => table_objet_sql('formulaires_reponse'),
+							);
+							if (autoriser('modifierextra', 'formulaires_reponse', $id_formulaires_reponse, '', $opt)) {
+								$crayons = true;
+							}
+						}
+						if (isset($champ['options']['traitements'])) {
+							$value = \appliquer_traitement_champ($row_reponse[$nom], $nom, 'formulaires_reponse');
+						} else {
+							$value = implode(\calculer_balise_LISTER_VALEURS('formulaires_reponses', $nom, $row_reponse[$nom]), ', ');
+						}
+						$row_ts[] = new cell(
+							[
+								'table' => $this,
+								'id_formulaires_reponse' => $id_formulaires_reponse,
+								'nom' => $nom,
+								'value' => $value,
+								'sort_value' => sort_value($value, $champ, 'extra'),
+								'filter_value' => null,
+								'crayons' => $crayons,
+								'type' => 'extra'
+							]
+						);
+					} else { // Réponse de l'internaute
+						$value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'valeur_uniquement');
+						$row_value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'brut');
+						$row_ts[] = new cell(
+							[
+								'table' => $this,
+								'id_formulaires_reponse' => $id_formulaires_reponse,
+								'nom' => $nom,
+								'value' => $value,
+								'sort_value' => sort_value($value, $champ, 'champ'),
+								'filter_value' => null,
+								'crayons' => true,
+								'type' => 'champ'
+							]
+						);
+					}
+				}
 			}
-			$nom = $saisie['options']['nom'];
-			$value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'valeur_uniquement');
-			$row_value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'brut');
-			$row_ts[] = new cell(
-				[
-					'table' => $this,
-					'id_formulaires_reponse' => $id_formulaires_reponse,
-					'nom' => $nom,
-					'value' => $value,
-					'sort_value' => sort_value($value, $champ, 'champ'),
-					'filter_value' => null,
-					'crayons' => true,
-					'type' => 'champ'
-				]
-			);
-		}
-		// Vérifier si cela passe le filtres:
-		if ($this->checkFilter($row_ts)) {
-			$this->rows[] = $row_ts;
-		}
+			// Vérifier si cela passe le filtres:
+			if ($this->checkFilter($row_ts)) {
+				$this->rows[] = $row_ts;
+			}
 		}
 		$this->sortRows();
 	}
