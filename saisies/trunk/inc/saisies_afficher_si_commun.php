@@ -12,22 +12,39 @@
  * Reçoit une condition
  * la parse pour trouver champs/opérateurs/valeurs etc.
  * @param string $condition
+ * @param null|string $no_arobase, permet de ne pas parser le arobase
  * @return array tableau d'analyse (resultat d'un preg_match_all) montrant sous condition par sous condition l'analyse en champ/opérateur/valeur etc.
 **/
-function saisies_parser_condition_afficher_si($condition) {
+function saisies_parser_condition_afficher_si($condition, $no_arobase=null) {
+	static $cache = array(
+		'no_arobase' => array(),
+		'arobase' => array()
+	);
+	if ($no_arobase !== null) {
+		$cache_ici = &$cache['no_arobase'];
+		$no_arobase = '?';
+	} else {
+		$no_arobase = '';
+		$cache_ici = &$cache['arobase'];
+	}
+	if (isset($cache_ici[$condition])) {
+		return $cache_ici[$condition];
+	}
 	$regexp =
 	  '(?<negation>!?)' // négation éventuelle
-		. '(?:@(?<champ>.+?)@)' // @champ_@
+		. "((?:(?<arobase>@)(?<champ>.+?)(\k<arobase>)))$no_arobase" // @champ_@, optionnel (formidable_ts)
 		. '(?<total>:TOTAL)?' // TOTAL éventuel (pour les champs de type case à cocher)
 		. '(' // partie operateur + valeur (optionnelle) : debut
 		. '(?:\s*?)' // espaces éventuels après
-		. '(?<operateur>==|!=|IN|!IN|>=|>|<=|<)' // opérateur
+		. '(?<operateur>==|!=|IN|!IN|>=|>|<=|<|MATCH|!MATCH)' // opérateur
 		. '(?:\s*?)' // espaces éventuels après
 		. '((?<guillemet>"|\')(?<valeur>.*?)(\k<guillemet>)|(?<valeur_numerique>\d+))' // valeur (string) ou valeur_numérique (int)
 		. ')?' // partie operateur + valeur (optionnelle) : fin
 		. '|(?<booleen>false|true)';//accepter false/true brut
 	$regexp = "#$regexp#";
+
 	preg_match_all($regexp, $condition, $tests, PREG_SET_ORDER);
+	$cache_ici[$condition] = $tests;
 	return $tests;
 }
 
@@ -122,6 +139,10 @@ function saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur
 		return $champ > $valeur;
 	} elseif ($operateur == '>=') {
 		return $champ >= $valeur;
+	} elseif ($operateur == 'MATCH') {
+		return preg_match($valeur, $champ);
+	} elseif ($operateur == '!MATCH') {
+		return !preg_match($valeur, $champ);
 	} else {//Si mauvaise operateur -> on annule
 		return false;
 	}
@@ -180,7 +201,7 @@ function saisies_afficher_si_secure($condition, $tests=array()) {
 	}
 	$condition = trim($condition);
 	if ($condition) {// il reste quelque chose > c'est le mal
-		spip_log("Afficher_si incorrect. $condition_original non sécurisée", "saisies"._LOG_CRITIQUE);
+		spip_log("Afficher_si incorrect. $condition_original non sécurisée; reste $condition", "saisies"._LOG_CRITIQUE);
 		return false;
 	} else {
 		return true;

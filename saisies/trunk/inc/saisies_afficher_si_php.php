@@ -133,7 +133,7 @@ function saisies_afficher_si_get_valeur_champ($champ, $env, $saisies) {
 			}
 		}
 	} else {
-		$champ = $env["valeurs"][$champ];
+		$champ = $env['valeurs'][$champ];
 	}
 	if ($fichiers) {
 		if (!is_array($precedent)) {
@@ -156,10 +156,11 @@ function saisies_afficher_si_get_valeur_champ($champ, $env, $saisies) {
  *   Tableau d'environnement transmis dans inclure/voir_saisies.html,
  *   NULL si on doit rechercher dans _request (pour saisies_verifier()).
  * @param  array $saisies
+ * @param string|null $no_arobase une valeur à tester là où il devrait y avoir un @@
  * @return string $condition
 **/
-function saisies_transformer_condition_afficher_si($condition, $env = null, $saisies = array()) {
-	if ($tests = saisies_parser_condition_afficher_si($condition)) {
+function saisies_transformer_condition_afficher_si($condition, $env = null, $saisies = array(), $no_arobase=null) {
+	if ($tests = saisies_parser_condition_afficher_si($condition, $no_arobase)) {
 		if (!saisies_afficher_si_verifier_syntaxe($condition, $tests)) {
 			spip_log("Afficher_si incorrect. $condition syntaxe_incorrecte", "saisies"._LOG_CRITIQUE);
 			return '';
@@ -167,8 +168,11 @@ function saisies_transformer_condition_afficher_si($condition, $env = null, $sai
 		foreach ($tests as $test) {
 			$expression = $test[0];
 			if (!isset($test['booleen'])) {
-
-				$champ = saisies_afficher_si_get_valeur_champ($test['champ'], $env, $saisies);
+				if (!$no_arobase) {
+					$champ = saisies_afficher_si_get_valeur_champ($test['champ'], $env, $saisies);
+				} else {
+					$champ = $no_arobase;
+				}
 				$total = isset($test['total']) ? $test['total'] : '';
 				$operateur = isset($test['operateur']) ? $test['operateur'] : null;
 				$negation = isset($test['negation']) ? $test['negation'] : '';
@@ -179,7 +183,6 @@ function saisies_transformer_condition_afficher_si($condition, $env = null, $sai
 				} else {
 					$valeur = null;
 				}
-
 				$test_modifie = saisies_tester_condition_afficher_si($champ, $total, $operateur, $valeur, $negation) ? 'true' : 'false';
 				$condition = str_replace($expression, $test_modifie, $condition);
 			}
@@ -201,10 +204,11 @@ function saisies_transformer_condition_afficher_si($condition, $env = null, $sai
  *   Tableau d'environnement transmis dans inclure/voir_saisies.html,
  *   NULL si on doit rechercher dans _request (pour saisies_verifier()).
  * @param array $saisies
+ * @param string|null $no_arobase une valeur à tester là où il devrait y avoir un @@
  * @return bool le résultat du test
 **/
-function saisies_evaluer_afficher_si($condition, $env = null, $saisies=array()) {
-	$condition = saisies_transformer_condition_afficher_si($condition, $env, $saisies);
+function saisies_evaluer_afficher_si($condition, $env = null, $saisies=array(), $no_arobase=null) {
+	$condition = saisies_transformer_condition_afficher_si($condition, $env, $saisies, $no_arobase);
 	if ($condition) {
 		eval('$ok = '.$condition.';');
 	} else {
