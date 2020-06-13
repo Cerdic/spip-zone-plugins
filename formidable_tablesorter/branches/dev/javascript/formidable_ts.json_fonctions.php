@@ -128,7 +128,7 @@ continue;
 			// Cell 0 : statut
 			$value = \liens_absolus(\appliquer_filtre($row_reponse['statut'], 'puce_statut', 'formulaires_reponse', $row_reponse['id_formulaires_reponse'], true));
 			$row_ts[] = new cell([
-				'id_formulaire' => $this->id_formulaire,
+				'table' => $this,
 				'id_formulaires_reponse' => $id_formulaires_reponse,
 				'nom' => 'statut',
 				'value' => $value,
@@ -141,7 +141,7 @@ continue;
 			// Cell 1 : id
 			$value = '<a href="'.\generer_url_ecrire('formulaires_reponse', 'id_formulaires_reponse='.$row_reponse['id_formulaires_reponse']).'">'.$row_reponse['id_formulaires_reponse'].'</a>';
 			$row_ts[] = new cell([
-				'id_formulaire' => $this->id_formulaire,
+				'table' => $this,
 				'id_formulaires_reponse' => $id_formulaires_reponse,
 				'nom' => 'id_formulaires_reponse',
 				'value' => $value,
@@ -154,7 +154,7 @@ continue;
 			// Cell 2 : date
 			$value = \affdate_heure($row_reponse['date_envoi']);
 			$row_ts[] = new cell([
-				'id_formulaire' => $this->id_formulaire,
+				'table' => $this,
 				'id_formulaires_reponse' => $id_formulaires_reponse,
 				'nom' => 'date_envoi',
 				'value' => $value,
@@ -187,7 +187,7 @@ continue;
 		}
 		$row_ts[] = new cell(
 			[
-				'id_formulaire' => $this->id_formulaire,
+				'table' => $this,
 				'id_formulaires_reponse' => $id_formulaires_reponse,
 				'nom' => $nom,
 				'value' => $value,
@@ -209,7 +209,7 @@ continue;
 			$row_value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'brut');
 			$row_ts[] = new cell(
 				[
-					'id_formulaire' => $this->id_formulaire,
+					'table' => $this,
 					'id_formulaires_reponse' => $id_formulaires_reponse,
 					'nom' => $nom,
 					'value' => $value,
@@ -290,6 +290,14 @@ continue;
 		return count($this->headers);
 	}
 
+	/**
+	 * Return la propriété, permet d'y accéder mais pas de la modifier
+	 * @param string $prop
+	**/
+	public function __get($prop) {
+		return $this->$prop;
+	}
+
 }
 /**
  * Classe représentant une cellule
@@ -302,7 +310,7 @@ continue;
  * @var string $type natif|extra|champ
  **/
 class cell implements \JsonSerializable{
-	private $id_formulaire;
+	private $table;
 	private $id_formulaires_reponse;
 	private $nom;
 	private $value;
@@ -312,7 +320,7 @@ class cell implements \JsonSerializable{
 	private $type;
 
 	public function __construct($param = array()) {
-		$this->id_formulaire = $param['id_formulaire'] ?? false;
+		$this->table = $param['table'] ?? false;
 		$this->id_formulaires_reponse = $param['id_formulaires_reponse'] ?? false;
 		$this->nom = $param['nom'];
 		$this->value = $param['value'];
@@ -330,7 +338,7 @@ class cell implements \JsonSerializable{
 			if ($this->type == 'extra') {
 				return '<div class="'.classe_boucle_crayon('formulaires_reponse', $this->nom, $this->id_formulaires_reponse).'">'.$this->value.'</div>';
 			} elseif ($this->type == 'champ') {
-				return  '<div class="'.\calculer_voir_reponse($this->id_formulaires_reponse, $this->id_formulaire, $this->nom, '', 'edit').'">'.$this->value.'</div>';
+				return  '<div class="'.\calculer_voir_reponse($this->id_formulaires_reponse, $this->table->id_formulaire, $this->nom, '', 'edit').'">'.$this->value.'</div>';
 			}
 		} else {
 			return $this->value;
