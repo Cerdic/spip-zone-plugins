@@ -38,22 +38,22 @@
 	width:100%;
 	min-width:1em;
 }
-.tablesorter-header {
+.tablesorter-header .header-title {
 	cursor:pointer;
 }
-.tablesorter-header-inner {
+.tablesorter-header .header-title {
 	display:inline;
 }
-.tablesorter-header::after {
+.tablesorter-header .header-title::after {
 	float:right
 }
-.tablesorter-headerUnSorted::after {
+.tablesorter-headerUnSorted .header-title::after {
 	content: "⬆️⬇️"
 }
-.tablesorter-headerAsc::after {
+.tablesorter-headerAsc .header-title::after {
 	content: "⬆️"
 }
-.tablesorter-headerDesc::after {
+.tablesorter-headerDesc .header-title::after {
 	content: "⬇️"
 }
 .tablesorter-filter-row {

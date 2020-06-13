@@ -389,9 +389,9 @@ class header extends cell {
 	 * Returne la valeur string, avec le span englobant, pour les crayons
 	**/
 	public function jsonSerialize() {
-		$arrows = '<div class="move-arrows"><a class="left">&#x2B05;</a> <a class="right">&#x27A1;</a></div>';
 		$data_col = "$this->type-$this->nom";
-		return "$arrows\n\r<div data-col='$data_col'>$this->value</div>";
+		$arrows = "<div data-col='$data_col' class='move-arrows'><a class='left'>&#x2B05;</a> <a class='right'>&#x27A1;</a></div>";
+		return "$arrows\n\r<div class='header-title'>$this->value</div>";
 	}
 }
 /**

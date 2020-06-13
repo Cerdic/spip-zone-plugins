@@ -5,6 +5,7 @@ formidable_ts = '';
 $(function() {
 	formidable_ts = $(".tablesorter");
 	formidable_ts.tablesorter({
+		selectorSort: '.header-title',
 		widgets: [
 			"pager",
 			"stickyHeaders",
@@ -51,6 +52,13 @@ $(function() {
 		  pager_updateArrows: true,
 			pager_savePages: true,
       pager_ajaxUrl : pager_ajaxUrl,
+			pager_customAjaxUrl: function(table, url) {
+				order = $.tablesorter.storage(formidable_ts, 'tablesorter-order');
+				for (col in order) {
+					url = url+'&order[]='+order[col];
+				}
+				return url;
+			},
       pager_ajaxObject: {
         type: 'GET', // default setting
         dataType: 'json'
@@ -58,7 +66,10 @@ $(function() {
 			resizable_addLastColumn: true
 		}
 	}).bind('pagerComplete', function(event, options) {
+		formidable_ts_saveOrder();
 		formidable_ts_setColumnSelector();
+		formidable_ts_set_move_arrows();
+		formidable_ts.trigger('updateHeaders');
 	});
 
 	;
@@ -158,7 +169,48 @@ $.tablesorter.filter.types.start = function(config, data) {
 }
 
 
+/** Tout ce qui concerne le reordonnancement**/
 
+/**
+ * Sauver l'ordre initial
+**/
+function formidable_ts_saveOrder() {
+	order = [];
+	$('th div[data-col]',formidable_ts).each(function() {
+		order.push($(this).attr('data-col'));
+	});
+	$.tablesorter.storage(formidable_ts, 'tablesorter-order', order, {});
+};
+
+function formidable_ts_set_move_arrows() {
+	$('.move-arrows .left, .move-arrows .right').click(function(event) {
+		col = $(this).parent().attr('data-col');
+		th = $(this).parents('th');
+		tr = th.parent();
+		index = th.index();
+		if ($(this).hasClass('left')) {
+			prev = th.prevAll(':not(.filtered)').first();
+			index_inserting = prev.index();
+			inserting = 'before';
+		} else {
+			next = th.nextAll(':not(.filtered)').first();
+			index_inserting = next.index();
+			inserting = 'after';
+		}
+		order = $.tablesorter.storage(formidable_ts, 'tablesorter-order');
+		before = order.slice(0, index_inserting+1);
+		after = order.slice(index_inserting+1);
+		if (inserting == 'before') {
+			before = [col].concat(before);
+			after = after.slice(1);
+		} else {
+			after = [col].concat(after);
+			before = before.slice(-1);
+		}
+		order = before.concat(after);
+		$.tablesorter.storage(formidable_ts, 'tablesorter-order', order, {});
+	});
+};
 
 
 /**
@@ -173,7 +225,8 @@ function formidable_ts_restart() {
 		'resizable',
 		'savesort',
 		'table-original-css-width',
-		'table-resized-width'
+		'table-resized-width',
+		'order',
 	]).each(function(key, storage) {
 			$.tablesorter.storage(formidable_ts, 'tablesorter-'+storage, null);
 	});
