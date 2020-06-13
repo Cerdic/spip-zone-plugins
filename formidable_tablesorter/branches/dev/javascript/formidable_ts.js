@@ -31,7 +31,7 @@ $(function() {
 			output_callback: function(config, data, url) {
 				return call_formidable_ts_export(config, data, url);
 			},
-			pager_size: 25,//Nombre de lignes par page
+			pager_size: 100,//Nombre de lignes par page
 			// css class names that are added
 			pager_css: {
 				container   : 'tablesorter-pager',    // class added to make included pager.css file work
