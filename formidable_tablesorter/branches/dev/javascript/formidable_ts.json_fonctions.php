@@ -76,7 +76,7 @@ class table {
 		$headers = &$this->headers;
 		$headers[] = '#';
 		$headers[] = _T('info_numero_abbreviation');
-		$headers[] = _T('public:date');
+		$headers[] = _T('formidable:date_envoi');
 		foreach ($this->cextras as $extra) {
 			$headers[] = $extra['options']['label'] ?? $extra['options']['label_case'] ?? $extra['options']['nom'];
 		}
@@ -142,13 +142,13 @@ continue;
 				'natif');
 
 			// Cell 2 : date
-			$value = \affdate_heure($raw_reponse['date']);
+			$value = \affdate_heure($raw_reponse['date_envoi']);
 			$raw_ts[] = new cell(
 				$this->id_formulaire,
 				$id_formulaires_reponse,
-				'date',
+				'date_envoi',
 				$value,
-				$raw_reponse['date'],
+				$raw_reponse['date_envoi'],
 				$value,
 				false,
 				'natif');
