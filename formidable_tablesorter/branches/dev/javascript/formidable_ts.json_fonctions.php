@@ -36,8 +36,8 @@ class table {
 			$this->filter = array();
 		}
 		$this->filter = array_map(function($a)  {
-			if (!preg_match('#(=|>|<)#', $a)) {
-				$a = " == '$a'";
+			if (!preg_match('#(=|>|<|MATCH)#', $a)) {
+				$a = " MATCH '/$a/'";
 			}
 			return $a;
 		},
