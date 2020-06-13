@@ -209,6 +209,7 @@ function formidable_ts_set_move_arrows() {
 		}
 		order = before.concat(after);
 		$.tablesorter.storage(formidable_ts, 'tablesorter-order', order, {});
+		formidable_ts.trigger('pagerUpdate');
 	});
 };
 
