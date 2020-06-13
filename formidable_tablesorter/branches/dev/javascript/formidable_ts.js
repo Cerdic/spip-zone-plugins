@@ -48,6 +48,7 @@ $(function() {
 				pageDisplay : '.pagedisplay', // location of where the "output" is displayed
 				pageSize    : '.pagesize'     // page size selector - select dropdown that sets the "size" option
 			},
+		  pager_updateArrows: true,
 			pager_savePages: true,
       pager_ajaxUrl : pager_ajaxUrl,
       pager_ajaxObject: {
