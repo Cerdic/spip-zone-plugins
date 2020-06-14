@@ -247,6 +247,11 @@ function formidable_ts_set_move_arrows() {
 		$.tablesorter.setFilters(formidable_ts, $.tablesorter.storage(formidable_ts, 'tablesorter-filters'), false );
 		formidable_ts.trigger('sorton', [sortList]);
 
+		columnSelector = $.tablesorter.storage(formidable_ts, 'tablesorter-columnSelector');
+		$(columnSelector).each( function(key, value) {
+			$('#columnSelector input[data-column='+key+']').prop('checked',value).trigger('change');
+		});
+
 		moving_flag = false;
 		formidable_ts.trigger('pagerUpdate');
 	});
