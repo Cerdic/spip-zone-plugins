@@ -53,6 +53,9 @@ $(function() {
       filter_saveFilters : true,
 			output_separator: 'array',
 			output_delivery: 'download',
+			output_formatContent : function( c, wo, data ) {
+				return data.content.replace('⬅ ➡', '');
+			},
 			stickyHeaders_xScroll : '.formidable_ts-wrapper',
 			output_callback: function(config, data, url) {
 				return call_formidable_ts_export(config, data, url);
