@@ -72,7 +72,7 @@ $(function() {
       },
 			resizable_addLastColumn: true
 		}
-	}).bind('pagerComplete', function(event, options) {
+	}).bind('pagerComplete', function() {
 		formidable_ts_saveOrder();
 		formidable_ts_setColumnSelector();
 		formidable_ts_set_move_arrows();
