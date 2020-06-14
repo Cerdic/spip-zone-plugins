@@ -3,6 +3,30 @@
 **/
 formidable_ts = '';
 $(function() {
+	/** Migration des vieux storages**/
+	if (!localStorage.getItem('formidable_ts_version')) {
+		$([
+			'columnSelector',
+			'columnSelector-auto',
+			'filters',
+			'pager',
+			'resizable',
+			'savesort',
+			'table-original-css-width',
+			'table-resized-width',
+			'order',
+		]).each(function (key, value) {
+			value = 'tablesorter-'+value;
+			storage = localStorage.getItem(value);
+			if (storage) {
+				newStorage = storage.replace('formidable_tablesorter', 'formidable_ts');
+				localStorage.setItem(value, newStorage);
+			}
+		});
+		localStorage.setItem('formidable_ts_version', 1);
+	}
+
+	/** Code principal **/
 	formidable_ts = $(".tablesorter");
 	formidable_ts.tablesorter({
 		selectorSort: '.header-title',
