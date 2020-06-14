@@ -43,6 +43,7 @@ class table {
 			if (!preg_match('#(=|>|<|MATCH)#', $a)) {
 				$a = " MATCH '/$a/'";
 			}
+			$a = rawurldecode($a);
 			return $a;
 		},
 			$this->filter
