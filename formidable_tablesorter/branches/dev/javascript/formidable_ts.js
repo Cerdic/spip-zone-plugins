@@ -79,7 +79,6 @@ $(function() {
 		formidable_ts.trigger('updateHeaders');
 	});
 
-	;
   $('.print').click(function() {
     formidable_ts.trigger('printTable');
   });
