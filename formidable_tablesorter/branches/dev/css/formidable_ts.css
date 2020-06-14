@@ -7,6 +7,21 @@
 	width:100%;
 	overflow-x:scroll;
 }
+.formidable_ts-wrapper.loading {
+	cursor:wait;
+}
+.formidable_ts-wrapper.loading > * {
+	opacity:0.3;
+}
+.formidable_ts-wrapper.loading::before {
+	content: "Chargement";
+	text-align: center;
+	font-size: 150%;
+	display: block;
+	opacity:1;
+	color:red;
+}
+
 .formidable_ts-wrapper.puce_statut {
 	overflow-x:visible;
 }

@@ -57,6 +57,7 @@ $(function() {
 				if (moving_flag) {
 					return;
 				}
+				$('.formidable_ts-wrapper').addClass('loading');// Ceserait sans doute mieux ailleurs, mais bon
 				obj = table.config.widgetOptions.pager_ajaxObject;
 				if (order = $.tablesorter.storage(formidable_ts, 'tablesorter-order')) {
 					obj.data['order'] = order;
@@ -79,6 +80,7 @@ $(function() {
 		formidable_ts_set_move_arrows();
 		formidable_ts.trigger('updateHeaders');
 		formidable_ts_set_move_arrows_css();
+		$('.formidable_ts-wrapper').removeClass('loading');
 	}).bind('columnUpdate', function(){
 		formidable_ts_set_move_arrows_css();
 	});
@@ -275,6 +277,7 @@ function formidable_ts_set_move_arrows() {
 			$('#columnSelector input[data-column='+key+']').prop('checked',value).trigger('change');
 		});
 
+		$('.formidable_ts-wrapper').addClass('loading');
 		moving_flag = false;
 		formidable_ts.trigger('pagerUpdate');
 	});
