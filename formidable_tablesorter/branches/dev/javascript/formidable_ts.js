@@ -191,14 +191,6 @@ function call_formidable_ts_export(config, data, url) {
 	return false;
 }
 
-/** Customisation du filtrage **/
-// Filtrer sur les textes, pas sur data-sort-value
-$.tablesorter.filter.types.start = function(config, data) {
-	data.exact = data.$cells[data.index];
-	data.exact = data.exact.innerText;
-	data.iExact = data.exact.toLowerCase();
-	return null;
-}
 
 
 /** Tout ce qui concerne le reordonnancement**/
