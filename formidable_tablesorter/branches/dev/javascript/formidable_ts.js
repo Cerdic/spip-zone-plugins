@@ -53,15 +53,22 @@ $(function() {
 			pager_savePages: true,
       pager_ajaxUrl : pager_ajaxUrl,
 			pager_customAjaxUrl: function(table, url) {
-				order = $.tablesorter.storage(formidable_ts, 'tablesorter-order');
-				for (col in order) {
-					url = url+'&order[]='+order[col];
+				if (moving_flag) {
+					return;
 				}
-				return url;
+				obj = table.config.widgetOptions.pager_ajaxObject;
+				if (order = $.tablesorter.storage(formidable_ts, 'tablesorter-order')) {
+					obj.data['order'] = order;
+				};
+				if (filters = $.tablesorter.storage(formidable_ts, 'tablesorter-filters')) {
+					obj.data['filter'] = filters;
+				};
+        return url; // required to return url, but url remains unmodified
 			},
       pager_ajaxObject: {
-        type: 'GET', // default setting
-        dataType: 'json'
+        type: 'POST', // default setting
+        dataType: 'json',
+				data: {},
       },
 			resizable_addLastColumn: true
 		}
@@ -182,6 +189,7 @@ function formidable_ts_saveOrder() {
 	$.tablesorter.storage(formidable_ts, 'tablesorter-order', order, {});
 };
 
+moving_flag = false;
 function formidable_ts_set_move_arrows() {
 	$('.move-arrows .left, .move-arrows .right').click(function(event) {
 		col = $(this).parent().attr('data-col');
@@ -191,28 +199,80 @@ function formidable_ts_set_move_arrows() {
 		if ($(this).hasClass('left')) {
 			prev = th.prevAll(':not(.filtered)').first();
 			index_inserting = prev.index();
-			inserting = 'before';
+			move = 'left';
 		} else {
 			next = th.nextAll(':not(.filtered)').first();
 			index_inserting = next.index();
-			inserting = 'after';
+			move = 'right';
 		}
-		order = $.tablesorter.storage(formidable_ts, 'tablesorter-order');
-		before = order.slice(0, index_inserting+1);
-		after = order.slice(index_inserting+1);
-		if (inserting == 'before') {
-			before = [col].concat(before);
-			after = after.slice(1);
-		} else {
-			after = [col].concat(after);
-			before = before.slice(-1);
+		// Ajuster le storage des paramètres de colonnes, sauf pour le tri qui se fait plus loins
+		$([
+			'columnSelector',
+			'filters',
+			'resizable',
+			'order'
+		]).each(function(key, storage) {
+			order = $.tablesorter.storage(formidable_ts, 'tablesorter-' + storage);
+			if (!order) {
+				return true;
+			}
+			col = order[index];
+			if (!order) {
+				return true;
+			}
+			array_move(order, index, index_inserting);
+			$.tablesorter.storage(formidable_ts, 'tablesorter-' + storage, order, {});
+		});
+		// Ajuster le storage des tri de colonne
+		min = Math.min(index, index_inserting);
+		max = Math.max(index, index_inserting);
+		sortList = $.tablesorter.storage(formidable_ts, 'tablesorter-savesort');
+		if (sortList) {
+			sortList=sortList['sortList'];
+			$(sortList).each(function(key, value) {
+				if (value[0] == index) {
+					value[0] = index_inserting;
+				} else if (min <= value[0] && value[0] <= max) {
+					if (move == 'right') {
+						value[0] = value[0] - 1;
+					} else {
+						value[0] = value[0] + 1;
+					}
+				}
+				sortList[key] = value;
+			});
 		}
-		order = before.concat(after);
-		$.tablesorter.storage(formidable_ts, 'tablesorter-order', order, {});
+
+		moving_flag = true;
+		$.tablesorter.storage(formidable_ts, 'tablesorter-savesort',{'sortList':sortList}, {});
+		$.tablesorter.setFilters(formidable_ts, $.tablesorter.storage(formidable_ts, 'tablesorter-filters'), false );
+		formidable_ts.trigger('sorton', [sortList]);
+
+		moving_flag = false;
 		formidable_ts.trigger('pagerUpdate');
 	});
 };
 
+//https://stackoverflow.com/a/5306832/3206025
+function array_move(arr, old_index, new_index) {
+    if (new_index >= arr.length) {
+        var k = new_index - arr.length + 1;
+        while (k--) {
+            arr.push(undefined);
+        }
+    }
+    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+};
+function array_move(arr, old_index, new_index) {
+    if (new_index >= arr.length) {
+        var k = new_index - arr.length + 1;
+        while (k--) {
+            arr.push(undefined);
+        }
+    }
+    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+    return arr; // for testing
+};
 
 /**
  * Réinitialisation de tout, aille, aille, aille
