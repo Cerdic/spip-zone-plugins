@@ -155,10 +155,6 @@ function formidable_ts_add_check_all_button() {
 	});
 }
 
-/** Extraction de textes, notamment pour le tri **/
-$.tablesorter.defaults.textExtraction = function(node, table, cellIndex){
-    return $(node).attr('data-sort-value') || $(node).text();
-}
 /** Fonctions d'export tableur **/
 function call_formidable_ts_export(config, data, url) {
 	var form = $('<form></form>').attr('action', url_action_formidable_ts_export).attr('method', 'post');
