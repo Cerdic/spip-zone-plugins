@@ -13,7 +13,10 @@
 .formidable_ts-wrapper.loading > * {
 	opacity:0.3;
 }
-.formidable_ts-wrapper.loading::before {
+.formidable_ts-wrapper.loading .tablesorter-sticky-wrapper {
+	opacity:0;
+}
+.formidable_ts-wrapper.loading::before, .formidable_ts-wrapper.loading .tablesorter-sticky-wrapper::before{
 	content: "Chargement";
 	text-align: center;
 	font-size: 150%;
