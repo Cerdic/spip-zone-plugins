@@ -63,7 +63,7 @@
 	display: flex;
 	justify-content: space-between;
 }
-.tablesorter .move-arrows.first{
+.tablesorter .move-arrows.rightOnly{
 	justify-content:end;
 }
 .tablesorter tr > *{
@@ -75,13 +75,12 @@
 .tablesorter .pager {
 	font-weight:normal;
 }
-.tablesorter .pager .disabled {
+.tablesorter .pager .disabled, .tablesorter .move-arrows .disabled {
 	display:none;
 }
 .tablesorter input {
 	font-size:100%;
 }
-
 .filtered {
 	display:none;
 }

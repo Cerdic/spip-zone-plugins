@@ -20,6 +20,7 @@ $(function() {
 			columnSelector_container: $('#columnSelector'),
 			columnSelector_layout : '<label><input type="checkbox"><span>{name}</span></label>',
 			columnSelector_mediaquery: false,
+			columnSelector_updated : 'columnUpdate',
       print_columns: 's',
       print_rows: 'f',
 			print_extraCSS: 'table{font-size:10pt}',
@@ -77,6 +78,9 @@ $(function() {
 		formidable_ts_setColumnSelector();
 		formidable_ts_set_move_arrows();
 		formidable_ts.trigger('updateHeaders');
+		formidable_ts_set_move_arrows_css();
+	}).bind('columnUpdate', function(){
+		formidable_ts_set_move_arrows_css();
 	});
 
   $('.print').click(function() {
@@ -189,6 +193,29 @@ function formidable_ts_saveOrder() {
 };
 
 moving_flag = false;
+
+/**
+ * Masquer la toute première flèche de gauche dans les colonens visibles, et la toute dernière de droite
+ **/
+function formidable_ts_set_move_arrows_css() {
+	formidable_ts_sticky = $('#'+formidable_ts.attr('id')+'-sticky');
+	tables = [formidable_ts_sticky, formidable_ts];
+	for (table of tables) {
+		$('.move-arrows').removeClass('leftOnly').removeClass('rightOnly');
+		left = $('th:not(.filtered) .move-arrows .left', table);
+		left.removeClass('disabled');
+		left.first().addClass('disabled');
+		left.first().parent().addClass('rightOnly');
+
+		right = $('th:not(.filtered) .move-arrows .right', table);
+		right.removeClass('disabled');
+		right.last().addClass('disabled');
+		right.last().parent().addClass('leftOnly');
+	}
+}
+/**
+ * Régler les évènemens sur les flèches
+**/
 function formidable_ts_set_move_arrows() {
 	$('.move-arrows .left, .move-arrows .right').click(function(event) {
 		col = $(this).parent().attr('data-col');
