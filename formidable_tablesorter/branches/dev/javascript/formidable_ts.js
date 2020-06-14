@@ -103,6 +103,13 @@ $(function() {
 		formidable_ts_setColumnSelector();
 		formidable_ts_set_move_arrows();
 		formidable_ts.trigger('updateHeaders');
+		$('.tablesorter-stickyHeader th .header-title').each(function() {
+			$(this).bind('click', function(){
+				dc = $(this).parents('th').attr('data-column');
+				console.log(dc);
+				$('th[data-column='+dc+'] .header-title',formidable_ts).trigger('click');
+			});
+		});
 		formidable_ts_set_move_arrows_css();
 		$('.formidable_ts-wrapper').removeClass('loading');
 	}).bind('columnUpdate', function(){
