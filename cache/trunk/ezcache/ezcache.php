@@ -330,7 +330,7 @@ function ezcache_cache_decoder($plugin, $contenu, $configuration) {
 			case 'yaml':
 			case 'yml':
 				// On utilise la fonction du plugin YAML si il est actif (un jour on l'aura dans SPIP...)
-				if (!defined('_DIR_PLUGIN_YAML')) {
+				if (defined('_DIR_PLUGIN_YAML')) {
 					include_spip('inc/yaml');
 					$contenu = yaml_decode($contenu);
 				}
