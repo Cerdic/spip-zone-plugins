@@ -57,6 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'n_vides' => '@n@ caselle bianche',
 	'nouveau_jeu' => 'Nouveau jeu',
 
+	// O
+	'ou' => 'o ', # MODIF
+
 	// P
 	'point' => 'punto', # MODIF
 	'points' => 'punti', # MODIF

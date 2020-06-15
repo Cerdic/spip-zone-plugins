@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options' => 'Options',
+	'ou' => 'or ',
 
 	// P
 	'point' => ' pt',
