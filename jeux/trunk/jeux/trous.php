@@ -64,7 +64,7 @@ expression ne soit pas une expression reguliere
 
 */
 
-// configuration par defaut : jeu_{mon_jeu}_init()
+// configuration par defaut : jeux_{mon_jeu}_init()
 function jeux_trous_init() {
 	return "
 		taille=auto	// taille des trous
@@ -135,7 +135,7 @@ function trous_liste_reponses($mots) {
 	$reponses = array(); $etc = '';
 	foreach ($mots as $mot) {
 		if(substr($mot,0,1)===',') $etc = 'etc.';
-		 else $reponses[] = strpos($mot, '/M')===($len=strlen($mot)-2) ?substr($mot,0,$len):$mot;
+		 else $reponses[] = strpos($mot, '/M')===($len=strlen($mot)-2) ? substr($mot,0,$len) : $mot;
 	}
 	return join(' / ', $reponses) . $etc;
 }

@@ -20,4 +20,10 @@
 	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>(#MODELE{jeu,id=#ID_JEU,statut=#STATUT})</div>
 </div>]
 
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{jeu-config-24.png}|balise_img{'',cadre-icone}
+	|concat{<:jeux:titre_configurer_jeu:>},'simple','titrem'})]
+<p class="jeux_decaler_config">#CONFIG_JEU</p>
+<p><a href='#URL_ECRIRE{configurer_jeux}'><:jeux:configuration_jeux:></a></p>
+#BOITE_FERMER
+
 </BOUCLE_jeu>

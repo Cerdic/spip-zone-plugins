@@ -14,46 +14,59 @@ include_spip('jeux_config');
 
 // 4 fonctions pour traiter la valeur du parametre de configuration place apres le separateur [config]
 global $jeux_config;
-function jeux_config($param, $config=false) {
+
+function jeux_config($param, $config = false) {
   global $jeux_config;
-  $p = ($config===false?$jeux_config:$config);
+  $param = jeux_verif_param_config($param);
+  $p = $config === false ? $jeux_config : $config;
   $p = isset($p[$param]) ? trim($p[$param]) : "";
 
-  if (in_array($p, array('true', 'vrai', 'oui', 'yes', 'on', '1', 'si', 'ja', strtolower(_T('item_oui'))))) return true;
+  if (in_array($p, array('true', 'vrai', 'oui', 'yes', 'on',  '1', 'si', 'ja', strtolower(_T('item_oui'))))) return true;
   if (in_array($p, array('false', 'faux', 'non', 'no', 'off', '0', 'nein', strtolower(_T('item_non'))))) return false;
-  if(strncmp($p,'"',1)===0) $p = str_replace('"', '', $p);
+  $p = trim($p, '"');
   return $p;
 }
+
 function jeux_config_tout() {
   global $jeux_config;
   return $jeux_config;
 }
+
 function jeux_config_set($param, $valeur) {
   global $jeux_config;
-  if ($param!='') $jeux_config[$param] = $valeur;
+  $param = jeux_verif_param_config($param);
+  if ($param != '')
+	  $jeux_config[$param] = trim($valeur);
 }
-function jeux_config_init($texte, $ecrase=false) {
- global $jeux_config;
- $lignes = preg_split("/[\r\n]+/", $texte);
- foreach ($lignes as $ligne) {
-  if ($regs = jeux_parse_ligne_config($ligne)) {
-    list($p, $v) = array($regs[1], $regs[2]);
-	// au moment de la config initiale, preferer les valeurs de CFG
-	if(!$ecrase && !isset($jeux_config[$p])) {
-		if(function_exists('lire_config'))
-			$jeux_config[$p] = lire_config('jeux/cfg_'.$p, NULL);
-		else $jeux_config[$p] = $v;
+
+// alimente la globale $jeux_config, tout en preferant les valeurs de la configuration CFG du plugin
+// le texte est une liste de config de type : param = valeur
+// $ecrase : forcer a ecraser la config eventuellement existante
+function jeux_config_init($texte_config, $ecrase = false) {
+	global $jeux_config;
+	// configuration CFG
+	$config_CFG = jeux_configuration_generale(true);
+	$parametres = jeux_parse_section_config($texte_config);
+	foreach ($parametres as $p) {
+		// array($ligne epuree, $param_original, $param, $valeur)
+		list( , , $p_base, $valeur) = $p;
+		// au moment de la config initiale, preferer les valeurs de CFG
+		if (!$ecrase && !isset($jeux_config[$p_base]))
+			$jeux_config[$p_base] = isset($config_CFG[$p_base]) ? $config_CFG[$p_base] : $valeur;
+		if ($ecrase || !isset($jeux_config[$p_base]))
+			$jeux_config[$p_base] = $valeur;
 	}
-	if ($ecrase || !isset($jeux_config[$p])) $jeux_config[$p] = $v;
-  }
- }
 }
-function jeux_config_ecrase($texte) { 
-	jeux_config_init($texte, true); 
+
+// ecrase les parametres de la globale $jeux_config;
+function jeux_config_ecrase($texte_config) { 
+	jeux_config_init($texte_config, true); 
 }
+
+// reinitialise la globale $jeux_config;
 function jeux_config_reset() {
   global $jeux_config;
-  $jeux_config = false;
+  $jeux_config = array();
 }
 
 // splitte le texte du jeu avec les separateurs concernes
@@ -61,65 +74,77 @@ function jeux_config_reset() {
 function jeux_split_texte($jeu, &$texte) {
   global $jeux_caracteristiques;
   jeux_config_reset();
-  if (function_exists($init = 'jeux_'.$jeu.'_init')) jeux_config_init($init());
-  $texte = '['._JEUX_TEXTE.']'.trim($texte).' ';
-  $expr = '/(\['.join('\]|\[', $jeux_caracteristiques['SEPARATEURS'][$jeu]).'\])/';
+  if (function_exists($init = 'jeux_'  .$jeu . '_init'))
+	  jeux_config_init($init());
+  $texte = '[' . _JEUX_TEXTE . ']' . trim($texte) . ' ';
+  $expr = '/(\[' . join('\]|\[', $jeux_caracteristiques['SEPARATEURS'][$jeu]) . '\])/';
   $tableau = preg_split($expr, $texte, -1, PREG_SPLIT_DELIM_CAPTURE);
 //  foreach($tableau as $i => $valeur) $tableau[$i] = preg_replace('/^\[(.*)\]$/', '\\1', trim($valeur));
   foreach($tableau as $i => $valeur)
 	  if (($i & 1) && preg_match('/^\[(.*)\]$/', trim($valeur), $reg)) {
 	    $tableau[$i] = strtolower(trim($reg[1]));
-	    if ($reg[1] == _JEUX_CONFIG && $i+1 < count($tableau)) jeux_config_ecrase($tableau[$i+1]); 
+	    if ($reg[1] == _JEUX_CONFIG && $i+1 < count($tableau))
+			jeux_config_ecrase($tableau[$i+1]); 
 	  }
   return $tableau;
 }  
 
 // transforme un texte en listes html 
 function jeux_listes($texte) {
-	$tableau = preg_split("/[\r\n]+/", trim($texte));	
+	$tableau = preg_split('/[\r\n]+/', trim($texte));	
 	foreach ($tableau as $i=>$valeur)
-		if (($valeur = trim($valeur)) != '') $tableau[$i] = "<li>$valeur</li>\n";
+		if (($valeur = trim($valeur)) != '')
+			$tableau[$i] = "<li>$valeur</li>\n";
 	$texte = implode('', $tableau);
 	return "<ol>$texte</ol>";
 }
 
 // retourne un tableau de mots ou d'expressions a partir d'un texte
-function jeux_liste_mots($texte) {
+function jeux_liste_mots($texte, $unique = true) {
 	// corrections typo eventuelles
-	$texte = str_replace(array('&#8217;','&laquo;&nbsp;','&nbsp;&raquo;','&laquo; ',' &raquo;'), array("'",'"','"','"','"'), echappe_retour($texte));
+	$texte = str_replace(
+		array('&#8217;','&laquo;&nbsp;','&nbsp;&raquo;','&laquo; ',' &raquo;','&nbsp;?','&nbsp;!','&nbsp;;'),
+		array("'",'"','"','"','"','?','!',';'), echappe_retour($texte));
 	$texte = filtrer_entites(trim($texte));
 	$split = explode('"', $texte);
 	$c = count($split);
 	$split2 = array();
-	for($i=0; $i<$c; $i++) if (strlen($s = trim($split[$i]))){
+	for($i=0; $i<$c; $i++) if (strlen($s = trim($split[$i]))) {
 		if (($i & 1) && ($i != $c-1)) {
 			// on touche pas au texte entre deux ""
 			$split2[] = $s;
 		} else {
-			// on rassemble tous les separateurs : ,;.\s\t\n
+			// on rassemble tous les separateurs : ,;\s\t\n
 			$temp = str_replace(array(' ?', ' !', ' ;'), array('?', '!', ';'), $s);
 			$temp = preg_replace('/[,;\s\t\n\r]+/'.($GLOBALS['meta']['charset']=='utf-8'?'u':''), '@SEP@', $temp);
 			$temp = str_replace('+', ' ', $temp);
-			$split2 = array_merge($split2, explode('@SEP@', $temp));
+			$temp = array_filter(explode('@SEP@', $temp));
+			$split2 = array_merge($split2, $temp);
 		}
 	}
-	return array_unique($split2);
+	return $unique ? array_unique($split2) : $split2;
 }
+
 function jeux_majuscules($texte) {
 	return init_mb_string()?mb_strtoupper($texte,$GLOBALS['meta']['charset']):strtoupper($texte);
 }
+
 function jeux_minuscules($texte) {
 	return init_mb_string()?mb_strtolower($texte,$GLOBALS['meta']['charset']):strtolower($texte);
 }
+
+// verifie si le $texte est bien dans la $liste de bonnes reponses
+// les expression regulieres sont egalement traitees
 function jeux_in_liste($texte, $liste=array()) {
 	$texte = filtrer_entites($texte);
 	$texte_m = jeux_minuscules($texte);
 	foreach($liste as $expr) {
 		// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
-		if(strncmp($expr,',',1)===0) {
+		if(strncmp($expr, ',', 1)===0 && ($pos = strripos($expr, ','))>0) {
+			if($GLOBALS['meta']['charset']=='utf-8' && strpos($expr, 'u', ++$pos)===false) $expr .= 'u';
 			if(preg_match($expr, $texte)) return true;
 		} elseif(strpos($expr, '/M')===($len=strlen($expr)-2)) {
-			if(substr($expr,0,$len)===$texte) return true;
+			if(substr($expr, 0, $len)===$texte) return true;
 		} else {
 			$expr = jeux_minuscules($expr);
 			// corriger_typo peut eviter un pb d'apostrophe par exemple
@@ -128,6 +153,13 @@ function jeux_in_liste($texte, $liste=array()) {
 		}
 	}
 	return false;
+}
+
+function jeux_filtre_preg($array) {
+	foreach($array as $key => $value)
+		if(strncmp($value, ',', 1)===0 && ($pos = strripos($value, ','))>0) 
+			$array[$key] = substr($value, 1, --$pos);
+	return $array;
 }
 
 // retourne la boite de score et ajoute le resultat en base
@@ -184,7 +216,7 @@ function jeux_bouton_rejouer() { return jeux_bouton('rejouer'); }
 function jeux_liste_les_jeux(&$texte) {
 	global $jeux_caracteristiques;
 	$liste = array();
-	foreach($jeux_caracteristiques['SIGNATURES'] as $jeu=>$signatures) {
+	foreach($jeux_caracteristiques['SIGNATURES'] as $jeu => $signatures) {
 		$ok = false;
 		foreach($signatures as $s) $ok |= (strpos($texte, "[$s]")!==false);
 		if ($ok) $liste[] = $jeu;
@@ -193,8 +225,8 @@ function jeux_liste_les_jeux(&$texte) {
 }
 
 // decode les jeux si les modules jeux/lejeu.php sont presents
-// retourne la liste des jeux trouves et inclut la bibliotheque si $indexJeux existe
-function jeux_decode_les_jeux(&$texte, $indexJeux=NULL) {
+// retourne la liste unique des jeux trouves et inclut la bibliotheque si $indexJeux existe
+function jeux_decode_les_jeux(&$texte, $indexJeux = NULL) {
 	global $jeux_caracteristiques, $scoreMULTIJEUX;
 	$liste = array();
 	foreach($jeux_caracteristiques['SIGNATURES'] as $jeu=>$signatures) {
@@ -217,7 +249,7 @@ function jeux_decode_les_jeux(&$texte, $indexJeux=NULL) {
 function jeux_trouver_nom($texte) {
 	global $jeux_caracteristiques;
 	$liste = jeux_liste_les_jeux($texte);
-	foreach($liste as $i=>$jeu)
+	foreach($liste as $i => $jeu)
 		$liste[$i] = $jeux_caracteristiques['TYPES'][$jeu];
 	return join(', ', $liste);
 }
@@ -231,7 +263,8 @@ function jeux_trouver_titre_public($texte) {
   $texte = jeux_sans_balise($texte);
   $titre_public = false;
   // cas particulier des multi-jeux
-  if($p=strpos($texte,'['._JEUX_MULTI_JEUX.']')) $texte = substr($texte,0,$p);
+  if($p = strpos($texte,'['._JEUX_MULTI_JEUX.']'))
+	  $texte = substr($texte,0,$p);
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('la_totale', $texte);
   foreach($tableau as $i => $valeur) if ($i & 1) {
@@ -240,74 +273,160 @@ function jeux_trouver_titre_public($texte) {
   return $titre_public;
 }
 
-// retourne la configuration interne, si le separateur [config] est present
-// si strlen($param)>0 alors la valeur d'un parametre en particulier est renvoyee
-// si $param=='' alors un tableau associatif est renvoye
-function jeux_trouver_configuration_interne($texte, $param=false) {
+// appel de la balise #CONFIG_INTERNE
+// si $param est une chaine non vide, alors la valeur d'un parametre en particulier est retournee
+// si $param === '' alors un tableau associatif est retourne
+// si $param === false alors un texte HTML est retourne
+function jeux_trouver_configuration_complete($texte_jeu, $param = false) {
+	global $jeux_caracteristiques;
+
+	if(strpos($texte_jeu, _JEUX_DEBUT)!==false) 
+		return "Balise &lt;JEUX/&gt; trouv&eacute;e => Pas encore trait&eacute; !";
+
+	$liste_jeux = jeux_liste_les_jeux($texte_jeu);
+	if(!count($liste_jeux)) return "Aucun jeu trouv&eacute;, sauf errer ?" . print_r($texte_jeu, 1);
+	$nb_jeux = count($liste_jeux);
+
+	// ici un texte de jeu est fourni
+	// $nom_jeu = jeux_trouver_nom($texte_jeu);
+	$config_interne = jeux_trouver_configuration_interne($texte_jeu, false, true);
+	$config_defaut = jeux_trouver_configuration_defaut($liste_jeux[0], true);
+//return print_r($config_defaut, 1);
+	// verification des parametres de la configuration interne
+	$config_interne = explode('<br/>', $config_interne);
+	foreach ($config_interne as &$ligne) {
+		// array(param, valeur, param original, ligne epuree)
+		$arr = jeux_parse_ligne_config($ligne);
+		if($arr[0] && $arr[3] && !isset($config_defaut[$arr[0]]))
+				$ligne =  '/* ' . _T('jeux:erreur_inconnu') . ' : ' . $ligne . ' */';
+	}
+	sort($config_interne);
+	$config_interne = join('<br/>', $config_interne);
+	$config_defaut = jeux_trouver_configuration_defaut($liste_jeux[0], false);
+
+	return '<p><strong>' . _T('jeux:titre_config_defaut') 
+		. ' <small>(' . $jeux_caracteristiques['TYPES'][$liste_jeux[0]] . ')</small> :'
+		. '</strong></p><p class="jeux_decaler_config">' . $config_defaut . '</p>'
+		. ($config_interne ? '<p><strong>' . _T('jeux:titre_config_interne')
+			. ' :</strong></p><p class="jeux_decaler_config">' . $config_interne . '</p>' : '');
+
+}
+
+// retourne la configuration interne d'un texte de jeu, si le separateur [config] est present
+// si une option generale de configuration est cochee, elle prendra le dessus (sauf si $ignorer_CFG == true)
+// si strlen($param) > 0 alors la valeur d'un parametre en particulier est retournee
+// si $param === '' alors un tableau associatif est retourne
+// si $param === false alors un texte HTML est retourne
+function jeux_trouver_configuration_interne($texte, $param = false, $ignorer_CFG = false) {
   $texte = jeux_sans_balise($texte);
-  $configuration_interne = array();
+  $affiche_config_interne = array();
   $ok_param = false;
+  $config_CFG = jeux_configuration_generale(true);
+
   // cas particulier des multi-jeux
-  if($p=strpos($texte,'['._JEUX_MULTI_JEUX.']')) $texte = substr($texte,0,$p);
+  if($p = strpos($texte,'['._JEUX_MULTI_JEUX.']'))
+	  $texte = substr($texte, 0, $p);
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('la_totale', $texte);
   foreach($tableau as $i => $valeur) if ($i & 1) {
-	if ($valeur==_JEUX_CONFIG) {
-		$lignes = preg_split(",[\r\n]+,", $tableau[$i+1]);
-		foreach ($lignes as $ligne) if(strlen($ligne = trim($ligne))) {
-			$configuration_interne[] = $ligne = preg_replace(',\s*=\s*,', ' = ', $ligne);
-			if($param!==false) {
-				list(,$k, $v) = jeux_parse_ligne_config($ligne);
-				if($param==='') $ok_param[$k] = $v;
-				elseif($k == $param) $ok_param = $v;
+	if ($valeur ==_JEUX_CONFIG) {
+		$parametres = jeux_parse_section_config($tableau[$i+1]);
+		foreach ($parametres as $p) {
+			// array($ligne epuree, $param_original, $param, $valeur, $ligne_originale)
+			list($ligne, $p_user, $p_base, $valeur, $ligneOrig) = $p;
+			if($p_base !== false) {
+				// la configuration generale passe avant !
+				if (!$ignorer_CFG && isset($config_CFG[$p_base]) && $valeur != $config_CFG[$p_base]) {
+					$valeur = $config_CFG[$p_base];
+					$ligne = "/* CFG */ $p_user = $valeur";
+				}
+				if ($param === '') {
+					$ok_param[$p_base] = $valeur;
+				} elseif ($param === false) {
+					$affiche_config_interne[] = $ligne;
+				} else {
+					$param = jeux_verif_param_config($param);
+					if($p_base == $param) $ok_param = $valeur;
+				}
+			} else {
+				$affiche_config_interne[] = '/* ' . _T('jeux:erreur_syntaxe') . ' : ' . $ligneOrig . ' */';
 			}
 		}
 	}
   }
-  if($param!==false) return $ok_param;
-  sort($configuration_interne);
-  return $configuration_interne;
+  if ($param === false) {
+	  sort($affiche_config_interne);
+	  return join('<br/>', $affiche_config_interne);
+  }
+  return $ok_param;
 }
 
-// retourne la configuration par defaut d'un jeu
-function jeux_trouver_configuration_defaut($jeu) {
-	if (!function_exists($fonc = 'jeux_'.$jeu))
-		include_spip('jeux/'.$jeu);
-	if (function_exists($init = $fonc.'_init'))
-		return jeux_trouver_configuration_interne('['._JEUX_CONFIG.']'.$init());
+// retourne la configuration par defaut d'un type jeu
+function jeux_trouver_configuration_defaut($type_jeu, $type_array = false) {
+	if (!function_exists($fonc = 'jeux_'.$type_jeu))
+		include_spip('jeux/' . $type_jeu);
+	if (function_exists($init = $fonc . '_init'))
+		return jeux_trouver_configuration_interne('['._JEUX_CONFIG.']' . $init(), $type_array ? '' : false);
+	return false;
 }
 
 // retourne la configuration generale du plugin (options par defaut gerees par CFG)
-function jeux_configuration_generale($jeu='') {
-	if(function_exists('lire_config') && is_array($liste_cfg2 = lire_config('jeux'))) {
+// retour un array() si $type_array est true
+function jeux_configuration_generale($type_array = false) {
+	$affiche_cfg = array();
+	if(function_exists('lire_config') && is_array($liste_cfg = lire_config('jeux'))) {
 		// liste des options disponibles par CFG
-		$adr = generer_url_ecrire('cfg', 'cfg=jeux');
-		foreach($liste_cfg2 as $o=>$v) if(preg_match(',^cfg_(.*)$,', $o, $regs)) {
-			if($v===true || $v==='on') $v = strtolower(_T('item_oui'));
-			elseif($v===false) $v = strtolower(_T('item_non'));
-			$options_cfg[$regs[1]] = "[<a href='$adr'>CFG</a>] $regs[1] = $v";
+		foreach($liste_cfg as $o => $v) {
+			$o = jeux_verif_param_config(preg_replace(',^cfg_,', '', $o));
+			if($v === true || $v === 'on')
+				$v = strtolower(_T('item_oui'));
+			elseif($v === false || $v === 'off')
+				$v = strtolower(_T('item_non'));
+			$affiche_cfg[$o] = $type_array ? $v : "$o = $v";
 		}
 	}
-	if($jeu=='') return $configuration_generale;
-	// renvoyer la config par defaut du premier jeu decele
-	$defaut = jeux_trouver_configuration_defaut($jeu);
-	foreach($defaut as $ligne) {
-		if ($regs = jeux_parse_ligne_config($ligne)) {
-			// ajout de l'option si CFG ne l'a pas deja
-			$configuration_generale[] = isset($options_cfg[$regs[1]])?$options_cfg[$regs[1]]:"$regs[1] = $regs[2]";
-		}
-	}
-	sort($configuration_generale);
-	return $configuration_generale;
+	if($type_array)
+		return $affiche_cfg;
+	if(!$affiche_cfg) 
+		$affiche_cfg = array(_T('jeux:jeu_vide'));
+	return '[' . _JEUX_CONFIG . "]<br/>" . join("<br/>", $affiche_cfg);
 }
 
-// decoder une ligne de config (retrait des comentaires facon PHP)
+// decoder une ligne de config (retrait des comentaires facon PHP et mise en forme du parametre)
+// retour : array(param, valeur, param original, ligne epuree)
 function jeux_parse_ligne_config($ligne) {
-	$ligne = preg_replace(',\/\*(.*)\*\/,','', $ligne);
-	$ligne = trim(preg_replace(',\/\/(.*)$,','', $ligne));
-	if (!preg_match('/([^=\s]+)\s*=\s*(.+)$/', $ligne, $regs)) return false;
-	return $regs;
+	$ligne = preg_replace(',\/\*(.*?)\*\/,', '', $ligne);
+	$ligne = trim(preg_replace(',\/\/(.*)$,', '', $ligne));
+	$arr = explode('=', $ligne, 2);
+	if (count($arr) != 2) return array(false, false, false, strlen($ligne)? '/* ' . $ligne . '*/' : false);
+	$arr[0] = trim($arr[0]); $arr[1] = trim($arr[1]);
+	return array(jeux_verif_param_config($arr[0]), $arr[1], $arr[0], $arr[0] . ' = ' . $arr[1]);
 }
+
+// decoder une section de config
+// retourne le tableau des parametres : array[] = array($ligne epuree, $param_original, $param, $valeur, $ligne_originale)
+function jeux_parse_section_config($texte_config) {
+	$arr_config = array();
+	$texte_config = preg_split('/[\r\n]+/', $texte_config);
+	foreach ($texte_config as $ligne) {
+		// array(param, valeur, param original, ligne epuree)
+		$arr = jeux_parse_ligne_config($ligne);
+		if(strlen($arr[3])) {
+			if ($arr[0])
+				$arr_config[] = array($arr[3], $arr[2], $arr[0], $arr[1], $ligne);
+			else
+				$arr_config[] = array($arr[3], false, false, false, $ligne);
+		}
+	}
+	return $arr_config;
+}
+
+// le parametre de config d'un jeu est insensible a la casse et ne comporte ni espace ni accent
+function jeux_verif_param_config($param) {
+	include_spip('inc/charsets');
+	return strtolower(translitteration(str_replace(' ', '', $param)));
+}
+
 
 // pour placer des commentaires
 function jeux_rem($rem, $index=false, $jeu='', $balise='div') {
@@ -354,9 +473,12 @@ function jeux_idname($indexJeux, $index=-1, $prefixe='', $index2=-1, $prefixe2='
 // renvoie la reponse trimee du formulaire (NULL si n'existe pas)
 function jeux_form_reponse($indexJeux, $index=-1, $prefixe='', $index2=-1, $prefixe2='') {
   	$reponse = _request('reponses'.str_replace('.','_',$indexJeux));
-	if($index>=0 && is_array($reponse)) $reponse = isset($reponse[$prefixe.$index])?$reponse[$prefixe.$index]:NULL;
-	if($index2>=0 && is_array($reponse)) $reponse = isset($reponse[$prefixe2.$index2])?$reponse[$prefixe2.$index2]:NULL;
-	if(is_string($reponse) && strlen($reponse)) $reponse = trim($reponse);
+	if($index>=0 && is_array($reponse))
+		$reponse = isset($reponse[$prefixe.$index])?$reponse[$prefixe.$index]:NULL;
+	if($index2>=0 && is_array($reponse))
+		$reponse = isset($reponse[$prefixe2.$index2])?$reponse[$prefixe2.$index2]:NULL;
+	if(is_string($reponse) && strlen($reponse))
+		$reponse = trim($reponse);
 	return $reponse;
 }
 
@@ -366,14 +488,14 @@ function jeux_form_correction($indexJeux) {
 }
 
 // deux fonctions qui encadrent un jeu dans un formulaire
-function jeux_form_debut($name, $indexJeux, $class="", $method="post", $action="") {
+function jeux_form_debut($name, $indexJeux, $class="", $method="post", $action="", $insert="") {
 	$id_jeu = intval(jeux_config('id_jeu'));
 	$cvt = jeux_config('jeu_cvt')?'oui':'non';
 	$hidden = "<div><input type='hidden' name='id_jeu' value='$id_jeu' />\n"
 		."<input type='hidden' name='debut_index_jeux' value='$GLOBALS[debut_index_jeux]' />\n"
 		."<input type='hidden' name='index_jeux' value='$indexJeux' />\n"
-		."<input type='hidden' name='correction$indexJeux' value='1' /></div>\n";
-	if(jeux_config('jeu_cvt')) return $hidden;
+		."<input type='hidden' name='correction$indexJeux' value='1' />$insert</div>\n";
+	if (jeux_config('jeu_cvt')) return $hidden;
 	if (strlen($name)) $name=" id='$name$indexJeux'";
 	if (strlen($class)) $class=" class='$class'";
 	if (strlen($method)) $method=" method='$method'";

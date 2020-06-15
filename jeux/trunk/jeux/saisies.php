@@ -74,7 +74,7 @@ Les autres parametres :
 
 */
 
-// configuration par defaut : jeu_{mon_jeu}_init()
+// configuration par defaut : jeux_{mon_jeu}_init()
 function jeux_saisies_init() {
 	return "
 		bouton_corriger=valider // fond utilise pour le bouton 'Valider'

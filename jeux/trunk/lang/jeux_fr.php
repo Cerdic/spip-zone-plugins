@@ -23,11 +23,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_donner_indices' => 'Afficher des indices',
 	'cfg_donner_reponse' => 'Afficher la réponse',
 	'cfg_donner_solution' => 'Donner les bonnes réponses',
-	'cfg_introduction' => 'Les paramètres regroupés ici correspondent à la configuration par défaut de l’ensemble des jeux du site. Ils peuvent être surchargées au cas par cas grâce à la configuration interne des jeux (séparateur [config]).<br/><br/>Il est possible que certains jeux n’utilisent pas certains des paramètres listés ci-dessous.',
+	'cfg_introduction' => 'Les paramètres regroupés ici correspondent à la configuration par défaut de l’ensemble des jeux du site.<br/><br/>Si ces paramètres sont cochés, alors ils prendront le pas sur les paramètres par défaut particuliers du jeu.<br/><br/>Ils peuvent être surchargées au cas par cas, grâce à la configuration interne des jeux (séparateur [config]).<br/><br/>Note : il est possible que certains jeux ne soient pas sensibles à la configuration de catte page.',
 	'cfg_scores' => 'Les scores du jeu',
 	'cfg_type_resultat' => 'Enregistrement des scores :',
 	'colonne_n' => 'colonne @n@',
 	'configuration_jeux' => 'Configurer les jeux',
+	'configuration_generale' => 'Configuration générale (CFG)',
 	'correction' => 'Correction :',
 	'corriger' => 'Corriger',
 
@@ -36,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_doublon' => 'Erreur : doublon',
 	'erreur_scripts' => 'Scripts désactivés : vous ne pouvez pas jouer à ce jeu ici !',
 	'erreur_syntaxe' => 'Erreur de syntaxe',
+	'erreur_inconnu' => 'Paramètre inconnu',
 	'erreur_taille_grille' => 'Erreur : taille invalide',
 
 	// G
@@ -64,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options' => 'Options',
+	'ou' => 'ou',
 
 	// P
 	'point' => ' pt',
@@ -106,8 +109,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_configurer_jeux' => 'Configuration du plugin jeux',
+	'titre_configurer_jeu' => 'Configuration du jeu',
 	'total' => 'Total',
 	'type_resultat' => 'Type de résultats',
+	'titre_config_defaut' => 'Configuration par défaut',
+	'titre_config_interne' => 'Configuration interne de ce jeu',
 
 	// U
 	'une_erreur' => 'Une erreur',

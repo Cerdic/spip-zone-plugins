@@ -75,7 +75,7 @@ function devinettes_reponse($texte, $id) {
  return $texte?"<div class=\"devinettes_reponse\">$texte</div>":'';
 }
 
-// configuration par defaut : jeu_{mon_jeu}_init()
+// configuration par defaut : jeux_{mon_jeu}_init()
 function jeux_devinettes_init() {
 	return "
 		reponse=oui	// afficher la reponse ?

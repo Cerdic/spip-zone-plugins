@@ -41,6 +41,9 @@ define('_JEUX_KAKURO', 'kakuro');
 define('_JEUX_QCM', 'qcm');
 define('_JEUX_QRM', 'qrm');
 define('_JEUX_QUIZ', 'quiz');
+define('_JEUX_RELIER', 'relier');
+define('_JEUX_GAUCHE', 'gauche');
+define('_JEUX_DROITE', 'droite');
 define('_JEUX_CHARADE', 'charade');
 define('_JEUX_DEVINETTE', 'devinette');
 define('_JEUX_TROU', 'trou');
@@ -73,13 +76,14 @@ $jeux_caracteristiques = array(
 //	'kakuro' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_KAKURO, _JEUX_SOLUTION, _JEUX_CONFIG),
 	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION, _JEUX_CONFIG),
 	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_QCM, _JEUX_QRM, _JEUX_QUIZ, _JEUX_CONFIG, _JEUX_SCORE),
-	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE, _JEUX_AUTEUR, _JEUX_RECUEIL),
+	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE, _JEUX_AUTEUR, _JEUX_RECUEIL, _JEUX_CONFIG),
 	'devinettes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_DEVINETTE, _JEUX_CHARADE, _JEUX_REPONSE, _JEUX_CONFIG),
 	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_TROU, _JEUX_CONFIG, _JEUX_SCORE),
 	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_PENDU, _JEUX_CONFIG),
 	'diag_echecs' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_DIAG_ECHECS, _JEUX_COLORATION, _JEUX_CONFIG),
 	'chesstuff' => array(_JEUX_CHESSSTUFF, _JEUX_CONFIG),
 	'saisies' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_LABEL, _JEUX_SAISIE, _JEUX_CONFIG),
+	'relier' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_COPYRIGHT, _JEUX_GAUCHE, _JEUX_DROITE, _JEUX_SOLUTION, _JEUX_CONFIG),
   ),
 
 // liste des signatures caracteristiques d'un jeu.
@@ -102,6 +106,7 @@ $jeux_caracteristiques = array(
 	'diag_echecs' => array(_JEUX_DIAG_ECHECS),
 	'chesstuff' => array(_JEUX_CHESSSTUFF),
  	'saisies' => array(_JEUX_SAISIE),
+	'relier' => array(_JEUX_GAUCHE, _JEUX_DROITE),
  ),
 
 // nom court a donner aux jeux
@@ -118,6 +123,7 @@ $jeux_caracteristiques = array(
 	'diag_echecs' => _L('Echecs'),
 	'chesstuff' => _L('Echecs'),
 	'saisies' => _L('Saisies'),
+	'relier' => _L('Points à relier'),
   ),
 
 );
@@ -135,9 +141,9 @@ unset($temp);
 // ca peut toujours servir pour les controles...
 // dossiers : jeux/style/ et jeux/javascript/
 global $jeux_header_prive, $jeux_javascript_prive;
-$jeux_header_prive = array('jeux','qcm', 'mots_croises', 'sudoku', 'pendu', 'trous');
+$jeux_header_prive = array('jeux','qcm', 'mots_croises', 'sudoku', 'pendu', 'trous', 'relier');
 // mots_croises.js suffit car sudoku.js est a priori l'exacte copie
-$jeux_javascript_prive = array('jeux', 'qcm', 'pendu', 'mots_croises');
+$jeux_javascript_prive = array('jeux', 'qcm', 'pendu', 'mots_croises', 'relier');
 
 // Codes RGB des couleurs predefinies a utiliser pour certains parametres apres la balise [config]
 global $jeux_couleurs;
@@ -162,7 +168,27 @@ $jeux_couleurs = array(
 	'brun' => array(224,183,153),
 	'jauneclair' => array(247,235,211),
 	'brunclair' => array(255,243,217),
+	
+	'rouge' => array(230,0,0),
+	'red' => array(230,0,0),
 );
+
+function jeux_rgbArray($couleur) {
+	global $jeux_couleurs;
+	if(isset($jeux_couleurs[$couleur]))
+		return $jeux_couleurs[$couleur];
+	include_spip('inc/filtres_images_mini');
+	$c = str_replace('html:', '', $couleur); // forcer une couleur html
+	$c = _couleur_hex_to_dec($c);
+	return $jeux_couleurs[$couleur] = array($c['red'], $c['green'], $c['blue']);
+}
+
+function jeux_rgb($couleur, $rgb=true) {
+	list($a, $b, $c) = jeux_rgbArray($couleur);
+	if($rgb) return "rgb($a, $b, $c)";
+	include_spip('inc/filtres_images_mini');
+	return _couleur_dec_to_hex($a, $b, $c);
+}
 
 global $scoreMULTIJEUX; $scoreMULTIJEUX = array();
 

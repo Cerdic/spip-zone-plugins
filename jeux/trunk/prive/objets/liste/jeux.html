@@ -53,13 +53,13 @@
 		<tr class='first_row'>
 			<th class='statut_article' scope='col'>[(#TRI{statut_article,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			<th class='titre' scope='col'>[(#TRI{titre,<:jeu:label_titre_article:>,ajax})]</th>
-			<th class='type_jeu_article' scope='col'><:jeu:label_type_jeu:></th>
+			<th class='type_jeu_article' scope='col'><:jeu:label_type_jeu:></th> [(#REM) a voir si on peut trier ? type_jeu n'est pas un champ SQL :-( ]
 			<th class='date_article' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
 			<th class='id' scope='col'>[(#TRI{id_article,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-    <BOUCLE_articles(ARTICLES){statut?}{recherche &lt;/jeux&gt;}{tri #ENV{par,num titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+    <BOUCLE_articles(ARTICLES){statut?}{recherche \<jeux\>}{tri #ENV{par,num titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td> 
 			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a></td>
@@ -81,11 +81,15 @@
 
 <div class="modules_jeux">
 
-[(#BOITE_OUVRIR{#CHEMIN_IMAGE{jeu-16.png}|balise_img{'',cadre-icone}
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{jeu-24.png}|balise_img{'',cadre-icone}
 	|concat{<:jeu:titre_modules_dispos:>},'simple','titrem'})]
-
 [(#VAL|table_jeux_caracteristiques)]
+#BOITE_FERMER
 
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{jeu-config-24.png}|balise_img{'',cadre-icone}
+	|concat{<:jeux:configuration_generale:>},'simple','titrem'})]
+<p class="jeux_decaler_config">[(#VAL|jeux_configuration_generale)]</p>
+<p><a href='#URL_ECRIRE{configurer_jeux}'><:jeux:configuration_jeux:></a></p>
 #BOITE_FERMER
 
 </div>

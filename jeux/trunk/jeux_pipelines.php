@@ -91,6 +91,12 @@ function jeux_post_propre($texte) {
 	return $texteAvant.$texte.jeux_post_propre($texteApres);
 }
 
+// pipeline ramasse-miettes permet de recuperer le HTML propre *après* la reinsertion des modeles
+// les scripts de jeux (base ou inline) sont empeches en partie privee, il a fallu les echapper.
+// textwheel >= 1.3.5
+function jeux_post_echappe_html_propre($texte) {
+	return echappe_retour($texte, 'JEUX_SCRIPTS');
+}
 
 // pipeline header_prive
 function jeux_header_prive($flux){
@@ -157,15 +163,21 @@ function jeux_affiche_gauche($flux){
         $flux['data'].= boite_ouvrir('','info');
         $flux['data'].= '<a href="'.generer_url_ecrire('jeux_resultats','id_auteur='.$flux['args']['id_auteur']).'">'._T('jeux:voir_resultats').'</a>';
         $flux['data'].= boite_fermer();  
-        
      }
       if ($flux['args']['exec'] == 'infos_perso') {
         $flux['data'].= boite_ouvrir('','info');
         $flux['data'].= '<a href="'.generer_url_ecrire('jeux_resultats','id_auteur='.$GLOBALS['auteur_session']['id_auteur']).'">'._T('jeux:voir_resultats').'</a>';
         $flux['data'].= boite_fermer();  
-        
      }
-    return $flux;    
+    return $flux;
+}
+
+// Afficher liens vers les résultats de l'auteur
+function jeux_affiche_milieu($flux){
+     if ($flux['args']['exec'] == 'article') {
+        $flux['data'].= jeux_configuration_jeux_inline($flux['args']['id_article']);
+     }
+    return $flux;
 }
 
 ?>

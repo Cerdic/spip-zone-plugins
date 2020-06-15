@@ -93,8 +93,7 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $form, $solution=false
 			$classnoir = ' class="jeux_noir' . ($ligne==$hauteur?($colonne==$largeur?' jeux_bas jeux_droite':' jeux_bas'):($colonne==$largeur?' jeux_droite':'')) . '"';
 		    // s'il s'agit d'un noir
 		    if ($cellule == "*") { 
-				$noires = $jeux_couleurs[jeux_config('fondnoir')];
-				$noires = "rgb($noires[0], $noires[1], $noires[2])";
+				$noires = jeux_rgb(jeux_config('fondnoir'));
 				$grille .= "\t\t<td$classnoir style=\"background-color:$noires; color:$noires;\">*</td>\n";
 			}
 			else if ($solution)
@@ -210,7 +209,7 @@ function affichage_definitions($horizontal, $vertical) {
 	return $liste_horizontal.$liste_vertical;
 }
 
-// configuration par defaut : jeu_{mon_jeu}_init()
+// configuration par defaut : jeux_{mon_jeu}_init()
 function jeux_mots_croises_init() {
 	return "
 		solution=oui	// Afficher la solution ?

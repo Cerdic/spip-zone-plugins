@@ -178,7 +178,7 @@ function calcul_erreurs_sudoku($tableau_sudoku, $solution, $indexJeux) {
 		. '</div><br />';
 }
 
-// configuration par defaut : jeu_{mon_jeu}_init()
+// configuration par defaut : jeux_{mon_jeu}_init()
 function jeux_sudoku_init() {
 	return "
 		solution=oui	// Afficher la solution ?

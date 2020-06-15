@@ -40,7 +40,7 @@ Exemple de syntaxe dans l'article :
 // Separateur pour l'enregistrement en base des resultats longs
 @define('_SEP_BASE_MULTI_JEUX', '<br />');
 
-// configuration par defaut : jeu_{mon_jeu}_init()
+// configuration par defaut : jeux_{mon_jeu}_init()
 function jeux_multi_jeux_init() {
 	return "
 		bouton_corriger=corriger // fond utilise pour le bouton 'Corriger' (non ou 0 : pas de bouton)

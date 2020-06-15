@@ -115,11 +115,12 @@ function balise_TEXTE_JEU_dist($p) {
 	return $p;
 }
 
-// renvoie la configuration interne d'un jeu
-function balise_CONFIG_INTERNE_dist($p) {
+// renvoie la configuration interne complete du jeu
+// si un parametre existe, alors la valeur de configuration est retournee
+function balise_CONFIG_JEU_dist($p) {
 	$texte = champ_sql('texte', $p);
 	$param = interprete_argument_balise(1, $p);
-	$p->code = "jeux_trouver_configuration_interne($texte, ".($param?$param:"''").')';
+	$p->code = "jeux_trouver_configuration_complete($texte" . ($param ? ", $param" : '') . ')';
 	return $p;
 }
 
@@ -148,8 +149,9 @@ function table_jeux_caracteristiques() {
 	$res = _T('jeu:explication_modules')
 		. "\n\n| {{"._T('jeux:jeux').'}} | {{'._T('public:signatures_petition').'}} | {{'._T('jeu:label_options').'}} | {{'._T('spip:icone_configuration_site').'}} |';
 	foreach($jeux_caracteristiques['TYPES'] as $j=>$t) {
-		include_spip('jeux/'.$j);
-		$config = function_exists($f='jeux_'.$j.'_init')?trim($f()):'';
+		//include_spip('jeux/'.$j);
+		//$config = function_exists($f = 'jeux_'.$j.'_init') ? trim($f()) : '';
+		$config = jeux_trouver_configuration_defaut($j);
 		$res .= "\n|$t|&#91;" 
 			. join("]<br />&#91;", $jeux_caracteristiques['SIGNATURES'][$j]) . ']|['
 			. join("]<br />&#91;", array_diff($jeux_caracteristiques['SEPARATEURS'][$j], $jeux_caracteristiques['SIGNATURES'][$j])) . ']|'
@@ -201,4 +203,29 @@ function filtre_resultat_intermediaire($texte, $code='score', $index=0) {
 	}
 }
 
+// retourne la configuration de tous les jeux trouves dans le texte de l'article
+function jeux_configuration_jeux_inline($id_article) {
+	include_spip('public/assembler');
+	return recuperer_fond('fonds/article_jeu_config', array('id_article' => $id_article));
+}
+
+// filtre isolant le texte inline de jeux eventuels entre les balises <jeux/>
+// retour : tableau des textes de jeux inline trouves dans le texte initial
+function jeux_isoler_les_jeux($texte) {
+	$tableau = array();
+	while(true) {
+		$texte = trim($texte);
+		// pas/plus de jeu ?
+		if(!strlen($texte) || strpos($texte, _JEUX_DEBUT)===false || strpos($texte, _JEUX_FIN)===false)
+			return $tableau;
+		// isoler le jeu...
+		list($texteAvant, $suite) = explode(_JEUX_DEBUT, $texte, 2); 
+		list($texte, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
+		$res = jeux_trouver_configuration_complete($texte);
+		if ($res)
+			$tableau[] = code_echappement($texte);
+		$texte = $texteApres;
+	}
+}
+	
 ?>
