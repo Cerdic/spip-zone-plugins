@@ -184,6 +184,7 @@ function cache_lire($plugin, $cache) {
  *
  * @uses configuration_cache_lire()
  * @uses ezcache_cache_composer()
+ * @uses ezcache_cache_valider()
  *
  * @param string       $plugin Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *                             ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -212,23 +213,12 @@ function cache_est_valide($plugin, $cache) {
 		$fichier_cache = $cache;
 	}
 
-	if ($fichier_cache) {
-		// Vérifier en premier lieu l'existence du fichier.
-		if (!file_exists($fichier_cache)) {
-			$fichier_cache = '';
-		} else {
-			// Vérifier la péremption ou pas du fichier.
-			// -- un délai de conservation est configuré pour les caches du plugin utilisateur mais il possible
-			//    de préciser un délai spécifique à un cache donné (index 'conservation' dans l'id du cache).
-			// -- si le délai est à 0 cela correspond à un cache dont la durée de vie est infinie.
-			$conservation = (is_array($cache) and isset($cache['conservation']))
-				? $cache['conservation']
-				: $configuration['conservation'];
-			if (($conservation > 0)
-			and (!filemtime($fichier_cache) or (time() - filemtime($fichier_cache) > $conservation))) {
-				$fichier_cache = '';
-			}
-		}
+	// Vérifier maintenant la validité du cache.
+	if (
+		$fichier_cache
+		and !ezcache_cache_valider($plugin, $fichier_cache, $cache, $configuration)
+	) {
+		$fichier_cache = '';
 	}
 
 	return $fichier_cache;

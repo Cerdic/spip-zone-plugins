@@ -260,6 +260,7 @@ function ezcache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 	return $cache;
 }
 
+
 /**
  * Complète la description d'un cache issue du service `cache_decomposer()`.
  *
@@ -346,6 +347,55 @@ function ezcache_cache_decoder($plugin, $contenu, $configuration) {
 	}
 
 	return $contenu;
+}
+
+
+/**
+ * Vérifie la validité du fichier cache.
+ *
+ * Le plugin Cache Factory teste toujours la péremption du fichier (durée de conservation issue). Il est toutefois
+ * possible de rajouter des tests spécifiques en appelant un service propre au plugin.
+ *
+ * @uses cache_service_chercher()
+ *
+ * @param string $plugin        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $fichier_cache Le chemin complet du fichier à valider.
+ * @param array  $cache         Tableau identifiant le cache (redondant avec l'argument $fichier_cache mais peut être
+ *                              nécessaire pour les éventuels tests complémentaires du plugin utilisateur.
+ * @param array  $configuration Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
+ *
+ * @return bool `true` si le cache est valide, `false` sinon.
+ */
+function ezcache_cache_valider($plugin, $fichier_cache, $cache, $configuration) {
+
+	// Initialisation de la sortie
+	$est_valide = true;
+
+	// Vérifier en premier lieu l'existence du fichier.
+	if (!file_exists($fichier_cache)) {
+		$est_valide = false;
+	} else {
+		// Vérifier la péremption ou pas du fichier.
+		// -- un délai de conservation est configuré pour les caches du plugin utilisateur mais il possible
+		//    de préciser un délai spécifique à un cache donné (index 'conservation' dans l'id du cache).
+		// -- si le délai est à 0 cela correspond à un cache dont la durée de vie est infinie.
+		$conservation = (is_array($cache) and isset($cache['conservation']))
+			? $cache['conservation']
+			: $configuration['conservation'];
+		if (($conservation > 0)
+		and (!filemtime($fichier_cache) or (time() - filemtime($fichier_cache) > $conservation))) {
+			$est_valide = false;
+		}
+
+		// Si le fichier a passé la vérification de péremption, il est possible de rajouter des tests spécifiques
+		// au plugin utilisateur.
+		if ($valider = cache_service_chercher($plugin, 'cache_valider')) {
+			$est_valide = $valider($plugin, $cache, $configuration);
+		}
+	}
+
+	return $est_valide;
 }
 
 /**
