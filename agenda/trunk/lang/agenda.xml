@@ -31,7 +31,7 @@
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=fr" total="155" traduits="155" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
-	<langue code="ja" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=ja" total="155" traduits="127" relire="0" modifs="0" nouveaux="28" pourcent="81.94">
+	<langue code="ja" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=ja" total="155" traduits="155" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
 		<traducteur nom="origenius" lien="https://trad.spip.net/auteur/origenius" />
 	</langue>
