@@ -15,10 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => '多数でメールの送信を設定する',
 
 	// E
-	'erreur_aucun_service_configure' => 'どんなメールサービスも設定されていません。 <a href="@url@">Configurer un service</a>',
-	'erreur_envoi_mail_bloque_debug' => '<tt>_TEST_EMAIL_DEST</tt>はメールの送信を停止しました。', # MODIF
-	'erreur_envoi_mail_force_debug' => '<tt>_TEST_EMAIL_DEST</tt>は強制的に@email@宛にを送信しました。', # MODIF
-	'erreur_generation_newsletter' => 'ニュースレターの生成中にエラーが発生しました。', # MODIF
+	'erreur_aucun_service_configure' => 'どんなメールサービスも設定されていません。 <a href="@url@">設定する</a>',
+	'erreur_envoi_mail_bloque_debug' => '<tt>_TEST_EMAIL_DEST</tt>はメールの送信を停止しました。',
+	'erreur_envoi_mail_force_debug' => '<tt>_TEST_EMAIL_DEST</tt>は強制的に@email@宛に送信しました。',
+	'erreur_envoi_newsletter' => 'ニュースレター送信中に不明なエラーが発生しました。',
+	'erreur_generation_newsletter' => 'ニュースレターの生成中にエラーが発生しました。',
 	'explication_boost_send' => 'この送信モードでは、メールはでできるだけ早く送信されます。 レート制限は考慮
 されていません。',
 	'explication_purger_historique' => '多数で各送信の場合、送信に関するステータスと宛先人の情報はデータベースに保管
@@ -64,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_start' => '送信の開始日',
 	'label_envoi' => '送信',
 	'label_from' => '差出人',
+	'label_graceful' => '送信するのはまだ受け取っていない購読者だけに',
 	'label_html' => 'HTMLバージョン',
 	'label_listes' => '名簿',
 	'label_mailer_defaut' => '他のメールと同じメールサービスを使用する。',
@@ -100,11 +102,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_pause' => '一時停止中',
 	'texte_statut_processing' => '処理中',
 	'titre_envois_archives' => 'アーカイブとされた送信',
-	'titre_envois_destinataires_fail' => '送信失敗', # MODIF
+	'titre_envois_destinataires_clic' => 'クリックされたメール',
+	'titre_envois_destinataires_fail' => '送信エラー',
 	'titre_envois_destinataires_init_encours' => 'どんな設定された宛先人もいません。（初期化中）',
 	'titre_envois_destinataires_ok' => '送信済み',
+	'titre_envois_destinataires_read' => '読んだメール',
 	'titre_envois_destinataires_sent' => '送信済み',
-	'titre_envois_destinataires_todo' => '送信すべきメール', # MODIF
+	'titre_envois_destinataires_spam' => '迷惑メール',
+	'titre_envois_destinataires_todo' => '送信すべきメール',
 	'titre_envois_en_cours' => '送信中',
 	'titre_envois_planifies' => '計画送信',
 	'titre_envois_termines' => '送信済み',
