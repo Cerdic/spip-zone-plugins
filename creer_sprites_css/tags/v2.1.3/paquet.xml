@@ -1,0 +1,17 @@
+<paquet
+	prefix="creer_sprites"
+	categorie="multimedia"
+	version="2.1.3"
+	etat="test"
+	compatibilite="[3.2.0;3.3.*]"
+	documentation="https://23forward.com/Plugin-Creer-Sprites-CSS"
+>
+
+	<nom>Cr&#233;er sprites CSS</nom>
+
+	<auteur>ARNO*</auteur>
+	<auteur>JLuc</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL</licence>
+
+	<pipeline nom="affichage_final" inclure="creer_sprites_fonctions.php" />
+</paquet>
