@@ -42,7 +42,7 @@ function sprite($img, $nom) {
 
 		// On pose un marqueur pour le timestamp du futur fichier sprite
 		// qui garantira le raffraîchissement de l'affichage en cas de mise à jour du sprite
-		$fichier .= "?m=spiprempdate[$fichier]";
+		$fichier .= "?spiprempdate[$fichier]";
 
 		$date_src = @filemtime($src);
 		if (!isset($GLOBALS['sprites'][$nom]['date'])
@@ -152,6 +152,8 @@ function filtre_creer_sprites($page) {
 
 			$ext = creer_sprites_terminaison_fichier_image($fichier_sprite);
 			if ($ext != 'png') {
+				include_spip("filtres/images_transforme");
+
 				if ($new = extraire_attribut(image_aplatir("$nom_fichier_sprite.png", $ext, 'ffffff'), 'src')) {
 					copy($new, $fichier_sprite);    // copy ($source , $dest)
 				}
@@ -165,7 +167,7 @@ function filtre_creer_sprites($page) {
 		}
 	}
 	// Mettre les dates des fichiers en variable de chaque appel
-	$page = preg_replace_callback(',spiprempdate\[([^\]]*)\],', 'creer_sprites_remplacer_date', $page);
+	$page = preg_replace_callback(',spiprempdate\[([^\]]*)\],', '_creer_sprites_remplacer_date', $page);
 
 	$GLOBALS['sprites'] = false;
 
@@ -176,7 +178,7 @@ function filtre_creer_sprites($page) {
  * @param array $regs       tableau dont l'élément d'index 1 est un chemin de fichier
  * @return string mixed     timestamp de la création du fichier
  */
-function creer_sprites_remplacer_date($regs) {
+function _creer_sprites_remplacer_date($regs) {
 static $date_fichier=array();
 	$fichier = $regs[1];
 	if (isset($date_fichier[$fichier])) {
@@ -185,6 +187,10 @@ static $date_fichier=array();
 		$date_fichier[$fichier] = @filemtime($fichier);
 		return $date_fichier[$fichier];
 	}
+}
+
+function creer_sprites_remplacer_date($page) {
+	return preg_replace_callback(',spiprempdate\[([^\]]*)\],', '_creer_sprites_remplacer_date', $page);
 }
 
 /**
