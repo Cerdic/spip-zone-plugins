@@ -1,0 +1,21 @@
+<div class="ajax formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE
+
+		#GENERER_SAISIES{#ENV{_saisies}}
+
+		[(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer|attribut_html:>' />
+		</p>
+	</div></form>
+	]
+</div>
+<style>
+	.editer_dimensions .unit input.text {width: 80%}
+	.editer_taxe input.text {max-width: 5em;text-align: right}
+</style>
