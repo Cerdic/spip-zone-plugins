@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_test_envoye' => 'テストメールが正しく送信されました。正しく表示されない場合は、サーバーの設定を確認するか、サーバー管理者に問い合わせてください。',
 	'erreur' => 'エラー',
 	'erreur_dans_log' => '：詳細は、ログファイルを確認してください。',
+	'erreur_envoi_bloque_constante' => '定数 <tt>_TEST_EMAIL_DEST</tt> によって、送信は中止されます。',
 	'erreur_generale' => '設定エラーが最低１つあります。フォームの内容を確認してください。',
 	'erreur_invalid_host' => 'このホスト名が正しくありません。',
 	'erreur_invalid_port' => 'このポート番号が正しくありません。',
@@ -58,11 +59,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_tls_allow_self_signed_oui' => 'SMTPサーバーのSSL証明書は自己署名されています。',
 	'facteur_smtp_username' => 'ユーザーネーム：',
 
+	// I
+	'info_envois_bloques_constante' => '定数 <tt>_TEST_EMAIL_DEST</tt> によって、全ての送信は中止されます。',
+	'info_envois_forces_vers_email' => '定数 <tt>_TEST_EMAIL_DEST</tt> によって、全ては強制的に<b>@email@</b>へ送信されます。',
+
 	// L
+	'label_email_test_from' => '送信者',
+	'label_email_test_from_placeholder' => 'from@example.org（オプショナル）',
+	'label_email_test_important' => 'このメールは重要です',
 	'label_facteur_forcer_from' => '</tt>form<tt> が同じドメインにない場合、この送信アドレスを強制する。',
+	'label_mailjet_api_key' => 'Mailjet API キー',
+	'label_mailjet_api_version' => 'API バージョン',
+	'label_mailjet_secret_key' => 'シークレットキー Mailjet',
+	'label_message_envoye' => '送信済み：',
+	'label_utiliser_mailjet' => 'Mailjet 使用',
 
 	// M
-	'message_identite_email' => '「郵便屋さん」というプラグインの設定は、Ｅメールを送信するためにこのメールアドレスをオーバーロードします。', # MODIF
+	'message_identite_email' => '「郵便屋さん」というプラグインの設定は（<a href="@url@">）、Ｅメールを送信するためにこのメールアドレスをオーバーロードします。',
 
 	// N
 	'note_test_configuration' => 'このアドレスにＥメールを送信します。',
@@ -70,13 +83,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'personnaliser' => '設定のカスタマイズする',
 
+	// S
+	'sujet_alerte_mail_fail' => '@dest@に送信失敗（@sujet@）',
+
 	// T
 	'tester' => 'テスト',
 	'tester_la_configuration' => '設定をテストする',
+	'titre_configurer_facteur' => '郵便屋さん設定',
 
 	// U
-	'utiliser_mail' => 'PHPメール機能を使用する', # MODIF
-	'utiliser_reglages_site' => 'SPIPサイト設定を使用する： <br/>@from@', # MODIF
+	'utiliser_mail' => 'PHPメール機能を使用する',
+	'utiliser_reglages_site' => 'SPIPサイト設定を使用する',
 	'utiliser_smtp' => 'SMTPを使用する',
 
 	// V
