@@ -6,7 +6,7 @@ if (!defined("_HTML5_RESPONSIVE_ACCESSIBLE")) define("_HTML5_RESPONSIVE_ACCESSIB
 
 function html5_responsive_insert_head($flux) {
 
-	if (_HTML5_RESPONSIVE_ACCESSIBLE) $viewport ="width=device-width,viewport-fit=cover"; 
+	if (_HTML5_RESPONSIVE_ACCESSIBLE) $viewport ="width=device-width,viewport-fit=cover,initial-scale=1.0"; 
 	else $viewport = "user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover";
 
 	$flux = "<meta charset='".lire_meta("charset")."'>
