@@ -55,12 +55,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_zones' => 'すべてのゾーンから取り外す',
 	'info_rubrique_dans_zone' => 'このセクションは、ゾーンに属しています。',
 	'info_rubrique_dans_zones' => 'このセクションは、ゾーンに属しています。',
+	'info_vous_avez_acces_a_cette_zone' => 'このゾーンにアクセス権があります。',
+	'info_vous_navez_pas_acces_a_cette_zone' => 'このゾーンにはアクセス権がありません。',
 
 	// L
 	'label_creer_htaccess' => 'URLによって添付されたドキュメントへのアクセス',
 	'label_creer_htaccess_non' => '読み取り許可',
 	'label_creer_htaccess_oui' => '読み取り禁止',
 	'label_droits_acces' => 'アクセス権',
+	'label_filtrer_rubriques' => '濾過する',
 	'label_titre_zone' => '件名',
 
 	// M
@@ -69,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'page_zones_acces' => '制限付きアクセス',
 	'par_titre' => '件名で',
+	'placeholder_filtrer_rubriques' => 'セクションの題名',
 	'privee' => 'プライベート',
 	'publique' => '公開',
 
