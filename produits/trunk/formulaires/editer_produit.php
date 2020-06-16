@@ -285,9 +285,11 @@ function formulaires_editer_produit_traiter($id_produit = 'new', $id_rubrique = 
 	set_request('id_parent', produits_id_parent());
 
 	// Normaliser la taxe
-	$taxe = floatval(_request('taxe'));
-	set_request('taxe', $taxe/100);
-
+	$taxe = floatval(_request('taxe')) / 100;
+	// Qu'on remet dans l'environnement pour les fonctions suivantes
+	set_request('taxe', $taxe);
+	
+	// Si on a édité en TTC, il faut recalculer le HT
 	if (lire_config('produits/editer_ttc')) {
 		$prix_ht = _request('prix_ttc') / (1 + $taxe);
 		set_request('prix_ht', $prix_ht);
@@ -296,16 +298,17 @@ function formulaires_editer_produit_traiter($id_produit = 'new', $id_rubrique = 
 	$retours = formulaires_editer_objet_traiter('produit', $id_produit, $id_rubrique, $lier_trad, $retour);
 
 	// Dans le cas d'une création on lie l'auteur au produit
-	if(!is_numeric($id_produit)){
+	if(!is_numeric($id_produit)) {
 		include_spip('action/editer_liens');
 		$id_auteur = session_get('id_auteur');
 		objet_associer(array("auteur"=>$id_auteur), array("produit"=>$retours['id_produit']));
 	}
 
-	// En cas d’erreur, repasser la taxe en base 100 saisie.
+	// En cas d’erreur, repasser la taxe en base 100 pour la saisie.
 	if (!empty($retours['message_erreur'])) {
 		set_request('taxe', $taxe*100);
 	}
+	
 	return $retours;
 }
 
