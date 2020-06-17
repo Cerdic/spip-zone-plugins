@@ -1,0 +1,52 @@
+[(#REM) paddingX du canvas: 30px à gauche + 30px à droite ]
+#SET{widthCanvas, 220}
+[(#ENV*{imageFond}|non)
+	#SET{2xPaddingX, #ENV{margeHorizontale, 30}|intval|mult{2}}
+	#SET{widthCanvas, #ENV{espaceHorizontal, 140}|intval|plus{#GET{2xPaddingX}}}
+]
+#SET{toutRelier, #ENV{toutRelier}|?{1,0}}
+<div id="relierDataL#ENV{indexJeux}">#ENV*{colGauche}</div>
+<div id="relierDataR#ENV{indexJeux}">#ENV*{colDroite}</div>
+[<div class="relierImageFond" id="ImageFond#ENV{indexJeux}" >#MODELE{image,id=#ENV*{imageFond}}</div>(#ENV*{imageFond}|oui)]
+<div class="relierInfoTop">
+	<div id="exo#ENV{indexJeux}"></div>
+</div>
+<div id="relierContent#ENV{indexJeux}" class="relierContent">
+	<div class = "relierContent1">
+		<div id="relierDivGauche#ENV{indexJeux}" class="relierDivGauche relierDivColonne"></div>
+	</div>
+	<div class = "relierContent2">
+		<div>
+			<div id="AlertContainer#ENV{indexJeux}" class="relierAlertContainer"></div>
+			<canvas id="canvas#ENV{indexJeux}" class="relierCanvas"
+					width="#GET{widthCanvas}" height="440">
+			<!-- message pour les navigateurs ne supportant pas encore canvas -->
+			Votre navigateur ne supporte pas l'élément canvas.
+			</canvas>
+		</div>
+	</div>
+	<div class = "relierContent3">
+		<div id="relierDivDroite#ENV{indexJeux}" class="relierDivDroite relierDivColonne"></div>
+	</div>
+</div>
+<!-- Boutons -->
+<div class="relierAvantBoutons"></div>
+	<div class="relierBoutons"><div>
+		<button id="del#ENV{indexJeux}" class="jeux_bouton ToolBtn"><img src="#CHEMIN{img/relier/scissors_ready.gif}"></button>
+		<button id="relierBack#ENV{indexJeux}" class="jeux_bouton RestoreBtn"><img src="#CHEMIN{img/relier/undo.gif}"></button>
+		<button id="relierForward#ENV{indexJeux}" class="jeux_bouton RestoreBtn"><img src="#CHEMIN{img/relier/redo.gif}"></button>
+		<button id="connection#ENV{indexJeux}" class="jeux_bouton relierConnection">Corriger</button>
+	</div>
+	<div id="count#ENV{indexJeux}" class="relierCount"></div>
+</div>
+<div id="infoBottom#ENV{indexJeux}" class="relierInfoBottom"></div>
+<script>
+	relierDraw_create(true, "#ENV{indexJeux}",
+		"relierDataL#ENV{indexJeux}", "relierDataR#ENV{indexJeux}", 
+		atob("#ENV*{ordreGauche}").split('/'), atob("#ENV*{ordreDroite}").split('/'), 
+		"#CHEMIN{img/relier/}", "#ENV{couleurLignes, '#FF0000'}", "#ENV{couleurErreurs, '#000000'}",
+		"#ENV*{espaceHorizontal, 140}/#ENV*{espaceVertical, 40}/#ENV*{margeHorizontale, 30}/#ENV*{margeVerticale, 20}/#GET{toutRelier}", 
+		#ENV{compteur, 0}
+	);
+</script>
+<noscript>Vous devez avoir Javascript activé pour utiliser ce module</noscript>

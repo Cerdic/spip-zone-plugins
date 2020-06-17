@@ -1,0 +1,145 @@
+.jeux_cadre .relierCanvas { /* modifier la position du clic du curseur personnalisé */
+	cursor: url(../img/relier/pen_red_ff0000.gif)0 20, auto;
+}
+
+.relierInfoTop, .relierInfoBottom  { /* marge encadrant les blocs div principaux */
+	margin: 20px;
+}
+
+.relierContent {
+	text-align: center;
+}
+
+.relierInfoTop { display: none; }
+
+.relierInfoBottom { /* espace entre le contenu (canvas + texte) et les informations du bas du module pour le mode administration */
+	position: relative;
+	top: 45px;
+}
+
+.jeux_cadre .relierContent > div { /* afficher les colonnes de blocs à la suite, sur une ligne */
+	display: inline-block;
+	vertical-align: top;
+}
+
+.relierContent1, .relierContent3 { /* les 2 colonnes entourant le canvas du jeu */
+	/* max-width: 33%; */
+}	
+
+.jeux_cadre .relierDivGauche { /* espace entre le bloc de texte gauche et le bloc contenant le canvas */
+	/* margin-right: 50px; */
+}
+
+.jeux_cadre .relierDivDroite { /* espace entre le bloc de texte de droite et le bloc contenant le canvas */
+	/* margin-left: 50px; */
+}
+
+.relierDivColonne .relierElement { /* style et position du texte pour les balises div, lorsque l'utilisateur fait un exercice */
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+	font-family: sans-serif; /* sans-serif: police ayant une bonne compatibilité entre navigateurs (arial: décalage 1px suivant la propriété font-size) */
+}
+
+.relierDivColonne dl.spip_documents, .relierDivColonne img {
+	margin: 0;
+	border: 0;
+	padding: 0;
+}
+.relierDivColonne dl.spip_documents dt:nth-child(2) {
+	display: none; /* pas de titre sur les images eventuelles */
+}
+
+.relierCount {
+    float: right;
+    font-size: smaller;
+}
+
+.inputText > input { /* style et position du texte pour les balises input, lorsque l'utilisateur créé ou modifie un exercice */
+	height: 18px; /* nécessaire de préciser la taille pour avoir la même marge suivant les navigateurs */
+	margin-bottom: 16px;
+	position: relative;
+	top: 25px;
+}
+
+.relier .relierBoutons div {
+	display: flex;
+}
+
+.relier .relierBoutons {
+	text-align: center;
+}
+
+.relier .relierAvantBoutons {
+	border-top: 2px solid lightgrey;
+    margin: 1em 15%;
+}
+
+.relier .ToolBtn { /* épaisseur et position du bouton d'outils ciseaux pour supprimer un tracé */
+	padding: 3px 6px;
+	margin: auto 50px auto auto;
+}
+
+.relier .RestoreBtn {
+	/* épaisseur et position des boutons permettant de restaurer un tracé en avant/arrière */
+    padding: 3px 3px;
+    margin: auto 5px auto;
+}
+
+.relier .relierConnection { /* position du bouton de connexion corriger ou envoyer suivant l'utilisation du module */
+	margin: auto auto auto 50px;
+}
+
+.inputRemove { /* bouton (croix rouge) permettant de supprimer les champs en mode administration */
+	padding: 0px 0px 0px 0px;
+	background: none;
+	border: 0px;
+	position: absolute; /* position absolute permet d'éviter d'avoir des décalages entre éléments */
+	margin-top: 30px; /* utiliser margin-top et margin-left au lieu de top et left pour commencer depuis le haut-gauche de la page */
+	margin-left: 5px;
+}
+
+.relierAlertContainer {
+	z-index:99; /* z-index permet de donner une priorité sur l'affichage des éléments (div au dessus des tags input) */
+	position: absolute;
+	margin-top: 50px;
+}
+.relierAlertBox { /* style de la boîte de dialogue HTML/CSS */
+	background-color: white;
+	border-style: solid;
+	border-width: 1px;
+	padding: 15px 20px 5px 20px;
+	max-width: 500px; /* continuer le message sur une nouvelle ligne si on atteint une boîte de dialogue de plus de 500 pixels de large */
+	text-align: center;
+}
+
+.relier .AlertButton { /* style du bouton par défaut de la boîte de dialogue HTML/CSS */
+	width: 75px;
+}
+
+.relier .extraAdmin { /* positionnement du bloc textarea + coordonnées canvas + bouton reset (utilisation de l'option debug) */
+	position: absolute;
+	left: 550px;
+	top: 15px;
+}
+
+.relier .extraUser { /* bloc extra pour l'utilisateur classique */
+	position: absolute;
+	top: -20px;
+}
+
+.jeux_cadre .relierCoordonnees { /* décalage positionnement pour la balise input text des coordonnées canvas */
+	position: relative;
+	top: -5px;
+	left: 15px;
+}
+
+.jeux_cadre .relierReset { /* décalage positionnement pour la balise input button du bouton reset */
+	position: relative;
+	top: -35px;
+	left: -50px;
+}
+
+.jeux_cadre .relierImageFond {
+	display: none;
+}

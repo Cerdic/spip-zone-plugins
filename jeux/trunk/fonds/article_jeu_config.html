@@ -1,0 +1,23 @@
+[(#REM) liste toutes les configurations trouvees dans le texte de l'article ]
+<B_a>
+
+<BOUCLE_a(ARTICLES){id_article=#ENV*{id_article}}{tout}>
+
+[(#SET{jeux, [(#TEXTE*|jeux_isoler_les_jeux)]})]
+
+<B_afficher>
+[(#SET{titre, [(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{jeu:info_1_jeu_inline,jeu:info_nb_jeux_inline}})]})]
+#BOITE_OUVRIR{'', 'info'}
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{jeux-edit-24.png}|balise_img{'',cadre-icone})][(#GET{titre}|wrap{'<h3>'})],'simple'})]
+
+<BOUCLE_afficher(DATA){source tableau,#GET{jeux}}> 
+#SET{valeur, #VALEUR|echappe_retour}
+<h3>##COMPTEUR_BOUCLE.[(#GET{valeur}|titre_jeu)]</h3>
+ [<div class ="jeux_decaler_config">(#GET{valeur}|jeux_trouver_configuration_complete)</div>]
+</BOUCLE_afficher>
+</B_afficher>
+
+</BOUCLE_a>
+#BOITE_FERMER
+#BOITE_FERMER
+</B_a>
