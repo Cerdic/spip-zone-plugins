@@ -6,31 +6,28 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
 #--------------------------------------------------------------------------#
-#  Documentation : https://contrib.spip.net/Des-jeux-dans-vos-articles  #
+#  Documentation : https://contrib.spip.net/Des-jeux-dans-vos-articles     #
 #--------------------------------------------------------------------------#
 /*
 
-Insere des parties d'echecs dans vos articles !
------------------------------------------------
+Insere un jeu de points a relier dans vos articles !
+----------------------------------------------------
 	https://github.com/baptx/connect-points/
 	https://drawcode.eu/projects/connect-points/
 
-Attention : utilisation d'une librairie externe : 
--------------------------------------------------
-
-separateur obligatoire : [gauche] [droite]
-separateur optionnel   : [solution] [config]
+separateurs obligatoires : [gauche] [droite]
+separateurs optionnels   : [solution] [config] [texte] [titre] [copyright]
 parametres de configurations par defaut :
-	Couleur lignes = rouge
-	Couleur erreurs = noir
-	Espace vertical = 40
-	Espace horizontal = 140
-	Marge horizontale = 30
-	Transparence = non
-	Recadre auto = non
-	Compteur = non
-	Aléatoire = non
-	Tout relier = oui
+	Couleur lignes = rouge		// couleur lors du jeu
+	Couleur erreurs = noir		// couleur lors de la correction
+	Espace vertical = 40		// espace vertical entre les points
+	Espace horizontal = 140		// espace horizontal entrre les points
+	Marge horizontale = 30		// marge droite et gauche
+	Transparence = non			// couleur de transparence des images
+	Recadre auto = non			// recadrage automatique des images
+	Compteur = non				// Affichage d'un compteur de secondes
+	Aléatoire = non				// melange des colonnes de droite et de gauche
+	Tout relier = oui			// faut-il tout relier pour la bonne reponse
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -219,7 +216,7 @@ function jeux_relier($texte, $indexJeux, $form = true) {
   // placer les boutons à la fin
   $solution = explode('<!-- Boutons -->', $solution, 2);
   // mise en clair des images et autres modeles échappés 
-  $solution[0] = echappe_retour($solution[0]);	// jeux lui-même et tous ses textes
+  $solution[0] = echappe_retour($solution[0]);	// jeux lui-meme et tous ses textes
   $gauche = echappe_retour($gauche);			// donnees colonne de gauche
   $droite = echappe_retour($droite);			// donnees colonne de droite
   // config avec demande de transparence des images sur un fond de couleur ?
@@ -245,7 +242,7 @@ function jeux_relier($texte, $indexJeux, $form = true) {
 
   $solution[0] = str_replace(array('@@GAUCHE@@', '@@DROITE@@'), array($gauche, $droite), $solution[0]);
 	
-  // nouvel échappement
+  // nouvel echappement
   $html = relier_placer_jeu($html, code_echappement($solution[0])) . $solution[1];
   return $tete . $html  . '</div>';
 
