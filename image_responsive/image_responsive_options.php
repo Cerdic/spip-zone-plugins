@@ -119,7 +119,7 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 					$transp = imagecolortransparent($srcImage); 
 					if ($transp > 0) $destFormat = "png"; 
 				}
-				if ($destFormat == "png") { 
+				if ($destFormat == "png" || $destFormat == "webp") { 
 					// Conserver la transparence 
 					if (function_exists("imageAntiAlias")) imageAntiAlias($destImage,true); 
 					@imagealphablending($destImage, false); 
