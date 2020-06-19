@@ -11,12 +11,15 @@ include_spip('base/objets');
  * Cherche le contenu parent d'un contenu précis. Cette version permet de gérer un parent trouvé dans une table de lien
  * comme :
  * ```
- * 	$tables['spip_auteurs']['parent']  = array(
- *		'type' => 'organisation',
- *		'champ' => 'id_organisation',
- *		'table_lien' => 'spip_organisations_liens',
- *		'role_lien' => 'parent'
- *	);
+ * $tables['spip_auteurs']['parent']  = array(
+ *     'type' => 'organisation',
+ *     'champ' => 'id_organisation',
+ *     'parent_lien' => array(
+ *         'table' => 'spip_organisations_liens',
+ *         'source' => array('champ' => 'id_objet', 'champ_type' => 'objet'),
+ *         'condition' => 'role="parent"',
+ *     )
+ * );
  * ```
  *
  * La table de liens est forcément de structure (id_organisation, objet, id_objet, role).
@@ -36,71 +39,93 @@ function objet_trouver_parent($objet, $id_objet) {
 	// Si on trouve une ou des méthodes de parent
 	if ($parent_methodes = type_objet_info_parent($objet)) {
 
+		// On identifie les informations sur l'objet source dont on cherche le parent.
 		include_spip('base/abstract_sql');
 		$table_objet = table_objet_sql($objet);
 		$cle_objet = id_table_objet($objet);
 		$id_objet = intval($id_objet);
 
 		// On teste chacun méthode dans l'ordre, et dès qu'on a trouvé un parent on s'arrête
-		foreach ($parent_methodes as $parent_methode) {
+		foreach ($parent_methodes as $_parent_methode) {
 			// Champ identifiant le parent (id et éventuellement le type)
+			// -- cette identification ne dépend pas du fait que le parent soit stocké dans une table de différente
+			//    de celle de l'objet source
 			$select = array();
-			if (isset($parent_methode['champ'])) {
-				$select[] = $parent_methode['champ'];
+			if (isset($_parent_methode['champ'])) {
+				$select[] = $_parent_methode['champ'];
 			}
-			if (isset($parent_methode['champ_type'])) {
-				$select[] = $parent_methode['champ_type'];
+			if (isset($_parent_methode['champ_type'])) {
+				$select[] = $_parent_methode['champ_type'];
 			}
 
-			// Détermination de la table et de la condition.
-			// - Si le parent est connu via une table de lien alors il faut adapter la table et le where
-			$role = '';
-			if (isset($parent_methode['table_lien'])) {
-				$table = $parent_methode['table_lien'];
-				$role = isset($parent_methode['role_lien']) ? $parent_methode['role_lien'] : 'parent';
-				$where = array(
-					'objet = ' . sql_quote($objet),
-					"id_objet = $id_objet",
-					'role = ' . sql_quote($role)
-				);
-			} else {
+			// Détermination de la table du parent et des conditions sur l'objet source et le parent.
+			$condition_objet_invalide = false;
+			$where = array();
+			if (!isset($_parent_methode['parent_lien'])) {
+				// Le parent est stocké dans la même table que l'objet source :
+				// -- toutes les conditions s'appliquent à la table source.
 				$table = $table_objet;
 				$where = array("$cle_objet = $id_objet");
-			}
-
-			// - Condition supplémentaire sur la détection du parent
-			if (isset($parent_methode['condition'])) {
-				$where[] = $parent_methode['condition'];
-			}
-
-			// On lance la requête
-			if ($ligne = sql_fetsel($select, $table, $where)) {
-
-				// Si le type est fixe
-				if (isset($parent_methode['type'])) {
-					$parent = array(
-						'objet' 	=> $parent_methode['type'],
-						'id_objet'	=> intval($ligne[$parent_methode['champ']]),
-						'champ' 	=> $parent_methode['champ'],
-					);
+				// -- Condition supplémentaire sur la détection du parent
+				if (isset($_parent_methode['condition'])) {
+					$where[] = $_parent_methode['condition'];
 				}
-				elseif (isset($parent_methode['champ_type'])) {
-					$parent = array(
-						'objet' 	 => $ligne[$parent_methode['champ_type']],
-						'id_objet' 	 => intval($ligne[$parent_methode['champ']]),
-						'champ' 	 => $parent_methode['champ'],
-						'champ_type' => $parent_methode['champ_type'],
+			} else {
+				// Le parent est stocké dans une table différente de l'objet source.
+				// -- on vérifie d'emblée si il y a une condition sur l'objet source et si celle-ci est vérifiée
+				//    Si non, on peut arrêter le traitement.
+				if (isset($_parent_methode['condition'])) {
+					$where = array(
+						"$cle_objet = $id_objet",
+						$_parent_methode['condition']
 					);
-				}
-
-				if ($parent) {
-					// Si on passe par une table de liens
-					if (isset($parent_methode['table_lien'])) {
-						$parent['table_lien'] = $parent_methode['table_lien'];
-						$parent['role_lien'] = $role;
+					if (!sql_countsel($table_objet, $where)) {
+						$condition_objet_invalide = true;
 					}
-					break;
 				}
+
+				// Si pas de condition sur l'objet source ou que la condition est vérifiée, on peut construire
+				// la requête sur la table qui accueille le parent.
+				if (!$condition_objet_invalide) {
+					$table = $_parent_methode['parent_lien']['table'];
+					// -- On construit les conditions en fonction de l'identification de l'objet source
+					$where = array();
+					if (isset($_parent_methode['parent_lien']['source']['champ'])) {
+						$where[] = "{$_parent_methode['parent_lien']['source']['champ']} = $id_objet";
+					}
+					if (isset($_parent_methode['parent_lien']['source']['champ_type'])) {
+						$where[] = "{$_parent_methode['parent_lien']['source']['champ_type']} = " . sql_quote($objet);
+					}
+					// -- Condition supplémentaire sur la détection du parent
+					if (isset($_parent_methode['parent_lien']['condition'])) {
+						$where[] = $_parent_methode['parent_lien']['condition'];
+					}
+				}
+			}
+
+			// On lance la requête de récupération du parent
+			if (
+				!$condition_objet_invalide
+				and $where
+				and ($ligne = sql_fetsel($select, $table, $where))
+			) {
+				// Si le type est fixe
+				if (isset($_parent_methode['type'])) {
+					$parent = array(
+						'objet' 	=> $_parent_methode['type'],
+						'id_objet'	=> intval($ligne[$_parent_methode['champ']]),
+						'champ' 	=> $_parent_methode['champ'],
+					);
+				}
+				elseif (isset($_parent_methode['champ_type'])) {
+					$parent = array(
+						'objet' 	 => $ligne[$_parent_methode['champ_type']],
+						'id_objet' 	 => intval($ligne[$_parent_methode['champ']]),
+						'champ' 	 => $_parent_methode['champ'],
+						'champ_type' => $_parent_methode['champ_type'],
+					);
+				}
+				break;
 			}
 		}
 	}
@@ -203,7 +228,7 @@ function type_objet_info_parent($objet) {
 		if ($infos = lister_tables_objets_sql($table)) {
 			// S'il y a une description explicite de parent, c'est prioritaire
 			if (isset($infos['parent']) and is_array($infos['parent'])) {
-				if (count($infos['parent']) === count($infos['parent'], COUNT_RECURSIVE)) {
+				if (!isset($infos['parent'][0])) {
 					$parents[$objet] = array($infos['parent']);
 				} else {
 					$parents[$objet] = $infos['parent'];
@@ -252,16 +277,16 @@ function type_objet_info_enfants($objet) {
 			// On ne va pas refaire les tests des différents cas, on réutilise
 			if ($parent_methodes = type_objet_info_parent($objet_enfant)) {
 				// On parcourt les différents cas possible, si certains peuvent concerner l'objet demandé
-				foreach ($parent_methodes as $parent_methode) {
+				foreach ($parent_methodes as $_parent_methode) {
 					// Si la méthode qu'on teste n'exclut pas le parent demandé
-					if (!isset($parent_methode['exclus']) or !in_array($objet, $parent_methode['exclus'])) {
+					if (!isset($_parent_methode['exclus']) or !in_array($objet, $_parent_methode['exclus'])) {
 						// Si le type du parent est fixe et directement l'objet demandé
-						if (isset($parent_methode['type']) and isset($parent_methode['champ']) and $parent_methode['type'] == $objet) {
-							$enfants[$objet][$objet_enfant] = $parent_methode;
+						if (isset($_parent_methode['type']) and isset($_parent_methode['champ']) and $_parent_methode['type'] == $objet) {
+							$enfants[$objet][$objet_enfant] = $_parent_methode;
 						}
 						// Si le type est variable, alors l'objet demandé peut forcément être parent
-						elseif (isset($parent_methode['champ_type']) and isset($parent_methode['champ'])) {
-							$enfants[$objet][$objet_enfant] = $parent_methode;
+						elseif (isset($_parent_methode['champ_type']) and isset($_parent_methode['champ'])) {
+							$enfants[$objet][$objet_enfant] = $_parent_methode;
 						}
 					}
 				}
