@@ -166,28 +166,47 @@ function objet_trouver_enfants($objet, $id_objet) {
 		$id_objet = intval($id_objet);
 		
 		// On parcourt tous les types d'enfants trouvés
-		foreach ($enfants_methodes as $objet_enfant => $methode) {
-			$table_enfant = table_objet_sql($objet_enfant);
-			$cle_objet_enfant = id_table_objet($objet_enfant);
-			
-			$where = array();
-			// L'identifiant du parent
-			if (isset($methode['champ'])) {
-				$where[] = $methode['champ'] . ' = ' . $id_objet;
-			}
-			// Si le parent est variable
-			if (isset($methode['champ_type'])) {
-				$where[] = $methode['champ_type'] . ' = ' . sql_quote($objet);
-			}
-			// S'il y a une condition supplémentaire
-			if (isset($methode['condition'])) {
-				$where[] = $methode['condition'];
-			}
-			
-			// On lance la requête
-			if ($ids = sql_allfetsel($cle_objet_enfant, $table_enfant, $where)) {
-				$ids = array_map('reset', $ids);
-				$enfants[$objet_enfant] = $ids;
+		foreach ($enfants_methodes as $objet_enfant => $_methodes_parent) {
+			foreach ($_methodes_parent as $_methode_parent) {
+				// On construit les conditions d'identification du parent
+				$where = array();
+				// -- L'identifiant du parent
+				if (isset($_methode_parent['champ'])) {
+					$where[] = $_methode_parent['champ'] . ' = ' . $id_objet;
+				}
+				// -- Si le parent est variable
+				if (isset($_methode_parent['champ_type'])) {
+					$where[] = $_methode_parent['champ_type'] . ' = ' . sql_quote($objet);
+				}
+
+				// On détermine la table, le champ id des enfants et on complète éventuellement les conditions
+				if (!isset($_methode_parent['parent_lien'])) {
+					// Les enfants sont stockés dans la même table que l'objet parent :
+					$table_enfant = table_objet_sql($objet_enfant);
+					$cle_objet_enfant = id_table_objet($objet_enfant);
+
+					// S'il y a une condition supplémentaire
+					if (isset($_methode_parent['condition'])) {
+						$where[] = $_methode_parent['condition'];
+					}
+				} else {
+					// Les enfants sont stockés dans une table différente de l'objet parent.
+					$table_enfant = $_methode_parent['parent_lien']['table'];
+					$cle_objet_enfant = $_methode_parent['parent_lien']['source']['champ'];
+
+					// S'il y a une condition supplémentaire
+					if (isset($_methode_parent['parent_lien']['condition'])) {
+						$where[] = $_methode_parent['parent_lien']['condition'];
+					}
+				}
+
+				// On lance la requête
+				if ($ids = sql_allfetsel($cle_objet_enfant, $table_enfant, $where)) {
+					$ids = array_map('reset', $ids);
+					$enfants[$objet_enfant] = isset($enfants[$objet_enfant])
+						? array_merge($enfants[$objet_enfant], $ids)
+						: $ids;
+				}
 			}
 		}
 	}
@@ -282,11 +301,11 @@ function type_objet_info_enfants($objet) {
 					if (!isset($_parent_methode['exclus']) or !in_array($objet, $_parent_methode['exclus'])) {
 						// Si le type du parent est fixe et directement l'objet demandé
 						if (isset($_parent_methode['type']) and isset($_parent_methode['champ']) and $_parent_methode['type'] == $objet) {
-							$enfants[$objet][$objet_enfant] = $_parent_methode;
+							$enfants[$objet][$objet_enfant][] = $_parent_methode;
 						}
 						// Si le type est variable, alors l'objet demandé peut forcément être parent
 						elseif (isset($_parent_methode['champ_type']) and isset($_parent_methode['champ'])) {
-							$enfants[$objet][$objet_enfant] = $_parent_methode;
+							$enfants[$objet][$objet_enfant][] = $_parent_methode;
 						}
 					}
 				}
