@@ -42,6 +42,17 @@ $(document).ready(function(){
 			$(this).attr('id', timecode[0]);
 		}
 	});
+	// scroller vers le lien dans la page si timecode dans l'url d'arrivée #t10000
+	var tc = window.location.hash.match(/^#t(\d+)$/);
+	if(typeof tc !== "undefined" && tc){
+		tc = parseInt(tc[1]);
+		// trouver le lien avec ce timecode en href et y scroller
+		var lien = $('a.audio[href$="#t' + tc + '"]');
+		$("a.audio").removeClass("on");
+		lien.addClass("on");
+		$('body, html').animate({scrollTop: lien.offset().top - 70 }, 500);
+	}
+
 	// clic sur un lien avec timecode #t10000 ?
 	$("a.audio").on("click",function(){
 		// stopper un eventuel son en cours
