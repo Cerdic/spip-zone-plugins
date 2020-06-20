@@ -789,6 +789,8 @@ function lieu_normaliser($lieu, &$format_lieu = '') {
 	} elseif (preg_match(_RAINETTE_REGEXP_LIEU_IP, $lieu_normalise, $match)) {
 		$format_lieu = 'adresse_ip';
 		$lieu_normalise = $match[0];
+	} elseif (intval($lieu_normalise)) {
+		$format_lieu = 'city_id';
 	} else {
 		$format_lieu = 'ville_pays';
 		// On détermine la ville et éventuellement le pays (ville[,pays])

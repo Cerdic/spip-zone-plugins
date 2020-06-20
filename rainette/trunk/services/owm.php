@@ -306,6 +306,9 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 	if ($format_lieu == 'latitude_longitude') {
 		list($latitude, $longitude) = explode(',', $lieu_normalise);
 		$query = "lat=${latitude}&lon=${longitude}";
+	} elseif ($format_lieu == 'city_id') {
+		// City ID
+		$query = "id=${lieu_normalise}";
 	} else {
 		// Format ville,pays
 		$query = "q=${lieu_normalise}";
@@ -320,7 +323,7 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 			? '&cnt=' . $configuration['periodicites'][$periodicite]['max_jours']
 			: '')
 		   . '&lang=' . $code_langue
-		   . ($configuration['inscription'] ? '&APPID=' . $configuration['inscription'] : '');
+		   . ($configuration['inscription'] ? '&appid=' . $configuration['inscription'] : '');
 
 	return $url;
 }

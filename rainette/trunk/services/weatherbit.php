@@ -306,12 +306,14 @@ function weatherbit_service2url($lieu, $mode, $periodicite, $configuration) {
 	// On normalise le lieu et on récupère son format.
 	// Le service accepte la format ville,pays, le format latitude,longitude et le format adresse IP.
 	$lieu_normalise = lieu_normaliser($lieu, $format_lieu);
-	if ($format_lieu == 'adresse_ip') {
-		$localisation = "ip=${lieu_normalise}";
-	} elseif ($format_lieu == 'latitude_longitude') {
+	if ($format_lieu == 'latitude_longitude') {
 		list($latitude, $longitude) = explode(',', $lieu_normalise);
 		$localisation = "lat=${latitude}&lon=${longitude}";
-	} else { // Format ville,pays
+	} elseif ($format_lieu == 'city_id') {
+		// City ID
+		$localisation = "city_id=${lieu_normalise}";
+	} else {
+		// Format ville,pays
 		$elements = explode(',', $lieu_normalise);
 		$localisation = "city={$elements[0]}";
 		if (count($elements) == 2) {
