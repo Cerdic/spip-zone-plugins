@@ -34,11 +34,12 @@ if (threeSixtyPlayer.config.useWaveformData || threeSixtyPlayer.flash9Options.us
 }
 
 $(document).ready(function(){
-	// classe audio sur les liens avec time code.
+	// classe audio et id timecode sur les liens vers #t123456789
 	$("a").each(function(){
 		var timecode = $(this)[0].href.match(/t(\d+)/) ;
 		if(typeof timecode !== "undefined" && timecode){
 			$(this).addClass("audio");
+			$(this).attr('id', timecode[0]);
 		}
 	});
 	// clic sur un lien avec timecode #t10000 ?
