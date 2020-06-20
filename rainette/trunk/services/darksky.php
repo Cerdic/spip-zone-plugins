@@ -21,7 +21,7 @@ if (!defined('_RAINETTE_DARKSKY_URL_BASE')) {
 $GLOBALS['rainette_darksky_config']['service'] = array(
 	'alias'   => 'darksky',
 	'nom'     => 'Dark Sky',
-	'actif'   => true,
+	'actif'   => false,
 	'credits' => array(
 		'titre' => 'Powered by Dark Sky',
 		'logo'  => '',
