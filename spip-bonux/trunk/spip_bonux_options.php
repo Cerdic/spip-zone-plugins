@@ -211,10 +211,6 @@
       $options = array_merge($default, $options);
       extract($options);
 
-      $html = $options['html'];
-      $exact = $options['exact'];
-      $ending = $options['ending'];
-
       if ($html) {
           if (mb_strlen(preg_replace('/<.*?>/', '', $text)) <= $length) {
               return $text;
