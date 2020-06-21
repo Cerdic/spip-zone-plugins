@@ -274,6 +274,49 @@ $GLOBALS['rainette_icones']['darksky'] = array(
 	'tornado'             => array('texte' => 'Tornado', 'icone' => array('tornado', ''))
 );
 
+$GLOBALS['rainette_icones']['accuweather'] = array(
+	1  => array('texte' => 'Sunny', 'icone' => array('1', '')),
+	2  => array('texte' => 'Mostly Sunny', 'icone' => array('2', '')),
+	3  => array('texte' => 'Partly Sunny', 'icone' => array('3', '')),
+	4  => array('texte' => 'Intermittent Clouds', 'icone' => array('4', '')),
+	5  => array('texte' => 'Hazy Sunshine', 'icone' => array('5', '')),
+	6  => array('texte' => 'Mostly Cloudy', 'icone' => array('6', '')),
+	7  => array('texte' => 'Cloudy', 'icone' => array('7', '7')),
+	8  => array('texte' => 'Dreary (Overcast)', 'icone' => array('8', '8')),
+	11 => array('texte' => 'Fog', 'icone' => array('11', '11')),
+	12 => array('texte' => 'Showers', 'icone' => array('12', '12')),
+	13 => array('texte' => 'Mostly Cloudy w/ Showers', 'icone' => array('13', '')),
+	14 => array('texte' => 'Partly Sunny w/ Showers', 'icone' => array('14', '')),
+	15 => array('texte' => 'T-Storms', 'icone' => array('15', '15')),
+	16 => array('texte' => 'Mostly Cloudy w/ T-Storms', 'icone' => array('16', '')),
+	17 => array('texte' => 'Partly Sunny w/ T-Storms', 'icone' => array('17', '')),
+	18 => array('texte' => 'Rain', 'icone' => array('18', '18')),
+	19 => array('texte' => 'Flurries', 'icone' => array('19', '19')),
+	20 => array('texte' => 'Mostly Cloudy w/ Flurries', 'icone' => array('20', '')),
+	21 => array('texte' => 'Partly Sunny w/ Flurries', 'icone' => array('21', '')),
+	22 => array('texte' => 'Snow', 'icone' => array('22', '22')),
+	23 => array('texte' => 'Mostly Cloudy w/ Snow', 'icone' => array('23', '')),
+	24 => array('texte' => 'Ice', 'icone' => array('24', '24')),
+	25 => array('texte' => 'Sleet', 'icone' => array('25', '25')),
+	26 => array('texte' => 'Freezing Rain', 'icone' => array('26', '26')),
+	29 => array('texte' => 'Rain and Snow', 'icone' => array('29', '29')),
+	30 => array('texte' => 'Hot', 'icone' => array('30', '30')),
+	31 => array('texte' => 'Cold', 'icone' => array('31', '31')),
+	32 => array('texte' => 'Windy', 'icone' => array('32', '32')),
+	33 => array('texte' => 'Clear', 'icone' => array('', '33')),
+	34 => array('texte' => 'Mostly Clear', 'icone' => array('', '34')),
+	35 => array('texte' => 'Partly Cloudy', 'icone' => array('', '35')),
+	36 => array('texte' => 'Intermittent Clouds', 'icone' => array('', '36')),
+	37 => array('texte' => 'Hazy Moonlight', 'icone' => array('', '37')),
+	38 => array('texte' => 'Mostly Cloudy', 'icone' => array('', '38')),
+	39 => array('texte' => 'Partly Cloudy w/ Showers', 'icone' => array('', '39')),
+	40 => array('texte' => 'Mostly Cloudy w/ Showers', 'icone' => array('', '40')),
+	41 => array('texte' => 'Partly Cloudy w/ T-Storms', 'icone' => array('', '41')),
+	42 => array('texte' => 'Mostly Cloudy w/ T-Storms', 'icone' => array('', '42')),
+	43 => array('texte' => 'Mostly Cloudy w/ Flurries', 'icone' => array('', '43')),
+	44 => array('texte' => 'Mostly Cloudy w/ Snow ', 'icone' => array('', '44')),
+);
+
 
 /**
  * @param string $service
