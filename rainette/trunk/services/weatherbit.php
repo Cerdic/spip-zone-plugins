@@ -31,7 +31,7 @@ $GLOBALS['rainette_weatherbit_config']['service'] = array(
 	'actif'   => true,
 	'credits' => array(
 		'titre' => 'Weatherbit API',
-		'logo'  => '',
+		'logo'  => null,
 		'lien'  => 'https://www.weatherbit.io/',
 	),
 	'termes'         => array(
