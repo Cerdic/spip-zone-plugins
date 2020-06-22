@@ -29,5 +29,3 @@ function genie_abonnements_verifier_desactivation_dist($time){
 	
 	return 1;
 }
-
-?>

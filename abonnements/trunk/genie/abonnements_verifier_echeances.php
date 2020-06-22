@@ -31,7 +31,14 @@ function genie_abonnements_verifier_echeances_dist($time){
 		// Pour chaque abonnement trop dépassé, on met la date de fin à maintenant
 		// ce qui va normalement provoquer la désactivation immédiate
 		foreach ($abonnements_retard as $abonnement) {
+			// On inhibe les autorisations
+			autoriser_exception('modifier', 'abonnement', $abonnement['id_abonnement']);
+			autoriser_exception('instituer', 'abonnement', $abonnement['id_abonnement']);
+			// On change la date de fin
 			objet_modifier('abonnement', $abonnement['id_abonnement'], array('date_fin' => $jourdhui));
+			// On remet les autorisations
+			autoriser_exception('instituer', 'abonnement', $abonnement['id_abonnement'], false);
+			autoriser_exception('modifier', 'abonnement', $abonnement['id_abonnement'], false);
 		}
 	}
 	
