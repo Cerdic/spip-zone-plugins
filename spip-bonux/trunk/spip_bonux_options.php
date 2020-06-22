@@ -202,7 +202,7 @@ if (!function_exists('text_truncate')) {
 * @param array $options An array of html attributes and options.
 * @return string Trimmed string.
 * @access public
-* @link http://book.cakephp.org/view/1469/Text#truncate-1625
+* @link https://api.cakephp.org/4.0/class-Cake.Utility.Text.html#truncate
 */
 function text_truncate($text, $length = 100, $options = array()) {
 	$default = array(
