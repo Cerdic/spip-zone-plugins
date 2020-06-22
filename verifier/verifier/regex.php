@@ -27,7 +27,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 function verifier_regex_dist($valeur, $options = array()) {
-	if ($options['message_erreur'] and $options['message_erreur']) {
+	if (!empty($options['message_erreur'])) {
 		$erreur = _T_ou_typo($options['message_erreur']);
 	} else {
 		$erreur = _T('verifier:erreur_regex');
