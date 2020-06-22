@@ -86,11 +86,11 @@ if (!function_exists('_T_ou_typo')) {
 		// Si la valeur est bien une chaine (et pas non plus un entier déguisé)
 		if (is_string($valeur) and !is_numeric($valeur)) {
 			// Si on est en >=3.2, on peut extraire les <:chaine:>
-			$version = explode('.', $GLOBALS['spip_version_branche']);
+			$version = explode('.',$GLOBALS['spip_version_branche']);
 			$extraction_chaines = (($version[0] > 3 or $version[1] >= 2) ? true : false);
 			// Si la chaine est du type <:truc:> on passe à _T()
 			if (strpos($valeur, '<:') !== false
-				and preg_match('/^\<:([^>]*?):\>$/', $valeur, $match)) {
+			  and preg_match('/^\<:([^>]*?):\>$/', $valeur, $match)) {
 				$valeur = _T($match[1]);
 			} else {
 				// Sinon on la passe a typo() si c'est pertinent
@@ -98,10 +98,10 @@ if (!function_exists('_T_ou_typo')) {
 					$mode_typo === 'toujours'
 					or ($mode_typo === 'multi' and strpos($valeur, '<multi>') !== false)
 					or ($extraction_chaines
-						and $mode_typo === 'multi'
-						and strpos($valeur, '<:') !== false
-						and include_spip('inc/filtres')
-						and preg_match(_EXTRAIRE_IDIOME, $valeur))
+					  and $mode_typo === 'multi'
+					  and strpos($valeur, '<:') !== false
+					  and include_spip('inc/filtres')
+					  and preg_match(_EXTRAIRE_IDIOME, $valeur))
 				) {
 					include_spip('inc/texte');
 					$valeur = typo($valeur);
@@ -133,18 +133,18 @@ if (!function_exists('_T_ou_typo')) {
  * @return array Retourne le tableau avec l'insertion
  */
 if (!function_exists('spip_array_insert')) {
-	function spip_array_insert($arr1, $cle, $arr2, $avant = false) {
-		$index = array_search($cle, array_keys($arr1));
-		if ($index === false) {
-			$index = count($arr1); // insert @ end of array if $key not found
-		} else {
-			if (!$avant) {
-				$index++;
-			}
+function spip_array_insert($arr1, $cle, $arr2, $avant = false) {
+	$index = array_search($cle, array_keys($arr1));
+	if ($index === false) {
+		$index = count($arr1); // insert @ end of array if $key not found
+	} else {
+		if (!$avant) {
+			$index++;
 		}
-		$fin = array_splice($arr1, $index);
-		return array_merge($arr1, $arr2, $fin);
 	}
+	$fin = array_splice($arr1, $index);
+	return array_merge($arr1, $arr2, $fin);
+}
 }
 
 /*
@@ -185,110 +185,110 @@ if (!function_exists('array_replace_recursive')) {
 }
 
 if (!function_exists('text_truncate')) {
-	/**
-	 * Truncates text.
-	 *
-	 * Cuts a string to the length of $length and replaces the last characters
-	 * with the ending if the text is longer than length.
-	 *
-	 * ### Options:
-	 *
-	 * - `ending` Will be used as Ending and appended to the trimmed string
-	 * - `exact` If false, $text will not be cut mid-word
-	 * - `html` If true, HTML tags would be handled correctly
-	 *
-	 * @param string  $text String to truncate.
-	 * @param integer $length Length of returned string, including ellipsis.
-	 * @param array $options An array of html attributes and options.
-	 * @return string Trimmed string.
-	 * @access public
-	 * @link https://api.cakephp.org/4.0/class-Cake.Utility.Text.html#truncate
-	 */
-	function text_truncate($text, $length = 100, $options = array()) {
-		$default = array(
-			'ending' => '...', 'exact' => true, 'html' => false
-		);
-		$options = array_merge($default, $options);
-		extract($options);
+/**
+* Truncates text.
+*
+* Cuts a string to the length of $length and replaces the last characters
+* with the ending if the text is longer than length.
+*
+* ### Options:
+*
+* - `ending` Will be used as Ending and appended to the trimmed string
+* - `exact` If false, $text will not be cut mid-word
+* - `html` If true, HTML tags would be handled correctly
+*
+* @param string  $text String to truncate.
+* @param integer $length Length of returned string, including ellipsis.
+* @param array $options An array of html attributes and options.
+* @return string Trimmed string.
+* @access public
+* @link http://book.cakephp.org/view/1469/Text#truncate-1625
+*/
+function text_truncate($text, $length = 100, $options = array()) {
+	$default = array(
+		'ending' => '...', 'exact' => true, 'html' => false
+	);
+	$options = array_merge($default, $options);
+	extract($options);
 
-		if ($html) {
-			if (mb_strlen(preg_replace('/<.*?>/', '', $text)) <= $length) {
-				return $text;
+	if ($html) {
+		if (mb_strlen(preg_replace('/<.*?>/', '', $text)) <= $length) {
+			return $text;
+		}
+		$totalLength = mb_strlen(strip_tags($ending));
+		$openTags = array();
+		$truncate = '';
+
+		preg_match_all('/(<\/?([\w+]+)[^>]*>)?([^<>]*)/', $text, $tags, PREG_SET_ORDER);
+		foreach ($tags as $tag) {
+			if (!preg_match('/img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param/s', $tag[2])) {
+				if (preg_match('/<[\w]+[^>]*>/s', $tag[0])) {
+					array_unshift($openTags, $tag[2]);
+				} else if (preg_match('/<\/([\w]+)[^>]*>/s', $tag[0], $closeTag)) {
+					$pos = array_search($closeTag[1], $openTags);
+					if ($pos !== false) {
+						array_splice($openTags, $pos, 1);
+					}
+				}
 			}
-			$totalLength = mb_strlen(strip_tags($ending));
-			$openTags = array();
-			$truncate = '';
+			$truncate .= $tag[1];
 
-			preg_match_all('/(<\/?([\w+]+)[^>]*>)?([^<>]*)/', $text, $tags, PREG_SET_ORDER);
-			foreach ($tags as $tag) {
-				if (!preg_match('/img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param/s', $tag[2])) {
-					if (preg_match('/<[\w]+[^>]*>/s', $tag[0])) {
-						array_unshift($openTags, $tag[2]);
-					} elseif (preg_match('/<\/([\w]+)[^>]*>/s', $tag[0], $closeTag)) {
-						$pos = array_search($closeTag[1], $openTags);
-						if ($pos !== false) {
-							array_splice($openTags, $pos, 1);
+			$contentLength = mb_strlen(preg_replace('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i', ' ', $tag[3]));
+			if ($contentLength + $totalLength > $length) {
+				$left = $length - $totalLength;
+				$entitiesLength = 0;
+				if (preg_match_all('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i', $tag[3], $entities, PREG_OFFSET_CAPTURE)) {
+					foreach ($entities[0] as $entity) {
+						if ($entity[1] + 1 - $entitiesLength <= $left) {
+							$left--;
+							$entitiesLength += mb_strlen($entity[0]);
+						} else {
+							break;
 						}
 					}
 				}
-				$truncate .= $tag[1];
-
-				$contentLength = mb_strlen(preg_replace('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i', ' ', $tag[3]));
-				if ($contentLength + $totalLength > $length) {
-					$left = $length - $totalLength;
-					$entitiesLength = 0;
-					if (preg_match_all('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i', $tag[3], $entities, PREG_OFFSET_CAPTURE)) {
-						foreach ($entities[0] as $entity) {
-							if ($entity[1] + 1 - $entitiesLength <= $left) {
-								$left--;
-								$entitiesLength += mb_strlen($entity[0]);
-							} else {
-								break;
-							}
-						}
-					}
-					$truncate .= mb_substr($tag[3], 0, $left + $entitiesLength);
-					break;
-				} else {
-					$truncate .= $tag[3];
-					$totalLength += $contentLength;
-				}
-				if ($totalLength >= $length) {
-					break;
-				}
-			}
-		} else {
-			if (mb_strlen($text) <= $length) {
-				return $text;
+				$truncate .= mb_substr($tag[3], 0, $left + $entitiesLength);
+				break;
 			} else {
-				$truncate = mb_substr($text, 0, $length - mb_strlen($ending));
+				$truncate .= $tag[3];
+				$totalLength += $contentLength;
+			}
+			if ($totalLength >= $length) {
+				break;
 			}
 		}
-		if (!$exact) {
-			$spacepos = mb_strrpos($truncate, ' ');
-			if (isset($spacepos)) {
-				if ($html) {
-					$bits = mb_substr($truncate, $spacepos);
-					preg_match_all('/<\/([a-z]+)>/', $bits, $droppedTags, PREG_SET_ORDER);
-					if (!empty($droppedTags)) {
-						foreach ($droppedTags as $closingTag) {
-							if (!in_array($closingTag[1], $openTags)) {
-								array_unshift($openTags, $closingTag[1]);
-							}
+	} else {
+		if (mb_strlen($text) <= $length) {
+			return $text;
+		} else {
+			$truncate = mb_substr($text, 0, $length - mb_strlen($ending));
+		}
+	}
+	if (!$exact) {
+		$spacepos = mb_strrpos($truncate, ' ');
+		if (isset($spacepos)) {
+			if ($html) {
+				$bits = mb_substr($truncate, $spacepos);
+				preg_match_all('/<\/([a-z]+)>/', $bits, $droppedTags, PREG_SET_ORDER);
+				if (!empty($droppedTags)) {
+					foreach ($droppedTags as $closingTag) {
+						if (!in_array($closingTag[1], $openTags)) {
+							array_unshift($openTags, $closingTag[1]);
 						}
 					}
 				}
-				$truncate = mb_substr($truncate, 0, $spacepos);
 			}
+			$truncate = mb_substr($truncate, 0, $spacepos);
 		}
-		$truncate .= $ending;
-
-		if ($html) {
-			foreach ($openTags as $tag) {
-				$truncate .= '</'.$tag.'>';
-			}
-		}
-
-		return $truncate;
 	}
+	$truncate .= $ending;
+
+	if ($html) {
+		foreach ($openTags as $tag) {
+			$truncate .= '</'.$tag.'>';
+		}
+	}
+
+	return $truncate;
+}
 }
