@@ -16,6 +16,7 @@ $(function(){
 })
 function verifier_afficher_si(form, saisie, chargement) {
 	var condition = saisie.attr('data-afficher_si');
+	console.log("Afficher_si : evaluation de "+condition);
 	condition = eval(condition);
 	if (condition) {
 		afficher_si_show(saisie);
