@@ -12,8 +12,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Déclaration des nouvelles tables de la base de données propres au plugin.
  *
- * Le plugin déclare 5 nouvelles tables ISO-639 issues de 2 bases de données (SIL et Library of Congress
- * uniquemet pour les familles de langues) :
+ * Le plugin déclare des tables ISO-639 issues de 2 bases de données (SIL et Library of Congress
+ * uniquement pour les familles de langues) :
  *
  * - `spip_iso639codes`, qui contient les codes ISO-639-3, 2 et 1,
  * - `spip_iso639names`, qui contient les noms de langue,
@@ -25,7 +25,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * définition en français et en anglais et une table `spip_iana5646subtags` qui contient les codes des sous-étiquettes
  * des étiquettes de langue construites selon la RFC 5646.
  *
- * Enfin, la plugin déclare une table `spip_iso15924countries` qui contient les indicatifs ISO-3166 des pays.
+ * Le plugin déclare aussi un ensemble de tables liées aux différents découpages géographiques, à savoir:
+ * - `spip_geoipcontinents` qui contient les indicatifs GeoIP des continents.
+ * - `spip_m49regions` qui contient les indicatifs M49 des zones géographiques englobant les pays.
+ * - `spip_iso3166countries` qui contient les indicatifs ISO-3166-1 des pays.
+ * - `spip_iso3166subdivisions` qui contient les indicatifs ISO-3166-2 des subdivisions des pays.
+ *
+ * Le plugin déclare aussi une table `spip_iso3166alternates` qui contient des codes nationaux ou supranationaux
+ * alternatifs aux codes IS0 3166 (NUTS, INSEE...), et la table des devises ISO-4217 `spip_iso4217currencies`
  *
  * @pipeline declarer_tables_principales
  *
@@ -37,6 +44,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function isocode_declarer_tables_principales($tables_principales) {
 
+	// ---------------------------------------------------------------
+	// Langues
 	// ---------------------------------------------------------------
 	// Table principale des codes de langue ISO-639 : spip_iso639codes
 	$table_codes = array(
@@ -152,56 +161,6 @@ function isocode_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso15924scripts'] =
 		array('field' => &$table_scripts, 'key' => &$table_scripts_key);
 
-	// -------------------------------------------------------------------------------------
-	// Table des indicatifs des pays ISO-3166 et autres informations : spip_iso3166countries
-	$table_countries = array(
-		'code_alpha2'     => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier
-		'code_alpha3'     => "char(3) DEFAULT '' NOT NULL",       // The three-letter identifier
-		'code_num'        => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
-		'label_en'        => "varchar(255) DEFAULT '' NOT NULL",  // English name
-		'label_fr'        => "varchar(255) DEFAULT '' NOT NULL",  // french name
-		'label'           => "text DEFAULT '' NOT NULL",          // Multiple langages label
-		'capital'         => "varchar(255) DEFAULT '' NOT NULL",  // Capital name
-		'area'            => "int DEFAULT 0 NOT NULL",            // Area in squared km
-		'population'      => "int DEFAULT 0 NOT NULL",            // Inhabitants count
-		'code_continent'  => "char(2) DEFAULT '' NOT NULL",       // Continent code alpha2
-		'code_num_region' => "char(3) DEFAULT '' NOT NULL",       // Parent region numeric code (ISO 3166)
-		'tld'             => "char(3) DEFAULT '' NOT NULL",       // Tld - Top-Level Domain
-		'code_4217_3'     => "char(3) DEFAULT '' NOT NULL",       // Currency code ISO-4217
-		'currency_en'     => "varchar(255) DEFAULT '' NOT NULL",  // Currency English name
-		'phone_id'        => "varchar(16) DEFAULT '' NOT NULL",   // Phone id
-		'maj'             => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
-	);
-
-	$table_countries_key = array(
-		'PRIMARY KEY'     => 'code_alpha2',
-		'KEY code_alpha3' => 'code_alpha3',
-		'KEY code_num'    => 'code_num',
-	);
-
-	$tables_principales['spip_iso3166countries'] =
-		array('field' => &$table_countries, 'key' => &$table_countries_key);
-
-	// ------------------------------------------------------------------
-	// Table des indicatifs des devises ISO-4217 : spip_iso4217currencies
-	$table_currencies = array(
-		'code_4217_3' => "char(3) DEFAULT '' NOT NULL",       // The three-letter identifier
-		'code_num'    => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
-		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",  // English name
-		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",  // french name
-		'label'       => "text DEFAULT '' NOT NULL",          // Multiple langages label
-		'symbol'      => "char(8) DEFAULT '' NOT NULL",       // Currency symbol
-		'minor_units' => "int DEFAULT 0 NOT NULL",            // Minor units
-		'maj'         => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
-	);
-
-	$table_currencies_key = array(
-		'PRIMARY KEY' => 'code_4217_3'
-	);
-
-	$tables_principales['spip_iso4217currencies'] =
-		array('field' => &$table_currencies, 'key' => &$table_currencies_key);
-
 	// -----------------------------------------------------------------------------------------
 	// Table reproduisant le registre IANA des sous-étiquettes de langues : spip_iana5646subtags
 	$table_subtags = array(
@@ -226,6 +185,8 @@ function isocode_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iana5646subtags'] =
 		array('field' => &$table_subtags, 'key' => &$table_subtags_key);
 
+	// -------------------------------------------------------------------------------------
+	// Découpages géographiques
 	// -------------------------------------------------------------------------------------
 	// Table des indicatifs des continents GeoIP : spip_geoipcontinents
 	$table_continents = array(
@@ -262,24 +223,88 @@ function isocode_declarer_tables_principales($tables_principales) {
 		array('field' => &$table_regions, 'key' => &$table_regions_key);
 
 	// -------------------------------------------------------------------------------------
-	// Table des subdivisions géographiques des pays suivant la norme ISO 3166-2 : spip_iso3166subdivisions
+	// Table des indicatifs des pays ISO-3166-1 et autres informations : spip_iso3166countries
+	$table_countries = array(
+		'code_alpha2'     => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier
+		'code_alpha3'     => "char(3) DEFAULT '' NOT NULL",       // The three-letter identifier
+		'code_num'        => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
+		'label_en'        => "varchar(255) DEFAULT '' NOT NULL",  // English name
+		'label_fr'        => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'label'           => "text DEFAULT '' NOT NULL",          // Multiple langages label
+		'capital'         => "varchar(255) DEFAULT '' NOT NULL",  // Capital name
+		'area'            => "int DEFAULT 0 NOT NULL",            // Area in squared km
+		'population'      => "int DEFAULT 0 NOT NULL",            // Inhabitants count
+		'code_continent'  => "char(2) DEFAULT '' NOT NULL",       // Continent code alpha2
+		'code_num_region' => "char(3) DEFAULT '' NOT NULL",       // Parent region numeric code (ISO 3166)
+		'tld'             => "char(3) DEFAULT '' NOT NULL",       // Tld - Top-Level Domain
+		'code_4217_3'     => "char(3) DEFAULT '' NOT NULL",       // Currency code ISO-4217
+		'currency_en'     => "varchar(255) DEFAULT '' NOT NULL",  // Currency English name
+		'phone_id'        => "varchar(16) DEFAULT '' NOT NULL",   // Phone id
+		'maj'             => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
+	);
+
+	$table_countries_key = array(
+		'PRIMARY KEY'     => 'code_alpha2',
+		'KEY code_alpha3' => 'code_alpha3',
+		'KEY code_num'    => 'code_num',
+	);
+
+	$tables_principales['spip_iso3166countries'] =
+		array('field' => &$table_countries, 'key' => &$table_countries_key);
+
+	// -------------------------------------------------------------------------------------
+	// Table des subdivisions géographiques des pays (arborescence) suivant l'ISO 3166-2 : spip_iso3166subdivisions
 	$table_subdivisions = array(
-		'code_3166_2'   => "varchar(6) DEFAULT '' NOT NULL",    // ISO 3166-2 Subdivision identifier XX-YYY
-		'code_specific' => "char(2) DEFAULT '' NOT NULL",       // Specific Subdivision identifier by country (i.e. INSEE)
-		'country'       => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier (ISO 3166 alpha2)
-		'type'          => "varchar(32) DEFAULT '' NOT NULL",   // Specific type by country in english (department, land...)
-		'parent'        => "varchar(6) DEFAULT '' NOT NULL",    // The ISO 3166-2 identifier of parent
-		'label'         => "text DEFAULT '' NOT NULL",          // Multilangage name
-		'maj'           => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
+		'code_3166_2'     => "varchar(6) DEFAULT '' NOT NULL",    // ISO 3166-2 Subdivision identifier XX-YYY
+		'country'         => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier (ISO 3166 alpha2)
+		'type'            => "varchar(48) DEFAULT '' NOT NULL",   // Specific type by country in english (department, land...)
+		'parent'          => "varchar(6) DEFAULT '' NOT NULL",    // The ISO 3166-2 identifier of parent
+		'label'           => "text DEFAULT '' NOT NULL",          // Multilangage name
+		'maj'             => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 
 	$table_subdivisions_key = array(
-		'PRIMARY KEY'       => 'code_3166_2',
-		'KEY code_specific' => 'code_specific'
+		'PRIMARY KEY'         => 'code_3166_2',
 	);
 
 	$tables_principales['spip_iso3166subdivisions'] =
 		array('field' => &$table_subdivisions, 'key' => &$table_subdivisions_key);
+
+	// -------------------------------------------------------------------------------------
+	// Table des codes alternatifs à l'ISO 3166-2 (nationaux ou supra-nationaux) : spip_iso3166alternates
+	// C'est en quelque sorte une table de liens sans qui fonctionne avec les codes et pas un id.
+	$table_alternates = array(
+		"code_3166_2" => "varchar(6) DEFAULT '' NOT NULL",
+		"type_alter"  => "varchar(16) DEFAULT '' NOT NULL",
+		"code_alter"  => "varchar(10) DEFAULT '' NOT NULL",
+	);
+
+	$table_alternates_key = array(
+		"PRIMARY KEY" => "code_3166_2,type_alter,code_alter",
+	);
+
+	$tables_principales['spip_iso3166alternates'] =
+		array('field' => &$table_alternates, 'key' => &$table_alternates_key);
+
+	// ------------------------------------------------------------------
+	// Table des indicatifs des devises ISO-4217 : spip_iso4217currencies
+	$table_currencies = array(
+		'code_4217_3' => "char(3) DEFAULT '' NOT NULL",       // The three-letter identifier
+		'code_num'    => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
+		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",  // English name
+		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'label'       => "text DEFAULT '' NOT NULL",          // Multiple langages label
+		'symbol'      => "char(8) DEFAULT '' NOT NULL",       // Currency symbol
+		'minor_units' => "int DEFAULT 0 NOT NULL",            // Minor units
+		'maj'         => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
+	);
+
+	$table_currencies_key = array(
+		'PRIMARY KEY' => 'code_4217_3'
+	);
+
+	$tables_principales['spip_iso4217currencies'] =
+		array('field' => &$table_currencies, 'key' => &$table_currencies_key);
 
 	return $tables_principales;
 }
@@ -307,12 +332,15 @@ function isocode_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['iso639retirements'] = 'iso639retirements';
 	$interfaces['table_des_tables']['iso639families'] = 'iso639families';
 	$interfaces['table_des_tables']['iso15924scripts'] = 'iso15924scripts';
-	$interfaces['table_des_tables']['iso3166countries'] = 'iso3166countries';
-	$interfaces['table_des_tables']['iso3166subdivisions'] = 'iso3166subdivisions';
-	$interfaces['table_des_tables']['iso4217currencies'] = 'iso4217currencies';
 	$interfaces['table_des_tables']['iana5646subtags'] = 'iana5646subtags';
+
 	$interfaces['table_des_tables']['geoipcontinents'] = 'geoipcontinents';
 	$interfaces['table_des_tables']['m49regions'] = 'm49regions';
+	$interfaces['table_des_tables']['iso3166countries'] = 'iso3166countries';
+	$interfaces['table_des_tables']['iso3166subdivisions'] = 'iso3166subdivisions';
+	$interfaces['table_des_tables']['iso3166alternates'] = 'iso3166alternates';
+
+	$interfaces['table_des_tables']['iso4217currencies'] = 'iso4217currencies';
 
 	// Les traitements
 

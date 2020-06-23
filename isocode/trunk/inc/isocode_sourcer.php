@@ -98,7 +98,7 @@ function lire_source($service, $table) {
 							}
 						}
 					} else {
-						spip_log("Le champ <${_titre}> n'existe pas dans la configuration de la table ${table}", 'isocode' . _LOG_INFO);
+						spip_log("Le champ ${_titre} n'existe pas dans la configuration de la table ${table}", 'isocode' . _LOG_INFO);
 					}
 				}
 
@@ -283,33 +283,49 @@ function extraire_contenu_source($service, $table, $config) {
 			}
 		}
 	} else {
-		// La source est un fichier.
-		// On construit son nom et on lit son contenu en fonction du type du fichier.
-		$fichier = find_in_path("services/${service}/${table}{$config['extension']}");
-		if (file_exists($fichier) and ($sha = sha1_file($fichier))) {
-			if ($config['populating'] == 'file_csv') {
-				$lignes = file($fichier);
-				if ($lignes) {
-					// La première ligne d'un CSV contient toujours les titres des colonnes.
-					// On sauvegarde ces titres dans une variable et on élimine la ligne du contenu retourné.
-					$titres = explode($config['delimiter'], trim(array_shift($lignes), "\r\n"));
-					$titres = array_map('trim', $titres);
-					// On renvoie le contenu sans titre
-					$contenu = $lignes;
-				}
-			} elseif ($config['populating'] == 'file_xml') {
-				include_spip('inc/flock');
-				lire_fichier($fichier, $xml);
-				$arbre = json_decode(json_encode(simplexml_load_string($xml)), true);
+		// La source est un ou plusieurs fichier (option multiple à vrai).
+		if (empty($config['multiple'])) {
+			// On construit son nom et on lit son contenu en fonction du type du fichier.
+			$fichiers[] = find_in_path("services/${service}/${table}{$config['extension']}");
+		} else {
+			// On cherche les fichiers constitutifs de la table qui sont toujours de la forme table_*.extension
+			$pattern = "services/${service}/${table}_*{$config['extension']}";
+			if (!$fichiers = glob(_DIR_PLUGIN_ISOCODE . $pattern)) {
+				$fichiers = array();
+			}
+		}
 
-				include_spip('inc/filtres');
-				if (table_valeur($arbre, $config['base'], '')) {
-					$contenu = table_valeur($arbre, $config['base'], '');
+		foreach ($fichiers as $_fichier) {
+			if (file_exists($_fichier) and ($sha = sha1_file($_fichier))) {
+				// On extrait le contenu du fichier
+				$contenu_fichier = array();
+				if ($config['populating'] == 'file_csv') {
+					$lignes = file($_fichier);
+					if ($lignes) {
+						// La première ligne d'un CSV contient toujours les titres des colonnes.
+						// On sauvegarde ces titres dans une variable et on élimine la ligne du contenu retourné.
+						$titres = explode($config['delimiter'], trim(array_shift($lignes), "\r\n"));
+						$titres = array_map('trim', $titres);
+						// On renvoie le contenu sans titre
+						$contenu_fichier = $lignes;
+					}
+				} elseif ($config['populating'] == 'file_xml') {
+					include_spip('inc/flock');
+					lire_fichier($_fichier, $xml);
+					$arbre = json_decode(json_encode(simplexml_load_string($xml)), true);
+
+					include_spip('inc/filtres');
+					if (table_valeur($arbre, $config['base'], '')) {
+						$contenu_fichier = table_valeur($arbre, $config['base'], '');
+					}
+				} elseif ($config['populating'] == 'file_json') {
+					include_spip('inc/flock');
+					lire_fichier($_fichier, $json);
+					$contenu_fichier = json_decode($json, true);
 				}
-			} elseif ($config['populating'] == 'file_json') {
-				include_spip('inc/flock');
-				lire_fichier($fichier, $json);
-				$contenu = json_decode($json, true);
+
+				// On additionne les contenus de chaque fichier
+				$contenu = array_merge($contenu, $contenu_fichier);
 			}
 		}
 	}

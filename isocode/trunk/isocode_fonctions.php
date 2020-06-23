@@ -239,7 +239,8 @@ function isocode_trouver_service($table) {
 
 /**
  * Retourne la liste des services disponibles pour le chargement des tables de codes ISO.
- * La fonction lit les sous-répertoires du répertoire `services/` du plugin.
+ * La fonction lit les sous-répertoires du répertoire `services/` du plugin et vérifie qu'un fichier
+ * d'API existe.
  *
  * @api
  * @filtre
@@ -251,9 +252,12 @@ function isocode_lister_services() {
 
 	$services = array();
 
-	if ($dossiers = glob(_DIR_PLUGIN_ISOCODE . '/services/*', GLOB_ONLYDIR)) {
+	if ($dossiers = glob(_DIR_PLUGIN_ISOCODE . 'services/*', GLOB_ONLYDIR)) {
 		foreach ($dossiers as $_dossier) {
-			$services[] = strtolower(basename($_dossier));
+			$service = strtolower(basename($_dossier));
+			if (file_exists($f = _DIR_PLUGIN_ISOCODE . "services/${service}/${service}_api.php")) {
+				$services[] = $service;
+			}
 		}
 	}
 
@@ -262,7 +266,7 @@ function isocode_lister_services() {
 
 
 /**
- * Vérifie si le service demandé est fait bien partie de la liste des services disponibles.
+ * Vérifie si le service demandé fait bien partie de la liste des services disponibles.
  *
  * @api
  * @filtre
@@ -278,7 +282,10 @@ function isocode_lister_services() {
 function isocode_service_disponible($service) {
 
 	$disponible = false;
-	if ($service and in_array(strtolower($service), isocode_lister_services())) {
+	if (
+		$service
+		and in_array(strtolower($service), isocode_lister_services())
+	) {
 		$disponible = true;
 	}
 

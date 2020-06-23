@@ -177,11 +177,6 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 		'unused_fields' => array(
 			'language'        => '',
 		),
-		'addon_fields' => array(
-			'insee'    => array(
-				'ccnr'         => 'code_specific',
-			)
-		),
 		'populating'   => 'file_csv',
 		'delimiter'    => "\t",
 		'extension'    => '.tsv',

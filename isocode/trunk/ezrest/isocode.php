@@ -9,42 +9,36 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS['isocode']['pays']['champs'] = array(
-	'code_alpha2' => 'code',
-	'code_alpha3' => 'code_a3',
-	'code_num' => 'code_num',
-	'label' => 'nom',
-	'capital' => 'capitale',
-	'area' => 'superficie',
-	'population' => 'population',
-	'code_continent' => 'continent',
+	'code_alpha2'     => 'code',
+	'code_alpha3'     => 'code_a3',
+	'code_num'        => 'code_num',
+	'label'           => 'nom',
+	'capital'         => 'capitale',
+	'area'            => 'superficie',
+	'population'      => 'population',
+	'code_continent'  => 'continent',
 	'code_num_region' => 'zone',
-	'tld' => 'tld',
-	'code_4217_3' => 'code_devise',
-	'currency_en' => 'nom_devise',
-	'phone_id' => 'indicatif_uit'
+	'tld'             => 'tld',
+	'code_4217_3'     => 'code_devise',
+	'currency_en'     => 'nom_devise',
+	'phone_id'        => 'indicatif_uit'
 );
-
 
 // -----------------------------------------------------------------------
 // -------------------------- COLLECTION PAYS ----------------------------
 // -----------------------------------------------------------------------
 
 /**
- * Récupère la liste des plugins de la table spip_plugins éventuellement filtrés par les critères
+ * Récupère la liste des pays de la table spip_iso3166countries éventuellement filtrés par les critères
  * additionnels positionnés dans la requête.
- * Chaque objet plugin est présenté comme un tableau dont tous les champs sont accessibles comme un
- * type PHP simple, entier, chaine ou tableau.
  *
- * @uses plugin_normaliser_champs()
+ * @param array $conditions    Conditions à appliquer au select
+ * @param array $filtres       Tableau des critères de filtrage additionnels à appliquer au select.
+ * @param array $configuration Configuration de la collection utile pour savoir quelle fonction appeler pour
+ *                             construire chaque filtre.
  *
- * @param array $filtres
- *      Tableau des critères de filtrage additionnels à appliquer au select.
- * @param array $configuration
- *      Configuration de la collection plugins utile pour savoir quelle fonction appeler pour construire chaque filtre.
- *
- * @return array
- *      Tableau des plugins dont l'index est le préfixe du plugin.
- *      Les champs de type id ou maj ne sont pas renvoyés.
+ * @return array Tableau des plugins dont l'index est le préfixe du plugin.
+ *               Les champs de type id ou maj ne sont pas renvoyés.
  */
 function pays_collectionner($conditions, $filtres, $configuration) {
 
@@ -77,21 +71,17 @@ function pays_collectionner($conditions, $filtres, $configuration) {
 	return $pays;
 }
 
-
 /**
  * Détermine si la valeur du critère de région d'appartenance du pays est valide.
  * La fonction compare uniquement la structure de la chaine passée qui doit être cohérente avec un code à 3 chiffres.
  *
- * @param string $zone
- *        La valeur du critère région, soit son code ISO 3166-1 numérique (3 chiffres).
- * @param string $extra
- *        Message complémentaire à renvoyer dans la réponse en cas d'erreur.
+ * @param string $zone   La valeur du critère région, soit son code ISO 3166-1 numérique (3 chiffres).
+ * @param array  $erreur Bloc d'erreur préparé au cas où la vérification retourne une erreur. Dans ce cas, le bloc
+ *                       et complété et renvoyé.
  *
- * @return bool
- *        `true` si la valeur est valide, `false` sinon.
+ * @return bool `true` si la valeur est valide, `false` sinon.
  */
 function pays_verifier_filtre_zone($zone, &$erreur) {
-
 	$est_valide = true;
 
 	if (!preg_match('#^[0-9]{3}$#', $zone)) {
@@ -102,20 +92,18 @@ function pays_verifier_filtre_zone($zone, &$erreur) {
 	return $est_valide;
 }
 
-
 /**
  * Détermine si la valeur du continent d'appartenance du pays est valide.
  * La fonction compare uniquement la structure de la chaine passée qui doit être cohérente avec une code à deux lettres
  * majuscules.
  *
- * @param string $prefixe
- *        La valeur du préfixe
+ * @param string $continent La valeur du critère région, soit son code ISO 3166-1 numérique (3 chiffres).
+ * @param array  $erreur    Bloc d'erreur préparé au cas où la vérification retourne une erreur. Dans ce cas, le bloc
+ *                          et complété et renvoyé.
  *
- * @return bool
- *        `true` si la valeur est valide, `false` sinon.
+ * @return bool `true` si la valeur est valide, `false` sinon.
  */
 function pays_verifier_filtre_continent($continent, &$erreur) {
-
 	$est_valide = true;
 
 	if (!preg_match('#^[A-Z]{2}$#', $continent)) {
