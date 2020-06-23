@@ -26,7 +26,7 @@
 <dl>
 	<dt><:metasplus:label_previsu_objet:> :</dt>
 	<dd>
-		<:titre_cadre_numero_objet{objet=#GET{texte_objet}}|strtolower|ucfirst|replace{':',''}:>[(#ENV{id_objet})][ : «&nbsp;(#INFO_TITRE{#ENV{objet},#ENV{id_objet}})&nbsp;»]
+		<:titre_cadre_numero_objet{objet=#GET{texte_objet}}|spip_strtolower|ucfirst|replace{':',''}:>[(#ENV{id_objet})][ : «&nbsp;(#INFO_TITRE{#ENV{objet},#ENV{id_objet}})&nbsp;»]
 	</dd>
 	<dt><:metasplus:label_previsu_fond:> :</dt>
 	<dd><code>#GET{fond}.html</code></dd>
