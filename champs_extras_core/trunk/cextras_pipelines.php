@@ -158,6 +158,7 @@ function cextras_pre_edition($flux){
 	include_spip('inc/saisies_lister');
 	if (
 		$flux['args']['action'] == 'modifier'
+		and !isset($flux['args']['data'])
 		and $table = $flux['args']['table']
 		and $saisies = champs_extras_objet($table)
 	) {
