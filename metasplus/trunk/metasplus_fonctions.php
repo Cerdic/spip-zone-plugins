@@ -122,3 +122,16 @@ function metasplus_selectionner_fond($contexte) {
 
 	return $fond;
 }
+
+/**
+ * @param array $args
+ * @param \Spip\Bigup\Formulaire $formulaire
+ * @return \Spip\Bigup\Formulaire
+ */
+function inc_bigup_medias_formulaire_configurer_metasplus_dist($args, $formulaire) {
+	$formulaire->preparer_input_class(
+		'bigup', // 'file' pour rendre automatique.
+		['previsualiser' => true]
+	);
+	return $formulaire;
+}

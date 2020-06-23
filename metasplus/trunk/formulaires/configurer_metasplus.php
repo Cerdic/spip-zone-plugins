@@ -3,6 +3,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+function formulaires_configurer_metasplus_charger_dist() {
+	// Chargement automatique
+	$valeurs = cvtconf_formulaires_configurer_recense('configurer_metasplus', array());
+
+	// Compat bigup
+	$valeurs['_bigup_rechercher_fichiers'] = true;
+
+	return $valeurs;
+}
+
 function formulaires_configurer_metasplus_traiter_dist() {
 
 	include_spip('inc/cvt_configurer');
@@ -19,7 +29,6 @@ function formulaires_configurer_metasplus_traiter_dist() {
 			$document = $ajouter_document(0, $documents, null, 0, $mode)
 			and $id_document = intval($document[0])
 		) {
-			;
 			sql_updateq('spip_documents',array('statut' => 'publie'), 'id_document='.intval($id_document));
 			set_request('id_doc_logo',$id_document);
 		}
