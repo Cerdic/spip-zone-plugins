@@ -125,8 +125,9 @@
 
 [(#REM) Les images : logo de l'objet puis images liées ]
 <BOUCLE_logo_objet(CONDITION){si #ENV{logos}|non}>
-#SET{logo_objet, #ENV{id_objet}|quete_logo_objet{#ENV{objet},on}}
-#SET{logos_auto, #GET{logo_objet}|?{#LISTE{#ARRAY{url,#GET{logo_objet/chemin}}},#ARRAY}}
+#SET{logo_objet, #ENV{objet}|id_table_objet|quete_logo{on,#ENV{id_objet},0,0}}
+#SET{logos_auto, #GET{logo_objet}|?{#LISTE{#ARRAY{url,#GET{logo_objet/src}}},#ARRAY}}
+#SET{fichier_logo,#GET{logo_objet/src}|replace{#VAL{_NOM_PERMANENTS_ACCESSIBLES}|constant}|replace{'\.\./'}|supprimer_timestamp}
 #SET{par,#SPIP_VERSION|floatval|>{3.1}|?{rang_lien,largeur}}
 #SET{defaut_tri,#ARRAY{
 	rang_lien, 1,
@@ -136,8 +137,8 @@
 	{objet}
 	{id_objet}
 	{media = image}
-	{!extension = svg}
-	{!fichier = #GET{logos_auto/0/url}|replace{#VAL{_NOM_PERMANENTS_ACCESSIBLES}|constant}|replace{'\.\./'}}
+	{extension != svg}
+	{fichier != #GET{fichier_logo}}
 	{tri #GET{par}, #GET{defaut_tri}}
 	{0,#GET{logos_auto}|?{2,3}}
 	{!par largeur}
