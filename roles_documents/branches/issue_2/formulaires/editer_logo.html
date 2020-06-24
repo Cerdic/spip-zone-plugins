@@ -1,0 +1,67 @@
+[(#REM)
+
+	Formulaire d'édition d'un logo : surcharge
+
+	On utilise à la place les documents avec des rôles de logo
+
+]
+<div class='formulaire_spip formulaire_editer formulaire_editer_logo formulaire_editer_logo_#ENV{objet}[ (#ENV{logos}|non)no-logo]' id="editer_logo">
+
+	[(#REM) On n'affiche le titre que s'il n'y a pas de logo ]
+	[(#ENV{logos}|non)
+	[<h3 class="titrem">(#ENV*{_options/titre})</h3>]
+	]
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	[(#REM)
+		Aperçu des logos présents
+		Si on trouve un id_document (clé 5), c'est un doc avec rôles,
+		sinon c'est un vieux logo
+	]
+	<B_logos>
+	<div class="apercu liste_items documents">
+		<BOUCLE_logos(DATA) {source table, #ENV{logos}}>
+		#SET{type, #VALEUR{5}|intval|?{document,logo}}
+		[(#GET{type}|=={document}|oui)
+			<h3 class="titrem">[(#VALEUR{6}|role{document})]</h3>
+			<INCLURE{
+				fond=modeles/document_desc,
+				id_document=#VALEUR{5},
+				objet,
+				id_objet,
+				role=#VALEUR{6},
+				uniqueid=#VALEUR{6},
+				variante=editer_logo,
+			}/>
+		][(#GET{type}|=={logo}|oui)
+			<h3 class="titrem">[(#VAL{roles_documents:mode_#VALEUR{6}}|_T)]</h3>
+			<INCLURE{
+				fond=formulaires/inc-apercu-logo,
+				logo=#VALEUR,
+				objet,
+				id_objet,
+			}/>
+		]
+		</BOUCLE_logos>
+	</div>
+	</B_logos>
+
+	[(#REM) Ajout de nouveaux logos ]
+	[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE
+		<INCLURE{
+			fond=formulaires/inc-upload_document,
+			mediatheque=#ENV{objet}|et{#ENV{proposer_media}},
+			env
+		}/>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+
+	</div></form>
+	]
+</div>

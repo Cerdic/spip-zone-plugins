@@ -1,0 +1,174 @@
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
+/**
+ * Formulaire d'édition de rôle
+ */
+.fiche_objet .formulaire_editer_roles_document {
+	margin: 0.5em 0 0;
+	padding: 0;
+	background: transparent;
+	border: 0 none;
+}
+.roles-documents {
+	display: flex;
+	flex-flow: row wrap;
+}
+.roles-documents .label {
+	margin-#ENV{left}: auto;
+}
+.roles-documents > *:not(:first-of-type) {
+	margin-#ENV{left}: 0.5em;
+}
+.roles-documents .btn-group {
+	position: relative;
+	margin-#ENV{left}: 0.5em;
+}
+.roles-documents .btn {
+	padding: 0 0.2em;
+	border-radius: 5px;
+	background-color: #GET{claire};
+	color: inherit;
+}
+.roles-documents .caret {
+	vertical-align: middle; /* Top par défaut, pourquoi ??? */
+}
+/* Exposer les rôles de logos */
+[class*=role-logo] {
+	font-weight: bold;
+}
+
+/* fix pour s'assurer que le dropdown soit visible */
+.portfolios.portfolios .item,
+.portfolios.portfolios .item .descriptions {
+	overflow: visible;
+}
+
+
+/**
+ * Formulaire de logo
+ */
+.formulaire_editer_logo .titrem {
+	text-align: center;
+}
+/* Apercu */
+.formulaire_editer_logo .apercu {
+	border: 0;
+}
+.formulaire_editer_logo .apercu .titrem {
+	margin: 0 0 0.5em 0;
+	word-break: break-all;
+}
+.formulaire_editer_logo .item {
+	margin: 0;
+	border: 0;
+}
+.formulaire_editer_logo .descriptions {
+	text-align: #ENV{left};
+}
+.formulaire_editer_logo .infos {
+	margin-bottom: 0.5em;
+}
+.formulaire_editer_logo .lien_details {
+	float: right;
+	cursor: pointer;
+}
+.formulaire_editer_logo .deplacer-modifier {
+	display: inline;
+}
+.formulaire_editer_logo .detaillees,
+.formulaire_editer_logo .mode,
+.formulaire_editer_logo .deplacer-document {
+	display: none;
+}
+.formulaire_editer_logo .editer-groupe.roles,
+.formulaire_editer_logo .editer-groupe.roles .editer {
+	padding: 0;
+}
+.formulaire_editer_logo.no-logo .editer .titrem {
+	display: none;
+}
+
+
+/**
+ * Mediathèque
+ */
+ .onglets_simple .formulaire_filtrer_roles_documents {
+	display: inline-block;
+	margin: 0 0 0 30px;
+	padding: 0;
+	border: 0;
+}
+.onglets_simple .formulaire_filtrer_roles_documents .editer-groupe {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+.onglets_simple .formulaire_filtrer_roles_documents .editer {
+	padding: 0;
+}
+.onglets_simple .formulaire_filtrer_roles_documents .editer label {
+	margin: 0 1em 0 0;
+	float: none;
+	width: auto;
+}
+.onglets_simple .formulaire_filtrer_roles_documents .editer select {
+	width: auto;
+}
+.onglets_simple .formulaire_filtrer_roles_documents .boutons {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+}
+.onglets_simple .formulaire_filtrer_roles_documents .chosen-container li {
+	float: none;
+}
+
+
+/**
+ * Fix plugin médias < r109742
+ */
+[(#PLUGIN{medias,version}|<{2.20.24}|oui)
+.portfolios.portfolios .item .infos { margin-top: auto; }
+.portfolios.portfolios .documents_liste .item .descriptions { 
+	-webkit-box-orient: horizontal; 
+	-webkit-box-direction: normal; 
+	    -ms-flex-direction: row; 
+	        flex-direction: row; 
+}
+.portfolios.portfolios .documents_liste .item .actions {
+	margin-#ENV{left}: auto;
+	margin-top: 0;
+}
+.portfolios.portfolios .documents_cases .item .presentation {
+	-webkit-box-flex:1;
+	-ms-flex-positive:1;
+	flex-grow:1;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	   -ms-flex-direction: column;
+	       flex-direction: column;
+}
+.portfolios.portfolios .documents_cases .item .descriptions {
+	margin: 0; 
+	padding: 0; 
+	-webkit-box-pack: end; 
+	   -ms-flex-pack: end; 
+	 justify-content: flex-end;
+}
+.portfolios.portfolios .documents_cases .item .descriptions {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.portfolios .documents_cases .item .descriptions > *:not(.actions) {
+	display: none;
+}
+]

@@ -1,0 +1,64 @@
+[(#REM)
+
+	Dropdown contenant des boutons pour ajouter ou supprimer des rôles de documents
+
+	Basé sur le squelette du plugin rôles : inc-editer_liens_actions_roles.html
+
+	Notes :
+	- S'il n'y a qu'un rôle, on ne permet pas de le supprimer (l'API nécessite au moins un rôle)
+	- S'il n'y a qu'un rôle et pas d'autres attribuables, on n'affiche pas le dropdown
+
+	Paramètres :
+		**obligatoires
+		*conseillés
+
+		- **id_document : identifiant du document
+		- **objet : type d'objet lié
+		- **id_objet : identifiant de l'objet lié
+		- principaux : 'oui' pour n'afficher que les rôles principaux (logos)
+									 '' pour exclure les rôles principaux (logos)
+		- libelle : intitulé du label
+
+]
+#SET{cle, document-#ENV{id_document}-#ENV{objet}-#ENV{id_objet}}
+#SET{roles, #ENV{objet}|roles_documents_presents_sur_objet{#ENV{id_objet}, #ENV{id_document}, #ENV{principaux}}}
+#SET{role_unique, #GET{roles/attribues}|count|=={1}}
+#SET{no_dropdown, #GET{role_unique}|et{#GET{roles/attribuables}|non}}
+
+<BOUCLE_dropdown(CONDITION){si #GET{no_dropdown}|non}>
+<div class="btn-group">
+
+	<a data-toggle="dropdown" href="#" title="<:roles:modifier_roles_title:>" class="btn btn-mini dropdown-toggle">[(#ENV{libelle,<:roles:modifier_roles:>})]
+		<span class="caret"></span>
+	</a>
+
+	<ul class="dropdown-menu">
+
+		[(#REM) Les rôles attribués ]
+		<B_roles_attribues>
+		<li class='dropdown-header'><:roles:enlever_role:></li>
+		<BOUCLE_roles_attribues(DATA){source table,#GET{roles/attribues}} {si #GET{role_unique}|non}>
+		<li>
+			<button type="submit" name="supprimer_lien\[#GET{cle}-#VALEUR\]" class="link btn btn-mini delete">
+			[(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})] [(#VALEUR|role{document})]
+			</button>
+		</li>
+		</BOUCLE_roles_attribues>
+		[(#GET{roles/attribuables}|oui)<li class="divider"></li>]
+		</B_roles_attribues>
+
+		[(#REM) Les rôles non attribués ]
+		<B_roles_attribuables>
+		<li class='dropdown-header'><:roles:ajouter_role:></li>
+		<BOUCLE_roles_attribuables(DATA){source table,#GET{roles/attribuables}}>
+		<li>
+			<button type="submit" name="ajouter_lien\[#GET{cle}-#VALEUR\]" class="link btn btn-mini delete">
+			[(#CHEMIN_IMAGE{inserer-8.png}|balise_img{'+'})] [(#VALEUR|role{document})]
+			</button>
+		</li>
+		</BOUCLE_roles_attribuables>
+
+	</ul>
+
+</div>
+</BOUCLE_dropdown>
