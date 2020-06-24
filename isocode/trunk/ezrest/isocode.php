@@ -173,7 +173,7 @@ function subdivisions_collectionner($conditions, $filtres, $configuration) {
 	if (empty($filtres['exclure'])
 		or (
 			!empty($filtres['exclure'])
-			and (strpos('alternates', $filtres['exclure']) === false)
+			and (strpos($filtres['exclure'], 'alternates') === false)
 		)
 	) {
 		// on construit la condition sur la table de liens à partir des codes ISO des subdivisions
@@ -196,7 +196,7 @@ function subdivisions_collectionner($conditions, $filtres, $configuration) {
 	if (empty($filtres['exclure'])
 		or (
 			!empty($filtres['exclure'])
-			and (strpos('pays', $filtres['exclure']) === false)
+			and (strpos($filtres['exclure'], 'pays') === false)
 		)
 	) {
 		$pays = array();
@@ -222,4 +222,27 @@ function subdivisions_collectionner($conditions, $filtres, $configuration) {
 function subdivisions_conditionner_exclure($valeur) {
 
 	return '';
+}
+
+/**
+ * Calcule la condition du filtre pays pour lequel il est possible de passer une liste de codes de pays séparés
+ * par une virgule.
+ *
+ * @param string $valeur Valeur du critère `exclure`.
+ *
+ * @return string Toujours la chaine vide.
+ */
+function subdivisions_conditionner_pays($valeur) {
+
+	$condition = '';
+	if ($valeur) {
+		if (strpos($valeur, ',') === false) {
+			$condition = 'country=' . sql_quote($valeur);
+		} else {
+			$pays = explode(',', $valeur);
+			$condition = sql_in('country', $pays);
+		}
+	}
+
+	return $condition;
 }
