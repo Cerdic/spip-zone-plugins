@@ -181,9 +181,13 @@ function subdivisions_collectionner($conditions, $filtres, $configuration) {
 		$codes_subdivision = array_column($subdivisions['subdivisions'], 'iso_subdivision');
 		$where[] = sql_in('code_3166_2', $codes_subdivision);
 
-		$alternates = sql_allfetsel('*', 'spip_iso3166alternates', $where);
-		if ($alternates) {
-			$alternates = array_column($alternates, null, 'code_3166_2');
+		$alternates = array();
+		$codes = sql_allfetsel('*', 'spip_iso3166alternates', $where);
+		if ($codes) {
+			// On range les codes alternatifs par code ISO-3166-2
+			foreach ($codes as $_alternate) {
+				$alternates[$_alternate['code_3166_2']][] = $_alternate;
+			}
 		}
 		$subdivisions['codes_alternatifs'] = $alternates;
 	}
