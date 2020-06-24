@@ -20,7 +20,7 @@ function image_webp($image) {
 		imagepalettetotruecolor($img);
 		imagealphablending($img, true);
 		imagesavealpha($img, true);
-		imagewebp($img, $dest,80);
+		imagewebp($img, $dest,_IMG_CONVERT_QUALITE);
 		imagedestroy($img);
 		return $dest;
 	}
