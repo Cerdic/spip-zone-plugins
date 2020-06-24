@@ -10,6 +10,11 @@
 /* Dans l'espace privé, afficher les labels des vues de Saisies */
 #wysiwyg .afficher .label{ display:block; }
 
+/* Correction d'un bug de navigateur. On l'ajoute là pour tout le monde, c'est gentil. https://stackoverflow.com/a/17863685 */
+fieldset {
+	min-width:0;
+}
+
 .fieldset.pliable > fieldset > .legend{
 	cursor:pointer;
 }
@@ -64,4 +69,9 @@
 }
 .formulaire_spip .etapes__item:not(:first-child):before {
 	content: ' → ';
+}
+
+/* Pour les saisies grilles, on s'arrange pour faire défiler si ça dépasse en largeur */
+.choix_grille_wrapper {
+	overflow-x: auto;
 }
