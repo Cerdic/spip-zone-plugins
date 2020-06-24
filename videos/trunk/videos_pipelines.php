@@ -66,7 +66,11 @@ function videos_jquery_plugins($scripts) {
  * @return array
  */
 function videos_formulaire_fond($flux) {
-	if ($flux['args']['form'] == 'joindre_document') {
+	if (
+		$flux['args']['form'] == 'joindre_document'
+		and !empty($flux['args']['contexte']['objet'])
+		and !empty($flux['args']['contexte']['id_objet'])
+	) {
 		$videos = recuperer_fond(
 			'prive/contenu/videos_affiche_boite',
 			array(
