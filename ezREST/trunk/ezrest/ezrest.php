@@ -657,7 +657,9 @@ function ezrest_conditionner($plugin, $collection, $filtres, $configuration) {
 				// La condition est élaborée par une fonction spécifique du plugin utilisateur.
 				// Il est donc inutile de fournir autre chose que la valeur à la fonction spécifique car tout le
 				// contexte est déjà connu du plugin utilisateur.
-				$conditions[] = $conditionner($_valeur);
+				if ($condition = $conditionner($_valeur)) {
+					$conditions[] = $condition;
+				}
 			} else {
 				// La condition est calculée par REST Factory à partir de la configuration du filtre.
 				// -- détermination du nom du champ servant de critère
