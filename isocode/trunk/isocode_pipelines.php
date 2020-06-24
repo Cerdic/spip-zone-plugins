@@ -31,12 +31,12 @@ function isocode_liste_ezcollection($collections) {
 		'module'    => 'isocode',
 		'cache'     => array(
 			'type'  => 'ezrest',
-			'duree' => 3600 * 24 * 30
+			'duree' => 1 //3600 * 24 * 30
 		),
 		'filtres'   => array(
 			array(
 				'critere'         => 'pays',
-				'est_obligatoire' => true,
+				'est_obligatoire' => false,
 				'champ_nom'       => 'country',
 				'champ_table'     => 'iso3166subdivisions'
 			),
@@ -45,6 +45,10 @@ function isocode_liste_ezcollection($collections) {
 				'est_obligatoire' => false,
 				'champ_nom'       => 'type',
 				'champ_table'     => 'iso3166subdivisions'
+			),
+			array(
+				'critere'         => 'exclure', // Ce n'est pas un filtre conditionnel mais une option de contenu
+				'est_obligatoire' => false,
 			),
 		)
 	);

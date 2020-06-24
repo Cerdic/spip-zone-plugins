@@ -24,6 +24,14 @@ $GLOBALS['isocode']['pays']['champs'] = array(
 	'phone_id'        => 'indicatif_uit'
 );
 
+$GLOBALS['isocode']['subdivisions']['champs'] = array(
+	'code_3166_2' => 'iso_subdivision',
+	'country'     => 'iso_pays',
+	'type'        => 'categorie',
+	'parent'      => 'iso_parent',
+	'label'       => 'iso_titre',
+);
+
 // -----------------------------------------------------------------------
 // -------------------------- COLLECTION PAYS ----------------------------
 // -----------------------------------------------------------------------
@@ -50,7 +58,7 @@ function pays_collectionner($conditions, $filtres, $configuration) {
 	// cette région.
 	$from = array('spip_iso3166countries');
 	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
-	$description_table = sql_showtable('spip_iso3166countries');
+	$description_table = sql_showtable($from[0]);
 	$champs = array_keys($description_table['field']);
 	$champs = array_diff($champs, array('label_fr', 'label_en', 'maj'));
 	// -- Traduire les champs de Isocode en champs pour Géographie
@@ -112,4 +120,102 @@ function pays_verifier_filtre_continent($continent, &$erreur) {
 	}
 
 	return $est_valide;
+}
+
+
+// -----------------------------------------------------------------------
+// ---------------------- COLLECTION SUBDIVISIONS ------------------------
+// -----------------------------------------------------------------------
+
+/**
+ * Récupère la liste des subdivisions de la table spip_iso3166subdivisions éventuellement filtrés par les critères
+ * additionnels positionnés dans la requête.
+ *
+ * @param array $conditions    Conditions à appliquer au select
+ * @param array $filtres       Tableau des critères de filtrage additionnels à appliquer au select.
+ * @param array $configuration Configuration de la collection utile pour savoir quelle fonction appeler pour
+ *                             construire chaque filtre.
+ *
+ * @return array Tableau des subdivisions et par défaut des codes alternatifs et de la liste des pays.
+ */
+function subdivisions_collectionner($conditions, $filtres, $configuration) {
+
+	// Initialisation de la collection
+	$subdivisions = array();
+
+	// Récupérer la liste des subdivisions (filtrée ou pas par pays ou par type de subdivision).
+	$from = 'spip_iso3166subdivisions';
+	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
+	$description_table = sql_showtable($from);
+	$champs = array_keys($description_table['field']);
+	$champs = array_diff($champs, array('maj'));
+	// -- Traduire les champs de Isocode en champs pour Subdivisions
+	$select = array();
+	foreach ($champs as $_champ) {
+		$select[] = "${_champ} as {$GLOBALS['isocode']['subdivisions']['champs'][$_champ]}";
+	}
+
+	// -- Initialisation du where: aucune condition par défaut.
+	$where = array();
+	// -- Si il y a des critères additionnels on complète le where en conséquence.
+	if ($conditions) {
+		$where = array_merge($where, $conditions);
+	}
+	// -- Rangement de la liste dans l'index subdivisions
+	$subdivisions['subdivisions'] = sql_allfetsel($select, $from, $where);
+
+	// La liste est enrichie par défaut:
+	// -- des codes alternatifs disponibles dans iso3166alternates
+	// -- de la liste des pays concernés par les codes renvoyés
+	// Ces données supplémentaires peuvent être exclues en utilisant le filtre 'exclure'
+	//
+	// -- Ajout des codes alternatifs si non exclus explicitement
+	if (empty($filtres['exclure'])
+		or (
+			!empty($filtres['exclure'])
+			and (strpos('alternates', $filtres['exclure']) === false)
+		)
+	) {
+		// on construit la condition sur la table de liens à partir des codes ISO des subdivisions
+		$where = array();
+		$codes_subdivision = array_column($subdivisions['subdivisions'], 'iso_subdivision');
+		$where[] = sql_in('code_3166_2', $codes_subdivision);
+
+		$alternates = sql_allfetsel('*', 'spip_iso3166alternates', $where);
+		if ($alternates) {
+			$alternates = array_column($alternates, null, 'code_3166_2');
+		}
+		$subdivisions['codes_alternatifs'] = $alternates;
+	}
+
+	// -- Ajout de la liste des pays concernés par les subdivisions sauf si exclu
+	if (empty($filtres['exclure'])
+		or (
+			!empty($filtres['exclure'])
+			and (strpos('pays', $filtres['exclure']) === false)
+		)
+	) {
+		$pays = array();
+		foreach($subdivisions['subdivisions'] as $_subdivision) {
+			if (!in_array($_subdivision['iso_pays'], $pays)) {
+				$pays[] = $_subdivision['iso_pays'];
+			}
+		}
+		$subdivisions['pays'] = $pays;
+	}
+
+	return $subdivisions;
+}
+
+/**
+ * Evite que le filtre exclure ne soit considéré comme une condition SQL.
+ * Il sera traité dans la fonction collectionner pour supprimer des données dans le contenu de la requête.
+ *
+ * @param string $valeur Valeur du critère `exclure`.
+ *
+ * @return string Toujours la chaine vide.
+ */
+function subdivisions_conditionner_exclure($valeur) {
+
+	return '';
 }
