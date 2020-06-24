@@ -117,7 +117,7 @@ function formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_rep
 
 		$reponses = formidable_verifier_reponse_formulaire(
 			$id_formulaire,
-			$options['identification'],
+			isset($options['identification']) ? $options['identification'] : '',
 			isset($options['variable_php']) ? $options['variable_php'] : ''
 		);
 
