@@ -128,7 +128,7 @@ function dictionnaires_lister_definitions($purger = false){
 				. join(
 					'|',
 					array_map(
-						create_function('$mot', 'return str_replace(".", "\.", $mot);'),
+						function($mot) { return str_replace(".", "\.", $mot); },
 						$definition['termes']
 					)
 				)
