@@ -1,0 +1,33 @@
+[(#REM)
+	Ce formulaire a un parent (qui n'est pas une rubrique)
+]
+[(#ID_DEFINITION|intval|oui)
+	[(#AUTORISER{modifier,definition,#ID_DEFINITION}|sinon_interdire_acces)]
+][(#ID_DEFINITION|intval|non)
+	[(#AUTORISER{creer,definition}|sinon_interdire_acces)]
+]
+#SET{retour,#ENV{redirect}
+	|sinon{#ID_DEFINITION|intval
+		|?{#URL_ECRIRE{definition,id_definition=#ID_DEFINITION},#URL_ECRIRE{definitions}}}}
+
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		[(#ID_DEFINITION|oui)
+		[(#GET{retour}|icone_verticale{<:icone_retour:>,definition,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		]
+		[[(#ID_DEFINITION|?{<:definition:icone_modifier_definition:>,<:definition:icone_creer_definition:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{definition,#ID_DEFINITION}|sinon{<:info_sans_titre:>}})</h1>]
+	</div>
+
+	#SET{redirect,#ENV{redirect,#ID_DEFINITION|generer_url_entite{definition}}}
+	[(#ENV{retourajax,''}|oui)
+		#SET{redirect,#GET{retour}}
+		<div class="ajax">
+	]
+	#FORMULAIRE_EDITER_DEFINITION{#ENV{id_definition,oui},#ENV{id_dictionnaire},#GET{redirect},#ENV{lier_trad}}
+	[(#ENV{retourajax,''}|oui)
+		</div>
+		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#extra');/*\]\]>*/</script>
+	]
+
+</div>

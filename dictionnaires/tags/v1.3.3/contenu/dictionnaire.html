@@ -1,0 +1,19 @@
+<BOUCLE_dictionnaire(DICTIONNAIRES){id_dictionnaire}>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+<div class="contenu-principal">
+	<div class="cartouche">
+		[(#LOGO_DICTIONNAIRE|image_reduire{200,200})]
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+	</div>
+
+	[<div class="#EDIT{descriptif} texte">(#DESCRIPTIF)</div>]
+	[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+</div>
+<BOUCLE_definitions(DEFINITIONS){id_dictionnaire}{par titre}{statut=publie}>
+<dl>
+	<dt><a href="#URL_DEFINITION">#TITRE</a></dt>
+	<dd>#TEXTE</dd>
+</dl>
+</BOUCLE_definitions>
+</BOUCLE_dictionnaire>

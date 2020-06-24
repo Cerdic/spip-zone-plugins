@@ -1,0 +1,9 @@
+
+[(#INCLURE{fond=prive/objets/liste/definitions, sinon=<:definition:info_aucun_definition:>, env, ajax})]
+
+[(#AUTORISER{creerdefinitiondans, dictionnaire, #ENV{id_dictionnaire}}|oui)
+[(#URL_ECRIRE{definition_edit, new=oui&id_dictionnaire=#ENV{id_dictionnaire}}
+	|icone{<:definition:icone_creer_definition:>,#CHEMIN_IMAGE{definition-add-24.png},#LANG_RIGHT})]
+]
+
+<div class='nettoyeur'></div>

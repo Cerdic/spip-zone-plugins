@@ -1,0 +1,13 @@
+
+<!-- hierarchie -->
+<a href="#URL_ECRIRE{dictionnaires}"><:dictionnaire:titre_dictionnaires:></a>
+<BOUCLE_def(DEFINITIONS){id_definition}{statut==.*}>
+	<BOUCLE_dico(DICTIONNAIRES){id_dictionnaire}{statut==.*}>
+	&gt; [(#URL_ECRIRE{dictionnaire,id_dictionnaire=#ID_DICTIONNAIRE}
+		|lien_ou_expose{ #TITRE, ''})]
+	</BOUCLE_dico>
+&gt; <strong class="on">#TITRE</strong>
+</BOUCLE_def>
+
+&gt; <strong class="on"><:definition:info_nouveau_definition:></strong>
+<//B_def>
