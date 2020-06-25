@@ -85,7 +85,13 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $s
 		)) {
 			foreach ($champs as $champ) {
 				$reponses_valeurs[$id_formulaires_reponse][$champ['nom']] = array(
-					'valeur' =>  $tenter_unserialize($champ['valeur']),
+					'valeur' =>  formidable_ajouter_action_recuperer_fichier(
+						$tenter_unserialize($champ['valeur']),
+						$champ['nom'],
+						$formulaires_saisies[$id_formulaire],
+						$id_formulaire,
+						$id_formulaires_reponse
+					),
 					'id' => $champ['id_formulaires_reponses_champ']
 				);
 			}
