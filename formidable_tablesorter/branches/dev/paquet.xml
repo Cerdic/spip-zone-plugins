@@ -15,11 +15,12 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	<pipeline nom="affiche_gauche" inclure="formidable_ts_pipelines.php" />
 	<pipeline nom="formidable_ts_sort_value" action="" />
-	<necessite nom="formidable" compatibilite="[4.5.0;[" />
+	<necessite nom="formidable" compatibilite="[4.5.1;[" />
 	<necessite nom="spout" compatibilite="[1.2.2;[" />
 	<necessite nom="tablesorter" compatibilite="[2.1.0;[" />
 	<necessite nom="saisies" compatibilite="[3.41.0;[" />
 	<necessite nom="crayons" compatibilite="[2.0.9;[" />
 	<utilise nom="prive_fluide" compatibilite="[1.2.3;[" />
 	<utilise nom="cextras" compatibilite="[3.12.6;[" />
+	<utilise nom="cvtupload" compatibilite="[1.20.3;[" />
 </paquet>
