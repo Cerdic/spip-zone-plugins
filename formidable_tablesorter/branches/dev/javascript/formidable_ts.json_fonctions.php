@@ -390,10 +390,12 @@ class cell implements \JsonSerializable{
 	public function jsonSerialize() {
 		if ($this->crayons) {
 			if ($this->type == 'extra') {
-				return '<div class="'.classe_boucle_crayon('formulaires_reponse', $this->nom, $this->id_formulaires_reponse).'">'.$this->value.'</div>';
+				$class = classe_boucle_crayon('formulaires_reponse', $this->nom, $this->id_formulaires_reponse);
 			} elseif ($this->type == 'champ') {
-				return  '<div class="'.\calculer_voir_reponse($this->id_formulaires_reponse, $this->table->id_formulaire, $this->nom, '', 'edit').'">'.$this->value.'</div>';
+				$class = \calculer_voir_reponse($this->id_formulaires_reponse, $this->table->id_formulaire, $this->nom, '', 'edit');
 			}
+			$value = $this->value ? $this->value : '&nbps;';
+			return "<div class='$class'>$value</div>";
 		} else {
 			return $this->value;
 		}
