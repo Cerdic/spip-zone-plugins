@@ -1,0 +1,11 @@
+heritage: 'toto'
+titre: 'titi'
+description: 'titi_description'
+defaut:
+  options:
+    readonly: 'on'
+    label: 'titi'
+  verifier:
+    type: 'toto'
+    options:
+      normaliser: false

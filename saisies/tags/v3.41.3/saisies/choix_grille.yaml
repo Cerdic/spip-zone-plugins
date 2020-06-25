@@ -1,0 +1,117 @@
+titre: '<:saisies:saisie_choix_grille_titre:>'
+description: '<:saisies:saisie_choix_grille_explication:>'
+options:
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'description'
+      label: '<:saisies:option_groupe_description:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'label'
+          label: '<:saisies:option_label_label:>'
+          explication: '<:saisies:option_label_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'explication'
+          label: '<:saisies:option_explication_label:>'
+          explication: '<:saisies:option_explication_explication:>'
+          size: 50
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'utilisation'
+      label: '<:saisies:option_groupe_utilisation:>'
+    saisies:
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'multiple'
+          label: '<:saisies:option_multiple_label:>'
+          explication: '<:saisies:option_multiple_explication:>'
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'data_rows'
+          label: '<:saisies:data_rows_label:>'
+          explication: '<:saisies:option_datas_explication:>'
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'data_cols'
+          label: '<:saisies:data_cols_label:>'
+          explication: '<:saisies:option_datas_explication:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'affichage'
+      label: '<:saisies:option_groupe_affichage:>'
+    saisies:
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'afficher_si'
+          label: '<:saisies:option_afficher_si_label:>'
+          explication: '<:saisies:option_afficher_si_explication:>'
+          rows: 5
+        verifier:
+          type: 'afficher_si'
+      -
+        saisie: 'case'
+        options:
+          nom: 'afficher_si_remplissage_uniquement'
+          label: '<:saisies:option_afficher_si_remplissage_uniquement_label:>'
+          label_case: '<:saisies:option_afficher_si_remplissage_uniquement_label_case:>'
+          explication: '<:saisies:option_afficher_si_remplissage_uniquement_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'attention'
+          label: '<:saisies:option_attention_label:>'
+          explication: '<:saisies:option_attention_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'class'
+          label: '<:saisies:option_class_label:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'conteneur_class'
+          label: '<:saisies:option_conteneur_class_label:>'
+          size: 50
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'validation'
+      label: '<:saisies:option_groupe_validation:>'
+    saisies:
+      -
+        saisie: 'case'
+        options:
+          nom: 'obligatoire'
+          label_case: '<:saisies:option_obligatoire_label:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'info_obligatoire'
+          label: '<:saisies:option_info_obligatoire_label:>'
+          explication: '<:saisies:option_info_obligatoire_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'erreur_obligatoire'
+          label: '<:saisies:option_erreur_obligatoire_label:>'
+          explication: '<:saisies:option_erreur_obligatoire_explication:>'
+defaut:
+  options:
+    label: '<:saisies:saisie_choix_grille_titre:>'
+    size: 40
+    # champs extras (definition du champ sql)
+    sql: "text DEFAULT '' NOT NULL"
