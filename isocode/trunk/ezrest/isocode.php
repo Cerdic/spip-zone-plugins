@@ -199,10 +199,14 @@ function subdivisions_collectionner($conditions, $filtres, $configuration) {
 			and (strpos($filtres['exclure'], 'pays') === false)
 		)
 	) {
+		// Liste des codes 3166-1 alpha2 et du nom multi
 		$pays = array();
 		foreach($subdivisions['subdivisions'] as $_subdivision) {
 			if (!in_array($_subdivision['iso_pays'], $pays)) {
-				$pays[] = $_subdivision['iso_pays'];
+				$where = array('code_alpha2=' . sql_quote($_subdivision['iso_pays']));
+				if ($nom = sql_getfetsel('label', 'spip_iso3166countries', $where)) {
+					$pays['pays'][$_subdivision['iso_pays']] = $nom;
+				}
 			}
 		}
 		$subdivisions['pays'] = $pays;
