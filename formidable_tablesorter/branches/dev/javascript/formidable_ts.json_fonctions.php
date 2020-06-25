@@ -259,7 +259,6 @@ continue;
 						);
 					} else { // Réponse de l'internaute
 						$value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'valeur_uniquement');
-						$row_value = \calculer_voir_reponse($id_formulaires_reponse, $this->id_formulaire, $nom, '', 'brut');
 						$row_ts[] = new cell(
 							[
 								'table' => $this,
