@@ -41,8 +41,8 @@ metropolitan_department	FR-32	Gers	fr	FR	FR-OCC
 metropolitan_department	FR-33	Gironde	fr	FR	FR-NAQ
 metropolitan_region	FR-GES	Grand-Est	fr	FR	
 overseas_region	FR-GUA	Guadeloupe	fr	FR	
-overseas_department	FR-GP	Guadeloupe (see also separate country code entry under GP)	fr	FR	FR-GUA
-overseas_territorial_collectivity	FR-GF	Guyane (française) (see also separate country code entry under GF)	fr	FR	
+overseas_department	FR-GP	Guadeloupe	fr	FR	FR-GUA
+overseas_territorial_collectivity	FR-GF	Guyane (française)	fr	FR
 metropolitan_department	FR-68	Haut-Rhin	fr	FR	FR-GES
 metropolitan_department	FR-2B	Haute-Corse	fr	FR	FR-COR
 metropolitan_department	FR-31	Haute-Garonne	fr	FR	FR-OCC
@@ -62,7 +62,7 @@ metropolitan_department	FR-37	Indre-et-Loire	fr	FR	FR-CVL
 metropolitan_department	FR-38	Isère	fr	FR	FR-ARA
 metropolitan_department	FR-39	Jura	fr	FR	FR-BFC
 overseas_region	FR-LRE	La Réunion	fr	FR	
-overseas_department	FR-RE	La Réunion (see also separate country code entry under RE)	fr	FR	FR-LRE
+overseas_department	FR-RE	La Réunion	fr	FR	FR-LRE
 metropolitan_department	FR-40	Landes	fr	FR	FR-NAQ
 metropolitan_department	FR-41	Loir-et-Cher	fr	FR	FR-CVL
 metropolitan_department	FR-42	Loire	fr	FR	FR-ARA
@@ -74,10 +74,10 @@ metropolitan_department	FR-48	Lozère	fr	FR	FR-OCC
 metropolitan_department	FR-49	Maine-et-Loire	fr	FR	FR-PDL
 metropolitan_department	FR-50	Manche	fr	FR	FR-NOR
 metropolitan_department	FR-51	Marne	fr	FR	FR-GES
-overseas_territorial_collectivity	FR-MQ	Martinique (see also separate country code entry under MQ)	fr	FR	
+overseas_territorial_collectivity	FR-MQ	Martinique	fr	FR
 metropolitan_department	FR-53	Mayenne	fr	FR	FR-PDL
 overseas_region	FR-MAY	Mayotte	fr	FR	
-overseas_department	FR-YT	Mayotte (see also separate country code entry under YT)	fr	FR	FR-MAY
+overseas_department	FR-YT	Mayotte	fr	FR	FR-MAY
 metropolitan_department	FR-54	Meurthe-et-Moselle	fr	FR	FR-GES
 metropolitan_department	FR-55	Meuse	fr	FR	FR-GES
 metropolitan_department	FR-56	Morbihan	fr	FR	FR-BRE
@@ -86,22 +86,22 @@ metropolitan_department	FR-58	Nièvre	fr	FR	FR-BFC
 metropolitan_department	FR-59	Nord	fr	FR	FR-HDF
 metropolitan_region	FR-NOR	Normandie	fr	FR	
 metropolitan_region	FR-NAQ	Nouvelle-Aquitaine	fr	FR	
-overseas_territorial_collectivity	FR-NC	Nouvelle-Calédonie (see also separate country code entry under NC)	fr	FR	
+overseas_territorial_collectivity	FR-NC	Nouvelle-Calédonie	fr	FR
 metropolitan_region	FR-OCC	Occitanie	fr	FR	
 metropolitan_department	FR-60	Oise	fr	FR	FR-HDF
 metropolitan_department	FR-61	Orne	fr	FR	FR-NOR
 metropolitan_department	FR-75	Paris	fr	FR	FR-IDF
 metropolitan_department	FR-62	Pas-de-Calais	fr	FR	FR-HDF
 metropolitan_region	FR-PDL	Pays-de-la-Loire	fr	FR	
-overseas_territorial_collectivity	FR-PF	Polynésie française (see also separate country code entry under PF)	fr	FR	
+overseas_territorial_collectivity	FR-PF	Polynésie française	fr	FR
 metropolitan_region	FR-PAC	Provence-Alpes-Côte-d’Azur	fr	FR	
 metropolitan_department	FR-63	Puy-de-Dôme	fr	FR	FR-ARA
 metropolitan_department	FR-64	Pyrénées-Atlantiques	fr	FR	FR-NAQ
 metropolitan_department	FR-66	Pyrénées-Orientales	fr	FR	FR-OCC
 metropolitan_department	FR-69	Rhône	fr	FR	FR-ARA
-overseas_territorial_collectivity	FR-BL	Saint-Barthélemy (see also separate country code entry under BL)	fr	FR	
-overseas_territorial_collectivity	FR-MF	Saint-Martin (see also separate country code entry under MF)	fr	FR	
-overseas_territorial_collectivity	FR-PM	Saint-Pierre-et-Miquelon (see also separate country code entry under PM)	fr	FR	
+overseas_territorial_collectivity	FR-BL	Saint-Barthélemy	fr	FR
+overseas_territorial_collectivity	FR-MF	Saint-Martin	fr	FR
+overseas_territorial_collectivity	FR-PM	Saint-Pierre-et-Miquelon	fr	FR
 metropolitan_department	FR-72	Sarthe	fr	FR	FR-PDL
 metropolitan_department	FR-73	Savoie	fr	FR	FR-ARA
 metropolitan_department	FR-71	Saône-et-Loire	fr	FR	FR-BFC
@@ -111,7 +111,7 @@ metropolitan_department	FR-77	Seine-et-Marne	fr	FR	FR-IDF
 metropolitan_department	FR-80	Somme	fr	FR	FR-HDF
 metropolitan_department	FR-81	Tarn	fr	FR	FR-OCC
 metropolitan_department	FR-82	Tarn-et-Garonne	fr	FR	FR-OCC
-overseas_territorial_collectivity	FR-TF	Terres australes françaises (see also separate country code entry under TF)	fr	FR	
+overseas_territorial_collectivity	FR-TF	Terres australes françaises	fr	FR
 metropolitan_department	FR-90	Territoire de Belfort	fr	FR	FR-BFC
 metropolitan_department	FR-95	Val-d'Oise	fr	FR	FR-IDF
 metropolitan_department	FR-94	Val-de-Marne	fr	FR	FR-IDF
@@ -120,7 +120,7 @@ metropolitan_department	FR-84	Vaucluse	fr	FR	FR-PAC
 metropolitan_department	FR-85	Vendée	fr	FR	FR-PDL
 metropolitan_department	FR-86	Vienne	fr	FR	FR-NAQ
 metropolitan_department	FR-88	Vosges	fr	FR	FR-GES
-overseas_territorial_collectivity	FR-WF	Wallis-et-Futuna (see also separate country code entry under WF)	fr	FR	
+overseas_territorial_collectivity	FR-WF	Wallis-et-Futuna	fr	FR
 metropolitan_department	FR-89	Yonne	fr	FR	FR-BFC
 metropolitan_department	FR-78	Yvelines	fr	FR	FR-IDF
 metropolitan_region	FR-IDF	Île-de-France	fr	FR	
