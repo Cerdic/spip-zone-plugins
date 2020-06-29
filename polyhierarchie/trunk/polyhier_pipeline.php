@@ -72,7 +72,7 @@ function polyhier_formulaire_charger($flux){
 	$form = $flux['args']['form'];
 	if (
 		(isset($flux['data']['_polyhier']) AND $objet = $flux['data']['_polyhier'] AND in_array($objet,array('article','rubrique')))
-		OR ($objet = substr($form,7) AND in_array($form,array('editer_article','editer_rubrique')))
+		OR (is_array($flux['data']) and $objet = substr($form,7) AND in_array($form,array('editer_article','editer_rubrique')))
 		){
 		// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
 		if ($flux['data']['id_parent'] < 0) return $flux;
