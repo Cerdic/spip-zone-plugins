@@ -102,7 +102,7 @@ function rang_recuperer_fond($flux) {
 }
 
 /**
- * Insertion dans le pipeline pre_edition pour le classer l'objet quand on le publie
+ * Classer l'objet quand il est publie ou, pour un objet sans statut, quand il est crée.
  *
  * @param    array $flux Données du pipeline
  * @return    array        Données du pipeline
