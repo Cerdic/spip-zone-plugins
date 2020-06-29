@@ -106,7 +106,7 @@ function pages_affiche_milieu_identifiant($flux) {
 // Vérifier que la page n'est pas vide
 function pages_formulaire_charger($flux) {
 	// Si on est dans l'édition d'un article
-	if (is_array($flux) and $flux['args']['form'] == 'editer_article') {
+	if (is_array($flux) and is_array($flux['data']) and $flux['args']['form'] == 'editer_article') {
 		// Si on est dans un article de modele page
 		if (_request('modele') == 'page' or ($flux['data']['page'] and _request('modele') != 'article')) {
 			$flux['data']['modele'] = 'page';
