@@ -105,25 +105,35 @@ function rang_recuperer_fond($flux) {
  * Insertion dans le pipeline pre_edition pour le classer l'objet quand on le publie
  *
  * @param    array $flux Données du pipeline
- *
  * @return    array        Données du pipeline
  */
 function rang_pre_edition($flux) {
+	include_spip('inc/config');
 	$rang_max = lire_config('rang/rang_max');
 
-	if (isset($rang_max) && !empty($rang_max) && $flux['args']['action'] == 'instituer') {
+	if ($rang_max && !empty($rang_max) && $flux['args']['action'] == 'instituer') {
 
-		$liste_objets = lire_config('rang/objets');
-		$table        = $flux['args']['table'];
-		$id_table_objet = id_table_objet($table);
-
+		$liste_objets 	= lire_config('rang/objets');
+		$table        	= $flux['args']['table'];
+		
 		if (in_array($table, $liste_objets)) {
-			$id_objet = $flux['args']['id_objet'];
+			$id_objet 		= $flux['args']['id_objet'];
+			
+			$trouver_table = charger_fonction('trouver_table', 'base');
+			$desc = $trouver_table($table);
 
-			if (isset($flux['data']['statut']) && $flux['data']['statut'] == 'publie') { // cas des objets avec statut
-				$flux['data']['rang'] = rang_classer_dernier($table, $id_objet);
-			} elseif ($rang = sql_getfetsel('rang', $table, "$id_table_objet=".intval($id_objet)) == 0) { // cas des objets sans statut, mot-clés par exemple
+			if (isset($desc['field']['statut'])) { // cas des objets avec statut
+				if ($flux['data']['statut'] == 'publie') {
 					$flux['data']['rang'] = rang_classer_dernier($table, $id_objet);
+				}
+			} 
+
+			if (!isset($desc['field']['statut'])) { // cas des objets sans statut (mots, groupes_mots, etc.) 
+				$id_table_objet = id_table_objet($table);
+				$rang = sql_getfetsel('rang', $table, "$id_table_objet=".intval($id_objet));
+				if ($rang == '0') {
+					$flux['data']['rang'] = rang_classer_dernier($table, $id_objet);
+				}
 			}
 		}
 	}

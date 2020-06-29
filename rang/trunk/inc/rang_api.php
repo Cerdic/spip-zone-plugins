@@ -204,7 +204,9 @@ function rang_get_contextes() {
 }
 
 /**
- * Calculer le rang pour la nouvelle occurence de l’objet
+ * Calculer le rang si :
+ * 	• une nouvelle occurence d’un objet qui n'a pas de statut
+ * 	• (re) publication d'un objet avec statut
  *
  * @param string $table
  * @param int $id_objet
@@ -222,11 +224,18 @@ function rang_get_contextes() {
 			$where = $parent['champ'].'='.$parent['id_objet'];
 		}
 
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$desc = $trouver_table($table);
+
+		if (isset($desc['field']['statut'])) { // cas des objets avec statut
+			$where .= " AND statut=".sql_quote('publie');
+		}
+
 		$rang = sql_getfetsel('max(rang)', $table, $where);
 		
 	} else {
 	// si pas de parent, c'est plus simple
-		$rang = sql_getfetsel('max(rang)', $table);
+		$rang = sql_getfetsel('max(rang)', $table, 'statut='.sql_quote('publie'));
 	}
 	 
 	// todo : on classe l'objet à la fin (rang max) mais on pourrait vouloir le classer au début
