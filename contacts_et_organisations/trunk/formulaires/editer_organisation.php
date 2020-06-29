@@ -209,6 +209,19 @@ function formulaires_editer_organisation_verifier_dist($id_organisation = 'new',
 	if ($editer_organisation_verifier = charger_fonction('editer_organisation_verifier', 'inc', true)){
 		$erreurs = array_merge($erreurs, $editer_organisation_verifier($id_organisation, $id_parent));
 	}
+
+	// verifier que la hiearchie n'introduit pas une boucle infinie de parente
+	if (!isset($erreurs['id_parent'])
+		and intval($id_organisation) and $idp = intval(_request('id_parent'))) {
+		$deja = [$id_organisation];
+		while ($idp and !in_array($idp, $deja)) {
+			$deja[] = $idp;
+			$idp = sql_getfetsel("id_parent", "spip_organisations", "id_organisation=".intval($idp));
+		}
+		if ($idp) {
+			$erreurs['id_parent'] = _T('contacts:erreur_parent_organisation_boucle_infinie');
+		}
+	}
 	
 	return $erreurs;
 }

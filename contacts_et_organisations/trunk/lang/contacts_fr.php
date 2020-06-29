@@ -101,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_annuaire_identifiant_existant' => 'Cet identifiant est déjà utilisé par l’un de vos annuaires.',
+	'erreur_parent_organisation_boucle_infinie' => 'Impossible de sélectionner cette organisation comme parent, cela créé une boucle infinie de parents',
 	'est_un_contact' => 'Cet auteur est défini comme étant un contact.',
 	'est_une_organisation' => 'Cet auteur est défini comme étant une organisation.',
 	'explication_activite' => 'Activité de l’organisation : humanitaire, formation, édition...',
