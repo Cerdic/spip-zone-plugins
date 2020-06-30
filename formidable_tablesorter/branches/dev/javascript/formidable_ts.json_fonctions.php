@@ -394,7 +394,7 @@ class cell implements \JsonSerializable{
 			} elseif ($this->type == 'champ') {
 				$class = \calculer_voir_reponse($this->id_formulaires_reponse, $this->table->id_formulaire, $this->nom, '', 'edit');
 			}
-			$value = $this->value ? $this->value : '&nbps;';
+			$value = $this->value ? $this->value : '&nbsp;';
 			return "<div class='$class'>$value</div>";
 		} else {
 			return $this->value;
