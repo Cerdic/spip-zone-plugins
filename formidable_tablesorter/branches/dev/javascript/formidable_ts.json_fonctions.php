@@ -94,9 +94,10 @@ continue;
 			}
 			$columns[] = 'champ-'.$champ['options']['nom'];
 		}
-		// Ajouter les nouvelles colonnes à la fin
+		// Ajouter les nouvelles colonnes à la fin, et soustraire celles qui n'existent plus
 		$diff = array_diff($columns, $order);
 		$this->columns = array_merge($order, $diff);
+		$this->columns = array_intersect($this->columns, $columns);
 	}
 
 	/**
