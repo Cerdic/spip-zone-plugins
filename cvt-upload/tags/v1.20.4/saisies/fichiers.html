@@ -1,0 +1,14 @@
+#SET{mime,''}
+[(#ENV{verifier/type}|=={'fichiers'}|oui)
+  [(#ENV{verifier/options/mime}|=={tout_mime}|oui) #SET{mime,''}][(#REM) si on demande tout mime, on va pas s'amuser à boucler sur ce qui existe dans SPIP]
+  [(#ENV{verifier/options/mime}|=={image_web}|oui) #SET{mime,'image/jpeg,image/png,image/gif'}]
+  [(#ENV{verifier/options/mime}|=={specifique}|oui) #SET{mime,#ENV{verifier/options/mime_specifique}|implode{','}}]
+]
+<BOUCLE_input(DATA) {enum 1,#ENV{nb_fichiers,1}}>
+<div class="choix">
+	[(#ENV{label_fichiers_individuels}|!={non}|oui|et{#ENV{nb_fichiers,1}|>{1}|oui})
+	<label for="#ENV{nom}_[(#VALEUR|moins{1})]"><:cvtupload:saisie_fichiers_plusieur_label{nb=#VALEUR}:></label>
+	]
+	<input type="file" class="file[ (#ENV{class})]" name="#ENV{nom}\[[(#VALEUR|moins{1})]\]" id="#ENV{nom}_[(#VALEUR|moins{1})]" size="40"[ accept="(#GET{mime})"] />
+</div>
+</BOUCLE_input>

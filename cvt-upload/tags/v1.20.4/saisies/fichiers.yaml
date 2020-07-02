@@ -1,0 +1,111 @@
+titre: '<:cvtupload:saisie_fichiers_titre:>'
+description: '<:cvtupload:saisie_fichiers_explication:>'
+icone: 'images/saisies_fichiers.png'
+options:
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'description'
+      label: '<:saisies:option_groupe_description:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'label'
+          label: '<:saisies:option_label_label:>'
+          explication: '<:saisies:option_label_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'explication'
+          label: '<:saisies:option_explication_label:>'
+          explication: '<:saisies:option_explication_explication:>'
+          size: 50
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'utilisation'
+      label: '<:saisies:option_groupe_utilisation:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'nb_fichiers'
+          label: '<:cvtupload:saisie_fichiers_nb_fichiers_label:>'
+          explication: '<:cvtupload:saisie_fichiers_nb_fichiers_explication:>'
+          defaut: 1
+        verifier: 
+          type: 'entier'
+          options:
+            min: 1
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'label_fichiers_individuels'
+          defaut: 'on'
+          valeur_non: 'non'
+          label: '<:cvtupload:saisie_fichiers_label_fichiers_individuels_label:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'affichage'
+      label: '<:saisies:option_groupe_affichage:>'
+    saisies:
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'afficher_si'
+          label: '<:saisies:option_afficher_si_label:>'
+          explication: '<:saisies:option_afficher_si_explication:>'
+          rows: 5
+      -
+        saisie: 'case'
+        options:
+          nom: 'afficher_si_remplissage_uniquement'
+          label: '<:saisies:option_afficher_si_remplissage_uniquement_label:>'
+          explication: '<:saisies:option_afficher_si_remplissage_uniquement_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'attention'
+          label: '<:saisies:option_attention_label:>'
+          explication: '<:saisies:option_attention_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'info_obligatoire'
+          label: '<:saisies:option_info_obligatoire_label:>'
+          explication: '<:saisies:option_info_obligatoire_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'class'
+          label: '<:saisies:option_class_label:>'
+          size: 50
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'validation'
+      label: '<:saisies:option_groupe_validation:>'
+    saisies:
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'obligatoire'
+          label: '<:saisies:option_obligatoire_label:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'erreur_obligatoire'
+          label: '<:saisies:option_erreur_obligatoire_label:>'
+          explication: '<:saisies:option_erreur_obligatoire_explication:>'
+defaut:
+  options:
+    label: '<:cvtupload:saisie_fichiers_titre:>'
+    nb_fichiers: 1
+  verifier:
+    type: 'fichiers'
+    options:
+      mime: 'tout_mime'
