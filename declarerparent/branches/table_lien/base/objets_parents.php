@@ -301,11 +301,11 @@ function type_objet_info_enfants($objet) {
 					if (!isset($_parent_methode['exclus']) or !in_array($objet, $_parent_methode['exclus'])) {
 						// Si le type du parent est fixe et directement l'objet demandé
 						if (isset($_parent_methode['type']) and isset($_parent_methode['champ']) and $_parent_methode['type'] == $objet) {
-							$enfants[$objet][$objet_enfant][] = $_parent_methode;
+							$enfants[$objet][$objet_enfant] = $_parent_methode;
 						}
 						// Si le type est variable, alors l'objet demandé peut forcément être parent
 						elseif (isset($_parent_methode['champ_type']) and isset($_parent_methode['champ'])) {
-							$enfants[$objet][$objet_enfant][] = $_parent_methode;
+							$enfants[$objet][$objet_enfant] = $_parent_methode;
 						}
 					}
 				}
