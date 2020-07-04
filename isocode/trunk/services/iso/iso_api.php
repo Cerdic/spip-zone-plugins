@@ -144,6 +144,11 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 			'Alpha-2'      => 'code_alpha2',
 			'Alpha-3'      => 'code_alpha3',
 			'Numeric'      => 'code_num',
+			'category'     => 'category',
+		),
+		'unused_fields' => array(
+			'label_fr' => '',
+			'label_en' => '',
 		),
 		'addon_fields' => array(
 			'geonames' => array(
@@ -158,7 +163,7 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 			),
 			'm49'      => array(
 				'parent'         => 'code_num_region',
-			)
+			),
 		),
 		'label_field'  => true,
 		'populating'   => 'file_csv',
@@ -447,9 +452,6 @@ function iso3166subdivisions_completer_enregistrement($enregistrement, $config) 
 	$enregistrement['label'] = "<multi>[{$enregistrement['language']}]"
 		. $enregistrement['label']
 		.'</multi>';
-
-	// On supprime maintenant le champ language qui ne sert plus à rien
-	unset($enregistrement['language']);
 
 	return $enregistrement;
 }

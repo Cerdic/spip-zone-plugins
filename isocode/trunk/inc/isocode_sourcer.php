@@ -134,6 +134,12 @@ function lire_source($service, $table) {
 							$enregistrement = $completer_enregistrement($enregistrement, $config);
 						}
 
+						// Maintenant que l'enregistrement est entièrement complété on peut supprimer les champs
+						// qui ne sont pas insérés dans la base (unused_fields)
+						foreach (array_keys($config_unused) as $_champ) {
+							unset($enregistrement[$_champ]);
+						}
+
 						// Ajout de l'enregistrement finalisé dans la liste.
 						$enregistrements[] = $enregistrement;
 					} elseif (function_exists($fusionner_enregistrement)) {

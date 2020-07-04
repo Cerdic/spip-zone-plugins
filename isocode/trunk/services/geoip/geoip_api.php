@@ -30,12 +30,3 @@ $GLOBALS['isocode']['geoip']['tables'] = array(
 // ----------------------------------------------------------------------------
 // ---------------- API du service GEOIP - Actions principales ----------------
 // ----------------------------------------------------------------------------
-
-function geoipcontinents_completer_enregistrement($enregistrement, $config) {
-
-	// Il s'agit uniquement de supprimer les labels ayant permis de calculer le nom multi.
-	unset($enregistrement['label_fr']);
-	unset($enregistrement['label_en']);
-
-	return $enregistrement;
-}
