@@ -226,8 +226,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'code_alpha2'     => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier
 		'code_alpha3'     => "char(3) DEFAULT '' NOT NULL",       // The three-letter identifier
 		'code_num'        => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
-		'label_en'        => "varchar(255) DEFAULT '' NOT NULL",  // English name
-		'label_fr'        => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'category'        => "varchar(48) DEFAULT '' NOT NULL",   // Category (area, country) only country used today
 		'label'           => "text DEFAULT '' NOT NULL",          // Multiple langages label
 		'capital'         => "varchar(255) DEFAULT '' NOT NULL",  // Capital name
 		'area'            => "int DEFAULT 0 NOT NULL",            // Area in squared km

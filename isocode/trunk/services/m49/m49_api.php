@@ -32,13 +32,3 @@ $GLOBALS['isocode']['m49']['tables'] = array(
 // ----------------------------------------------------------------------------
 // ---------------- API du service M49 - Actions principales ----------------
 // ----------------------------------------------------------------------------
-
-function m49regions_completer_enregistrement($enregistrement, $config) {
-
-	// Il s'agit uniquement de supprimer les labels ayant permis de calculer le nom multi.
-	unset($enregistrement['label_fr']);
-	unset($enregistrement['label_en']);
-
-	return $enregistrement;
-}
-
