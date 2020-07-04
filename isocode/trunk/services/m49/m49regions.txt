@@ -1,33 +1,33 @@
 label_en;label_fr;code_num;parent;category
 World;Monde;001;;world
 Africa;Afrique;002;001;continent
-Northern Africa;Afrique septentrionale;015;002;region
-Sub-Saharan Africa;Afrique subsaharienne;202;002;region
-Eastern Africa;Afrique orientale;014;202;region
-Middle Africa;Afrique centrale;017;202;region
-Southern Africa;Afrique australe;018;202;region
-Western Africa;Afrique occidentale;011;202;region
-Americas;Amériques;019;001;region
+Northern Africa;Afrique septentrionale;015;002;zone_region
+Sub-Saharan Africa;Afrique subsaharienne;202;002;zone_region
+Eastern Africa;Afrique orientale;014;202;zone_region
+Middle Africa;Afrique centrale;017;202;zone_region
+Southern Africa;Afrique australe;018;202;zone_region
+Western Africa;Afrique occidentale;011;202;zone_region
+Americas;Amériques;019;001;zone_region
 Latin America and the Caribbean;Amérique latine et Caraïbes;419;019;continent
-Caribbean;Caraïbes;029;419;region
-Central America;Amérique centrale;013;419;region
-South America;Amérique du Sud;005;419;region
+Caribbean;Caraïbes;029;419;zone_region
+Central America;Amérique centrale;013;419;zone_region
+South America;Amérique du Sud;005;419;zone_region
 Northern America;Amérique septentrionale;021;019;continent
 Antarctica;Antarctique;010;001;continent
 Asia;Asie;142;001;continent
-Central Asia;Asie centrale;143;142;region
-Eastern Asia;Asie orientale;030;142;region
-South-eastern Asia;Asie du Sud-Est;035;142;region
-Southern Asia;Asie méridionale;034;142;region
-Western Asia;Asie occidentale;145;142;region
+Central Asia;Asie centrale;143;142;zone_region
+Eastern Asia;Asie orientale;030;142;zone_region
+South-eastern Asia;Asie du Sud-Est;035;142;zone_region
+Southern Asia;Asie méridionale;034;142;zone_region
+Western Asia;Asie occidentale;145;142;zone_region
 Europe;Europe;150;001;continent
-Eastern Europe;Europe orientale;151;150;region
-Northern Europe;Europe septentrionale;154;150;region
-Channel Islands;Îles Anglo-Normandes;830;154;region
-Southern Europe;Europe méridionale;039;150;region
-Western Europe;Europe occidentale;155;150;region
+Eastern Europe;Europe orientale;151;150;zone_region
+Northern Europe;Europe septentrionale;154;150;zone_region
+Channel Islands;Îles Anglo-Normandes;830;154;zone_region
+Southern Europe;Europe méridionale;039;150;zone_region
+Western Europe;Europe occidentale;155;150;zone_region
 Oceania;Océanie;009;001;continent
-Australia and New Zealand;Australie et Nouvelle-Zélande;053;009;region
-Melanesia;Mélanésie;054;009;region
-Micronesia;Micronésie;057;009;region
-Polynesia;Polynésie;061;009;region
+Australia and New Zealand;Australie et Nouvelle-Zélande;053;009;zone_region
+Melanesia;Mélanésie;054;009;zone_region
+Micronesia;Micronésie;057;009;zone_region
+Polynesia;Polynésie;061;009;zone_region
