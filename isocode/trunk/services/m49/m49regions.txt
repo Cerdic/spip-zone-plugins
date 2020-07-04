@@ -1,33 +1,33 @@
-label_en;label_fr;code_num;parent
-World;Monde;001
-Africa;Afrique;002;001
-Northern Africa;Afrique septentrionale;015;002
-Sub-Saharan Africa;Afrique subsaharienne;202;002
-Eastern Africa;Afrique orientale;014;202
-Middle Africa;Afrique centrale;017;202
-Southern Africa;Afrique australe;018;202
-Western Africa;Afrique occidentale;011;202
-Americas;Amériques;019;001
-Latin America and the Caribbean;Amérique latine et Caraïbes;419;019
-Caribbean;Caraïbes;029;419
-Central America;Amérique centrale;013;419
-South America;Amérique du Sud;005;419
-Northern America;Amérique septentrionale;021;019
-Antarctica;Antarctique;010;001
-Asia;Asie;142;001
-Central Asia;Asie centrale;143;142
-Eastern Asia;Asie orientale;030;142
-South-eastern Asia;Asie du Sud-Est;035;142
-Southern Asia;Asie méridionale;034;142
-Western Asia;Asie occidentale;145;142
-Europe;Europe;150;001
-Eastern Europe;Europe orientale;151;150
-Northern Europe;Europe septentrionale;154;150
-Channel Islands;Îles Anglo-Normandes;830;154
-Southern Europe;Europe méridionale;039;150
-Western Europe;Europe occidentale;155;150
-Oceania;Océanie;009;001
-Australia and New Zealand;Australie et Nouvelle-Zélande;053;009
-Melanesia;Mélanésie;054;009
-Micronesia;Micronésie;057;009
-Polynesia;Polynésie;061;009
+label_en;label_fr;code_num;parent;category
+World;Monde;001;;world
+Africa;Afrique;002;001;continent
+Northern Africa;Afrique septentrionale;015;002;region
+Sub-Saharan Africa;Afrique subsaharienne;202;002;region
+Eastern Africa;Afrique orientale;014;202;region
+Middle Africa;Afrique centrale;017;202;region
+Southern Africa;Afrique australe;018;202;region
+Western Africa;Afrique occidentale;011;202;region
+Americas;Amériques;019;001;region
+Latin America and the Caribbean;Amérique latine et Caraïbes;419;019;continent
+Caribbean;Caraïbes;029;419;region
+Central America;Amérique centrale;013;419;region
+South America;Amérique du Sud;005;419;region
+Northern America;Amérique septentrionale;021;019;continent
+Antarctica;Antarctique;010;001;continent
+Asia;Asie;142;001;continent
+Central Asia;Asie centrale;143;142;region
+Eastern Asia;Asie orientale;030;142;region
+South-eastern Asia;Asie du Sud-Est;035;142;region
+Southern Asia;Asie méridionale;034;142;region
+Western Asia;Asie occidentale;145;142;region
+Europe;Europe;150;001;continent
+Eastern Europe;Europe orientale;151;150;region
+Northern Europe;Europe septentrionale;154;150;region
+Channel Islands;Îles Anglo-Normandes;830;154;region
+Southern Europe;Europe méridionale;039;150;region
+Western Europe;Europe occidentale;155;150;region
+Oceania;Océanie;009;001;continent
+Australia and New Zealand;Australie et Nouvelle-Zélande;053;009;region
+Melanesia;Mélanésie;054;009;region
+Micronesia;Micronésie;057;009;region
+Polynesia;Polynésie;061;009;region

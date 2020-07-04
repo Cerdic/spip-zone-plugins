@@ -207,9 +207,8 @@ function isocode_declarer_tables_principales($tables_principales) {
 	// Table des indicatifs des régions du monde (arborescence) : spip_m49regions
 	$table_regions = array(
 		'code_num' => "char(3) DEFAULT '' NOT NULL",       // The three-letter numeric identifier
+		'category' => "varchar(48) DEFAULT '' NOT NULL",   // Category like region, continent or world
 		'parent'   => "char(3) DEFAULT '' NOT NULL",       // The three-letter numeric identifier of parent
-		'label_en' => "varchar(255) DEFAULT '' NOT NULL",  // English name
-		'label_fr' => "varchar(255) DEFAULT '' NOT NULL",  // french name
 		'label'    => "text DEFAULT '' NOT NULL",          // Multiple langages label
 		'maj'      => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);

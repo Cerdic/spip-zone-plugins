@@ -12,10 +12,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS['isocode']['m49']['tables'] = array(
 	'm49regions' => array(
 		'basic_fields' => array(
+			'code_num' => 'code_num',
+			'parent'   => 'parent',
+			'category' => 'category',
 			'label_fr' => 'label_fr',
 			'label_en' => 'label_en',
-			'code_num' => 'code_num',
-			'parent'   => 'parent'
+		),
+		'unused_fields' => array(
+			'label_fr' => '',
+			'label_en' => '',
 		),
 		'label_field'  => true,
 		'populating'   => 'file_csv',
@@ -27,4 +32,13 @@ $GLOBALS['isocode']['m49']['tables'] = array(
 // ----------------------------------------------------------------------------
 // ---------------- API du service M49 - Actions principales ----------------
 // ----------------------------------------------------------------------------
+
+function m49regions_completer_enregistrement($enregistrement, $config) {
+
+	// Il s'agit uniquement de supprimer les labels ayant permis de calculer le nom multi.
+	unset($enregistrement['label_fr']);
+	unset($enregistrement['label_en']);
+
+	return $enregistrement;
+}
 
