@@ -8,29 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-$GLOBALS['isocode']['pays']['champs'] = array(
-	'code_alpha2'     => 'code',
-	'code_alpha3'     => 'code_a3',
-	'code_num'        => 'code_num',
-	'label'           => 'nom',
-	'capital'         => 'capitale',
-	'area'            => 'superficie',
-	'population'      => 'population',
-	'code_continent'  => 'continent',
-	'code_num_region' => 'zone',
-	'tld'             => 'tld',
-	'code_4217_3'     => 'code_devise',
-	'currency_en'     => 'nom_devise',
-	'phone_id'        => 'indicatif_uit'
-);
 
-$GLOBALS['isocode']['subdivisions']['champs'] = array(
-	'code_3166_2' => 'iso_subdivision',
-	'country'     => 'iso_pays',
-	'type'        => 'categorie',
-	'parent'      => 'iso_parent',
-	'label'       => 'iso_titre',
-);
+// -----------------------------------------------------------------------
+// -------------------------- COLLECTION ZONES ---------------------------
+// -----------------------------------------------------------------------
+
+/**
+ * Récupère la liste des régions du monde de la table spip_m49regions éventuellement filtrées par les critères
+ * additionnels positionnés dans la requête.
+ *
+ * @param array $conditions    Conditions à appliquer au select
+ * @param array $filtres       Tableau des critères de filtrage additionnels à appliquer au select.
+ * @param array $configuration Configuration de la collection utile pour savoir quelle fonction appeler pour
+ *                             construire chaque filtre.
+ *
+ * @return array Tableau des plugins dont l'index est le préfixe du plugin.
+ *               Les champs de type id ou maj ne sont pas renvoyés.
+ */
+function zones_collectionner($conditions, $filtres, $configuration) {
+
+	// Initialisation de la collection
+	$zones = array();
+
+	// Récupérer la liste des pays (filtrée ou pas).
+	// Si la liste est filtrée par continent ou région, on renvoie aussi les informations sur ce continent ou
+	// cette région.
+	$from = 'spip_m49regions';
+	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
+	$description_table = sql_showtable($from);
+	$champs = array_keys($description_table['field']);
+	$select = array_diff($champs, array('label_fr', 'label_en', 'maj'));
+
+	// -- Initialisation du where avec les conditions sur la table des dépots.
+	$where = array();
+	// -- Si il y a des critères additionnels on complète le where en conséquence en fonction de la configuration.
+	if ($conditions) {
+		$where = array_merge($where, $conditions);
+	}
+
+	$zones['zones'] = sql_allfetsel($select, $from, $where);
+
+	return $zones;
+}
+
 
 // -----------------------------------------------------------------------
 // -------------------------- COLLECTION PAYS ----------------------------
@@ -60,12 +80,7 @@ function pays_collectionner($conditions, $filtres, $configuration) {
 	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
 	$description_table = sql_showtable($from[0]);
 	$champs = array_keys($description_table['field']);
-	$champs = array_diff($champs, array('label_fr', 'label_en', 'maj'));
-	// -- Traduire les champs de Isocode en champs pour Géographie
-	$select = array();
-	foreach ($champs as $_champ) {
-		$select[] = "${_champ} as {$GLOBALS['isocode']['pays']['champs'][$_champ]}";
-	}
+	$select = array_diff($champs, array('label_fr', 'label_en', 'maj'));
 
 	// -- Initialisation du where avec les conditions sur la table des dépots.
 	$where = array();
@@ -148,12 +163,7 @@ function subdivisions_collectionner($conditions, $filtres, $configuration) {
 	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
 	$description_table = sql_showtable($from);
 	$champs = array_keys($description_table['field']);
-	$champs = array_diff($champs, array('maj'));
-	// -- Traduire les champs de Isocode en champs pour Subdivisions
-	$select = array();
-	foreach ($champs as $_champ) {
-		$select[] = "${_champ} as {$GLOBALS['isocode']['subdivisions']['champs'][$_champ]}";
-	}
+	$select = array_diff($champs, array('maj'));
 
 	// -- Initialisation du where: aucune condition par défaut.
 	$where = array();
@@ -178,7 +188,7 @@ function subdivisions_collectionner($conditions, $filtres, $configuration) {
 	) {
 		// on construit la condition sur la table de liens à partir des codes ISO des subdivisions
 		$where = array();
-		$codes_subdivision = array_column($subdivisions['subdivisions'], 'iso_subdivision');
+		$codes_subdivision = array_column($subdivisions['subdivisions'], 'code_3166_2');
 		$where[] = sql_in('code_3166_2', $codes_subdivision);
 
 		$alternates = array();
@@ -202,10 +212,10 @@ function subdivisions_collectionner($conditions, $filtres, $configuration) {
 		// Liste des codes 3166-1 alpha2 et du nom multi
 		$pays = array();
 		foreach($subdivisions['subdivisions'] as $_subdivision) {
-			if (!in_array($_subdivision['iso_pays'], $pays)) {
-				$where = array('code_alpha2=' . sql_quote($_subdivision['iso_pays']));
+			if (!in_array($_subdivision['country'], $pays)) {
+				$where = array('code_alpha2=' . sql_quote($_subdivision['country']));
 				if ($nom = sql_getfetsel('label', 'spip_iso3166countries', $where)) {
-					$pays[$_subdivision['iso_pays']] = $nom;
+					$pays[$_subdivision['country']] = $nom;
 				}
 			}
 		}
