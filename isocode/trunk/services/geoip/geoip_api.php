@@ -12,9 +12,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS['isocode']['geoip']['tables'] = array(
 	'geoipcontinents' => array(
 		'basic_fields' => array(
-			'Code' => 'code',
-			'fr'   => 'label_fr',
-			'en'   => 'label_en',
+			'Code'     => 'code',
+			'code_num' => 'code_num',
+			'fr'       => 'label_fr',
+			'en'       => 'label_en',
+		),
+		'unused_fields' => array(
+			'label_fr' => '',
+			'label_en' => '',
 		),
 		'label_field'  => true,
 		'populating'   => 'file_json',
@@ -26,3 +31,13 @@ $GLOBALS['isocode']['geoip']['tables'] = array(
 // ---------------- API du service GEOIP - Actions principales ----------------
 // ----------------------------------------------------------------------------
 
+
+
+function geoipcontinents_completer_enregistrement($enregistrement, $config) {
+
+	// Il s'agit uniquement de supprimer les labels ayant permis de calculer le nom multi.
+	unset($enregistrement['label_fr']);
+	unset($enregistrement['label_en']);
+
+	return $enregistrement;
+}

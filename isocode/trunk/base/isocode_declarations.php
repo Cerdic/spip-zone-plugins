@@ -191,8 +191,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 	// Table des indicatifs des continents GeoIP : spip_geoipcontinents
 	$table_continents = array(
 		'code'     => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier
-		'label_en' => "varchar(255) DEFAULT '' NOT NULL",  // English name
-		'label_fr' => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'code_num' => "varchar(3) DEFAULT '' NOT NULL",    // The three-digit M49 identifier
 		'label'    => "text DEFAULT '' NOT NULL",          // Multiple langages label
 		'maj'      => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
