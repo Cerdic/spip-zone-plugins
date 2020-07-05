@@ -35,11 +35,11 @@ function zones_collectionner($conditions, $filtres, $configuration) {
 	// cette région.
 	$from = 'spip_m49regions';
 	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
-	$description_table = sql_showtable($from);
+	$description_table = sql_showtable($from, true);
 	$champs = array_keys($description_table['field']);
-	$select = array_diff($champs, array('label_fr', 'label_en', 'maj'));
+	$select = array_diff($champs, array('maj'));
 
-	// -- Initialisation du where avec les conditions sur la table des dépots.
+	// -- Initialisation du where avec les conditions calculées.
 	$where = array();
 	// -- Si il y a des critères additionnels on complète le where en conséquence en fonction de la configuration.
 	if ($conditions) {
@@ -47,6 +47,17 @@ function zones_collectionner($conditions, $filtres, $configuration) {
 	}
 
 	$zones['zones'] = sql_allfetsel($select, $from, $where);
+
+	// Renvoyer aussi les continents GeoIP
+	$from = 'spip_geoipcontinents';
+	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
+	$description_table = sql_showtable($from);
+	$champs = array_keys($description_table['field']);
+	$select = array_diff($champs, array('maj'));
+
+	// La liste des continents est indexée par le code M49
+	$zones['continents'] = sql_allfetsel($select, $from, $where);
+	$zones['continents'] = array_column($zones['continents'], null, 'code_num');
 
 	return $zones;
 }
@@ -76,11 +87,11 @@ function pays_collectionner($conditions, $filtres, $configuration) {
 	// Récupérer la liste des pays (filtrée ou pas).
 	// Si la liste est filtrée par continent ou région, on renvoie aussi les informations sur ce continent ou
 	// cette région.
-	$from = array('spip_iso3166countries');
+	$from = 'spip_iso3166countries';
 	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
-	$description_table = sql_showtable($from[0]);
+	$description_table = sql_showtable($from, true);
 	$champs = array_keys($description_table['field']);
-	$select = array_diff($champs, array('label_fr', 'label_en', 'maj'));
+	$select = array_diff($champs, array('maj'));
 
 	// -- Initialisation du where avec les conditions sur la table des dépots.
 	$where = array();
@@ -90,6 +101,17 @@ function pays_collectionner($conditions, $filtres, $configuration) {
 	}
 
 	$pays['pays'] = sql_allfetsel($select, $from, $where);
+
+	// Renvoyer aussi les continents GeoIP car les pays possèdent un lien vers les continents
+	$from = 'spip_geoipcontinents';
+	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
+	$description_table = sql_showtable($from, true);
+	$champs = array_keys($description_table['field']);
+	$select = array_diff($champs, array('maj'));
+
+	// La liste des continents est indexée par le code M49
+	$pays['continents'] = sql_allfetsel($select, $from, $where);
+	$pays['continents'] = array_column($pays['continents'], null, 'code');
 
 	return $pays;
 }
@@ -161,7 +183,7 @@ function subdivisions_collectionner($conditions, $filtres, $configuration) {
 	// Récupérer la liste des subdivisions (filtrée ou pas par pays ou par type de subdivision).
 	$from = 'spip_iso3166subdivisions';
 	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
-	$description_table = sql_showtable($from);
+	$description_table = sql_showtable($from, true);
 	$champs = array_keys($description_table['field']);
 	$select = array_diff($champs, array('maj'));
 
