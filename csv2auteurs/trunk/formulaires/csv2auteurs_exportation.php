@@ -28,7 +28,7 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
 	$correspondances_statuts = array( "0minirezo" => "administrateur", "1comite" => "redacteur", "6forum" => "visiteur");
 
 	// creation du nom du fichier
-	$date_du_jour=date(Y_m_d);
+	$date_du_jour=date('Y_m_d');
 	$nom_fichier_csv = $date_du_jour.'_export_table_auteurs.csv';
 
 	// récupération des données dans la tables spip_auteurs que l'on place dans le champ "ss_groupe"
