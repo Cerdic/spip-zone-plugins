@@ -59,7 +59,9 @@ class table {
 		$this->champs_finaux  = \saisies_lister_finales($this->champs);
 		if (\test_plugin_actif('cextras')) {
 			include_spip('cextras_pipelines');
-			$this->cextras = \champs_extras_objet('spip_formulaires_reponses');
+			$champs = \champs_extras_objet('spip_formulaires_reponses');
+			$champs = \champs_extras_autorisation('voir', 'fprmulaires_reponse', $champs, $flux['args']);
+			$this->cextras = $champs;
 			$this->cextras_finaux = \saisies_lister_finales($this->cextras);
 		}
 		if (!$this->cextras) {
