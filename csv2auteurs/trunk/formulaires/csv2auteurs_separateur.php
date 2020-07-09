@@ -11,7 +11,7 @@ function formulaires_csv2auteurs_separateur_charger_dist() {
 function formulaires_csv2auteurs_separateur_verifier_dist() {
 	$erreurs = array();
 	//champs obligatoire
-	if (!_request(separateur)) $erreurs['separateur'] = _T('csv2auteurs:obligatoire');
+	if (!_request('separateur')) $erreurs['separateur'] = _T('csv2auteurs:obligatoire');
 	return $erreurs;
 }
 

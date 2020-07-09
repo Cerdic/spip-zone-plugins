@@ -144,7 +144,7 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
 function csv2auteurs_exportation() {
 	//récupération des noms des champs
 	$Tnom_champs= array();
-	$Tchamps_exclus = array('id_auteur', 'low_sec', 'maj', 'htpass', 'en_ligne', 
+	$Tchamps_exclus = array(/*'id_auteur', */'low_sec', 'maj', 'htpass', 'en_ligne', 
 	'alea_actuel', 'alea_futur', 'prefs', 'cookie_oubli', 'source', 'imessage', 'messagerie');
 
 	$desc = sql_showtable('spip_auteurs', true);
