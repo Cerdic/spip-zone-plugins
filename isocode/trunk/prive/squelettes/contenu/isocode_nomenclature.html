@@ -1,0 +1,14 @@
+[(#AUTORISER{webmestre}|sinon_interdire_acces)]
+<h1 class="grostitre"><:isocode:titre_page_nomenclature:></h1>
+
+[(#REM) <!-- Liste des tables de nomenclatures chargées --> ]
+#SET{type_service, nomenclature}
+<INCLURE{fond=prive/squelettes/liste/chargements,
+	titre=<:isocode:titre_liste_tables:>,
+	type_service=#GET{type_service},
+	sinon=<:isocode:notice_nomenclature_aucun_chargement:>,
+	env, ajax} />
+
+[<div class="noajax">
+		(#FORMULAIRE_ISOCODE_PEUPLER{#GET{type_service}})
+</div>]

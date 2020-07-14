@@ -1,0 +1,34 @@
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+	<h3 class="titrem"><:isocode:titre_form_gerer_table:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<div class="editer-groupe">
+				[(#SAISIE{radio, action_peuplement,
+					explication=#ENV{_action_explication},
+					label=<:isocode:label_action:>,
+					datas=#ENV{_actions},
+					defaut=#ENV{_action_defaut},
+					disable=#ENV{_actions_disable},
+					obligatoire=oui,
+				})]
+				[(#SAISIE{checkbox, elements,
+					label=#ENV{_label_element},
+					datas=#ENV{_elements},
+					obligatoire=oui,
+				})]
+			</div>
+
+			<p class="boutons">
+				<span class="image_loading">&nbsp;</span>
+				<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+			</p>
+		</div>
+	</form>
+	]
+</div>

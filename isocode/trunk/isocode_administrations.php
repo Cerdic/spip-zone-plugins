@@ -26,10 +26,12 @@ function isocode_upgrade($nom_meta_base_version, $version_cible) {
 	//	$config_defaut = configurer_isocode();
 
 	// Liste des tables créées par le plugin
-	include_spip('isocode_fonctions');
+	include_spip('inc/isocode');
 	$tables = array();
-	foreach (isocode_lister_tables() as $_table) {
-		$tables[] = "spip_${_table}";
+	foreach (isocode_lister_types_service() as $_type) {
+		foreach (isocode_lister_tables($_type) as $_table) {
+			$tables[] = "spip_${_table}";
+		}
 	}
 
 	$maj['create'] = array(
@@ -37,7 +39,14 @@ function isocode_upgrade($nom_meta_base_version, $version_cible) {
 			'maj_tables',
 			$tables
 		),
-		//		array('ecrire_config', 'isocode', $config_defaut)
+//		array('ecrire_config', 'isocode', $config_defaut)
+	);
+
+	$maj['2'] = array(
+		array(
+			'maj_tables',
+			'spip_geoboundaries'
+		),
 	);
 
 	include_spip('base/upgrade');
@@ -59,13 +68,12 @@ function isocode_upgrade($nom_meta_base_version, $version_cible) {
  **/
 function isocode_vider_tables($nom_meta_base_version) {
 
-	// Liste des tables créées par le plugin
-	include_spip('isocode_fonctions');
-	$tables = isocode_lister_tables();
-
 	// Supprimer les tables ISO créées par le plugin
-	foreach ($tables as $_table) {
-		sql_drop_table("spip_${_table}");
+	include_spip('inc/isocode');
+	foreach (isocode_lister_types_service() as $_type) {
+		foreach (isocode_lister_tables($_type) as $_table) {
+			sql_drop_table("spip_${_table}");
+		}
 	}
 
 	// Effacer la meta de configuration et de stockage du plugin

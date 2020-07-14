@@ -1,0 +1,14 @@
+[(#AUTORISER{webmestre}|sinon_interdire_acces)]
+<h1 class="grostitre"><:isocode:titre_page_geometrie:></h1>
+
+[(#REM) <!-- Liste des ensembles de géométrie chargés --> ]
+#SET{type_service, geometrie}
+<INCLURE{fond=prive/squelettes/liste/chargements,
+	titre=<:isocode:titre_liste_geometries:>,
+	type_service=#GET{type_service},
+	sinon=<:isocode:notice_geometrie_aucun_chargement:>,
+	env, ajax} />
+
+[<div class="noajax">
+	(#FORMULAIRE_ISOCODE_PEUPLER{#GET{type_service}})
+</div>]

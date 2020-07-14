@@ -1,0 +1,44 @@
+[
+  {
+    "Code": "AF",
+    "code_num": "002",
+    "en": "Africa",
+    "fr": "Afrique"
+  },
+  {
+    "Code": "NA",
+    "code_num": "021",
+    "en": "North America",
+    "fr": "Amérique du nord"
+  },
+  {
+    "Code": "OC",
+    "code_num": "009",
+    "en": "Oceania",
+    "fr": "Océanie"
+  },
+  {
+    "Code": "AN",
+    "code_num": "010",
+    "en": "Antarctica",
+    "fr": "Antarctique"
+  },
+  {
+    "Code": "AS",
+    "code_num": "142",
+    "en": "Asia",
+    "fr": "Asie"
+  },
+  {
+    "Code": "EU",
+    "code_num": "150",
+    "en": "Europe",
+    "fr": "Europe"
+  },
+  {
+    "Code": "SA",
+    "code_num": "005",
+    "en": "South America",
+    "fr": "Amérique du sud"
+  }
+]

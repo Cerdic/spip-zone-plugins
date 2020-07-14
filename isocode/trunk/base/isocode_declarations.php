@@ -186,7 +186,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		array('field' => &$table_subtags, 'key' => &$table_subtags_key);
 
 	// -------------------------------------------------------------------------------------
-	// Découpages géographiques
+	// Identifiants & informations sur les zones géographiques du monde aux subdivisions
 	// -------------------------------------------------------------------------------------
 	// Table des indicatifs des continents GeoIP : spip_geoipcontinents
 	$table_continents = array(
@@ -303,6 +303,30 @@ function isocode_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso4217currencies'] =
 		array('field' => &$table_currencies, 'key' => &$table_currencies_key);
 
+	// -------------------------------------------------------------------------------------
+	// Géométrie des zones géographiques du monde aux subdivisions
+	// -------------------------------------------------------------------------------------
+	// Table des indicatifs des geometries : spip_geometries
+	$table_geometries = array(
+		'source'    => "varchar(10) DEFAULT '' NOT NULL", // la source des données (peut valoir le service)
+		'code'      => "varchar(10) DEFAULT '' NOT NULL", // L'identifiant de l'objet
+		'code_type' => "varchar(30) DEFAULT '' NOT NULL", // Le type d'identifiant
+		'type'      => "varchar(30) DEFAULT '' NOT NULL", // type vu de l'API REST
+		'lat'       => 'double NULL NULL',
+		'lon'       => 'double NULL NULL',
+		'geometry'  => 'longtext NOT NULL DEFAULT ""',    // La géométrie de l'objet
+		'format'    => "varchar(10) DEFAULT '' NOT NULL", // format de la géométrie (geoJSON, topoJSON, etc)
+		'maj'       => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
+	);
+
+	$table_geometries_key = array(
+		'PRIMARY KEY' => 'source,code',
+		'KEY type'    => 'type',
+	);
+
+	$tables_principales['spip_geoboundaries'] =
+		array('field' => &$table_geometries, 'key' => &$table_geometries_key);
+
 	return $tables_principales;
 }
 
@@ -336,8 +360,9 @@ function isocode_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['iso3166countries'] = 'iso3166countries';
 	$interfaces['table_des_tables']['iso3166subdivisions'] = 'iso3166subdivisions';
 	$interfaces['table_des_tables']['iso3166alternates'] = 'iso3166alternates';
-
 	$interfaces['table_des_tables']['iso4217currencies'] = 'iso4217currencies';
+
+	$interfaces['table_des_tables']['geoboundaries'] = 'geoboundaries';
 
 	// Les traitements
 

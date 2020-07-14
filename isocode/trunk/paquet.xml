@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="isocode_logo-64.png"
-	schema="1"
+	schema="2"
 >
 
 	<nom>Nomenclatures officielles</nom>
@@ -22,5 +22,5 @@
 	<necessite nom="ezrest" compatibilite="[0.1.0;]" />
 	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
-	<menu nom="isocode" titre="isocode:bouton_isocode" parent="menu_developpement" icone="images/isocode-16.png" action="isocode" />
+	<menu nom="isocode" titre="isocode:bouton_isocode" parent="menu_developpement" icone="images/isocode-16.png" action="isocode_nomenclature" />
 </paquet>

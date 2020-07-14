@@ -1,0 +1,15 @@
+[(#REM) <!-- Menu des onglets "Nomenclatures" et "Géométries" --> ]
+<ul class="liste-items sous_navigation">
+	[<li class="item">
+		(#URL_ECRIRE{isocode_nomenclature}
+			|lien_ou_expose{
+				<:isocode:menu_nomenclature:>,
+				[(#ENV{exec}|=={isocode_nomenclature})]})
+	</li>]
+	[<li class="item">
+		(#URL_ECRIRE{isocode_geometrie}
+			|lien_ou_expose{
+				<:isocode:menu_geometrie:>,
+				[(#ENV{exec}|=={isocode_geometrie})]})
+	</li>]
+</ul>
