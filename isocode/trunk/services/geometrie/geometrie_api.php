@@ -25,6 +25,7 @@ $GLOBALS['isocode']['geometrie'] = array(
 			'code_type',
 			'format',
 			'type',
+			'country',
 			'lat',
 			'lon',
 		),
@@ -54,6 +55,7 @@ $GLOBALS['isocode']['geometrie'] = array(
 			'code_type',
 			'format',
 			'type',
+			'country',
 			'lat',
 			'lon',
 		),
@@ -128,6 +130,7 @@ function urssafregfr_completer_element($element, $config) {
 	$element['code_type'] = 'code_insee_reg';
 	$element['format'] = 'geojson';
 	$element['type'] = 'subdivision';
+	$element['country'] = 'FR';
 
 	// Et d'apporter des corrections au champs déjà compilés
 	// - serialiser le champs des géométries
@@ -150,6 +153,7 @@ function urssafdepfr_completer_element($element, $config) {
 	$element['code_type'] = 'code_insee';
 	$element['format'] = 'geojson';
 	$element['type'] = 'subdivision';
+	$element['country'] = 'FR';
 
 	// Et d'apporter des corrections au champs déjà compilés
 	// - serialiser le champs des géométries

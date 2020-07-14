@@ -312,6 +312,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'code'      => "varchar(10) DEFAULT '' NOT NULL", // L'identifiant de l'objet
 		'code_type' => "varchar(30) DEFAULT '' NOT NULL", // Le type d'identifiant
 		'type'      => "varchar(30) DEFAULT '' NOT NULL", // type vu de l'API REST
+		'country'   => "varchar(2) DEFAULT '' NOT NULL", // Code ISO 3166-1 alpha2 utile si type = subdivision)
 		'lat'       => 'double NULL NULL',
 		'lon'       => 'double NULL NULL',
 		'geometry'  => 'longtext NOT NULL DEFAULT ""',    // La géométrie de l'objet
@@ -322,6 +323,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 	$table_geometries_key = array(
 		'PRIMARY KEY' => 'source,code',
 		'KEY type'    => 'type',
+		'KEY country' => 'country',
 	);
 
 	$tables_principales['spip_geoboundaries'] =
