@@ -94,5 +94,27 @@ function isocode_liste_ezcollection($collections) {
 		'filtres' => array()
 	);
 
+	$collections['contours'] = array(
+		'module'    => 'isocode',
+		'cache'     => array(
+			'type'  => 'ezrest',
+			'duree' => 3600 * 24 * 30
+		),
+		'filtres'   => array(
+			array(
+				'critere'         => 'type',
+				'est_obligatoire' => true,
+				'champ_nom'       => 'type',
+				'champ_table'     => 'geoboundaries'
+			),
+			array(
+				'critere'         => 'service',
+				'est_obligatoire' => false,
+				'champ_nom'       => 'service',
+				'champ_table'     => 'geoboundaries'
+			),
+		),
+	);
+
 	return $collections;
 }

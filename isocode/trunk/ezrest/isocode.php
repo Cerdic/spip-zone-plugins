@@ -213,7 +213,6 @@ function subdivisions_collectionner($conditions, $filtres, $configuration) {
 		$codes_subdivision = array_column($subdivisions['subdivisions'], 'code_3166_2');
 		$where[] = sql_in('code_3166_2', $codes_subdivision);
 
-		$alternates = array();
 		$codes = sql_allfetsel('*', 'spip_iso3166alternates', $where);
 		$subdivisions['codes_alternatifs'] = $codes;
 	}
@@ -275,4 +274,103 @@ function subdivisions_conditionner_pays($valeur) {
 	}
 
 	return $condition;
+}
+
+
+// -----------------------------------------------------------------------
+// ------------------------ COLLECTION CONTOURS --------------------------
+// -----------------------------------------------------------------------
+
+/**
+ * Récupère la liste des contours géographiques de la table spip_boundaries.
+ * Il est obligatoire de choisir à minima un type de territoire de façon à limiter le transfert d'informations
+ * via l'API REST. Un critère faculatatif permet de filtrer sur le service ce qui est recommandé.
+ *
+ * @param array $conditions    Conditions à appliquer au select
+ * @param array $filtres       Tableau des critères de filtrage additionnels à appliquer au select.
+ * @param array $configuration Configuration de la collection utile pour savoir quelle fonction appeler pour
+ *                             construire chaque filtre.
+ *
+ * @return array Tableau des subdivisions et par défaut des codes alternatifs et de la liste des pays.
+ */
+function contours_collectionner($conditions, $filtres, $configuration) {
+
+	// Initialisation de la collection
+	$contours = array();
+
+	// Récupérer la liste des contours d'un type de territoire donné (filtrée ou pas par service).
+	$from = 'spip_geoboundaries';
+	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
+	$description_table = sql_showtable($from, true);
+	$champs = array_keys($description_table['field']);
+	$select = array_diff($champs, array('maj'));
+
+	// -- Initialisation du where: aucune condition par défaut.
+	$where = array();
+	// -- Si il y a des critères additionnels on complète le where en conséquence.
+	if ($conditions) {
+		$where = array_merge($where, $conditions);
+	}
+	// -- Rangement de la liste dans l'index subdivisions
+	$contours['contours'] = sql_allfetsel($select, $from, $where);
+
+	// La liste est enrichie par défaut:
+	// -- des codes alternatifs disponibles dans iso3166alternates si les contours sont identifiés par
+	//    un code alternatif et pas le code standard ISO (3166-1 a2 pour les pays, M49 pour les zones et 3166-2 pour
+	//    les subdivisions.
+	// Ces données supplémentaires peuvent être exclues en utilisant le filtre 'exclure'
+	//
+	// -- Ajout des codes alternatifs si non exclus explicitement
+	if (empty($filtres['exclure'])
+		or (
+			!empty($filtres['exclure'])
+			and (strpos($filtres['exclure'], 'alternates') === false)
+		)
+	) {
+		// on construit la condition sur la table de liens à partir des codes ISO des subdivisions
+		$where = array();
+		$types_codes = array_unique(array_column($contours['contours'], 'code_type'));
+		$where[] = sql_in('type_alter', $types_codes);
+
+		$codes = sql_allfetsel('*', 'spip_iso3166alternates', $where);
+		$contours['codes_alternatifs'] = $codes;
+	}
+
+	return $contours;
+}
+
+/**
+ * Calcule la condition du filtre service pour lequel il est possible de passer une liste de services séparés
+ * par une virgule.
+ *
+ * @param string $valeur Valeur du critère `service`.
+ *
+ * @return string Toujours la chaine vide.
+ */
+function contours_conditionner_service($valeur) {
+
+	$condition = '';
+	if ($valeur) {
+		if (strpos($valeur, ',') === false) {
+			$condition = 'service=' . sql_quote($valeur);
+		} else {
+			$services = explode(',', $valeur);
+			$condition = sql_in('service', $services);
+		}
+	}
+
+	return $condition;
+}
+
+/**
+ * Evite que le filtre exclure ne soit considéré comme une condition SQL.
+ * Il sera traité dans la fonction collectionner pour supprimer des données dans le contenu de la requête.
+ *
+ * @param string $valeur Valeur du critère `exclure`.
+ *
+ * @return string Toujours la chaine vide.
+ */
+function contourss_conditionner_exclure($valeur) {
+
+	return '';
 }
