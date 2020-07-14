@@ -370,7 +370,7 @@ function contours_conditionner_service($valeur) {
  *
  * @return string Toujours la chaine vide.
  */
-function contourss_conditionner_exclure($valeur) {
+function contours_conditionner_exclure($valeur) {
 
 	return '';
 }
