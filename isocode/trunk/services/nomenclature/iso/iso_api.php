@@ -456,6 +456,9 @@ function iso3166subdivisions_completer_enregistrement($enregistrement, $config) 
 		. $enregistrement['label']
 		. '</multi>';
 
+	// S'assurer que la catégorie est en minuscule
+	$enregistrement['type'] = strtolower($enregistrement['type']);
+
 	return $enregistrement;
 }
 
