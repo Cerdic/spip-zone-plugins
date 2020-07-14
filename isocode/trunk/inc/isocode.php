@@ -59,8 +59,7 @@ function isocode_charger($type, $service, $table) {
 		isocode_decharger($type, $service, $table);
 
 		// Insertion dans la base de données des éléments extraits
-		$sql_ok = sql_insertq_multi("spip_${table}", $enregistrements);
-		if ($sql_ok !== false) {
+		if (inserer_enregistrements($type, $enregistrements, $table)) {
 			// On stocke les informations de chargement de la table dans une meta.
 			$meta = array(
 				'sha'     => $sha,

@@ -19,6 +19,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+if (!defined('_ISOCODE_GEOMETRIE_MAX_INSERT')) {
+	/**
+	 * URL de base (endpoint) des requêtes au service APIXU.
+	 */
+	define('_ISOCODE_GEOMETRIE_MAX_INSERT', 50);
+}
+
 
 /**
  * Constitue, à partir, d'un fichier CSV ou XML ou d'une page HTML au format texte, un tableau des éléments
@@ -101,7 +108,11 @@ function lire_source($type, $service, $table) {
 						// Si la valeur n'est pas vide on l'affecte au champ sinon on laisse la valeur par défaut
 						// déjà initialisée.
 						if ($_valeur) {
-							$enregistrement[$config_basic[$titre]] = trim($_valeur);
+							if (is_string($_valeur)) {
+								$enregistrement[$config_basic[$titre]] = trim($_valeur);
+							} else {
+								$enregistrement[$config_basic[$titre]] = $_valeur;
+							}
 						}
 						// Vérifier si le champ en cours fait partie de la clé primaire et élaborer la clé
 						// primaire de l'élément en cours
@@ -246,6 +257,8 @@ function initialiser_enregistrement($table, $config_source, $config_unused = arr
 						$enregistrement[$_champ] = ($defaut != null) ? $defaut : '';
 					} elseif (strpos($type, 'DATE') !== false) {
 						$enregistrement[$_champ] = ($defaut != null) ? $defaut : '0000-00-00 00:00:00';
+					} elseif (strpos($type, 'DOUBLE') !== false) {
+						$enregistrement[$_champ] = ($defaut != null) ? floatval($defaut) : 0.0;
 					} else {
 						$enregistrement[$_champ] = ($defaut != null) ? intval($defaut) : 0;
 					}
@@ -271,6 +284,28 @@ function initialiser_enregistrement($table, $config_source, $config_unused = arr
 	}
 
 	return $enregistrement;
+}
+
+function inserer_enregistrements($type, $enregistrements, $table) {
+
+	// Initialisation du retour de la fonction
+	$retour = true;
+
+	// Suivant le type de service on découpe ou pas la liste des enregistrements.
+	// -- le type géométrie contient des données de coordonnées qui sont volumineuses, on découpe le tableau en paquets
+	//    plus petit.
+	$paquets_enregistrements = ($type === 'nomenclature')
+		? array($enregistrements)
+		: array_chunk($enregistrements, _ISOCODE_GEOMETRIE_MAX_INSERT);
+	foreach ($paquets_enregistrements as $_enregistrements) {
+		$sql_ok = sql_insertq_multi("spip_${table}", $_enregistrements);
+		if ($sql_ok === false) {
+			$retour = false;
+			break;
+		}
+	}
+
+	return $retour;
 }
 
 /**

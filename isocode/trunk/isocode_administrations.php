@@ -23,8 +23,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function isocode_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	//	$config_defaut = configurer_isocode();
-
 	// Liste des tables créées par le plugin
 	include_spip('inc/isocode');
 	$tables = array();
@@ -39,7 +37,6 @@ function isocode_upgrade($nom_meta_base_version, $version_cible) {
 			'maj_tables',
 			$tables
 		),
-//		array('ecrire_config', 'isocode', $config_defaut)
 	);
 
 	$maj['2'] = array(
@@ -51,10 +48,6 @@ function isocode_upgrade($nom_meta_base_version, $version_cible) {
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
-
-	// Ajout systématique des données iso dans la base de données, quelque soit l'action en cours.
-	// Ces données n'étant pas modifiables, il n'y a pas de risque à recharger ces tables.
-	//	isocode_charger_tables();
 }
 
 
@@ -81,16 +74,4 @@ function isocode_vider_tables($nom_meta_base_version) {
 
 	// Effacer la meta du schéma de la base
 	effacer_meta($nom_meta_base_version);
-}
-
-/**
- * Initialise la configuration du plugin.
- *
- * @return array
- *        Le tableau de la configuration par défaut qui servira à initialiser la meta `isocode`.
- */
-function configurer_isocode() {
-	$config = array();
-
-	return $config;
 }

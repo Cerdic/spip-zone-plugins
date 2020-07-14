@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
-	'bouton_isocode'                => 'Nomenclatures officielles',
+	'bouton_isocode' => 'Nomenclatures officielles',
 
 	// E
 	'erreur_400_zone_nok_titre'        => 'La zone géographique d\'identifiant « @valeur@ » est invalide',
@@ -20,26 +20,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_action_geometrie'     => 'Si les contours sont déjà chargés en base de données ils seront vidés avant le chargement.',
 
 	// G
-	'geometrie_urssafregfr'                => 'Contours des régions françaises, URSSAF',
-	'geometrie_urssafdepfr'                => 'Contours des départements françaises, URSSAF',
-	'geometrie_mapofglobe'                 => 'Contours des pays, Map of Globe',
+	'geometrie_urssafregfr' => 'Contours des régions françaises, URSSAF',
+	'geometrie_urssafdepfr' => 'Contours des départements françaises, URSSAF',
+	'geometrie_mapofglobe'  => 'Contours des pays, Map of Globe',
 
 	// I
 	'info_charge' => 'chargé',
 
 	// L
-	'label_action_charger'                       => 'Charger',
-	'label_action'                               => 'Action à exécuter',
-	'label_action_decharger'                     => 'Vider',
-	'label_colonne_actualisation'                => 'Actualisé le',
-	'label_colonne_libelle'                      => 'Description',
-	'label_colonne_service'                      => 'Service',
-	'label_colonne_statistiques'                 => 'Compteur',
-	'label_colonne_table'                        => 'Table',
-	'label_element_geometrie'                    => 'Contours sur lesquels appliquer l\'action',
-	'label_element_nomenclature'                 => 'Tables sur lesquelles appliquer l\'action',
-	'label_groupe_langue'                        => 'Langues',
-	'label_groupe_geographie'                    => 'Informations géographiques',
+	'label_action_charger'        => 'Charger',
+	'label_action'                => 'Action à exécuter',
+	'label_action_decharger'      => 'Vider',
+	'label_colonne_actualisation' => 'Actualisé le',
+	'label_colonne_libelle'       => 'Description',
+	'label_colonne_service'       => 'Service',
+	'label_colonne_statistiques'  => 'Compteur',
+	'label_colonne_table'         => 'Table',
+	'label_element_geometrie'     => 'Contours sur lesquels appliquer l\'action',
+	'label_element_nomenclature'  => 'Tables sur lesquelles appliquer l\'action',
+	'label_groupe_langue'         => 'Langues',
+	'label_groupe_geographie'     => 'Informations géographiques',
 
 	// M
 	'menu_nomenclature' => 'Nomenclatures',
@@ -59,8 +59,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nomenclature_iso639macros'            => 'table des macrolangues',
 	'nomenclature_iso639names'             => 'table des noms de langues',
 	'nomenclature_iso639retirements'       => 'table des langues supprimées',
-	'notice_charger'            => 'Aucune mise à journécessaire pour « @elements@ ».',
-	'notice_geometrie_aucun_chargement' => 'Aucun contour géométrique n\'a encore été chargé en base de données. Utiliser le formulaire ci-dessous pour y remédier.',
+	'notice_charger'                       => 'Aucune mise à jour nécessaire pour « @elements@ ».',
+	'notice_geometrie_aucun_chargement'    => 'Aucun contour géométrique n\'a encore été chargé en base de données. Utiliser le formulaire ci-dessous pour y remédier.',
 	'notice_nomenclature_aucun_chargement' => 'Aucune table de nomenclatures n\'a encore été chargée en base de données. Utiliser le formulaire ci-dessous pour y remédier.',
 
 	// S
@@ -68,10 +68,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'succes_decharger' => 'Vidage ok pour « @elements@ ».',
 
 	// T
-	'titre_form_gerer_table'      => 'Vider ou charger des tables',
-	'titre_form_gerer_geometrie'  => 'Vider ou charger des ensembles de contours géographiques',
-	'titre_liste_tables'          => 'Liste des nomenclatures officielles chargées en base de données',
-	'titre_liste_geometries'      => 'Liste des contours géométriques chargés en base de données',
-	'titre_page_geometrie'        => 'Gestion des contours géométriques',
-	'titre_page_nomenclature'     => 'Gestion des nomenclatures',
+	'titre_form_gerer_table'     => 'Vider ou charger des tables',
+	'titre_form_gerer_geometrie' => 'Vider ou charger des ensembles de contours géographiques',
+	'titre_liste_tables'         => 'Liste des nomenclatures officielles chargées en base de données',
+	'titre_liste_geometries'     => 'Liste des contours géométriques chargés en base de données',
+	'titre_page_geometrie'       => 'Gestion des contours géométriques',
+	'titre_page_nomenclature'    => 'Gestion des nomenclatures',
 );
