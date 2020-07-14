@@ -20,9 +20,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 if (!defined('_ISOCODE_GEOMETRIE_MAX_INSERT')) {
-	/**
-	 * URL de base (endpoint) des requêtes au service APIXU.
-	 */
 	define('_ISOCODE_GEOMETRIE_MAX_INSERT', 50);
 }
 
