@@ -1,7 +1,7 @@
 <paquet
 	prefix="csv2auteurs"
 	categorie="outil"
-	version="1.2.0"
+	version="1.2.1"
 	etat="test"
 	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/csv2auteurs-128.png"

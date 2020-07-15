@@ -20,7 +20,7 @@
 								}}
 							)]
 							</div>
-							<div id="choix_admins_complets">
+							<div id="choix_admins_complets" class="js_hidden">
 								[(#SAISIE{radio, admins_complets}
 								{label=<:csv2auteurs:choix_admins_complets:>}
 								{datas=#ARRAY{
@@ -78,12 +78,21 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-	jQuery(document).ready(function() {
-		jQuery("#config_import").on('click', function() {
-			jQuery(".editer_nom_champs input").prop("checked", false);
+	$(document).ready(function() {
+		$("#config_import").on('click', function() {
+			$(".editer_nom_champs input").prop("checked", false);
 			var Tchamp_import = ['nom', 'login', 'email', 'pass', 'statut'];
 			for (i in Tchamp_import) 
-			jQuery(".choix_" + Tchamp_import[i] + " input").prop("checked", true);
+			$(".choix_" + Tchamp_import[i] + " input").prop("checked", true);
 		});
+
+		$(".checkbox_choix_statut[value=0minirezo]").on('change', function() {
+			if ($(this).prop('checked')) {
+				$("#choix_admins_complets").removeClass('js_hidden');
+			}
+			else {
+				$("#choix_admins_complets").addClass('js_hidden');
+			}
+		})
 	});
 </script>

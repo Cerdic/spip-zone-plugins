@@ -55,9 +55,7 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
 
 	// boucler dans tous les auteurs sélectionnés en fonction de leur statut
 	$where = 'statut IN ("'.join('","', $choix_statut).'")';
-	echo $where;
 	if ($res = sql_select('*', 'spip_auteurs', $where)) {
-var_dump($res);
 		$i = 1;
 		while ($row = sql_fetch($res)) {
 			// test admins restreints / complets
@@ -128,12 +126,12 @@ var_dump($res);
 		$a_ecrire .= "\r\n";
 	}
 	// telechargement du fichier csv	
-/*	header("Content-Type: application/download");
+	header("Content-Type: application/download");
 	header("Content-Disposition: attachment; filename=$nom_fichier_csv");
 	header("Content-Length: ".strlen($a_ecrire));
 	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 	header('Pragma: public');
-*/	echo $a_ecrire; 
+	echo $a_ecrire; 
 	exit;
 
 	return $retour;

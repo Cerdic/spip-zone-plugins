@@ -16,3 +16,6 @@ li.editer_nom_rubrique_archive {
 li.editer_nom_rubrique_archive,li.editer_rubrique_parent_archive {
 	background-color:#E1F4F2;
 }
+.csv2auteurs .js_hidden {
+	display: none;
+}
