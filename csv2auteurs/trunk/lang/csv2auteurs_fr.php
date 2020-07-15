@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abs_visiteur' => 'Visiteurs absents',
 	'abs_poubelle' => 'Traitement des auteurs absents sans articles',
 	'administrateurs' => 'Administrateurs',
+	'administrateurs_restreints' => 'Admins restreints',
 	'admin_a_zero' => 'Réinitialisation des rubriques administrées :',
 	'auteur_poubelle'=>'mettre les auteurs "à la poubelle" sans les supprimer complètement',
 	'auteur_nouveau'=>'supprimer les auteurs et attribuer leurs articles à l\'auteur',
@@ -25,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chargement_fichier_CSV_OK' => 'Chargement du fichier <strong>@nom_fichier@</strong>: OK',
 	'choix_format_rub_zones' => 'Format pour les rubriques des admins (champ <strong>ss_groupe</strong>) et les zones d\'accés restreint (champ <strong>zone</strong>)',
 	'choix_manip' => 'Choix de l\'opération',
+	'choix_admins_complets' => 'Exporter les administrateurs complets ?<br><small>(non = admins restreints uniquement)</small>',
 
 	// D
 	'delimiteur'=>'Choisissez le type de délimiteur que vous désirer pour créer votre fichier csv',

@@ -23,6 +23,7 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
 	$nom_champs   = _request('nom_champs');
 	$choix_statut = _request('choix_statut');
 	$choix_format = _request('choix_format');
+	$admins_complets = _request('admins_complets') == 'oui' ? true : false;
 
 	$retour = $login_restreint = array();
 	$correspondances_statuts = array( "0minirezo" => "administrateur", "1comite" => "redacteur", "6forum" => "visiteur");
@@ -53,15 +54,14 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
 	}
 
 	// boucler dans tous les auteurs sélectionnés en fonction de leur statut
-	if ($res = sql_select('*', 'spip_auteurs')) {
+	$where = 'statut IN ("'.join('","', $choix_statut).'")';
+	echo $where;
+	if ($res = sql_select('*', 'spip_auteurs', $where)) {
+var_dump($res);
 		$i = 1;
 		while ($row = sql_fetch($res)) {
-			// test les statuts demandés
-			if (in_array($row['statut'], $choix_statut)) {
-				// si c'est un admin, on ne selectionne que les admins restreints !!!
-				if ((($row['statut'] == "0minirezo") AND (in_array($row['login'], $login_restreint))) 
-				OR $row['statut'] == "1comite" 
-				OR $row['statut'] == "6forum") {
+			// test admins restreints / complets
+			if ($row['statut'] != "0minirezo" OR ($admins_complets OR in_array($row['login'], $login_restreint))) {
 					// Prise en compte de tous les champs selectionnés
 					foreach ($nom_champs as $nom_champ) {
 						// Prise en compte du champ statut
@@ -115,7 +115,6 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
 						}
 					}
 				}
-			}
 			// on passe à l'auteur suivant
 			$i++;
 		}
@@ -129,12 +128,12 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
 		$a_ecrire .= "\r\n";
 	}
 	// telechargement du fichier csv	
-	header("Content-Type: application/download");
+/*	header("Content-Type: application/download");
 	header("Content-Disposition: attachment; filename=$nom_fichier_csv");
 	header("Content-Length: ".strlen($a_ecrire));
 	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 	header('Pragma: public');
-	echo $a_ecrire; 
+*/	echo $a_ecrire; 
 	exit;
 
 	return $retour;

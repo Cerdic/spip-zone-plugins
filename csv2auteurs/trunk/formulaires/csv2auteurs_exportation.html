@@ -10,7 +10,7 @@
 				<li class="fieldset">
 					<fieldset>
 						<h3 class="legend"><:csv2auteurs:titre_choix_statuts:></h3>
-						<ul>
+						<div>
 							[(#SAISIE{checkbox, choix_statut}
 								{label=<:csv2auteurs:choix_statut:>}
 								{datas=#ARRAY{
@@ -19,7 +19,17 @@
 									6forum,<:csv2auteurs:visiteurs:>
 								}}
 							)]
-						</ul>
+							</div>
+							<div id="choix_admins_complets">
+								[(#SAISIE{radio, admins_complets}
+								{label=<:csv2auteurs:choix_admins_complets:>}
+								{datas=#ARRAY{
+									oui,<:csv2auteurs:oui:>,
+									non,<:csv2auteurs:non:>
+								}}
+								{defaut=non}
+							)]
+							</div>
 					</fieldset>
 				</li>
 				<li class="fieldset">
