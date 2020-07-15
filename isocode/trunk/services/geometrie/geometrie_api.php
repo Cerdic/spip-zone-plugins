@@ -15,19 +15,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS['isocode']['geometrie'] = array(
 	'urssafregfr' => array(
 		'table' => 'geoboundaries',
+		'type'  => 'subdivision',
+		'pays'  => 'FR',
 		'basic_fields' => array(
 			'code_insee' => 'code',
 			'geo_shape'  => 'geometry',
 			'geo_point'  => 'lat_lon',
 		),
 		'basic_ext_fields' => array(
-			'service',
-			'code_type',
-			'format',
-			'type',
-			'country',
 			'lat',
 			'lon',
+		),
+		'static_fields' => array(
+			'service'   => '$service',
+			'code_type' => 'code_insee_reg',
+			'format'    => 'geojson',
+			'type'      => '/type',
+			'country'   => '/pays',
 		),
 		'unused_fields' => array(
 			'lat_lon' => '',
@@ -45,19 +49,23 @@ $GLOBALS['isocode']['geometrie'] = array(
 	),
 	'urssafdepfr' => array(
 		'table' => 'geoboundaries',
+		'type'  => 'subdivision',
+		'pays'  => 'FR',
 		'basic_fields' => array(
 			'code_departement' => 'code',
 			'geo_shape'        => 'geometry',
 			'geo_point'        => 'lat_lon',
 		),
 		'basic_ext_fields' => array(
-			'service',
-			'code_type',
-			'format',
-			'type',
-			'country',
 			'lat',
 			'lon',
+		),
+		'static_fields' => array(
+			'service'   => '$service',
+			'code_type' => 'code_insee',
+			'format'    => 'geojson',
+			'type'      => '/type',
+			'country'   => '/pays',
 		),
 		'unused_fields' => array(
 			'lat_lon' => '',
@@ -75,15 +83,18 @@ $GLOBALS['isocode']['geometrie'] = array(
 	),
 	'mapofglobe' => array(
 		'table' => 'geoboundaries',
+		'type'  => 'country',
+		'pays'  => '',
 		'basic_fields' => array(
 			'iso_a2'   => 'code',
 			'geometry' => 'geometry',
 		),
-		'basic_ext_fields' => array(
-			'service',
-			'code_type',
-			'format',
-			'type',
+		'static_fields' => array(
+			'service'   => '$service',
+			'code_type' => 'code_3166_a2',
+			'format'    => 'geojson',
+			'type'      => '/type',
+			'country'   => '/pays',
 		),
 		'label_field'  => false,
 		'populating'   => 'file_geojson',
@@ -104,14 +115,6 @@ $GLOBALS['isocode']['geometrie'] = array(
 function mapofglobe_completer_element($element, $config) {
 
 	// Cette fonction permet de remplir les champs "basic_ext".
-	// - le service
-	// - le type de zone
-	// - le type de code
-	// - le format du fichier source
-	$element['service'] = 'mapofglobe';
-	$element['code_type'] = 'code_3166_a2';
-	$element['format'] = 'geojson';
-	$element['type'] = 'country';
 
 	// Et d'apporter des corrections au champs déjà compilés : attention on a encore les index source !!!
 	// - serialiser le champs des géométries
@@ -123,22 +126,13 @@ function mapofglobe_completer_element($element, $config) {
 function urssafregfr_completer_element($element, $config) {
 
 	// Cette fonction permet de remplir les champs "basic_ext".
-	// - le service
-	// - le type de
-	// - le format du fichier source
-	$element['service'] = 'urssafregfr';
-	$element['code_type'] = 'code_insee_reg';
-	$element['format'] = 'geojson';
-	$element['type'] = 'subdivision';
-	$element['country'] = 'FR';
+	// - récupérer la latitude et la longitude à partir du champ geo_point
+	$element['lat'] = floatval($element['geo_point'][0]);
+	$element['lon'] = floatval($element['geo_point'][1]);
 
 	// Et d'apporter des corrections au champs déjà compilés
 	// - serialiser le champs des géométries
 	$element['geo_shape'] = serialize($element['geo_shape']);
-
-	// - récupérer la latitude et la longitude à partir du champ geo_point
-	$element['lat'] = floatval($element['geo_point'][0]);
-	$element['lon'] = floatval($element['geo_point'][1]);
 
 	return $element;
 }
@@ -146,22 +140,13 @@ function urssafregfr_completer_element($element, $config) {
 function urssafdepfr_completer_element($element, $config) {
 
 	// Cette fonction permet de remplir les champs "basic_ext".
-	// - le service
-	// - le type de
-	// - le format du fichier source
-	$element['service'] = 'urssafdepfr';
-	$element['code_type'] = 'code_insee';
-	$element['format'] = 'geojson';
-	$element['type'] = 'subdivision';
-	$element['country'] = 'FR';
+	// - récupérer la latitude et la longitude à partir du champ geo_point
+	$element['lat'] = floatval($element['geo_point'][0]);
+	$element['lon'] = floatval($element['geo_point'][1]);
 
 	// Et d'apporter des corrections au champs déjà compilés
 	// - serialiser le champs des géométries
 	$element['geo_shape'] = serialize($element['geo_shape']);
-
-	// - récupérer la latitude et la longitude à partir du champ geo_point
-	$element['lat'] = floatval($element['geo_point'][0]);
-	$element['lon'] = floatval($element['geo_point'][1]);
 
 	return $element;
 }

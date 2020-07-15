@@ -74,7 +74,7 @@ function lire_source($type, $service, $table) {
 	// Cela permet de s'assurer que chaque élément du tableau de sortie aura la même structure
 	// quelque soit les données lues dans la source.
 	$config_unused = isset($config['unused_fields']) ? $config['unused_fields'] : array();
-	$config_basic = compiler_champ_base($config);
+	$config_basic = compiler_champs($config);
 	$enregistrement_defaut = initialiser_enregistrement($table, $config_basic, $config_unused);
 
 	// Récupération du contenu du fichier ou de la page HTML source et du sha associé. Pour les fichiers CSV
@@ -89,7 +89,13 @@ function lire_source($type, $service, $table) {
 				// Pour chaque élément on récupère un tableau associatif [titre colonne] = valeur colonne.
 				$element = extraire_element($_contenu, $titres, $config);
 
-				// Si besoin on appelle une fonction pour chaque element afin de le compléter.
+				// Si il existe des champs statiques on les ajoute.
+				if (isset($config['static_fields'])) {
+					$element = completer_element($type, $service, $table, $config, $element);
+				}
+
+				// Si besoin on appelle une fonction spécifique pour chaque element afin de le compléter
+				// (champs basic_ext_fields ou modification d'un champ basic, par exemple).
 				if (function_exists($completer_element)) {
 					$element = $completer_element($element, $config);
 				}
@@ -450,6 +456,43 @@ function extraire_element($contenu, $titres, $config) {
 	return $element;
 }
 
+/**
+ * @param $type
+ * @param $service
+ * @param $table
+ * @param $config
+ *      Configuration de la méthode de lecture de la source pour la table concernée.
+ * @param $element
+ *
+ * @return array
+ */
+function completer_element($type, $service, $table, $config, $element) {
+
+	foreach($config['static_fields'] as $_champ => $_valeur) {
+		if ($_valeur === '$service') {
+			// -- le nom du service
+			$element[$_champ] = $service;
+		} elseif ($_valeur === '$table') {
+			// -- le nom du service
+			$element[$_champ] = $table;
+		} elseif ($_valeur === '$type') {
+			// -- le nom du service
+			$element[$_champ] = $type;
+		} elseif (substr($_valeur, 0, 1) === '/') {
+			// -- la valeur de l'index de config identifié par la nom après le /
+			$index = ltrim($_valeur, '/');
+			if ($valeur = table_valeur($config, $index, '')) {
+				$element[$_champ] = $valeur;
+			}
+		} else {
+			// -- la valeur elle-même
+			$element[$_champ] = $_valeur;
+		}
+	}
+
+	return $element;
+}
+
 
 /**
  * Compare le sha passé en argument pour la table concernée avec le sha stocké dans la meta
@@ -482,13 +525,27 @@ function sha_identique($sha, $table) {
 }
 
 
-function compiler_champ_base($config) {
+function compiler_champs($config) {
 
+	// On initialise avec les champs de base, c'est à dire ceux qui vont être extraits directement de la source.
+	// Certains pourront disparaitre dans la table destination, ce sont les unused_fields.
 	$basics = $config['basic_fields'];
+
+	// On ajoute les extensions des champs de base qui ne peuvent pas être valorisés via l'extraction
+	// simple de la source mais découlent de la valeur d'un basic_fields.
+	$extensions = array();
 	if (isset($config['basic_ext_fields'])) {
-		foreach ($config['basic_ext_fields'] as $_field) {
-			$basics[$_field] = $_field;
-		}
+		$extensions = array_merge($extensions, $config['basic_ext_fields']);
+	}
+
+	// On ajoute enfin les champs de la table destination qui ne sont pas remplis par un champ de la source
+	// mais par une valeur statique toujours identique.
+	if (isset($config['static_fields'])) {
+		$extensions = array_merge($extensions, array_keys($config['static_fields']));
+	}
+
+	foreach ($extensions as $_field) {
+		$basics[$_field] = $_field;
 	}
 
 	return $basics;
