@@ -284,7 +284,7 @@ function subdivisions_conditionner_pays($valeur) {
 /**
  * Récupère la liste des contours géographiques de la table spip_boundaries.
  * Il est obligatoire de choisir à minima un type de territoire de façon à limiter le transfert d'informations
- * via l'API REST. Un critère faculatatif permet de filtrer sur le service ce qui est recommandé.
+ * via l'API REST. Un critère facultatif permet de filtrer sur le service ce qui est recommandé.
  *
  * @param array $conditions    Conditions à appliquer au select
  * @param array $filtres       Tableau des critères de filtrage additionnels à appliquer au select.
@@ -311,7 +311,7 @@ function contours_collectionner($conditions, $filtres, $configuration) {
 	if ($conditions) {
 		$where = array_merge($where, $conditions);
 	}
-	// -- Rangement de la liste dans l'index subdivisions
+	// -- Rangement de la liste dans l'index contours
 	$contours['contours'] = sql_allfetsel($select, $from, $where);
 
 	// La liste est enrichie par défaut:
@@ -371,6 +371,73 @@ function contours_conditionner_service($valeur) {
  * @return string Toujours la chaine vide.
  */
 function contours_conditionner_exclure($valeur) {
+
+	return '';
+}
+
+
+// -----------------------------------------------------------------------
+// ------------------------ COLLECTION SERVICES --------------------------
+// -----------------------------------------------------------------------
+
+/**
+ * Récupère les configuration des services.
+ * Il est possible de filtrer la liste avec le critère facultatif type de service (nomenclature, geometrie).
+ *
+ * @param array $conditions    Conditions à appliquer au select
+ * @param array $filtres       Tableau des critères de filtrage additionnels à appliquer au select.
+ * @param array $configuration Configuration de la collection utile pour savoir quelle fonction appeler pour
+ *                             construire chaque filtre.
+ *
+ * @return array Tableau des subdivisions et par défaut des codes alternatifs et de la liste des pays.
+ */
+function services_collectionner($conditions, $filtres, $configuration) {
+
+	// Initialisation de la collection
+	$configs = array();
+
+	// Filtre sur le type de service.
+	include_spip('inc/isocode');
+	if (!empty($filtres['type_service'])) {
+		$types_services[] = $filtres['type_service'];
+	} else {
+		$types_services = isocode_lister_types_service();
+	}
+
+	// Extraire la configuration brute de tous les services demandés.
+	foreach ($types_services as $_type_service) {
+		$services = isocode_lister_services($_type_service);
+		foreach ($services as $_service) {
+			if ($_type_service === 'nomenclature') {
+				include_spip("services/${_type_service}/${_service}/${_service}_api");
+				$configs[$_type_service][$_service] = $GLOBALS['isocode'][$_service];
+				// On complète avec le libellé des tables
+				foreach ($configs[$_type_service][$_service] as $_table => $_desc) {
+					$configs[$_type_service][$_service][$_table]['libelle'] = _T("isocode:${_type_service}_${_table}");
+					$configs[$_type_service][$_service][$_table]['chargements'] = isocode_lire_consignation($_type_service, $_service, $_table);
+				}
+			} else {
+				include_spip("services/${_type_service}/${_service}_api");
+				$configs[$_type_service][$_service] = $GLOBALS['isocode'][$_type_service][$_service];
+				// On complète avec le libellé des services
+				$configs[$_type_service][$_service]['libelle'] = _T("isocode:${_type_service}_${_service}");
+				$configs[$_type_service][$_service]['chargements'] = isocode_lire_consignation($_type_service, $_service, '');
+			}
+		}
+	}
+
+	return $configs;
+}
+
+/**
+ * Evite que le filtre type_service ne soit considéré comme une condition SQL.
+ * Il sera traité dans la fonction collectionner pour filtrer la liste des configurations renvoyées.
+ *
+ * @param string $valeur Valeur du critère `type_service`.
+ *
+ * @return string Toujours la chaine vide.
+ */
+function services_conditionner_type_service($valeur) {
 
 	return '';
 }

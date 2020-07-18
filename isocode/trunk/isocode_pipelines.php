@@ -108,10 +108,34 @@ function isocode_liste_ezcollection($collections) {
 				'champ_table'     => 'geoboundaries'
 			),
 			array(
+				'critere'         => 'pays',
+				'est_obligatoire' => false,
+				'champ_nom'       => 'country',
+				'champ_table'     => 'geoboundaries'
+			),
+			array(
 				'critere'         => 'service',
 				'est_obligatoire' => false,
 				'champ_nom'       => 'service',
 				'champ_table'     => 'geoboundaries'
+			),
+			array(
+				'critere'         => 'exclure', // Ce n'est pas un filtre conditionnel mais une option de contenu
+				'est_obligatoire' => false,
+			),
+		),
+	);
+
+	$collections['services'] = array(
+		'module'    => 'isocode',
+		'cache'     => array(
+			'type'  => 'ezrest',
+			'duree' => 3600 * 24 * 30
+		),
+		'filtres'   => array(
+			array(
+				'critere'         => 'type_service',
+				'est_obligatoire' => false,
 			),
 		),
 	);
