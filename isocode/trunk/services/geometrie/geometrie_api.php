@@ -91,7 +91,7 @@ $GLOBALS['isocode']['geometrie'] = array(
 		),
 		'static_fields' => array(
 			'service'   => '$service',
-			'code_type' => 'code_3166_a2',
+			'code_type' => 'code_iso',
 			'format'    => 'geojson',
 			'type'      => '/type',
 			'country'   => '/pays',

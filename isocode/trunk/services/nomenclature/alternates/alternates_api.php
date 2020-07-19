@@ -14,7 +14,7 @@ $GLOBALS['isocode']['alternates'] = array(
 	'iso3166alternates' => array(
 		'groupe'       => 'geographie',
 		'basic_fields' => array(
-			'iso'  => 'code_3166_2',
+			'iso'  => 'code_iso',
 			'type' => 'type_alter',
 			'code' => 'code_alter',
 		),

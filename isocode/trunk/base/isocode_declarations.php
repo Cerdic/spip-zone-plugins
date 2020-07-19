@@ -269,9 +269,9 @@ function isocode_declarer_tables_principales($tables_principales) {
 
 	// -------------------------------------------------------------------------------------
 	// Table des codes alternatifs à l'ISO 3166-2 (nationaux ou supra-nationaux) : spip_iso3166alternates
-	// C'est en quelque sorte une table de liens sans qui fonctionne avec les codes et pas un id.
+	// C'est en quelque sorte une table de liens qui fonctionne avec les codes et pas un id.
 	$table_alternates = array(
-		"code_3166_2" => "varchar(6) DEFAULT '' NOT NULL",
+		"code_iso"    => "varchar(6) DEFAULT '' NOT NULL",
 		"type_alter"  => "varchar(16) DEFAULT '' NOT NULL",
 		"code_alter"  => "varchar(10) DEFAULT '' NOT NULL",
 	);
