@@ -39,13 +39,6 @@ function isocode_upgrade($nom_meta_base_version, $version_cible) {
 		),
 	);
 
-	$maj['2'] = array(
-		array(
-			'maj_tables',
-			'spip_geoboundaries'
-		),
-	);
-
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

@@ -23,6 +23,10 @@ if (!defined('_ISOCODE_GEOMETRIE_MAX_INSERT')) {
 	define('_ISOCODE_GEOMETRIE_MAX_INSERT', 50);
 }
 
+if (!defined('_ISOCODE_COEFF_MAX_DISTANT')) {
+	define('_ISOCODE_COEFF_MAX_DISTANT', 5);
+}
+
 
 /**
  * Constitue, à partir, d'un fichier CSV ou XML ou d'une page HTML au format texte, un tableau des éléments
@@ -341,14 +345,18 @@ function extraire_contenu_source($type, $service, $table, $config) {
 			}
 		}
 	} elseif ($config['populating'] === 'api_rest') {
-		// TODO à compléter
-		$contenu_decode = array();
+		// On considère que l'API REST renvoie soit le format JSON soit le format XML
+		// -- acquisition des données spécifiées par l'url
+		include_spip('inc/distant');
+		$options = array(
+			'transcoder' => true,
+			'taille_max' => _INC_DISTANT_MAX_SIZE * _ISOCODE_COEFF_MAX_DISTANT,
+		);
+		$flux = recuperer_url($config['url'], $options);
 
-		// Si un noeud est fourni inutile de se trimbaler tout le tableau, on se restreint
-		// au noeud fourni.
-		include_spip('inc/filtres');
-		if (!empty($config['node'])) {
-			$contenu_fichier = table_valeur($contenu_decode, $config['node'], array());
+	// Initialisation de la réponse et du bloc d'erreur normalisé.
+		if (!empty($flux['page']) and ($sha = sha1($flux['page']))) {
+			$contenu = decoder_xml_json($flux['page'], $config);
 		}
 	} else {
 		// La source est un ou plusieurs fichier (option multiple à vrai).
@@ -390,16 +398,7 @@ function extraire_contenu_source($type, $service, $table, $config) {
 				) {
 					include_spip('inc/flock');
 					lire_fichier($_fichier, $contenu_brut);
-					$contenu_fichier = ($config['populating'] === 'file_xml')
-						? json_decode(json_encode(simplexml_load_string($contenu_brut)), true)
-						: json_decode($contenu_brut, true);
-
-					// Si un noeud est fourni inutile de se trimbaler tout le tableau, on se restreint
-					// au noeud fourni.
-					include_spip('inc/filtres');
-					if (!empty($config['node'])) {
-						$contenu_fichier = table_valeur($contenu_fichier, $config['node'], array());
-					}
+					$contenu_fichier = decoder_xml_json($contenu_brut, $config);
 				}
 				// On additionne les contenus de chaque fichier
 				$contenu = array_merge($contenu, $contenu_fichier);
@@ -479,7 +478,7 @@ function completer_element($type, $service, $table, $config, $element) {
 			// -- le nom du service
 			$element[$_champ] = $type;
 		} elseif (substr($_valeur, 0, 1) === '/') {
-			// -- la valeur de l'index de config identifié par la nom après le /
+			// -- la valeur de l'index de config identifié par la chaine après le /
 			$index = ltrim($_valeur, '/');
 			if ($valeur = table_valeur($config, $index, '')) {
 				$element[$_champ] = $valeur;
@@ -575,4 +574,46 @@ function deconsigner_chargement($type, $service, $table) {
 	} else {
 		effacer_config("isocode/${type}/${service}");
 	}
+}
+
+function decoder_xml_json($xml_json, $config) {
+
+	// Initialisation du contenu décodé
+	$contenu = array();
+
+	if ($config['extension'] == '.xml') {
+		// Pouvoir attraper les erreurs de simplexml_load_string().
+		// http://stackoverflow.com/questions/17009045/how-do-i-handle-warning-simplexmlelement-construct/17012247#17012247
+		set_error_handler(
+			function ($erreur_id, $erreur_message, $erreur_fichier, $erreur_ligne) {
+				throw new Exception($erreur_message, $erreur_id);
+			}
+		);
+
+		try {
+			$contenu = json_decode(json_encode(simplexml_load_string($xml_json)), true);
+		} catch (Exception $erreur) {
+			restore_error_handler();
+			spip_log("Erreur d'analyse XML pour l'URL `{$config['url']}` : " . $erreur->getMessage(), 'isocode' . _LOG_ERREUR);
+		}
+		restore_error_handler();
+	} elseif ($config['extension'] == '.json') {
+		// Transformation de la chaîne json reçue en tableau associatif
+		try {
+			$contenu = json_decode($xml_json, true);
+		} catch (Exception $erreur) {
+			spip_log("Erreur d'analyse JSON pour l'URL `{$config['url']}` : " . $erreur->getMessage(), 'isocode' . _LOG_ERREUR);
+		}
+	}
+
+	// Si un noeud est fourni inutile de se trimbaler tout le tableau, on se restreint
+	// au noeud fourni.
+	if ($contenu) {
+		include_spip('inc/filtres');
+		if (!empty($config['node'])) {
+			$contenu = table_valeur($contenu, $config['node'], array());
+		}
+	}
+
+	return $contenu;
 }

@@ -37,8 +37,8 @@ $GLOBALS['isocode']['geometrie'] = array(
 			'lat_lon' => '',
 		),
 		'label_field'  => false,
-		'populating'   => 'file_geojson',
-		'multiple'     => false,
+		'populating'   => 'api_rest',
+		'url'          => 'https://open.urssaf.fr/api/records/1.0/search/?dataset=contours-geographiques-des-regions-2016&q=&rows=-1',
 		'extension'    => '.json',
 		'node'         => 'records',
 		'basic_nodes'  => array(
@@ -71,8 +71,8 @@ $GLOBALS['isocode']['geometrie'] = array(
 			'lat_lon' => '',
 		),
 		'label_field'  => false,
-		'populating'   => 'file_geojson',
-		'multiple'     => false,
+		'populating'   => 'api_rest',
+		'url'          => 'https://open.urssaf.fr/api/records/1.0/search/?dataset=contours-geographiques-des-departements-2016&q=&rows=-1',
 		'extension'    => '.json',
 		'node'         => 'records',
 		'basic_nodes'  => array(
@@ -118,7 +118,7 @@ function mapofglobe_completer_element($element, $config) {
 
 	// Et d'apporter des corrections au champs déjà compilés : attention on a encore les index source !!!
 	// - serialiser le champs des géométries
-	$element['geometry'] = serialize($element['geometry']);
+	$element['geometry'] = json_encode($element['geometry']);
 
 	return $element;
 }
@@ -132,7 +132,7 @@ function urssafregfr_completer_element($element, $config) {
 
 	// Et d'apporter des corrections au champs déjà compilés
 	// - serialiser le champs des géométries
-	$element['geo_shape'] = serialize($element['geo_shape']);
+	$element['geo_shape'] = json_encode($element['geo_shape']);
 
 	return $element;
 }
@@ -146,7 +146,7 @@ function urssafdepfr_completer_element($element, $config) {
 
 	// Et d'apporter des corrections au champs déjà compilés
 	// - serialiser le champs des géométries
-	$element['geo_shape'] = serialize($element['geo_shape']);
+	$element['geo_shape'] = json_encode($element['geo_shape']);
 
 	return $element;
 }

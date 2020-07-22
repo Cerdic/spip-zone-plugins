@@ -313,6 +313,9 @@ function contours_collectionner($conditions, $filtres, $configuration) {
 	}
 	// -- Rangement de la liste dans l'index contours
 	$contours['contours'] = sql_allfetsel($select, $from, $where);
+	foreach ($contours['contours'] as $_cle => $_contour) {
+		$contours['contours'][$_cle]['geometry'] = json_decode($_contour['geometry'], true);
+	}
 
 	// La liste est enrichie par défaut:
 	// -- des codes alternatifs disponibles dans iso3166alternates si les contours sont identifiés par
