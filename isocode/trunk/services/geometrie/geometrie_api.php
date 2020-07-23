@@ -106,6 +106,31 @@ $GLOBALS['isocode']['geometrie'] = array(
 			'geometry' => 'geometry',
 		),
 	),
+	'deutschlandgeojson' => array(
+		'table' => 'geoboundaries',
+		'type'  => 'subdivision',
+		'pays'  => 'DE',
+		'basic_fields' => array(
+			'id'       => 'code',
+			'geometry' => 'geometry',
+		),
+		'static_fields' => array(
+			'service'   => '$service',
+			'code_type' => 'code_iso',
+			'format'    => 'geojson',
+			'type'      => '/type',
+			'country'   => '/pays',
+		),
+		'label_field'  => false,
+		'populating'   => 'file_geojson',
+		'multiple'     => true,
+		'extension'    => '.json',
+		'node'         => 'features',
+		'basic_nodes'  => array(
+			'id'   => 'properties/id',
+			'geometry' => 'geometry',
+		),
+	),
 );
 
 // ----------------------------------------------------------------------------
@@ -147,6 +172,16 @@ function urssafdepfr_completer_element($element, $config) {
 	// Et d'apporter des corrections au champs déjà compilés
 	// - serialiser le champs des géométries
 	$element['geo_shape'] = json_encode($element['geo_shape']);
+
+	return $element;
+}
+
+function deutschlandgeojson_completer_element($element, $config) {
+
+
+	// Et d'apporter des corrections au champs déjà compilés
+	// - serialiser le champs des géométries
+	$element['geometry'] = json_encode($element['geometry']);
 
 	return $element;
 }

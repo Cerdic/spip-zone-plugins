@@ -20,9 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_action_geometrie'     => 'Si les contours sont déjà chargés en base de données ils seront vidés avant le chargement.',
 
 	// G
-	'geometrie_urssafregfr' => 'Contours des régions françaises, URSSAF',
-	'geometrie_urssafdepfr' => 'Contours des départements françaises, URSSAF',
-	'geometrie_mapofglobe'  => 'Contours des pays, Map of Globe',
+	'geometrie_urssafregfr'         => 'Contours des régions françaises, URSSAF',
+	'geometrie_urssafdepfr'         => 'Contours des départements françaises, URSSAF',
+	'geometrie_mapofglobe'          => 'Contours des pays, Map of Globe',
+	'geometrie_deutschlandgeojson'  => 'Contours des lands allemands, Deutschland geoJSON',
 
 	// I
 	'info_charge' => 'chargé',

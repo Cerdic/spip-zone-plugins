@@ -130,7 +130,7 @@ function isocode_liste_ezcollection($collections) {
 		'module'    => 'isocode',
 		'cache'     => array(
 			'type'  => 'ezrest',
-			'duree' => 3600 * 24 * 30
+			'duree' => 3600 * 12
 		),
 		'filtres'   => array(
 			array(
