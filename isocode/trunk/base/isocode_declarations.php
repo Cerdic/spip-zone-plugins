@@ -277,7 +277,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 	);
 
 	$table_alternates_key = array(
-		"PRIMARY KEY" => "code_3166_2,type_alter,code_alter",
+		"PRIMARY KEY" => "code_iso,type_alter,code_alter",
 	);
 
 	$tables_principales['spip_iso3166alternates'] =
