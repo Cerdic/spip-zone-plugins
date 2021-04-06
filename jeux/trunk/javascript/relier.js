@@ -14,7 +14,7 @@
  *
  * Using HTML5 Canvas element & JavaScript
  *
- * Copyright (c) 2012 Baptiste Hassenfratz
+ * Copyright (c) 2012 https://about.me/bhassenfratz
  * Licensed under MIT license http://opensource.org/licenses/MIT
  **/
 
@@ -1564,7 +1564,7 @@ function htmlentities_decode(str) {
  *
  * Version 1.0
  *
- * Copyright (c) 2012 Baptiste Hassenfratz
+ * Copyright (c) 2012 https://about.me/bhassenfratz
  * Licensed under MIT license http://opensource.org/licenses/MIT
  **/
 
@@ -1684,7 +1684,7 @@ function ptsDebug_()
  *
  * Version 1.2
  *
- * Copyright (c) 2012 Baptiste Hassenfratz
+ * Copyright (c) 2012 https://about.me/bhassenfratz
  * Licensed under MIT license http://opensource.org/licenses/MIT
  **/
 
