@@ -2,7 +2,7 @@
     "name": "spip/httpapi",
     "require": {
         "php": ">=5.3.3",
-        "symfony/http-foundation": "2.3.*"
+        "symfony/http-foundation": "5.4.*"
     },
     "minimum-stability": "dev"
 }
